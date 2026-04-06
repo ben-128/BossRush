@@ -20,7 +20,7 @@
       "type": "attaque",
       "portee": "mélée",
       "degats": 2,
-      "prerequis": "physique",
+      "prerequis": "armure",
       "description": "Inflige 2 dégâts en mélée."
     },
     {
@@ -74,7 +74,7 @@
       "type": "attaque",
       "portee": "mélée",
       "degats": 3,
-      "prerequis": "physique",
+      "prerequis": "armure",
       "description": "Inflige 3 dégâts en mélée."
     },
     {
@@ -161,7 +161,7 @@
       "type": "effet",
       "portee": null,
       "degats": null,
-      "prerequis": "physique",
+      "prerequis": "armure",
       "effet": "Annule la prochaine attaque du boss contre ce héros.",
       "description": "Bloque une attaque ennemie."
     },

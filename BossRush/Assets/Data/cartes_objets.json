@@ -43,7 +43,7 @@
       "id": "OBJ_005",
       "nom": "Pierre d'aiguisage",
       "type": "renfort",
-      "prerequis": "physique",
+      "prerequis": "armure",
       "bonus_degats": 2,
       "effet": "Ajoute 2 dégâts à une attaque mélée jouée en même temps.",
       "description": "Affûte une lame pour un coup tranchant."

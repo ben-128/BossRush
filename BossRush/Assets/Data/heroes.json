@@ -25,7 +25,7 @@
       "id": "HERO_003",
       "nom": "Guerrier",
       "pv": 7,
-      "competences": ["physique"],
+      "competences": ["armure"],
       "capacite_speciale": "Prévient la prochaine attaque physique qui devrait vous être infilgée ce tour ci.",
       "description": "Un rempart solide qui protège ses alliés."
     },
@@ -44,6 +44,6 @@
       "competences": ["diplomatie"],
       "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent.",
       "description": "Coordonne l'équipe pour optimiser les ressources."
-    },
+    }
   ]
 }
