@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "description": "Liste des boss du jeu",
+    "version": "0.2",
+    "notes": "PV adaptés au nombre de joueurs via formule. Monstres invoqués varient aussi selon le nombre de joueurs (indiqué sur les cartes Attaque). Chaque boss a ses propres cartes Épreuve, Attaque et Monstre identifiées par son icône."
+  },
+  "boss": [
+    {
+      "id": "BOSS_001",
+      "nom": "Géant Affamé",
+      "difficulte": "facile",
+      "pv_formule": "8 + 4 par joueur",
+      "pv_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
+      "nb_epreuves": "2x le nombre de joueurs",
+      "effet_special": "Lorsque le boss inflige des dégâts physiques, il se soigne 1 blessure.",
+      "nb_cartes_attaque": 7,
+      "nb_cartes_epreuve_total": 15,
+      "nb_cartes_monstre": 13,
+      "monstres_associes": ["Gobelin", "Rat géant", "Loup affamé", "Chaman gobelin", "Feu follet"],
+      "description": "Un colosse vorace qui se régénère en frappant."
+    },
+  ]
+}

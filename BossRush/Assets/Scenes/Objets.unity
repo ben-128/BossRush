@@ -1,0 +1,5210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 10
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 0
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 2
+    m_PVRDenoiserTypeDirect: 0
+    m_PVRDenoiserTypeIndirect: 0
+    m_PVRDenoiserTypeAO: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 0
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 3
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    buildHeightMesh: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &20570008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 20570009}
+  - component: {fileID: 20570010}
+  m_Layer: 0
+  m_Name: Down
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &20570009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20570008}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.82, y: -5.084, z: 0}
+  m_LocalScale: {x: 1000, y: 5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1920203966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &20570010
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20570008}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c0cc01f608753c24f8dc883390a548c2, type: 3}
+  m_Color: {r: 0.26666668, g: 0.18039216, b: 0.09019608, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &119207021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 119207022}
+  - component: {fileID: 119207023}
+  m_Layer: 0
+  m_Name: up (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &119207022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119207021}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.99, y: 5.05, z: 0}
+  m_LocalScale: {x: 1000, y: 5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1920203966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &119207023
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119207021}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c0cc01f608753c24f8dc883390a548c2, type: 3}
+  m_Color: {r: 0.26666668, g: 0.18039216, b: 0.09019608, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &247666405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247666407}
+  - component: {fileID: 247666406}
+  m_Layer: 0
+  m_Name: Root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &247666406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247666405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3acdc7dcfefc484bb5d0c6fbd93fab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  categoryName: Objets
+  visuals:
+    physiqueAtk: {fileID: 0}
+    magicAtk: {fileID: 0}
+    physiqueDef: {fileID: 0}
+    magicDef: {fileID: 0}
+    moveMelee: {fileID: 0}
+    Moveback: {fileID: 0}
+    Soins: {fileID: 0}
+  allimages:
+  - name: Potion de soin
+    sprite: {fileID: 21300000, guid: 1abfde9f4e9cae64a8057173edbb7611, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Rend 6 points de vie au h\xE9ros ou \xE0 un h\xE9ros proche."
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Soupe de m\xE9m\xE9"
+    sprite: {fileID: 21300000, guid: d7eec6f5625e58e47acfaae7d5f548d8, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Rend 10 points de vie au h\xE9ros ou \xE0 un h\xE9ros proche. \\n\\n
+      Si utilis\xE9 en combat, augmente de 3 les prochains d\xE9g\xE2ts (physiques
+      ou magiques) qu\u2019il pourra infliger au cours de ce combat. "
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Halt\xE8res"
+    sprite: {fileID: 21300000, guid: 7ca2fb4587dc2f74894af227a4384c90, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.55
+    description: "A chaque utilisation, placez/incr\xE9mentez un token sur la carte.\\n\\nLorsque
+      le token affiche 5, le h\xE9ros gagne 1 point de force."
+    description2: 
+    buyPrice: 30
+    sellPrice: 6
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: 'Livre de recettes '
+    sprite: {fileID: 21300000, guid: d0b655d891f521848888adc5f9e79114, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Le h\xE9ros et les alli\xE9s proches gagnent (2d10) points de vie.\\n\\nInutilisable
+      en combat."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Tome d\u2019exp\xE9rience "
+    sprite: {fileID: 21300000, guid: a9ddf26da147c1941bec90f066a28348, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Le h\xE9ros gagne instantan\xE9ment 3 points d\u2019exp\xE9rience.\\n\\nJetez
+      cette carte."
+    description2: 
+    buyPrice: 15
+    sellPrice: 0
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Guide du h\xE9ro"
+    sprite: {fileID: 21300000, guid: ac99815140f630d45b41ffd0acb4089b, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Gagne 1 point d\u2019exp\xE9rience \xE0 chaque utilisation."
+    description2: 
+    buyPrice: 25
+    sellPrice: 5
+    charges: 5
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Anneau de r\xE9g\xE9n\xE9ration "
+    sprite: {fileID: 21300000, guid: 6185c822c7fc5b349a8603b2138b4e44, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Hors combat : Rend instantan\xE9ment 10 points de vie au h\xE9ros
+      ou un alli\xE9 proche.\\n\\nEn combat : Rend 3 points de vie par tour jusqu\u2019\xE0
+      la fin du combat au h\xE9ros ou un alli\xE9 proche."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Totem de soin
+    sprite: {fileID: 21300000, guid: 9a79966b52a7c3e41ac613b76fa8c7a0, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Rend 6 points de vie au h\xE9ros et \xE0 ses alli\xE9s proches."
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Rune de t\xE9l\xE9portation "
+    sprite: {fileID: 21300000, guid: 110ce1a369fe7a541a336d86cb1e4890, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "T\xE9l\xE9porte le h\xE9ros sur un autre h\xE9ros."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Rune de transport
+    sprite: {fileID: 21300000, guid: 3659c5c5a489fd6459a04c9aa9fbd5e5, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Permet de t\xE9l\xE9porter un autre h\xE9ros consentant sur la
+      case du h\xE9ros. "
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Kit de r\xE9paration d\u2019\xE9quipement"
+    sprite: {fileID: 21300000, guid: d6fb4d4732ce52042946b37b2c1e61bf, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Permet de redonner une charge \xE0 un EQUIPEMENT du h\xE9ro ou
+      \xE0 celui d\u2019un alli\xE9 proche. "
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Monstres en cage
+    sprite: {fileID: 21300000, guid: a8e14cbca1e091840895c4bfee63249f, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Permet de d\xE9clencher un combat monstre comme si le h\xE9ros
+      \xE9tait sur une case monstre."
+    description2: 
+    buyPrice: 12
+    sellPrice: 3
+    charges: 2
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Demoiselle en d\xE9tresse"
+    sprite: {fileID: 21300000, guid: 508e2c6284a90a04da08576deebd29c4, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Piochez une carte qu\xEAte.\\n\\nJetez cette carte."
+    description2: 
+    buyPrice: 5
+    sellPrice: 0
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Artefact triangle gauche
+    sprite: {fileID: 21300000, guid: e6f375c9e6fe3c444925dc3b0400481a, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "+1 force.\\n\\nRetirez le point si vous perdez l\u2019objet.\\n\\nSi
+      le h\xE9ro poss\xE8de les 3 artefacts triangle, le h\xE9ro et ses alli\xE9s
+      proches gagnent +1 \xE0 tous leurs jets de d\xE9. "
+    description2: 
+    buyPrice: 35
+    sellPrice: 7
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Artefact triangle droite
+    sprite: {fileID: 21300000, guid: 26185a3933b65964a8a366d4a99ba604, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "+1 esprit.\\n\\nRetirez le point si vous perdez l\u2019objet.\\n\\nSi
+      le h\xE9ro poss\xE8de les 3 artefacts triangle, le h\xE9ro et ses alli\xE9s
+      proches gagnent +1 \xE0 tous leurs jets de d\xE9. "
+    description2: 
+    buyPrice: 35
+    sellPrice: 7
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Artefact triangle haut
+    sprite: {fileID: 21300000, guid: fcedeaebd6de9d446b5eeb046189d208, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "+3 points de vie maximum. \\n\\nRetirez les points si vous perdez
+      l\u2019objet.\\n\\nSi le h\xE9ro poss\xE8de les 3 artefacts triangle, le h\xE9ro
+      et ses alli\xE9s proches gagnent +1 \xE0 tous leurs jets de d\xE9. "
+    description2: 
+    buyPrice: 35
+    sellPrice: 7
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Mines
+    sprite: {fileID: 21300000, guid: bb27b2a20bdeccd46a5409b9dc7eec93, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Pose un token \xE0 distance de m\xEAl\xE9e des monstres.\\n\\nSi
+      un ennemi attaque en m\xEAl\xE9e, le h\xE9ros peut choisir de d\xE9truire le
+      token et d\u2019infliger (1d6 + 5) points de d\xE9g\xE2ts magiques."
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Boule de cristal de divination
+    sprite: {fileID: 21300000, guid: 78acc8c6538219349b5f16760974e8f7, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Avant que n\u2019importe quel joueur ne pioche n\u2019importe quelle
+      carte, le h\xE9ros peut regarder cette carte et choisir de la mettre au fond
+      du paquet.\\n\\nLe joueur pioche alors une autre carte.\\n\\nNe consomme pas
+      d\u2019action."
+    description2: 
+    buyPrice: 18
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Bonza\xEF Zen"
+    sprite: {fileID: 21300000, guid: bb90d5253416ad343abf523be60287c6, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Le h\xE9ros peut \xE9changer un point de force avec un point d\u2019esprit
+      et vice-versa."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Festin
+    sprite: {fileID: 21300000, guid: 33f1d662f95db5c47959e757efb6e1c5, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Le h\xE9ros et les alli\xE9s proches sont soign\xE9s de 10 points
+      de vie."
+    description2: 
+    buyPrice: 27
+    sellPrice: 5
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Sanglier \xE0 partager"
+    sprite: {fileID: 21300000, guid: 26918f68d7dcb114f9f54a97ceb1a06b, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Le h\xE9ros et les alli\xE9s proches gagnent 8 points de vie."
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 1
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Chope de bi\xE8re"
+    sprite: {fileID: 21300000, guid: 19889066b5774de408babc90f2fcb961, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Le h\xE9ros ou un alli\xE9 proche est soign\xE9 de 6 points de
+      vie.\\n\\nHors combat, son prochain d\xE9placement est r\xE9duit de 2 (pour
+      un minimum de 1).\\n\\nEn combat, le h\xE9ros ne peut plus se d\xE9placer jusqu\u2019\xE0
+      la fin du combat. "
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Coffre rempli d'or
+    sprite: {fileID: 21300000, guid: 57a1a29f9dc99734d9f904b7c9167db2, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "R\xE9coltez imm\xE9diatement 15 pi\xE8ces d\u2019or.\\n\\nJetez
+      cette carte. "
+    description2: 
+    buyPrice: 15
+    sellPrice: 0
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: 'Diamant magnifique '
+    sprite: {fileID: 21300000, guid: 89eff12afa0992c498729a1e480dabf6, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Cet objet n\u2019a aucune autre utilit\xE9 que d\u2019\xEAtre vendu."
+    description2: 
+    buyPrice: 35
+    sellPrice: 30
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "B\xE2ton de l\u2019orage"
+    sprite: {fileID: 21300000, guid: 20b80683a4524d04caa62860046fbeb0, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "A ce tour et \xE0 chaque tour pour le reste du combat, un \xE9clair
+      s\u2019abat sur l\u2019ennemi le plus proche et lui inflige (1d6) points de
+      d\xE9g\xE2ts magiques."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Bon de r\xE9duction"
+    sprite: {fileID: 21300000, guid: d22115e55eb677a40998e4d0447c609d, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "R\xE9duit le prix d\u2019un achat au magasin de 50 %.\\n\\nD\xE9truit
+      apr\xE8s utilisation."
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Tr\xE8fle \xE0 4 feuilles"
+    sprite: {fileID: 21300000, guid: 2d38cc9223c67b54e8f64fb41c1d6426, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Permet de relancer un d\xE9 pour obtenir un r\xE9sultat diff\xE9rent.\\n\\nNe
+      consomme pas d\u2019action. "
+    description2: 
+    buyPrice: 40
+    sellPrice: 8
+    charges: 4
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Boost d\u2019adr\xE9naline"
+    sprite: {fileID: 21300000, guid: dfc4dab84c0af7c45b7c34d7346e36e2, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Permet d\u2019utiliser deux actions suppl\xE9mentaires ce tour
+      ci.\\n\\nNe consomme pas d\u2019action. "
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Phylact\xE8re des \xE2mes maudites"
+    sprite: {fileID: 21300000, guid: f1e5bf167660d3a4ead1cce16a5ccafc, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Lorsque un monstre meurt dans un combat o\xF9 le h\xE9ros participe,
+      placez/incr\xE9mentez un token sur cette carte.\\n\\nLorsque le token indique
+      5, Le h\xE9ros gagne 1 d\u2019esprit et 3 points d\u2019exp\xE9rience.\\n\\nD\xE9truisez
+      ensuite cette carte."
+    description2: 
+    buyPrice: 30
+    sellPrice: 15
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Potion d\u2019invincibilit\xE9"
+    sprite: {fileID: 21300000, guid: a99e96618931f684ea8ccb9fbdf3b951, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Utilisable uniquement en combat.\\n\\nLe h\xE9ros devient invuln\xE9rable
+      jusqu\u2019\xE0 son prochain tour de jeu. "
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 1
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Gants de fouilles
+    sprite: {fileID: 21300000, guid: 8ec7d93c99f51a644a72d192fd62372b, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Double les r\xE9compenses que donne un monstre lors d\u2019un combat."
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 1
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Tour de passe passe
+    sprite: {fileID: 21300000, guid: 53147c0d870d16d41b8525d8d9186158, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "D\xE9truisez un de vos objets.\\n\\nPiochez un objet. "
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 2
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Entra\xEEneur de h\xE9ros"
+    sprite: {fileID: 21300000, guid: b192944e3d7592640bc1bec771ff9693, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "A chaque fois que le h\xE9ros subit des d\xE9g\xE2ts, placez/incr\xE9mentez
+      un token sur la carte.\\n\\nLorsque le token indique 4, augmentez la vie maximum
+      du h\xE9ros de 3 points et d\xE9truisez  cette carte."
+    description2: 
+    buyPrice: 30
+    sellPrice: 15
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Chaussures de course
+    sprite: {fileID: 21300000, guid: 0266c3aab8a63b94d924b0c37ad93669, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Augmente de 3 le d\xE9placement hors combat."
+    description2: 
+    buyPrice: 25
+    sellPrice: 5
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: 'Transfusion de sang '
+    sprite: {fileID: 21300000, guid: cbe76e7497b0bff458180353487ce443, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Permet de transf\xE9rer jusqu\u2019\xE0 10 points de vie du h\xE9ros
+      \xE0 un alli\xE9 proche, ou de transf\xE9rer jusqu\u2019\xE0 10 points de vie
+      d\u2019un alli\xE9 proche (consentant) au h\xE9ros. "
+    description2: 
+    buyPrice: 14
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Enchantement arme de feu
+    sprite: {fileID: 21300000, guid: b06e517e4db90894fadd3ef7b699c08c, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "L\u2019\xE9quipement d\u2019attaque cibl\xE9 inflige 4 points de
+      d\xE9g\xE2ts magiques en plus jusqu\u2019\xE0 la fin du combat. "
+    description2: 
+    buyPrice: 17
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Enchantement arme de givre
+    sprite: {fileID: 21300000, guid: 1dd69dd6cded8304db806f95320a6117, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Jusqu\u2019\xE0 la fin du combat, si l\u2019\xE9quipement d\u2019attaque
+      cibl\xE9 inflige des d\xE9g\xE2ts, la cible subira 2 points de d\xE9g\xE2ts
+      magiques suppl\xE9mentaires et ne pourra pas se d\xE9placer pendant son prochain
+      tour. "
+    description2: 
+    buyPrice: 17
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Enchantement armure de terre
+    sprite: {fileID: 21300000, guid: 4738de98a51247d49855e905895858d9, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Jusqu'\xE0 la fin du combat, augmente l\u2019armure physique de
+      3 si l\u2019\xE9quipement de d\xE9fense cibl\xE9 est utilis\xE9. "
+    description2: 
+    buyPrice: 17
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Enchantement armure de flammes
+    sprite: {fileID: 21300000, guid: 2bf75710472da6c45806f543d004f837, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Jusqu'\xE0 la fin du combat, si l\u2019\xE9quipement de d\xE9fense
+      cibl\xE9 est utilis\xE9, il inflige \xE9galement 5 points de d\xE9g\xE2ts magiques
+      \xE0 l\u2019attaquant. "
+    description2: 
+    buyPrice: 17
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Poup\xE9e qui couine"
+    sprite: {fileID: 21300000, guid: f6c581dcee0bad942ae850f685bf0767, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Jouet qui semble totalement inutile. Mais peut \xEAtre que quelqu\u2019un
+      la cherche\u2026 "
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "\xC9p\xE9e en plastique rose"
+    sprite: {fileID: 21300000, guid: 2f981479952797a498a0ddfb73a8e216, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Jouet qui semble totalement inutile.\\n\\nMais peut \xEAtre que
+      quelqu\u2019un la cherche\u2026"
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Rune de vitesse
+    sprite: {fileID: 21300000, guid: 1d244f320de37a843ad51c0b601678a8, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Permet de t\xE9l\xE9porter le h\xE9ros ou un h\xE9ros proche 10
+      cases en ligne droite."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Rune de soin
+    sprite: {fileID: 21300000, guid: bd3474e20d76e10439cac10f715a4fec, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Hors combat : Le h\xE9ros et les h\xE9ros proches regagnent 6 points
+      de vie.\\n\\nEn combat : Le h\xE9ros et les h\xE9ros proches regagnent 4 points
+      de vie puis 1 point de vie par tour jusqu\u2019\xE0 la fin du combat."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Pillules dopantes
+    sprite: {fileID: 21300000, guid: 2b30079d762d31a40afb4426e775f3ad, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Rends 5 points de vie au h\xE9ros.\\n\\nLes soins de cet objet
+      peuvent d\xE9passer la vie maximum (jusqu\u2019\xE0 un maximum de 5 au-dessus
+      du maximum)."
+    description2: 
+    buyPrice: 22
+    sellPrice: 5
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Bottes m\xE9dicales"
+    sprite: {fileID: 21300000, guid: 53d6b1b67a6baff488ad85e7d5892715, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Hors combat uniquement.\\n\\nLe h\xE9ros est soign\xE9 de la valeur
+      du dernier d\xE9placement effectu\xE9."
+    description2: 
+    buyPrice: 16
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Lit douillet
+    sprite: {fileID: 21300000, guid: 7d979f1698f41b84ca81ef6f648686f4, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.385
+    description: "Votre prochain repos rend (1d6) points de vie suppl\xE9mentaires.\\n\\nEffet
+      doubl\xE9 pour le h\xE9ros \u201CLa R\xEAveuse\u201D."
+    description2: 
+    buyPrice: 14
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Tatouage de puissance
+    sprite: {fileID: 21300000, guid: c51075036c1dd734e96f2bd996ddf171, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "A chaque utilisation, placez/incr\xE9mentez un token sur la carte.\\n\\nLorsque
+      le token affiche 6, le h\xE9ros gagne au choix 1 de force ou d\u2019esprit,
+      puis d\xE9truisez la carte."
+    description2: 
+    buyPrice: 30
+    sellPrice: 15
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Kit de voleur
+    sprite: {fileID: 21300000, guid: b77ae8b19debf714f9ee264d0f68bab1, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Vole 5 pi\xE8ces \xE0 un h\xE9ros proche."
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Livre de r\xEAves"
+    sprite: {fileID: 21300000, guid: 587f7a1f700a4e24ab70d8f8b6bce209, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Rajoute 1d6 d\xE9g\xE2ts \xE0 votre prochaine attaque magique.\\n\\nRestore
+      sa charge apr\xE8s un repos."
+    description2: 
+    buyPrice: 30
+    sellPrice: 6
+    charges: 1
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Kit de r\xE9paration d'objets"
+    sprite: {fileID: 21300000, guid: 2d67b0b25ba9cb04a8c0e976a7f314fa, type: 3}
+    offset: {x: 0, y: 1.95}
+    scale: 0.4
+    description: "Permet de redonner une charge \xE0 un OBJET du h\xE9ros ou \xE0
+      celui d\u2019un alli\xE9 proche. "
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Bague de cupidit\xE9 du d\xE9mon"
+    sprite: {fileID: 21300000, guid: 6f312f0bebdec964aaf06ae1d073f824, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Double l\u2019or re\xE7u en r\xE9compense d\u2019une qu\xEAte ou
+      de votre part du butin d\u2019un combat.\\n\\nApr\xE8s usage : vous \xEAtes
+      maudit. Bloque la gu\xE9rison et impossible \xE0 vendre/jeter/\xE9changer sans
+      enchanteur."
+    description2: 
+    buyPrice: 40
+    sellPrice: 0
+    charges: 5
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Bague du destin
+    sprite: {fileID: 21300000, guid: 61a431bacc7f21f4a937ff677bc7ea5a, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Vous t\xE9l\xE9porte sur n\u2019importe quelle case.\\n\\nApr\xE8s
+      usage : vous \xEAtes maudit. Bloque la gu\xE9rison et impossible \xE0 vendre/jeter/\xE9changer
+      sans enchanteur. "
+    description2: 
+    buyPrice: 40
+    sellPrice: 0
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Leurre
+    sprite: {fileID: 21300000, guid: 4823c41bcd8921b4d9cd80d67fdbba53, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Pose un token \xE0 distance de m\xEAl\xE9e des monstres.\\n\\nIl
+      peut \xEAtre la cible des monstres du combat.\\n\\nIl est d\xE9truit apr\xE8s
+      avoir \xE9t\xE9 attaqu\xE9 pour la premi\xE8re fois. "
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Babiole intrigante
+    sprite: {fileID: 21300000, guid: d25dab61f4c279c49970ed529bd626b1, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Choisissez un h\xE9ros proche hors combat.\\n\\nLancez un d6 :
+      S\u2019il fait 4 ou plus, le h\xE9ros est oblig\xE9 d\u2019\xE9changer la babiole
+      intrigante contre un objet de son inventaire.\\n\\nUn h\xE9ros ayant poss\xE9d\xE9
+      cet objet en est immunis\xE9."
+    description2: 
+    buyPrice: 10
+    sellPrice: 5
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Milo le chien sauveteur
+    sprite: {fileID: 21300000, guid: 148826103d0ed484abb41e27dff6a70c, type: 3}
+    offset: {x: 0, y: 1.95}
+    scale: 0.4
+    description: "Placez un token \xE0 la droite du h\xE9ros.\\n\\nA chaque tour
+      jusqu'\xE0 la fin du combat, il peut se d\xE9placer et soigner un h\xE9ros
+      proche de 3 points de vie.\\n\\nIl ne peut pas \xEAtre la cible d\u2019une
+      attaque mais retirez Milo du combat si une attaque adverse touche tous les
+      h\xE9ros alli\xE9s. "
+    description2: 
+    buyPrice: 25
+    sellPrice: 5
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Wif le chien de guerre
+    sprite: {fileID: 21300000, guid: 1bee90ad9af2ec2469dd1ce41f18debf, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Placez un token \xE0 la droite du h\xE9ros.\\n\\nA chaque tour
+      jusqu'\xE0 la fin du combat, il peut se d\xE9placer et faire une attaque physique
+      de port\xE9e m\xEAl\xE9e, infligeant 1d6 d\xE9gats physiques.\\n\\nIl ne peut
+      pas \xEAtre la cible d\u2019une attaque mais retirez Wif du combat si une attaque
+      adverse touche tous les h\xE9ros alli\xE9s."
+    description2: 
+    buyPrice: 25
+    sellPrice: 5
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Banni\xE8re de combat"
+    sprite: {fileID: 21300000, guid: 4abfcca1594c9f948a6d34311fddd70e, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Augmente de 3 tous les d\xE9g\xE2ts inflig\xE9s par le h\xE9ros
+      ses alli\xE9s proches jusqu\u2019\xE0 la fin du tour. "
+    description2: 
+    buyPrice: 12
+    sellPrice: 3
+    charges: 4
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "B\xE2ton de n\xE9cromancien"
+    sprite: {fileID: 21300000, guid: fcdb1a6842ce51744aefbc09069cc178, type: 3}
+    offset: {x: 0, y: 1.95}
+    scale: 0.4
+    description: "Invoque un monstre \xE0 c\xF4t\xE9 du h\xE9ros qui reste \xE0 son
+      contr\xF4le pendant le reste du combat.\\n\\nIl peut attaquer, se d\xE9placer
+      comme un h\xE9ros, \xEAtre cibl\xE9 par les autres monstres, et mourir.\\n\\nNe
+      donne aucune r\xE9compense.\\n\\n"
+    description2: 
+    buyPrice: 35
+    sellPrice: 5
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Dynamite dangereuse
+    sprite: {fileID: 21300000, guid: 1b0825c139b70a340ab3059aec745f81, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Inflige (1d6 + 5) points de d\xE9g\xE2ts magiques \xE0 tous les
+      adversaires, et 2 points de d\xE9g\xE2ts magiques au h\xE9ros et alli\xE9s
+      proches."
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 3
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Machine \xE0 sous"
+    sprite: {fileID: 21300000, guid: e7d77c26f3846d6438c46d87e668cc88, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "D\xE9pensez une pi\xE8ce : jetez un d6.\\n\\n1-2 : Vous ne gagnez
+      rien.\\n\\n 3-4-5 : Vous gagnez 3 pi\xE8ces.\\n\\n6 : Vous gagnez 10 pi\xE8ces."
+    description2: 
+    buyPrice: 6
+    sellPrice: 1
+    charges: 6
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Marchand ambulant
+    sprite: {fileID: 21300000, guid: dd164ae90309f9745882ae2e4716e8ef, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Permet de faire ses achats et ventes comme si le h\xE9ros \xE9tait
+      sur une case magasin."
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 2
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Pi\xE8ge \xE0 filet"
+    sprite: {fileID: 21300000, guid: ce58548d6aa769a4a8a393fb6e0f929a, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Hors combat : emp\xEAche le joueur proche cibl\xE9 de se d\xE9placer
+      pendant son prochain tour.\\n\\nEn combat : Emp\xEAche le monstre ou h\xE9ros
+      cibl\xE9 de bouger pendant son prochain tour."
+    description2: 
+    buyPrice: 12
+    sellPrice: 3
+    charges: 4
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Pacte avec le diable
+    sprite: {fileID: 21300000, guid: 4e4913a3ec205f1468ebe8942d26d16b, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Augmente les d\xE9gats de la prochaine attaque du h\xE9ros de 5
+      mais lui inflige 2 points de d\xE9g\xE2t."
+    description2: 
+    buyPrice: 15
+    sellPrice: 3
+    charges: 4
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Grand sac
+    sprite: {fileID: 21300000, guid: 1761c89cb1473c14cbdeb091e12757b4, type: 3}
+    offset: {x: 0, y: 1.5}
+    scale: 0.52
+    description: "Permet de stocker 1 \xE9quipement suppl\xE9mentaire."
+    description2: 
+    buyPrice: 30
+    sellPrice: 6
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Grappe de raisin
+    sprite: {fileID: 21300000, guid: 10233425432ee3248b37e8c6d93ae7a9, type: 3}
+    offset: {x: 0, y: 2.25}
+    scale: 0.52
+    description: "Soigne 2 points de vie au h\xE9ros ou \xE0 un h\xE9ros proche."
+    description2: 
+    buyPrice: 12
+    sellPrice: 3
+    charges: 10
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Grappin \xE0 h\xE9ro "
+    sprite: {fileID: 21300000, guid: 066818c04a4226d49b5244b6b25e65d9, type: 3}
+    offset: {x: 0, y: 2.25}
+    scale: 0.52
+    description: "Double la distance \xE0 laquelle les autres h\xE9ros sont consid\xE9r\xE9s
+      comme \"proches\"."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Pierre myst\xE9rieuse"
+    sprite: {fileID: 21300000, guid: 1926926eea7284744955cbc9be8d8d3b, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Jetez un d6 hors combat:\\n\\n1-2 : piochez un objet.\\n\\n3-4
+      : piochez un \xE9quipement. \\n\\n5 : piochez un monstre et commencez un combat
+      (d'autres h\xE9ros pourront vous rejoindre).\\n\\n6 : piochez un \xE9quipement
+      \xE9lite."
+    description2: 
+    buyPrice: 25
+    sellPrice: 5
+    charges: 1
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Vin de garde
+    sprite: {fileID: 21300000, guid: 84cbde14581a66d4c8242021abf23f2c, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Rend 6 points de vie au h\xE9ros ou \xE0 un h\xE9ros proche.\\n\\nA
+      chaque fin de tour du h\xE9ros, posez/incr\xE9mentez un token sur cette carte.\\nQuand
+      il atteint 6, le prix de vente passe \xE0 25 et utiliser l\u2019objet rend
+      tous les points de vie. "
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 1
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Bottes de course
+    sprite: {fileID: 21300000, guid: 1efa191ab50a1e34398087c559489e8d, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Utilisable uniquement hors combat.\\n\\n Ajoute 5 \xE0 un d\xE9placement.\\n\\nNe
+      consomme pas d\u2019action."
+    description2: 
+    buyPrice: 12
+    sellPrice: 3
+    charges: 4
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: "Livre des l\xE9gendes"
+    sprite: {fileID: 21300000, guid: ad7d2127617a5aa4fa1e138098656e1f, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "D\xE9truisez votre L\xE9gende et piochez-en une nouvelle.\\n\\nD\xE9truisez
+      cette carte apr\xE8s utilisation."
+    description2: 
+    buyPrice: 20
+    sellPrice: 4
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  - name: Figurine de cheval
+    sprite: {fileID: -2934745323003264687, guid: 0a9647783236c8f48925d4ebe50306f8, type: 3}
+    offset: {x: 0, y: 2}
+    scale: 0.4
+    description: "Jouet qui semble totalement inutile.\\n\\nMais peut \xEAtre que
+      quelqu\u2019un la cherche\u2026"
+    description2: 
+    buyPrice: 10
+    sellPrice: 2
+    charges: 0
+    sharable: 0
+    recompense:
+      equip: 0
+      equipElite: 0
+      obj: 0
+      gold: 0
+      xp: 0
+    range: 0
+    type: 0
+    requirement: 
+    monsterStats:
+      physicDef: 0
+      magicDef: 0
+      Life: 0
+      lifePerHeros: 0
+      atk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+      otherAtk:
+        type: 0
+        dmg: 0
+        range: 
+        moveType: 0
+        moveMoment: 0
+  titre: {fileID: 1000190560}
+  objectRender: {fileID: 1603593783}
+  description: {fileID: 1602578963}
+  description2: {fileID: 0}
+  buyCost: {fileID: 1188186221}
+  sellCost: {fileID: 879517100}
+  charges: {fileID: 1358044653}
+  equipment:
+    root: {fileID: 0}
+    text: {fileID: 0}
+  equipmentElite:
+    root: {fileID: 0}
+    text: {fileID: 0}
+  objet:
+    root: {fileID: 0}
+    text: {fileID: 0}
+  gold:
+    root: {fileID: 0}
+    text: {fileID: 0}
+  xp:
+    root: {fileID: 0}
+    text: {fileID: 0}
+  sharable: {fileID: 0}
+  range: {fileID: 0}
+  atkType: {fileID: 0}
+  defType: {fileID: 0}
+  defType2: {fileID: 0}
+  atkTxt: {fileID: 0}
+  requirementTxt: {fileID: 0}
+  PhysicDef: {fileID: 0}
+  MagicDef: {fileID: 0}
+  Life: {fileID: 0}
+  atk:
+    damage: {fileID: 0}
+    damageValue: {fileID: 0}
+    rangeValue: {fileID: 0}
+    atkObject: {fileID: 0}
+    plusSign: {fileID: 0}
+    moveObject: {fileID: 0}
+    moveImg: {fileID: 0}
+    moveTxt: {fileID: 0}
+  OtherAtk:
+    damage: {fileID: 0}
+    damageValue: {fileID: 0}
+    rangeValue: {fileID: 0}
+    atkObject: {fileID: 0}
+    plusSign: {fileID: 0}
+    moveObject: {fileID: 0}
+    moveImg: {fileID: 0}
+    moveTxt: {fileID: 0}
+  expBonus: 0
+--- !u!4 &247666407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247666405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1000190559}
+  - {fileID: 1278901544}
+  - {fileID: 1603593782}
+  - {fileID: 1602578962}
+  - {fileID: 962678130}
+  - {fileID: 1329282568}
+  - {fileID: 1399078473}
+  - {fileID: 1190785142}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &292143122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 292143123}
+  - component: {fileID: 292143124}
+  m_Layer: 0
+  m_Name: Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &292143123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292143122}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.82, y: -0.39160782, z: 0}
+  m_LocalScale: {x: 5, y: 9500000, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1920203966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &292143124
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292143122}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c0cc01f608753c24f8dc883390a548c2, type: 3}
+  m_Color: {r: 0.26666668, g: 0.18039216, b: 0.09019608, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &519420028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 519420032}
+  - component: {fileID: 519420031}
+  - component: {fileID: 519420033}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!20 &519420031
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: fdfb3e87e038b534fb40c838a7c2517a, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 0
+  m_HDR: 1
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 0
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &519420032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04df4ded4b5aec4a895737e956bcc85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &879517098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 879517099}
+  - component: {fileID: 879517101}
+  - component: {fileID: 879517100}
+  m_Layer: 0
+  m_Name: text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &879517099
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879517098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1329282568}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.028, y: -0.031}
+  m_SizeDelta: {x: 20, y: 5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &879517100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879517098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 2
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 5
+  m_fontSizeBase: 5
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 9.744518, y: 2.084293, z: 9.536461, w: 2.0685406}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 879517101}
+  m_maskType: 0
+--- !u!23 &879517101
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879517098}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &962678129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 962678130}
+  m_Layer: 0
+  m_Name: cost
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &962678130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962678129}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.93, y: 4.26, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2146069631}
+  - {fileID: 1001648926}
+  - {fileID: 1188186220}
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1000190558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1000190559}
+  - component: {fileID: 1000190561}
+  - component: {fileID: 1000190560}
+  m_Layer: 0
+  m_Name: Titre
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1000190559
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000190558}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.9702737, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 4.75}
+  m_SizeDelta: {x: 20, y: 5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1000190560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000190558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Figurine de cheval
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 2fa8cb1685c8ddd4e85d25a8746d2d3b, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 4.9
+  m_fontSizeBase: 4.75
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2.8
+  m_fontSizeMax: 5
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: -5
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 7.6354394, y: 2.6569154, z: 7.6456547, w: 1.7955804}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1000190561}
+  m_maskType: 0
+--- !u!23 &1000190561
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000190558}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2fa8cb1685c8ddd4e85d25a8746d2d3b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1001648925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1001648926}
+  - component: {fileID: 1001648927}
+  m_Layer: 0
+  m_Name: Move
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1001648926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001648925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.02, y: -0.47, z: -2}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 962678130}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!212 &1001648927
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001648925}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: d5e37090a8e8b004481394b731d9968a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1188186219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1188186220}
+  - component: {fileID: 1188186222}
+  - component: {fileID: 1188186221}
+  m_Layer: 0
+  m_Name: text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1188186220
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188186219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 962678130}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.028, y: -0.031}
+  m_SizeDelta: {x: 20, y: 5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1188186221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188186219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 10
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 5
+  m_fontSizeBase: 5
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 9.744518, y: 2.084293, z: 9.536461, w: 2.0685406}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1188186222}
+  m_maskType: 0
+--- !u!23 &1188186222
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188186219}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1190785141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1190785142}
+  - component: {fileID: 1190785143}
+  m_Layer: 0
+  m_Name: Type
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1190785142
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190785141}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.5}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!212 &1190785143
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190785141}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 73d30ed05dbc195428deabbc0da8dcc8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1278901542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1278901544}
+  - component: {fileID: 1278901543}
+  m_Layer: 0
+  m_Name: background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1278901543
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278901542}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c05f9039bf1c2be4c856fd80448a685a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 8.25, y: 11.25}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1278901544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278901542}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0009, z: 0}
+  m_LocalScale: {x: 0.89, y: 0.89, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1329282567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1329282568}
+  m_Layer: 0
+  m_Name: Sell
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1329282568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329282567}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.794, y: 4.26, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1963996934}
+  - {fileID: 2011449918}
+  - {fileID: 879517099}
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1333057185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333057188}
+  - component: {fileID: 1333057187}
+  - component: {fileID: 1333057186}
+  m_Layer: 0
+  m_Name: DebugCam
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1333057186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333057185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04df4ded4b5aec4a895737e956bcc85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!20 &1333057187
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333057185}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 0
+  m_HDR: 1
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 0
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1333057188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333057185}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1358044651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1358044652}
+  - component: {fileID: 1358044654}
+  - component: {fileID: 1358044653}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1358044652
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358044651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1399078473}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 13.17, y: -0.29}
+  m_SizeDelta: {x: 20, y: 5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1358044653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358044651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 0
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 45
+  m_fontSizeBase: 45
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1358044654}
+  m_maskType: 0
+--- !u!23 &1358044654
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358044651}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1399078472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399078473}
+  - component: {fileID: 1399078474}
+  m_Layer: 0
+  m_Name: Charges
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1399078473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399078472}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.132, y: -4.254, z: -1}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1358044652}
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1399078474
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399078472}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: feb007df720ae7a4697bf63a26eacba7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1591941304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1591941305}
+  - component: {fileID: 1591941306}
+  m_Layer: 0
+  m_Name: Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1591941305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591941304}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.815, y: -0.39160782, z: 0}
+  m_LocalScale: {x: 5, y: 9500000, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1920203966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1591941306
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591941304}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c0cc01f608753c24f8dc883390a548c2, type: 3}
+  m_Color: {r: 0.26666668, g: 0.18039216, b: 0.09019608, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1602578961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1602578962}
+  - component: {fileID: 1602578964}
+  - component: {fileID: 1602578963}
+  m_Layer: 0
+  m_Name: description
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1602578962
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602578961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 3.897, y: -2.5126}
+  m_SizeDelta: {x: 12.2061, y: 2.3678}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1602578963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602578961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "Jouet qui semble totalement inutile.\n\nMais peut \xEAtre que quelqu\u2019un
+    la cherche\u2026"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 2.5
+  m_fontSizeBase: 2.25
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 1.95
+  m_fontSizeMax: 2.5
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: -0.11219454, z: 7.6111526, w: -0.14024282}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1602578964}
+  m_maskType: 0
+--- !u!23 &1602578964
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602578961}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1603593781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1603593782}
+  - component: {fileID: 1603593783}
+  m_Layer: 0
+  m_Name: ObjectImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1603593782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603593781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0.01}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1603593783
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603593781}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2934745323003264687, guid: 0a9647783236c8f48925d4ebe50306f8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 10.24, y: 10.24}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1920203965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1920203966}
+  m_Layer: 0
+  m_Name: Borders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1920203966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920203965}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1591941305}
+  - {fileID: 292143123}
+  - {fileID: 2089962794}
+  - {fileID: 119207022}
+  - {fileID: 20570009}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1963996933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963996934}
+  - component: {fileID: 1963996935}
+  m_Layer: 0
+  m_Name: Gold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1963996934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963996933}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.08, y: -0.04, z: -1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1329282568}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1963996935
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963996933}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 4497e16f066a6114d96e2abd493eb910, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &2011449917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2011449918}
+  - component: {fileID: 2011449919}
+  m_Layer: 0
+  m_Name: Move
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2011449918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011449917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.154, y: -0.477, z: -2}
+  m_LocalScale: {x: -0.1, y: 0.1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1329282568}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!212 &2011449919
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011449917}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: d5e37090a8e8b004481394b731d9968a, type: 3}
+  m_Color: {r: 0.14285529, g: 1, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &2089962793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2089962794}
+  - component: {fileID: 2089962795}
+  m_Layer: 0
+  m_Name: up
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2089962794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089962793}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.82, y: 5.053, z: 0}
+  m_LocalScale: {x: 1e+11, y: 5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1920203966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2089962795
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089962793}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c0cc01f608753c24f8dc883390a548c2, type: 3}
+  m_Color: {r: 0.26666668, g: 0.18039216, b: 0.09019608, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &2146069630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2146069631}
+  - component: {fileID: 2146069632}
+  m_Layer: 0
+  m_Name: Gold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2146069631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146069630}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.08, y: -0.04, z: -1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 962678130}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2146069632
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146069630}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 4497e16f066a6114d96e2abd493eb910, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 519420032}
+  - {fileID: 1333057188}
+  - {fileID: 247666407}
+  - {fileID: 1920203966}

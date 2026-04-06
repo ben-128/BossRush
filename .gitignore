@@ -1,0 +1,20 @@
+# Unity
+BossRush/Library/
+BossRush/Temp/
+BossRush/Logs/
+BossRush/obj/
+BossRush/UserSettings/
+BossRush/*.csproj
+BossRush/*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# Claude
+.claude/

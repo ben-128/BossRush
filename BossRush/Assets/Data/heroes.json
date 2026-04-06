@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "description": "Liste des héros jouables",
+    "version": "0.1",
+    "notes": "Chaque héros a des PV, une ou plusieurs compétences (icônes), et une capacité spéciale utilisable une fois par combat (carte tournée à 90°). Certains effets peuvent régénérer la capacité."
+  },
+  "heroes": [
+    {
+      "id": "HERO_001",
+      "nom": "Mage",
+      "pv": 4,
+      "competences": ["magie"],
+      "capacite_speciale": "Un héros ciblé joue instantanément 2 cartes Action comme s'il possédait tous les prérequis.",
+      "description": "Fragile mais capable de débloquer le potentiel des alliés."
+    },
+    {
+      "id": "HERO_002",
+      "nom": "Soigneur",
+      "pv": 4,
+      "competences": ["soin"],
+      "capacite_speciale": "Retire toutes les cartes blessure d'un héros au choix.",
+      "description": "Le pilier de survie de l'équipe."
+    },
+    {
+      "id": "HERO_003",
+      "nom": "Guerrier",
+      "pv": 7,
+      "competences": ["physique"],
+      "capacite_speciale": "Prévient la prochaine attaque physique qui devrait vous être infilgée ce tour ci.",
+      "description": "Un rempart solide qui protège ses alliés."
+    },
+    {
+      "id": "HERO_004",
+      "nom": "Rôdeur",
+      "pv": 6,
+      "competences": ["distance"],
+      "capacite_speciale": "Joue immédiatement 3 cartes Action de sa main.",
+      "description": "Rapide et polyvalent, il enchaîne les attaques."
+    },
+    {
+      "id": "HERO_005",
+      "nom": "Diplomate",
+      "pv": 5,
+      "competences": ["diplomatie"],
+      "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent.",
+      "description": "Coordonne l'équipe pour optimiser les ressources."
+    },
+  ]
+}

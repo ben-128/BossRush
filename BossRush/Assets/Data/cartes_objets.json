@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "description": "Liste des cartes Objet du jeu",
+    "version": "0.1",
+    "notes": "Les objets sont posés face visible devant le héros. Utilisables à tout moment pendant le tour du héros, en plus de son action. Une fois utilisé, l'objet est défaussé. prerequis = icône requise sur la carte Héros. type: effet (défaussé après usage) ou renfort (placé sous la cible avec la carte Action)."
+  },
+  "cartes_objet": [
+    {
+      "id": "OBJ_001",
+      "nom": "Potion de soin",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Retire 2 cartes blessure du héros qui l'utilise.",
+      "description": "Récupération rapide en plein combat."
+    },
+    {
+      "id": "OBJ_002",
+      "nom": "Potion de soin majeure",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Retire toutes les cartes blessure d'un héros au choix.",
+      "description": "Guérison complète d'un allié."
+    },
+    {
+      "id": "OBJ_003",
+      "nom": "Huile enflammée",
+      "type": "renfort",
+      "prerequis": null,
+      "bonus_degats": 1,
+      "effet": "Ajoute 1 dégât à une attaque mélée jouée en même temps.",
+      "description": "Enduit une arme de flammes."
+    },
+    {
+      "id": "OBJ_004",
+      "nom": "Carquois magique",
+      "type": "renfort",
+      "prerequis": "distance",
+      "bonus_degats": 2,
+      "effet": "Ajoute 2 dégâts à une attaque à distance jouée en même temps.",
+      "description": "Des flèches enchantées pour un tir dévastateur."
+    },
+    {
+      "id": "OBJ_005",
+      "nom": "Pierre d'aiguisage",
+      "type": "renfort",
+      "prerequis": "physique",
+      "bonus_degats": 2,
+      "effet": "Ajoute 2 dégâts à une attaque mélée jouée en même temps.",
+      "description": "Affûte une lame pour un coup tranchant."
+    },
+    {
+      "id": "OBJ_006",
+      "nom": "Coursier personnel",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Un héros ciblé pioche 3 cartes Action.",
+      "description": "Un messager rapporte du ravitaillement."
+    },
+    {
+      "id": "OBJ_007",
+      "nom": "Poudre magique",
+      "type": "effet",
+      "prerequis": "élémentaire",
+      "effet": "Le héros peut utiliser sa capacité spéciale une seconde fois dans ce combat.",
+      "description": "Recharge l'énergie du héros."
+    },
+    {
+      "id": "OBJ_008",
+      "nom": "Bouclier temporaire",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Annule les dégâts de la prochaine attaque du boss contre ce héros.",
+      "description": "Une protection éphémère mais salvatrice."
+    },
+    {
+      "id": "OBJ_009",
+      "nom": "Parchemin ancien",
+      "type": "effet",
+      "prerequis": "élémentaire",
+      "effet": "Le héros joue la prochaine carte Action de sa main sans prérequis.",
+      "description": "Un savoir oublié qui déverrouille les limites."
+    },
+    {
+      "id": "OBJ_010",
+      "nom": "Corne de ralliement",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Tous les héros piochent 1 carte Objet.",
+      "description": "Un appel qui mobilise toute l'équipe."
+    },
+    {
+      "id": "OBJ_011",
+      "nom": "Fiole de poison",
+      "type": "renfort",
+      "prerequis": null,
+      "bonus_degats": 1,
+      "effet": "Ajoute 1 dégât à n'importe quelle attaque jouée en même temps.",
+      "description": "Un poison appliqué sur l'arme au dernier moment."
+    },
+    {
+      "id": "OBJ_012",
+      "nom": "Catalyseur arcanique",
+      "type": "renfort",
+      "prerequis": "élémentaire",
+      "bonus_degats": 3,
+      "effet": "Ajoute 3 dégâts à une attaque à distance jouée en même temps.",
+      "description": "Amplifie la puissance d'un sort."
+    },
+    {
+      "id": "OBJ_013",
+      "nom": "Bandages",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Retire 1 carte blessure du héros qui l'utilise.",
+      "description": "Un soin basique mais toujours utile."
+    },
+    {
+      "id": "OBJ_014",
+      "nom": "Sacoche du marchand",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Le héros pioche 2 cartes Action et 1 carte Objet.",
+      "description": "Un sac rempli de surprises."
+    },
+    {
+      "id": "OBJ_015",
+      "nom": "Amulette de résurrection",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Ressuscite un héros mort avec la moitié de ses PV.",
+      "description": "Ramène un allié de l'au-delà."
+    }
+  ]
+}

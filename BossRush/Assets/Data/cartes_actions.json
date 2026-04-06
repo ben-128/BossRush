@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "description": "Liste des cartes Action du jeu",
+    "version": "0.1",
+    "notes": "prerequis = icône requise sur la carte Héros pour jouer cette carte. type: attaque (placée sous la cible) ou effet (défaussée après usage)."
+  },
+  "cartes_action": [
+    {
+      "id": "ACT_001",
+      "nom": "Épée simple",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 1,
+      "prerequis": null,
+      "description": "Inflige 1 dégât en mélée à un monstre ou au boss."
+    },
+    {
+      "id": "ACT_002",
+      "nom": "Coup puissant",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 2,
+      "prerequis": "physique",
+      "description": "Inflige 2 dégâts en mélée."
+    },
+    {
+      "id": "ACT_003",
+      "nom": "Tir",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 1,
+      "prerequis": null,
+      "description": "Inflige 1 dégât à distance à un monstre ou au boss."
+    },
+    {
+      "id": "ACT_004",
+      "nom": "Tir précis",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 2,
+      "prerequis": "distance",
+      "description": "Inflige 2 dégâts à distance."
+    },
+    {
+      "id": "ACT_005",
+      "nom": "Boule de feu",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 1,
+      "prerequis": null,
+      "description": "Inflige 1 dégât à distance par les flammes."
+    },
+    {
+      "id": "ACT_006",
+      "nom": "Tempête de feu",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 3,
+      "prerequis": "élémentaire",
+      "description": "Déchaîne une pluie de flammes."
+    },
+    {
+      "id": "ACT_007",
+      "nom": "Éclair",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 2,
+      "prerequis": "élémentaire",
+      "description": "Inflige 2 dégâts à distance par la foudre."
+    },
+    {
+      "id": "ACT_008",
+      "nom": "Frappe sauvage",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 3,
+      "prerequis": "physique",
+      "description": "Inflige 3 dégâts en mélée."
+    },
+    {
+      "id": "ACT_009",
+      "nom": "Soin mineur",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": null,
+      "effet": "Retire 1 carte blessure d'un héros au choix.",
+      "description": "Soigne légèrement un allié."
+    },
+    {
+      "id": "ACT_010",
+      "nom": "Soin majeur",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": "soin",
+      "effet": "Retire 2 cartes blessure d'un héros au choix.",
+      "description": "Soin puissant."
+    },
+    {
+      "id": "ACT_011",
+      "nom": "Résurrection",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": "soin",
+      "effet": "Ressuscite un héros mort avec 1 PV restant.",
+      "description": "Ramène un allié tombé au combat."
+    },
+    {
+      "id": "ACT_012",
+      "nom": "Don d'objet",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": null,
+      "effet": "Un héros ciblé pioche 1 carte Action.",
+      "description": "Aide un allié en lui fournissant une carte."
+    },
+    {
+      "id": "ACT_013",
+      "nom": "Discours inspirant",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": "diplomatie",
+      "effet": "Tous les héros piochent 1 carte Action.",
+      "description": "Motive toute l'équipe."
+    },
+    {
+      "id": "ACT_014",
+      "nom": "Coup de bouclier",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 1,
+      "prerequis": null,
+      "description": "Inflige 1 dégât en mélée. Basique mais fiable."
+    },
+    {
+      "id": "ACT_015",
+      "nom": "Flèche empoisonnée",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 2,
+      "prerequis": "distance",
+      "description": "Inflige 2 dégâts à distance avec du poison."
+    },
+    {
+      "id": "ACT_016",
+      "nom": "Drain de vie",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 1,
+      "prerequis": "élémentaire",
+      "effet": "Retire également 1 carte blessure du joueur.",
+      "description": "Inflige 1 dégât et soigne 1 blessure. Nécessite la maîtrise élémentaire."
+    },
+    {
+      "id": "ACT_017",
+      "nom": "Parade",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": "physique",
+      "effet": "Annule la prochaine attaque du boss contre ce héros.",
+      "description": "Bloque une attaque ennemie."
+    },
+    {
+      "id": "ACT_018",
+      "nom": "Embuscade",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 2,
+      "prerequis": null,
+      "description": "Inflige 2 dégâts en mélée par surprise."
+    },
+    {
+      "id": "ACT_019",
+      "nom": "Bénédiction",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": "soin",
+      "effet": "Un héros ciblé peut ignorer les prérequis sur sa prochaine carte Action.",
+      "description": "Octroie une faveur divine."
+    },
+    {
+      "id": "ACT_020",
+      "nom": "Troc astucieux",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": "diplomatie",
+      "effet": "Deux héros au choix échangent autant de cartes qu'ils le souhaitent.",
+      "description": "Facilite les échanges entre alliés."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "description": "Destins incertains - Le résultat peut être favorable ou funeste",
+    "type": "incertain"
+  },
+  "destins": [
+    { "id": "DEN_R_001", "nom": "Coffre mystérieux", "effet": "Le héros pioche 3 cartes Action. Un autre héros au choix subit 1 dégâts physiques." },
+    { "id": "DEN_R_002", "nom": "Pacte sombre", "effet": "Le héros subit 1 dégats magique et pioche 1 carte Objet." },
+    { "id": "DEN_R_003", "nom": "Fontaine corrompue", "effet": "Le héros subit 1 dégats magique et est soigné de 3 blessures physiques." },
+    { "id": "DEN_R_004", "nom": "Marchand louche", "effet": "Défaussez 2 cartes Action pour piocher 2 cartes Objet. Si vous n'avez pas assez de cartes, subissez 2 dégâts physiques." },
+    { "id": "DEN_R_005", "nom": "Autel ancien", "effet": "Le héros peut échanger ses cartes avec tous les autres héros. Mais piochez 1 monstre et placez-le en tête de file." },
+    { "id": "DEN_R_006", "nom": "Passage secret", "effet": "Choix collectif : tous les héros piochent 1 cartes Action, OU tous les héros retirent 2 blessures." },
+    { "id": "DEN_R_007", "nom": "Relique instable", "effet": "Le héros actif pioche 1 carte Objet. S'il a un prérequis qu'il ne possède pas, il subit 2 dégâts magiques." },
+    { "id": "DEN_R_008", "nom": "Sacrifice héroïque", "effet": "Un héros défausse toutes ses cartes Action. Tous les autres héros piochent autant de cartes que de cartes défaussées." }
+  ]
+}
