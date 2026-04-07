@@ -8,9 +8,9 @@ Style cible : MTG painterly (voir memory/reference_art_prompt.md)
 |---|---|---|
 | Raw/Heros/Guerrier.png | Guerrier humain, armure lourde, epee + bouclier, palette bleu/acier | Fait |
 | Raw/Heros/Mage.png | Mage femme, baton arcanique, palette bleu electrique | Fait |
-| Raw/Heros/Diplomate.png | Diplomate homme, cape noble, parchemin, palette bordeaux/or | A refaire |
-| Raw/Heros/Rodeur.png | Rodeuse femme, arc, cape sombre, palette vert foret | A refaire |
-| Raw/Heros/Soigneur.png | Soigneur homme, robes blanches, magie doree, palette blanc/or | A refaire |
+| Raw/Heros/Diplomate.png | Diplomate homme, cape noble, parchemin, palette bordeaux/or | Fait |
+| Raw/Heros/Rodeur.png | Rodeuse femme, arc, cape sombre, palette vert foret | Fait |
+| Raw/Heros/Soigneur.png | Soigneur homme, robes blanches, magie doree, palette blanc/or | Fait |
 
 ## Monstres (5)
 
