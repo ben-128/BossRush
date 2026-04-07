@@ -1,0 +1,652 @@
+{
+  "meta": {
+    "description": "Liste des cartes Arsenal du jeu (Actions + Objets fusionnés)",
+    "version": "2.0",
+    "notes": "110 cartes totales. Base (sans prérequis) : 50 cartes (35 actions + 15 objets). Par héros (avec prérequis) : 12 cartes chacun (7 actions + 5 objets) × 5 héros = 60. Icône haut gauche = type (Action/Objet). Icône haut droite = prérequis (compétence du héros)."
+  },
+
+  "_comment_base": "=== BASE — 50 CARTES SANS PRÉREQUIS (35 Actions + 15 Objets) ===",
+
+  "cartes_arsenal": [
+    {
+      "id": "ACT_001",
+      "nom": "Coup simple",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 1,
+      "prerequis": null,
+      "quantite": 8
+    },
+    {
+      "id": "ACT_003",
+      "nom": "Tir",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 1,
+      "prerequis": null,
+      "quantite": 5
+    },
+    {
+      "id": "ACT_005",
+      "nom": "Lame enflammée",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 1,
+      "prerequis": null,
+      "quantite": 4
+    },
+    {
+      "id": "ACT_009",
+      "nom": "Soin mineur",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Retire 1 blessure d'un héros au choix.",
+      "quantite": 4
+    },
+    {
+      "id": "ACT_012",
+      "nom": "Pioche rapide",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Pioche 2 cartes Arsenal.",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_014",
+      "nom": "Embuscade",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 2,
+      "prerequis": null,
+      "quantite": 4
+    },
+    {
+      "id": "ACT_025",
+      "nom": "Bénédiction",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Un héros ciblé peut ignorer les prérequis sur sa prochaine carte Action. Le héros pioche une carte Arsenal.",
+      "quantite": 1
+    },
+    {
+      "id": "ACT_026",
+      "nom": "Drain de vie",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 1,
+      "prerequis": null,
+      "effet": "Retire également 1 blessure du héros.",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_027",
+      "nom": "Coup de bouclier",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 1,
+      "prerequis": null,
+      "quantite": 3
+    },
+    {
+      "id": "ACT_031",
+      "nom": "Frappe sauvage",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 2,
+      "prerequis": null,
+      "effet": "Le héros subit 1 dégât physique.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_001",
+      "nom": "Potion de soin",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Retire 2 cartes blessure du héros qui l'utilise.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_003",
+      "nom": "Huile enflammée",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": null,
+      "bonus_degats": 1,
+      "effet": "Ajoute 1 dégât à une attaque mélée jouée en même temps.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_006",
+      "nom": "Coursier personnel",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Un héros ciblé pioche 3 cartes Arsenal.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_008",
+      "nom": "Bouclier temporaire",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Annule les dégâts de la prochaine attaque du boss contre ce héros.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_011",
+      "nom": "Fiole de poison",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": null,
+      "bonus_degats": 1,
+      "effet": "Ajoute 1 dégât à n'importe quelle attaque jouée en même temps.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_013",
+      "nom": "Bandages",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Retire 1 carte blessure du héros qui l'utilise.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_016",
+      "nom": "Torche",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Regardez la prochaine carte Destin avant de la piocher. Vous pouvez la défausser et en piocher une autre à la place.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_017",
+      "nom": "Corde solide",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Un héros au choix ignore le prochain dégât physique qu'il subirait ce tour.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_018",
+      "nom": "Ration de voyage",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Le héros pioche 1 carte Arsenal.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_019",
+      "nom": "Pierre de chance",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": null,
+      "effet": "Piochez 1 Destin favorable au lieu du prochain Destin incertain ou funeste.",
+      "quantite": 1
+    },
+
+    {"_comment": "=== ARMURE (Guerrier) — 12 CARTES : 7 Actions + 5 Objets ==="},
+
+    {
+      "id": "ACT_002",
+      "nom": "Riposte blindée",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 2,
+      "prerequis": "armure",
+      "effet": "Retire 1 blessure physique du héros, puis inflige les dégâts.",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_008",
+      "nom": "Provocation",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "armure",
+      "effet": "Tous les monstres de la file attaquent le héros.",
+      "quantite": 1
+    },
+    {
+      "id": "ACT_019",
+      "nom": "Mur d'acier",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "armure",
+      "effet": "Annule les prochains dégâts physiques subis par ce héros ce tour.",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_020",
+      "nom": "Couvert de fer",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 1,
+      "prerequis": "armure",
+      "effet": "Le héros ne subit aucun dégât physique ce tour.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_005",
+      "nom": "Pierre d'aiguisage",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": "armure",
+      "bonus_degats": 2,
+      "effet": "Ajoute 2 dégâts à une attaque mélée jouée en même temps.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_022",
+      "nom": "Bouclier de fer",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": "armure",
+      "bonus_degats": 1,
+      "effet": "Ajoute 1 dégât à une attaque mélée. Le héros prévient 1 dégât physique ce tour.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_023",
+      "nom": "Armure lourde",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "armure",
+      "effet": "Les 2 prochains dégâts physiques subis par le héros sont réduits de 1 (minimum 0).",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_024",
+      "nom": "Gantelet clouté",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": "armure",
+      "bonus_degats": 1,
+      "effet": "Ajoute 1 dégât à une attaque mélée jouée en même temps.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_025",
+      "nom": "Heaume de guerre",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "armure",
+      "effet": "Le héros ignore les effets de la prochaine carte Attaque du boss ce tour.",
+      "quantite": 1
+    },
+
+    {"_comment": "=== DISTANCE (Rôdeur) — 12 CARTES : 7 Actions + 5 Objets ==="},
+
+    {
+      "id": "ACT_004",
+      "nom": "Tir précis",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 2,
+      "prerequis": "distance",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_015",
+      "nom": "Flèche perforante",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 3,
+      "prerequis": "distance",
+      "quantite": 1
+    },
+    {
+      "id": "ACT_016",
+      "nom": "Flèche empoisonnée",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 2,
+      "prerequis": "distance",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_029",
+      "nom": "Tir de couverture",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 1,
+      "prerequis": "distance",
+      "effet": "Le héros peut jouer 1 carte Action supplémentaire ce tour.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_004",
+      "nom": "Carquois magique",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": "distance",
+      "bonus_degats": 2,
+      "effet": "Ajoute 2 dégâts à une attaque à distance jouée en même temps.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_026",
+      "nom": "Flèches incendiaires",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": "distance",
+      "bonus_degats": 1,
+      "effet": "Ajoute 1 dégât à une attaque distance jouée en même temps.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_027",
+      "nom": "Arc composite",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": "distance",
+      "bonus_degats": 1,
+      "effet": "Ajoute 1 dégât à une attaque distance. Le héros peut jouer 1 carte Action supplémentaire ce tour.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_028",
+      "nom": "Lunette de visée",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "distance",
+      "effet": "La prochaine attaque distance du héros ce tour inflige +2 dégâts.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_029",
+      "nom": "Carquois infini",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "distance",
+      "effet": "Le héros pioche 2 cartes Arsenal.",
+      "quantite": 1
+    },
+
+    {"_comment": "=== ÉLÉMENTAIRE (Mage) — 12 CARTES : 7 Actions + 5 Objets ==="},
+
+    {
+      "id": "ACT_006",
+      "nom": "Foudre",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "distance",
+      "degats": 3,
+      "prerequis": "élémentaire",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_007",
+      "nom": "Poing de givre",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 2,
+      "prerequis": "élémentaire",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_017",
+      "nom": "Lame de givre",
+      "categorie": "action",
+      "type": "attaque",
+      "portee": "mélée",
+      "degats": 2,
+      "prerequis": "élémentaire",
+      "quantite": 1
+    },
+    {
+      "id": "ACT_018",
+      "nom": "Bouclier magique",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "élémentaire",
+      "effet": "Annule les prochains dégâts magiques subis par ce héros ce tour.",
+      "quantite": 1
+    },
+    {
+      "id": "ACT_030",
+      "nom": "Transfert arcanique",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "élémentaire",
+      "effet": "Déplace 1 carte blessure magique de ce héros sous un monstre au choix.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_007",
+      "nom": "Poudre magique",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "élémentaire",
+      "effet": "Le héros peut utiliser sa capacité spéciale une seconde fois dans ce combat.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_009",
+      "nom": "Parchemin ancien",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "élémentaire",
+      "effet": "Le héros joue la prochaine carte Action de sa main sans prérequis.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_012",
+      "nom": "Catalyseur arcanique",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": "élémentaire",
+      "bonus_degats": 3,
+      "effet": "Ajoute 3 dégâts à une attaque à distance jouée en même temps.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_030",
+      "nom": "Cristal élémentaire",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "élémentaire",
+      "effet": "Inflige 2 dégâts magiques à un monstre au choix dans la file.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_031",
+      "nom": "Baguette de feu",
+      "categorie": "objet",
+      "type": "renfort",
+      "prerequis": "élémentaire",
+      "bonus_degats": 2,
+      "effet": "Ajoute 2 dégâts à une attaque mélée jouée en même temps.",
+      "quantite": 1
+    },
+
+    {"_comment": "=== SOIN (Soigneur) — 12 CARTES : 7 Actions + 5 Objets ==="},
+
+    {
+      "id": "ACT_010",
+      "nom": "Soin majeur",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Retire 2 blessures d'un héros au choix.",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_011",
+      "nom": "Résurrection",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Ressuscite un héros mort avec 1 PV restant.",
+      "quantite": 1
+    },
+    {
+      "id": "ACT_021",
+      "nom": "Régénération",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Un héros au choix régénère sa capacité spéciale.",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_022",
+      "nom": "Ondes de soin",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Retire 1 blessure de chaque héros.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_002",
+      "nom": "Potion de soin majeure",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Retire toutes les cartes blessure d'un héros au choix.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_015",
+      "nom": "Amulette de résurrection",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Ressuscite un héros mort avec la moitié de ses PV.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_032",
+      "nom": "Herbes médicinales",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Retire 1 blessure de 2 héros différents au choix.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_033",
+      "nom": "Calice sacré",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Régénère la capacité spéciale du héros.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_034",
+      "nom": "Onguent miraculeux",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "soin",
+      "effet": "Retire 3 blessures d'un héros au choix.",
+      "quantite": 1
+    },
+
+    {"_comment": "=== DIPLOMATIE (Diplomate) — 12 CARTES : 7 Actions + 5 Objets ==="},
+
+    {
+      "id": "ACT_013",
+      "nom": "Discours inspirant",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Tous les héros piochent 1 carte Arsenal.",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_023",
+      "nom": "Négociation",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Défausse le monstre en tête de file sans combat. Si le monstre avait 1 point de vie ou moins, pioche une carte Arsenal.",
+      "quantite": 2
+    },
+    {
+      "id": "ACT_024",
+      "nom": "Renfort allié",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Jusqu'à 3 héros alliés (pas ce héros) jouent chacun 1 carte Action immédiatement.",
+      "quantite": 1
+    },
+    {
+      "id": "ACT_028",
+      "nom": "Troc astucieux",
+      "categorie": "action",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Deux héros au choix échangent autant de cartes qu'ils le souhaitent. Le héros pioche ensuite une carte Arsenal.",
+      "quantite": 2
+    },
+    {
+      "id": "OBJ_010",
+      "nom": "Corne de ralliement",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Tous les héros piochent 1 carte Arsenal.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_014",
+      "nom": "Sacoche du marchand",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Le héros pioche 3 cartes Arsenal.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_035",
+      "nom": "Étendard royal",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Chaque héros pioche 1 carte Arsenal.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_036",
+      "nom": "Bourse d'or",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Défaussez 1 carte Arsenal de votre choix. Piochez 2 cartes Arsenal.",
+      "quantite": 1
+    },
+    {
+      "id": "OBJ_037",
+      "nom": "Traité de paix",
+      "categorie": "objet",
+      "type": "effet",
+      "prerequis": "diplomatie",
+      "effet": "Défausse 1 monstre au choix dans la file (n'importe quelle position).",
+      "quantite": 1
+    }
+  ]
+}

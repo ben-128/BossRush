@@ -41,7 +41,7 @@
       "pv": 3,
       "degats": 1,
       "type_degats": "physique",
-      "capacite_speciale": "Le héros attaqué défausse 1 carte Action en plus des dégâts.",
+      "capacite_speciale": "Le héros attaqué défausse 1 carte Arsenal de type Action en plus des dégâts.",
       "description": "Sa toile emprisonne autant que sa morsure blesse.",
       "quantite": 2
     },

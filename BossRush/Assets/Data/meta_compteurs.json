@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "description": "Compteurs centraux de toutes les cartes du jeu Raid Party. À mettre à jour à chaque modification de cartes.",
+    "derniere_mise_a_jour": "2026-04-07",
+    "version": "1.0"
+  },
+
+  "arsenal": {
+    "_description": "Pile unique Arsenal = Actions + Objets. Icône haut gauche = type. Icône haut droite = prérequis.",
+    "fichier": "cartes_arsenal.json",
+    "base_sans_prerequis": {
+      "cible_actions": 35,
+      "cible_objets": 15,
+      "cible_total": 50,
+      "actuel_actions": 35,
+      "actuel_objets": 15,
+      "actuel_total": 50,
+      "status": "OK"
+    },
+    "par_hero": {
+      "_regle": "Après le choix des héros, on mélange dans la pile Arsenal uniquement les paquets des héros choisis.",
+      "cible_actions_par_hero": 7,
+      "cible_objets_par_hero": 5,
+      "cible_total_par_hero": 12,
+      "heros": {
+        "armure": {
+          "hero": "Guerrier",
+          "actuel_actions": 7,
+          "actuel_objets": 5,
+          "actuel_total": 12,
+          "status": "OK"
+        },
+        "distance": {
+          "hero": "Rôdeur",
+          "actuel_actions": 7,
+          "actuel_objets": 5,
+          "actuel_total": 12,
+          "status": "OK"
+        },
+        "élémentaire": {
+          "hero": "Mage",
+          "actuel_actions": 7,
+          "actuel_objets": 5,
+          "actuel_total": 12,
+          "status": "OK"
+        },
+        "soin": {
+          "hero": "Soigneur",
+          "actuel_actions": 7,
+          "actuel_objets": 5,
+          "actuel_total": 12,
+          "status": "OK"
+        },
+        "diplomatie": {
+          "hero": "Diplomate",
+          "actuel_actions": 7,
+          "actuel_objets": 5,
+          "actuel_total": 12,
+          "status": "OK"
+        }
+      }
+    },
+    "total_general": {
+      "cible": 110,
+      "actuel": 110,
+      "status": "OK"
+    }
+  },
+
+  "monstres": {
+    "fichier": "monstres.json",
+    "cible": 50,
+    "actuel": 13,
+    "manquant": 37,
+    "status": "INCOMPLET"
+  },
+
+  "brutes": {
+    "fichier": "brutes.json",
+    "cible": 10,
+    "actuel": 10,
+    "status": "OK"
+  },
+
+  "destins": {
+    "dossier": "destins/",
+    "favorables": {
+      "fichier": "destins/favorables.json",
+      "cible": 20,
+      "actuel": 8,
+      "manquant": 12,
+      "status": "INCOMPLET"
+    },
+    "funestes": {
+      "fichier": "destins/funestes.json",
+      "cible": 20,
+      "actuel": 8,
+      "manquant": 12,
+      "status": "INCOMPLET"
+    },
+    "incertains": {
+      "fichier": "destins/incertains.json",
+      "cible": 20,
+      "actuel": 8,
+      "manquant": 12,
+      "status": "INCOMPLET"
+    },
+    "total": {
+      "cible": 60,
+      "actuel": 24,
+      "manquant": 36,
+      "status": "INCOMPLET"
+    }
+  },
+
+  "par_boss": {
+    "_regle": "Chaque boss a ses propres cartes Épreuve et Attaque.",
+    "cible_epreuves": 15,
+    "cible_attaques": 10,
+    "boss": {
+      "geant_affame": {
+        "nom": "Géant Affamé",
+        "difficulte": "facile",
+        "dossier": "boss/geant_affame/",
+        "epreuves": {
+          "fichier": "boss/geant_affame/01_epreuves.json",
+          "cible": 15,
+          "actuel": 15,
+          "status": "OK"
+        },
+        "attaques": {
+          "fichier": "boss/geant_affame/01_attaques.json",
+          "cible": 10,
+          "actuel": 9,
+          "manquant": 1,
+          "status": "INCOMPLET"
+        }
+      }
+    }
+  },
+
+  "heros": {
+    "fichier": "heroes.json",
+    "cible": 5,
+    "actuel": 5,
+    "status": "OK"
+  },
+
+  "resume_global": {
+    "complet": ["arsenal", "brutes", "heros", "epreuves_geant"],
+    "incomplet": [
+      "monstres (13/50, manque 37)",
+      "destins_favorables (8/20, manque 12)",
+      "destins_funestes (8/20, manque 12)",
+      "destins_incertains (8/20, manque 12)",
+      "attaques_geant (9/10, manque 1)"
+    ],
+    "total_cartes_jeu": {
+      "cible": "110 arsenal + 50 monstres + 10 brutes + 60 destins + 15 épreuves/boss + 10 attaques/boss + 5 héros",
+      "note": "Les cartes boss (épreuves + attaques) sont par boss, pas dans le total global fixe."
+    }
+  }
+}

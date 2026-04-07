@@ -1,0 +1,763 @@
+================================================================================
+           RAID PARTY - SIMULATION DE PARTIE (4 JOUEURS)
+================================================================================
+Boss : Géant Affamé (Facile)
+Date : 2026-04-07
+================================================================================
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          MISE EN PLACE                                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+--- Choix du boss ---
+Boss : Géant Affamé (Facile)
+PV du boss : 8 + 4×4 = 24 PV
+Effet spécial : Lorsque le boss inflige des dégâts physiques, il se soigne 1 blessure.
+Nombre d'épreuves : 2×4 = 8 épreuves
+
+--- Attribution aléatoire des héros (5 héros, 4 joueurs) ---
+Héros disponibles : Mage, Soigneur, Guerrier, Rôdeur, Diplomate
+[Tirage aléatoire : le Mage n'est pas sélectionné]
+
+  Joueur 1 (J1) : GUERRIER  — 7 PV — Compétence : Armure
+                   Spécial : Prévient tous les dégâts physiques ce tour (1x/combat)
+  Joueur 2 (J2) : SOIGNEUR  — 4 PV — Compétence : Soin
+                   Spécial : Retire toutes les blessures d'un héros au choix (1x/combat)
+  Joueur 3 (J3) : RÔDEUR    — 6 PV — Compétence : Distance
+                   Spécial : Joue immédiatement 3 cartes Action de sa main (1x/combat)
+  Joueur 4 (J4) : DIPLOMATE — 5 PV — Compétence : Diplomatie
+                   Spécial : Tous les héros échangent autant de cartes qu'ils veulent (1x/combat)
+
+--- Pioche initiale (1 Objet + 2 Actions par joueur) ---
+
+[Mélange du paquet Objet (15 cartes)]
+  J1 pioche : OBJ_005 Pierre d'aiguisage (+2 dégâts mêlée, req: armure)
+  J2 pioche : OBJ_001 Potion de soin (retire 2 blessures)
+  J3 pioche : OBJ_011 Fiole de poison (+1 dégât toute attaque)
+  J4 pioche : OBJ_006 Coursier personnel (un héros pioche 3 Actions)
+
+[Mélange du paquet Action (70 cartes)]
+  J1 pioche : ACT_001 Coup simple (1 mêlée), ACT_014 Embuscade (2 mêlée)
+  J2 pioche : ACT_009 Soin mineur (soigne 1), ACT_003 Tir (1 distance)
+  J3 pioche : ACT_004 Tir précis (2 distance, req: distance), ACT_016 Flèche empoisonnée (2 distance, req: distance)
+  J4 pioche : ACT_001 Coup simple (1 mêlée), ACT_013 Discours inspirant (req: diplomatie)
+
+--- Échange de cartes (discussion entre joueurs) ---
+Les joueurs décident de ne rien échanger pour l'instant, les cartes sont bien distribuées.
+
+--- Pioche des 8 épreuves (tirées au hasard parmi 15) ---
+[Mélange des 15 cartes épreuve, pioche de 8]
+Pile d'épreuves (de haut en bas) :
+  1. EPR_GA_008 — Embranchement
+  2. EPR_GA_005 — Piège à loup
+  3. EPR_GA_013 — Source souterraine
+  4. EPR_GA_002 — Passage étroit
+  5. EPR_GA_010 — Autel primitif
+  6. EPR_GA_015 — Cri d'alarme
+  7. EPR_GA_007 — Trésor caché
+  8. EPR_GA_004 — Sentinelle gobeline
+
+--- Paquets mélangés et prêts ---
+Monstres (13 cartes) : Gobelin×4, Rat géant×3, Loup affamé×2, Chaman gobelin×2, Feu follet×2
+Brutes (10 cartes) : non utilisées par ce boss (facile)
+Attaques du boss (9 cartes) : Coup de poing×1, Balayage×3, Invocation×2, Ordre d'attaque×2, Festin×1
+Destins favorables (8), funestes (8), incertains (8) : mélangés
+
+Ordre de jeu : J1 → J2 → J3 → J4 (sens horaire)
+La partie commence !
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      PHASE D'ÉPREUVES                                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+File de monstres : [vide]
+
+────────────────────────────────────────────────────────────────────────────────
+ÉPREUVE 1/8 — Tour de J1 (Guerrier)
+────────────────────────────────────────────────────────────────────────────────
+
+1) ÉPREUVE : EPR_GA_008 — Embranchement
+   "Vous arrivez à un croisement. Deux chemins s'offrent à vous."
+   Choix A : Chemin éclairé → 1 monstre apparaît + 1 Destin favorable
+   Choix B : Chemin sombre → 1 Destin incertain
+
+   ➤ J1 choisit A (chemin éclairé) — résultat connu et favorable
+     • Monstre invoqué : [Pioche monstre] → MON_001 Gobelin (1 PV, 1 dgt physique)
+       File de monstres : [Gobelin]
+     • Destin favorable : [Pioche] → DEN_P_003 "Le héros est soigné de 2 blessures"
+       Aucune blessure → aucun effet.
+
+2) ACTIONS DU HÉROS :
+   J1 joue ACT_001 Coup simple (1 dgt mêlée) → cible Gobelin (tête de file)
+   Gobelin : 1 dgt ≥ 1 PV → MORT !
+   File de monstres : [vide]
+
+3) ATTAQUE DES MONSTRES :
+   File vide → aucune attaque.
+
+   État J1 : 7/7 PV | Main : [Embuscade] | Objets : [Pierre d'aiguisage]
+
+────────────────────────────────────────────────────────────────────────────────
+ÉPREUVE 2/8 — Tour de J2 (Soigneur)
+────────────────────────────────────────────────────────────────────────────────
+
+1) ÉPREUVE : EPR_GA_005 — Piège à loup
+   "Un piège mécanique se referme !"
+   Le héros actif subit 1 dégât physique.
+   MAIS un autre héros peut défausser 1 carte Action → annule les dégâts + 1 Favorable
+
+   ➤ Discussion : J1 (Guerrier, 7 PV) propose de défausser sa carte Embuscade.
+   ➤ J1 défausse ACT_014 Embuscade → dégâts annulés pour J2 !
+     • Destin favorable : [Pioche] → DEN_P_001 "Chaque héros pioche 1 carte Action"
+       J1 pioche : ACT_005 Lame enflammée (1 mêlée)
+       J2 pioche : ACT_022 Ondes de soin (soigne 1 à chaque héros, req: soin)
+       J3 pioche : ACT_029 Tir de couverture (1 distance, req: distance, +1 Action bonus)
+       J4 pioche : ACT_023 Négociation (défausse monstre, req: diplomatie)
+
+2) ACTIONS DU HÉROS :
+   J2 n'a rien à faire (pas de monstre, pas besoin de soins). Passe.
+
+3) ATTAQUE DES MONSTRES :
+   File vide → aucune attaque.
+
+   État J2 : 4/4 PV | Main : [Soin mineur, Tir, Ondes de soin] | Objets : [Potion de soin]
+
+────────────────────────────────────────────────────────────────────────────────
+ÉPREUVE 3/8 — Tour de J3 (Rôdeur)
+────────────────────────────────────────────────────────────────────────────────
+
+1) ÉPREUVE : EPR_GA_013 — Source souterraine
+   "Une source d'eau claire coule dans la grotte."
+   Choix A : Boire et se reposer → régénère le spécial + 1 monstre
+   Choix B : Continuer → 1 Destin incertain
+
+   ➤ J3 n'a pas utilisé son spécial → régénération inutile.
+   ➤ J3 choisit B (continuer)
+     • Destin incertain : [Pioche] → DEN_R_006 "Choix collectif : tous piochent 1 Action OU tous retirent 2 blessures"
+       Personne n'a de blessure → tous piochent 1 Action.
+       J1 pioche : ACT_027 Coup de bouclier (1 mêlée)
+       J2 pioche : ACT_010 Soin majeur (soigne 2, req: soin)
+       J3 pioche : ACT_003 Tir (1 distance)
+       J4 pioche : ACT_028 Troc astucieux (échange + pioche Objet, req: diplomatie)
+
+2) ACTIONS DU HÉROS :
+   File vide. J3 conserve ses cartes. Passe.
+
+3) ATTAQUE DES MONSTRES :
+   File vide → aucune attaque.
+
+   État J3 : 6/6 PV | Main : [Tir précis, Flèche empoisonnée, Tir de couverture, Tir]
+   Objets : [Fiole de poison]
+
+────────────────────────────────────────────────────────────────────────────────
+ÉPREUVE 4/8 — Tour de J4 (Diplomate)
+────────────────────────────────────────────────────────────────────────────────
+
+1) ÉPREUVE : EPR_GA_002 — Passage étroit
+   "Le tunnel se rétrécit dangereusement."
+   Choix A : Défausser 1 Objet pour passer vite
+   Choix B : Forcer le passage → 1 Destin funeste
+
+   ➤ J4 a OBJ_006 Coursier personnel (très utile pour plus tard).
+   ➤ J4 prend le risque : choisit B (forcer le passage).
+     • Destin funeste : [Pioche] → DEN_N_003 "Piochez 1 monstre dans la file"
+       Monstre : [Pioche] → MON_002 Rat géant (1 PV, 2 dgt physique)
+       File de monstres : [Rat géant]
+
+2) ACTIONS DU HÉROS :
+   J4 joue ACT_023 Négociation (req: diplomatie) → défausse le monstre sans combat.
+   Le Rat géant a 1 PV (≤1) → en bonus, J4 pioche 1 Objet !
+   J4 pioche : OBJ_008 Bouclier temporaire (annule la prochaine attaque du boss)
+   File de monstres : [vide]
+
+3) ATTAQUE DES MONSTRES :
+   File vide → aucune attaque.
+
+   État J4 : 5/5 PV | Main : [Coup simple, Discours inspirant, Troc astucieux]
+   Objets : [Coursier personnel, Bouclier temporaire]
+
+────────────────────────────────────────────────────────────────────────────────
+ÉPREUVE 5/8 — Tour de J1 (Guerrier)
+────────────────────────────────────────────────────────────────────────────────
+
+1) ÉPREUVE : EPR_GA_010 — Autel primitif
+   "Un autel de pierre brute se dresse dans une alcôve."
+   Choix A : Sacrifier 1 Objet → soigne 1 blessure
+   Choix B : Profaner l'autel → 1 Destin incertain
+
+   ➤ J1 n'a pas de blessure → le sacrifice n'apporte rien.
+   ➤ J1 choisit B (profaner).
+     • Destin incertain : [Pioche] → DEN_R_002 "Le héros subit 1 dgt magique ET pioche 1 Objet"
+       J1 subit 1 dgt magique → blessure : 1 (magique)
+       J1 pioche Objet : OBJ_003 Huile enflammée (+1 dgt mêlée)
+
+2) ACTIONS DU HÉROS :
+   File vide, J1 n'a rien de spécial à faire. Conserve ses cartes. Passe.
+
+3) ATTAQUE DES MONSTRES :
+   File vide → aucune attaque.
+
+   État J1 : 6/7 PV (1 blessure magique) | Main : [Lame enflammée, Coup de bouclier]
+   Objets : [Pierre d'aiguisage, Huile enflammée]
+
+────────────────────────────────────────────────────────────────────────────────
+ÉPREUVE 6/8 — Tour de J2 (Soigneur)
+────────────────────────────────────────────────────────────────────────────────
+
+1) ÉPREUVE : EPR_GA_015 — Cri d'alarme
+   "Un gobelin vous aperçoit et ouvre la bouche pour crier !"
+   Choix A : Défausser 2 cartes Action pour le faire taire
+   Choix B : Le laisser crier → 3 monstres rejoignent la file !
+
+   ➤ 3 monstres serait catastrophique. J2 défausse 2 cartes.
+   ➤ J2 défausse ACT_003 Tir + ACT_009 Soin mineur → alarme étouffée !
+
+2) ACTIONS DU HÉROS :
+   J2 conserve ses cartes restantes. Passe.
+
+3) ATTAQUE DES MONSTRES :
+   File vide → aucune attaque.
+
+   État J2 : 4/4 PV | Main : [Ondes de soin, Soin majeur] | Objets : [Potion de soin]
+
+────────────────────────────────────────────────────────────────────────────────
+ÉPREUVE 7/8 — Tour de J3 (Rôdeur)
+────────────────────────────────────────────────────────────────────────────────
+
+1) ÉPREUVE : EPR_GA_007 — Trésor caché
+   "Un coffre ancien brille dans la pénombre."
+   Choix A : Prendre le temps de l'ouvrir → 2 Destins favorables + 1 monstre
+   Choix B : Ignorer et continuer → aucun effet
+
+   ➤ 2 Destins favorables, ça vaut le coup ! L'équipe peut gérer 1 monstre.
+   ➤ J3 choisit A (ouvrir le coffre).
+     • Destin favorable 1 : [Pioche] → DEN_P_005 "Le héros pioche 1 Action + 1 Objet"
+       J3 pioche Action : ACT_015 Flèche perforante (3 distance, req: distance) — EXCELLENT !
+       J3 pioche Objet : OBJ_004 Carquois magique (+2 distance, req: distance)
+     • Destin favorable 2 : [Pioche] → DEN_P_007 "Un héros au choix pioche 2 Actions"
+       J3 donne ça à J4 (Diplomate) qui a peu de cartes.
+       J4 pioche : ACT_012 Pioche rapide (pioche 2), ACT_026 Drain de vie (1 mêlée + soigne 1)
+     • Monstre invoqué : [Pioche] → MON_004 Chaman gobelin (1 PV, 1 dgt magique)
+       File de monstres : [Chaman gobelin]
+
+2) ACTIONS DU HÉROS :
+   J3 joue ACT_003 Tir (1 distance) → cible Chaman gobelin
+   Chaman : 1 dgt ≥ 1 PV → MORT !
+   File de monstres : [vide]
+
+3) ATTAQUE DES MONSTRES :
+   File vide → aucune attaque.
+
+   État J3 : 6/6 PV | Main : [Tir précis, Flèche empoisonnée, Tir de couverture, Flèche perforante]
+   Objets : [Fiole de poison, Carquois magique]
+
+────────────────────────────────────────────────────────────────────────────────
+ÉPREUVE 8/8 — Tour de J4 (Diplomate)  [DERNIÈRE ÉPREUVE]
+────────────────────────────────────────────────────────────────────────────────
+
+1) ÉPREUVE : EPR_GA_004 — Sentinelle gobeline
+   "Un gobelin monte la garde, dos tourné."
+   Choix A : Défausser 1 Action silencieusement → 1 Destin favorable
+   Choix B : Tenter de passer → 1 Destin incertain
+
+   ➤ J4 défausse ACT_001 Coup simple (carte faible) → passage silencieux
+     • Destin favorable : [Pioche] → DEN_P_002 "Le héros actif pioche 1 Objet"
+       J4 pioche : OBJ_013 Bandages (retire 1 blessure)
+
+2) ACTIONS DU HÉROS :
+   J4 utilise OBJ_006 Coursier personnel → J4 pioche 3 cartes Action !
+   J4 pioche : ACT_005 Lame enflammée (1 mêlée), ACT_009 Soin mineur (soigne 1),
+               ACT_001 Coup simple (1 mêlée)
+
+3) ATTAQUE DES MONSTRES :
+   File vide → aucune attaque.
+
+   État J4 : 5/5 PV
+   Main : [Discours inspirant, Troc astucieux, Pioche rapide, Drain de vie,
+           Lame enflammée, Soin mineur, Coup simple]
+   Objets : [Bouclier temporaire, Bandages]
+
+════════════════════════════════════════════════════════════════════════════════
+        TOUTES LES ÉPREUVES SONT RÉSOLUES — LE COMBAT COMMENCE !
+════════════════════════════════════════════════════════════════════════════════
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      PHASE DE COMBAT                                        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+ÉTAT INITIAL DU COMBAT :
+┌─────────────────────────────────────────────────────────────┐
+│ BOSS : Géant Affamé — 0/24 dégâts — Passif : soigne 1      │
+│        blessure quand il inflige des dégâts physiques        │
+│ FILE DE MONSTRES : [vide]                                    │
+├─────────────────────────────────────────────────────────────┤
+│ J1 GUERRIER  : 6/7 PV (1 blessure magique)                  │
+│   Main : [Lame enflammée, Coup de bouclier]                  │
+│   Objets : [Pierre d'aiguisage, Huile enflammée]            │
+│   Spécial : DISPONIBLE                                       │
+├─────────────────────────────────────────────────────────────┤
+│ J2 SOIGNEUR  : 4/4 PV                                       │
+│   Main : [Ondes de soin, Soin majeur]                        │
+│   Objets : [Potion de soin]                                  │
+│   Spécial : DISPONIBLE                                       │
+├─────────────────────────────────────────────────────────────┤
+│ J3 RÔDEUR    : 6/6 PV                                        │
+│   Main : [Tir précis, Flèche empoisonnée, Tir de couverture,│
+│           Flèche perforante]                                 │
+│   Objets : [Fiole de poison, Carquois magique]               │
+│   Spécial : DISPONIBLE                                       │
+├─────────────────────────────────────────────────────────────┤
+│ J4 DIPLOMATE : 5/5 PV                                        │
+│   Main : [Discours inspirant, Troc astucieux, Pioche rapide, │
+│           Drain de vie, Lame enflammée, Soin mineur,         │
+│           Coup simple]                                        │
+│   Objets : [Bouclier temporaire, Bandages]                   │
+│   Spécial : DISPONIBLE                                       │
+└─────────────────────────────────────────────────────────────┘
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 1 — J1 (Guerrier)
+────────────────────────────────────────────────────────────────────────────────
+Action : J1 joue ACT_005 Lame enflammée (1 dgt mêlée) sur le boss.
+  + Utilise OBJ_003 Huile enflammée en renfort (+1 dgt mêlée)
+  → Total : 2 dégâts au boss ! (cartes placées sous le boss)
+  Boss : 2/24 dégâts
+
+Riposte du boss : [Pioche attaque] → ATT_GA_002 Balayage — 1 dgt physique à J1.
+  J1 subit 1 dgt physique. Blessures : 1 magique (1) + 1 physique (1) = 2 total.
+  ★ Passif du boss : dégâts physiques infligés → boss se soigne 1.
+    Sous le boss : [Lame+Huile = 2 dgt combo]. 2 > 1 → ne peut pas retirer. Pas de soin.
+  J1 : 5/7 PV effectifs
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 2 — J2 (Soigneur)
+────────────────────────────────────────────────────────────────────────────────
+Action : J2 n'a que des soins en main et personne n'est en danger.
+  J2 pioche 2 cartes Action : ACT_014 Embuscade (2 mêlée), ACT_001 Coup simple (1 mêlée)
+
+Riposte du boss : [Pioche] → ATT_GA_003 Invocation de meute — 1 monstre apparaît.
+  [Pioche monstre] → MON_001 Gobelin (1 PV, 1 dgt physique)
+  File de monstres : [Gobelin]
+  (Pas de dégâts physiques du boss → pas de soin)
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 3 — J3 (Rôdeur)
+────────────────────────────────────────────────────────────────────────────────
+Action : J3 joue ACT_015 Flèche perforante (3 dgt distance, req: distance) sur le BOSS.
+  (Distance : J3 peut ignorer la file et cibler directement le boss !)
+  + Utilise OBJ_004 Carquois magique en renfort (+2 dgt distance, req: distance)
+  → Total : 5 dégâts au boss !!!
+  Boss : 2 + 5 = 7/24 dégâts
+
+Riposte du boss : [Pioche] → ATT_GA_002 Balayage — 1 dgt physique à J3.
+  J3 subit 1 dgt physique. Blessures : 1 physique (1). J3 : 5/6 PV effectifs.
+  ★ Passif du boss → soigne 1. Sous le boss : [Lame+Huile (2), Flèche+Carquois (5)].
+    Aucune carte ≤ 1 → ne peut pas retirer. Pas de soin.
+
+  File de monstres : [Gobelin]
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 4 — J4 (Diplomate)
+────────────────────────────────────────────────────────────────────────────────
+Action : J4 joue ACT_013 Discours inspirant (req: diplomatie) — tous les héros piochent 1 Action.
+  J1 pioche : ACT_002 Riposte blindée (2 mêlée, req: armure, retire 1 blessure phys)
+  J2 pioche : ACT_021 Régénération (régénère le spécial d'un héros, req: soin)
+  J3 pioche : ACT_001 Coup simple (1 mêlée)
+  J4 pioche : ACT_027 Coup de bouclier (1 mêlée)
+
+Riposte du boss : [Pioche] → ATT_GA_004 Ordre d'attaque — le monstre en tête attaque J4 !
+  Gobelin (1 dgt physique) attaque J4.
+  J4 n'a pas de moyen de contrer. La carte Gobelin se place sous J4 comme blessure.
+  J4 : 4/5 PV effectifs (1 blessure physique = Gobelin 1 dgt)
+  File de monstres : [vide] (le Gobelin a quitté la file pour attaquer)
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 5 — J1 (Guerrier)
+────────────────────────────────────────────────────────────────────────────────
+Action : J1 joue ACT_002 Riposte blindée (2 dgt mêlée, req: armure).
+  Effet : retire d'abord 1 blessure physique du héros.
+  → J1 retire la blessure physique (1 dgt). Reste : 1 blessure magique (1 dgt).
+  File vide → la mêlée frappe le boss !
+  + Utilise OBJ_005 Pierre d'aiguisage en renfort (+2 dgt mêlée, req: armure)
+  → Total : 2 + 2 = 4 dégâts au boss !
+  Boss : 7 + 4 = 11/24 dégâts
+
+  J1 : 6/7 PV effectifs (1 blessure magique)
+
+Riposte du boss : [Pioche] → ATT_GA_001 Coup de poing — 2 dgt physiques à J1.
+  J1 subit 2 dgt physiques. Blessures : 1 magique (1) + 1 physique (2) = 3 total.
+  J1 : 4/7 PV effectifs.
+  ★ Passif du boss → soigne 1. Sous le boss : [Lame+Huile (2), Flèche+Carquois (5), Riposte+Pierre (4)].
+    Aucune carte ≤ 1 → ne peut pas retirer. Pas de soin !
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 6 — J2 (Soigneur)
+────────────────────────────────────────────────────────────────────────────────
+Action : J2 joue ACT_014 Embuscade (2 dgt mêlée) sur le boss. File vide → touche le boss.
+  Boss : 11 + 2 = 13/24 dégâts
+
+Riposte du boss : [Pioche] → ATT_GA_005 Festin — le boss se soigne 2 !
+  Boss retire des blessures totalisant ≤ 2. L'Embuscade (2 dgt) est exactement 2. Retirée !
+  Boss : 13 - 2 = 11/24 dégâts. Grr !
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 7 — J3 (Rôdeur)
+────────────────────────────────────────────────────────────────────────────────
+Action : J3 joue ACT_004 Tir précis (2 dgt distance, req: distance) sur le boss.
+  + Utilise OBJ_011 Fiole de poison en renfort (+1 dgt) → 2 + 1 = 3 dégâts au boss.
+  Boss : 11 + 3 = 14/24 dégâts
+
+Riposte du boss : [Pioche] → ATT_GA_003 Invocation — 1 monstre apparaît.
+  [Pioche monstre] → MON_005 Feu follet (1 PV, 1 dgt magique, immunisé distance)
+  File de monstres : [Feu follet]
+  Pas de dégâts physiques → pas de soin.
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 8 — J4 (Diplomate)
+────────────────────────────────────────────────────────────────────────────────
+Le Feu follet est immunisé aux attaques à distance ! Seule la mêlée peut le toucher.
+
+Action : J4 joue ACT_026 Drain de vie (1 dgt mêlée, soigne 1) sur le Feu follet.
+  Feu follet : 1 dgt ≥ 1 PV → MORT !
+  J4 se soigne 1. J4 a 1 blessure (Gobelin, 1 dgt phys). 1 ≤ 1 → retirée !
+  J4 : 5/5 PV (pleine santé !)
+  File de monstres : [vide]
+
+Riposte du boss : [Pioche] → ATT_GA_004 Ordre d'attaque — file vide → aucun effet.
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 9 — J1 (Guerrier)
+────────────────────────────────────────────────────────────────────────────────
+J1 n'a plus que ACT_027 Coup de bouclier (1 dgt) en main. Peu de dégâts et les cartes de
+1 dgt se font soigner par le boss quand il frappe en physique...
+
+Action : J1 pioche 2 Actions : ACT_020 Couvert de fer (1 mêlée, req: armure, bloque phys),
+                                ACT_019 Mur d'acier (bloque phys ce tour, req: armure)
+  Bonnes cartes défensives !
+
+Riposte du boss : [Pioche] → ATT_GA_002 Balayage — 1 dgt physique à J1.
+  J1 subit 1 dgt phys. Blessures : 1 mag(1) + 1 phys(2) + 1 phys(1) = 4 total. J1 : 3/7 PV.
+  ★ Passif du boss → soigne 1. Sous le boss : [Lame+Huile (2), Flèche+Carquois (5),
+    Riposte+Pierre (4), Tir+Fiole (3)]. Aucune ≤ 1 → pas de soin.
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 10 — J2 (Soigneur)
+────────────────────────────────────────────────────────────────────────────────
+J1 est à 3/7 PV ! Il faut le soigner.
+
+Action : J2 joue ACT_022 Ondes de soin (req: soin) → chaque héros retire 1 blessure (≤ 1 dgt).
+  J1 : retire la blessure phys de 1 dgt (Balayage). Reste : mag(1) + phys(2) = 3. → 4/7 PV.
+  J2 : pas de blessure.
+  J3 : retire la blessure phys de 1 dgt (Balayage). → 6/6 PV !
+  J4 : pas de blessure.
+
+  [Paquet d'attaque épuisé — on mélange la défausse pour reformer la pile]
+
+Riposte du boss : [Pioche] → ATT_GA_002 Balayage — 1 dgt physique à J2.
+  J2 subit 1 dgt physique. J2 : 3/4 PV.
+  ★ Passif du boss → soigne 1. Aucune carte ≤ 1 sous le boss → pas de soin.
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 11 — J3 (Rôdeur)
+────────────────────────────────────────────────────────────────────────────────
+J3 a en main : [Flèche empoisonnée, Tir de couverture, Coup simple, Tir]
+Plus d'objets en renfort.
+
+C'est le moment d'utiliser le SPÉCIAL !
+
+Action (principale) : J3 pioche 2 Actions : ACT_016 Flèche empoisonnée (2 dist, req: dist),
+                                             ACT_014 Embuscade (2 mêlée)
+  Main maintenant : [Flèche empoisonnée ×2, Tir de couverture, Coup simple, Tir, Embuscade]
+
+★ SPÉCIAL DU RÔDEUR : Joue immédiatement 3 cartes Action !
+  1. ACT_016 Flèche empoisonnée (2 distance) → boss. Boss : 14 + 2 = 16/24.
+  2. ACT_016 Flèche empoisonnée (2 distance) → boss. Boss : 16 + 2 = 18/24.
+  3. ACT_029 Tir de couverture (1 distance) → boss. Boss : 18 + 1 = 19/24.
+     Bonus Tir de couverture : J3 peut jouer 1 Action supplémentaire !
+     → ACT_003 Tir (1 distance) → boss. Boss : 19 + 1 = 20/24 !!!
+
+  SPÉCIAL UTILISÉ. J3 tourne sa carte.
+  Boss : 20/24 dégâts ! Plus que 4 à infliger !
+
+Riposte du boss : [Pioche] → ATT_GA_001 Coup de poing — 2 dgt physiques à J3 !
+  J3 subit 2 dgt physiques. J3 : 4/6 PV.
+  ★ Passif → soigne 1. Sous le boss : [...Flèche emp. (2), Flèche emp. (2), Tir couverture (1), Tir (1)].
+    Le boss peut retirer le Tir (1 dgt) ! Boss soigne 1.
+    Boss : 20 - 1 = 19/24 dégâts. Plus que 5 !
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 12 — J4 (Diplomate)
+────────────────────────────────────────────────────────────────────────────────
+Boss : 19/24. Il faut finir vite !
+
+Action : J4 joue ACT_012 Pioche rapide → pioche 2 Actions.
+  J4 pioche : ACT_005 Lame enflammée (1 mêlée), ACT_014 Embuscade (2 mêlée)
+
+  + J4 utilise OBJ_013 Bandages → soigne J2 de 1 blessure.
+    J2 : retire blessure phys (1 dgt Balayage). J2 : 4/4 PV !
+
+Riposte du boss : [Pioche] → ATT_GA_003 Invocation — 1 monstre apparaît.
+  [Pioche monstre] → MON_003 Loup affamé (2 PV, 1 dgt physique)
+  File de monstres : [Loup affamé]
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 13 — J1 (Guerrier)
+────────────────────────────────────────────────────────────────────────────────
+File : [Loup affamé (2 PV)]. J1 a des cartes mêlée → doit cibler le Loup.
+
+Action : J1 joue ACT_020 Couvert de fer (1 dgt mêlée, req: armure) sur le Loup.
+  Effet : J1 ne subit aucun dégât physique ce tour !
+  Loup : 1/2 dégâts. Pas encore mort.
+
+  J1 ne peut pas jouer d'autre carte Action (1 seule action par tour).
+  Loup survit avec 1 PV restant.
+
+Riposte du boss : [Pioche] → ATT_GA_002 Balayage — 1 dgt physique à J1.
+  ★ MAIS J1 est protégé par Couvert de fer → 0 dégât !
+  Le boss n'inflige pas de dégâts → pas de soin non plus (le passif ne se déclenche pas).
+
+  File de monstres : [Loup affamé — 1/2 PV restant]
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 14 — J2 (Soigneur)
+────────────────────────────────────────────────────────────────────────────────
+Action : J2 joue ACT_001 Coup simple (1 dgt mêlée) sur le Loup.
+  Loup : 1 + 1 = 2 dgt ≥ 2 PV → MORT !
+  File de monstres : [vide]
+
+  J2 utilise aussi ACT_021 Régénération (req: soin) → NON ! C'est une carte Action, pas un objet.
+  Régénération est une carte Action, J2 ne peut pas la jouer en plus (1 action par tour).
+  J2 la garde pour le tour prochain.
+
+Riposte du boss : [Pioche] → ATT_GA_004 Ordre d'attaque — file vide → aucun effet. Ouf !
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 15 — J3 (Rôdeur)
+────────────────────────────────────────────────────────────────────────────────
+J3 a en main : [Coup simple, Embuscade]. Plus de flèches...
+Boss : 19/24. File vide → mêlée touche le boss.
+
+Action : J3 joue ACT_014 Embuscade (2 dgt mêlée) sur le boss.
+  Boss : 19 + 2 = 21/24 dégâts. Plus que 3 !
+
+Riposte du boss : [Pioche] → ATT_GA_005 Festin — le boss se soigne 2 !
+  Sous le boss : [...Tir couverture (1), Flèche emp. (2), Flèche emp. (2), Riposte+Pierre (4),
+                  Lame+Huile (2), Flèche+Carquois (5), Embuscade (2), Couvert de fer (1)]
+  Boss retire le Tir couverture (1) + Couvert de fer (1) = 2. Exactement ≤ 2 !
+  Boss : 21 - 2 = 19/24. ENCORE !!! Plus que 5 !
+
+  Les joueurs grognent. Le Festin est redoutable.
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 16 — J4 (Diplomate)
+────────────────────────────────────────────────────────────────────────────────
+Boss : 19/24, 5 à infliger.
+J4 a beaucoup de cartes : [Troc astucieux, Lame enflammée ×2, Soin mineur, Coup simple,
+                            Coup de bouclier, Embuscade]
+
+Action : J4 joue ACT_014 Embuscade (2 dgt mêlée) sur le boss.
+  Boss : 19 + 2 = 21/24. Plus que 3 !
+
+  + J4 utilise OBJ_008 Bouclier temporaire → annule la prochaine attaque du boss !
+
+Riposte du boss : [Pioche] → ATT_GA_002 Balayage — ANNULÉ par le Bouclier temporaire !
+  Aucun dégât. Aucun soin pour le boss.
+  Boss : 21/24. Plus que 3 !
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 17 — J1 (Guerrier)
+────────────────────────────────────────────────────────────────────────────────
+J1 a : [Coup de bouclier, Mur d'acier]. Boss : 21/24.
+Coup de bouclier fait 1 dgt — le boss pourrait le soigner avec son passif...
+
+Action : J1 joue ACT_027 Coup de bouclier (1 dgt mêlée) sur le boss.
+  Boss : 21 + 1 = 22/24. Plus que 2 !
+
+Riposte du boss : [Pioche] → ATT_GA_003 Invocation — 1 monstre apparaît.
+  [Pioche] → MON_002 Rat géant (1 PV, 2 dgt physique)
+  File de monstres : [Rat géant]
+  Pas de dégâts physiques du boss → pas de soin !
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 18 — J2 (Soigneur)
+────────────────────────────────────────────────────────────────────────────────
+Boss : 22/24. File : [Rat géant].
+
+Action : J2 joue ACT_021 Régénération (req: soin) → régénère le spécial de J3 (Rôdeur) !
+  ★ Le spécial du Rôdeur est de nouveau DISPONIBLE !
+  J3 pourra jouer 3 cartes d'un coup au prochain tour.
+
+Riposte du boss : [Pioche] → ATT_GA_004 Ordre d'attaque — Rat géant attaque J2 !
+  Rat géant (2 dgt physique) attaque J2.
+  J2 utilise OBJ_001 Potion de soin ? Non, c'est un soin, pas un contre.
+  J2 n'a pas de moyen de contrer. Rat géant se place sous J2 comme blessure.
+  J2 : 4 - 2 = 2/4 PV effectifs.
+  File de monstres : [vide]
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 19 — J3 (Rôdeur) ★★★ TOUR DÉCISIF ★★★
+────────────────────────────────────────────────────────────────────────────────
+Boss : 22/24 dégâts. Plus que 2 à infliger !
+J3 a en main : [Coup simple (1 mêlée)]. Spécial régénéré mais 1 seule carte...
+
+J3 a besoin de plus de cartes pour exploiter le spécial. Mais le boss n'a que 2 PV !
+
+Action : J3 joue ACT_001 Coup simple (1 dgt mêlée) sur le boss.
+  Boss : 22 + 1 = 23/24. PLUS QU'UN SEUL DÉGÂT !!!
+
+  ★ SPÉCIAL DU RÔDEUR : J3 n'a plus de cartes en main. Le spécial ne sert à rien ici.
+
+Riposte du boss : [Pioche] → ATT_GA_002 Balayage — 1 dgt physique à J3.
+  J3 subit 1 dgt physique. J3 : 4 - 1 = 3/6 PV.
+  ★ Passif du boss → soigne 1. Sous le boss : [Coup simple (1 dgt)]. Le boss peut le retirer !
+  Boss : 23 - 1 = 22/24. NOOOOON !!! Retour à 22 !
+
+  La table entière pousse un cri de frustration. Le passif du Géant dévore les petites attaques !
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 20 — J4 (Diplomate) ★★★ MOMENT CRITIQUE ★★★
+────────────────────────────────────────────────────────────────────────────────
+Boss : 22/24. 2 dégâts nécessaires. Mais les attaques de 1 dgt se font soigner !
+Il FAUT infliger au moins 2 dégâts en un coup !
+
+J4 a : [Troc astucieux, Lame enflammée ×2, Soin mineur, Coup simple, Coup de bouclier]
+
+Lame enflammée = 1 dgt → risque d'être soigné.
+Coup simple = 1 dgt → même risque.
+
+MAIS ! Si J4 joue une attaque de 1 dgt et que le boss ne riposte pas en physique, pas de soin !
+
+Attendons... ou bien : J4 peut échanger une carte avec J1 qui a ACT_019 Mur d'acier (inutile
+pour le Guerrier maintenant). Ou bien J4 a ACT_028 Troc astucieux...
+
+Action : J4 joue ACT_005 Lame enflammée (1 dgt mêlée) sur le boss.
+  + J4 joue... non, les objets de renfort sont épuisés.
+  Boss : 22 + 1 = 23/24. Plus qu'un !
+
+  ESPOIR : que la riposte ne soit pas physique !
+
+Riposte du boss : [Pioche] → ATT_GA_001 Coup de poing — 2 dgt physiques à J4.
+  J4 subit 2 dgt physiques. J4 : 5 - 2 = 3/5 PV.
+  ★ Passif du boss → soigne 1. Sous le boss : [Lame enflammée (1 dgt)]. Retiré !!!
+  Boss : 23 - 1 = 22/24. ENCORE !!!
+
+  J4 frappe la table du poing. "Ce géant est un tank !"
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 21 — J1 (Guerrier)
+────────────────────────────────────────────────────────────────────────────────
+Boss : 22/24. Le problème : toute attaque de 1 dgt se fait annuler par le passif si le boss
+riposte en physique (et 4 cartes sur 9 infligent des dégâts physiques).
+
+J1 a : [Mur d'acier]. Il ne peut pas attaquer avec ça (c'est un effet défensif).
+
+Action : J1 pioche 2 Actions : ACT_005 Lame enflammée (1 mêlée), ACT_027 Coup de bouclier (1 mêlée).
+  Encore des cartes de 1 dgt ! Pas assez.
+
+  J1 garde Mur d'acier pour protéger un tour.
+
+Riposte du boss : [Pioche] → ATT_GA_003 Invocation — 1 monstre apparaît.
+  [Pioche] → MON_001 Gobelin (1 PV, 1 dgt physique)
+  File de monstres : [Gobelin]
+  Pas de dégâts physiques → pas de soin. Boss : 22/24.
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 22 — J2 (Soigneur)
+────────────────────────────────────────────────────────────────────────────────
+J2 est à 2/4 PV (blessure du Rat géant, 2 dgt).
+
+Action : J2 joue ACT_010 Soin majeur (req: soin) → soigne 2 blessures à J1.
+  J1 a : 1 blessure magique (1) + 1 blessure phys (2) + 1 blessure phys (1) = 4 total.
+  Soin de 2 : J1 retire la blessure phys (2 dgt Coup de poing). ≤ 2 → OK !
+  J1 : 1 mag(1) + 1 phys(1) = 2 blessures. J1 : 5/7 PV.
+
+  ★ J2 utilise son SPÉCIAL : Retire toutes les blessures d'un héros au choix !
+  → Cible J3 (Rôdeur, 3/6 PV, blessures : phys(2) + phys(1) = 3).
+  J3 : TOUTES les blessures retirées ! J3 : 6/6 PV !!!
+  Spécial de J2 utilisé.
+
+Riposte du boss : [Pioche] → ATT_GA_002 Balayage — 1 dgt physique à J2.
+  J2 subit 1 dgt phys. Blessures : phys(2 Rat) + phys(1 Balayage) = 3. J2 : 1/4 PV !!! DANGER !
+  ★ Passif → soigne 1. Pas de carte ≤ 1 sous le boss → pas de soin.
+
+  File de monstres : [Gobelin]
+
+────────────────────────────────────────────────────────────────────────────────
+TOUR DE COMBAT 23 — J3 (Rôdeur)
+────────────────────────────────────────────────────────────────────────────────
+J3 est à 6/6 PV, spécial régénéré ! Mais main vide...
+Le boss est à 22/24. File : [Gobelin].
+
+Action : J3 pioche 2 Actions : ACT_004 Tir précis (2 distance, req: distance),
+                                ACT_003 Tir (1 distance)
+
+  ★ SPÉCIAL DU RÔDEUR : Joue immédiatement 3 cartes Action !
+  J3 n'a que 2 cartes. Joue les 2 :
+  1. ACT_004 Tir précis (2 dgt distance) → cible le BOSS (distance ignore la file) !
+     Boss : 22 + 2 = 24/24 !!!
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║          ★★★ LE BOSS EST VAINCU !!! 24/24 DÉGÂTS !!! ★★★                   ║
+║                                                                              ║
+║   Le Tir précis du Rôdeur traverse la salle et frappe le Géant Affamé       ║
+║   en pleine poitrine ! Le colosse vacille... et s'effondre dans un          ║
+║   fracas assourdissant qui fait trembler toute la caverne !                  ║
+║                                                                              ║
+║                    ★ VICTOIRE DES HÉROS ! ★                                 ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+════════════════════════════════════════════════════════════════════════════════
+                         BILAN FINAL
+════════════════════════════════════════════════════════════════════════════════
+
+Nombre de tours d'épreuve : 8
+Nombre de tours de combat : 23
+
+--- État final des héros ---
+  J1 GUERRIER  : 5/7 PV — Spécial : DISPONIBLE (non utilisé !)
+  J2 SOIGNEUR  : 1/4 PV — Spécial : UTILISÉ — In extremis !
+  J3 RÔDEUR    : 6/6 PV — Spécial : UTILISÉ (2 fois grâce à Régénération) — MVP !
+  J4 DIPLOMATE : 3/5 PV — Spécial : DISPONIBLE (non utilisé)
+
+--- Statistiques ---
+  Dégâts totaux infligés au boss : 24 (pile)
+  Dégâts soignés par le boss (passif + Festin) : 7
+    • Passif (physique → soigne 1) : 3 fois déclenché, 3 fois réussi
+    • Festin : 2 fois pioché, 4 dégâts soignés total
+  Monstres tués : 7 (Gobelin ×3, Rat géant ×1, Chaman ×1, Feu follet ×1, Loup ×1)
+
+--- Moments clés ---
+  • Tour Combat 3 : J3 inflige 5 dégâts d'un coup (Flèche perforante + Carquois magique)
+  • Tour Combat 5 : J1 place un combo Riposte + Pierre pour 4 dégâts
+  • Tour Combat 11 : J3 active son spécial, inflige 7 dégâts en un tour !
+  • Tour Combat 15 : Le Festin annule 2 dégâts, frustrant l'équipe
+  • Tours 19-20 : Le passif du boss dévore deux attaques de 1 dgt consécutives
+  • Tour Combat 22 : J2 utilise son spécial pour soigner J3, permettant le coup final
+  • Tour Combat 23 : J3, spécial régénéré par J2, achève le boss avec Tir précis !
+
+--- Analyse ---
+  La difficulté principale a été le passif du Géant Affamé : chaque fois qu'il infligeait
+  des dégâts physiques (Balayage, Coup de poing), il récupérait 1 blessure. Les attaques
+  de 1 dégât étaient donc systématiquement annulées, forçant l'équipe à privilégier des
+  combos de 2+ dégâts.
+
+  Le Rôdeur (J3) a été le MVP avec 17 dégâts infligés au boss à lui seul, grâce à ses
+  attaques à distance qui ignoraient la file de monstres et son spécial dévastateur.
+
+  Le Soigneur (J2) a joué un rôle crucial en maintenant l'équipe en vie et surtout en
+  régénérant le spécial du Rôdeur au Tour 18, ce qui a permis le coup de grâce final.
+
+  Le Diplomate (J4) a brillé pendant les épreuves (Négociation, Discours inspirant) et
+  a fourni un soutien constant en cartes et soins mineurs.
+
+  Le Guerrier (J1) a servi de tank fiable, absorbant les dégâts et nettoyant les monstres
+  de la file avec ses combos d'armure. Il n'a même pas eu besoin de son spécial !
+
+  Victoire serrée : J2 finit à 1 PV, et sans la Régénération de J2 sur J3, le boss aurait
+  probablement survécu encore plusieurs tours grâce à son passif de soin.
+
+================================================================================
+                              FIN DE PARTIE
+================================================================================
