@@ -94,7 +94,7 @@ public class ActionCardGenerator : CardGenerator
             ? action.effet
             : action.description;
 
-        SetBaseTexts(action.nom, action.degats, null, mainDesc);
+        SetBaseTexts(action.nom, mainDesc);
         SetPortrait(action.sprite, action.offset, action.scale);
 
         // Icônes de dégâts pour les attaques
@@ -111,9 +111,5 @@ public class ActionCardGenerator : CardGenerator
 
         if (typeText != null)
             typeText.text = action.type;
-
-        // PV pas pertinent pour les actions
-        if (pvText != null)
-            pvText.text = "";
     }
 }

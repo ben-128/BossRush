@@ -17,6 +17,8 @@ public class EpreuveCardGenerator : CardGenerator
     {
         public string id;
         public string nom;
+        public int degats;
+        public string type_degats;
         public string description;
     }
     #endregion
@@ -25,9 +27,18 @@ public class EpreuveCardGenerator : CardGenerator
     [Serializable]
     public class EpreuveVisualData : CardVisualData
     {
+        [HideInInspector] public int degats;
+        [HideInInspector] public string type_degats;
         [HideInInspector] public string description;
     }
     #endregion
+
+    [Header("Dégâts")]
+    public SpriteRenderer[] degatsSlots;
+    public float degatsSpacing = 0.5f;
+    public SpriteRenderer typeDegatsIcon;
+    public Sprite physiqueSprite;
+    public Sprite magiqueSprite;
 
     [Header("Données des épreuves (charger depuis JSON)")]
     public EpreuveVisualData[] allEpreuves;
@@ -47,6 +58,8 @@ public class EpreuveCardGenerator : CardGenerator
             allEpreuves[i] = new EpreuveVisualData
             {
                 nom = json.nom,
+                degats = json.degats,
+                type_degats = json.type_degats,
                 description = json.description,
             };
         }
@@ -60,10 +73,26 @@ public class EpreuveCardGenerator : CardGenerator
     public override void GenerateCard(int index)
     {
         var epreuve = allEpreuves[index];
-        SetBaseTexts(epreuve.nom, 0, null, epreuve.description);
+        SetBaseTexts(epreuve.nom, epreuve.description);
         SetPortrait(epreuve.sprite, epreuve.offset, epreuve.scale);
 
-        // PV non pertinent pour les épreuves
-        if (pvText != null) pvText.text = "";
+        // Icônes de dégâts (optionnel)
+        SetDamageIcons(degatsSlots, epreuve.degats, degatsSpacing);
+
+        // Icône type de dégâts
+        if (typeDegatsIcon != null)
+        {
+            Sprite icon = epreuve.type_degats == "physique" ? physiqueSprite
+                        : epreuve.type_degats == "magique" ? magiqueSprite : null;
+            if (icon != null && epreuve.degats > 0)
+            {
+                typeDegatsIcon.gameObject.SetActive(true);
+                typeDegatsIcon.sprite = icon;
+            }
+            else
+            {
+                typeDegatsIcon.gameObject.SetActive(false);
+            }
+        }
     }
 }

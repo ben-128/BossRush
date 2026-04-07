@@ -68,6 +68,9 @@ public class MonsterCardGenerator : CardGenerator
     }
     #endregion
 
+    [Header("Textes spécifiques monstre")]
+    public TMPro.TextMeshPro pvText;
+
     [Header("Icônes de type de dégâts")]
     public TypeDegatsSprites typeDegatsSprites;
 
@@ -126,7 +129,8 @@ public class MonsterCardGenerator : CardGenerator
         bool hasCapacite = !string.IsNullOrEmpty(monster.capacite_speciale);
         string texte = hasCapacite ? monster.capacite_speciale : $"<i>{monster.description}</i>";
 
-        SetBaseTexts(monster.nom, monster.pv, null, texte);
+        SetBaseTexts(monster.nom, texte);
+        if (pvText != null) pvText.text = monster.pv.ToString();
         SetPortrait(monster.sprite, monster.offset, monster.scale);
 
         // Icônes de dégâts

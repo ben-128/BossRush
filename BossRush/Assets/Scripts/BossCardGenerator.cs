@@ -83,7 +83,7 @@ public class BossCardGenerator : CardGenerator
     public override void GenerateCard(int index)
     {
         var boss = allBoss[index];
-        SetBaseTexts(boss.nom, 0, boss.effet_special, boss.description);
+        SetBaseTexts(boss.nom, boss.description);
         SetPortrait(boss.sprite, boss.offset, boss.scale);
 
         if (difficulteText != null) difficulteText.text = boss.difficulte;

@@ -89,7 +89,7 @@ public class AttaqueCardGenerator : CardGenerator
     public override void GenerateCard(int index)
     {
         var atk = allAttaques[index];
-        SetBaseTexts(atk.nom, atk.degats, null, atk.description);
+        SetBaseTexts(atk.nom, atk.description);
         SetPortrait(atk.sprite, atk.offset, atk.scale);
 
         // Icônes de dégâts pour les attaques de type "degats"

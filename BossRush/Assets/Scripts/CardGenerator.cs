@@ -10,8 +10,6 @@ public abstract class CardGenerator : MonoBehaviour
 
     [Header("Visuels de la carte")]
     public TextMeshPro nomText;
-    public TextMeshPro pvText;
-    public TextMeshPro capaciteText;
     public TextMeshPro descriptionText;
     public SpriteRenderer portraitRenderer;
 
@@ -32,14 +30,10 @@ public abstract class CardGenerator : MonoBehaviour
         }
     }
 
-    protected void SetBaseTexts(string nom, int pv, string capacite, string description)
+    protected void SetBaseTexts(string nom, string description)
     {
         if (nomText != null)
             nomText.text = nom;
-        if (pvText != null)
-            pvText.text = pv.ToString();
-        if (capaciteText != null)
-            capaciteText.text = capacite ?? "";
         if (descriptionText != null)
             descriptionText.text = description ?? "";
 

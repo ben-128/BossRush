@@ -70,12 +70,9 @@ public class DestinCardGenerator : CardGenerator
     public override void GenerateCard(int index)
     {
         var destin = allDestins[index];
-        SetBaseTexts(destin.nom, 0, null, destin.effet);
+        SetBaseTexts(destin.nom, destin.effet);
         SetPortrait(destin.sprite, destin.offset, destin.scale);
 
         if (effetText != null) effetText.text = destin.effet;
-
-        // PV pas pertinent
-        if (pvText != null) pvText.text = "";
     }
 }

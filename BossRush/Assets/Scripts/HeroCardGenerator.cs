@@ -69,6 +69,10 @@ public class HeroCardGenerator : CardGenerator
     }
     #endregion
 
+    [Header("Textes spécifiques héros")]
+    public TMPro.TextMeshPro pvText;
+    public TMPro.TextMeshPro capaciteText;
+
     [Header("Icônes de compétences")]
     public CompetenceSprites competenceSprites;
 
@@ -119,7 +123,9 @@ public class HeroCardGenerator : CardGenerator
     {
         var hero = allHeroes[index];
 
-        SetBaseTexts(hero.nom, hero.pv, hero.capacite_speciale, hero.description);
+        SetBaseTexts(hero.nom, hero.description);
+        if (pvText != null) pvText.text = hero.pv.ToString();
+        if (capaciteText != null) capaciteText.text = hero.capacite_speciale ?? "";
         SetPortrait(hero.sprite, hero.offset, hero.scale);
         SetCompetenceIcons(hero.competences);
     }

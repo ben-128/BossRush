@@ -85,7 +85,7 @@ public class ObjetCardGenerator : CardGenerator
     public override void GenerateCard(int index)
     {
         var objet = allObjets[index];
-        SetBaseTexts(objet.nom, 0, null, objet.effet);
+        SetBaseTexts(objet.nom, objet.effet);
         SetPortrait(objet.sprite, objet.offset, objet.scale);
 
         if (typeText != null) typeText.text = objet.type;
@@ -97,8 +97,5 @@ public class ObjetCardGenerator : CardGenerator
             bonusDegatsText.gameObject.SetActive(objet.bonus_degats > 0);
             bonusDegatsText.text = objet.bonus_degats > 0 ? $"+{objet.bonus_degats}" : "";
         }
-
-        // PV pas pertinent
-        if (pvText != null) pvText.text = "";
     }
 }
