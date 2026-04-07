@@ -29,7 +29,6 @@ public class ActionCardGenerator : CardGenerator
         public int degats;
         public string prerequis;
         public string effet;
-        public string description;
     }
     #endregion
 
@@ -42,7 +41,6 @@ public class ActionCardGenerator : CardGenerator
         [HideInInspector] public int degats;
         [HideInInspector] public string prerequis;
         [HideInInspector] public string effet;
-        [HideInInspector] public string description;
     }
     #endregion
 
@@ -110,7 +108,6 @@ public class ActionCardGenerator : CardGenerator
                 degats = json.degats,
                 prerequis = json.prerequis,
                 effet = json.effet,
-                description = json.description,
             };
         }
         PreserveSprites(old, allActions);
@@ -124,11 +121,7 @@ public class ActionCardGenerator : CardGenerator
     {
         var action = allActions[index];
 
-        string mainDesc = action.type == "effet" && !string.IsNullOrEmpty(action.effet)
-            ? action.effet
-            : action.description;
-
-        SetBaseTexts(action.nom, mainDesc);
+        SetBaseTexts(action.nom, action.effet ?? "");
         SetPortrait(action.sprite, action.offset, action.scale);
 
         // Icônes de dégâts pour les attaques
