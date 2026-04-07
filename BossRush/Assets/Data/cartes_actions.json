@@ -149,22 +149,20 @@
     },
     {
       "id": "ACT_016",
-      "nom": "Pluie de flèches",
+      "nom": "Flèche empoisonnée",
       "type": "attaque",
       "portee": "distance",
-      "degats": 1,
+      "degats": 2,
       "prerequis": "distance",
-      "effet": "Inflige les dégâts à tous les monstres de la file.",
       "quantite": 2
     },
     {
       "id": "ACT_017",
-      "nom": "Nova arcanique",
+      "nom": "Lame de givre",
       "type": "attaque",
       "portee": "mélée",
       "degats": 2,
       "prerequis": "élémentaire",
-      "effet": "Inflige les dégâts à tous les monstres de la file.",
       "quantite": 1
     },
     {
@@ -175,7 +173,17 @@
       "degats": null,
       "prerequis": "élémentaire",
       "effet": "Annule les prochains dégâts magiques subis par ce héros ce tour.",
-      "quantite": 2
+      "quantite": 1
+    },
+    {
+      "id": "ACT_030",
+      "nom": "Transfert arcanique",
+      "type": "effet",
+      "portee": null,
+      "degats": null,
+      "prerequis": "élémentaire",
+      "effet": "Déplace 1 carte blessure magique de ce héros sous un monstre au choix.",
+      "quantite": 1
     },
     {
       "id": "ACT_019",
@@ -184,7 +192,7 @@
       "portee": null,
       "degats": null,
       "prerequis": "armure",
-      "effet": "Le prochain monstre qui attaque ce héros est défaussé sans infliger de dégâts.",
+      "effet": "Annule les prochains dégâts physiques subis par ce héros ce tour.",
       "quantite": 2
     },
     {
@@ -224,17 +232,17 @@
       "portee": null,
       "degats": null,
       "prerequis": "diplomatie",
-      "effet": "Défausse le monstre en tête de file sans combat.",
+      "effet": "Défausse le monstre en tête de file sans combat. Si le monstre avait 1 point de vie ou moins, pioche un objet.",
       "quantite": 2
     },
     {
       "id": "ACT_024",
-      "nom": "Appel aux armes",
+      "nom": "Renfort allié",
       "type": "effet",
       "portee": null,
       "degats": null,
       "prerequis": "diplomatie",
-      "effet": "Chaque héros pioche 1 carte Objet.",
+      "effet": "Jusqu'à 3 héros alliés (pas ce héros) jouent chacun 1 carte Action immédiatement.",
       "quantite": 1
     },
     {
@@ -244,7 +252,7 @@
       "portee": null,
       "degats": null,
       "prerequis": null,
-      "effet": "Un héros ciblé peut ignorer les prérequis sur sa prochaine carte Action.",
+      "effet": "Un héros ciblé peut ignorer les prérequis sur sa prochaine carte Action. Le héros pioche une carte Action.",
       "quantite": 1
     },
     {
@@ -273,7 +281,7 @@
       "portee": null,
       "degats": null,
       "prerequis": "diplomatie",
-      "effet": "Deux héros au choix échangent autant de cartes qu'ils le souhaitent.",
+      "effet": "Deux héros au choix échangent autant de cartes qu'ils le souhaitent. Le héros pioche ensuite un Objet.",
       "quantite": 2
     },
     {
