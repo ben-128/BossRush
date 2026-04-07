@@ -22,21 +22,18 @@ public class DestinCardGenerator : CardGenerator
     public class DestinJsonData
     {
         public string id;
-        public string nom;
         public string effet;
     }
     #endregion
 
     #region Visual Data
     [Serializable]
-    public class DestinVisualData : CardVisualData
+    public class DestinVisualData
     {
+        [HideInInspector] public string id;
         [HideInInspector] public string effet;
     }
     #endregion
-
-    [Header("Visuels spécifiques destin")]
-    public TMPro.TextMeshPro effetText;
 
     [Header("Données des destins (charger depuis JSON)")]
     public DestinVisualData[] allDestins;
@@ -48,31 +45,30 @@ public class DestinCardGenerator : CardGenerator
         var file = JsonUtility.FromJson<DestinsFile>(jsonSource.text);
         if (file == null || file.destins == null) { Debug.LogError("Impossible de parser le JSON des destins."); return; }
 
-        var old = allDestins;
         allDestins = new DestinVisualData[file.destins.Length];
         for (int i = 0; i < file.destins.Length; i++)
         {
             var json = file.destins[i];
             allDestins[i] = new DestinVisualData
             {
-                nom = json.nom,
+                id = json.id,
                 effet = json.effet,
             };
         }
-        PreserveSprites(old, allDestins);
         string typeDestin = file.meta?.type ?? "inconnu";
         Debug.Log($"{allDestins.Length} destins ({typeDestin}) chargés.");
     }
 
-    public override string GetCardName(int index) => allDestins[index].nom;
-    public override bool HasSprite(int index) => allDestins[index].sprite != null;
+    public override string GetCardName(int index) => allDestins[index].id;
+    public override bool HasSprite(int index) => true;
 
     public override void GenerateCard(int index)
     {
         var destin = allDestins[index];
-        SetBaseTexts(destin.nom, destin.effet);
-        SetPortrait(destin.sprite, destin.offset, destin.scale);
 
-        if (effetText != null) effetText.text = destin.effet;
+        // Pas de nom, pas de portrait — juste l'effet
+        if (nomText != null) nomText.text = "";
+        if (descriptionText != null) descriptionText.text = destin.effet;
+        if (portraitRenderer != null) portraitRenderer.gameObject.SetActive(false);
     }
 }

@@ -4,13 +4,13 @@
     "type": "favorable"
   },
   "destins": [
-    { "id": "DEN_P_001", "nom": "Ravitaillement", "effet": "Chaque héros pioche 1 carte Action." },
-    { "id": "DEN_P_002", "nom": "Trouvaille", "effet": "Le héros actif pioche 1 carte Objet." },
-    { "id": "DEN_P_003", "nom": "Source de soin", "effet": "Le héros est soigné de 2 blessures." },
-    { "id": "DEN_P_004", "nom": "Regain d'énergie", "effet": "Un héros au choix régénère sa capacité spéciale." },
-    { "id": "DEN_P_005", "nom": "Arsenal caché", "effet": "Le héros pioche 1 carte Action et 1 carte Objet." },
-    { "id": "DEN_P_006", "nom": "Repos mérité", "effet": "Chaque héros retire 1 cartes blessure." },
-    { "id": "DEN_P_007", "nom": "Bénédiction divine", "effet": "Un héros au choix pioche 2 cartes Action." },
-    { "id": "DEN_P_008", "nom": "Échange fortuné", "effet": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent." }
+    { "id": "DEN_P_001", "effet": "Chaque héros pioche 1 carte Action." },
+    { "id": "DEN_P_002", "effet": "Le héros actif pioche 1 carte Objet." },
+    { "id": "DEN_P_003", "effet": "Le héros est soigné de 2 blessures." },
+    { "id": "DEN_P_004", "effet": "Un héros au choix régénère sa capacité spéciale." },
+    { "id": "DEN_P_005", "effet": "Le héros pioche 1 carte Action et 1 carte Objet." },
+    { "id": "DEN_P_006", "effet": "Chaque héros retire 1 carte blessure." },
+    { "id": "DEN_P_007", "effet": "Un héros au choix pioche 2 cartes Action." },
+    { "id": "DEN_P_008", "effet": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent." }
   ]
 }

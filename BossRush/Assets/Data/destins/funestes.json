@@ -4,13 +4,13 @@
     "type": "funeste"
   },
   "destins": [
-    { "id": "DEN_N_001", "nom": "Piège", "effet": "Le héros subit 1 dégâts physiques." },
-    { "id": "DEN_N_002", "nom": "Malédiction", "effet": "Le héros défausse 1 carte Action de sa main." },
-    { "id": "DEN_N_003", "nom": "Embuscade", "effet": "Piochez 1 monstres et placez-les dans la file." },
-    { "id": "DEN_N_004", "nom": "Vol", "effet": "Le héros défausse 1 carte Objet devant lui (s'il en a)." },
-    { "id": "DEN_N_005", "nom": "Sort de confusion", "effet": "Le héros subit 1 dégâts magiques." },
-    { "id": "DEN_N_006", "nom": "Terrain instable", "effet": "Chaque héros subit 1 dégât physique." },
-    { "id": "DEN_N_007", "nom": "Drain arcanique", "effet": "Le héros voit sa capacité active utilisée (sans effet)." },
-    { "id": "DEN_N_008", "nom": "Renfort ennemi", "effet": "Piochez 2 monstres et placez-les dans la file." }
+    { "id": "DEN_N_001", "effet": "Le héros subit 1 dégât physique." },
+    { "id": "DEN_N_002", "effet": "Le héros défausse 1 carte Action de sa main." },
+    { "id": "DEN_N_003", "effet": "Piochez 1 monstre et placez-le dans la file." },
+    { "id": "DEN_N_004", "effet": "Le héros défausse 1 carte Objet devant lui (s'il en a)." },
+    { "id": "DEN_N_005", "effet": "Le héros subit 1 dégât magique." },
+    { "id": "DEN_N_006", "effet": "Chaque héros subit 1 dégât physique." },
+    { "id": "DEN_N_007", "effet": "Le héros voit sa capacité active utilisée (sans effet)." },
+    { "id": "DEN_N_008", "effet": "Piochez 2 monstres et placez-les dans la file." }
   ]
 }
