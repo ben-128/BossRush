@@ -46,12 +46,46 @@ public class ActionCardGenerator : CardGenerator
     }
     #endregion
 
-    [Header("Visuels spécifiques action")]
+    #region Prerequis Icons
+    [Serializable]
+    public class PrerequisSprites
+    {
+        public Sprite armure;
+        public Sprite distance;
+        public Sprite soin;
+        public Sprite magie;
+        public Sprite diplomatie;
+        public Sprite elementaire;
+
+        public Sprite GetSprite(string prerequis)
+        {
+            if (string.IsNullOrEmpty(prerequis)) return null;
+            switch (prerequis.ToLower())
+            {
+                case "armure": return armure;
+                case "distance": return distance;
+                case "soin": return soin;
+                case "magie": return magie;
+                case "diplomatie": return diplomatie;
+                case "élémentaire": return elementaire;
+                default:
+                    Debug.LogWarning($"Prérequis inconnu : {prerequis}");
+                    return null;
+            }
+        }
+    }
+    #endregion
+
+    [Header("Dégâts")]
     public SpriteRenderer[] degatsSlots;
     public float degatsSpacing = 0.5f;
-    public TMPro.TextMeshPro porteeText;
-    public TMPro.TextMeshPro prerequisText;
-    public TMPro.TextMeshPro typeText;
+
+    [Header("Portée")]
+    public SpriteRenderer porteeDistanceIcon;
+
+    [Header("Prérequis")]
+    public PrerequisSprites prerequisSprites;
+    public SpriteRenderer prerequisIcon;
 
     [Header("Données des actions (charger depuis JSON)")]
     public ActionVisualData[] allActions;
@@ -103,13 +137,23 @@ public class ActionCardGenerator : CardGenerator
         else
             SetDamageIcons(degatsSlots, 0, degatsSpacing);
 
-        if (porteeText != null)
-            porteeText.text = action.portee ?? "";
+        // Icône portée distance
+        if (porteeDistanceIcon != null)
+            porteeDistanceIcon.gameObject.SetActive(action.portee == "distance");
 
-        if (prerequisText != null)
-            prerequisText.text = action.prerequis ?? "";
-
-        if (typeText != null)
-            typeText.text = action.type;
+        // Icône prérequis
+        if (prerequisIcon != null)
+        {
+            var sprite = prerequisSprites.GetSprite(action.prerequis);
+            if (sprite != null)
+            {
+                prerequisIcon.gameObject.SetActive(true);
+                prerequisIcon.sprite = sprite;
+            }
+            else
+            {
+                prerequisIcon.gameObject.SetActive(false);
+            }
+        }
     }
 }
