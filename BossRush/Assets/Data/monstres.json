@@ -1,9 +1,12 @@
 {
-  "boss_id": "BOSS_001",
-  "boss_nom": "Géant Affamé",
+  "meta": {
+    "description": "Liste des monstres du jeu",
+    "version": "0.1",
+    "notes": "Monstres génériques, utilisables par n'importe quel boss."
+  },
   "monstres": [
     {
-      "id": "MON_GA_001",
+      "id": "MON_001",
       "nom": "Gobelin",
       "pv": 1,
       "degats": 1,
@@ -13,7 +16,7 @@
       "quantite": 4
     },
     {
-      "id": "MON_GA_002",
+      "id": "MON_002",
       "nom": "Rat géant",
       "pv": 1,
       "degats": 2,
@@ -23,7 +26,7 @@
       "quantite": 3
     },
     {
-      "id": "MON_GA_003",
+      "id": "MON_003",
       "nom": "Loup affamé",
       "pv": 2,
       "degats": 1,
@@ -33,7 +36,7 @@
       "quantite": 2
     },
     {
-      "id": "MON_GA_004",
+      "id": "MON_004",
       "nom": "Chaman gobelin",
       "pv": 1,
       "degats": 1,
@@ -43,12 +46,12 @@
       "quantite": 2
     },
     {
-      "id": "MON_GA_005",
+      "id": "MON_005",
       "nom": "Feu follet",
       "pv": 1,
       "degats": 1,
       "type_degats": "magique",
-      "capacite_speciale": "Ne peut pas être attaqué par des attaques physiques.",
+      "capacite_speciale": "Ne peut pas être attaqué par des attaques à distance.",
       "description": "Une flamme errante qui brûle au toucher.",
       "quantite": 2
     }

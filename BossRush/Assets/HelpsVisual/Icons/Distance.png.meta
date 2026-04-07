@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,12 +103,12 @@ TextureImporter:
       name: Distance_0
       rect:
         serializedVersion: 2
-        x: 385
-        y: 52
-        width: 245
-        height: 949
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 21
+        y: 311
+        width: 939
+        height: 443
+      alignment: 9
+      pivot: {x: 0.5068303, y: 0.46322432}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -121,11 +121,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Distance_1
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 751
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98c69f1263e484f42b0058dc30391e58
+      internalID: -156000302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Distance_2
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 306
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c9dc28beb082d641bed01db161bf2be
+      internalID: 1957031247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 75add66b7f9608942b58639a8966ff3b
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +178,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Distance_0: -8257054274441828170
+      Distance_1: -156000302
+      Distance_2: 1957031247
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "description": "Liste des brutes du jeu",
+    "version": "0.1",
+    "notes": "Brutes = monstres d'élite. Paquet séparé des monstres classiques. Invoquées par certains boss ou lors d'épreuves difficiles. Plus résistantes et plus dangereuses."
+  },
+  "monstres": [
+    {
+      "id": "BRU_001",
+      "nom": "Ogre",
+      "pv": 4,
+      "degats": 2,
+      "type_degats": "physique",
+      "capacite_speciale": null,
+      "description": "Une masse de muscles et de fureur.",
+      "quantite": 2
+    },
+    {
+      "id": "BRU_002",
+      "nom": "Spectre",
+      "pv": 2,
+      "degats": 2,
+      "type_degats": "magique",
+      "capacite_speciale": "Ne peut pas être attaqué par des attaques physiques.",
+      "description": "Un esprit vengeur qui traverse les armures.",
+      "quantite": 2
+    },
+    {
+      "id": "BRU_003",
+      "nom": "Berserker gobelin",
+      "pv": 3,
+      "degats": 3,
+      "type_degats": "physique",
+      "capacite_speciale": "Inflige ses dégâts même s'il est vaincu pendant l'attaque.",
+      "description": "Un gobelin enragé qui ne recule jamais.",
+      "quantite": 1
+    },
+    {
+      "id": "BRU_004",
+      "nom": "Araignée géante",
+      "pv": 3,
+      "degats": 1,
+      "type_degats": "physique",
+      "capacite_speciale": "Le héros attaqué défausse 1 carte Action en plus des dégâts.",
+      "description": "Sa toile emprisonne autant que sa morsure blesse.",
+      "quantite": 2
+    },
+    {
+      "id": "BRU_005",
+      "nom": "Sorcier noir",
+      "pv": 2,
+      "degats": 2,
+      "type_degats": "magique",
+      "capacite_speciale": "Lorsqu'il attaque, piochez 1 monstre supplémentaire dans la file.",
+      "description": "Ses incantations appellent des renforts sans fin.",
+      "quantite": 1
+    },
+    {
+      "id": "BRU_006",
+      "nom": "Golem de pierre",
+      "pv": 5,
+      "degats": 1,
+      "type_degats": "physique",
+      "capacite_speciale": "Les attaques à distance ne lui infligent que 1 dégât maximum.",
+      "description": "Lent mais quasi indestructible.",
+      "quantite": 1
+    },
+    {
+      "id": "BRU_007",
+      "nom": "Banshee",
+      "pv": 2,
+      "degats": 1,
+      "type_degats": "magique",
+      "capacite_speciale": "Lorsqu'elle attaque, tous les héros subissent 1 dégât magique.",
+      "description": "Son cri glace le sang de tous ceux qui l'entendent.",
+      "quantite": 1
+    }
+  ]
+}

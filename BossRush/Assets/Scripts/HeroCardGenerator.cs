@@ -1,8 +1,7 @@
 using System;
-using TMPro;
 using UnityEngine;
 
-public class HeroCardGenerator : MonoBehaviour
+public class HeroCardGenerator : CardGenerator
 {
     #region JSON Data Classes
     [Serializable]
@@ -32,20 +31,14 @@ public class HeroCardGenerator : MonoBehaviour
     }
     #endregion
 
-    #region Visual Data (Inspector)
+    #region Visual Data
     [Serializable]
-    public class HeroVisualData
+    public class HeroVisualData : CardVisualData
     {
-        [HideInInspector] public string nom;
         [HideInInspector] public int pv;
         [HideInInspector] public string[] competences;
         [HideInInspector] public string capacite_speciale;
         [HideInInspector] public string description;
-
-        [Header("Visuel")]
-        public Sprite sprite;
-        public Vector2 offset = Vector2.up * 2;
-        public float scale = 0.5f;
     }
     #endregion
 
@@ -76,19 +69,8 @@ public class HeroCardGenerator : MonoBehaviour
     }
     #endregion
 
-    [Header("Source")]
-    public TextAsset heroesJson;
-    public string outputFolder = "Heros";
-
     [Header("Icônes de compétences")]
     public CompetenceSprites competenceSprites;
-
-    [Header("Visuels de la carte")]
-    public TextMeshPro nomText;
-    public TextMeshPro pvText;
-    public TextMeshPro capaciteText;
-    public TextMeshPro descriptionText;
-    public SpriteRenderer portraitRenderer;
 
     [Header("Emplacements des icônes de compétences")]
     public SpriteRenderer[] competenceSlots;
@@ -96,32 +78,22 @@ public class HeroCardGenerator : MonoBehaviour
     [Header("Données des héros (charger depuis JSON)")]
     public HeroVisualData[] allHeroes;
 
-    public void LoadFromJson()
+    public override void LoadFromJson()
     {
-        if (heroesJson == null)
+        if (jsonSource == null)
         {
             Debug.LogError("Aucun fichier JSON assigné !");
             return;
         }
 
-        var file = JsonUtility.FromJson<HeroesFile>(heroesJson.text);
+        var file = JsonUtility.FromJson<HeroesFile>(jsonSource.text);
         if (file == null || file.heroes == null)
         {
             Debug.LogError("Impossible de parser le JSON des héros.");
             return;
         }
 
-        // Préserver les sprites déjà assignés
-        var oldSprites = new System.Collections.Generic.Dictionary<string, HeroVisualData>();
-        if (allHeroes != null)
-        {
-            foreach (var h in allHeroes)
-            {
-                if (!string.IsNullOrEmpty(h.nom))
-                    oldSprites[h.nom] = h;
-            }
-        }
-
+        var oldHeroes = allHeroes;
         allHeroes = new HeroVisualData[file.heroes.Length];
         for (int i = 0; i < file.heroes.Length; i++)
         {
@@ -134,52 +106,22 @@ public class HeroCardGenerator : MonoBehaviour
                 capacite_speciale = json.capacite_speciale,
                 description = json.description,
             };
-
-            // Récupérer le sprite s'il existait déjà
-            if (oldSprites.TryGetValue(json.nom, out var old))
-            {
-                allHeroes[i].sprite = old.sprite;
-                allHeroes[i].offset = old.offset;
-                allHeroes[i].scale = old.scale;
-            }
         }
 
+        PreserveSprites(oldHeroes, allHeroes);
         Debug.Log($"{allHeroes.Length} héros chargés. Assignez les sprites dans l'inspecteur.");
     }
 
-    public void GenerateCard(HeroVisualData hero)
+    public override string GetCardName(int index) => allHeroes[index].nom;
+    public override bool HasSprite(int index) => allHeroes[index].sprite != null;
+
+    public override void GenerateCard(int index)
     {
-        // Nom
-        if (nomText != null)
-            nomText.text = hero.nom;
+        var hero = allHeroes[index];
 
-        // PV
-        if (pvText != null)
-            pvText.text = hero.pv.ToString();
-
-        // Capacité spéciale
-        if (capaciteText != null)
-            capaciteText.text = hero.capacite_speciale;
-
-        // Description
-        if (descriptionText != null)
-            descriptionText.text = hero.description;
-
-        // Portrait
-        if (portraitRenderer != null)
-        {
-            portraitRenderer.sprite = hero.sprite;
-            if (hero.sprite != null)
-            {
-                portraitRenderer.transform.localPosition = (Vector3)hero.offset + Vector3.forward * 0.01f;
-                portraitRenderer.transform.localScale = new Vector3(hero.scale, hero.scale, 1f);
-            }
-        }
-
-        // Icônes de compétences
+        SetBaseTexts(hero.nom, hero.pv, hero.capacite_speciale, hero.description);
+        SetPortrait(hero.sprite, hero.offset, hero.scale);
         SetCompetenceIcons(hero.competences);
-
-        Canvas.ForceUpdateCanvases();
     }
 
     private void SetCompetenceIcons(string[] competences)

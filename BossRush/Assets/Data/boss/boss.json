@@ -1,8 +1,8 @@
 {
   "meta": {
     "description": "Liste des boss du jeu",
-    "version": "0.2",
-    "notes": "PV adaptés au nombre de joueurs via formule. Monstres invoqués varient aussi selon le nombre de joueurs (indiqué sur les cartes Attaque). Chaque boss a ses propres cartes Épreuve, Attaque et Monstre identifiées par son icône."
+    "version": "0.4",
+    "notes": "PV adaptés au nombre de joueurs via formule. Monstres et brutes référencés par ID. Chaque boss a ses propres cartes Épreuve et Attaque. Les boss moyens/difficiles peuvent invoquer des brutes."
   },
   "boss": [
     {
@@ -15,9 +15,9 @@
       "effet_special": "Lorsque le boss inflige des dégâts physiques, il se soigne 1 blessure.",
       "nb_cartes_attaque": 7,
       "nb_cartes_epreuve_total": 15,
-      "nb_cartes_monstre": 13,
-      "monstres_associes": ["Gobelin", "Rat géant", "Loup affamé", "Chaman gobelin", "Feu follet"],
+      "monstres_ids": ["MON_001", "MON_002", "MON_003", "MON_004", "MON_005"],
+      "brutes_ids": [],
       "description": "Un colosse vorace qui se régénère en frappant."
-    },
+    }
   ]
 }
