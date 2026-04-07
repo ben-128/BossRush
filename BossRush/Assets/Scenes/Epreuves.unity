@@ -663,18 +663,18 @@ MonoBehaviour:
       et faire du bruit (piocher 2 Destin favorable, mais piocher 2 monstres dans
       la file)"
   - nom: Sentinelle gobeline
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 7d5522fc71784d3d99790fa003afc11e, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Un gobelin monte la garde devant un couloir.\n\n\u2022 Un h\xE9ros
       d\xE9fausse 1 carte Action pour le neutraliser silencieusement (piocher 1 Destin
       favorable)\n\nOU\n\n\u2022 Tenter de passer (piocher 1 Destin incertain)"
   - nom: "Pi\xE8ge \xE0 loup"
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 9b24f6fbc7ef417386dcacea5db61433, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 1
     type_degats: physique
     description: "Le h\xE9ros actif marche sur un pi\xE8ge !\n\n\u2022 Un autre h\xE9ros
@@ -682,72 +682,72 @@ MonoBehaviour:
       Destin favorable)\n\nOU\n\n\u2022 Il se lib\xE8re seul (le h\xE9ros actif subit
       les d\xE9g\xE2ts)"
   - nom: "Tani\xE8re des rats"
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 41368bfcf3c045af841b891281094822, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Des rats grouillent dans le noir.\n\n\u2022 Les chasser avec une
       torche \u2014 un h\xE9ros d\xE9fausse 1 carte Objet (piocher 1 Destin favorable)\n\nOU\n\n\u2022
       Traverser en courant (piocher 1 Destin incertain)"
   - nom: "Tr\xE9sor cach\xE9"
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 595474ee2bc0409c8ef1ddba75ee96bc, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Un coffre derri\xE8re un rocher.\n\n\u2022 Prendre le temps de
       l'ouvrir (piocher 2 Destins favorables, mais piocher 1 monstre dans la file)\n\nOU\n\n\u2022
       L'ignorer et avancer (aucun effet)"
   - nom: Embranchement
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 52886dd5573447c09aefc2a5e61b1c5c, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Deux chemins s'offrent \xE0 vous.\n\n\u2022 Le chemin \xE9clair\xE9
       (piocher 1 monstre dans la file, mais piocher 1 Destin favorable)\n\nOU\n\n\u2022
       Le chemin sombre (piocher 1 Destin incertain chacun)"
   - nom: Os qui craquent
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: fe7a6285752f4eb7998713b63797a6ea, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Le sol est jonch\xE9 d'ossements.\n\n\u2022 Avancer prudemment
       \u2014 un h\xE9ros d\xE9fausse 1 carte Action (aucun effet)\n\nOU\n\n\u2022
       Marcher normalement (piocher 1 Destin funeste, le G\xE9ant vous a entendus)"
   - nom: Autel primitif
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 6f32913741f34e788d885cc3f6bb49e4, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Un autel couvert de sang s\xE9ch\xE9.\n\n\u2022 Faire une offrande
       \u2014 un h\xE9ros d\xE9fausse 1 carte Action (piocher 2 Destins favorables)\n\nOU\n\n\u2022
       Profaner l'autel (piocher 1 Destin funeste)"
   - nom: Meute endormie
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: d55196dcfb9d4ad58822c65ab512ca5e, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Une meute de loups dort dans un coin.\n\n\u2022 Les contourner
       en silence (piocher 1 Destin incertain)\n\nOU\n\n\u2022 Les r\xE9veiller et
       fuir (piocher 2 monstres dans la file, mais piocher 1 Destin favorable)"
   - nom: "\xC9boulement"
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 3eeae57f48fb4bf2a3ea4e49661981ae, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 1
     type_degats: physique
     description: "Des rochers menacent de tomber.\n\n\u2022 Un h\xE9ros d\xE9fausse
       1 carte Objet pour \xE9tayer le plafond (aucun effet)\n\nOU\n\n\u2022 Courir
       \u2014 le h\xE9ros actif subit les d\xE9g\xE2ts"
   - nom: Source souterraine
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: bac72454fc5745a793c18004317a1375, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Une source d'eau claire.\n\n\u2022 Boire et se reposer \u2014 un
@@ -755,9 +755,9 @@ MonoBehaviour:
       dans la file)\n\nOU\n\n\u2022 Continuer sans s'arr\xEAter (piocher 1 Destin
       incertain)"
   - nom: "Le G\xE9ant dort"
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 3bbccf5e3c5a42cea5e5afaae9a02971, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Vous apercevez le G\xE9ant assoupi au loin.\n\n\u2022 Tendre une
@@ -765,9 +765,9 @@ MonoBehaviour:
       favorables chacun)\n\nOU\n\n\u2022 Approcher discr\xE8tement (piocher 1 Destin
       incertain)"
   - nom: Cri d'alarme
-    sprite: {fileID: 0}
-    offset: {x: 0, y: 2}
-    scale: 0.5
+    sprite: {fileID: 21300000, guid: 24f2c63186924148ad6e94cbcab500f8, type: 3}
+    offset: {x: 0, y: 1.8}
+    scale: 0.45
     degats: 0
     type_degats: 
     description: "Un gobelin vous rep\xE8re et crie !\n\n\u2022 Un h\xE9ros d\xE9fausse
