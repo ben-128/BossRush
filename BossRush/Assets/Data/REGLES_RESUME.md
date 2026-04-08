@@ -211,7 +211,12 @@ Texte d'ambiance affiché en italique en bas de carte, sous la capacité/descrip
 
 ---
 
-## Conditions de victoire / défaite
+## Fin de partie
 
-- **Victoire** : les dégâts sous le boss atteignent ou dépassent ses PV.
-- **Défaite** : tous les héros sont hors combat.
+### Victoire
+Les dégâts accumulés sous la carte du boss atteignent ou dépassent ses PV → le boss est vaincu. Les joueurs remportent la partie !
+
+### Défaite
+Les héros perdent si l'une de ces deux conditions est remplie :
+- **Tous les héros sont hors combat** : chaque héros dont les blessures atteignent ou dépassent ses PV est éliminé. Si le dernier héros tombe, c'est la défaite.
+- **Débordement** : un effet demande de piocher un monstre, la pile Monstres est vide, et la pile Élites est également vide. Les héros sont submergés par les créatures — défaite immédiate.
