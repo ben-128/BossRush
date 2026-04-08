@@ -2,7 +2,7 @@
   "meta": {
     "description": "Compteurs centraux de toutes les cartes du jeu Raid Party. À mettre à jour à chaque modification de cartes.",
     "derniere_mise_a_jour": "2026-04-08",
-    "version": "3.0"
+    "version": "4.0"
   },
 
   "arsenal": {
@@ -99,26 +99,18 @@
   },
 
   "par_boss": {
-    "_regle": "Chaque boss a ses propres cartes Épreuve et Attaque.",
-    "cible_epreuves": 15,
-    "cible_attaques": 10,
+    "_regle": "Chaque boss a un deck Raid de 20 cartes (assauts + événements), mélangé en début de partie.",
+    "cible_raid": 20,
     "boss": {
       "geant_affame": {
         "nom": "Géant Affamé",
         "difficulte": "facile",
         "dossier": "boss/geant_affame/",
-        "epreuves": {
-          "fichier": "boss/geant_affame/01_epreuves.json",
-          "cible": 15,
-          "actuel": 15,
+        "raid": {
+          "fichier": "boss/geant_affame/01_raid.json",
+          "cible": 20,
+          "actuel": 20,
           "status": "OK"
-        },
-        "attaques": {
-          "fichier": "boss/geant_affame/01_attaques.json",
-          "cible": 10,
-          "actuel": 9,
-          "manquant": 1,
-          "status": "INCOMPLET"
         }
       }
     }
@@ -132,13 +124,11 @@
   },
 
   "resume_global": {
-    "complet": ["arsenal", "elites", "heros", "epreuves_geant", "monstres", "destins"],
-    "incomplet": [
-      "attaques_geant (9/10, manque 1)"
-    ],
+    "complet": ["arsenal", "elites", "heros", "monstres", "destins", "raid_geant"],
+    "incomplet": [],
     "total_cartes_jeu": {
-      "cible": "100 arsenal + 30 monstres + 10 élites + 30 destins + 15 épreuves/boss + 10 attaques/boss + 5 héros",
-      "note": "Les cartes boss (épreuves + attaques) sont par boss, pas dans le total global fixe."
+      "cible": "100 arsenal + 30 monstres + 10 élites + 30 destins + 20 raid/boss + 5 héros",
+      "note": "Les cartes Raid sont par boss, pas dans le total global fixe."
     }
   }
 }

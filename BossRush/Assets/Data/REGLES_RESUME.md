@@ -13,17 +13,16 @@
 | Monstres | 30 | Paquet commun |
 | Élites | 10 | Monstres d'élite, paquet séparé |
 | Destins | 30 | Paquet unique mélangé |
-| Boss | variable | Chacun avec ses épreuves et attaques |
-| Épreuves (par boss) | 15 | Propres à chaque boss |
-| Attaques du boss | 10 | Propres à chaque boss |
+| Boss | variable | Chacun avec son deck Raid |
+| Raid (par boss) | 20 | Assauts + Événements propres à chaque boss |
 
 ---
 
 ## Mise en place
 
 1. **Choisir un boss** (facile, moyen ou difficile). Placer sa carte au centre.
-2. **Épreuves** : mélanger ses cartes Épreuve, en piocher 2× le nombre de joueurs. Remettre le reste dans la boîte.
-3. **Piles communes** : former les piles Attaque du boss, Monstres, Élites, Destins. Mélanger.
+2. **Deck Raid** : mélanger les 20 cartes Raid du boss. Placer la pile face cachée.
+3. **Piles communes** : former les piles Monstres, Élites, Destins. Mélanger.
 4. **Héros** : chaque joueur pioche 1 héros aléatoire.
 5. **Pile Arsenal** :
    - Chaque héros possède un paquet de 20 cartes Arsenal (identifié par l'icône prérequis en haut à droite).
@@ -74,39 +73,30 @@ Chaque paquet contient **20 cartes** : 15 Actions (dont 10 attaques) + 5 Objets.
 
 ---
 
-## Phase d'épreuves
+## Déroulement du jeu
 
-Tour par tour (sens horaire). À chaque tour :
+Le combat commence immédiatement. Tour par tour (sens horaire) :
 
-1. **Épreuve** — Piocher et résoudre la carte du dessus (choix, destins, dégâts, monstres…).
-2. **Actions du héros** — Le joueur actif peut :
-   - Jouer 1 carte Action de sa main
-   - Utiliser ses Objets sur la table
-   - Activer sa capacité spéciale (1×/combat)
-   - Échanger des cartes Arsenal avec un autre joueur
-3. **Attaque des monstres** — S'il y a un monstre en tête de file, il attaque le héros actif. Le héros peut contrer avec un Objet ou une capacité.
-4. **Tour suivant.**
+### 1. Carte Raid
+Piocher 1 carte du deck Raid et la résoudre :
+- **Assaut** : le boss attaque (dégâts, invocation de monstres, soin du boss…). Appliquer l'effet.
+- **Événement** : une situation survient pendant le combat. Le héros actif choisit entre les options proposées.
 
-Continuer jusqu'à épuisement des épreuves → passage au combat.
-
----
-
-## Phase de combat
-
-Les monstres restants sont conservés. Tour par tour :
-
-### 1. Action du joueur (choisir UNE)
+### 2. Action du héros (choisir UNE)
 - Jouer 1 carte Action de sa main
 - Échanger des cartes Arsenal avec un autre joueur
 - Piocher 2 cartes Arsenal
 
-### 2. Cartes sur la table (en plus)
-- Utiliser ses Objets et/ou sa capacité spéciale
+### 3. En plus (optionnel)
+- Utiliser ses Objets sur la table
+- Activer sa capacité spéciale (1×/combat)
 
-### 3. Riposte du boss
-- Piocher 1 carte Attaque du boss → appliquer au joueur actif
+### 4. Monstres
+S'il y a un monstre en tête de file, il attaque le héros actif. Le héros peut contrer avec un Objet ou une capacité.
 
-### 4. Tour suivant
+### 5. Tour suivant
+
+Continuer jusqu'à victoire ou défaite. Si le deck Raid est épuisé, mélanger la défausse Raid pour reformer la pile.
 
 ---
 
@@ -152,11 +142,10 @@ Soigne X points = retirer des cartes blessure totalisant **≤ X**. Une carte ne
 - **Effet spécial** : capacité passive active pendant tout le combat.
 - **Mort** : dégâts accumulés ≥ PV → **victoire !**
 
-### Attaques du boss
-- Dégâts physiques ou magiques
-- Invocation de monstres
-- Ordre d'attaque (monstre en tête attaque)
-- Effet divers (soin du boss…)
+### Deck Raid
+20 cartes par boss, mélange d'assauts et d'événements :
+- **Assaut** : dégâts physiques ou magiques, invocation de monstres, ordre d'attaque, soin du boss
+- **Événement** : situation de combat avec un choix à faire (risque/récompense)
 
 ---
 
@@ -176,21 +165,22 @@ Monstres d'élite (paquet séparé). Mêmes règles, stats plus élevées.
 ┌─────────────────────────────────────────┐
 │           TOUR D'UN JOUEUR              │
 ├─────────────────────────────────────────┤
-│ ÉPREUVE (phase épreuves uniquement)     │
-│  → Piocher + résoudre                   │
+│ 1. CARTE RAID                           │
+│  → Piocher + résoudre (assaut/événement)│
 ├─────────────────────────────────────────┤
-│ ACTION (choisir 1) :                    │
+│ 2. ACTION (choisir 1) :                 │
 │  • Jouer 1 carte Action                 │
 │  • Échanger des cartes Arsenal          │
 │  • Piocher 2 cartes Arsenal             │
 ├─────────────────────────────────────────┤
-│ EN PLUS (optionnel) :                   │
+│ 3. EN PLUS (optionnel) :                │
 │  • Utiliser Objets sur la table         │
 │  • Activer capacité spéciale            │
 ├─────────────────────────────────────────┤
-│ MONSTRES / BOSS :                       │
-│  Épreuves → monstre tête de file attaque│
-│  Combat   → piocher 1 carte Attaque boss│
+│ 4. MONSTRES                             │
+│  → Monstre en tête de file attaque      │
+├─────────────────────────────────────────┤
+│ 5. TOUR SUIVANT                         │
 └─────────────────────────────────────────┘
 ```
 
