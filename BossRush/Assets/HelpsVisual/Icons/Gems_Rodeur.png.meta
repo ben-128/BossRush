@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 6d24c51eac2af8241bba0bf067ed7fa7
+guid: c04fa6ac791307c41928ef4505775d8b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 383244976241870122
-    second: Gems_Guerrier_0
+      213: 1945978502620606180
+    second: Gems_Rodeur_0
   - first:
-      213: -6618774464538612634
-    second: Gems_Guerrier_1
+      213: 1525712957436121346
+    second: Gems_Rodeur_1
   - first:
-      213: -843739340167458242
-    second: Gems_Guerrier_2
+      213: -4706097547793136392
+    second: Gems_Rodeur_2
   - first:
-      213: -7424442098926458536
-    second: Gems_Guerrier_3
+      213: -8974601763127107665
+    second: Gems_Rodeur_3
   - first:
-      213: 960723746695700088
-    second: Gems_Guerrier_4
+      213: -2572849167624173566
+    second: Gems_Rodeur_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -112,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gems_Guerrier_0
+      name: Gems_Rodeur_0
       rect:
         serializedVersion: 2
         x: 133
@@ -127,14 +127,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a2589de764f815500800000000000000
-      internalID: 383244976241870122
+      spriteID: 4ee6f3d4321810b10800000000000000
+      internalID: 1945978502620606180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gems_Guerrier_1
+      name: Gems_Rodeur_1
       rect:
         serializedVersion: 2
         x: 281
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 66cefb831b36524a0800000000000000
-      internalID: -6618774464538612634
+      spriteID: 201d039e9db6c2510800000000000000
+      internalID: 1525712957436121346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gems_Guerrier_2
+      name: Gems_Rodeur_2
       rect:
         serializedVersion: 2
         x: 429
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e32db4a5a8f6a44f0800000000000000
-      internalID: -843739340167458242
+      spriteID: 8f40479d63590beb0800000000000000
+      internalID: -4706097547793136392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gems_Guerrier_3
+      name: Gems_Rodeur_3
       rect:
         serializedVersion: 2
         x: 577
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 85968065f3517f890800000000000000
-      internalID: -7424442098926458536
+      spriteID: fafd634fe3fc37380800000000000000
+      internalID: -8974601763127107665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gems_Guerrier_4
+      name: Gems_Rodeur_4
       rect:
         serializedVersion: 2
         x: 725
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87e5411582d255d00800000000000000
-      internalID: 960723746695700088
+      spriteID: 2080a1740576b4cd0800000000000000
+      internalID: -2572849167624173566
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -234,7 +234,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gems_Rodeur_0: 1945978502620606180
+      Gems_Rodeur_1: 1525712957436121346
+      Gems_Rodeur_2: -4706097547793136392
+      Gems_Rodeur_3: -8974601763127107665
+      Gems_Rodeur_4: -2572849167624173566
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

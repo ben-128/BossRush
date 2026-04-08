@@ -10,8 +10,7 @@
       "nom": "Mage",
       "pv": 4,
       "competences": ["magie"],
-      "capacite_speciale": "Défausse tous les monstres avec 1 PV dans la file.",
-      "description": "Fragile mais capable de débloquer le potentiel des alliés.",
+      "capacite_speciale": "Défausse tous les monstres avec 1 point de vie dans la file.",
       "citation": "« Un seul mot, et les faibles tombent. »"
     },
     {
@@ -19,8 +18,7 @@
       "nom": "Soigneur",
       "pv": 4,
       "competences": ["soin"],
-      "capacite_speciale": "Retire toutes les cartes blessure d'un héros au choix.",
-      "description": "Le pilier de survie de l'équipe.",
+      "capacite_speciale": "Retire toutes les blessures d'un héros au choix.",
       "citation": "« La mort devra repasser. »"
     },
     {
@@ -29,16 +27,14 @@
       "pv": 7,
       "competences": ["armure"],
       "capacite_speciale": "Prévient tous les dégâts physiques que ce héros devrait subir ce tour.",
-      "description": "Un rempart solide qui protège ses alliés.",
       "citation": "« Frappe. Je ne bougerai pas. »"
     },
     {
       "id": "HERO_004",
       "nom": "Rôdeur",
-      "pv": 6,
+      "pv": 5,
       "competences": ["distance"],
       "capacite_speciale": "Joue immédiatement 3 cartes Action de sa main.",
-      "description": "Rapide et polyvalent, il enchaîne les attaques.",
       "citation": "« Tu as vu la première flèche. Pas les deux autres. »"
     },
     {
@@ -47,7 +43,6 @@
       "pv": 5,
       "competences": ["diplomatie"],
       "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent.",
-      "description": "Coordonne l'équipe pour optimiser les ressources.",
       "citation": "« Ce que j'ai est à toi. Ce que tu as m'intéresse. »"
     }
   ]

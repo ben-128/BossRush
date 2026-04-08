@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: c04fa6ac791307c41928ef4505775d8b
+guid: ddd6b189b77f0744e9d774f7ff108d51
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1945978502620606180
-    second: Gems_Rodeur_0
+      213: -4632917243282847948
+    second: Gems_Diplomate_0
   - first:
-      213: 1525712957436121346
-    second: Gems_Rodeur_1
+      213: -8901454376123713229
+    second: Gems_Diplomate_1
   - first:
-      213: -4706097547793136392
-    second: Gems_Rodeur_2
+      213: 4157554414874951348
+    second: Gems_Diplomate_2
   - first:
-      213: -8974601763127107665
-    second: Gems_Rodeur_3
+      213: 5950961080969552562
+    second: Gems_Diplomate_3
   - first:
-      213: -2572849167624173566
-    second: Gems_Rodeur_4
+      213: 1049459968295204386
+    second: Gems_Diplomate_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -112,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gems_Rodeur_0
+      name: Gems_Diplomate_0
       rect:
         serializedVersion: 2
         x: 133
@@ -127,14 +127,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ee6f3d4321810b10800000000000000
-      internalID: 1945978502620606180
+      spriteID: 4370850405294bfb0800000000000000
+      internalID: -4632917243282847948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gems_Rodeur_1
+      name: Gems_Diplomate_1
       rect:
         serializedVersion: 2
         x: 281
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 201d039e9db6c2510800000000000000
-      internalID: 1525712957436121346
+      spriteID: 339bcc6286ea77480800000000000000
+      internalID: -8901454376123713229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gems_Rodeur_2
+      name: Gems_Diplomate_2
       rect:
         serializedVersion: 2
         x: 429
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8f40479d63590beb0800000000000000
-      internalID: -4706097547793136392
+      spriteID: 4be7af076b992b930800000000000000
+      internalID: 4157554414874951348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gems_Rodeur_3
+      name: Gems_Diplomate_3
       rect:
         serializedVersion: 2
         x: 577
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fafd634fe3fc37380800000000000000
-      internalID: -8974601763127107665
+      spriteID: 2b26d57d29f069250800000000000000
+      internalID: 5950961080969552562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gems_Rodeur_4
+      name: Gems_Diplomate_4
       rect:
         serializedVersion: 2
         x: 725
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2080a1740576b4cd0800000000000000
-      internalID: -2572849167624173566
+      spriteID: 2267a38e74e609e00800000000000000
+      internalID: 1049459968295204386
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -234,7 +234,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gems_Diplomate_0: -4632917243282847948
+      Gems_Diplomate_1: -8901454376123713229
+      Gems_Diplomate_2: 4157554414874951348
+      Gems_Diplomate_3: 5950961080969552562
+      Gems_Diplomate_4: 1049459968295204386
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

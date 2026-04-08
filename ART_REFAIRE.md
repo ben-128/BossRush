@@ -47,9 +47,9 @@ Style cible : MTG painterly (voir memory/reference_art_prompt.md)
 | Fichier | Sujet | Statut |
 |---|---|---|
 | HelpsVisual/Icons/Armure.png | Icone armure/defense | A refaire |
-| HelpsVisual/Icons/AttackMagique.png | Icone attaque magique | A refaire |
-| HelpsVisual/Icons/AttackPhysique.png | Icone attaque physique (griffes feu) | A refaire |
-| HelpsVisual/Icons/Blessure.png | Icone blessure/degat | A refaire |
+| HelpsVisual/Icons/AttackMagique.png | Icone attaque magique (eclair violet, degats monstres) | Fait |
+| HelpsVisual/Icons/AttackPhysique.png | Icone attaque physique (griffures orange, degats monstres) | Fait |
+| HelpsVisual/Icons/Blessure.png | Icone blessure (entaille X sanglante, degats joueur) | Fait |
 | HelpsVisual/Icons/Diploma.png | Icone diplomatie (sceau cire, plumes croisees/livre) | Fait |
 | HelpsVisual/Icons/Distance.png | Icone distance (fleche cristal vert, plumes corbeau) | Fait |
 | HelpsVisual/Icons/Magie.png | Icone magie (cristal saphir fissure, runes bleues) | Fait |
