@@ -11,7 +11,7 @@
 | Héros | 5 | 1 par joueur |
 | Arsenal (Actions + Objets) | 100 | 20 par héros × 5 héros (toutes avec prérequis) |
 | Monstres | 30 | Paquet commun |
-| Brutes | 10 | Monstres d'élite, paquet séparé |
+| Élites | 10 | Monstres d'élite, paquet séparé |
 | Destins | 30 | Paquet unique mélangé |
 | Boss | variable | Chacun avec ses épreuves et attaques |
 | Épreuves (par boss) | 15 | Propres à chaque boss |
@@ -23,7 +23,7 @@
 
 1. **Choisir un boss** (facile, moyen ou difficile). Placer sa carte au centre.
 2. **Épreuves** : mélanger ses cartes Épreuve, en piocher 2× le nombre de joueurs. Remettre le reste dans la boîte.
-3. **Piles communes** : former les piles Attaque du boss, Monstres, Brutes, Destins. Mélanger.
+3. **Piles communes** : former les piles Attaque du boss, Monstres, Élites, Destins. Mélanger.
 4. **Héros** : chaque joueur pioche 1 héros aléatoire.
 5. **Pile Arsenal** :
    - Chaque héros possède un paquet de 20 cartes Arsenal (identifié par l'icône prérequis en haut à droite).
@@ -165,7 +165,7 @@ Soigne X points = retirer des cartes blessure totalisant **≤ X**. Une carte ne
 - **PV** / **Dégâts** (physique ou magique) / **Capacité spéciale** éventuelle.
 - Quand un monstre attaque : sa carte va sous le héros. Si contré → défaussé sans effet.
 
-### Brutes
+### Élites
 Monstres d'élite (paquet séparé). Mêmes règles, stats plus élevées.
 
 ---

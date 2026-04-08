@@ -2,7 +2,7 @@
   "meta": {
     "description": "Liste des boss du jeu",
     "version": "0.4",
-    "notes": "PV adaptés au nombre de joueurs via formule. Monstres et brutes référencés par ID. Chaque boss a ses propres cartes Épreuve et Attaque. Les boss moyens/difficiles peuvent invoquer des brutes."
+    "notes": "PV adaptés au nombre de joueurs via formule. Monstres et elites référencés par ID. Chaque boss a ses propres cartes Épreuve et Attaque. Les boss moyens/difficiles peuvent invoquer des elites."
   },
   "boss": [
     {
@@ -16,7 +16,7 @@
       "nb_cartes_attaque": 7,
       "nb_cartes_epreuve_total": 15,
       "monstres_ids": ["MON_001", "MON_002", "MON_003", "MON_004", "MON_005"],
-      "brutes_ids": [],
+      "elites_ids": [],
       "description": "Un colosse vorace qui se régénère en frappant."
     }
   ]

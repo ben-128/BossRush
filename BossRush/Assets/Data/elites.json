@@ -1,12 +1,12 @@
 {
   "meta": {
-    "description": "Liste des brutes du jeu",
-    "version": "0.1",
-    "notes": "Brutes = monstres d'élite. Paquet séparé des monstres classiques. Invoquées par certains boss ou lors d'épreuves difficiles. Plus résistantes et plus dangereuses."
+    "description": "Liste des élites du jeu",
+    "version": "0.2",
+    "notes": "Élites = monstres d'élite. Paquet séparé des monstres classiques. Invoquées par certains boss ou lors d'épreuves difficiles. Plus résistantes et plus dangereuses."
   },
   "monstres": [
     {
-      "id": "BRU_001",
+      "id": "ELI_001",
       "nom": "Ogre",
       "pv": 4,
       "degats": 2,
@@ -16,7 +16,7 @@
       "quantite": 2
     },
     {
-      "id": "BRU_002",
+      "id": "ELI_002",
       "nom": "Spectre",
       "pv": 2,
       "degats": 2,
@@ -26,7 +26,7 @@
       "quantite": 2
     },
     {
-      "id": "BRU_003",
+      "id": "ELI_003",
       "nom": "Berserker gobelin",
       "pv": 3,
       "degats": 3,
@@ -36,7 +36,7 @@
       "quantite": 1
     },
     {
-      "id": "BRU_004",
+      "id": "ELI_004",
       "nom": "Araignée géante",
       "pv": 3,
       "degats": 1,
@@ -46,7 +46,7 @@
       "quantite": 2
     },
     {
-      "id": "BRU_005",
+      "id": "ELI_005",
       "nom": "Sorcier noir",
       "pv": 2,
       "degats": 2,
@@ -56,7 +56,7 @@
       "quantite": 1
     },
     {
-      "id": "BRU_006",
+      "id": "ELI_006",
       "nom": "Golem de pierre",
       "pv": 5,
       "degats": 1,
@@ -66,7 +66,7 @@
       "quantite": 1
     },
     {
-      "id": "BRU_007",
+      "id": "ELI_007",
       "nom": "Banshee",
       "pv": 2,
       "degats": 1,

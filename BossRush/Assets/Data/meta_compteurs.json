@@ -2,7 +2,7 @@
   "meta": {
     "description": "Compteurs centraux de toutes les cartes du jeu Raid Party. À mettre à jour à chaque modification de cartes.",
     "derniere_mise_a_jour": "2026-04-08",
-    "version": "2.0"
+    "version": "3.0"
   },
 
   "arsenal": {
@@ -78,48 +78,24 @@
 
   "monstres": {
     "fichier": "monstres.json",
-    "cible": 50,
-    "actuel": 13,
-    "manquant": 37,
-    "status": "INCOMPLET"
+    "cible": 30,
+    "actuel": 30,
+    "status": "OK"
   },
 
-  "brutes": {
-    "fichier": "brutes.json",
+  "elites": {
+    "fichier": "elites.json",
     "cible": 10,
     "actuel": 10,
     "status": "OK"
   },
 
   "destins": {
-    "dossier": "destins/",
-    "favorables": {
-      "fichier": "destins/favorables.json",
-      "cible": 20,
-      "actuel": 8,
-      "manquant": 12,
-      "status": "INCOMPLET"
-    },
-    "funestes": {
-      "fichier": "destins/funestes.json",
-      "cible": 20,
-      "actuel": 8,
-      "manquant": 12,
-      "status": "INCOMPLET"
-    },
-    "incertains": {
-      "fichier": "destins/incertains.json",
-      "cible": 20,
-      "actuel": 8,
-      "manquant": 12,
-      "status": "INCOMPLET"
-    },
-    "total": {
-      "cible": 60,
-      "actuel": 24,
-      "manquant": 36,
-      "status": "INCOMPLET"
-    }
+    "fichier": "destins/destins.json",
+    "_note": "Paquet unique mélangé, plus de catégories favorable/funeste/incertain.",
+    "cible": 30,
+    "actuel": 30,
+    "status": "OK"
   },
 
   "par_boss": {
@@ -156,16 +132,12 @@
   },
 
   "resume_global": {
-    "complet": ["arsenal", "brutes", "heros", "epreuves_geant"],
+    "complet": ["arsenal", "elites", "heros", "epreuves_geant", "monstres", "destins"],
     "incomplet": [
-      "monstres (13/50, manque 37)",
-      "destins_favorables (8/20, manque 12)",
-      "destins_funestes (8/20, manque 12)",
-      "destins_incertains (8/20, manque 12)",
       "attaques_geant (9/10, manque 1)"
     ],
     "total_cartes_jeu": {
-      "cible": "100 arsenal + 50 monstres + 10 brutes + 60 destins + 15 épreuves/boss + 10 attaques/boss + 5 héros",
+      "cible": "100 arsenal + 30 monstres + 10 élites + 30 destins + 15 épreuves/boss + 10 attaques/boss + 5 héros",
       "note": "Les cartes boss (épreuves + attaques) sont par boss, pas dans le total global fixe."
     }
   }
