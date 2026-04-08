@@ -78,8 +78,9 @@
 
   "monstres": {
     "fichier": "monstres.json",
-    "cible": 30,
-    "actuel": 30,
+    "_note": "Si pile vide, piocher une Élite. Si pile Élites aussi vide, défaite.",
+    "cible": 25,
+    "actuel": 25,
     "status": "OK"
   },
 
@@ -92,9 +93,9 @@
 
   "destins": {
     "fichier": "destins/destins.json",
-    "_note": "Paquet unique mélangé, plus de catégories favorable/funeste/incertain.",
-    "cible": 30,
-    "actuel": 30,
+    "_note": "Paquet unique mélangé, plus de catégories.",
+    "cible": 20,
+    "actuel": 20,
     "status": "OK"
   },
 
@@ -127,7 +128,7 @@
     "complet": ["arsenal", "elites", "heros", "monstres", "destins", "raid_geant"],
     "incomplet": [],
     "total_cartes_jeu": {
-      "cible": "100 arsenal + 30 monstres + 10 élites + 30 destins + 20 raid/boss + 5 héros",
+      "cible": "100 arsenal + 25 monstres + 10 élites + 20 destins + 20 raid/boss + 5 héros",
       "note": "Les cartes Raid sont par boss, pas dans le total global fixe."
     }
   }

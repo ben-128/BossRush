@@ -1,8 +1,8 @@
 {
   "meta": {
     "description": "Liste des monstres du jeu",
-    "version": "0.2",
-    "notes": "Monstres génériques, utilisables par n'importe quel boss. 30 cartes au total."
+    "version": "0.4",
+    "notes": "Monstres génériques, utilisables par n'importe quel boss. 25 cartes au total."
   },
   "monstres": [
     {
@@ -14,7 +14,7 @@
       "capacite_speciale": null,
       "description": "Petit mais sournois.",
       "citation": "« Il rit encore quand il tombe. »",
-      "quantite": 5
+      "quantite": 3
     },
     {
       "id": "MON_002",
@@ -25,7 +25,7 @@
       "capacite_speciale": null,
       "description": "Rapide et vorace.",
       "citation": "« Deux crocs, et c'est fini. »",
-      "quantite": 4
+      "quantite": 2
     },
     {
       "id": "MON_003",
@@ -36,7 +36,7 @@
       "capacite_speciale": null,
       "description": "Attiré par l'odeur du sang.",
       "citation": "« Il ne chasse pas. Il attend. »",
-      "quantite": 3
+      "quantite": 2
     },
     {
       "id": "MON_004",
@@ -47,7 +47,7 @@
       "capacite_speciale": null,
       "description": "Un gobelin qui lance des malédictions.",
       "citation": "« Ses mots brûlent plus que le feu. »",
-      "quantite": 3
+      "quantite": 2
     },
     {
       "id": "MON_005",
@@ -69,7 +69,7 @@
       "capacite_speciale": null,
       "description": "Les os claquent dans l'obscurité.",
       "citation": "« Il ne sait pas qu'il est mort. »",
-      "quantite": 3
+      "quantite": 2
     },
     {
       "id": "MON_007",
@@ -91,7 +91,7 @@
       "capacite_speciale": null,
       "description": "Elle fond sur sa proie depuis les ténèbres.",
       "citation": "« Tu ne l'entends qu'une fois. »",
-      "quantite": 3
+      "quantite": 1
     },
     {
       "id": "MON_009",
@@ -113,7 +113,62 @@
       "capacite_speciale": null,
       "description": "Lent mais tenace, il ne s'arrête jamais.",
       "citation": "« Il avance. Toujours. »",
-      "quantite": 3
+      "quantite": 2
+    },
+    {
+      "id": "MON_011",
+      "nom": "Limon acide",
+      "pv": 2,
+      "degats": 1,
+      "type_degats": "magique",
+      "capacite_speciale": "Le héros attaqué défausse 1 carte Arsenal de type Objet (s'il en a).",
+      "description": "Il dissout tout ce qu'il touche.",
+      "citation": null,
+      "quantite": 1
+    },
+    {
+      "id": "MON_012",
+      "nom": "Essaim de scarabées",
+      "pv": 1,
+      "degats": 1,
+      "type_degats": "physique",
+      "capacite_speciale": "Ne peut pas être attaqué par des attaques de mêlée.",
+      "description": "Mille pattes, une seule faim.",
+      "citation": null,
+      "quantite": 1
+    },
+    {
+      "id": "MON_013",
+      "nom": "Lutin",
+      "pv": 1,
+      "degats": 1,
+      "type_degats": "magique",
+      "capacite_speciale": null,
+      "description": "Un farceur cruel qui vole et disparaît.",
+      "citation": "« Tu cherches ta lame ? Dommage. »",
+      "quantite": 1
+    },
+    {
+      "id": "MON_014",
+      "nom": "Gnoll",
+      "pv": 2,
+      "degats": 2,
+      "type_degats": "physique",
+      "capacite_speciale": null,
+      "description": "Mi-homme, mi-hyène. Tout prédateur.",
+      "citation": "« Il rit avant de mordre. »",
+      "quantite": 1
+    },
+    {
+      "id": "MON_015",
+      "nom": "Ombre rampante",
+      "pv": 1,
+      "degats": 1,
+      "type_degats": "magique",
+      "capacite_speciale": null,
+      "description": "Elle se glisse sous les torches éteintes.",
+      "citation": "« Tu croyais que c'était la tienne. »",
+      "quantite": 1
     }
   ]
 }

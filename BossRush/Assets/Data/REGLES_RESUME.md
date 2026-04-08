@@ -10,9 +10,9 @@
 |---|---|---|
 | Héros | 5 | 1 par joueur |
 | Arsenal (Actions + Objets) | 100 | 20 par héros × 5 héros (toutes avec prérequis) |
-| Monstres | 30 | Paquet commun |
+| Monstres | 25 | Paquet commun |
 | Élites | 10 | Monstres d'élite, paquet séparé |
-| Destins | 30 | Paquet unique mélangé |
+| Destins | 20 | Paquet unique mélangé |
 | Boss | variable | Chacun avec son deck Raid |
 | Raid (par boss) | 20 | Assauts + Événements propres à chaque boss |
 
@@ -153,6 +153,10 @@ Soigne X points = retirer des cartes blessure totalisant **≤ X**. Une carte ne
 
 - **PV** / **Dégâts** (physique ou magique) / **Capacité spéciale** éventuelle.
 - Quand un monstre attaque : sa carte va sous le héros. Si contré → défaussé sans effet.
+
+### Pile vide (débordement)
+Si la pile Monstres est épuisée et qu'un effet demande de piocher un monstre → **piocher une Élite** à la place.
+Si la pile Élites est également épuisée → **défaite immédiate**. Les héros sont submergés.
 
 ### Élites
 Monstres d'élite (paquet séparé). Mêmes règles, stats plus élevées.
