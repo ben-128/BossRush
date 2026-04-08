@@ -148,5 +148,8 @@ public class ActionCardGenerator : CardGenerator
                 prerequisIcon.gameObject.SetActive(false);
             }
         }
+
+        // Gemmes de classe sur la bordure centrale
+        SetGems(action.prerequis);
     }
 }

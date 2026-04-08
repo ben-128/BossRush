@@ -97,5 +97,8 @@ public class ObjetCardGenerator : CardGenerator
             bonusDegatsText.gameObject.SetActive(objet.bonus_degats > 0);
             bonusDegatsText.text = objet.bonus_degats > 0 ? $"+{objet.bonus_degats}" : "";
         }
+
+        // Gemmes de classe sur la bordure centrale
+        SetGems(objet.prerequis);
     }
 }

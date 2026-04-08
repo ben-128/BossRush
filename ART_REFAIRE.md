@@ -50,11 +50,11 @@ Style cible : MTG painterly (voir memory/reference_art_prompt.md)
 | HelpsVisual/Icons/AttackMagique.png | Icone attaque magique | A refaire |
 | HelpsVisual/Icons/AttackPhysique.png | Icone attaque physique (griffes feu) | A refaire |
 | HelpsVisual/Icons/Blessure.png | Icone blessure/degat | A refaire |
-| HelpsVisual/Icons/Diploma.png | Icone diplomatie | A refaire |
-| HelpsVisual/Icons/Distance.png | Icone attaque a distance | A refaire |
-| HelpsVisual/Icons/Magie.png | Icone magie (vortex bleu) | A refaire |
-| HelpsVisual/Icons/Soin.png | Icone soin (mains dorees) | A refaire |
-| HelpsVisual/Icons/Tourner.png | Icone rotation/tour | A refaire |
+| HelpsVisual/Icons/Diploma.png | Icone diplomatie (sceau cire, plumes croisees/livre) | Fait |
+| HelpsVisual/Icons/Distance.png | Icone distance (fleche cristal vert, plumes corbeau) | Fait |
+| HelpsVisual/Icons/Magie.png | Icone magie (cristal saphir fissure, runes bleues) | Fait |
+| HelpsVisual/Icons/Soin.png | Icone soin (main ouverte soleil dore, runes) | Fait |
+| HelpsVisual/Icons/Tourner.png | Icone rotation/tour | Fait |
 | HelpsVisual/Icons/Vie.png | Icone points de vie (coeur) | Fait |
 
 ---

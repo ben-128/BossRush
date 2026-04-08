@@ -13,15 +13,15 @@
 | Monstres | 25 | Paquet commun |
 | Élites | 10 | Monstres d'élite, paquet séparé |
 | Destins | 20 | Paquet unique mélangé |
-| Boss | variable | Chacun avec son deck Raid |
-| Raid (par boss) | 20 | Assauts + Événements propres à chaque boss |
+| Boss | variable | Chacun avec son deck Épreuve |
+| Épreuves (par boss) | 20 | Assauts + Événements propres à chaque boss |
 
 ---
 
 ## Mise en place
 
 1. **Choisir un boss** (facile, moyen ou difficile). Placer sa carte au centre.
-2. **Deck Raid** : mélanger les 20 cartes Raid du boss. Placer la pile face cachée.
+2. **Deck Épreuve** : mélanger les 20 cartes Épreuve du boss. Placer la pile face cachée.
 3. **Piles communes** : former les piles Monstres, Élites, Destins. Mélanger.
 4. **Héros** : chaque joueur pioche 1 héros aléatoire.
 5. **Pile Arsenal** :
@@ -77,8 +77,8 @@ Chaque paquet contient **20 cartes** : 15 Actions (dont 10 attaques) + 5 Objets.
 
 Le combat commence immédiatement. Tour par tour (sens horaire) :
 
-### 1. Carte Raid
-Piocher 1 carte du deck Raid et la résoudre :
+### 1. Carte Épreuve
+Piocher 1 carte du deck Épreuve et la résoudre :
 - **Assaut** : le boss attaque (dégâts, invocation de monstres, soin du boss…). Appliquer l'effet.
 - **Événement** : une situation survient pendant le combat. Le héros actif choisit entre les options proposées.
 
@@ -96,7 +96,7 @@ S'il y a un monstre en tête de file, il attaque le héros actif. Le héros peut
 
 ### 5. Tour suivant
 
-Continuer jusqu'à victoire ou défaite. Si le deck Raid est épuisé, mélanger la défausse Raid pour reformer la pile.
+Continuer jusqu'à victoire ou défaite. Si le deck Épreuve est épuisé, mélanger la défausse Épreuve pour reformer la pile.
 
 ---
 
@@ -142,7 +142,7 @@ Soigne X points = retirer des cartes blessure totalisant **≤ X**. Une carte ne
 - **Effet spécial** : capacité passive active pendant tout le combat.
 - **Mort** : dégâts accumulés ≥ PV → **victoire !**
 
-### Deck Raid
+### Deck Épreuve
 20 cartes par boss, mélange d'assauts et d'événements :
 - **Assaut** : dégâts physiques ou magiques, invocation de monstres, ordre d'attaque, soin du boss
 - **Événement** : situation de combat avec un choix à faire (risque/récompense)
@@ -169,7 +169,7 @@ Monstres d'élite (paquet séparé). Mêmes règles, stats plus élevées.
 ┌─────────────────────────────────────────┐
 │           TOUR D'UN JOUEUR              │
 ├─────────────────────────────────────────┤
-│ 1. CARTE RAID                           │
+│ 1. CARTE ÉPREUVE                        │
 │  → Piocher + résoudre (assaut/événement)│
 ├─────────────────────────────────────────┤
 │ 2. ACTION (choisir 1) :                 │

@@ -452,7 +452,15 @@ MonoBehaviour:
   outputFolder: Heros
   nomText: {fileID: 1000190560}
   descriptionText: {fileID: 2063036563}
+  citationText: {fileID: 2063036563}
   portraitRenderer: {fileID: 1603593783}
+  gemsRenderer: {fileID: 0}
+  gemSprites:
+    armure: {fileID: 0}
+    distance: {fileID: 0}
+    soin: {fileID: 0}
+    magie: {fileID: 0}
+    diplomatie: {fileID: 0}
   pvText: {fileID: 2090081213}
   capaciteText: {fileID: 1602578963}
   competenceSprites:
@@ -473,6 +481,7 @@ MonoBehaviour:
     - magie
     capacite_speciale: "D\xE9fausse tous les monstres avec 1 PV dans la file."
     description: "Fragile mais capable de d\xE9bloquer le potentiel des alli\xE9s."
+    citation: 
   - nom: Soigneur
     sprite: {fileID: -4426865552208672761, guid: 52a6172166028334a98bf92665540e0a, type: 3}
     offset: {x: 0, y: 2.2}
@@ -482,6 +491,7 @@ MonoBehaviour:
     - soin
     capacite_speciale: "Retire toutes les cartes blessure d'un h\xE9ros au choix."
     description: "Le pilier de survie de l'\xE9quipe."
+    citation: 
   - nom: Guerrier
     sprite: {fileID: 3364270101458684742, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
     offset: {x: 0, y: 2}
@@ -492,6 +502,7 @@ MonoBehaviour:
     capacite_speciale: "Pr\xE9vient tous les d\xE9g\xE2ts physiques que ce h\xE9ros
       devrait subir ce tour."
     description: "Un rempart solide qui prot\xE8ge ses alli\xE9s."
+    citation: 
   - nom: "R\xF4deur"
     sprite: {fileID: -6257678261995369750, guid: 63882c0e895215741814a71d86920edc, type: 3}
     offset: {x: 0, y: 1.7}
@@ -501,6 +512,7 @@ MonoBehaviour:
     - distance
     capacite_speciale: "Joue imm\xE9diatement 3 cartes Action de sa main."
     description: "Rapide et polyvalent, il encha\xEEne les attaques."
+    citation: 
   - nom: Diplomate
     sprite: {fileID: 8773021328209283472, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
     offset: {x: 0.1, y: 2}
@@ -511,6 +523,7 @@ MonoBehaviour:
     capacite_speciale: "Tous les h\xE9ros peuvent s'\xE9changer autant de cartes
       qu'ils le souhaitent."
     description: "Coordonne l'\xE9quipe pour optimiser les ressources."
+    citation: 
 --- !u!1 &442832019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,7 +1691,7 @@ GameObject:
   - component: {fileID: 2063036564}
   - component: {fileID: 2063036563}
   m_Layer: 0
-  m_Name: description2
+  m_Name: citation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1700,7 +1713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.897, y: -9.16}
+  m_AnchoredPosition: {x: 3.98, y: -2.17}
   m_SizeDelta: {x: 12.2061, y: 2.3678}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2063036563

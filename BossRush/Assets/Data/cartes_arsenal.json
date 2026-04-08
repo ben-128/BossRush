@@ -4,12 +4,7 @@
     "version": "3.0",
     "notes": "100 cartes totales. 20 par héros (15 actions dont 10 attaques + 5 objets). Icône haut gauche = type (Action/Objet). Icône haut droite = prérequis (compétence du héros). Toutes les cartes ont un prérequis."
   },
-
   "cartes_arsenal": [
-
-    {"_comment": "=== GUERRIER (Armure) — 20 CARTES : 15 Actions (10 attaques + 5 effets) + 5 Objets ==="},
-    {"_comment": "Thème : résistant, mélée, soigne/prévient dégâts physiques"},
-
     {
       "id": "GUE_A01",
       "nom": "Coup de bouclier",
@@ -137,10 +132,6 @@
       "effet": "Le héros ignore les effets de la prochaine carte Attaque du boss ce tour.",
       "quantite": 1
     },
-
-    {"_comment": "=== MAGE (Élémentaire) — 20 CARTES : 15 Actions (10 attaques + 5 effets) + 5 Objets ==="},
-    {"_comment": "Thème : gros dégâts magiques, distance et mélée"},
-
     {
       "id": "MAG_A01",
       "nom": "Foudre",
@@ -286,10 +277,6 @@
       "effet": "Ajoute 2 dégâts à une attaque mélée jouée en même temps.",
       "quantite": 1
     },
-
-    {"_comment": "=== SOIGNEUR (Soin) — 20 CARTES : 15 Actions (10 attaques + 5 effets) + 5 Objets ==="},
-    {"_comment": "Thème : peu de dégâts mais soigne beaucoup"},
-
     {
       "id": "SOI_A01",
       "nom": "Frappe lumineuse",
@@ -435,10 +422,6 @@
       "effet": "Retire 3 blessures d'un héros au choix.",
       "quantite": 1
     },
-
-    {"_comment": "=== RÔDEUR (Distance) — 20 CARTES : 15 Actions (10 attaques + 5 effets) + 5 Objets ==="},
-    {"_comment": "Thème : attaques à distance, rapidité (jouer plusieurs cartes)"},
-
     {
       "id": "ROD_A01",
       "nom": "Tir précis",
@@ -575,10 +558,6 @@
       "effet": "Le héros pioche 2 cartes Arsenal.",
       "quantite": 1
     },
-
-    {"_comment": "=== DIPLOMATE (Diplomatie) — 20 CARTES : 15 Actions (10 attaques + 5 effets) + 5 Objets ==="},
-    {"_comment": "Thème : fait piocher, échanger, coordonner les alliés"},
-
     {
       "id": "DIP_A01",
       "nom": "Lame du négociateur",

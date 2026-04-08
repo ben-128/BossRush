@@ -1,9 +1,9 @@
 {
   "boss_id": "BOSS_001",
   "boss_nom": "Géant Affamé",
-  "raid": [
+  "epreuves": [
     {
-      "id": "RAID_GA_001",
+      "id": "EPR_GA_001",
       "type": "assaut",
       "nom": "Coup de poing",
       "degats": 2,
@@ -11,7 +11,7 @@
       "description": "Le Géant écrase le héros de son poing."
     },
     {
-      "id": "RAID_GA_002",
+      "id": "EPR_GA_002",
       "type": "assaut",
       "nom": "Balayage",
       "degats": 1,
@@ -19,7 +19,7 @@
       "description": "Un large coup qui balaie tout sur son passage."
     },
     {
-      "id": "RAID_GA_003",
+      "id": "EPR_GA_003",
       "type": "assaut",
       "nom": "Balayage",
       "degats": 1,
@@ -27,7 +27,7 @@
       "description": "Un large coup qui balaie tout sur son passage."
     },
     {
-      "id": "RAID_GA_004",
+      "id": "EPR_GA_004",
       "type": "assaut",
       "nom": "Invocation de meute",
       "degats": 0,
@@ -35,7 +35,7 @@
       "description": "Le Géant appelle ses bêtes. Piochez 1 monstre et placez-le au fond de la file."
     },
     {
-      "id": "RAID_GA_005",
+      "id": "EPR_GA_005",
       "type": "assaut",
       "nom": "Invocation de meute",
       "degats": 0,
@@ -43,7 +43,7 @@
       "description": "Le Géant appelle ses bêtes. Piochez 1 monstre et placez-le au fond de la file."
     },
     {
-      "id": "RAID_GA_006",
+      "id": "EPR_GA_006",
       "type": "assaut",
       "nom": "Ordre d'attaque",
       "degats": 0,
@@ -51,7 +51,7 @@
       "description": "Le monstre en tête de file attaque le héros actif. S'il n'y a pas de monstre, le Géant inflige 1 dégât physique."
     },
     {
-      "id": "RAID_GA_007",
+      "id": "EPR_GA_007",
       "type": "assaut",
       "nom": "Ordre d'attaque",
       "degats": 0,
@@ -59,7 +59,7 @@
       "description": "Le monstre en tête de file attaque le héros actif. S'il n'y a pas de monstre, le Géant inflige 1 dégât physique."
     },
     {
-      "id": "RAID_GA_008",
+      "id": "EPR_GA_008",
       "type": "assaut",
       "nom": "Festin",
       "degats": 0,
@@ -67,7 +67,7 @@
       "description": "Le Géant dévore et récupère 2 PV."
     },
     {
-      "id": "RAID_GA_009",
+      "id": "EPR_GA_009",
       "type": "assaut",
       "nom": "Piétinement",
       "degats": 1,
@@ -75,7 +75,7 @@
       "description": "Le Géant martèle le sol. Chaque héros subit les dégâts."
     },
     {
-      "id": "RAID_GA_010",
+      "id": "EPR_GA_010",
       "type": "assaut",
       "nom": "Rugissement",
       "degats": 0,
@@ -83,7 +83,7 @@
       "description": "Le Géant rugit ! Piochez 2 monstres et placez-les dans la file."
     },
     {
-      "id": "RAID_GA_011",
+      "id": "EPR_GA_011",
       "type": "evenement",
       "nom": "Gobelin lancé",
       "degats": 0,
@@ -91,7 +91,7 @@
       "description": "Le Géant attrape un gobelin et le lance vers vous.\n\n• L'esquiver (aucun effet)\n\nOU\n\n• L'attraper au vol (piocher 1 Destin)"
     },
     {
-      "id": "RAID_GA_012",
+      "id": "EPR_GA_012",
       "type": "evenement",
       "nom": "Débris volants",
       "degats": 0,
@@ -99,7 +99,7 @@
       "description": "Le combat fait voler des débris partout.\n\n• Se protéger — un héros défausse 1 carte Arsenal de type Objet (aucun effet)\n\nOU\n\n• Encaisser (le héros subit 1 dégât physique)"
     },
     {
-      "id": "RAID_GA_013",
+      "id": "EPR_GA_013",
       "type": "evenement",
       "nom": "Sac éventré",
       "degats": 0,
@@ -107,7 +107,7 @@
       "description": "Le sac du Géant se déchire, du loot tombe !\n\n• Ramasser vite (le héros pioche 1 carte Arsenal)\n\nOU\n\n• Fouiller à fond (chaque héros pioche 1 carte Arsenal, mais piocher 1 monstre dans la file)"
     },
     {
-      "id": "RAID_GA_014",
+      "id": "EPR_GA_014",
       "type": "evenement",
       "nom": "Renfort gobelin",
       "degats": 0,
@@ -115,7 +115,7 @@
       "description": "Un gobelin surgit sur le flanc !\n\n• Un héros défausse 1 carte Arsenal de type Action pour l'éliminer (le héros pioche 1 carte Arsenal)\n\nOU\n\n• L'ignorer (piocher 1 Destin)"
     },
     {
-      "id": "RAID_GA_015",
+      "id": "EPR_GA_015",
       "type": "evenement",
       "nom": "Sol instable",
       "degats": 0,
@@ -123,7 +123,7 @@
       "description": "Le Géant piétine et le sol se fissure !\n\n• Un autre héros défausse 1 carte Arsenal de type Action pour tirer le héros actif (aucun dégât, le héros pioche 1 carte Arsenal)\n\nOU\n\n• Sauter seul (le héros subit 1 dégât physique)"
     },
     {
-      "id": "RAID_GA_016",
+      "id": "EPR_GA_016",
       "type": "evenement",
       "nom": "Rats en fuite",
       "degats": 0,
@@ -131,7 +131,7 @@
       "description": "Le combat fait fuir des rats de leur trou.\n\n• Les chasser — un héros défausse 1 carte Arsenal de type Objet (le héros retire 1 blessure)\n\nOU\n\n• Les ignorer (piocher 1 Destin)"
     },
     {
-      "id": "RAID_GA_017",
+      "id": "EPR_GA_017",
       "type": "evenement",
       "nom": "Pilier qui s'effondre",
       "degats": 1,
@@ -139,7 +139,7 @@
       "description": "Un pilier s'effondre sous les coups !\n\n• Un héros défausse 1 carte Arsenal de type Objet pour le retenir (aucun effet)\n\nOU\n\n• Esquiver : le héros actif subit les dégâts"
     },
     {
-      "id": "RAID_GA_018",
+      "id": "EPR_GA_018",
       "type": "evenement",
       "nom": "Moment de répit",
       "degats": 0,
@@ -147,7 +147,7 @@
       "description": "Le Géant recule un instant, haletant.\n\n• En profiter pour souffler — un héros régénère sa capacité spéciale (mais piocher 1 monstre dans la file)\n\nOU\n\n• Rester concentré (piocher 1 Destin)"
     },
     {
-      "id": "RAID_GA_019",
+      "id": "EPR_GA_019",
       "type": "evenement",
       "nom": "Le Géant titube",
       "degats": 0,
@@ -155,7 +155,7 @@
       "description": "Le Géant est étourdi, il baisse sa garde !\n\n• Attaque coordonnée : chaque héros pioche 1 Destin\n\nOU\n\n• Frapper vite (piocher 1 carte Arsenal)"
     },
     {
-      "id": "RAID_GA_020",
+      "id": "EPR_GA_020",
       "type": "evenement",
       "nom": "Énergie arcanique",
       "degats": 0,

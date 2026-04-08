@@ -14,6 +14,51 @@ public abstract class CardGenerator : MonoBehaviour
     public TextMeshPro citationText;
     public SpriteRenderer portraitRenderer;
 
+    [Header("Gemmes de classe (bordure centrale)")]
+    public SpriteRenderer gemsRenderer;
+    public GemSprites gemSprites;
+
+    [System.Serializable]
+    public class GemSprites
+    {
+        public Sprite armure;      // Guerrier - rouge
+        public Sprite distance;    // Rodeur - vert
+        public Sprite soin;        // Soigneur - or
+        public Sprite magie;       // Mage - bleu
+        public Sprite diplomatie;  // Diplomate - marron
+
+        public Sprite GetSprite(string competence)
+        {
+            if (string.IsNullOrEmpty(competence)) return null;
+            switch (competence.ToLower())
+            {
+                case "armure": return armure;
+                case "distance": return distance;
+                case "soin": return soin;
+                case "magie": return magie;
+                case "élémentaire": return magie;
+                case "diplomatie": return diplomatie;
+                default: return null;
+            }
+        }
+    }
+
+    protected void SetGems(string competence)
+    {
+        if (gemsRenderer == null || gemSprites == null) return;
+
+        var sprite = gemSprites.GetSprite(competence);
+        if (sprite != null)
+        {
+            gemsRenderer.gameObject.SetActive(true);
+            gemsRenderer.sprite = sprite;
+        }
+        else
+        {
+            gemsRenderer.gameObject.SetActive(false);
+        }
+    }
+
     public abstract string GetCardName(int index);
     public abstract bool HasSprite(int index);
     public abstract void GenerateCard(int index);

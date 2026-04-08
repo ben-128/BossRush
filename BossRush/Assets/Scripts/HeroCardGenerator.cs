@@ -132,6 +132,12 @@ public class HeroCardGenerator : CardGenerator
         SetPortrait(hero.sprite, hero.offset, hero.scale);
         SetCitation(hero.citation);
         SetCompetenceIcons(hero.competences);
+
+        // Gemmes de classe : utilise la première compétence du héros
+        if (hero.competences != null && hero.competences.Length > 0)
+            SetGems(hero.competences[0]);
+        else
+            SetGems(null);
     }
 
     private void SetCompetenceIcons(string[] competences)

@@ -2,7 +2,7 @@
   "meta": {
     "description": "Liste des boss du jeu",
     "version": "0.5",
-    "notes": "PV adaptés au nombre de joueurs via formule. Monstres et élites référencés par ID. Chaque boss a un deck Raid de 20 cartes (assauts + événements). Les boss moyens/difficiles peuvent invoquer des élites."
+    "notes": "PV adaptés au nombre de joueurs via formule. Monstres et élites référencés par ID. Chaque boss a un deck Épreuve de 20 cartes (assauts + événements). Les boss moyens/difficiles peuvent invoquer des élites."
   },
   "boss": [
     {
@@ -12,7 +12,7 @@
       "pv_formule": "8 + 4 par joueur",
       "pv_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
       "effet_special": "Lorsque le boss inflige des dégâts physiques, il se soigne 1 blessure.",
-      "nb_cartes_raid": 20,
+      "nb_cartes_epreuves": 20,
       "monstres_ids": ["MON_001", "MON_002", "MON_003", "MON_004", "MON_005"],
       "elites_ids": [],
       "description": "Un colosse vorace qui se régénère en frappant."
