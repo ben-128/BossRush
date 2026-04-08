@@ -9,10 +9,10 @@
 | Type de carte | Quantité | Notes |
 |---|---|---|
 | Héros | 5 | 1 par joueur |
-| Arsenal (Actions + Objets) | 110 | 50 base + 12 par héros × 5 |
-| Monstres | 50 | Paquet commun |
+| Arsenal (Actions + Objets) | 100 | 20 par héros × 5 héros (toutes avec prérequis) |
+| Monstres | 30 | Paquet commun |
 | Brutes | 10 | Monstres d'élite, paquet séparé |
-| Destins | 60 | 20 favorables + 20 funestes + 20 incertains |
+| Destins | 30 | Paquet unique mélangé |
 | Boss | variable | Chacun avec ses épreuves et attaques |
 | Épreuves (par boss) | 15 | Propres à chaque boss |
 | Attaques du boss | 10 | Propres à chaque boss |
@@ -26,10 +26,10 @@
 3. **Piles communes** : former les piles Attaque du boss, Monstres, Brutes, Destins. Mélanger.
 4. **Héros** : chaque joueur pioche 1 héros aléatoire.
 5. **Pile Arsenal** :
-   - Séparer les cartes Arsenal par icône de prérequis (haut droite).
-   - Les cartes **sans prérequis** = paquet Arsenal de base (50 cartes).
-   - Les cartes **avec prérequis** = 1 petit paquet par compétence (12 cartes chacun).
-   - Mélanger dans le paquet de base **uniquement** les paquets des héros choisis. Remettre les autres dans la boîte.
+   - Chaque héros possède un paquet de 20 cartes Arsenal (identifié par l'icône prérequis en haut à droite).
+   - Prendre les paquets des héros choisis. Remettre les autres dans la boîte.
+   - Mélanger tous les paquets choisis ensemble pour former la pile Arsenal.
+   - *(Exemple : 3 joueurs = 3 paquets × 20 = 60 cartes Arsenal.)*
 6. **Pioche initiale** : chaque joueur pioche 3 cartes Arsenal.
    - Type **Action** (icône haut gauche) → en main.
    - Type **Objet** (icône haut gauche) → face visible devant le héros.
@@ -53,10 +53,24 @@ Pile unique. Deux types identifiés par une icône en haut à gauche :
 - **Renfort** → renforce une attaque Action jouée en même temps. Les deux cartes vont sous la cible.
 
 ### Prérequis
-Icône en haut à droite. Le héros doit posséder la compétence correspondante. Sinon, la carte ne peut pas être jouée.
+Icône en haut à droite. Le héros doit posséder la compétence correspondante. Sinon, la carte ne peut pas être jouée (mais peut être échangée avec un allié qui possède la compétence).
 
 ### Pile vide
 Mélanger la défausse pour reformer la pile.
+
+---
+
+## Identité des héros et de leurs cartes
+
+| Héros | Compétence | Identité du paquet Arsenal |
+|---|---|---|
+| Guerrier | Armure | Résistant, mélée, soigne/prévient les dégâts physiques |
+| Mage | Élémentaire | Gros dégâts magiques (distance et mélée) |
+| Soigneur | Soin | Peu de dégâts, mais soigne beaucoup les alliés |
+| Rôdeur | Distance | Attaques à distance, rapide (joue plusieurs cartes par tour) |
+| Diplomate | Diplomatie | Fait piocher et échanger des cartes, coordonne les alliés |
+
+Chaque paquet contient **20 cartes** : 15 Actions (dont 10 attaques) + 5 Objets.
 
 ---
 

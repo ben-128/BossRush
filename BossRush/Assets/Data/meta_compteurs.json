@@ -1,68 +1,77 @@
 {
   "meta": {
     "description": "Compteurs centraux de toutes les cartes du jeu Raid Party. À mettre à jour à chaque modification de cartes.",
-    "derniere_mise_a_jour": "2026-04-07",
-    "version": "1.0"
+    "derniere_mise_a_jour": "2026-04-08",
+    "version": "2.0"
   },
 
   "arsenal": {
-    "_description": "Pile unique Arsenal = Actions + Objets. Icône haut gauche = type. Icône haut droite = prérequis.",
+    "_description": "Pile Arsenal = uniquement des paquets héros. 20 cartes par héros (15 actions dont 10 attaques + 5 objets). Toutes les cartes ont un prérequis.",
     "fichier": "cartes_arsenal.json",
     "base_sans_prerequis": {
-      "cible_actions": 35,
-      "cible_objets": 15,
-      "cible_total": 50,
-      "actuel_actions": 35,
-      "actuel_objets": 15,
-      "actuel_total": 50,
-      "status": "OK"
+      "_note": "Supprimé en v3.0. Plus de cartes de base sans prérequis.",
+      "cible_total": 0,
+      "actuel_total": 0,
+      "status": "N/A"
     },
     "par_hero": {
-      "_regle": "Après le choix des héros, on mélange dans la pile Arsenal uniquement les paquets des héros choisis.",
-      "cible_actions_par_hero": 7,
+      "_regle": "Après le choix des héros, on mélange dans la pile Arsenal uniquement les paquets de 20 cartes des héros choisis.",
+      "cible_actions_par_hero": 15,
+      "cible_attaques_par_hero": 10,
+      "cible_effets_par_hero": 5,
       "cible_objets_par_hero": 5,
-      "cible_total_par_hero": 12,
+      "cible_total_par_hero": 20,
       "heros": {
         "armure": {
           "hero": "Guerrier",
-          "actuel_actions": 7,
+          "actuel_actions": 15,
+          "actuel_attaques": 10,
+          "actuel_effets": 5,
           "actuel_objets": 5,
-          "actuel_total": 12,
+          "actuel_total": 20,
           "status": "OK"
         },
         "distance": {
           "hero": "Rôdeur",
-          "actuel_actions": 7,
+          "actuel_actions": 15,
+          "actuel_attaques": 10,
+          "actuel_effets": 5,
           "actuel_objets": 5,
-          "actuel_total": 12,
+          "actuel_total": 20,
           "status": "OK"
         },
         "élémentaire": {
           "hero": "Mage",
-          "actuel_actions": 7,
+          "actuel_actions": 15,
+          "actuel_attaques": 10,
+          "actuel_effets": 5,
           "actuel_objets": 5,
-          "actuel_total": 12,
+          "actuel_total": 20,
           "status": "OK"
         },
         "soin": {
           "hero": "Soigneur",
-          "actuel_actions": 7,
+          "actuel_actions": 15,
+          "actuel_attaques": 10,
+          "actuel_effets": 5,
           "actuel_objets": 5,
-          "actuel_total": 12,
+          "actuel_total": 20,
           "status": "OK"
         },
         "diplomatie": {
           "hero": "Diplomate",
-          "actuel_actions": 7,
+          "actuel_actions": 15,
+          "actuel_attaques": 10,
+          "actuel_effets": 5,
           "actuel_objets": 5,
-          "actuel_total": 12,
+          "actuel_total": 20,
           "status": "OK"
         }
       }
     },
     "total_general": {
-      "cible": 110,
-      "actuel": 110,
+      "cible": 100,
+      "actuel": 100,
       "status": "OK"
     }
   },
@@ -156,7 +165,7 @@
       "attaques_geant (9/10, manque 1)"
     ],
     "total_cartes_jeu": {
-      "cible": "110 arsenal + 50 monstres + 10 brutes + 60 destins + 15 épreuves/boss + 10 attaques/boss + 5 héros",
+      "cible": "100 arsenal + 50 monstres + 10 brutes + 60 destins + 15 épreuves/boss + 10 attaques/boss + 5 héros",
       "note": "Les cartes boss (épreuves + attaques) sont par boss, pas dans le total global fixe."
     }
   }
