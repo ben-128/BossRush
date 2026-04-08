@@ -1,8 +1,8 @@
 {
   "meta": {
     "description": "Liste des monstres du jeu",
-    "version": "0.1",
-    "notes": "Monstres génériques, utilisables par n'importe quel boss."
+    "version": "0.2",
+    "notes": "Monstres génériques, utilisables par n'importe quel boss. 30 cartes au total."
   },
   "monstres": [
     {
@@ -13,7 +13,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Petit mais sournois.",
-      "quantite": 4
+      "quantite": 5
     },
     {
       "id": "MON_002",
@@ -23,7 +23,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Rapide et vorace.",
-      "quantite": 3
+      "quantite": 4
     },
     {
       "id": "MON_003",
@@ -33,7 +33,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Attiré par l'odeur du sang.",
-      "quantite": 2
+      "quantite": 3
     },
     {
       "id": "MON_004",
@@ -43,7 +43,7 @@
       "type_degats": "magique",
       "capacite_speciale": null,
       "description": "Un gobelin qui lance des malédictions.",
-      "quantite": 2
+      "quantite": 3
     },
     {
       "id": "MON_005",
@@ -54,6 +54,56 @@
       "capacite_speciale": "Ne peut pas être attaqué par des attaques à distance.",
       "description": "Une flamme errante qui brûle au toucher.",
       "quantite": 2
+    },
+    {
+      "id": "MON_006",
+      "nom": "Squelette",
+      "pv": 2,
+      "degats": 1,
+      "type_degats": "physique",
+      "capacite_speciale": null,
+      "description": "Les os claquent dans l'obscurité.",
+      "quantite": 3
+    },
+    {
+      "id": "MON_007",
+      "nom": "Serpent venimeux",
+      "pv": 1,
+      "degats": 1,
+      "type_degats": "magique",
+      "capacite_speciale": "Le héros attaqué défausse 1 carte Arsenal de type Objet (s'il en a).",
+      "description": "Son venin paralyse et détruit l'équipement.",
+      "quantite": 2
+    },
+    {
+      "id": "MON_008",
+      "nom": "Chauve-souris géante",
+      "pv": 1,
+      "degats": 1,
+      "type_degats": "physique",
+      "capacite_speciale": null,
+      "description": "Elle fond sur sa proie depuis les ténèbres.",
+      "quantite": 3
+    },
+    {
+      "id": "MON_009",
+      "nom": "Kobold",
+      "pv": 1,
+      "degats": 2,
+      "type_degats": "magique",
+      "capacite_speciale": null,
+      "description": "Un petit reptile rusé qui manie la magie brute.",
+      "quantite": 2
+    },
+    {
+      "id": "MON_010",
+      "nom": "Zombie",
+      "pv": 3,
+      "degats": 1,
+      "type_degats": "physique",
+      "capacite_speciale": null,
+      "description": "Lent mais tenace, il ne s'arrête jamais.",
+      "quantite": 3
     }
   ]
 }

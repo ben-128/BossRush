@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "description": "Destins — Effets aléatoires tirés pendant les épreuves",
+    "type": "destin"
+  },
+  "destins": [
+    { "id": "DEN_001", "effet": "Chaque héros pioche 1 carte Arsenal." },
+    { "id": "DEN_002", "effet": "Le héros est soigné de 2 blessures." },
+    { "id": "DEN_003", "effet": "Un héros au choix régénère sa capacité spéciale." },
+    { "id": "DEN_004", "effet": "Le héros pioche 2 cartes Arsenal." },
+    { "id": "DEN_005", "effet": "Chaque héros retire 1 carte blessure." },
+    { "id": "DEN_006", "effet": "Le héros subit 1 dégât physique." },
+    { "id": "DEN_007", "effet": "Piochez 1 monstre et placez-le dans la file." },
+    { "id": "DEN_008", "effet": "Le héros subit 1 dégât magique." },
+    { "id": "DEN_009", "effet": "Chaque héros subit 1 dégât physique." },
+    { "id": "DEN_010", "effet": "Piochez 2 monstres et placez-les dans la file." },
+    { "id": "DEN_011", "effet": "Le héros pioche 3 cartes Arsenal. Un autre héros au choix subit 1 dégât physique." },
+    { "id": "DEN_012", "effet": "Le héros subit 1 dégât magique et pioche 1 carte Arsenal." },
+    { "id": "DEN_013", "effet": "Le héros subit 1 dégât magique et est soigné de 3 blessures physiques." },
+    { "id": "DEN_014", "effet": "Défaussez 2 cartes Arsenal de type Action pour piocher 2 cartes Arsenal. Si vous n'avez pas assez de cartes, subissez 2 dégâts physiques." },
+    { "id": "DEN_015", "effet": "Le héros peut échanger ses cartes avec tous les autres héros. Mais piochez 1 monstre et placez-le en tête de file." },
+    { "id": "DEN_016", "effet": "Choix collectif : tous les héros piochent 1 carte Arsenal, OU tous les héros retirent 2 blessures." },
+    { "id": "DEN_017", "effet": "Le héros actif pioche 1 carte Arsenal. S'il a un prérequis qu'il ne possède pas, il subit 2 dégâts magiques." },
+    { "id": "DEN_018", "effet": "Un héros défausse toutes ses cartes Arsenal de type Action. Tous les autres héros piochent autant de cartes Arsenal que de cartes défaussées." },
+    { "id": "DEN_019", "effet": "Un héros au choix pioche 1 carte Arsenal et subit 1 dégât physique." },
+    { "id": "DEN_020", "effet": "Le héros retire 2 blessures mais défausse 1 carte Arsenal de sa main." },
+    { "id": "DEN_021", "effet": "Piochez 1 monstre dans la file. Chaque héros pioche 1 carte Arsenal." },
+    { "id": "DEN_022", "effet": "Le héros subit 2 dégâts magiques. Un autre héros au choix est soigné de 2 blessures." },
+    { "id": "DEN_023", "effet": "Chaque héros pioche 1 carte Arsenal et subit 1 dégât magique." },
+    { "id": "DEN_024", "effet": "Le héros régénère sa capacité spéciale, mais piochez 1 monstre dans la file." },
+    { "id": "DEN_025", "effet": "Le héros pioche 3 cartes Arsenal et défausse 1 carte Arsenal au choix." },
+    { "id": "DEN_026", "effet": "Un héros au choix retire 1 blessure. Un autre héros au choix subit 1 dégât physique." },
+    { "id": "DEN_027", "effet": "Le héros défausse 1 carte Arsenal de type Objet. S'il ne peut pas, il pioche 2 cartes Arsenal." },
+    { "id": "DEN_028", "effet": "Le héros subit 1 dégât physique et 1 dégât magique. Il pioche 2 cartes Arsenal." },
+    { "id": "DEN_029", "effet": "Chaque héros défausse 1 carte Arsenal de sa main. Pour chaque carte défaussée, un héros au choix retire 1 blessure." },
+    { "id": "DEN_030", "effet": "Le héros pioche 1 carte Arsenal. Si c'est un Objet, il pioche 1 carte Arsenal supplémentaire." }
+  ]
+}

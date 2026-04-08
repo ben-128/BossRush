@@ -8,77 +8,77 @@
       "nom": "Entrée de la caverne",
       "degats": 0,
       "type_degats": null,
-      "description": "L'entrée est gardée par un gobelin endormi.\n\n• Se faufiler en silence (aucun effet)\n\nOU\n\n• Fouiller le garde (piocher 1 Destin incertain)"
+      "description": "L'entrée est gardée par un gobelin endormi.\n\n• Se faufiler en silence (aucun effet)\n\nOU\n\n• Fouiller le garde (piocher 1 Destin)"
     },
     {
       "id": "EPR_GA_002",
       "nom": "Passage étroit",
       "degats": 0,
       "type_degats": null,
-      "description": "Un tunnel trop étroit pour passer avec tout son équipement.\n\n• Le héros défausse 1 carte Arsenal de type Objet pour passer vite \n\nOU\n\n• Forcer le passage (piocher 1 Destin funeste)"
+      "description": "Un tunnel trop étroit pour passer avec tout son équipement.\n\n• Le héros défausse 1 carte Arsenal de type Objet pour passer vite \n\nOU\n\n• Forcer le passage (le héros subit 1 dégât physique)"
     },
     {
       "id": "EPR_GA_003",
       "nom": "Garde-manger",
       "degats": 0,
       "type_degats": null,
-      "description": "Vous tombez sur les réserves de nourriture du Géant.\n\n• Fouiller discrètement (piocher 1 Destin favorable)\n\nOU\n\n• Se goinfrer et faire du bruit (piocher 3 Destin favorable, mais piocher 2 monstres dans la file)"
+      "description": "Vous tombez sur les réserves de nourriture du Géant.\n\n• Fouiller discrètement (le héros pioche 1 carte Arsenal)\n\nOU\n\n• Se goinfrer et faire du bruit (chaque héros pioche 1 carte Arsenal, mais piocher 2 monstres dans la file)"
     },
     {
       "id": "EPR_GA_004",
       "nom": "Sentinelle gobeline",
       "degats": 0,
       "type_degats": null,
-      "description": "Un gobelin monte la garde devant un couloir.\n\n• Un héros défausse 1 carte Arsenal de type Action pour le neutraliser silencieusement (piocher 1 Destin favorable)\n\nOU\n\n• Tenter de passer (piocher 1 Destin incertain)"
+      "description": "Un gobelin monte la garde devant un couloir.\n\n• Un héros défausse 1 carte Arsenal de type Action pour le neutraliser silencieusement (le héros pioche 1 carte Arsenal)\n\nOU\n\n• Tenter de passer (piocher 1 Destin)"
     },
     {
       "id": "EPR_GA_005",
       "nom": "Piège à loup",
       "degats": 1,
       "type_degats": "physique",
-      "description": "Le héros actif marche sur un piège !\n\n• Un autre héros défausse 1 carte Arsenal de type Action pour le libérer (aucun dégât, piocher 1 Destin favorable)\n\nOU\n\n• Il se libère seul (le héros actif subit les dégâts)"
+      "description": "Le héros actif marche sur un piège !\n\n• Un autre héros défausse 1 carte Arsenal de type Action pour le libérer (aucun dégât, le héros pioche 1 carte Arsenal)\n\nOU\n\n• Il se libère seul (le héros actif subit les dégâts)"
     },
     {
       "id": "EPR_GA_006",
       "nom": "Tanière des rats",
       "degats": 0,
       "type_degats": null,
-      "description": "Des rats grouillent dans le noir.\n\n• Les chasser avec une torche — un héros défausse 1 carte Arsenal de type Objet (piocher 1 Destin favorable)\n\nOU\n\n• Traverser en courant (piocher 1 Destin incertain)"
+      "description": "Des rats grouillent dans le noir.\n\n• Les chasser avec une torche — un héros défausse 1 carte Arsenal de type Objet (le héros retire 1 blessure)\n\nOU\n\n• Traverser en courant (piocher 1 Destin)"
     },
     {
       "id": "EPR_GA_007",
       "nom": "Trésor caché",
       "degats": 0,
       "type_degats": null,
-      "description": "Un coffre derrière un rocher.\n\n• Prendre le temps de l'ouvrir (piocher 2 Destins favorables, mais piocher 1 monstre dans la file)\n\nOU\n\n• L'ignorer et avancer (aucun effet)"
+      "description": "Un coffre derrière un rocher.\n\n• Prendre le temps de l'ouvrir (chaque héros pioche 1 carte Arsenal, mais piocher 1 monstre dans la file)\n\nOU\n\n• L'ignorer et avancer (aucun effet)"
     },
     {
       "id": "EPR_GA_008",
       "nom": "Embranchement",
       "degats": 0,
       "type_degats": null,
-      "description": "Deux chemins s'offrent à vous.\n\n• Le chemin éclairé (piocher 1 monstre dans la file, mais piocher 1 Destin favorable)\n\nOU\n\n• Le chemin sombre (piocher 1 Destin incertain chacun)"
+      "description": "Deux chemins s'offrent à vous.\n\n• Le chemin éclairé (piocher 1 monstre dans la file, mais le héros pioche 1 carte Arsenal)\n\nOU\n\n• Le chemin sombre (piocher 1 Destin chacun)"
     },
     {
       "id": "EPR_GA_009",
       "nom": "Os qui craquent",
       "degats": 0,
       "type_degats": null,
-      "description": "Le sol est jonché d'ossements.\n\n• Avancer prudemment — un héros défausse 1 carte Arsenal de type Action (aucun effet)\n\nOU\n\n• Marcher normalement (piocher 1 Destin funeste, le Géant vous a entendus)"
+      "description": "Le sol est jonché d'ossements.\n\n• Avancer prudemment — un héros défausse 1 carte Arsenal de type Action (aucun effet)\n\nOU\n\n• Marcher normalement (piocher 1 monstre dans la file, le Géant vous a entendus)"
     },
     {
       "id": "EPR_GA_010",
       "nom": "Autel primitif",
       "degats": 0,
       "type_degats": null,
-      "description": "Un autel couvert de sang séché.\n\n• Faire une offrande : le héros défausse 1 carte Arsenal de type Objet et soigne une blessure \n\nOU\n\n• Profaner l'autel (piocher 1 Destin incertain)"
+      "description": "Un autel couvert de sang séché.\n\n• Faire une offrande : le héros défausse 1 carte Arsenal de type Objet et soigne une blessure \n\nOU\n\n• Profaner l'autel (piocher 1 Destin)"
     },
     {
       "id": "EPR_GA_011",
       "nom": "Meute endormie",
       "degats": 0,
       "type_degats": null,
-      "description": "Une meute de loups dort dans un coin.\n\n• Les enjamber en silence (piocher 1 Destin incertain)\n\nOU\n\n• Les réveiller et fuir (piocher 2 monstres dans la file)"
+      "description": "Une meute de loups dort dans un coin.\n\n• Les enjamber en silence (piocher 1 Destin)\n\nOU\n\n• Les réveiller et fuir (piocher 2 monstres dans la file)"
     },
     {
       "id": "EPR_GA_012",
@@ -92,14 +92,14 @@
       "nom": "Source souterraine",
       "degats": 0,
       "type_degats": null,
-      "description": "Une source d'eau claire.\n\n• Boire et se reposer — un héros régénère sa capacité spéciale (mais piocher 1 monstre dans la file)\n\nOU\n\n• Continuer sans s'arrêter (piocher 1 Destin incertain)"
+      "description": "Une source d'eau claire.\n\n• Boire et se reposer — un héros régénère sa capacité spéciale (mais piocher 1 monstre dans la file)\n\nOU\n\n• Continuer sans s'arrêter (piocher 1 Destin)"
     },
     {
       "id": "EPR_GA_014",
       "nom": "Le Géant dort",
       "degats": 0,
       "type_degats": null,
-      "description": "Vous apercevez le Géant assoupi au loin.\n\n• Tendre une embuscade : chaque héros pioche 1 carte Destin incertain \n\nOU\n\n• Approcher discrètement (piocher 1 carte Arsenal)"
+      "description": "Vous apercevez le Géant assoupi au loin.\n\n• Tendre une embuscade : chaque héros pioche 1 Destin \n\nOU\n\n• Approcher discrètement (piocher 1 carte Arsenal)"
     },
     {
       "id": "EPR_GA_015",
