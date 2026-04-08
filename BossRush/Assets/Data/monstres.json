@@ -13,6 +13,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Petit mais sournois.",
+      "citation": "« Il rit encore quand il tombe. »",
       "quantite": 5
     },
     {
@@ -23,6 +24,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Rapide et vorace.",
+      "citation": "« Deux crocs, et c'est fini. »",
       "quantite": 4
     },
     {
@@ -33,6 +35,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Attiré par l'odeur du sang.",
+      "citation": "« Il ne chasse pas. Il attend. »",
       "quantite": 3
     },
     {
@@ -43,6 +46,7 @@
       "type_degats": "magique",
       "capacite_speciale": null,
       "description": "Un gobelin qui lance des malédictions.",
+      "citation": "« Ses mots brûlent plus que le feu. »",
       "quantite": 3
     },
     {
@@ -53,6 +57,7 @@
       "type_degats": "magique",
       "capacite_speciale": "Ne peut pas être attaqué par des attaques à distance.",
       "description": "Une flamme errante qui brûle au toucher.",
+      "citation": null,
       "quantite": 2
     },
     {
@@ -63,6 +68,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Les os claquent dans l'obscurité.",
+      "citation": "« Il ne sait pas qu'il est mort. »",
       "quantite": 3
     },
     {
@@ -73,6 +79,7 @@
       "type_degats": "magique",
       "capacite_speciale": "Le héros attaqué défausse 1 carte Arsenal de type Objet (s'il en a).",
       "description": "Son venin paralyse et détruit l'équipement.",
+      "citation": null,
       "quantite": 2
     },
     {
@@ -83,6 +90,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Elle fond sur sa proie depuis les ténèbres.",
+      "citation": "« Tu ne l'entends qu'une fois. »",
       "quantite": 3
     },
     {
@@ -93,6 +101,7 @@
       "type_degats": "magique",
       "capacite_speciale": null,
       "description": "Un petit reptile rusé qui manie la magie brute.",
+      "citation": "« Petit, mais ça fait deux fois mal. »",
       "quantite": 2
     },
     {
@@ -103,6 +112,7 @@
       "type_degats": "physique",
       "capacite_speciale": null,
       "description": "Lent mais tenace, il ne s'arrête jamais.",
+      "citation": "« Il avance. Toujours. »",
       "quantite": 3
     }
   ]

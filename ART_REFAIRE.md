@@ -6,11 +6,11 @@ Style cible : MTG painterly (voir memory/reference_art_prompt.md)
 
 | Fichier | Sujet | Statut |
 |---|---|---|
-| Raw/Heros/Guerrier.png | Guerrier humain, armure lourde, epee + bouclier, palette bleu/acier | Fait |
-| Raw/Heros/Mage.png | Mage femme, baton arcanique, palette bleu electrique | Fait |
-| Raw/Heros/Diplomate.png | Diplomate homme, cape noble, parchemin, palette bordeaux/or | Fait |
-| Raw/Heros/Rodeur.png | Rodeuse femme, arc, cape sombre, palette vert foret | Fait |
-| Raw/Heros/Soigneur.png | Soigneur homme, robes blanches, magie doree, palette blanc/or | Fait |
+| Raw/Heros/Guerrier.png | Guerrier humain noir, armure lourde, epee + bouclier, phoenix rouge, palette ROUGE | Fait |
+| Raw/Heros/Mage.png | Mage femme, baton cristal saphir, eclair bleu, cercle arcanique, palette BLEU | Fait |
+| Raw/Heros/Diplomate.png | Diplomate homme, cape cuir, parchemin sceau, grande salle, palette MARRON | Fait |
+| Raw/Heros/Rodeur.png | Rodeuse femme, arc vertical, fleche cristal vert, foret cathedrale, palette VERT | Fait |
+| Raw/Heros/Soigneur.png | Soigneur homme, temple en ruine, lumiere doree soin, palette JAUNE/OR | Fait |
 
 ## Monstres (5)
 
@@ -55,7 +55,7 @@ Style cible : MTG painterly (voir memory/reference_art_prompt.md)
 | HelpsVisual/Icons/Magie.png | Icone magie (vortex bleu) | A refaire |
 | HelpsVisual/Icons/Soin.png | Icone soin (mains dorees) | A refaire |
 | HelpsVisual/Icons/Tourner.png | Icone rotation/tour | A refaire |
-| HelpsVisual/Icons/Vie.png | Icone points de vie (coeur) | A refaire |
+| HelpsVisual/Icons/Vie.png | Icone points de vie (coeur) | Fait |
 
 ---
 

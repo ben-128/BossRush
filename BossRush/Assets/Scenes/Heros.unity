@@ -213,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 27444593}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.82, y: 5.053, z: 0}
+  m_LocalPosition: {x: 3.82, y: 5.053, z: 1}
   m_LocalScale: {x: 1e+11, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -335,7 +335,7 @@ Transform:
   m_GameObject: {fileID: 245639258}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.82, y: -5.084, z: 0}
+  m_LocalPosition: {x: 3.82, y: -5.084, z: 1}
   m_LocalScale: {x: 1000, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -451,10 +451,10 @@ MonoBehaviour:
   jsonSource: {fileID: 4900000, guid: f45d7c3ba971e60449007594353764ae, type: 3}
   outputFolder: Heros
   nomText: {fileID: 1000190560}
-  pvText: {fileID: 2090081213}
-  capaciteText: {fileID: 1602578963}
   descriptionText: {fileID: 2063036563}
   portraitRenderer: {fileID: 1603593783}
+  pvText: {fileID: 2090081213}
+  capaciteText: {fileID: 1602578963}
   competenceSprites:
     armure: {fileID: 21300000, guid: 10c8a1a25dd1b9a4f96667b54eafb3c9, type: 3}
     distance: {fileID: 21300000, guid: 13c017cf45c980345816d933ecce271b, type: 3}
@@ -466,18 +466,17 @@ MonoBehaviour:
   allHeroes:
   - nom: Mage
     sprite: {fileID: -7285376162372006033, guid: 6cfb26ce14e7462459b2b4e549a16a46, type: 3}
-    offset: {x: 0, y: 1.7}
+    offset: {x: 0, y: 2.2}
     scale: 0.45
     pv: 4
     competences:
     - magie
-    capacite_speciale: "Un h\xE9ros cibl\xE9 joue instantan\xE9ment 2 cartes Action
-      comme s'il poss\xE9dait tous les pr\xE9requis."
+    capacite_speciale: "D\xE9fausse tous les monstres avec 1 PV dans la file."
     description: "Fragile mais capable de d\xE9bloquer le potentiel des alli\xE9s."
   - nom: Soigneur
     sprite: {fileID: -4426865552208672761, guid: 52a6172166028334a98bf92665540e0a, type: 3}
-    offset: {x: 0, y: 1.7}
-    scale: 0.45
+    offset: {x: 0, y: 2.2}
+    scale: 0.44
     pv: 4
     competences:
     - soin
@@ -485,13 +484,13 @@ MonoBehaviour:
     description: "Le pilier de survie de l'\xE9quipe."
   - nom: Guerrier
     sprite: {fileID: 3364270101458684742, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
-    offset: {x: 0, y: 1.7}
+    offset: {x: 0, y: 2}
     scale: 0.45
     pv: 7
     competences:
     - armure
-    capacite_speciale: "Pr\xE9vient la prochaine attaque physique qui devrait vous
-      \xEAtre infilg\xE9e ce tour ci."
+    capacite_speciale: "Pr\xE9vient tous les d\xE9g\xE2ts physiques que ce h\xE9ros
+      devrait subir ce tour."
     description: "Un rempart solide qui prot\xE8ge ses alli\xE9s."
   - nom: "R\xF4deur"
     sprite: {fileID: -6257678261995369750, guid: 63882c0e895215741814a71d86920edc, type: 3}
@@ -504,8 +503,8 @@ MonoBehaviour:
     description: "Rapide et polyvalent, il encha\xEEne les attaques."
   - nom: Diplomate
     sprite: {fileID: 8773021328209283472, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
-    offset: {x: 0, y: 1.7}
-    scale: 0.45
+    offset: {x: 0.1, y: 2}
+    scale: 0.47
     pv: 5
     competences:
     - diplomatie
@@ -538,7 +537,7 @@ Transform:
   m_GameObject: {fileID: 442832019}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.82, y: -0.39160782, z: 0}
+  m_LocalPosition: {x: 3.82, y: -0.39160782, z: 1}
   m_LocalScale: {x: 10, y: 9500000, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -721,7 +720,7 @@ Transform:
   m_GameObject: {fileID: 611862081}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.97, y: -2.96, z: -1}
+  m_LocalPosition: {x: -2, y: -1.46, z: -1}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -808,7 +807,7 @@ Transform:
   m_GameObject: {fileID: 900471165}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.815, y: -0.39160782, z: 0}
+  m_LocalPosition: {x: -3.815, y: -0.39160782, z: 1}
   m_LocalScale: {x: 10, y: 9500000, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -903,7 +902,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4.57}
+  m_AnchoredPosition: {x: 0.06, y: 4.5}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1000190560
@@ -926,17 +925,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "R\xF4deur"
+  m_text: Guerrier
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 2fa8cb1685c8ddd4e85d25a8746d2d3b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
+  m_sharedMaterial: {fileID: -3184560146148442986, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -991,7 +990,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 6.3478193, y: 2.262376, z: 6.334628, w: 1.988322}
+  m_margin: {x: 6.3478193, y: 2.4236767, z: 6.334628, w: 2.0036716}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -1023,7 +1022,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2fa8cb1685c8ddd4e85d25a8746d2d3b, type: 2}
+  - {fileID: -3184560146148442986, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1106,15 +1105,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8257054274441828170, guid: 13c017cf45c980345816d933ecce271b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10c8a1a25dd1b9a4f96667b54eafb3c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 9.79, y: 9.87}
+  m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1171038903
@@ -1126,8 +1125,8 @@ Transform:
   m_GameObject: {fileID: 1171038901}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -1.35, z: -1}
-  m_LocalScale: {x: 0.15, y: 0.14999999, z: 0.29411766}
+  m_LocalPosition: {x: 3.1, y: 4.5, z: -1}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 0.29411766}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -1158,7 +1157,7 @@ Transform:
   m_GameObject: {fileID: 1203465507}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.54, z: -1}
+  m_LocalPosition: {x: 0, y: -4.5, z: -1}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1301,8 +1300,8 @@ Transform:
   m_GameObject: {fileID: 1278901542}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.21, z: 0}
-  m_LocalScale: {x: 0.89, y: 0.82, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.85, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -1437,7 +1436,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.75, y: -2.79}
+  m_AnchoredPosition: {x: 3.75, y: -1.5}
   m_SizeDelta: {x: 12.2061, y: 1.5006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1602578963
@@ -1460,10 +1459,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Joue imm\xE9diatement 3 cartes Action de sa main."
+  m_text: "Pr\xE9vient tous les d\xE9g\xE2ts physiques que ce h\xE9ros devrait subir
+    ce tour."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dab5b252624470e478d828f747d3fea8, type: 2}
+  m_sharedMaterial: {fileID: 7330548444820031742, guid: dab5b252624470e478d828f747d3fea8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1487,8 +1487,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.25
-  m_fontSizeBase: 2.25
+  m_fontSize: 3
+  m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1525,7 +1525,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 1.6376548, y: -0.07812548, z: 6.831836, w: -0.22155732}
+  m_margin: {x: 1.6376548, y: -0.17728394, z: 6.831836, w: -0.1664598}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -1557,7 +1557,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 7330548444820031742, guid: dab5b252624470e478d828f747d3fea8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1605,7 +1605,7 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7, z: 0.01}
+  m_LocalPosition: {x: 0, y: 2, z: 0.01}
   m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1655,7 +1655,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6257678261995369750, guid: 63882c0e895215741814a71d86920edc, type: 3}
+  m_Sprite: {fileID: 3364270101458684742, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1723,10 +1723,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Rapide et polyvalent, il encha\xEEne les attaques."
+  m_text: "Un rempart solide qui prot\xE8ge ses alli\xE9s."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dab5b252624470e478d828f747d3fea8, type: 2}
+  m_sharedMaterial: {fileID: 7330548444820031742, guid: dab5b252624470e478d828f747d3fea8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1820,7 +1820,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 7330548444820031742, guid: dab5b252624470e478d828f747d3fea8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1880,17 +1880,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6
+  m_text: 7
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
+  m_sharedMaterial: {fileID: -3184560146148442986, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1945,7 +1945,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 2.6064453, y: 0.34402123, z: 8.539039, w: 0.27068368}
+  m_margin: {x: 2.5222347, y: 0.60900766, z: 8.478472, w: 0.3870353}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -1977,7 +1977,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: -3184560146148442986, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2015,7 +2015,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.8, y: 0.8}
+  m_AnchoredPosition: {x: 14.8, y: 1.5}
   m_SizeDelta: {x: 12.2061, y: 1.5006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807

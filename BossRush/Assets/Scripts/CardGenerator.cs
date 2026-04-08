@@ -11,6 +11,7 @@ public abstract class CardGenerator : MonoBehaviour
     [Header("Visuels de la carte")]
     public TextMeshPro nomText;
     public TextMeshPro descriptionText;
+    public TextMeshPro citationText;
     public SpriteRenderer portraitRenderer;
 
     public abstract string GetCardName(int index);
@@ -38,6 +39,12 @@ public abstract class CardGenerator : MonoBehaviour
             descriptionText.text = description ?? "";
 
         Canvas.ForceUpdateCanvases();
+    }
+
+    protected void SetCitation(string citation)
+    {
+        if (citationText != null)
+            citationText.text = !string.IsNullOrEmpty(citation) ? $"<i>{citation}</i>" : "";
     }
 
     protected static void SetDamageIcons(SpriteRenderer[] slots, int count, float spacing)

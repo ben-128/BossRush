@@ -29,6 +29,7 @@ public class MonsterCardGenerator : CardGenerator
         public string type_degats;
         public string capacite_speciale;
         public string description;
+        public string citation;
         public int quantite;
     }
     #endregion
@@ -43,6 +44,7 @@ public class MonsterCardGenerator : CardGenerator
         [HideInInspector] public string type_degats;
         [HideInInspector] public string capacite_speciale;
         [HideInInspector] public string description;
+        [HideInInspector] public string citation;
         [HideInInspector] public int quantite;
     }
     #endregion
@@ -111,6 +113,7 @@ public class MonsterCardGenerator : CardGenerator
                 type_degats = json.type_degats,
                 capacite_speciale = json.capacite_speciale,
                 description = json.description,
+                citation = json.citation,
                 quantite = json.quantite,
             };
         }
@@ -132,6 +135,7 @@ public class MonsterCardGenerator : CardGenerator
         SetBaseTexts(monster.nom, texte);
         if (pvText != null) pvText.text = monster.pv.ToString();
         SetPortrait(monster.sprite, monster.offset, monster.scale);
+        SetCitation(monster.citation);
 
         // Icônes de dégâts
         var dmgSprite = typeDegatsSprites.GetSprite(monster.type_degats);

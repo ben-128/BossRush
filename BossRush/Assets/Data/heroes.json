@@ -11,7 +11,8 @@
       "pv": 4,
       "competences": ["magie"],
       "capacite_speciale": "Défausse tous les monstres avec 1 PV dans la file.",
-      "description": "Fragile mais capable de débloquer le potentiel des alliés."
+      "description": "Fragile mais capable de débloquer le potentiel des alliés.",
+      "citation": "« Un seul mot, et les faibles tombent. »"
     },
     {
       "id": "HERO_002",
@@ -19,7 +20,8 @@
       "pv": 4,
       "competences": ["soin"],
       "capacite_speciale": "Retire toutes les cartes blessure d'un héros au choix.",
-      "description": "Le pilier de survie de l'équipe."
+      "description": "Le pilier de survie de l'équipe.",
+      "citation": "« La mort devra repasser. »"
     },
     {
       "id": "HERO_003",
@@ -27,7 +29,8 @@
       "pv": 7,
       "competences": ["armure"],
       "capacite_speciale": "Prévient tous les dégâts physiques que ce héros devrait subir ce tour.",
-      "description": "Un rempart solide qui protège ses alliés."
+      "description": "Un rempart solide qui protège ses alliés.",
+      "citation": "« Frappe. Je ne bougerai pas. »"
     },
     {
       "id": "HERO_004",
@@ -35,7 +38,8 @@
       "pv": 6,
       "competences": ["distance"],
       "capacite_speciale": "Joue immédiatement 3 cartes Action de sa main.",
-      "description": "Rapide et polyvalent, il enchaîne les attaques."
+      "description": "Rapide et polyvalent, il enchaîne les attaques.",
+      "citation": "« Tu as vu la première flèche. Pas les deux autres. »"
     },
     {
       "id": "HERO_005",
@@ -43,7 +47,8 @@
       "pv": 5,
       "competences": ["diplomatie"],
       "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent.",
-      "description": "Coordonne l'équipe pour optimiser les ressources."
+      "description": "Coordonne l'équipe pour optimiser les ressources.",
+      "citation": "« Ce que j'ai est à toi. Ce que tu as m'intéresse. »"
     }
   ]
 }

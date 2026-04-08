@@ -1103,7 +1103,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Garde-manger
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a9c5ed6f85441c7479e453a775877d0a, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 2fa8cb1685c8ddd4e85d25a8746d2d3b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1464,8 +1464,8 @@ MonoBehaviour:
     discr\xE8tement (piocher 1 Destin favorable)\n\nOU\n\n\u2022 Se goinfrer et faire
     du bruit (piocher 2 Destin favorable, mais piocher 2 monstres dans la file)"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dab5b252624470e478d828f747d3fea8, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: dab5b252624470e478d828f747d3fea8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1559,7 +1559,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2180264, guid: dab5b252624470e478d828f747d3fea8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

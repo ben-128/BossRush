@@ -196,6 +196,27 @@ Monstres d'élite (paquet séparé). Mêmes règles, stats plus élevées.
 
 ---
 
+## Citations (flavor text)
+
+Texte d'ambiance affiché en italique en bas de carte, sous la capacité/description.
+
+### Guide de style
+
+- **Ton** : laconique, tendu, presque chuchoté. Phrases courtes, tranchantes.
+- **Point de vue** : à la 1re personne (le personnage parle) ou narrateur anonyme. Jamais de nom d'auteur.
+- **Longueur** : 1 phrase, 12 mots max. Si ça tient pas en une ligne sur la carte, c'est trop long.
+- **Contenu** : doit laisser deviner la capacité ou le caractère de la carte sans la décrire. Montrer, pas expliquer.
+- **Format** : guillemets français + italique → *« Texte ici. »*
+- **Interdit** : humour méta, références pop culture, exclamations excessives, adjectifs superflus.
+
+### Pourcentage
+
+- **Héros** : 100 % — chaque héros a une citation.
+- **Monstres / Élites** : ~60-70 % — uniquement les cartes **sans** capacité spéciale. Les cartes avec une capacité spéciale n'ont pas de citation (la place est prise par le texte de règle).
+- **Cartes Arsenal** : 0 % pour l'instant (place limitée, texte d'effet prioritaire).
+
+---
+
 ## Conditions de victoire / défaite
 
 - **Victoire** : les dégâts sous le boss atteignent ou dépassent ses PV.

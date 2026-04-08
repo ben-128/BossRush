@@ -28,6 +28,7 @@ public class HeroCardGenerator : CardGenerator
         public string[] competences;
         public string capacite_speciale;
         public string description;
+        public string citation;
     }
     #endregion
 
@@ -39,6 +40,7 @@ public class HeroCardGenerator : CardGenerator
         [HideInInspector] public string[] competences;
         [HideInInspector] public string capacite_speciale;
         [HideInInspector] public string description;
+        [HideInInspector] public string citation;
     }
     #endregion
 
@@ -109,6 +111,7 @@ public class HeroCardGenerator : CardGenerator
                 competences = json.competences,
                 capacite_speciale = json.capacite_speciale,
                 description = json.description,
+                citation = json.citation,
             };
         }
 
@@ -127,6 +130,7 @@ public class HeroCardGenerator : CardGenerator
         if (pvText != null) pvText.text = hero.pv.ToString();
         if (capaciteText != null) capaciteText.text = hero.capacite_speciale ?? "";
         SetPortrait(hero.sprite, hero.offset, hero.scale);
+        SetCitation(hero.citation);
         SetCompetenceIcons(hero.competences);
     }
 
