@@ -1,6 +1,6 @@
 # Images a refaire - Raid Party
 
-Style cible : MTG painterly (voir memory/reference_art_prompt.md)
+Style cible : Gravure encre noire + rouge selectif (voir [Docs/art_direction.md](Docs/art_direction.md))
 
 ## Heros (5)
 

@@ -10,7 +10,7 @@
       "nom": "Mage",
       "pv": 4,
       "competences": ["magie"],
-      "capacite_speciale": "Défausse tous les monstres avec 1 point de vie dans la file.",
+      "capacite_speciale": "Défausse tous les monstres dans la file avec 1 point de vie restant.",
       "citation": "« Un seul mot, et les faibles tombent. »"
     },
     {
@@ -26,7 +26,7 @@
       "nom": "Guerrier",
       "pv": 7,
       "competences": ["armure"],
-      "capacite_speciale": "Prévient tous les dégâts que ce héros devrait subir ce tour.",
+      "capacite_speciale": "Prévient toutes les blessures que ce héros devait subir ce tour.",
       "citation": "« Frappe. Je ne bougerai pas. »"
     },
     {
@@ -34,7 +34,7 @@
       "nom": "Rôdeur",
       "pv": 5,
       "competences": ["distance"],
-      "capacite_speciale": "Joue immédiatement 3 cartes Action de sa main.",
+      "capacite_speciale": "Joue immédiatement 2 cartes Action de sa main.",
       "citation": "« Tu as vu la première flèche. Pas les deux autres. »"
     },
     {

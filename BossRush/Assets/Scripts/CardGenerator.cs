@@ -15,7 +15,7 @@ public abstract class CardGenerator : MonoBehaviour
     public SpriteRenderer portraitRenderer;
 
     [Header("Gemmes de classe (bordure centrale)")]
-    public SpriteRenderer gemsRenderer;
+    public SpriteRenderer[] gemsRenderers;
     public GemSprites gemSprites;
 
     [System.Serializable]
@@ -67,18 +67,25 @@ public abstract class CardGenerator : MonoBehaviour
 
     protected void SetGems(string competence)
     {
-        if (gemsRenderer == null || gemSprites == null) return;
+        if (gemsRenderers == null || gemSprites == null) return;
 
         var sprite = gemSprites.GetSprite(competence);
-        if (sprite != null)
+        var color = gemSprites.GetColor(competence);
+
+        for (int i = 0; i < gemsRenderers.Length; i++)
         {
-            gemsRenderer.gameObject.SetActive(true);
-            gemsRenderer.sprite = sprite;
-            gemsRenderer.color = gemSprites.GetColor(competence);
-        }
-        else
-        {
-            gemsRenderer.gameObject.SetActive(false);
+            if (gemsRenderers[i] == null) continue;
+
+            if (sprite != null)
+            {
+                gemsRenderers[i].gameObject.SetActive(true);
+                gemsRenderers[i].sprite = sprite;
+                gemsRenderers[i].color = color;
+            }
+            else
+            {
+                gemsRenderers[i].gameObject.SetActive(false);
+            }
         }
     }
 

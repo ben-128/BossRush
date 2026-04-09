@@ -3,8 +3,8 @@ guid: 10c8a1a25dd1b9a4f96667b54eafb3c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -179493029549758828
-    second: "Bouclier m\xE9dieval m\xE9tallique et brillant_0"
+      213: 2236314332460291929
+    second: Armure_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Bouclier m\xE9dieval m\xE9tallique et brillant_0"
+      name: Armure_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 32
-        width: 979
-        height: 987
+        x: 86
+        y: 88
+        width: 920
+        height: 931
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 49627066a00528df0800000000000000
-      internalID: -179493029549758828
+      spriteID: 9571960790cf80f10800000000000000
+      internalID: 2236314332460291929
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      "Bouclier m\xE9dieval m\xE9tallique et brillant_0": -179493029549758828
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
