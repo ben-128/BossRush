@@ -26,7 +26,7 @@
       "nom": "Guerrier",
       "pv": 7,
       "competences": ["armure"],
-      "capacite_speciale": "Prévient tous les dégâts physiques que ce héros devrait subir ce tour.",
+      "capacite_speciale": "Prévient tous les dégâts que ce héros devrait subir ce tour.",
       "citation": "« Frappe. Je ne bougerai pas. »"
     },
     {

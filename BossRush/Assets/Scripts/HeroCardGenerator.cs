@@ -54,6 +54,13 @@ public class HeroCardGenerator : CardGenerator
         public Sprite magie;
         public Sprite diplomatie;
 
+        [Header("Scale par type")]
+        public float scaleArmure = 1f;
+        public float scaleDistance = 1f;
+        public float scaleSoin = 1f;
+        public float scaleMagie = 1f;
+        public float scaleDiplomatie = 1f;
+
         public Sprite GetSprite(string competence)
         {
             switch (competence.ToLower())
@@ -66,6 +73,20 @@ public class HeroCardGenerator : CardGenerator
                 default:
                     Debug.LogWarning($"Compétence inconnue : {competence}");
                     return null;
+            }
+        }
+
+        public float GetScale(string competence)
+        {
+            if (string.IsNullOrEmpty(competence)) return 1f;
+            switch (competence.ToLower())
+            {
+                case "armure": return scaleArmure;
+                case "distance": return scaleDistance;
+                case "soin": return scaleSoin;
+                case "magie": return scaleMagie;
+                case "diplomatie": return scaleDiplomatie;
+                default: return 1f;
             }
         }
     }
@@ -159,6 +180,8 @@ public class HeroCardGenerator : CardGenerator
             {
                 competenceSlots[i].gameObject.SetActive(true);
                 competenceSlots[i].sprite = sprite;
+                float s = competenceSprites.GetScale(competences[i]);
+                competenceSlots[i].transform.localScale = new Vector3(s, s, 1f);
             }
         }
     }

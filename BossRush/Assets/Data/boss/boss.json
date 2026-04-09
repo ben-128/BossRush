@@ -1,8 +1,8 @@
 {
   "meta": {
-    "description": "Liste des boss du jeu",
-    "version": "0.5",
-    "notes": "PV adaptés au nombre de joueurs via formule. Monstres et élites référencés par ID. Chaque boss a un deck Épreuve de 20 cartes (assauts + événements). Les boss moyens/difficiles peuvent invoquer des élites."
+    "description": "Liste des 10 boss du jeu. Chaque boss a une fiche avec 4 stats consultées lors des épreuves génériques.",
+    "version": "1.0",
+    "notes": "PV adaptés au nombre de joueurs via formule. Le deck Épreuve est générique (30 cartes communes). Les valeurs '?' sur les cartes épreuve se réfèrent aux stats de la fiche boss."
   },
   "boss": [
     {
@@ -11,11 +11,149 @@
       "difficulte": "facile",
       "pv_formule": "8 + 4 par joueur",
       "pv_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
-      "effet_special": "Lorsque le boss inflige des dégâts physiques, il se soigne 1 blessure.",
-      "nb_cartes_epreuves": 20,
+      "stats": {
+        "degats": 2,
+        "nb_invocations": 1,
+        "action_speciale": "Le boss se soigne 2 PV.",
+        "passif": "Lorsque le boss inflige des dégâts, il se soigne 1 PV."
+      },
       "monstres_ids": ["MON_001", "MON_002", "MON_003", "MON_004", "MON_005"],
-      "elites_ids": [],
       "description": "Un colosse vorace qui se régénère en frappant."
+    },
+    {
+      "id": "BOSS_002",
+      "nom": "Reine Araignée",
+      "difficulte": "facile",
+      "pv_formule": "6 + 4 par joueur",
+      "pv_par_joueurs": { "2": 14, "3": 18, "4": 22, "5": 26 },
+      "stats": {
+        "degats": 1,
+        "nb_invocations": 2,
+        "action_speciale": "Chaque monstre en file inflige 1 dégât au héros actif.",
+        "passif": "Les monstres invoqués ont +1 PV."
+      },
+      "monstres_ids": [],
+      "description": "Une matriarche qui submerge les héros sous ses rejetons."
+    },
+    {
+      "id": "BOSS_003",
+      "nom": "Liche Oubliée",
+      "difficulte": "moyen",
+      "pv_formule": "7 + 4 par joueur",
+      "pv_par_joueurs": { "2": 15, "3": 19, "4": 23, "5": 27 },
+      "stats": {
+        "degats": 3,
+        "nb_invocations": 1,
+        "action_speciale": "Chaque héros défausse 1 carte Arsenal de sa main.",
+        "passif": "Les soins des héros sont réduits de 1 (min 0)."
+      },
+      "monstres_ids": [],
+      "description": "Un nécromancien desséché qui sape la volonté des héros."
+    },
+    {
+      "id": "BOSS_004",
+      "nom": "Dragon Cendré",
+      "difficulte": "moyen",
+      "pv_formule": "10 + 4 par joueur",
+      "pv_par_joueurs": { "2": 18, "3": 22, "4": 26, "5": 30 },
+      "stats": {
+        "degats": 3,
+        "nb_invocations": 1,
+        "action_speciale": "Tous les héros subissent 1 dégât.",
+        "passif": "Les attaques mélée infligent 1 dégât de moins au boss (min 1)."
+      },
+      "monstres_ids": [],
+      "description": "Un dragon cuirassé dont les flammes balaient le champ de bataille."
+    },
+    {
+      "id": "BOSS_005",
+      "nom": "Hydre des Marais",
+      "difficulte": "moyen",
+      "pv_formule": "8 + 5 par joueur",
+      "pv_par_joueurs": { "2": 18, "3": 23, "4": 28, "5": 33 },
+      "stats": {
+        "degats": 2,
+        "nb_invocations": 1,
+        "action_speciale": "Le boss se soigne 3 PV et pioche 1 monstre.",
+        "passif": "Quand le boss perd 5 PV ou plus, ses dégâts passent à 3."
+      },
+      "monstres_ids": [],
+      "description": "Chaque blessure la rend plus féroce."
+    },
+    {
+      "id": "BOSS_006",
+      "nom": "Seigneur Vampire",
+      "difficulte": "moyen",
+      "pv_formule": "7 + 4 par joueur",
+      "pv_par_joueurs": { "2": 15, "3": 19, "4": 23, "5": 27 },
+      "stats": {
+        "degats": 2,
+        "nb_invocations": 1,
+        "action_speciale": "Le héros actif défausse 1 Objet. Si impossible, subit 2 dégâts.",
+        "passif": "Quand le boss inflige des dégâts, il se soigne du même montant."
+      },
+      "monstres_ids": [],
+      "description": "Il se nourrit de vos forces pour alimenter les siennes."
+    },
+    {
+      "id": "BOSS_007",
+      "nom": "Golem de Fer",
+      "difficulte": "difficile",
+      "pv_formule": "12 + 4 par joueur",
+      "pv_par_joueurs": { "2": 20, "3": 24, "4": 28, "5": 32 },
+      "stats": {
+        "degats": 3,
+        "nb_invocations": 1,
+        "action_speciale": "Annule la prochaine attaque jouée contre le boss.",
+        "passif": "Le boss ignore les 1er dégât de chaque attaque (min 0)."
+      },
+      "monstres_ids": [],
+      "description": "Une forteresse vivante quasi indestructible."
+    },
+    {
+      "id": "BOSS_008",
+      "nom": "Sorcière du Crépuscule",
+      "difficulte": "difficile",
+      "pv_formule": "6 + 4 par joueur",
+      "pv_par_joueurs": { "2": 14, "3": 18, "4": 22, "5": 26 },
+      "stats": {
+        "degats": 2,
+        "nb_invocations": 2,
+        "action_speciale": "Mélanger la défausse Arsenal dans la pile Arsenal, puis chaque héros défausse sa main et pioche 3.",
+        "passif": "Les Objets posés devant les héros ne peuvent pas être utilisés pendant les épreuves."
+      },
+      "monstres_ids": [],
+      "description": "Elle manipule le destin et retourne vos armes contre vous."
+    },
+    {
+      "id": "BOSS_009",
+      "nom": "Titan des Abysses",
+      "difficulte": "difficile",
+      "pv_formule": "10 + 5 par joueur",
+      "pv_par_joueurs": { "2": 20, "3": 25, "4": 30, "5": 35 },
+      "stats": {
+        "degats": 4,
+        "nb_invocations": 1,
+        "action_speciale": "Tous les héros subissent 2 dégâts.",
+        "passif": "Le boss ne peut pas subir plus de 3 dégâts par tour."
+      },
+      "monstres_ids": [],
+      "description": "Une horreur primordiale que rien ne semble pouvoir arrêter."
+    },
+    {
+      "id": "BOSS_010",
+      "nom": "Roi Démon",
+      "difficulte": "très difficile",
+      "pv_formule": "10 + 5 par joueur",
+      "pv_par_joueurs": { "2": 20, "3": 25, "4": 30, "5": 35 },
+      "stats": {
+        "degats": 3,
+        "nb_invocations": 2,
+        "action_speciale": "Le boss invoque 2 monstres et chaque monstre en file attaque le héros actif.",
+        "passif": "Au début de chaque tour, si aucun monstre en file, le boss pioche 1 monstre."
+      },
+      "monstres_ids": [],
+      "description": "Le seigneur ultime. Ses légions sont infinies."
     }
   ]
 }

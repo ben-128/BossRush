@@ -27,6 +27,13 @@ public abstract class CardGenerator : MonoBehaviour
         public Sprite magie;       // Mage - bleu
         public Sprite diplomatie;  // Diplomate - marron
 
+        [Header("Couleurs par type")]
+        public Color couleurArmure = Color.red;
+        public Color couleurDistance = Color.green;
+        public Color couleurSoin = new Color(1f, 0.84f, 0f);     // or
+        public Color couleurMagie = Color.blue;
+        public Color couleurDiplomatie = new Color(0.6f, 0.4f, 0.2f); // marron
+
         public Sprite GetSprite(string competence)
         {
             if (string.IsNullOrEmpty(competence)) return null;
@@ -41,6 +48,21 @@ public abstract class CardGenerator : MonoBehaviour
                 default: return null;
             }
         }
+
+        public Color GetColor(string competence)
+        {
+            if (string.IsNullOrEmpty(competence)) return Color.white;
+            switch (competence.ToLower())
+            {
+                case "armure": return couleurArmure;
+                case "distance": return couleurDistance;
+                case "soin": return couleurSoin;
+                case "magie": return couleurMagie;
+                case "élémentaire": return couleurMagie;
+                case "diplomatie": return couleurDiplomatie;
+                default: return Color.white;
+            }
+        }
     }
 
     protected void SetGems(string competence)
@@ -52,6 +74,7 @@ public abstract class CardGenerator : MonoBehaviour
         {
             gemsRenderer.gameObject.SetActive(true);
             gemsRenderer.sprite = sprite;
+            gemsRenderer.color = gemSprites.GetColor(competence);
         }
         else
         {

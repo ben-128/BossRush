@@ -1,19 +1,13 @@
 {
   "meta": {
     "description": "Compteurs centraux de toutes les cartes du jeu Raid Party. À mettre à jour à chaque modification de cartes.",
-    "derniere_mise_a_jour": "2026-04-08",
-    "version": "4.0"
+    "derniere_mise_a_jour": "2026-04-09",
+    "version": "5.0"
   },
 
   "arsenal": {
     "_description": "Pile Arsenal = uniquement des paquets héros. 20 cartes par héros (15 actions dont 10 attaques + 5 objets). Toutes les cartes ont un prérequis.",
     "fichier": "cartes_arsenal.json",
-    "base_sans_prerequis": {
-      "_note": "Supprimé en v3.0. Plus de cartes de base sans prérequis.",
-      "cible_total": 0,
-      "actuel_total": 0,
-      "status": "N/A"
-    },
     "par_hero": {
       "_regle": "Après le choix des héros, on mélange dans la pile Arsenal uniquement les paquets de 20 cartes des héros choisis.",
       "cible_actions_par_hero": 15,
@@ -78,43 +72,38 @@
 
   "monstres": {
     "fichier": "monstres.json",
-    "_note": "Si pile vide, piocher une Élite. Si pile Élites aussi vide, défaite.",
+    "_note": "Si pile vide, défaite immédiate.",
     "cible": 25,
     "actuel": 25,
     "status": "OK"
   },
 
-  "elites": {
-    "fichier": "elites.json",
-    "cible": 10,
-    "actuel": 10,
-    "status": "OK"
-  },
-
   "destins": {
     "fichier": "destins/destins.json",
-    "_note": "Paquet unique mélangé, plus de catégories.",
+    "_note": "Paquet unique mélangé.",
     "cible": 20,
     "actuel": 20,
     "status": "OK"
   },
 
-  "par_boss": {
-    "_regle": "Chaque boss a un deck Épreuve de 20 cartes (assauts + événements), mélangé en début de partie.",
-    "cible_epreuves": 20,
-    "boss": {
-      "geant_affame": {
-        "nom": "Géant Affamé",
-        "difficulte": "facile",
-        "dossier": "boss/geant_affame/",
-        "epreuves": {
-          "fichier": "boss/geant_affame/01_epreuves.json",
-          "cible": 20,
-          "actuel": 20,
-          "status": "OK"
-        }
-      }
-    }
+  "epreuves": {
+    "_regle": "Deck Épreuve générique de 30 cartes, commun à tous les boss. Les valeurs '?' se réfèrent aux stats de la fiche boss.",
+    "fichier": "epreuves.json",
+    "cible_assauts": 15,
+    "cible_evenements": 15,
+    "cible_total": 30,
+    "actuel_assauts": 15,
+    "actuel_evenements": 15,
+    "actuel_total": 30,
+    "status": "OK"
+  },
+
+  "boss": {
+    "_regle": "10 fiches boss avec stats (dégâts, nb_invocations, action_spéciale, passif). Pas de deck épreuve spécifique.",
+    "fichier": "boss/boss.json",
+    "cible": 10,
+    "actuel": 10,
+    "status": "OK"
   },
 
   "heros": {
@@ -125,11 +114,16 @@
   },
 
   "resume_global": {
-    "complet": ["arsenal", "elites", "heros", "monstres", "destins", "epreuves_geant"],
+    "complet": ["arsenal", "heros", "monstres", "destins", "boss", "epreuves"],
     "incomplet": [],
     "total_cartes_jeu": {
-      "cible": "100 arsenal + 25 monstres + 10 élites + 20 destins + 20 épreuves/boss + 5 héros",
-      "note": "Les cartes Épreuve sont par boss, pas dans le total global fixe."
+      "heros": 5,
+      "arsenal": 100,
+      "monstres": 25,
+      "destins": 20,
+      "epreuves": 30,
+      "total": 180,
+      "note": "Les fiches boss (10) ne sont pas des cartes, elles ne comptent pas dans le total."
     }
   }
 }

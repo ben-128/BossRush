@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FeuFollet_0: -5182770915409962473
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

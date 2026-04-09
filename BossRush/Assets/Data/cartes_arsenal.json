@@ -23,7 +23,7 @@
       "portee": "mélée",
       "degats": 2,
       "prerequis": "armure",
-      "effet": "Retire 1 blessure physique du héros.",
+      "effet": "Retire 1 blessure du héros.",
       "quantite": 2
     },
     {
@@ -34,7 +34,7 @@
       "portee": "mélée",
       "degats": 1,
       "prerequis": "armure",
-      "effet": "Le héros ne subit aucun dégât physique ce tour.",
+      "effet": "Le héros ne subit aucun dégât ce tour.",
       "quantite": 2
     },
     {
@@ -63,7 +63,7 @@
       "categorie": "action",
       "type": "effet",
       "prerequis": "armure",
-      "effet": "Annule tous les dégâts physiques subis par ce héros ce tour.",
+      "effet": "Annule tous les dégâts subis par ce héros ce tour.",
       "quantite": 2
     },
     {
@@ -81,7 +81,7 @@
       "categorie": "action",
       "type": "effet",
       "prerequis": "armure",
-      "effet": "Retire 2 blessures physiques de ce héros.",
+      "effet": "Retire 2 blessures de ce héros.",
       "quantite": 2
     },
     {
@@ -101,7 +101,7 @@
       "type": "renfort",
       "prerequis": "armure",
       "bonus_degats": 1,
-      "effet": "Ajoute 1 dégât à une attaque mélée. Le héros prévient 1 dégât physique ce tour.",
+      "effet": "Ajoute 1 dégât à une attaque mélée. Le héros prévient 1 dégât ce tour.",
       "quantite": 1
     },
     {
@@ -110,7 +110,7 @@
       "categorie": "objet",
       "type": "effet",
       "prerequis": "armure",
-      "effet": "Les 2 prochains dégâts physiques subis par le héros sont réduits de 1 (minimum 0).",
+      "effet": "Les 2 prochains dégâts subis par le héros sont réduits de 1 (minimum 0).",
       "quantite": 1
     },
     {
@@ -160,7 +160,7 @@
       "portee": "distance",
       "degats": 4,
       "prerequis": "élémentaire",
-      "effet": "Le héros subit 1 dégât magique.",
+      "effet": "Le héros subit 1 dégât.",
       "quantite": 1
     },
     {
@@ -196,11 +196,11 @@
     },
     {
       "id": "MAG_A07",
-      "nom": "Bouclier magique",
+      "nom": "Bouclier arcanique",
       "categorie": "action",
       "type": "effet",
       "prerequis": "élémentaire",
-      "effet": "Annule les prochains dégâts magiques subis par ce héros ce tour.",
+      "effet": "Annule les prochains dégâts subis par ce héros ce tour.",
       "quantite": 1
     },
     {
@@ -209,7 +209,7 @@
       "categorie": "action",
       "type": "effet",
       "prerequis": "élémentaire",
-      "effet": "Déplace 1 carte blessure magique de ce héros sous un monstre au choix.",
+      "effet": "Déplace 1 carte blessure de ce héros sous un monstre au choix.",
       "quantite": 1
     },
     {
@@ -223,7 +223,7 @@
     },
     {
       "id": "MAG_A10",
-      "nom": "Surcharge magique",
+      "nom": "Surcharge arcanique",
       "categorie": "action",
       "type": "effet",
       "prerequis": "élémentaire",
@@ -232,7 +232,7 @@
     },
     {
       "id": "MAG_O01",
-      "nom": "Poudre magique",
+      "nom": "Poudre arcanique",
       "categorie": "objet",
       "type": "effet",
       "prerequis": "élémentaire",
@@ -264,7 +264,7 @@
       "categorie": "objet",
       "type": "effet",
       "prerequis": "élémentaire",
-      "effet": "Inflige 2 dégâts magiques à un monstre au choix dans la file.",
+      "effet": "Inflige 2 dégâts à un monstre au choix dans la file.",
       "quantite": 1
     },
     {
@@ -512,7 +512,7 @@
     },
     {
       "id": "ROD_O01",
-      "nom": "Carquois magique",
+      "nom": "Carquois enchanté",
       "categorie": "objet",
       "type": "renfort",
       "prerequis": "distance",
