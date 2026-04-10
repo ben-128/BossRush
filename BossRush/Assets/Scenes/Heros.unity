@@ -289,7 +289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &166872524
 Transform:
   m_ObjectHideFlags: 0
@@ -386,7 +386,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -4080278737599844964, guid: 18aca5bd79e71ec419a40a236f32d5c6, type: 3}
-  m_Color: {r: 0.53333336, g: 0.003921569, b: 0.003921569, a: 1}
+  m_Color: {r: 0.0982342, g: 0.58376193, b: 0.82641506, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -542,6 +542,14 @@ MonoBehaviour:
   descriptionText: {fileID: 2063036563}
   citationText: {fileID: 2063036563}
   portraitRenderer: {fileID: 1603593783}
+  backgroundRenderer: {fileID: 1278901543}
+  backgroundSprites:
+    armure: {fileID: -2765321262150181125, guid: e95615ab02acb3f42b1649ca44cfc1a6, type: 3}
+    distance: {fileID: -6108875264366590173, guid: e7f4ed158974c394eb65a23d11f32122, type: 3}
+    soin: {fileID: -7038475567817130574, guid: 0f561f96145bb2344ba1ba3599ed6207, type: 3}
+    magie: {fileID: 8440947296668089988, guid: 0d9014f2de2b7f541bf9dc797a4b3455, type: 3}
+    diplomatie: {fileID: -7441408205344155572, guid: 3044fa4f8b125bc4b91996ea81b2aace, type: 3}
+    neutre: {fileID: -2178279627178144466, guid: 0831d185b491dae47aaf284e5eb9e9fa, type: 3}
   gemsRenderers:
   - {fileID: 174145486}
   - {fileID: 353131054}
@@ -704,7 +712,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -4080278737599844964, guid: 18aca5bd79e71ec419a40a236f32d5c6, type: 3}
-  m_Color: {r: 0.53333336, g: 0.003921569, b: 0.003921569, a: 1}
+  m_Color: {r: 0.0982342, g: 0.58376193, b: 0.82641506, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -729,7 +737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &358258778
 Transform:
   m_ObjectHideFlags: 0
@@ -1081,7 +1089,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -4080278737599844964, guid: 18aca5bd79e71ec419a40a236f32d5c6, type: 3}
-  m_Color: {r: 0.53333336, g: 0.003921569, b: 0.003921569, a: 1}
+  m_Color: {r: 0.0982342, g: 0.58376193, b: 0.82641506, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1250,7 +1258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Guerrier
+  m_text: Mage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: -3184560146148442986, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
@@ -1430,7 +1438,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2236314332460291929, guid: 10c8a1a25dd1b9a4f96667b54eafb3c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e28c723e65758e44bfcdde2b10236ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1451,7 +1459,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.58, y: 4.3, z: -1}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -1605,7 +1613,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c05f9039bf1c2be4c856fd80448a685a, type: 3}
+  m_Sprite: {fileID: 8440947296668089988, guid: 0d9014f2de2b7f541bf9dc797a4b3455, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1625,8 +1633,8 @@ Transform:
   m_GameObject: {fileID: 1278901542}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.65, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -1784,7 +1792,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pr\xE9vient toutes les blessures que ce h\xE9ros devait subir ce tour."
+  m_text: "D\xE9fausse tous les monstres dans la file avec 1 point de vie restant."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7acaafab9ec5a9746be7f4dbb66f8710, type: 2}
   m_sharedMaterial: {fileID: 4811208682268784990, guid: 7acaafab9ec5a9746be7f4dbb66f8710, type: 2}
@@ -1929,7 +1937,7 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.38, z: 0.01}
+  m_LocalPosition: {x: 0, y: 1.35, z: 0.01}
   m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1979,7 +1987,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3364270101458684742, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
+  m_Sprite: {fileID: -7285376162372006033, guid: 6cfb26ce14e7462459b2b4e549a16a46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2067,7 +2075,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -4080278737599844964, guid: 18aca5bd79e71ec419a40a236f32d5c6, type: 3}
-  m_Color: {r: 0.53333336, g: 0.003921569, b: 0.003921569, a: 1}
+  m_Color: {r: 0.0982342, g: 0.58376193, b: 0.82641506, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2134,7 +2142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Frappe. Je ne bougerai pas. \xBB</i>"
+  m_text: "<i>\xAB Un seul mot, et les faibles tombent. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dab5b252624470e478d828f747d3fea8, type: 2}
   m_sharedMaterial: {fileID: 7330548444820031742, guid: dab5b252624470e478d828f747d3fea8, type: 2}
@@ -2291,7 +2299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: -3184560146148442986, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}

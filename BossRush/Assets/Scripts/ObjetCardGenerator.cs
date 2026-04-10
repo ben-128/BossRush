@@ -87,6 +87,7 @@ public class ObjetCardGenerator : CardGenerator
         var objet = allObjets[index];
         SetBaseTexts(objet.nom, objet.effet);
         SetPortrait(objet.sprite, objet.offset, objet.scale);
+        SetBackground(objet.prerequis);
 
         if (typeText != null) typeText.text = objet.type;
         if (prerequisText != null) prerequisText.text = objet.prerequis ?? "";

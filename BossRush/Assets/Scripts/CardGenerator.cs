@@ -14,9 +14,39 @@ public abstract class CardGenerator : MonoBehaviour
     public TextMeshPro citationText;
     public SpriteRenderer portraitRenderer;
 
+    [Header("Fond de carte par type de héros")]
+    public SpriteRenderer backgroundRenderer;
+    public BackgroundSprites backgroundSprites;
+
     [Header("Gemmes de classe (bordure centrale)")]
     public SpriteRenderer[] gemsRenderers;
     public GemSprites gemSprites;
+
+    [System.Serializable]
+    public class BackgroundSprites
+    {
+        public Sprite armure;      // Guerrier - rouge
+        public Sprite distance;    // Rodeur - vert
+        public Sprite soin;        // Soigneur - or
+        public Sprite magie;       // Mage - bleu
+        public Sprite diplomatie;  // Diplomate - marron
+        public Sprite neutre;      // Cartes sans héros - gris
+
+        public Sprite GetSprite(string competence)
+        {
+            if (string.IsNullOrEmpty(competence)) return neutre;
+            switch (competence.ToLower())
+            {
+                case "armure": return armure;
+                case "distance": return distance;
+                case "soin": return soin;
+                case "magie": return magie;
+                case "élémentaire": return magie;
+                case "diplomatie": return diplomatie;
+                default: return neutre;
+            }
+        }
+    }
 
     [System.Serializable]
     public class GemSprites
@@ -63,6 +93,14 @@ public abstract class CardGenerator : MonoBehaviour
                 default: return Color.white;
             }
         }
+    }
+
+    protected void SetBackground(string competence)
+    {
+        if (backgroundRenderer == null || backgroundSprites == null) return;
+        var sprite = backgroundSprites.GetSprite(competence);
+        if (sprite != null)
+            backgroundRenderer.sprite = sprite;
     }
 
     protected void SetGems(string competence)

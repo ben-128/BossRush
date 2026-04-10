@@ -147,17 +147,16 @@ public class HeroCardGenerator : CardGenerator
     {
         var hero = allHeroes[index];
 
+        var mainCompetence = (hero.competences != null && hero.competences.Length > 0) ? hero.competences[0] : null;
+
         SetBaseTexts(hero.nom, hero.description);
         if (pvText != null) pvText.text = hero.pv.ToString();
         if (capaciteText != null) capaciteText.text = hero.capacite_speciale ?? "";
         SetPortrait(hero.sprite, hero.offset, hero.scale);
         SetCitation(hero.citation);
         SetCompetenceIcons(hero.competences);
-
-        if (hero.competences != null && hero.competences.Length > 0)
-            SetGems(hero.competences[0]);
-        else
-            SetGems(null);
+        SetBackground(mainCompetence);
+        SetGems(mainCompetence);
     }
 
     private void SetCompetenceIcons(string[] competences)

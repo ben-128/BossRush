@@ -123,6 +123,7 @@ public class ActionCardGenerator : CardGenerator
 
         SetBaseTexts(action.nom, action.effet ?? "");
         SetPortrait(action.sprite, action.offset, action.scale);
+        SetBackground(action.prerequis);
 
         // Icônes de dégâts pour les attaques
         if (action.type == "attaque")
