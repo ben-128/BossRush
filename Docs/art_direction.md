@@ -30,7 +30,7 @@ areas in sky and ground for the image to breathe.
 High contrast, limited palette: black ink with selective {{COULEUR}} accent on {{ELEMENTS_COULEUR}} only.
 Printmaking aesthetic, hand-carved feel.
 {{PROMPT_VISAGE}}
-Landscape orientation.
+Landscape orientation, 3:2 aspect ratio.
 ```
 
 ### Correction illustration existante (img2img)

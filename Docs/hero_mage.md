@@ -88,7 +88,56 @@ Keep EVERYTHING else identical.
 ### 5. Eclairs bleus
 Les eclairs sont un peu trop "digital clean" par rapport aux hachures du reste. Idealement ils devraient avoir un cote plus "grave" aussi.
 
+## Prompt de regeneration complete (si besoin de repartir de zero)
+
+```
+Dark fantasy ink engraving illustration of a female human mage in
+her early 30s, lean and angular, channeling a massive blue lightning
+bolt from her left hand while her right hand grips an ornate staff
+topped with a cracked sapphire crystal leaking blue energy. An
+arcane circle with glowing blue runes is carved into the stone floor
+beneath her. Both hands are ENVELOPED in bright crackling blue
+magical energy that completely obscures fingers.
+
+Style of Gustave Dore woodcut engraving with heavy crosshatching,
+dramatic chiaroscuro. Black ink on a flat smooth light grey-beige
+background. No paper grain, no fiber texture. Plain smooth flat
+light background color.
+
+THICK SPACED OUT hatching strokes for shading, NOT fine dense
+hatching - big bold woodcut strokes. Overall ink coverage should be
+around 50%, with plenty of open light areas in the sky and ground
+for the image to breathe.
+
+High contrast, limited palette: black ink with selective electric
+blue accent on the lightning, crystal glow, arcane runes, and a few
+subtle blue streaks in her otherwise BLACK hair ONLY. Hair is mostly
+black ink with sparse blue highlights, NOT entirely blue. Everything
+else is black ink and grey-beige.
+
+Background: vast stone plateau at mountain peak, open sky all around.
+Ancient crumbling arcane circle on stone floor. Massive blue
+lightning shoots into dark storm sky. Distant jagged mountain peaks,
+dark citadel silhouette in valley below. Wind-swept clouds. LOTS of
+open dramatic sky.
+
+Sharp detailed face of a gaunt woman with deep olive skin, sharp
+cheekbones, hollow. Piercing asymmetric eyes - left eye slightly
+larger with faint blue glow (arcane burnout), right eye normal amber.
+Dark circles under eyes. Thin severe lips with asymmetric smirk -
+one corner up, one down. Faint arcane scar/tattoo glowing blue from
+temple down neck on LEFT side. Silver streaks in wild loose hair.
+Unsettling, intense, reckless. The face must be the SHARPEST most
+detailed area. Paint with rough thick strokes, NOT smooth.
+
+Foreground: cracked stone floor with glowing blue runes. Shattered
+staff fragment from a previous mage. Scattered old spell scrolls.
+
+Printmaking aesthetic, hand-carved feel. Landscape orientation, 3:2 aspect ratio.
+```
+
 ## Notes
 - Faire les corrections dans l'ordre : cheveux > visage > mains > densite
 - Chaque correction = un upload separe dans ChatGPT
 - Verifier apres chaque pass que les elements non-corriges n'ont pas bouge
+- Si trop de corrections necessaires, utiliser le prompt de regeneration complete

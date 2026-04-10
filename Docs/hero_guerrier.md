@@ -65,6 +65,50 @@ Keep EVERYTHING else identical.
 ### 4. Premier plan (optionnel)
 Le sol pourrait avoir plus de details nets (debris, pierres).
 
+## Prompt de regeneration complete (si besoin de repartir de zero)
+
+```
+Dark fantasy ink engraving illustration of a black male human
+warrior in his late 40s, heavyset and broad-shouldered, in defensive
+stance on a vast battlefield at dusk. He holds a large shield with a
+stylized crimson phoenix emblem in his left hand, and a longsword
+held horizontally at shoulder height in his right. A deep crimson
+wool cape billows to the left. Both hands wear THICK ARMORED IRON
+GAUNTLETS fully covering all fingers.
+
+Style of Gustave Dore woodcut engraving with heavy crosshatching,
+dramatic chiaroscuro. Black ink on a flat smooth light grey-beige
+background. No paper grain, no fiber texture. Plain smooth flat
+light background color.
+
+THICK SPACED OUT hatching strokes for shading, NOT fine dense
+hatching - big bold woodcut strokes. Overall ink coverage should be
+around 50%, with plenty of open light areas in the sky and ground
+for the image to breathe.
+
+High contrast, limited palette: black ink with selective red accent
+on the cape and shield phoenix emblem ONLY. Everything else is black
+ink and grey-beige.
+
+Background: vast battlefield plain to horizon. Broken siege tower
+and trebuchet wreckage middle distance. Dramatic cloudy sky with
+heavy dark clouds, light breaking through one spot. Distant castle
+silhouette. Smoke columns. LOTS of open sky.
+
+Sharp detailed face of a weathered dark brown skinned male soldier,
+broken nose, deep scar across left cheek as a raised keloid line.
+Left eye half-closed squinting through old scar. Right eye wide
+open, fierce. Jaw clenched, deep frown lines on one side. Short
+cropped hair turning grey. Asymmetric brow ridge. Cold veteran
+determination. The face must be the SHARPEST most detailed area.
+Paint with rough thick strokes, NOT smooth.
+
+Foreground: broken enemy sword and dented iron helmet in mud.
+Fallen red banner on snapped pole. Specific rocks, churned earth.
+
+Printmaking aesthetic, hand-carved feel. Landscape orientation, 3:2 aspect ratio.
+```
+
 ## Notes
 - Le Guerrier corrige sert de **reference de densite d'encre** pour les autres heros (~50%)
 - Le fond gris-beige est la cible pour tous les autres heros
