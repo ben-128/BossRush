@@ -121,7 +121,12 @@ lightning shoots into dark storm sky. Distant jagged mountain peaks,
 dark citadel silhouette in valley below. Wind-swept clouds. LOTS of
 open dramatic sky.
 
-Sharp detailed face of a gaunt woman with deep olive skin, sharp
+Sharp detailed face rendered PRIMARILY in black ink hatching like the
+rest of the body. A very faint warm olive skin tone visible as a WASH
+underneath the hatching - like an old engraving lightly hand-tinted.
+The BLACK INK HATCHING must DOMINATE the face, the skin color is
+barely perceptible underneath. The face must NOT look more realistic
+or painted than the rest of the illustration. Gaunt woman, sharp
 cheekbones, hollow. Piercing asymmetric eyes - left eye slightly
 larger with faint blue glow (arcane burnout), right eye normal amber.
 Dark circles under eyes. Thin severe lips with asymmetric smirk -

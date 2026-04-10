@@ -115,6 +115,14 @@ fine hatching, dense crosshatching, dark heavy image, mostly black
 - Fond suggestif, pas trop detaille (risque de bruit a petite taille)
 - Contraste figure/fond : le sujet doit se detacher clairement
 
+### Visages
+- Le visage doit rester PRINCIPALEMENT rendu en hachures noires, comme le reste du corps
+- Les tons chair sont un LAVIS SUBTIL visible entre les hachures, PAS un aplat de couleur peau realiste
+- Le visage ne doit PAS etre plus "realiste" ou "peint" que le reste de l'illustration
+- Penser "gravure ancienne legerement teintee a la main" PAS "portrait realiste colle sur gravure"
+- Les hachures du visage doivent etre aussi visibles et dominantes que partout ailleurs
+- Reference : le Guerrier est le bon dosage — tons chair a peine perceptibles sous les hachures
+
 ### Lisibilite a taille carte (63x88mm)
 - Eviter les hachures trop denses qui deviennent un aplat sombre
 - Eclaircir legerement la zone du personnage
@@ -133,7 +141,7 @@ Le **visage** est l'element le plus important de chaque illustration. Il doit et
 | **Guerrier** | Rouge | An armored warrior in defensive stance holding a large shield with a phoenix emblem, cape flowing, battlefield background at dusk | cape and shield emblem | Sharp detailed face of a weathered black male soldier, broken nose, deep scar across left cheek, intense determined gaze, square jaw clenched, short cropped hair, asymmetric brow ridge |
 | **Mage** | Bleu electrique | A female mage channeling lightning through a sapphire crystal staff, arcane circle glowing beneath her, storm clouds background | arcane runes and lightning arcs | Sharp detailed face of a gaunt woman with hollow cheekbones, piercing asymmetric eyes one slightly larger, thin severe lips, silver-streaked hair pulled tight, burn mark on temple, unsettling knowing expression |
 | **Diplomate** | Brun/sepia chaud | A diplomat in leather cape holding a sealed scroll, grand hall with banners background | wax seal and banner crests | Sharp detailed face of a middle-aged man with a crooked aristocratic nose, laugh lines deeply etched, shrewd narrow eyes, neatly trimmed greying beard, receding hairline, confident half-smile |
-| **Rodeur** | Vert emeraude | A female ranger drawing a bow with a crystal-tipped arrow, cathedral forest background, quiver on back | crystal arrowhead and bowstring glow | Sharp detailed face of a young woman with freckled sun-weathered skin, alert wide-set eyes, small scar on upper lip, wild windswept braided hair, angular jaw, focused hunting expression |
+| **Rodeuse** | Vert emeraude | A female Native American ranger crouched on a fallen tree trunk in a primeval forest, holding a bow vertically, quiver on back, green-lined cloak | crystal arrowhead glow, cloak interior lining, leaves in hair | Sharp detailed face of a young Native American woman with high cheekbones, aquiline nose, warm bronze/olive skin, long straight black hair, wide-set dark eyes, proud calm predatory expression |
 | **Soigneur** | Or/jaune dore | A male healer channeling light from open palms, ruined temple background, sacred symbols floating | healing light and sacred symbols | Sharp detailed face of an older man with deep-set compassionate eyes, prominent crow's feet, aquiline nose slightly bent, thin white beard, age spots on forehead, serene but weary expression |
 
 ---
