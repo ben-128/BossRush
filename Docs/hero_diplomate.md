@@ -22,13 +22,16 @@ round body, double chin, broad shoulders padded with fat. FULL BODY
 visible from head to feet, both feet on the ground. The character
 occupies about 60-70% of the image height, vertically centered.
 
+POSE: arms spread WIDE OPEN in a welcoming gesture, palms facing up,
+like he is inviting you to a negotiation or saying "let us be
+reasonable". A thick brown/sienna leather-bound book tucked under one
+arm. A concealed dagger visible at his belt - the dagger pommel is
+brown/sienna colored.
+
 He wears a rich leather cape with fur trim over a fine but straining
 doublet. Tall brown/sienna leather boots. Brown/sienna leather
-gloves on both hands. One hand holds a thick brown/sienna
-leather-bound book, the other hand rests on the pommel of a
-concealed dagger - the dagger pommel is brown/sienna colored. On
-one hand a LARGE ORNATE RING with a brown/sienna gemstone is worn
-OVER the glove.
+gloves on both hands. On one hand a LARGE ORNATE RING with a
+brown/sienna gemstone is worn OVER the glove.
 
 Style of Gustave Dore woodcut engraving with heavy crosshatching,
 dramatic chiaroscuro. Black ink on a flat smooth light grey-beige
