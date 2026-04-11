@@ -197,6 +197,77 @@ Meme prompt template. Le sujet est un lieu ou une situation. La couleur selectiv
 
 ---
 
+---
+
+## 6. NOUVEAU STYLE EN TEST : Impasto / Huile epaisse
+
+> **Statut :** En exploration (avril 2026). Pourrait remplacer le style gravure.
+
+### Pourquoi ce changement
+
+- Le style gravure noir + couleur selective est beau mais limite l'identite visuelle (pas de couleur, pas de wow en rayon)
+- L'univers evolue vers un cadre tribal/heroic fantasy colore (voir `Docs/univers.md`)
+- L'impasto est un territoire **vierge en JdS** — aucun jeu connu ne l'utilise
+- Les coups de couteau/pinceau epais masquent les artefacts IA
+- Les imperfections du style (textures rugueuses, formes pas lisses) sont voulues = pas de "uncanny valley"
+
+### Principe du style
+
+- Peinture a l'huile epaisse au couteau/pinceau large
+- Coups de pinceau visibles et sculpturaux, texture en relief
+- Formes solides et lisibles, PAS d'impressionnisme flou
+- Palette riche et saturee mais controlee : 5-6 couleurs dominantes
+- Visages rugueux, imparfaits, PAS lisses ni "beaux" — des guerriers, pas des mannequins
+- Fond/decor visible et atmospherique (paysages, ruines, jungle, montagnes)
+
+### Palette de reference (par heros)
+
+| Hero | Couleur dominante | Palette |
+|---|---|---|
+| **Nawel (Rempart)** | Rouge profond | deep crimson, burnt sienna, warm ochre, dark teal, charcoal, cream |
+| **Killa (Flamme)** | Orange/ambre | a definir |
+| **Karai (Porte-Voix)** | Brun/or | a definir |
+| **Liwen (Piste)** | Vert emeraude | a definir |
+| **Amaru (Gardien)** | Or/jaune | a definir |
+
+### Prompt template impasto
+
+```
+Full body character portrait, square format, wide shot showing full environment.
+{{DESCRIPTION_PERSONNAGE}}
+
+Behind him/her: {{DECOR}}
+
+Style: thick impasto oil painting with visible palette knife strokes and paint texture,
+but NOT impressionism. Keep forms solid and readable. Chunky paint application with
+visible ridges but maintain clear shapes and defined silhouette. Colors are rich and
+saturated, not broken into dots or dabs: {{PALETTE}}.
+The texture is in the surface of the paint, not in dissolving the image.
+Think thick paint on a solid drawing. Faces are rough but recognizable.
+No smooth digital look, no photorealism, but also no abstract impressionist blur.
+
+Character takes up about 60% of the frame, full body visible head to toe,
+environment clearly visible around and behind him/her.
+```
+
+### Prompt negatif impasto
+
+```
+smooth, digital, photorealistic, airbrushed, impressionism, pointillism,
+broken brushstrokes dissolving form, abstract, blurry face, beautiful face,
+model face, symmetrical perfect features, studio lighting, white skin
+```
+
+### Points de vigilance
+
+- **Visages** : doivent rester rugueux, asymetriques, imparfaits. Si trop beau/lisse = re-generer
+- **Peau** : doit correspondre a l'ethnie du personnage. PAS de peau blanche par defaut
+- **Pose** : dynamique, pas statique. Chaque heros dans une action liee a son role
+- **Lisibilite carte** : les zones de texte/icones devront etre sur fond plus clean (pas impasto)
+- **Consistance** : a tester sur les 5 heros avant de valider le style
+
+---
+
 ## Historique des decisions
 
 | Date | Decision |
@@ -205,3 +276,4 @@ Meme prompt template. Le sujet est un lieu ou une situation. La couleur selectiv
 | 2026-04-10 | Fond des illustrations change de parchemin chaud/sepia vers gris-beige plat lisse. Raison : uniformite entre illustrations et meilleure integration avec les fonds de carte colores. |
 | 2026-04-10 | Ajout des fonds de carte colores par type de hero (style MTG). |
 | 2026-04-10 | Ajout des cadres de carte (titre, image, texte, icone) en style woodcut traits epais. |
+| 2026-04-11 | Test style impasto/huile epaisse suite au changement d'univers (tribal/colosses). Premier test sur Nawel (Rempart) concluant — pose dynamique, defensif, peau amerindienne, decor ruines/jungle. |
