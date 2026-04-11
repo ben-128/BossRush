@@ -1,6 +1,8 @@
 # Raid Party — Résumé des règles
 
 > 2 à 5 joueurs | Jeu coopératif | Affrontez un boss ensemble !
+>
+> Pour l'univers et les héros, voir [univers.md](../../../Docs/univers.md)
 
 ---
 
