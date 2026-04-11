@@ -222,13 +222,13 @@ Meme prompt template. Le sujet est un lieu ou une situation. La couleur selectiv
 
 ### Palette de reference (par heros)
 
-| Hero | Couleur dominante | Palette |
-|---|---|---|
-| **Nawel (Rempart)** | Rouge profond | deep crimson, burnt sienna, warm ochre, dark teal, charcoal, cream |
-| **Killa (Flamme)** | Orange/ambre | a definir |
-| **Karai (Porte-Voix)** | Brun/or | a definir |
-| **Liwen (Piste)** | Vert emeraude | a definir |
-| **Amaru (Gardien)** | Or/jaune | a definir |
+| Hero | Couleur dominante | Elements portant la couleur | Palette |
+|---|---|---|---|
+| **Nawel (Rempart)** | Bleu acier | Plumes, bouclier, peinture de guerre | deep steel blue, burnt sienna, warm ochre, charcoal, dark brown, cream |
+| **Killa (Flamme)** | Rouge/cramoisi | Feu, runes, plumes | deep crimson, amber orange, molten gold, charcoal, dark brown, cream |
+| **Karai (Porte-Voix)** | Brun/or | a definir | a definir |
+| **Liwen (Piste)** | Vert emeraude | a definir | a definir |
+| **Amaru (Gardien)** | Or/jaune | a definir | a definir |
 
 ### Prompt template impasto
 
@@ -243,7 +243,9 @@ but NOT impressionism. Keep forms solid and readable. Chunky paint application w
 visible ridges but maintain clear shapes and defined silhouette. Colors are rich and
 saturated, not broken into dots or dabs: {{PALETTE}}.
 The texture is in the surface of the paint, not in dissolving the image.
-Think thick paint on a solid drawing. Faces are rough but recognizable.
+Think thick paint on a solid drawing. Face must be painted with the SAME thick rough strokes as the rest of the painting.
+No fine detail on the face. Features suggested by bold paint slabs, not rendered smoothly.
+The face should NOT be more detailed than the armor or background.
 No smooth digital look, no photorealism, but also no abstract impressionist blur.
 
 Character takes up about 60% of the frame, full body visible head to toe,
