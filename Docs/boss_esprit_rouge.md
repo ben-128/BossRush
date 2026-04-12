@@ -1,12 +1,12 @@
-# Le Rouge
+# Khwa
 
 ## Identité
 
-- **Nom :** Le Rouge
-- **Nom complet (référence) :** L'Esprit du cours d'eau
+- **Nom :** Khwa
+- **Nom complet (référence) :** !Khwa (Khwa, esprit/dieu de l'eau)
 - **Difficulté :** Très difficile
 - **Culture d'origine :** San (Kalahari, Afrique australe)
-- **Référence mythologique :** Esprit géant des cours d'eau dans la mythologie San — décrit comme un être immense à peau rouge ou verte et cheveux blancs, invisible à volonté, traditionnellement gardien des rivières mais ici devenu prédateur
+- **Référence mythologique :** !Khwa, la divinité de l'eau dans la mythologie San. Décrit comme un esprit géant à peau rouge ou verte et cheveux blancs, invisible à volonté, traditionnellement gardien des rivières et des sources mais ici devenu prédateur
 
 ## Description visuelle
 

@@ -98,7 +98,7 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 | 7 | **Azhda** | Difficile | Azhdaha — dragon du chaos des sagas Narts | Circassien (Caucase) | [boss_azhdaha.md](boss_azhdaha.md) |
 | 8 | **Gaww** | Difficile | Gaww — esprit possesseur Afar | Afar (Éthiopie/Djibouti) | [boss_gaww.md](boss_gaww.md) |
 | 9 | **Kaggen** | Difficile | ǀKaggen — dieu-mante trickster, l'éland sacré | San (Kalahari) | [boss_grand_eland.md](boss_grand_eland.md) |
-| 10 | **Le Rouge** | Très difficile | Esprit géant à peau rouge des cours d'eau | San (Kalahari) | [boss_esprit_rouge.md](boss_esprit_rouge.md) |
+| 10 | **Khwa** | Très difficile | Esprit géant à peau rouge des cours d'eau (Khwa, dieu de l'eau San) | San (Kalahari) | [boss_esprit_rouge.md](boss_esprit_rouge.md) |
 
 ### Stats résumées
 
@@ -113,7 +113,7 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 | 7 | Azhda | D | 27 | 3 | 1 | Double attaque |
 | 8 | Gaww | D | 23 | 2 | 1 | Drain de deck |
 | 9 | Kaggen | D | 30 | 3 | 1 | Cap de dégâts |
-| 10 | Le Rouge | TD | 32 | 3 | 2 | Esquive + AOE |
+| 10 | Khwa | TD | 32 | 3 | 2 | Esquive + AOE |
 
 ### Répartition par mythologie
 
@@ -123,7 +123,7 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 | **Afar** (Éthiopie/Djibouti) | Hobab, Gaww |
 | **Circassien** (Caucase) | Azhda, Pshato |
 | **Aïnou** (Japon) | Akkoro, Hoyau |
-| **San** (Kalahari) | Kaggen, Le Rouge |
+| **San** (Kalahari) | Kaggen, Khwa |
 
 ---
 
