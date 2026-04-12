@@ -155,6 +155,6 @@ public class MonsterCardGenerator : CardGenerator
             }
         }
 
-        ApplyTextStyle(pvText);
+        ApplyPvStyle(pvText);
     }
 }

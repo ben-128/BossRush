@@ -47,6 +47,11 @@ public class CardBackGeneratorInspector : Editor
         GUI.backgroundColor = Color.white;
     }
 
+    private static GameObject FindBorders()
+    {
+        return GameObject.Find("Borders") ?? GameObject.Find("borders");
+    }
+
     private void ExportOne(CardBackGenerator generator, int index)
     {
         var capture = Camera.main.GetComponent<CameraCapture>();
@@ -56,6 +61,9 @@ public class CardBackGeneratorInspector : Editor
             return;
         }
 
+        var borders = FindBorders();
+        if (borders != null) borders.SetActive(false);
+
         generator.GenerateCard(index);
         capture.Capture(new ToExport
         {
@@ -63,6 +71,8 @@ public class CardBackGeneratorInspector : Editor
             category = generator.outputFolder,
             suffix = "dos"
         });
+
+        if (borders != null) borders.SetActive(true);
 
         AssetDatabase.Refresh();
         Debug.Log($"Dos exporté : {generator.GetCardName(index)}");
@@ -77,6 +87,9 @@ public class CardBackGeneratorInspector : Editor
             return;
         }
 
+        var borders = FindBorders();
+        if (borders != null) borders.SetActive(false);
+
         int count = generator.Count;
         for (int i = 0; i < count; i++)
         {
@@ -88,6 +101,8 @@ public class CardBackGeneratorInspector : Editor
                 suffix = "dos"
             });
         }
+
+        if (borders != null) borders.SetActive(true);
 
         AssetDatabase.Refresh();
         Debug.Log($"{count} dos exportés dans Final/{generator.outputFolder}/");

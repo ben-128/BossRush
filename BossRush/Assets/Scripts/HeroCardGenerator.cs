@@ -161,10 +161,10 @@ public class HeroCardGenerator : CardGenerator
         SetCitation(hero.citation);
         SetCompetenceIcons(hero.competences);
         SetBackground(mainCompetence);
-        SetGems(mainCompetence);
 
         ApplyTextStyle(titreText);
         ApplyTextStyle(capaciteText);
+        ApplyPvStyle(pvText);
     }
 
     private void SetCompetenceIcons(string[] competences)

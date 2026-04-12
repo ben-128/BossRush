@@ -99,9 +99,6 @@ public class ObjetCardGenerator : CardGenerator
             bonusDegatsText.text = objet.bonus_degats > 0 ? $"+{objet.bonus_degats}" : "";
         }
 
-        // Gemmes de classe sur la bordure centrale
-        SetGems(objet.prerequis);
-
         ApplyTextStyle(typeText);
         ApplyTextStyle(prerequisText);
         ApplyTextStyle(effetText);

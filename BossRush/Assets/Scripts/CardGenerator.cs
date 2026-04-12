@@ -54,16 +54,27 @@ public abstract class CardGenerator : MonoBehaviour
     [Range(0f, 1f)]
     public float citationShadowOpacity = 0.5f;
 
+    [Header("Style PV (chiffre sur fond coloré)")]
+    [Tooltip("Font asset pour le chiffre PV (CinzelDecorative-Bold SDF recommandé)")]
+    public TMP_FontAsset pvFontAsset;
+
+    [Tooltip("Couleur de l'outline PV (sombre pour détacher du fond rouge)")]
+    public Color pvOutlineColor = new Color(0.15f, 0.05f, 0.02f, 0.8f); // brun très foncé
+
+    [Tooltip("Épaisseur de l'outline PV")]
+    [Range(0f, 1f)]
+    public float pvOutlineWidth = 0.25f;
+
+    [Tooltip("Opacité de l'ombre PV (plus forte car fond texturé)")]
+    [Range(0f, 1f)]
+    public float pvShadowOpacity = 0.7f;
+
     [Header("Fond de carte par type de héros")]
     public SpriteRenderer backgroundRenderer;
     public BackgroundSprites backgroundSprites;
 
     [Header("Fond bas (multiply subtil sur le portrait)")]
     public SpriteRenderer bottomRenderer;
-
-    [Header("Gemmes de classe (bordure centrale)")]
-    public SpriteRenderer[] gemsRenderers;
-    public GemSprites gemSprites;
 
     [System.Serializable]
     public class BackgroundSprites
@@ -91,82 +102,17 @@ public abstract class CardGenerator : MonoBehaviour
         }
     }
 
-    [System.Serializable]
-    public class GemSprites
-    {
-        public Sprite armure;      // Guerrier - rouge
-        public Sprite distance;    // Rodeur - vert
-        public Sprite soin;        // Soigneur - or
-        public Sprite magie;       // Mage - bleu
-        public Sprite diplomatie;  // Diplomate - marron
-
-        [Header("Couleurs par type")]
-        public Color couleurArmure = Color.red;
-        public Color couleurDistance = Color.green;
-        public Color couleurSoin = new Color(1f, 0.84f, 0f);     // or
-        public Color couleurMagie = Color.blue;
-        public Color couleurDiplomatie = new Color(0.6f, 0.4f, 0.2f); // marron
-
-        public Sprite GetSprite(string competence)
-        {
-            if (string.IsNullOrEmpty(competence)) return null;
-            switch (competence.ToLower())
-            {
-                case "armure": return armure;
-                case "distance": return distance;
-                case "soin": return soin;
-                case "magie": return magie;
-                case "élémentaire": return magie;
-                case "diplomatie": return diplomatie;
-                default: return null;
-            }
-        }
-
-        public Color GetColor(string competence)
-        {
-            if (string.IsNullOrEmpty(competence)) return Color.white;
-            switch (competence.ToLower())
-            {
-                case "armure": return couleurArmure;
-                case "distance": return couleurDistance;
-                case "soin": return couleurSoin;
-                case "magie": return couleurMagie;
-                case "élémentaire": return couleurMagie;
-                case "diplomatie": return couleurDiplomatie;
-                default: return Color.white;
-            }
-        }
-    }
+    private static readonly int BlendTexID = Shader.PropertyToID("_BlendTex");
 
     protected void SetBackground(string competence)
     {
         if (backgroundRenderer == null || backgroundSprites == null) return;
         var sprite = backgroundSprites.GetSprite(competence);
         if (sprite != null)
-            backgroundRenderer.sprite = sprite;
-    }
-
-    protected void SetGems(string competence)
-    {
-        if (gemsRenderers == null || gemSprites == null) return;
-
-        var sprite = gemSprites.GetSprite(competence);
-        var color = gemSprites.GetColor(competence);
-
-        for (int i = 0; i < gemsRenderers.Length; i++)
         {
-            if (gemsRenderers[i] == null) continue;
-
-            if (sprite != null)
-            {
-                gemsRenderers[i].gameObject.SetActive(true);
-                gemsRenderers[i].sprite = sprite;
-                gemsRenderers[i].color = color;
-            }
-            else
-            {
-                gemsRenderers[i].gameObject.SetActive(false);
-            }
+            backgroundRenderer.sprite = sprite;
+            if (bottomRenderer != null && sprite.texture != null)
+                bottomRenderer.material.SetTexture(BlendTexID, sprite.texture);
         }
     }
 
@@ -211,6 +157,32 @@ public abstract class CardGenerator : MonoBehaviour
             mat.DisableKeyword("OUTLINE_ON");
             mat.SetFloat("_OutlineWidth", 0f);
         }
+    }
+
+    protected void ApplyPvStyle(TextMeshPro pvTmp)
+    {
+        if (pvTmp == null) return;
+
+        // Font bold
+        if (pvFontAsset != null)
+            pvTmp.font = pvFontAsset;
+
+        // Couleur blanche sur fond rouge
+        pvTmp.color = Color.white;
+
+        var mat = pvTmp.fontMaterial;
+
+        // Outline sombre épaisse
+        mat.EnableKeyword("OUTLINE_ON");
+        mat.SetColor("_OutlineColor", pvOutlineColor);
+        mat.SetFloat("_OutlineWidth", pvOutlineWidth);
+
+        // Ombre portée forte
+        mat.EnableKeyword("UNDERLAY_ON");
+        mat.SetColor("_UnderlayColor", new Color(0f, 0f, 0f, pvShadowOpacity));
+        mat.SetFloat("_UnderlayOffsetX", 0.4f);
+        mat.SetFloat("_UnderlayOffsetY", -0.4f);
+        mat.SetFloat("_UnderlaySoftness", 0.15f);
     }
 
     protected void ApplyTextStyleAll()

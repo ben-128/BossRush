@@ -64,6 +64,11 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         GUI.backgroundColor = Color.white;
     }
 
+    private static GameObject FindBorders()
+    {
+        return GameObject.Find("Borders") ?? GameObject.Find("borders");
+    }
+
     private void ExportOne(T generator, int index)
     {
         var capture = Camera.main.GetComponent<CameraCapture>();
@@ -73,12 +78,17 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
             return;
         }
 
+        var borders = FindBorders();
+        if (borders != null) borders.SetActive(false);
+
         generator.GenerateCard(index);
         capture.Capture(new ToExport
         {
             finalName = generator.GetCardName(index),
             category = generator.outputFolder
         });
+
+        if (borders != null) borders.SetActive(true);
 
         AssetDatabase.Refresh();
         Debug.Log($"Carte exportée : {generator.GetCardName(index)}");
@@ -93,6 +103,9 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
             return;
         }
 
+        var borders = FindBorders();
+        if (borders != null) borders.SetActive(false);
+
         int count = GetCardCount(generator);
         for (int i = 0; i < count; i++)
         {
@@ -103,6 +116,8 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
                 category = generator.outputFolder
             });
         }
+
+        if (borders != null) borders.SetActive(true);
 
         AssetDatabase.Refresh();
         Debug.Log($"{count} cartes exportées dans Final/{generator.outputFolder}/");

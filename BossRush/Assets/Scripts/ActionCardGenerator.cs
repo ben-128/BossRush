@@ -150,7 +150,5 @@ public class ActionCardGenerator : CardGenerator
             }
         }
 
-        // Gemmes de classe sur la bordure centrale
-        SetGems(action.prerequis);
     }
 }
