@@ -1,6 +1,8 @@
 # Univers — La Chasse aux Colosses
 
 > Pour les règles du jeu, voir [REGLES_RESUME.md](../BossRush/Assets/Data/REGLES_RESUME.md)
+> Pour le texte d'intro du livret, voir [lore.md](lore.md)
+> Pour les monstres, voir [monstres.md](monstres.md)
 
 ---
 
