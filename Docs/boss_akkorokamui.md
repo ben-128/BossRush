@@ -1,11 +1,12 @@
-# L'Akkorokamui / The Akkorokamui
+# Akkoro
 
 ## Identité
 
-- **Nom FR :** L'Akkorokamui
-- **Nom EN :** The Akkorokamui
+- **Nom :** Akkoro
+- **Nom complet (référence) :** Akkorokamui
 - **Difficulté :** Moyen
-- **Mythologie :** Aïnou (Hokkaido, Japon) — démon marin tentaculaire colossal des profondeurs
+- **Culture d'origine :** Aïnou (Hokkaido, Japon)
+- **Référence mythologique :** Akkorokamui — démon marin tentaculaire colossal des profondeurs dans la mythologie aïnou, l'un des kamuy les plus dangereux
 
 ## Description visuelle
 

@@ -1,11 +1,12 @@
-# Le Psha-tkho / The Psha-tkho
+# Pshato
 
 ## Identité
 
-- **Nom FR :** Le Psha-tkho
-- **Nom EN :** The Psha-tkho
+- **Nom :** Pshato
+- **Nom complet (référence) :** Psha-tkho
 - **Difficulté :** Facile
-- **Mythologie :** Circassien (Caucase) — esprit vengeur de la forêt, gardien de la nature qui punit les intrus
+- **Culture d'origine :** Circassien (Caucase)
+- **Référence mythologique :** Psha-tkho — esprit vengeur de la forêt, gardien de la nature qui punit les intrus dans la mythologie circassienne (Adyghe)
 
 ## Description visuelle
 

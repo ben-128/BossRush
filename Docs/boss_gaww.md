@@ -1,11 +1,12 @@
-# Le Gaww / The Gaww
+# Gaww
 
 ## Identité
 
-- **Nom FR :** Le Gaww
-- **Nom EN :** The Gaww
+- **Nom :** Gaww
+- **Nom complet (référence) :** Gaww
 - **Difficulté :** Difficile
-- **Mythologie :** Afar (Éthiopie/Djibouti) — esprit puissant qui prend possession des corps humains et accorde des pouvoirs surnaturels
+- **Culture d'origine :** Afar (Éthiopie/Djibouti)
+- **Référence mythologique :** Gaww — esprit puissant qui prend possession des corps humains et accorde des pouvoirs surnaturels dans la croyance Afar. Les possédés sont appelés "Gawwala"
 
 ## Description visuelle
 

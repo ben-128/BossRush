@@ -1,11 +1,12 @@
-# Le Grand Éland / The Great Eland
+# Kaggen
 
 ## Identité
 
-- **Nom FR :** Le Grand Éland
-- **Nom EN :** The Great Eland
+- **Nom :** Kaggen
+- **Nom complet (référence) :** ǀKaggen
 - **Difficulté :** Difficile
-- **Mythologie :** San (Kalahari, Afrique australe) — l'éland sacré dont le sang contient l'énergie spirituelle, animal le plus important de la cosmologie San
+- **Culture d'origine :** San (Kalahari, Afrique australe)
+- **Référence mythologique :** ǀKaggen — dieu-mante trickster et créateur dans la mythologie San. L'éland est son animal sacré, et son sang contient l'énergie spirituelle. Ici, le boss prend la forme de l'éland colossal de Kaggen, corrompu
 
 ## Description visuelle
 

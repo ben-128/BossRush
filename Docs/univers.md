@@ -24,7 +24,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 | Mage | **Daraa** | Figure mythique maîtresse des esprits | La Flamme | The Flame | Tribu du Brasier | Afar (Éthiopie/Djibouti) |
 | Diplomate | **Aslan** | Lion | Le Porte-Voix | The Herald | Tribu du Gué | Circassien (Caucase) |
 | Rôdeuse | **Isonash** | Grand chasseur | La Piste | The Tracker | Tribu de la Lisière | Aïnou (Nord du Japon) |
-| Soigneur | **Kaggen** | Dieu-mante, trickster guérisseur | Le Gardien | The Warden | Tribu du Bosquet | San (Kalahari, Afrique australe) |
+| Soigneur | **Gao** | Nom San traditionnel | Le Gardien | The Warden | Tribu du Bosquet | San (Kalahari, Afrique australe) |
 
 ### Nawel — Le Rempart / The Bulwark
 - **Tribu du Fer** : forgerons guerriers, armures lourdes
@@ -56,11 +56,11 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Nom signifie "grand chasseur" en Aïnou
 - Couleur dominante : **vert émeraude**
 
-### Kaggen — Le Gardien / The Warden
+### Gao — Le Gardien / The Warden
 - **Tribu du Bosquet** : guérisseurs herboristes, gardiens de la vie
 - **Ethnie :** San — plus ancien peuple d'Afrique australe (Kalahari), guérisseurs, transe chamanique, médecine par les plantes
 - Rôle : soins, protection, maintien du groupe
-- Nom vient de ǀKágge̥n, le dieu-mante trickster et guérisseur de la mythologie San
+- Nom San traditionnel, court et prononçable
 - Couleur dominante : **or / jaune doré**
 
 ---
@@ -87,43 +87,43 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 
 ### Les 10 Colosses
 
-| # | Nom FR | Nom EN | Difficulté | Mythologie | Fiche |
-|---|--------|--------|-----------|-----------|-------|
-| 1 | **Le Hobab** | The Hobab | Facile | Afar | [boss_hobab.md](boss_hobab.md) |
-| 2 | **Le Psha-tkho** | The Psha-tkho | Facile | Circassien | [boss_psha_tkho.md](boss_psha_tkho.md) |
-| 3 | **Caicai Vilu** | Caicai Vilu | Moyen | Mapuche | [boss_caicai_vilu.md](boss_caicai_vilu.md) |
-| 4 | **L'Invunche** | The Invunche | Moyen | Mapuche | [boss_invunche.md](boss_invunche.md) |
-| 5 | **L'Akkorokamui** | The Akkorokamui | Moyen | Aïnou | [boss_akkorokamui.md](boss_akkorokamui.md) |
-| 6 | **Hoyau Kamuy** | Hoyau Kamuy | Moyen | Aïnou | [boss_hoyau_kamuy.md](boss_hoyau_kamuy.md) |
-| 7 | **L'Azhdaha** | The Azhdaha | Difficile | Circassien | [boss_azhdaha.md](boss_azhdaha.md) |
-| 8 | **Le Gaww** | The Gaww | Difficile | Afar | [boss_gaww.md](boss_gaww.md) |
-| 9 | **Le Grand Éland** | The Great Eland | Difficile | San | [boss_grand_eland.md](boss_grand_eland.md) |
-| 10 | **L'Esprit-Rouge** | The Red Spirit | Très difficile | San | [boss_esprit_rouge.md](boss_esprit_rouge.md) |
+| # | Nom | Difficulté | Référence mythologique | Culture | Fiche |
+|---|-----|-----------|----------------------|---------|-------|
+| 1 | **Hobab** | Facile | Hobab — dragon des terres arides du Danakil | Afar (Éthiopie/Djibouti) | [boss_hobab.md](boss_hobab.md) |
+| 2 | **Pshato** | Facile | Psha-tkho — esprit vengeur de la forêt | Circassien (Caucase) | [boss_psha_tkho.md](boss_psha_tkho.md) |
+| 3 | **Caicai** | Moyen | Caicai Vilu — serpent de mer qui inonde le monde | Mapuche (Chili/Argentine) | [boss_caicai_vilu.md](boss_caicai_vilu.md) |
+| 4 | **Invunche** | Moyen | Invunche — humanoïde déformé gardien des grottes | Mapuche (Chili/Argentine) | [boss_invunche.md](boss_invunche.md) |
+| 5 | **Akkoro** | Moyen | Akkorokamui — démon marin tentaculaire | Aïnou (Hokkaido, Japon) | [boss_akkorokamui.md](boss_akkorokamui.md) |
+| 6 | **Hoyau** | Moyen | Hoyau Kamuy — dragon-requin venimeux ailé | Aïnou (Hokkaido, Japon) | [boss_hoyau_kamuy.md](boss_hoyau_kamuy.md) |
+| 7 | **Azhda** | Difficile | Azhdaha — dragon du chaos des sagas Narts | Circassien (Caucase) | [boss_azhdaha.md](boss_azhdaha.md) |
+| 8 | **Gaww** | Difficile | Gaww — esprit possesseur Afar | Afar (Éthiopie/Djibouti) | [boss_gaww.md](boss_gaww.md) |
+| 9 | **Kaggen** | Difficile | ǀKaggen — dieu-mante trickster, l'éland sacré | San (Kalahari) | [boss_grand_eland.md](boss_grand_eland.md) |
+| 10 | **Le Rouge** | Très difficile | Esprit géant à peau rouge des cours d'eau | San (Kalahari) | [boss_esprit_rouge.md](boss_esprit_rouge.md) |
 
 ### Stats résumées
 
 | # | Boss | Diff. | PV (4j) | DGT | Inv | Thème mécanique |
 |---|------|-------|---------|-----|-----|-----------------|
-| 1 | Le Hobab | F | 24 | 2 | 1 | Brûlures continues |
-| 2 | Le Psha-tkho | F | 26 | 2 | 1 | Régénération + contrôle |
-| 3 | Caicai Vilu | M | 25 | 2 | 1 | AOE marin, anti-distance |
-| 4 | L'Invunche | M | 24 | 1 | 2 | Anti-mêlée, paralysie |
-| 5 | L'Akkorokamui | M | 28 | 2 | 1 | Multi-cibles |
-| 6 | Hoyau Kamuy | M | 25 | 2 | 1 | Poison anti-soin |
-| 7 | L'Azhdaha | D | 27 | 3 | 1 | Double attaque |
-| 8 | Le Gaww | D | 23 | 2 | 1 | Drain de deck |
-| 9 | Le Grand Éland | D | 30 | 3 | 1 | Cap de dégâts |
-| 10 | L'Esprit-Rouge | TD | 32 | 3 | 2 | Esquive + AOE |
+| 1 | Hobab | F | 24 | 2 | 1 | Brûlures continues |
+| 2 | Pshato | F | 26 | 2 | 1 | Régénération + contrôle |
+| 3 | Caicai | M | 25 | 2 | 1 | AOE marin, anti-distance |
+| 4 | Invunche | M | 24 | 1 | 2 | Anti-mêlée, paralysie |
+| 5 | Akkoro | M | 28 | 2 | 1 | Multi-cibles |
+| 6 | Hoyau | M | 25 | 2 | 1 | Poison anti-soin |
+| 7 | Azhda | D | 27 | 3 | 1 | Double attaque |
+| 8 | Gaww | D | 23 | 2 | 1 | Drain de deck |
+| 9 | Kaggen | D | 30 | 3 | 1 | Cap de dégâts |
+| 10 | Le Rouge | TD | 32 | 3 | 2 | Esquive + AOE |
 
 ### Répartition par mythologie
 
 | Mythologie | Colosses |
 |-----------|----------|
-| **Mapuche** | Caicai Vilu, L'Invunche |
-| **Afar** | Le Hobab, Le Gaww |
-| **Circassien** | L'Azhdaha, Le Psha-tkho |
-| **Aïnou** | L'Akkorokamui, Hoyau Kamuy |
-| **San** | Le Grand Éland, L'Esprit-Rouge |
+| **Mapuche** (Chili/Argentine) | Caicai, Invunche |
+| **Afar** (Éthiopie/Djibouti) | Hobab, Gaww |
+| **Circassien** (Caucase) | Azhda, Pshato |
+| **Aïnou** (Japon) | Akkoro, Hoyau |
+| **San** (Kalahari) | Kaggen, Le Rouge |
 
 ---
 

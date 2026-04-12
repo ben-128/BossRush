@@ -1,11 +1,12 @@
-# Caicai Vilu
+# Caicai
 
 ## Identité
 
-- **Nom FR :** Caicai Vilu
-- **Nom EN :** Caicai Vilu
+- **Nom :** Caicai
+- **Nom complet (référence) :** Caicai Vilu
 - **Difficulté :** Moyen
-- **Mythologie :** Mapuche (Chili/Argentine) — serpent de mer titanesque qui inonde le monde et provoque tsunamis et tremblements de terre
+- **Culture d'origine :** Mapuche (Chili/Argentine)
+- **Référence mythologique :** Caicai Vilu — serpent de mer titanesque qui inonde le monde et provoque tsunamis et tremblements de terre dans la mythologie mapuche
 
 ## Description visuelle
 

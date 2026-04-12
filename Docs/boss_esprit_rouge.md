@@ -1,11 +1,12 @@
-# L'Esprit-Rouge / The Red Spirit
+# Le Rouge
 
 ## Identité
 
-- **Nom FR :** L'Esprit-Rouge
-- **Nom EN :** The Red Spirit
+- **Nom :** Le Rouge
+- **Nom complet (référence) :** L'Esprit du cours d'eau
 - **Difficulté :** Très difficile
-- **Mythologie :** San (Kalahari) — esprit géant des cours d'eau, peau rouge ou verte, cheveux blancs, invisible à volonté, gardien devenu prédateur
+- **Culture d'origine :** San (Kalahari, Afrique australe)
+- **Référence mythologique :** Esprit géant des cours d'eau dans la mythologie San — décrit comme un être immense à peau rouge ou verte et cheveux blancs, invisible à volonté, traditionnellement gardien des rivières mais ici devenu prédateur
 
 ## Description visuelle
 

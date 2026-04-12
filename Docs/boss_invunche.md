@@ -1,11 +1,12 @@
-# L'Invunche / The Invunche
+# Invunche
 
 ## Identité
 
-- **Nom FR :** L'Invunche
-- **Nom EN :** The Invunche
+- **Nom :** Invunche
+- **Nom complet (référence) :** Invunche
 - **Difficulté :** Moyen
-- **Mythologie :** Mapuche (Chili/Argentine) — créature humanoïde monstrueuse déformée par les sorciers, gardienne des grottes secrètes
+- **Culture d'origine :** Mapuche (Chili/Argentine)
+- **Référence mythologique :** Invunche — créature humanoïde monstrueuse déformée par les sorciers (kalku), gardienne des grottes secrètes dans la mythologie mapuche
 
 ## Description visuelle
 

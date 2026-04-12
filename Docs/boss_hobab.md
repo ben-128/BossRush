@@ -1,11 +1,12 @@
-# Le Hobab / The Hobab
+# Hobab
 
 ## Identité
 
-- **Nom FR :** Le Hobab
-- **Nom EN :** The Hobab
+- **Nom :** Hobab
+- **Nom complet (référence) :** Hobab
 - **Difficulté :** Facile
-- **Mythologie :** Afar (Éthiopie/Djibouti) — dragon des terres arides, lié à l'eau et au feu, créature des déserts du Danakil
+- **Culture d'origine :** Afar (Éthiopie/Djibouti)
+- **Référence mythologique :** Hobab — dragon des terres arides, lié à l'eau et au feu, créature des déserts du Danakil dans la mythologie Afar
 
 ## Description visuelle
 

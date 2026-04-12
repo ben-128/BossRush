@@ -1,11 +1,12 @@
-# Hoyau Kamuy
+# Hoyau
 
 ## Identité
 
-- **Nom FR :** Hoyau Kamuy
-- **Nom EN :** Hoyau Kamuy
+- **Nom :** Hoyau
+- **Nom complet (référence) :** Hoyau Kamuy
 - **Difficulté :** Moyen
-- **Mythologie :** Aïnou (Hokkaido, Japon) — dragon-requin venimeux ailé, l'un des kamuy les plus dangereux
+- **Culture d'origine :** Aïnou (Hokkaido, Japon)
+- **Référence mythologique :** Hoyau Kamuy — dragon-requin venimeux ailé, l'un des kamuy les plus dangereux de la mythologie aïnou
 
 ## Description visuelle
 

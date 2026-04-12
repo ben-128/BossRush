@@ -1,11 +1,12 @@
-# L'Azhdaha / The Azhdaha
+# Azhda
 
 ## Identité
 
-- **Nom FR :** L'Azhdaha
-- **Nom EN :** The Azhdaha
+- **Nom :** Azhda
+- **Nom complet (référence) :** Azhdaha
 - **Difficulté :** Difficile
-- **Mythologie :** Circassien (Caucase) — dragon du chaos et de la destruction des sagas Narts, ennemi juré des héros
+- **Culture d'origine :** Circassien (Caucase)
+- **Référence mythologique :** Azhdaha — dragon du chaos et de la destruction des sagas Narts, ennemi juré des héros dans la mythologie circassienne
 
 ## Description visuelle
 
