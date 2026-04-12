@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: La Flamme
+  m_text: Le Rempart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 463713142}
@@ -1562,7 +1562,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Daraa
+  m_text: Nawel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: 1149569434}
@@ -1852,7 +1852,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f24a78e92668f0647b399e991ae57b70, type: 3}
+  m_Sprite: {fileID: -8533565451591527383, guid: 0926747be6f8db840bd08797a3e6e1cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1905,7 +1905,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.88, y: -4.31, z: -1}
-  m_LocalScale: {x: 0.075, y: 0.075, z: 0.99999994}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1.3333331}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2090081215}
@@ -2230,7 +2230,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "D\xE9fausse tous les monstres dans la file avec 1 point de vie restant."
+  m_text: "Pr\xE9vient toutes les blessures que ce h\xE9ros devait subir ce tour."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7acaafab9ec5a9746be7f4dbb66f8710, type: 2}
   m_sharedMaterial: {fileID: 151088090}
@@ -2376,7 +2376,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.7, z: 0.01}
-  m_LocalScale: {x: 0.47, y: 0.47, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -2425,7 +2425,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: -7285376162372006033, guid: 6cfb26ce14e7462459b2b4e549a16a46, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2493,7 +2493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Le feu ob\xE9it \xE0 ceux qu'il a br\xFBl\xE9s. \xBB</i>"
+  m_text: "<i>\xAB Ils frappent. Je reste. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dab5b252624470e478d828f747d3fea8, type: 2}
   m_sharedMaterial: {fileID: 320573624}
@@ -2650,7 +2650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1218711054}
@@ -2677,8 +2677,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
