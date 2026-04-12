@@ -50,6 +50,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Rôle : coordination, échanges, soutien tactique
 - Nom signifie "lion" en circassien — autorité naturelle, noblesse
 - Couleur dominante : **brun / or**
+- Voir [hero_aslan.md](hero_aslan.md) pour la fiche complète
 
 ### Isonash — La Piste / The Tracker
 - **Tribu de la Lisière** : pisteurs de colosses, éclaireurs
@@ -57,6 +58,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Rôle : attaques à distance, ciblage précis
 - Nom signifie "grand chasseur" en Aïnou
 - Couleur dominante : **vert émeraude**
+- Voir [hero_isonash.md](hero_isonash.md) pour la fiche complète
 
 ### Gao — Le Gardien / The Warden
 - **Tribu du Bosquet** : guérisseurs herboristes, gardiens de la vie
@@ -64,6 +66,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Rôle : soins, protection, maintien du groupe
 - Nom San traditionnel, court et prononçable
 - Couleur dominante : **or / jaune doré**
+- Voir [hero_gao.md](hero_gao.md) pour la fiche complète
 
 ---
 
