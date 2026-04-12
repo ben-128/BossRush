@@ -1,6 +1,9 @@
 # Le Limon / The Slime
 
+> *« Il digère lentement ce qui s'y prend. »*
+
 ## Stats
+- **Nom FR :** Le Limon | **Nom EN :** The Slime
 - **PV :** 2 | **Dégâts :** 2 | **Effet :** non
 
 ## Description visuelle

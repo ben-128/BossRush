@@ -1,6 +1,9 @@
 # L'Aiguillon / The Stinger
 
+> *« Une piqûre suffit à pourrir le sang. »*
+
 ## Stats
+- **Nom FR :** L'Aiguillon | **Nom EN :** The Stinger
 - **PV :** 1 | **Dégâts :** 1 | **Effet :** ✓ (à définir)
 
 ## Description visuelle

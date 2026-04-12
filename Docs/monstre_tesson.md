@@ -1,6 +1,9 @@
 # Le Tesson / The Shard
 
+> *« Les os des morts marchent encore. »*
+
 ## Stats
+- **Nom FR :** Le Tesson | **Nom EN :** The Shard
 - **PV :** 2 | **Dégâts :** 1 | **Effet :** non
 
 ## Description visuelle

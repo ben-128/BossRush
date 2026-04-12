@@ -1,6 +1,9 @@
 # La Larve / The Grub
 
+> *« Ce qui sort de la terre quand la corruption éclôt. »*
+
 ## Stats
+- **Nom FR :** La Larve | **Nom EN :** The Grub
 - **PV :** 1 | **Dégâts :** 1 | **Effet :** non
 
 ## Description visuelle

@@ -1,6 +1,9 @@
 # La Mâchoire / The Maw
 
+> *« Elle traîne sa faim sur la terre. »*
+
 ## Stats
+- **Nom FR :** La Mâchoire | **Nom EN :** The Maw
 - **PV :** 3 | **Dégâts :** 2 | **Effet :** non
 
 ## Description visuelle

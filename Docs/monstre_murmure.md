@@ -1,6 +1,9 @@
 # Le Murmure / The Whisper
 
+> *« Les voix dans ta tête ne sont pas les tiennes. »*
+
 ## Stats
+- **Nom FR :** Le Murmure | **Nom EN :** The Whisper
 - **PV :** 1 | **Dégâts :** 1 | **Effet :** non
 
 ## Description visuelle

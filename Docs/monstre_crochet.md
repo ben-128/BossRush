@@ -1,6 +1,9 @@
 # Le Crochet / The Hook
 
+> *« Il accroche, il tire, il dévore. »*
+
 ## Stats
+- **Nom FR :** Le Crochet | **Nom EN :** The Hook
 - **PV :** 1 | **Dégâts :** 2 | **Effet :** non
 
 ## Description visuelle

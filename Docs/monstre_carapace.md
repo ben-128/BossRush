@@ -1,6 +1,9 @@
 # La Carapace / The Husk
 
+> *« Sous la coque, plus rien qu'un nid de corruption. »*
+
 ## Stats
+- **Nom FR :** La Carapace | **Nom EN :** The Husk
 - **PV :** 3 | **Dégâts :** 1 | **Effet :** non
 
 ## Description visuelle

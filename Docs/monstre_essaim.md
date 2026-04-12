@@ -1,6 +1,9 @@
 # L'Essaim / The Swarm
 
+> *« Mille bouches pour une seule faim. »*
+
 ## Stats
+- **Nom FR :** L'Essaim | **Nom EN :** The Swarm
 - **PV :** 1 | **Dégâts :** 1 | **Effet :** non
 
 ## Description visuelle

@@ -1,6 +1,9 @@
 # La Ronce / The Bramble
 
+> *« Là où elle pousse, plus rien ne marche. »*
+
 ## Stats
+- **Nom FR :** La Ronce | **Nom EN :** The Bramble
 - **PV :** 2 | **Dégâts :** 1 | **Effet :** ✓ (à définir)
 
 ## Description visuelle

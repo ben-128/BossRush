@@ -1,6 +1,9 @@
 # Le Rampant / The Crawler
 
+> *« Il suit ta trace depuis le premier jour. »*
+
 ## Stats
+- **Nom FR :** Le Rampant | **Nom EN :** The Crawler
 - **PV :** 2 | **Dégâts :** 2 | **Effet :** non
 
 ## Description visuelle

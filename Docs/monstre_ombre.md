@@ -1,6 +1,9 @@
 # L'Ombre / The Shade
 
+> *« Elle a perdu son corps, mais pas sa rage. »*
+
 ## Stats
+- **Nom FR :** L'Ombre | **Nom EN :** The Shade
 - **PV :** 1 | **Dégâts :** 1 | **Effet :** ✓ (à définir)
 
 ## Description visuelle

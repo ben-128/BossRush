@@ -1,6 +1,9 @@
 # La Brume / The Haze
 
+> *« Elle entre par la bouche et s'installe. »*
+
 ## Stats
+- **Nom FR :** La Brume | **Nom EN :** The Haze
 - **PV :** 1 | **Dégâts :** 1 | **Effet :** ✓ (à définir)
 
 ## Description visuelle

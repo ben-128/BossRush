@@ -1,6 +1,9 @@
 # La Dent / The Fang
 
+> *« Il n'a gardé que sa morsure. »*
+
 ## Stats
+- **Nom FR :** La Dent | **Nom EN :** The Fang
 - **PV :** 1 | **Dégâts :** 2 | **Effet :** non
 
 ## Description visuelle

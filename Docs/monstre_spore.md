@@ -1,6 +1,9 @@
 # La Spore / The Spore
 
+> *« Là où elle s'enracine, le sol meurt. »*
+
 ## Stats
+- **Nom FR :** La Spore | **Nom EN :** The Spore
 - **PV :** 1 | **Dégâts :** 1 | **Effet :** ✓ (à définir)
 
 ## Description visuelle
