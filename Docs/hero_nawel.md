@@ -58,18 +58,44 @@ Forbidden: uniform texture, grain filter effect, smooth painting, evenly distrib
 Character takes up about 60-70% of the frame, full body visible head to toe, environment with significant depth around and behind him.
 ```
 
-## Prompt RECTO (DALL-E, impasto, 1:1 carré, vignette)
+## Prompt RECTO (DALL-E, impasto, 3:2 paysage, vignette)
 
 ```
-Iconic medium close-up character portrait, square 1:1 format, DARK MOODY COMPOSITION. Same character as the verso: a strong Indigenous American warrior, deep copper brown skin, strong Indigenous features, high cheekbones, broad nose, weathered scarred face, deep blue war paint across one side of his face, long black hair tied back, blue feathers on his shoulders and headpiece. Wearing iron plates and thick leather armor, jaguar pelt cape on shoulders. Bust to upper body shot, holding his round shield with blue geometric sun patterns raised in front of him, shield catching the light. Determined fierce gaze directly at the viewer, eyes lit by the warm light source.
+Iconic character portrait, landscape 3:2 format. A powerful Indigenous American warrior of Mapuche descent standing firm and immovable on a rocky outcrop, holding a large round shield in front of his torso showing bold blue geometric sun patterns, and a TOKI — a traditional Mapuche stone war axe with a carved stone head bound to a wooden handle with leather straps — resting on his shoulder. Strong vertical centered pose, weight grounded, legs apart, like a wall nothing can move. 
 
-Background: VERY DARK, almost black. A deep shadow of charcoal and dark brown with only a faint warm golden rim light edge. NO sky, NO mountains, NO landscape details. Just darkness and smoke behind him, like he is emerging from shadow. The ONLY light is a strong warm source from the upper left hitting his face, shoulder, and shield — everything else falls into deep shadow. Think Rembrandt lighting on an impasto painting.
+Deep copper brown skin, strong Indigenous features, high cheekbones, broad nose, weathered scarred asymmetric face, deep blue war paint across one side of his face, long black hair tied back, blue feathers on his shoulders and headpiece. Wearing a mix of forged iron plates and thick leather armor with bone ornaments, a jaguar pelt cape draped over his shoulders. Determined fierce gaze directly at the viewer.
 
-IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. Paint like toothpaste squeezed in long lines. Strokes have different sizes and directions, never uniform. The entire image must have the same thick paint stroke technique. Palette: deep steel blue, burnt sienna, warm ochre gold, charcoal black, dark brown, cream white. Palette knife and thick brush technique. Dramatic Rembrandt lighting — strong single light source from upper left, deep shadows on the opposite side, warm rim light on the figure edges. The blue of his war paint and shield should GLOW against the dark background.
+Background: A vast dramatic sky of DEEP STEEL BLUE — heavy storm clouds in shades of steel blue and charcoal, with streaks of warm golden light breaking through from behind the figure. Below the horizon line: distant dark mountain silhouettes and faint jungle canopy, kept very simple and dark. The sky dominates 60% of the background. The blue must be a DOMINANT COLOR MASS across the entire image — cold, powerful, oppressive. The landscape is suggested, not detailed.
 
-Forbidden: uniform texture, grain filter, smooth painting, AI-style neat strokes, bright background, visible sky, landscape behind character, busy background, multiple light sources.
+Strong warm golden rim light from the left hitting his skin and armor, creating HIGH CONTRAST against the cold blue sky and background. His skin and armor should be WARM (ochre, burnt sienna, gold highlights) while the sky and environment are COLD (deep steel blue, charcoal, dark teal). This warm/cold contrast is the key to readability.
 
-Character takes up about 85% of the frame, tightly framed, simple very dark background.
+CRITICAL STYLE — THIS IS THE MOST IMPORTANT PART: This painting MUST look like REAL THICK OIL PAINT applied with a palette knife and wide brush. Every single square centimeter of the image is made of VISIBLE INDIVIDUAL THICK PAINT STROKES — like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. The paint looks like toothpaste squeezed in long lines onto the canvas. You should be able to COUNT individual strokes one by one. Strokes have DIFFERENT sizes, directions, and thicknesses — NEVER uniform, NEVER systematic, NEVER evenly distributed. Some strokes are big fat and thick, others are thin and short. Strokes overlap chaotically in some areas, while in other areas there are empty gaps between strokes where raw canvas texture shows through. The paint has PHYSICAL DEPTH — you can see ridges, peaks, and valleys in the thick paint surface, as if the painting has real 3D relief. The paint builds form through deliberate directional lines following the contours of the body, clouds, and rocks — NOT blended smoothly. The sky strokes go in sweeping horizontal and diagonal directions. The armor strokes follow the metal curves. The skin strokes follow the muscle shapes. The ENTIRE image — character, sky, ground, shield, cape, EVERYTHING — must have the SAME level of thick impasto paint. The character must NOT be smoother or more detailed than the background. Palette: deep steel blue, burnt sienna, warm ochre gold, charcoal black, dark brown, cream white. Dramatic lighting with strong warm light source creating bright thick paint highlights and deep shadowed strokes.
+
+Forbidden: uniform texture, grain filter effect, smooth painting, soft blending, evenly distributed brushwork, digital painting with impasto filter applied on top, AI-style neat organized strokes, smooth character on textured background, character blending into background, beautiful face, model face, photorealistic skin, airbrush effect, any area that looks smooth or digitally painted.
+
+Character takes up about 70% of the frame, strong readable silhouette, must be instantly recognizable at thumbnail size.
+```
+
+## Prompt CORRECTION RECTO (DALL-E, img2img avec upload)
+
+> Uploader l'image recto actuelle de Nawel, puis utiliser ce prompt :
+
+```
+This is an existing impasto oil painting of an Indigenous warrior with a blue shield. Recreate this image with these CRITICAL changes:
+
+1. BACKGROUND: Replace the detailed mountain/jungle landscape with a vast DEEP STEEL BLUE dramatic sky — heavy storm clouds in steel blue and charcoal, with streaks of warm golden light breaking through. Below the horizon: distant dark mountain silhouettes and faint jungle canopy, kept very simple and dark. The sky dominates 60% of the background as a dominant blue color mass.
+
+2. WEAPON: Replace the war club/mace with a TOKI — a traditional Mapuche stone war axe with a carved stone head bound to a wooden handle with leather straps — resting on his shoulder.
+
+3. POSE: Keep the same character but shift to a more STATIC ICONIC pose — standing firm, shield planted in front showing the blue sun pattern, toki resting on shoulder. Strong vertical centered silhouette, not action pose. Think immovable wall.
+
+4. CONTRAST: Make the character WARM (ochre skin, golden rim light, sienna armor) against the COLD blue sky. Strong warm light from the left hitting his face and armor. High contrast between warm figure and cold background. The character must POP against the blue, not blend in.
+
+5. FRAMING: Character takes up 70% of the frame. Tighter crop, less environment, more presence.
+
+6. KEEP: Same impasto thick paint stroke style, same character design (blue war paint, feathers, iron armor, jaguar cape, Indigenous features), same palette knife technique. Do NOT smooth the painting.
+
+Forbidden: character blending into background, smooth digital painting, uniform texture, action pose with arms spread, busy detailed landscape.
 ```
 
 ## Notes
