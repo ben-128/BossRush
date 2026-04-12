@@ -39,8 +39,30 @@ public abstract class CardGenerator : MonoBehaviour
     [Range(0f, 1f)]
     public float shadowSoftness = 0.2f;
 
-    [Header("Style citation (renforcement)")]
-    [Tooltip("Activer un outline fin sur la citation pour la rendre plus lisible")]
+    [Header("Outline titre")]
+    [Tooltip("Activer un outline sur le titre")]
+    public bool titleOutline = true;
+
+    [Tooltip("Couleur de l'outline titre")]
+    public Color titleOutlineColor = new Color(0.165f, 0.122f, 0.078f, 0.4f);
+
+    [Tooltip("Épaisseur de l'outline titre")]
+    [Range(0f, 1f)]
+    public float titleOutlineWidth = 0.15f;
+
+    [Header("Outline description")]
+    [Tooltip("Activer un outline sur la description")]
+    public bool descriptionOutline = true;
+
+    [Tooltip("Couleur de l'outline description")]
+    public Color descriptionOutlineColor = new Color(0.165f, 0.122f, 0.078f, 0.4f);
+
+    [Tooltip("Épaisseur de l'outline description")]
+    [Range(0f, 1f)]
+    public float descriptionOutlineWidth = 0.15f;
+
+    [Header("Outline citation")]
+    [Tooltip("Activer un outline sur la citation")]
     public bool citationOutline = true;
 
     [Tooltip("Couleur de l'outline citation")]
@@ -121,11 +143,23 @@ public abstract class CardGenerator : MonoBehaviour
     public abstract void GenerateCard(int index);
     public abstract void LoadFromJson();
 
+    private enum TextRole { Title, Description, Citation }
+
     protected void ApplyTextStyle(TextMeshPro tmp, bool isCitation = false)
+    {
+        TextRole role;
+        if (isCitation) role = TextRole.Citation;
+        else if (tmp == nomText) role = TextRole.Title;
+        else role = TextRole.Description;
+
+        ApplyTextStyleForRole(tmp, role);
+    }
+
+    private void ApplyTextStyleForRole(TextMeshPro tmp, TextRole role)
     {
         if (tmp == null) return;
 
-        tmp.color = isCitation ? citationColor : textColor;
+        tmp.color = role == TextRole.Citation ? citationColor : textColor;
 
         var mat = tmp.fontMaterial;
 
@@ -134,7 +168,7 @@ public abstract class CardGenerator : MonoBehaviour
         {
             mat.EnableKeyword("UNDERLAY_ON");
             var uc = shadowColor;
-            uc.a = citationShadowOpacity; // même opacité d'ombre pour tous les textes
+            uc.a = citationShadowOpacity;
             mat.SetColor("_UnderlayColor", uc);
             mat.SetFloat("_UnderlayOffsetX", shadowOffsetX);
             mat.SetFloat("_UnderlayOffsetY", shadowOffsetY);
@@ -145,12 +179,35 @@ public abstract class CardGenerator : MonoBehaviour
             mat.DisableKeyword("UNDERLAY_ON");
         }
 
-        // Outline sur tous les textes pour rendu uniforme
-        if (citationOutline)
+        // Outline par rôle
+        bool outlineOn;
+        Color outlineCol;
+        float outlineW;
+
+        switch (role)
+        {
+            case TextRole.Title:
+                outlineOn = titleOutline;
+                outlineCol = titleOutlineColor;
+                outlineW = titleOutlineWidth;
+                break;
+            case TextRole.Citation:
+                outlineOn = citationOutline;
+                outlineCol = citationOutlineColor;
+                outlineW = citationOutlineWidth;
+                break;
+            default: // Description
+                outlineOn = descriptionOutline;
+                outlineCol = descriptionOutlineColor;
+                outlineW = descriptionOutlineWidth;
+                break;
+        }
+
+        if (outlineOn)
         {
             mat.EnableKeyword("OUTLINE_ON");
-            mat.SetColor("_OutlineColor", citationOutlineColor);
-            mat.SetFloat("_OutlineWidth", citationOutlineWidth);
+            mat.SetColor("_OutlineColor", outlineCol);
+            mat.SetFloat("_OutlineWidth", outlineW);
         }
         else
         {
