@@ -197,6 +197,174 @@ Meme prompt template. Le sujet est un lieu ou une situation. La couleur selectiv
 
 ---
 
+---
+
+## 6. NOUVEAU STYLE EN TEST : Impasto / Huile epaisse
+
+> **Statut :** En exploration (avril 2026). Pourrait remplacer le style gravure.
+
+### Pourquoi ce changement
+
+- Le style gravure noir + couleur selective est beau mais limite l'identite visuelle (pas de couleur, pas de wow en rayon)
+- L'univers evolue vers un cadre tribal/heroic fantasy colore (voir `Docs/univers.md`)
+- L'impasto est un territoire **vierge en JdS** — aucun jeu connu ne l'utilise
+- Les coups de couteau/pinceau epais masquent les artefacts IA
+- Les imperfections du style (textures rugueuses, formes pas lisses) sont voulues = pas de "uncanny valley"
+
+### Principe du style
+
+- Peinture a l'huile epaisse au couteau/pinceau large
+- Coups de pinceau visibles et sculpturaux, texture en relief
+- Formes solides et lisibles, PAS d'impressionnisme flou
+- Palette riche et saturee mais controlee : 5-6 couleurs dominantes
+- Visages rugueux, imparfaits, PAS lisses ni "beaux" — des guerriers, pas des mannequins
+- Fond/decor visible et atmospherique (paysages, ruines, jungle, montagnes)
+
+### Palette de reference (par heros)
+
+| Hero | Couleur dominante | Elements portant la couleur | Palette |
+|---|---|---|---|
+| **Nawel (Rempart)** | Bleu acier | Plumes, bouclier, peinture de guerre | deep steel blue, burnt sienna, warm ochre, charcoal, dark brown, cream |
+| **Killa (Flamme)** | Rouge/cramoisi | Feu, runes, plumes | deep crimson, amber orange, molten gold, charcoal, dark brown, cream |
+| **Karai (Porte-Voix)** | Brun/or | a definir | a definir |
+| **Liwen (Piste)** | Vert emeraude | a definir | a definir |
+| **Amaru (Gardien)** | Or/jaune | a definir | a definir |
+
+### Prompt template impasto
+
+> **IMPORTANT :** Le bloc "Style" doit être formulé avec des mots-clés TRÈS précis pour éviter que l'IA applique un simple filtre de texture. Il faut parler de coups de pinceau individuels, visibles, différents les uns des autres. Référencer **Leonid Afremov** et **Van Gogh (Starry Night)** qui sont bien connus de l'IA.
+
+```
+{{DESCRIPTION_PERSONNAGE_ET_DECOR}}
+
+IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES,
+like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a
+separate long thick ribbon of oil paint, clearly distinct from the next stroke.
+The paint looks like toothpaste squeezed in long lines onto the canvas. You
+should be able to count individual strokes one by one. Strokes have different
+sizes, directions, and thicknesses — never uniform. Some strokes are big and
+thick, others smaller. Strokes overlap chaotically, some areas have empty spaces
+between them where canvas shows. The paint builds form through deliberate
+directional lines, not blended smoothly. The entire image (character AND
+background) must have the same thick paint stroke technique — not smoother on
+the figure. Palette: {{PALETTE}}. Palette knife and thick brush technique.
+Dramatic lighting with strong light source creating highlights and shadows,
+warm rim light on the figure.
+
+Forbidden: uniform texture, grain filter effect, smooth painting, evenly
+distributed brushwork, digital painting with impasto filter, AI-style neat
+strokes, smooth character on textured background.
+```
+
+### Points clés du style impasto
+
+- **Coups de pinceau VISIBLES et COMPTABLES** — on doit pouvoir en compter individuellement
+- **Variations de taille et direction** — jamais uniformes, jamais systématiques
+- **Pâte épaisse comme du dentifrice** — long rubans de peinture, pas un filtre
+- **Canvas visible entre les coups** — zones vides assumées
+- **Personnage ET décor au même niveau d'empâtement** — pas de perso lisse sur fond texturé
+- **Lumière dramatique** — fort contraste, halo, rim light
+- **Références explicites** : Leonid Afremov, Van Gogh (Starry Night), peintures de Santorini
+
+### Prompt negatif impasto
+
+```
+smooth, digital, photorealistic, airbrushed, impressionism blur,
+uniform texture, grain filter, regular brushwork, neat strokes,
+systematic painting, AI painting style, even paint distribution,
+character smoother than background, blurry face, beautiful face,
+model face, studio lighting
+```
+
+### Points de vigilance
+
+- **Visages** : doivent rester rugueux, asymetriques, imparfaits. Si trop beau/lisse = re-generer
+- **Peau** : doit correspondre a l'ethnie du personnage. PAS de peau blanche par defaut
+- **Pose** : dynamique, pas statique. Chaque heros dans une action liee a son role
+- **Lisibilite carte** : les zones de texte/icones devront etre sur fond plus clean (pas impasto)
+- **Consistance** : a tester sur les 5 heros avant de valider le style
+
+---
+
+## 7. Deux formats par héros et boss
+
+Chaque **héros** et chaque **boss** a **deux illustrations distinctes**, générées séparément mais cohérentes entre elles.
+
+### Verso de carte — Format 2:3 (portrait vertical)
+
+- **Plein cadre** : illustration immersive sur tout le verso
+- C'est l'**image héro** : celle qu'on regarde, qu'on apprécie, qu'on retient
+- Composition portrait verticale avec décor riche
+- Le personnage occupe ~60-70% du cadre, environnement étendu visible
+- Pose dynamique et narrative
+- En bas : un **sous-titre** lore (1 phrase courte FR + EN)
+
+**Caractéristiques du prompt 2:3 :**
+```
+- Format: portrait vertical 2:3
+- Wide shot showing full environment
+- Character full body visible
+- Dramatic narrative pose
+- Atmospheric background with depth
+- Environment takes a significant role in the composition
+```
+
+### Recto de carte — Format 1:1 (vignette carrée en haut)
+
+- **Vignette carrée** en haut de la carte (le bas contient stats / effets)
+- C'est l'**image fonctionnelle** : on l'utilise pendant le jeu, doit être claire à petite taille
+- Composition centrée, sujet dominant, lecture rapide
+- Le personnage occupe ~80% du cadre, fond plus simple ou flou
+- Pose plus iconique/statique (buste ou portrait américain)
+- Doit rester lisible imprimé en petit format (~5cm)
+
+**Caractéristiques du prompt 1:1 :**
+```
+- Format: square 1:1
+- Medium close-up shot, bust to upper body
+- Character centered, dominant in frame (~80%)
+- Simpler less detailed background
+- Iconic identifying pose (not action shot)
+- Strong silhouette readable at small size
+- Same character description as the 2:3 version (consistency)
+```
+
+### Stratégie de cohérence visuelle entre 2:3 et 1:1
+
+L'IA ne garantit pas que le 2:3 et le 1:1 montrent **le même** personnage. Pour assurer la cohérence :
+
+**Option A — Description identique (recommandée pour démarrer)**
+1. Écrire d'abord le 2:3 avec une description physique très précise (ethnie, traits, cheveux, peinture de guerre, vêtements, accessoires colorés)
+2. Reprendre **mot pour mot** la description physique dans le 1:1
+3. Seul le cadrage et la pose changent
+
+**Option B — Image-to-image (plus précis)**
+1. Générer le 2:3 d'abord
+2. Cropper une zone carrée du visage/buste depuis le 2:3
+3. Utiliser ce crop comme **image de référence** dans DALL-E pour générer le 1:1
+4. Avantage : visage et tenue identiques garantis
+
+**Option C — Référence visuelle externe**
+1. Générer le 2:3
+2. L'utiliser comme reference image dans le prompt 1:1 (`reference image of the same character`)
+
+**Recommandation :** commencer par l'option A (descriptions identiques). Si la cohérence n'est pas suffisante, passer à l'option B.
+
+### Sous-titre lore (verso 2:3 uniquement)
+
+Chaque carte verso porte un **sous-titre court** en bas de l'illustration, en italique, qui suggère du lore sans tout expliquer.
+
+- **Longueur** : 1 phrase, 8 mots max idéalement
+- **Bilingue** : version FR + version EN
+- **Ton** : sobre, suggestif, jamais explicatif
+- **Style** : *« Phrase courte. »* en italique avec guillemets français
+
+Exemples :
+- Nawel : *« Tant qu'il tient debout, ils tiennent. »* / *« While he stands, they stand. »*
+- Hobab : *« Il était la pluie. Il est devenu la cendre. »* / *« He was the rain. He became the ash. »*
+
+---
+
 ## Historique des decisions
 
 | Date | Decision |
@@ -205,3 +373,6 @@ Meme prompt template. Le sujet est un lieu ou une situation. La couleur selectiv
 | 2026-04-10 | Fond des illustrations change de parchemin chaud/sepia vers gris-beige plat lisse. Raison : uniformite entre illustrations et meilleure integration avec les fonds de carte colores. |
 | 2026-04-10 | Ajout des fonds de carte colores par type de hero (style MTG). |
 | 2026-04-10 | Ajout des cadres de carte (titre, image, texte, icone) en style woodcut traits epais. |
+| 2026-04-11 | Test style impasto/huile epaisse suite au changement d'univers (tribal/colosses). Premier test sur Nawel (Rempart) concluant — pose dynamique, defensif, peau amerindienne, decor ruines/jungle. |
+| 2026-04-12 | Adoption de 2 formats par hero/boss : verso 2:3 (image hero immersive) + recto 1:1 (vignette en haut de carte). Sous-titre lore FR/EN sur le verso. |
+| 2026-04-12 | Refonte du bloc style impasto : mots-clés plus precis (Afremov, Van Gogh Starry Night, "toothpaste strokes", "count individual strokes") pour eviter que l'IA applique un simple filtre de texture. Emphase sur lumiere dramatique et uniformite du rendu entre perso et decor. |
