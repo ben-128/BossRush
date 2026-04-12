@@ -1,0 +1,32 @@
+# Le Psha-tkho / The Psha-tkho
+
+## Identité
+
+- **Nom FR :** Le Psha-tkho
+- **Nom EN :** The Psha-tkho
+- **Difficulté :** Facile
+- **Mythologie :** Circassien (Caucase) — esprit vengeur de la forêt, gardien de la nature qui punit les intrus
+
+## Description visuelle
+
+Colosse mi-arbre mi-géant. Corps massif fait de bois noueux, d'écorce craquelée et de mousse verte. Bras énormes terminés par des mains-racines. Jambes immenses comme des troncs centenaires. Visage sculpté dans l'écorce du torse, yeux de sève luminescente verte. Une couronne de branches feuillues. Quand il marche, des racines noires (corrompues) percent le sol et étranglent la végétation autour de lui. Mousse partout sur son corps, mais elle pourrit par endroits — taches noires de corruption.
+
+## Stats
+
+- **PV :** 10 + 4 par joueur (18/22/26/30)
+- **Dégâts :** 2
+- **Invocations :** 1
+- **Passif :** *Racines régénératrices* — Au début du tour du boss, il se soigne 1 PV.
+- **Action spéciale :** Des racines surgissent du sol : le héros actif défausse 1 carte Arsenal de sa main.
+
+## Prompt visuel (DALL-E, impasto, 1:1)
+
+```
+Square format, wide shot showing full creature and environment. A massive tree-giant colossus in a dense Caucasus forest. Body made of gnarled wood, cracked bark, and green moss. Huge arms ending in root-like hands. Trunk-thick legs. A face carved into the bark of his chest with glowing green sap eyes. A crown of leafy branches. Black corrupted roots breaking through the ground around his feet. Patches of rotting moss showing dark corruption marks.
+
+Setting: a dense ancient forest in the Caucasus mountains, towering oak trees, mist between the trunks, dappled green light filtering through leaves, mossy stones and fallen logs.
+
+Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: deep forest green, dark brown, mossy ochre, charcoal black, cream highlights, glowing emerald accents. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Creature must be painted with thick rough strokes, no smooth digital rendering. No photorealism, but no abstract impressionist blur.
+
+The creature takes up about 70% of the frame, full body visible, environment clearly visible around it.
+```

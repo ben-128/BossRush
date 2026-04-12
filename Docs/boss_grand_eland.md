@@ -1,0 +1,32 @@
+# Le Grand Éland / The Great Eland
+
+## Identité
+
+- **Nom FR :** Le Grand Éland
+- **Nom EN :** The Great Eland
+- **Difficulté :** Difficile
+- **Mythologie :** San (Kalahari, Afrique australe) — l'éland sacré dont le sang contient l'énergie spirituelle, animal le plus important de la cosmologie San
+
+## Description visuelle
+
+Éland colossal lumineux. Corps massif d'antilope géante, pelage doré qui semble briller d'une lumière intérieure. Cornes spiralées immenses, presque hypnotiques. Yeux profonds et intelligents — il regarde le chasseur dans les yeux. Sabots qui laissent des empreintes lumineuses. Quand il respire, de la lumière dorée s'échappe de ses naseaux. Une aura sacrée mais corrompue — le pelage doré est strié de marques noires malades, et son sang qui coule des plaies est un mélange d'or et de noir.
+
+## Stats
+
+- **PV :** 10 + 5 par joueur (20/25/30/35)
+- **Dégâts :** 3
+- **Invocations :** 1
+- **Passif :** *Aura sacrée* — Le boss ne peut pas subir plus de 4 dégâts par tour.
+- **Action spéciale :** Lueur aveuglante : tous les héros défaussent 1 carte au hasard de leur main.
+
+## Prompt visuel (DALL-E, impasto, 1:1)
+
+```
+Square format, wide shot showing full creature and environment. A colossal luminous eland antelope on the Kalahari savanna. Massive antelope body, golden coat seeming to glow with inner light. Huge spiraling horns. Deep intelligent eyes that meet the hunter's gaze. Hooves leaving glowing footprints. Golden light escaping its nostrils when it breathes. Sacred but corrupted aura — the golden coat is streaked with sick black corruption marks, blood from its wounds is a mix of gold and black.
+
+Setting: the vast Kalahari savanna at golden hour, red sand dunes, sparse acacia trees, ancient rock formations with San cave paintings visible, deep orange sky, long shadows.
+
+Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: glowing gold, warm ochre, burnt sienna, deep red, charcoal black corruption, cream highlights, deep orange sky. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Creature must be painted with thick rough strokes, no smooth digital rendering. The animal should feel sacred and tragic, not just a monster. No photorealism, but no abstract impressionist blur.
+
+The creature takes up about 70% of the frame, full body visible, environment clearly visible around it.
+```

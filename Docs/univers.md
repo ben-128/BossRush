@@ -87,18 +87,33 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 
 ### Les 10 Colosses
 
-| # | Nom FR | Nom EN | Visuel | Référence mythologique |
-|---|--------|--------|--------|----------------------|
-| 1 | **Caicai Vilu** | Caicai Vilu | Serpent de mer titanesque, provoque tsunamis en battant sa queue, eau noire autour de lui | Mapuche — serpent de mer qui inonde le monde |
-| 2 | **L'Invunche** | The Invunche | Humanoïde géant déformé, tête retournée sur le corps, membres tordus, gardien de caverne | Mapuche — créature monstrueuse déformée par les sorciers |
-| 3 | **Le Hobab** | The Hobab | Dragon des terres sèches, écailles craquelées comme la terre aride, crache du sable brûlant | Afar/Djibouti — dragon des déserts, lié à l'eau et au feu |
-| 4 | **Le Gaww** | The Gaww | Esprit sans forme fixe, masse d'ombre et de fumée avec des visages qui apparaissent et disparaissent | Afar — esprit qui prend possession des corps humains |
-| 5 | **L'Azhdaha** | The Azhdaha | Dragon à plusieurs têtes, corps serpentin couvert de fourrure et d'écailles, ailes de chauve-souris | Circassien — dragon du chaos, ennemi des héros Narts |
-| 6 | **Le Psha-tkho** | The Psha-tkho | Colosse de bois et mousse, mi-arbre mi-géant, racines envahissent le sol, visage dans l'écorce | Circassien — esprit vengeur de la forêt du Caucase |
-| 7 | **L'Akkorokamui** | The Akkorokamui | Pieuvre colossale rouge, tentacules immenses, ventouses comme des bouches, corps visqueux luisant | Aïnou — démon marin tentaculaire géant |
-| 8 | **Hoyau Kamuy** | Hoyau Kamuy | Dragon-requin ailé, mâchoire verticale, ailes membraneuses, venin qui suinte de tout le corps | Aïnou — dragon-requin venimeux volant |
-| 9 | **Le Grand Éland** | The Great Eland | Éland colossal lumineux, énergie surnaturelle dans son sang, laisse des traces de lumière | San — éland sacré dont le sang contient le pouvoir spirituel |
-| 10 | **L'Esprit-Rouge** | The Red Spirit | Géant humanoïde à peau rouge vif, cheveux blancs, apparaît et disparaît, contrôle l'eau | San — esprit des rivières asséchées, géant invisible |
+| # | Nom FR | Nom EN | Difficulté | Mythologie | Fiche |
+|---|--------|--------|-----------|-----------|-------|
+| 1 | **Le Hobab** | The Hobab | Facile | Afar | [boss_hobab.md](boss_hobab.md) |
+| 2 | **Le Psha-tkho** | The Psha-tkho | Facile | Circassien | [boss_psha_tkho.md](boss_psha_tkho.md) |
+| 3 | **Caicai Vilu** | Caicai Vilu | Moyen | Mapuche | [boss_caicai_vilu.md](boss_caicai_vilu.md) |
+| 4 | **L'Invunche** | The Invunche | Moyen | Mapuche | [boss_invunche.md](boss_invunche.md) |
+| 5 | **L'Akkorokamui** | The Akkorokamui | Moyen | Aïnou | [boss_akkorokamui.md](boss_akkorokamui.md) |
+| 6 | **Hoyau Kamuy** | Hoyau Kamuy | Moyen | Aïnou | [boss_hoyau_kamuy.md](boss_hoyau_kamuy.md) |
+| 7 | **L'Azhdaha** | The Azhdaha | Difficile | Circassien | [boss_azhdaha.md](boss_azhdaha.md) |
+| 8 | **Le Gaww** | The Gaww | Difficile | Afar | [boss_gaww.md](boss_gaww.md) |
+| 9 | **Le Grand Éland** | The Great Eland | Difficile | San | [boss_grand_eland.md](boss_grand_eland.md) |
+| 10 | **L'Esprit-Rouge** | The Red Spirit | Très difficile | San | [boss_esprit_rouge.md](boss_esprit_rouge.md) |
+
+### Stats résumées
+
+| # | Boss | Diff. | PV (4j) | DGT | Inv | Thème mécanique |
+|---|------|-------|---------|-----|-----|-----------------|
+| 1 | Le Hobab | F | 24 | 2 | 1 | Brûlures continues |
+| 2 | Le Psha-tkho | F | 26 | 2 | 1 | Régénération + contrôle |
+| 3 | Caicai Vilu | M | 25 | 2 | 1 | AOE marin, anti-distance |
+| 4 | L'Invunche | M | 24 | 1 | 2 | Anti-mêlée, paralysie |
+| 5 | L'Akkorokamui | M | 28 | 2 | 1 | Multi-cibles |
+| 6 | Hoyau Kamuy | M | 25 | 2 | 1 | Poison anti-soin |
+| 7 | L'Azhdaha | D | 27 | 3 | 1 | Double attaque |
+| 8 | Le Gaww | D | 23 | 2 | 1 | Drain de deck |
+| 9 | Le Grand Éland | D | 30 | 3 | 1 | Cap de dégâts |
+| 10 | L'Esprit-Rouge | TD | 32 | 3 | 2 | Esquive + AOE |
 
 ### Répartition par mythologie
 
@@ -109,14 +124,6 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 | **Circassien** | L'Azhdaha, Le Psha-tkho |
 | **Aïnou** | L'Akkorokamui, Hoyau Kamuy |
 | **San** | Le Grand Éland, L'Esprit-Rouge |
-
-### À faire
-
-- [ ] Classer les 10 boss par difficulté (facile → très difficile)
-- [ ] Définir les stats de chaque boss (dégâts, nb invocations, PV formule)
-- [ ] Définir le passif de chaque boss
-- [ ] Définir l'action spéciale de chaque boss
-- [ ] Voir [REGLES_RESUME.md](../BossRush/Assets/Data/REGLES_RESUME.md) pour le format des stats
 
 ---
 
