@@ -20,14 +20,31 @@ Hybride dragon-requin volant. Corps allongé de requin avec des écailles bleu-v
 - **Passif :** *Venin* — Quand le boss inflige des dégâts, le héros touché ne peut pas être soigné jusqu'à la fin de son prochain tour.
 - **Action spéciale :** Le boss libère un nuage venimeux : tous les héros subissent 1 dégât et défaussent 1 carte.
 
-## Prompt visuel (DALL-E, impasto, 1:1)
+## Sous-titre verso (lore)
+
+- **FR :** *« Il portait le ciel. Il l'empoisonne. »*
+- **EN :** *« He carried the sky. He poisons it. »*
+
+## Prompt VERSO (DALL-E, impasto, 2:3 portrait)
 
 ```
-Square format, wide shot showing full creature and environment. A flying shark-dragon hybrid hovering above a frozen Hokkaido landscape. Elongated shark body with dark blue-green scales. Vertical viper-shark jaws lined with sharp teeth. Massive bat-like membrane wings. Pulsing gills. Green viscous venom dripping from its body and mouth, sizzling drops hitting the ground. Lidless black eyes. Spined ridge along its back. Wing membranes have oozing holes where venom turned black with corruption.
+Portrait vertical 2:3 format, wide shot showing full creature and environment. A flying shark-dragon hybrid hovering above a frozen Hokkaido landscape. Elongated shark body with dark blue-green scales. Vertical viper-shark jaws lined with sharp teeth. Massive bat-like membrane wings. Pulsing gills. Green viscous venom dripping from its body and mouth, sizzling drops hitting the ground. Lidless black eyes. Spined ridge along its back. Wing membranes have oozing holes where venom turned black with corruption.
 
 Setting: a frozen northern Japanese landscape, snowy mountains, dark pine forest below, grey winter sky, frozen lake, falling snow, the venom melting the snow where it lands.
 
 Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: deep teal, dark blue, sickly venom green, charcoal black, pale snow white, dark grey. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Creature must be painted with thick rough strokes, no smooth digital rendering. No photorealism, but no abstract impressionist blur.
 
-The creature takes up about 70% of the frame, full body visible in flight, environment clearly visible around it.
+The creature takes up about 60-70% of the frame, full body visible in flight, environment with significant depth around it.
+```
+
+## Prompt RECTO (DALL-E, impasto, 1:1 carré, vignette)
+
+```
+Iconic close-up creature portrait, square 1:1 format. Same creature as the verso: the head and upper body of a flying shark-dragon hybrid. Vertical viper-shark jaws partially open showing sharp teeth, pulsing gills, lidless black eyes. Dark blue-green scales. Partial bat wings spread behind. Green venom dripping from the mouth and body. Spined ridge along the back. Black corrupted holes in the wing membranes.
+
+Background: a simple atmospheric wash of cold winter sky and falling snow, dramatic but not detailed, no narrative scene.
+
+Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable for small print. Chunky paint application. Colors: deep teal, dark blue, sickly venom green, charcoal black, pale snow white, dark grey. Strong silhouette readable at small size. No smooth digital look, no photorealism.
+
+The creature takes up about 80% of the frame, centered, simple background.
 ```

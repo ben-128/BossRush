@@ -42,16 +42,33 @@ Or / jaune doré
 
 Glowing gold, warm ochre, burnt sienna, deep brown, charcoal black, cream highlights, deep red
 
-## Prompt (DALL-E, style impasto, 1:1)
+## Sous-titre verso (lore)
+
+- **FR :** *« Il ramène les vivants chez les vivants. »*
+- **EN :** *« He brings the living back to the living. »*
+
+## Prompt VERSO (DALL-E, impasto, 2:3 portrait)
 
 ```
-Full body character portrait, square format, wide shot showing full environment. An elderly San healer man in mid-healing ceremony on the Kalahari savanna at golden hour. Small slender build typical of San people. Slightly leaning forward, hands extended palms open releasing golden healing light in rising wisps. Holding a short carved staff with feathers and ribbons in one hand, a small medicine gourd resting on the ground. Eyes half-closed in shamanic trance. Deep bronze skin, fine San features, round face, almond-shaped eyes, prominent cheekbones, deeply wrinkled face. Compassionate intense gaze. Short white-grey curly hair. Ritual ochre and gold face paint in simple lines above his eyebrows and on his cheeks. Antelope skin loincloth, leather belt with small pouches of herbs and powders. Necklace of bones, shells, and small gold beads. Fine ritual scarification marks on his chest in San cosmological patterns. Barefoot on red earth.
+Full body character portrait, portrait vertical 2:3 format, wide shot showing full environment. An elderly San healer man in mid-healing ceremony on the Kalahari savanna at golden hour. Small slender build typical of San people. Slightly leaning forward, hands extended palms open releasing golden healing light in rising wisps. Holding a short carved staff with feathers and ribbons in one hand, a small medicine gourd resting on the ground. Eyes half-closed in shamanic trance. Deep bronze skin, fine San features, round face, almond-shaped eyes, prominent cheekbones, deeply wrinkled face. Compassionate intense gaze. Short white-grey curly hair. Ritual ochre and gold face paint in simple lines above his eyebrows and on his cheeks. Antelope skin loincloth, leather belt with small pouches of herbs and powders. Necklace of bones, shells, and small gold beads. Fine ritual scarification marks on his chest in San cosmological patterns. Barefoot on red earth.
 
 Behind him: the vast Kalahari savanna at golden hour, red sand dunes, sparse acacia trees, distant rock formations with San cave paintings visible, deep orange and red sky, long shadows.
 
 Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: glowing gold, warm ochre, burnt sienna, deep brown, charcoal black, cream highlights, deep red. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Face must be painted with the SAME thick rough strokes as the rest of the painting. No fine detail on the face. Features suggested by bold paint slabs, not rendered smoothly. The face should NOT be more detailed than the body or background. The healer should feel sacred and ancient. No smooth digital look, no photorealism, but also no abstract impressionist blur.
 
-Character takes up about 60% of the frame, full body visible head to toe, environment clearly visible around and behind him.
+Character takes up about 60-70% of the frame, full body visible head to toe, environment with significant depth around and behind him.
+```
+
+## Prompt RECTO (DALL-E, impasto, 1:1 carré, vignette)
+
+```
+Iconic medium close-up character portrait, square 1:1 format. Same character as the verso: an elderly San healer man, deep bronze skin, fine San features, round face, almond-shaped eyes, prominent cheekbones, deeply wrinkled face, compassionate intense gaze. Short white-grey curly hair. Ritual ochre and gold face paint above his eyebrows and on his cheeks. Necklace of bones, shells, and small gold beads. Bust to upper body shot, one hand raised palm open with golden healing light rising from it in wisps. Serene focused expression, eyes half-closed in trance.
+
+Background: a simple atmospheric wash of warm gold and red with floating golden light particles, dramatic but not detailed, no narrative scene.
+
+Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable for small print. Chunky paint application with visible ridges. Colors: glowing gold, warm ochre, burnt sienna, deep brown, charcoal black, cream highlights, deep red. Strong silhouette readable at small size. Face painted with same thick rough strokes as the rest. Sacred and ancient feeling. No smooth digital look, no photorealism.
+
+Character takes up about 80% of the frame, centered, simple background.
 ```
 
 ## Notes

@@ -41,16 +41,33 @@ Deep crimson red
 
 Deep crimson, amber orange, molten gold, charcoal black, dark brown, cream white
 
-## Prompt (DALL-E, style impasto, 1:1)
+## Sous-titre verso (lore)
+
+- **FR :** *« Le feu obéit à ceux qu'il a brûlés. »*
+- **EN :** *« Fire obeys those it has burned. »*
+
+## Prompt VERSO (DALL-E, impasto, 2:3 portrait)
 
 ```
-Full body character portrait, square format, wide shot showing full environment. A lean and fierce East African woman in a powerful spellcasting pose, one arm thrust forward releasing a torrent of crimson fire from her open palm, her other hand gripping a carved obsidian staff planted in the ground. She wears light draped robes over thin leather armor, bone and obsidian jewelry, a headdress with deep red and crimson feathered plumes. Very dark black skin, fine East African features, high cheekbones, narrow straight nose, angular jaw, thin lips pressed tight in concentration. Short cropped curly hair, partially singed at the tips. Ritual scarification marks on her arms.
+Full body character portrait, portrait vertical 2:3 format, wide shot showing full environment. A lean and fierce East African woman in a powerful spellcasting pose, one arm thrust forward releasing a torrent of crimson fire from her open palm, her other hand gripping a carved obsidian staff planted in the ground. She wears light draped robes over thin leather armor, bone and obsidian jewelry, a headdress with deep red and crimson feathered plumes. Very dark black skin, fine East African features, high cheekbones, narrow straight nose, angular jaw, thin lips pressed tight in concentration. Short cropped curly hair, partially singed at the tips. Ritual scarification marks on her arms.
 
 Behind her: a volcanic landscape, dark basalt rocks, rivers of glowing lava in the distance, sulfurous yellow vents, ash clouds rising into a deep orange and purple sky. Ancient carved stone pillars covered in glowing red runes frame the scene.
 
 Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: deep crimson red, amber orange, molten gold, charcoal black, dark brown, cream white. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Face must be painted with the SAME thick rough strokes as the rest of the painting. No fine detail on the face. Features suggested by bold paint slabs, not rendered smoothly. The face should NOT be more detailed than the armor or background. No smooth digital look, no photorealism, but also no abstract impressionist blur.
 
-Character takes up about 60% of the frame, full body visible head to toe, environment clearly visible around and behind her.
+Character takes up about 60-70% of the frame, full body visible head to toe, environment with significant depth around and behind her.
+```
+
+## Prompt RECTO (DALL-E, impasto, 1:1 carré, vignette)
+
+```
+Iconic medium close-up character portrait, square 1:1 format. Same character as the verso: a lean and fierce East African woman, very dark black skin, fine East African features, high cheekbones, narrow straight nose, angular jaw, thin lips pressed tight in concentration. Short cropped curly hair partially singed at the tips. Ritual scarification marks on her arms. Wearing light draped robes, bone and obsidian jewelry, a headdress with deep red and crimson feathered plumes. Bust to upper body shot, one hand raised holding a small flame of crimson fire, the other gripping the top of her obsidian staff. Intense focused gaze directly at the viewer.
+
+Background: a simple atmospheric wash of deep red and orange embers with smoke, dramatic but not detailed, no narrative scene.
+
+Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable for small print. Chunky paint application with visible ridges. Colors: deep crimson red, amber orange, molten gold, charcoal black, dark brown, cream white. Strong silhouette readable at small size. Face painted with same thick rough strokes as the rest. No smooth digital look, no photorealism.
+
+Character takes up about 80% of the frame, centered, simple background.
 ```
 
 ## Notes

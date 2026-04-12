@@ -20,14 +20,31 @@ Dragon colossal des terres sèches. Corps long et serpentin couvert d'écailles 
 - **Passif :** *Brûlures persistantes* — Quand le boss inflige des dégâts, le héros actif subit 1 dégât supplémentaire au début de son prochain tour.
 - **Action spéciale :** Le boss souffle du sable brûlant : tous les héros subissent 1 dégât.
 
-## Prompt visuel (DALL-E, impasto, 1:1)
+## Sous-titre verso (lore)
+
+- **FR :** *« Il était la pluie. Il est devenu la cendre. »*
+- **EN :** *« He was the rain. He became the ash. »*
+
+## Prompt VERSO (DALL-E, impasto, 2:3 portrait)
 
 ```
-Square format, wide shot showing full creature and environment. A massive dragon-like creature in the volcanic Danakil desert. Long serpentine body covered in cracked dry scales like parched earth, glowing red embers visible between the cracks. Short clawed legs, heavy spiked tail crushing the ground. Angular jaws wide open, breathing scorching sand and ash. Yellow glowing eyes. Veins of black crystal corruption running between the scales.
+Portrait vertical 2:3 format, wide shot showing full creature and environment. A massive dragon-like creature in the volcanic Danakil desert. Long serpentine body covered in cracked dry scales like parched earth, glowing red embers visible between the cracks. Short clawed legs, heavy spiked tail crushing the ground. Angular jaws wide open, breathing scorching sand and ash. Yellow glowing eyes. Veins of black crystal corruption running between the scales.
 
 Setting: a vast volcanic desert at twilight, dark basalt rocks, sulfurous yellow steam vents, distant lava rivers, ash clouds in an orange and purple sky.
 
 Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: burnt orange, deep crimson, charcoal black, ochre yellow, dark brown, cream highlights. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Creature must be painted with thick rough strokes, no smooth digital rendering. No photorealism, but no abstract impressionist blur.
 
-The creature takes up about 70% of the frame, full body visible, environment clearly visible around it.
+The creature takes up about 60-70% of the frame, full body visible, environment with significant depth around it.
+```
+
+## Prompt RECTO (DALL-E, impasto, 1:1 carré, vignette)
+
+```
+Iconic close-up creature portrait, square 1:1 format. Same creature as the verso: a dragon's head and upper body, long neck with cracked dry scales like parched earth, glowing red embers between the cracks. Massive angular jaws partially open showing teeth, scorching breath escaping. Yellow glowing eyes. Black crystal corruption veins between the scales. The creature looms toward the viewer.
+
+Background: a simple atmospheric wash of dark volcanic smoke and orange embers, no narrative scene.
+
+Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable for small print. Chunky paint application. Colors: burnt orange, deep crimson, charcoal black, ochre yellow, dark brown, cream highlights. Strong silhouette readable at small size. No smooth digital look, no photorealism.
+
+The creature head takes up about 80% of the frame, centered, simple background.
 ```

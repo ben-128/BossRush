@@ -20,14 +20,31 @@ Pieuvre colossale d'un rouge vif éclatant, presque luminescent. Huit tentacules
 - **Passif :** *Tentacules multiples* — Quand le boss attaque, il attaque 2 héros au lieu d'1 (le héros actif + 1 au choix).
 - **Action spéciale :** Saisie : un héros au choix défausse 1 Objet posé devant lui.
 
-## Prompt visuel (DALL-E, impasto, 1:1)
+## Sous-titre verso (lore)
+
+- **FR :** *« Les profondeurs n'avaient pas de nom. Maintenant si. »*
+- **EN :** *« The depths had no name. Now they do. »*
+
+## Prompt VERSO (DALL-E, impasto, 2:3 portrait)
 
 ```
-Square format, wide shot showing full creature and environment. A colossal bright red octopus emerging from dark cold ocean waters. Eight massive twisting tentacles covered in suckers that look like small gaping mouths. Massive central body with glistening slimy skin. Huge yellow and black eyes. Sharp beak at the center of the tentacles. Some suckers have human teeth. Black crystal corruption growing on its skin. Water churning and boiling around it.
+Portrait vertical 2:3 format, wide shot showing full creature and environment. A colossal bright red octopus emerging from dark cold ocean waters. Eight massive twisting tentacles covered in suckers that look like small gaping mouths. Massive central body with glistening slimy skin. Huge yellow and black eyes. Sharp beak at the center of the tentacles. Some suckers have human teeth. Black crystal corruption growing on its skin. Water churning and boiling around it.
 
 Setting: a dark cold northern Japanese ocean, rocky volcanic shore in the background, grey overcast sky, mist over the water, jagged sea stacks, foam and waves.
 
 Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: vivid crimson red, deep purple, charcoal black, cold grey-blue, pale foam white, sickly yellow eye highlights. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Creature must be painted with thick rough strokes, no smooth digital rendering. No photorealism, but no abstract impressionist blur.
 
-The creature takes up about 70% of the frame, body and tentacles fully visible, environment clearly visible around it.
+The creature takes up about 60-70% of the frame, body and tentacles fully visible, environment with significant depth around it.
+```
+
+## Prompt RECTO (DALL-E, impasto, 1:1 carré, vignette)
+
+```
+Iconic close-up creature portrait, square 1:1 format. Same creature as the verso: the central body and partial tentacles of a colossal bright red octopus rising from dark water. Massive central body with slimy skin, huge yellow and black eyes dominating the frame. Some twisted tentacles framing the body, suckers visible with their mouth-like appearance. Black crystal corruption on the skin.
+
+Background: a simple atmospheric wash of dark cold ocean and mist, dramatic but not detailed, no narrative scene.
+
+Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable for small print. Chunky paint application. Colors: vivid crimson red, deep purple, charcoal black, cold grey-blue, pale foam white, sickly yellow eye highlights. Strong silhouette readable at small size. No smooth digital look, no photorealism.
+
+The creature takes up about 80% of the frame, centered, simple background.
 ```

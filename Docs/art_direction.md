@@ -270,6 +270,85 @@ model face, symmetrical perfect features, studio lighting, white skin
 
 ---
 
+## 7. Deux formats par héros et boss
+
+Chaque **héros** et chaque **boss** a **deux illustrations distinctes**, générées séparément mais cohérentes entre elles.
+
+### Verso de carte — Format 2:3 (portrait vertical)
+
+- **Plein cadre** : illustration immersive sur tout le verso
+- C'est l'**image héro** : celle qu'on regarde, qu'on apprécie, qu'on retient
+- Composition portrait verticale avec décor riche
+- Le personnage occupe ~60-70% du cadre, environnement étendu visible
+- Pose dynamique et narrative
+- En bas : un **sous-titre** lore (1 phrase courte FR + EN)
+
+**Caractéristiques du prompt 2:3 :**
+```
+- Format: portrait vertical 2:3
+- Wide shot showing full environment
+- Character full body visible
+- Dramatic narrative pose
+- Atmospheric background with depth
+- Environment takes a significant role in the composition
+```
+
+### Recto de carte — Format 1:1 (vignette carrée en haut)
+
+- **Vignette carrée** en haut de la carte (le bas contient stats / effets)
+- C'est l'**image fonctionnelle** : on l'utilise pendant le jeu, doit être claire à petite taille
+- Composition centrée, sujet dominant, lecture rapide
+- Le personnage occupe ~80% du cadre, fond plus simple ou flou
+- Pose plus iconique/statique (buste ou portrait américain)
+- Doit rester lisible imprimé en petit format (~5cm)
+
+**Caractéristiques du prompt 1:1 :**
+```
+- Format: square 1:1
+- Medium close-up shot, bust to upper body
+- Character centered, dominant in frame (~80%)
+- Simpler less detailed background
+- Iconic identifying pose (not action shot)
+- Strong silhouette readable at small size
+- Same character description as the 2:3 version (consistency)
+```
+
+### Stratégie de cohérence visuelle entre 2:3 et 1:1
+
+L'IA ne garantit pas que le 2:3 et le 1:1 montrent **le même** personnage. Pour assurer la cohérence :
+
+**Option A — Description identique (recommandée pour démarrer)**
+1. Écrire d'abord le 2:3 avec une description physique très précise (ethnie, traits, cheveux, peinture de guerre, vêtements, accessoires colorés)
+2. Reprendre **mot pour mot** la description physique dans le 1:1
+3. Seul le cadrage et la pose changent
+
+**Option B — Image-to-image (plus précis)**
+1. Générer le 2:3 d'abord
+2. Cropper une zone carrée du visage/buste depuis le 2:3
+3. Utiliser ce crop comme **image de référence** dans DALL-E pour générer le 1:1
+4. Avantage : visage et tenue identiques garantis
+
+**Option C — Référence visuelle externe**
+1. Générer le 2:3
+2. L'utiliser comme reference image dans le prompt 1:1 (`reference image of the same character`)
+
+**Recommandation :** commencer par l'option A (descriptions identiques). Si la cohérence n'est pas suffisante, passer à l'option B.
+
+### Sous-titre lore (verso 2:3 uniquement)
+
+Chaque carte verso porte un **sous-titre court** en bas de l'illustration, en italique, qui suggère du lore sans tout expliquer.
+
+- **Longueur** : 1 phrase, 8 mots max idéalement
+- **Bilingue** : version FR + version EN
+- **Ton** : sobre, suggestif, jamais explicatif
+- **Style** : *« Phrase courte. »* en italique avec guillemets français
+
+Exemples :
+- Nawel : *« Tant qu'il tient debout, ils tiennent. »* / *« While he stands, they stand. »*
+- Hobab : *« Il était la pluie. Il est devenu la cendre. »* / *« He was the rain. He became the ash. »*
+
+---
+
 ## Historique des decisions
 
 | Date | Decision |
@@ -279,3 +358,4 @@ model face, symmetrical perfect features, studio lighting, white skin
 | 2026-04-10 | Ajout des fonds de carte colores par type de hero (style MTG). |
 | 2026-04-10 | Ajout des cadres de carte (titre, image, texte, icone) en style woodcut traits epais. |
 | 2026-04-11 | Test style impasto/huile epaisse suite au changement d'univers (tribal/colosses). Premier test sur Nawel (Rempart) concluant — pose dynamique, defensif, peau amerindienne, decor ruines/jungle. |
+| 2026-04-12 | Adoption de 2 formats par hero/boss : verso 2:3 (image hero immersive) + recto 1:1 (vignette en haut de carte). Sous-titre lore FR/EN sur le verso. |
