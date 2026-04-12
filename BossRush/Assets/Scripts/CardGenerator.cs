@@ -134,7 +134,7 @@ public abstract class CardGenerator : MonoBehaviour
         {
             mat.EnableKeyword("UNDERLAY_ON");
             var uc = shadowColor;
-            if (isCitation) uc.a = citationShadowOpacity;
+            uc.a = citationShadowOpacity; // même opacité d'ombre pour tous les textes
             mat.SetColor("_UnderlayColor", uc);
             mat.SetFloat("_UnderlayOffsetX", shadowOffsetX);
             mat.SetFloat("_UnderlayOffsetY", shadowOffsetY);
@@ -145,14 +145,14 @@ public abstract class CardGenerator : MonoBehaviour
             mat.DisableKeyword("UNDERLAY_ON");
         }
 
-        // Outline (citation seulement)
-        if (isCitation && citationOutline)
+        // Outline sur tous les textes pour rendu uniforme
+        if (citationOutline)
         {
             mat.EnableKeyword("OUTLINE_ON");
             mat.SetColor("_OutlineColor", citationOutlineColor);
             mat.SetFloat("_OutlineWidth", citationOutlineWidth);
         }
-        else if (!isCitation)
+        else
         {
             mat.DisableKeyword("OUTLINE_ON");
             mat.SetFloat("_OutlineWidth", 0f);
