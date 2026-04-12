@@ -32,7 +32,9 @@ Portrait vertical 2:3 format, wide shot showing full creature and environment. A
 
 Setting: a dense ancient forest in the Caucasus mountains, towering oak trees, mist between the trunks, dappled green light filtering through leaves, mossy stones and fallen logs.
 
-Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: deep forest green, dark brown, mossy ochre, charcoal black, cream highlights, glowing emerald accents. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Creature must be painted with thick rough strokes, no smooth digital rendering. No photorealism, but no abstract impressionist blur.
+IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. The paint looks like toothpaste squeezed in long lines onto the canvas. You should be able to count individual strokes one by one. Strokes have different sizes, directions, and thicknesses — never uniform. Some strokes are big and thick, others smaller. Strokes overlap chaotically, some areas have empty spaces between them where canvas shows. The paint builds form through deliberate directional lines, not blended smoothly. The entire image (character/creature AND background) must have the same thick paint stroke technique — not smoother on the figure. Palette: deep forest green, dark brown, mossy ochre, charcoal black, cream highlights, glowing emerald accents. Palette knife and thick brush technique. Dramatic lighting with strong light source creating highlights and shadows, warm rim light on the figure.
+
+Forbidden: uniform texture, grain filter effect, smooth painting, evenly distributed brushwork, digital painting with impasto filter, AI-style neat strokes, smooth character on textured background.
 
 The creature takes up about 60-70% of the frame, full body visible, environment with significant depth around it.
 ```
@@ -44,7 +46,7 @@ Iconic close-up creature portrait, square 1:1 format. Same creature as the verso
 
 Background: a simple atmospheric wash of misty deep forest green, dramatic but not detailed, no narrative scene.
 
-Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable for small print. Chunky paint application. Colors: deep forest green, dark brown, mossy ochre, charcoal black, cream highlights, glowing emerald accents. Strong silhouette readable at small size. No smooth digital look, no photorealism.
+IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. Paint like toothpaste squeezed in long lines. Strokes have different sizes and directions, never uniform. The entire image must have the same thick paint stroke technique. Palette: deep forest green, dark brown, mossy ochre, charcoal black, cream highlights, glowing emerald accents. Palette knife and thick brush technique. Dramatic lighting with strong light source, warm rim light on the figure. Forbidden: uniform texture, grain filter, smooth painting, AI-style neat strokes.
 
 The creature takes up about 80% of the frame, centered, simple background.
 ```

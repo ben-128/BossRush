@@ -232,32 +232,48 @@ Meme prompt template. Le sujet est un lieu ou une situation. La couleur selectiv
 
 ### Prompt template impasto
 
+> **IMPORTANT :** Le bloc "Style" doit être formulé avec des mots-clés TRÈS précis pour éviter que l'IA applique un simple filtre de texture. Il faut parler de coups de pinceau individuels, visibles, différents les uns des autres. Référencer **Leonid Afremov** et **Van Gogh (Starry Night)** qui sont bien connus de l'IA.
+
 ```
-Full body character portrait, square format, wide shot showing full environment.
-{{DESCRIPTION_PERSONNAGE}}
+{{DESCRIPTION_PERSONNAGE_ET_DECOR}}
 
-Behind him/her: {{DECOR}}
+IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES,
+like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a
+separate long thick ribbon of oil paint, clearly distinct from the next stroke.
+The paint looks like toothpaste squeezed in long lines onto the canvas. You
+should be able to count individual strokes one by one. Strokes have different
+sizes, directions, and thicknesses — never uniform. Some strokes are big and
+thick, others smaller. Strokes overlap chaotically, some areas have empty spaces
+between them where canvas shows. The paint builds form through deliberate
+directional lines, not blended smoothly. The entire image (character AND
+background) must have the same thick paint stroke technique — not smoother on
+the figure. Palette: {{PALETTE}}. Palette knife and thick brush technique.
+Dramatic lighting with strong light source creating highlights and shadows,
+warm rim light on the figure.
 
-Style: thick impasto oil painting with visible palette knife strokes and paint texture,
-but NOT impressionism. Keep forms solid and readable. Chunky paint application with
-visible ridges but maintain clear shapes and defined silhouette. Colors are rich and
-saturated, not broken into dots or dabs: {{PALETTE}}.
-The texture is in the surface of the paint, not in dissolving the image.
-Think thick paint on a solid drawing. Face must be painted with the SAME thick rough strokes as the rest of the painting.
-No fine detail on the face. Features suggested by bold paint slabs, not rendered smoothly.
-The face should NOT be more detailed than the armor or background.
-No smooth digital look, no photorealism, but also no abstract impressionist blur.
-
-Character takes up about 60% of the frame, full body visible head to toe,
-environment clearly visible around and behind him/her.
+Forbidden: uniform texture, grain filter effect, smooth painting, evenly
+distributed brushwork, digital painting with impasto filter, AI-style neat
+strokes, smooth character on textured background.
 ```
+
+### Points clés du style impasto
+
+- **Coups de pinceau VISIBLES et COMPTABLES** — on doit pouvoir en compter individuellement
+- **Variations de taille et direction** — jamais uniformes, jamais systématiques
+- **Pâte épaisse comme du dentifrice** — long rubans de peinture, pas un filtre
+- **Canvas visible entre les coups** — zones vides assumées
+- **Personnage ET décor au même niveau d'empâtement** — pas de perso lisse sur fond texturé
+- **Lumière dramatique** — fort contraste, halo, rim light
+- **Références explicites** : Leonid Afremov, Van Gogh (Starry Night), peintures de Santorini
 
 ### Prompt negatif impasto
 
 ```
-smooth, digital, photorealistic, airbrushed, impressionism, pointillism,
-broken brushstrokes dissolving form, abstract, blurry face, beautiful face,
-model face, symmetrical perfect features, studio lighting, white skin
+smooth, digital, photorealistic, airbrushed, impressionism blur,
+uniform texture, grain filter, regular brushwork, neat strokes,
+systematic painting, AI painting style, even paint distribution,
+character smoother than background, blurry face, beautiful face,
+model face, studio lighting
 ```
 
 ### Points de vigilance
@@ -359,3 +375,4 @@ Exemples :
 | 2026-04-10 | Ajout des cadres de carte (titre, image, texte, icone) en style woodcut traits epais. |
 | 2026-04-11 | Test style impasto/huile epaisse suite au changement d'univers (tribal/colosses). Premier test sur Nawel (Rempart) concluant — pose dynamique, defensif, peau amerindienne, decor ruines/jungle. |
 | 2026-04-12 | Adoption de 2 formats par hero/boss : verso 2:3 (image hero immersive) + recto 1:1 (vignette en haut de carte). Sous-titre lore FR/EN sur le verso. |
+| 2026-04-12 | Refonte du bloc style impasto : mots-clés plus precis (Afremov, Van Gogh Starry Night, "toothpaste strokes", "count individual strokes") pour eviter que l'IA applique un simple filtre de texture. Emphase sur lumiere dramatique et uniformite du rendu entre perso et decor. |

@@ -52,7 +52,9 @@ Full body character portrait, portrait vertical 2:3 format, wide shot showing fu
 
 Behind him: a Caucasus mountain pass at golden hour, ancient stone watchtowers, scattered tribal banners, distant snow-capped peaks, dry grassland, dramatic clouds with warm sunset light breaking through.
 
-Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable. Chunky paint application with visible ridges but maintain clear shapes and defined silhouette. Colors are rich and saturated, not broken into dots or dabs: warm brown, ochre gold, deep sienna, charcoal black, cream white, dark olive green. The texture is in the surface of the paint, not in dissolving the image. Think thick paint on a solid drawing. Face must be painted with the SAME thick rough strokes as the rest of the painting. No fine detail on the face. Features suggested by bold paint slabs, not rendered smoothly. The face should NOT be more detailed than the armor or background. No smooth digital look, no photorealism, but also no abstract impressionist blur.
+IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. The paint looks like toothpaste squeezed in long lines onto the canvas. You should be able to count individual strokes one by one. Strokes have different sizes, directions, and thicknesses — never uniform. Some strokes are big and thick, others smaller. Strokes overlap chaotically, some areas have empty spaces between them where canvas shows. The paint builds form through deliberate directional lines, not blended smoothly. The entire image (character/creature AND background) must have the same thick paint stroke technique — not smoother on the figure. Palette: warm brown, ochre gold, deep sienna, charcoal black, cream white, dark olive green. Palette knife and thick brush technique. Dramatic lighting with strong light source creating highlights and shadows, warm rim light on the figure.
+
+Forbidden: uniform texture, grain filter effect, smooth painting, evenly distributed brushwork, digital painting with impasto filter, AI-style neat strokes, smooth character on textured background.
 
 Character takes up about 60-70% of the frame, full body visible head to toe, environment with significant depth around and behind him.
 ```
@@ -64,7 +66,7 @@ Iconic medium close-up character portrait, square 1:1 format. Same character as 
 
 Background: a simple atmospheric wash of warm brown and golden sunset light, dramatic but not detailed, no narrative scene.
 
-Style: thick impasto oil painting with visible palette knife strokes and paint texture, but NOT impressionism. Keep forms solid and readable for small print. Chunky paint application with visible ridges. Colors: warm brown, ochre gold, deep sienna, charcoal black, cream white, dark olive green. Strong silhouette readable at small size. Face painted with same thick rough strokes as the rest. No smooth digital look, no photorealism.
+IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. Paint like toothpaste squeezed in long lines. Strokes have different sizes and directions, never uniform. The entire image must have the same thick paint stroke technique. Palette: warm brown, ochre gold, deep sienna, charcoal black, cream white, dark olive green. Palette knife and thick brush technique. Dramatic lighting with strong light source, warm rim light on the figure. Forbidden: uniform texture, grain filter, smooth painting, AI-style neat strokes.
 
 Character takes up about 80% of the frame, centered, simple background.
 ```
