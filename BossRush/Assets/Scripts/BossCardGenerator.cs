@@ -89,5 +89,9 @@ public class BossCardGenerator : CardGenerator
         if (difficulteText != null) difficulteText.text = boss.difficulte;
         if (pvFormuleText != null) pvFormuleText.text = boss.pv_formule;
         if (effetSpecialText != null) effetSpecialText.text = boss.effet_special;
+
+        ApplyTextStyle(difficulteText);
+        ApplyTextStyle(pvFormuleText);
+        ApplyTextStyle(effetSpecialText);
     }
 }

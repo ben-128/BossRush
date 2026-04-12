@@ -9,6 +9,7 @@ public class CameraCapture : MonoBehaviour
     {
         public string finalName;
         public string category;
+        public string suffix = "face";
     }
 
     private Camera Camera
@@ -37,6 +38,7 @@ public class CameraCapture : MonoBehaviour
 
         byte[] bytes = image.EncodeToPNG();
         DestroyImmediate(image);
-        File.WriteAllBytes(Application.dataPath + "/Final/" + toExport.category + "/"+ toExport.finalName +"[face,1].png", bytes);
+        string suffix = string.IsNullOrEmpty(toExport.suffix) ? "face" : toExport.suffix;
+        File.WriteAllBytes(Application.dataPath + "/Final/" + toExport.category + "/"+ toExport.finalName +"[" + suffix + ",1].png", bytes);
     }
 }

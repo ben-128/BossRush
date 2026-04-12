@@ -14,9 +14,52 @@ public abstract class CardGenerator : MonoBehaviour
     public TextMeshPro citationText;
     public SpriteRenderer portraitRenderer;
 
+    [Header("Style texte global")]
+    [Tooltip("Couleur du texte principal (brun foncé recommandé au lieu de noir pur)")]
+    public Color textColor = new Color(0.165f, 0.122f, 0.078f, 1f); // #2A1F14
+
+    [Tooltip("Couleur du texte de citation")]
+    public Color citationColor = new Color(0.165f, 0.122f, 0.078f, 1f); // #2A1F14 — même couleur que le texte principal
+
+    [Tooltip("Activer l'ombre portée (underlay TMP)")]
+    public bool enableDropShadow = true;
+
+    [Tooltip("Couleur de l'ombre portée")]
+    public Color shadowColor = new Color(0.165f, 0.122f, 0.078f, 0.3f);
+
+    [Tooltip("Décalage X de l'ombre")]
+    [Range(-1f, 1f)]
+    public float shadowOffsetX = 0.3f;
+
+    [Tooltip("Décalage Y de l'ombre")]
+    [Range(-1f, 1f)]
+    public float shadowOffsetY = -0.3f;
+
+    [Tooltip("Flou de l'ombre (softness)")]
+    [Range(0f, 1f)]
+    public float shadowSoftness = 0.2f;
+
+    [Header("Style citation (renforcement)")]
+    [Tooltip("Activer un outline fin sur la citation pour la rendre plus lisible")]
+    public bool citationOutline = true;
+
+    [Tooltip("Couleur de l'outline citation")]
+    public Color citationOutlineColor = new Color(0.165f, 0.122f, 0.078f, 0.4f);
+
+    [Tooltip("Épaisseur de l'outline citation")]
+    [Range(0f, 1f)]
+    public float citationOutlineWidth = 0.15f;
+
+    [Tooltip("Ombre portée plus forte sur la citation")]
+    [Range(0f, 1f)]
+    public float citationShadowOpacity = 0.5f;
+
     [Header("Fond de carte par type de héros")]
     public SpriteRenderer backgroundRenderer;
     public BackgroundSprites backgroundSprites;
+
+    [Header("Fond bas (multiply subtil sur le portrait)")]
+    public SpriteRenderer bottomRenderer;
 
     [Header("Gemmes de classe (bordure centrale)")]
     public SpriteRenderer[] gemsRenderers;
@@ -132,6 +175,51 @@ public abstract class CardGenerator : MonoBehaviour
     public abstract void GenerateCard(int index);
     public abstract void LoadFromJson();
 
+    protected void ApplyTextStyle(TextMeshPro tmp, bool isCitation = false)
+    {
+        if (tmp == null) return;
+
+        tmp.color = isCitation ? citationColor : textColor;
+
+        var mat = tmp.fontMaterial;
+
+        // Ombre portée (underlay)
+        if (enableDropShadow)
+        {
+            mat.EnableKeyword("UNDERLAY_ON");
+            var uc = shadowColor;
+            if (isCitation) uc.a = citationShadowOpacity;
+            mat.SetColor("_UnderlayColor", uc);
+            mat.SetFloat("_UnderlayOffsetX", shadowOffsetX);
+            mat.SetFloat("_UnderlayOffsetY", shadowOffsetY);
+            mat.SetFloat("_UnderlaySoftness", shadowSoftness);
+        }
+        else
+        {
+            mat.DisableKeyword("UNDERLAY_ON");
+        }
+
+        // Outline (citation seulement)
+        if (isCitation && citationOutline)
+        {
+            mat.EnableKeyword("OUTLINE_ON");
+            mat.SetColor("_OutlineColor", citationOutlineColor);
+            mat.SetFloat("_OutlineWidth", citationOutlineWidth);
+        }
+        else if (!isCitation)
+        {
+            mat.DisableKeyword("OUTLINE_ON");
+            mat.SetFloat("_OutlineWidth", 0f);
+        }
+    }
+
+    protected void ApplyTextStyleAll()
+    {
+        ApplyTextStyle(nomText);
+        ApplyTextStyle(descriptionText);
+        ApplyTextStyle(citationText, isCitation: true);
+    }
+
     protected void SetPortrait(Sprite sprite, Vector2 offset, float scale)
     {
         if (portraitRenderer == null) return;
@@ -151,6 +239,9 @@ public abstract class CardGenerator : MonoBehaviour
         if (descriptionText != null)
             descriptionText.text = description ?? "";
 
+        ApplyTextStyle(nomText);
+        ApplyTextStyle(descriptionText);
+
         Canvas.ForceUpdateCanvases();
     }
 
@@ -158,6 +249,8 @@ public abstract class CardGenerator : MonoBehaviour
     {
         if (citationText != null)
             citationText.text = !string.IsNullOrEmpty(citation) ? $"<i>{citation}</i>" : "";
+
+        ApplyTextStyle(citationText, isCitation: true);
     }
 
     protected static void SetDamageIcons(SpriteRenderer[] slots, int count, float spacing)

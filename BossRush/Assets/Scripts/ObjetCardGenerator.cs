@@ -101,5 +101,10 @@ public class ObjetCardGenerator : CardGenerator
 
         // Gemmes de classe sur la bordure centrale
         SetGems(objet.prerequis);
+
+        ApplyTextStyle(typeText);
+        ApplyTextStyle(prerequisText);
+        ApplyTextStyle(effetText);
+        ApplyTextStyle(bonusDegatsText);
     }
 }

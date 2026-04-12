@@ -309,18 +309,18 @@ Chaque **héros** et chaque **boss** a **deux illustrations distinctes**, géné
 - Environment takes a significant role in the composition
 ```
 
-### Recto de carte — Format 1:1 (vignette carrée en haut)
+### Recto de carte — Format 3:2 (paysage, vignette en haut)
 
-- **Vignette carrée** en haut de la carte (le bas contient stats / effets)
+- **Vignette paysage** en haut de la carte (le bas contient stats / effets)
 - C'est l'**image fonctionnelle** : on l'utilise pendant le jeu, doit être claire à petite taille
 - Composition centrée, sujet dominant, lecture rapide
 - Le personnage occupe ~80% du cadre, fond plus simple ou flou
 - Pose plus iconique/statique (buste ou portrait américain)
 - Doit rester lisible imprimé en petit format (~5cm)
 
-**Caractéristiques du prompt 1:1 :**
+**Caractéristiques du prompt 3:2 :**
 ```
-- Format: square 1:1
+- Format: landscape 3:2
 - Medium close-up shot, bust to upper body
 - Character centered, dominant in frame (~80%)
 - Simpler less detailed background
@@ -329,19 +329,19 @@ Chaque **héros** et chaque **boss** a **deux illustrations distinctes**, géné
 - Same character description as the 2:3 version (consistency)
 ```
 
-### Stratégie de cohérence visuelle entre 2:3 et 1:1
+### Stratégie de cohérence visuelle entre 2:3 et 3:2
 
-L'IA ne garantit pas que le 2:3 et le 1:1 montrent **le même** personnage. Pour assurer la cohérence :
+L'IA ne garantit pas que le 2:3 et le 3:2 montrent **le même** personnage. Pour assurer la cohérence :
 
 **Option A — Description identique (recommandée pour démarrer)**
 1. Écrire d'abord le 2:3 avec une description physique très précise (ethnie, traits, cheveux, peinture de guerre, vêtements, accessoires colorés)
-2. Reprendre **mot pour mot** la description physique dans le 1:1
+2. Reprendre **mot pour mot** la description physique dans le 3:2
 3. Seul le cadrage et la pose changent
 
 **Option B — Image-to-image (plus précis)**
 1. Générer le 2:3 d'abord
 2. Cropper une zone carrée du visage/buste depuis le 2:3
-3. Utiliser ce crop comme **image de référence** dans DALL-E pour générer le 1:1
+3. Utiliser ce crop comme **image de référence** dans DALL-E pour générer le 3:2
 4. Avantage : visage et tenue identiques garantis
 
 **Option C — Référence visuelle externe**
@@ -374,5 +374,5 @@ Exemples :
 | 2026-04-10 | Ajout des fonds de carte colores par type de hero (style MTG). |
 | 2026-04-10 | Ajout des cadres de carte (titre, image, texte, icone) en style woodcut traits epais. |
 | 2026-04-11 | Test style impasto/huile epaisse suite au changement d'univers (tribal/colosses). Premier test sur Nawel (Rempart) concluant — pose dynamique, defensif, peau amerindienne, decor ruines/jungle. |
-| 2026-04-12 | Adoption de 2 formats par hero/boss : verso 2:3 (image hero immersive) + recto 1:1 (vignette en haut de carte). Sous-titre lore FR/EN sur le verso. |
+| 2026-04-12 | Adoption de 2 formats par hero/boss : verso 2:3 (image hero immersive) + recto 3:2 paysage (vignette en haut de carte). Sous-titre lore FR/EN sur le verso. |
 | 2026-04-12 | Refonte du bloc style impasto : mots-clés plus precis (Afremov, Van Gogh Starry Night, "toothpaste strokes", "count individual strokes") pour eviter que l'IA applique un simple filtre de texture. Emphase sur lumiere dramatique et uniformite du rendu entre perso et decor. |

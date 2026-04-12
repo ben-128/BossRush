@@ -7,43 +7,48 @@
   "heroes": [
     {
       "id": "HERO_001",
-      "nom": "Mage",
+      "nom": "Daraa",
+      "titre": "La Flamme",
       "pv": 4,
       "competences": ["magie"],
       "capacite_speciale": "Défausse tous les monstres dans la file avec 1 point de vie restant.",
-      "citation": "« Un seul mot, et les faibles tombent. »"
+      "citation": "« Le feu obéit à ceux qu'il a brûlés. »"
     },
     {
       "id": "HERO_002",
-      "nom": "Soigneur",
+      "nom": "Gao",
+      "titre": "Le Gardien",
       "pv": 4,
       "competences": ["soin"],
       "capacite_speciale": "Retire toutes les blessures d'un héros au choix.",
-      "citation": "« La mort devra repasser. »"
+      "citation": "« Il ramène les vivants chez les vivants. »"
     },
     {
       "id": "HERO_003",
-      "nom": "Guerrier",
+      "nom": "Nawel",
+      "titre": "Le Rempart",
       "pv": 7,
       "competences": ["armure"],
       "capacite_speciale": "Prévient toutes les blessures que ce héros devait subir ce tour.",
-      "citation": "« Frappe. Je ne bougerai pas. »"
+      "citation": "« Ils frappent. Je reste. »"
     },
     {
       "id": "HERO_004",
-      "nom": "Rôdeur",
+      "nom": "Isonash",
+      "titre": "La Piste",
       "pv": 5,
       "competences": ["distance"],
       "capacite_speciale": "Joue immédiatement 2 cartes Action de sa main.",
-      "citation": "« Tu as vu la première flèche. Pas les deux autres. »"
+      "citation": "« Elle voit ce que le vent oublie. »"
     },
     {
       "id": "HERO_005",
-      "nom": "Diplomate",
+      "nom": "Aslan",
+      "titre": "Le Porte-Voix",
       "pv": 5,
       "competences": ["diplomatie"],
       "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent.",
-      "citation": "« Ce que j'ai est à toi. Ce que tu as m'intéresse. »"
+      "citation": "« Cinq tribus parlent par sa bouche. »"
     }
   ]
 }

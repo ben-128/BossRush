@@ -154,5 +154,7 @@ public class MonsterCardGenerator : CardGenerator
                 typeDegatsIcon.gameObject.SetActive(false);
             }
         }
+
+        ApplyTextStyle(pvText);
     }
 }

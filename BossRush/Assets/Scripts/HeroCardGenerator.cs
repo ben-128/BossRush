@@ -24,6 +24,7 @@ public class HeroCardGenerator : CardGenerator
     {
         public string id;
         public string nom;
+        public string titre;
         public int pv;
         public string[] competences;
         public string capacite_speciale;
@@ -36,6 +37,7 @@ public class HeroCardGenerator : CardGenerator
     [Serializable]
     public class HeroVisualData : CardVisualData
     {
+        [HideInInspector] public string titre;
         [HideInInspector] public int pv;
         [HideInInspector] public string[] competences;
         [HideInInspector] public string capacite_speciale;
@@ -93,6 +95,7 @@ public class HeroCardGenerator : CardGenerator
     #endregion
 
     [Header("Textes spécifiques héros")]
+    public TMPro.TextMeshPro titreText;
     public TMPro.TextMeshPro pvText;
     public TMPro.TextMeshPro capaciteText;
 
@@ -128,6 +131,7 @@ public class HeroCardGenerator : CardGenerator
             allHeroes[i] = new HeroVisualData
             {
                 nom = json.nom,
+                titre = json.titre,
                 pv = json.pv,
                 competences = json.competences,
                 capacite_speciale = json.capacite_speciale,
@@ -150,6 +154,7 @@ public class HeroCardGenerator : CardGenerator
         var mainCompetence = (hero.competences != null && hero.competences.Length > 0) ? hero.competences[0] : null;
 
         SetBaseTexts(hero.nom, hero.description);
+        if (titreText != null) titreText.text = hero.titre ?? "";
         if (pvText != null) pvText.text = hero.pv.ToString();
         if (capaciteText != null) capaciteText.text = hero.capacite_speciale ?? "";
         SetPortrait(hero.sprite, hero.offset, hero.scale);
@@ -157,6 +162,9 @@ public class HeroCardGenerator : CardGenerator
         SetCompetenceIcons(hero.competences);
         SetBackground(mainCompetence);
         SetGems(mainCompetence);
+
+        ApplyTextStyle(titreText);
+        ApplyTextStyle(capaciteText);
     }
 
     private void SetCompetenceIcons(string[] competences)

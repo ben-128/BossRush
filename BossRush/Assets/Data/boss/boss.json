@@ -1,159 +1,169 @@
 {
   "meta": {
-    "description": "Liste des 10 boss du jeu. Chaque boss a une fiche avec 4 stats consultées lors des épreuves génériques.",
-    "version": "1.0",
+    "description": "Liste des 10 colosses du jeu. Chaque colosse a une fiche avec 4 stats consultées lors des épreuves génériques.",
+    "version": "2.0",
     "notes": "PV adaptés au nombre de joueurs via formule. Le deck Épreuve est générique (30 cartes communes). Les valeurs '?' sur les cartes épreuve se réfèrent aux stats de la fiche boss."
   },
   "boss": [
     {
       "id": "BOSS_001",
-      "nom": "Géant Affamé",
+      "nom": "Hobab",
       "difficulte": "facile",
       "pv_formule": "8 + 4 par joueur",
       "pv_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
-        "action_speciale": "Le boss se soigne 2 PV.",
-        "passif": "Lorsque le boss inflige des dégâts, il se soigne 1 PV."
+        "action_speciale": "Le boss souffle du sable brûlant : tous les héros subissent 1 dégât.",
+        "passif": "Brûlures persistantes — Quand le boss inflige des dégâts, le héros actif subit 1 dégât supplémentaire au début de son prochain tour."
       },
       "monstres_ids": ["MON_001", "MON_002", "MON_003", "MON_004", "MON_005"],
-      "description": "Un colosse vorace qui se régénère en frappant."
+      "description": "Dragon colossal des terres sèches, corps serpentin couvert d'écailles craquelées avec braises rougeoyantes entre les fissures.",
+      "citation": "« Il était la pluie. Il est devenu la cendre. »"
     },
     {
       "id": "BOSS_002",
-      "nom": "Reine Araignée",
+      "nom": "Pshato",
       "difficulte": "facile",
-      "pv_formule": "6 + 4 par joueur",
-      "pv_par_joueurs": { "2": 14, "3": 18, "4": 22, "5": 26 },
-      "stats": {
-        "degats": 1,
-        "nb_invocations": 2,
-        "action_speciale": "Chaque monstre en file inflige 1 dégât au héros actif.",
-        "passif": "Les monstres invoqués ont +1 PV."
-      },
-      "monstres_ids": [],
-      "description": "Une matriarche qui submerge les héros sous ses rejetons."
-    },
-    {
-      "id": "BOSS_003",
-      "nom": "Liche Oubliée",
-      "difficulte": "moyen",
-      "pv_formule": "7 + 4 par joueur",
-      "pv_par_joueurs": { "2": 15, "3": 19, "4": 23, "5": 27 },
-      "stats": {
-        "degats": 3,
-        "nb_invocations": 1,
-        "action_speciale": "Chaque héros défausse 1 carte Arsenal de sa main.",
-        "passif": "Les soins des héros sont réduits de 1 (min 0)."
-      },
-      "monstres_ids": [],
-      "description": "Un nécromancien desséché qui sape la volonté des héros."
-    },
-    {
-      "id": "BOSS_004",
-      "nom": "Dragon Cendré",
-      "difficulte": "moyen",
       "pv_formule": "10 + 4 par joueur",
       "pv_par_joueurs": { "2": 18, "3": 22, "4": 26, "5": 30 },
       "stats": {
-        "degats": 3,
+        "degats": 2,
         "nb_invocations": 1,
-        "action_speciale": "Tous les héros subissent 1 dégât.",
-        "passif": "Les attaques mélée infligent 1 dégât de moins au boss (min 1)."
+        "action_speciale": "Des racines surgissent du sol : le héros actif défausse 1 carte Arsenal de sa main.",
+        "passif": "Racines régénératrices — Au début du tour du boss, il se soigne 1 PV."
       },
       "monstres_ids": [],
-      "description": "Un dragon cuirassé dont les flammes balaient le champ de bataille."
+      "description": "Colosse mi-arbre mi-géant, corps massif de bois noueux avec mousse verte, racines noires corrompues.",
+      "citation": "« La forêt l'a fait. La forêt le pleure. »"
+    },
+    {
+      "id": "BOSS_003",
+      "nom": "Caicai",
+      "difficulte": "moyen",
+      "pv_formule": "9 + 4 par joueur",
+      "pv_par_joueurs": { "2": 17, "3": 21, "4": 25, "5": 29 },
+      "stats": {
+        "degats": 2,
+        "nb_invocations": 1,
+        "action_speciale": "Une vague immense déferle : tous les héros subissent 2 dégâts.",
+        "passif": "Marée noire — Les attaques à distance contre le boss infligent 1 dégât de moins (min 1)."
+      },
+      "monstres_ids": [],
+      "description": "Serpent de mer titanesque, corps couvert d'écailles bleu-noir, cristaux noirs poussant entre les écailles.",
+      "citation": "« Les vagues s'écartaient pour lui. Maintenant elles fuient. »"
+    },
+    {
+      "id": "BOSS_004",
+      "nom": "Invunche",
+      "difficulte": "moyen",
+      "pv_formule": "8 + 4 par joueur",
+      "pv_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
+      "stats": {
+        "degats": 1,
+        "nb_invocations": 2,
+        "action_speciale": "L'Invunche déforme le héros actif : il ne pourra jouer aucune carte Action à son prochain tour.",
+        "passif": "Difforme et tenace — Le boss ignore le 1er dégât de chaque attaque mêlée (min 0)."
+      },
+      "monstres_ids": [],
+      "description": "Humanoïde géant horriblement déformé, tête retournée à 180°, membres tordus, peau grise avec cicatrices rituelles.",
+      "citation": "« Ce qui reste d'un esprit qu'on a tordu. »"
     },
     {
       "id": "BOSS_005",
-      "nom": "Hydre des Marais",
+      "nom": "Akkoro",
       "difficulte": "moyen",
       "pv_formule": "8 + 5 par joueur",
       "pv_par_joueurs": { "2": 18, "3": 23, "4": 28, "5": 33 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
-        "action_speciale": "Le boss se soigne 3 PV et pioche 1 monstre.",
-        "passif": "Quand le boss perd 5 PV ou plus, ses dégâts passent à 3."
+        "action_speciale": "Saisie : un héros au choix défausse 1 Objet posé devant lui.",
+        "passif": "Tentacules multiples — Quand le boss attaque, il attaque 2 héros au lieu d'1 (le héros actif + 1 au choix)."
       },
       "monstres_ids": [],
-      "description": "Chaque blessure la rend plus féroce."
+      "description": "Pieuvre colossale rouge vif, huit tentacules immenses couverts de ventouses ressemblant à des bouches béantes.",
+      "citation": "« Les profondeurs n'avaient pas de nom. Maintenant si. »"
     },
     {
       "id": "BOSS_006",
-      "nom": "Seigneur Vampire",
+      "nom": "Hoyau",
       "difficulte": "moyen",
+      "pv_formule": "9 + 4 par joueur",
+      "pv_par_joueurs": { "2": 17, "3": 21, "4": 25, "5": 29 },
+      "stats": {
+        "degats": 2,
+        "nb_invocations": 1,
+        "action_speciale": "Le boss libère un nuage venimeux : tous les héros subissent 1 dégât et défaussent 1 carte.",
+        "passif": "Venin — Quand le boss inflige des dégâts, le héros touché ne peut pas être soigné jusqu'à la fin de son prochain tour."
+      },
+      "monstres_ids": [],
+      "description": "Hybride dragon-requin volant, corps de requin bleu-vert, mâchoire verticale, ailes membraneuses, venin vert suintant.",
+      "citation": "« Il portait le ciel. Il l'empoisonne. »"
+    },
+    {
+      "id": "BOSS_007",
+      "nom": "Azhda",
+      "difficulte": "difficile",
+      "pv_formule": "11 + 4 par joueur",
+      "pv_par_joueurs": { "2": 19, "3": 23, "4": 27, "5": 31 },
+      "stats": {
+        "degats": 3,
+        "nb_invocations": 1,
+        "action_speciale": "Une tête crache du feu : tous les héros subissent 1 dégât, ignore les boucliers/réductions.",
+        "passif": "Plusieurs têtes — Le boss attaque deux fois par tour (chaque tête frappe)."
+      },
+      "monstres_ids": [],
+      "description": "Dragon colossal à plusieurs têtes, corps serpentin couvert d'écailles et fourrure noire, ailes de chauve-souris déchirées.",
+      "citation": "« Une tête pour chaque peuple qu'il gardait. »"
+    },
+    {
+      "id": "BOSS_008",
+      "nom": "Gaww",
+      "difficulte": "difficile",
       "pv_formule": "7 + 4 par joueur",
       "pv_par_joueurs": { "2": 15, "3": 19, "4": 23, "5": 27 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
-        "action_speciale": "Le héros actif défausse 1 Objet. Si impossible, subit 2 dégâts.",
-        "passif": "Quand le boss inflige des dégâts, il se soigne du même montant."
+        "action_speciale": "Le Gaww prend possession : le héros actif défausse sa main, puis pioche 2 cartes.",
+        "passif": "Possession — Au début de chaque tour, le héros actif révèle la première carte de la pile Arsenal et la défausse."
       },
       "monstres_ids": [],
-      "description": "Il se nourrit de vos forces pour alimenter les siennes."
-    },
-    {
-      "id": "BOSS_007",
-      "nom": "Golem de Fer",
-      "difficulte": "difficile",
-      "pv_formule": "12 + 4 par joueur",
-      "pv_par_joueurs": { "2": 20, "3": 24, "4": 28, "5": 32 },
-      "stats": {
-        "degats": 3,
-        "nb_invocations": 1,
-        "action_speciale": "Annule la prochaine attaque jouée contre le boss.",
-        "passif": "Le boss ignore les 1er dégât de chaque attaque (min 0)."
-      },
-      "monstres_ids": [],
-      "description": "Une forteresse vivante quasi indestructible."
-    },
-    {
-      "id": "BOSS_008",
-      "nom": "Sorcière du Crépuscule",
-      "difficulte": "difficile",
-      "pv_formule": "6 + 4 par joueur",
-      "pv_par_joueurs": { "2": 14, "3": 18, "4": 22, "5": 26 },
-      "stats": {
-        "degats": 2,
-        "nb_invocations": 2,
-        "action_speciale": "Mélanger la défausse Arsenal dans la pile Arsenal, puis chaque héros défausse sa main et pioche 3.",
-        "passif": "Les Objets posés devant les héros ne peuvent pas être utilisés pendant les épreuves."
-      },
-      "monstres_ids": [],
-      "description": "Elle manipule le destin et retourne vos armes contre vous."
+      "description": "Esprit sans forme fixe, masse géante d'ombre et fumée noire, dizaines de visages humains apparaissant et disparaissant.",
+      "citation": "« Il habitait les vivants. Maintenant il les vide. »"
     },
     {
       "id": "BOSS_009",
-      "nom": "Titan des Abysses",
+      "nom": "Kaggen",
       "difficulte": "difficile",
       "pv_formule": "10 + 5 par joueur",
       "pv_par_joueurs": { "2": 20, "3": 25, "4": 30, "5": 35 },
       "stats": {
-        "degats": 4,
+        "degats": 3,
         "nb_invocations": 1,
-        "action_speciale": "Tous les héros subissent 2 dégâts.",
-        "passif": "Le boss ne peut pas subir plus de 3 dégâts par tour."
+        "action_speciale": "Lueur aveuglante : tous les héros défaussent 1 carte au hasard de leur main.",
+        "passif": "Aura sacrée — Le boss ne peut pas subir plus de 4 dégâts par tour."
       },
       "monstres_ids": [],
-      "description": "Une horreur primordiale que rien ne semble pouvoir arrêter."
+      "description": "Éland colossal lumineux, pelage doré brillant de lumière intérieure, cornes spiralées immenses.",
+      "citation": "« Son sang faisait pousser le monde. »"
     },
     {
       "id": "BOSS_010",
-      "nom": "Roi Démon",
+      "nom": "Khwa",
       "difficulte": "très difficile",
-      "pv_formule": "10 + 5 par joueur",
-      "pv_par_joueurs": { "2": 20, "3": 25, "4": 30, "5": 35 },
+      "pv_formule": "12 + 5 par joueur",
+      "pv_par_joueurs": { "2": 22, "3": 27, "4": 32, "5": 37 },
       "stats": {
         "degats": 3,
         "nb_invocations": 2,
-        "action_speciale": "Le boss invoque 2 monstres et chaque monstre en file attaque le héros actif.",
-        "passif": "Au début de chaque tour, si aucun monstre en file, le boss pioche 1 monstre."
+        "action_speciale": "L'eau se retire : tous les héros subissent 2 dégâts et le boss invoque 2 monstres.",
+        "passif": "Insaisissable — Annule la 1ère attaque jouée contre le boss à chaque tour."
       },
       "monstres_ids": [],
-      "description": "Le seigneur ultime. Ses légions sont infinies."
+      "description": "Géant humanoïde immense, peau rouge vif éclatante, longs cheveux blancs ondulant, cristal noir massif visible au cœur.",
+      "citation": "« Il était la source. Il est devenu la soif. »"
     }
   ]
 }

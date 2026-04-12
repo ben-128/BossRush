@@ -61,13 +61,15 @@ Character takes up about 60-70% of the frame, full body visible head to toe, env
 ## Prompt RECTO (DALL-E, impasto, 1:1 carré, vignette)
 
 ```
-Iconic medium close-up character portrait, square 1:1 format. Same character as the verso: a strong Indigenous American warrior, deep copper brown skin, strong Indigenous features, high cheekbones, broad nose, weathered scarred face, deep blue war paint across one side of his face, long black hair tied back, blue feathers on his shoulders and headpiece. Wearing iron plates and thick leather armor, jaguar pelt cape on shoulders. Bust to upper body shot, holding his round shield with blue geometric sun patterns raised in front of him. Determined fierce gaze directly at the viewer.
+Iconic medium close-up character portrait, square 1:1 format, DARK MOODY COMPOSITION. Same character as the verso: a strong Indigenous American warrior, deep copper brown skin, strong Indigenous features, high cheekbones, broad nose, weathered scarred face, deep blue war paint across one side of his face, long black hair tied back, blue feathers on his shoulders and headpiece. Wearing iron plates and thick leather armor, jaguar pelt cape on shoulders. Bust to upper body shot, holding his round shield with blue geometric sun patterns raised in front of him, shield catching the light. Determined fierce gaze directly at the viewer, eyes lit by the warm light source.
 
-Background: a simple atmospheric wash of dark stone and warm golden light, dramatic but not detailed, no narrative scene.
+Background: VERY DARK, almost black. A deep shadow of charcoal and dark brown with only a faint warm golden rim light edge. NO sky, NO mountains, NO landscape details. Just darkness and smoke behind him, like he is emerging from shadow. The ONLY light is a strong warm source from the upper left hitting his face, shoulder, and shield — everything else falls into deep shadow. Think Rembrandt lighting on an impasto painting.
 
-IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. Paint like toothpaste squeezed in long lines. Strokes have different sizes and directions, never uniform. The entire image must have the same thick paint stroke technique. Palette: deep steel blue, burnt sienna, warm ochre gold, charcoal black, dark brown, cream white. Palette knife and thick brush technique. Dramatic lighting with strong light source, warm rim light on the figure. Forbidden: uniform texture, grain filter, smooth painting, AI-style neat strokes.
+IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. Paint like toothpaste squeezed in long lines. Strokes have different sizes and directions, never uniform. The entire image must have the same thick paint stroke technique. Palette: deep steel blue, burnt sienna, warm ochre gold, charcoal black, dark brown, cream white. Palette knife and thick brush technique. Dramatic Rembrandt lighting — strong single light source from upper left, deep shadows on the opposite side, warm rim light on the figure edges. The blue of his war paint and shield should GLOW against the dark background.
 
-Character takes up about 80% of the frame, centered, simple background.
+Forbidden: uniform texture, grain filter, smooth painting, AI-style neat strokes, bright background, visible sky, landscape behind character, busy background, multiple light sources.
+
+Character takes up about 85% of the frame, tightly framed, simple very dark background.
 ```
 
 ## Notes

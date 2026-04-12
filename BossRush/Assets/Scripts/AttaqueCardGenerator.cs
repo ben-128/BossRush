@@ -115,6 +115,9 @@ public class AttaqueCardGenerator : CardGenerator
 
         if (typeAttaqueText != null) typeAttaqueText.text = atk.type;
 
+        ApplyTextStyle(typeAttaqueText);
+        ApplyTextStyle(valeurSpecialeText);
+
         if (typeDegatsIcon != null)
         {
             if (dmgIcon != null) { typeDegatsIcon.sprite = dmgIcon; typeDegatsIcon.gameObject.SetActive(true); }
