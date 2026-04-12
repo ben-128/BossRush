@@ -127,6 +127,14 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 
 ---
 
+## Les Monstres
+
+Petites créatures parasitaires invoquées par les colosses pendant le combat. Faibles individuellement (1-2 dégâts, 1-3 PV) mais dangereuses en nombre.
+
+15 monstres au total — voir [monstres.md](monstres.md) pour la liste complète et les fiches.
+
+---
+
 ## Nom du jeu — Pistes
 
 Voir [IDEAS.md](../IDEAS.md) pour la liste complète des propositions.
