@@ -11,7 +11,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-	  "effet": "Le monstre n'attaque pas ce tour ci.",
+	  "effet": "Lorsque ce monstre devrait attaquer, défaussez cette carte et annulez l'attaque.",
       "quantite": 3
     },
     {
@@ -38,7 +38,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-	  "effet": "Retire une blessure au héros.",
+	  "effet": "Retire 1 blessure au héros.",
       "quantite": 2
     },
     {
@@ -46,7 +46,7 @@
       "nom": "Second souffle",
       "categorie": "action",
       "prerequis": "Nawel",
-	  "effet": "Retire jusqu'à trois blessures au héros.",
+	  "effet": "Retire jusqu'à 3 blessures au héros.",
       "quantite": 2
     },
     {
@@ -130,7 +130,7 @@
       "degats": 1,
       "prerequis": "Daraa",
       "effet": "Peut cibler directement le Colosse ou n'importe quel monstre de la file.",
-      "quantite": 3
+      "quantite": 2
     },
     {
       "id": "MAG_A05",
@@ -138,7 +138,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Daraa",
-      "effet": "Si le monstre suivant dans la file n'a qu'un point de vie restant, le défausse.",
+      "effet": "Si le monstre suivant dans la file n'a qu'1 point de vie restant, le défausse.",
       "quantite": 2
     },
     {
@@ -172,6 +172,15 @@
       "prerequis": "Daraa",
       "effet": "Régénère la capacité spéciale du héros.",
       "quantite": 1
+    },
+	 {
+      "id": "MAG_A10",
+      "nom": "Explosion de cadavre",
+      "categorie": "action",
+      "prerequis": "Daraa",
+	  "degats": 1,
+      "effet": "Si la cible meurt, placez la blessure sur le monstre suivant dans la file.",
+      "quantite": 2
     },
     {
       "id": "MAG_O01",

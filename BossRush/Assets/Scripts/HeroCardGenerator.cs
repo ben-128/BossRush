@@ -63,6 +63,13 @@ public class HeroCardGenerator : CardGenerator
         public float scaleMagie = 1f;
         public float scaleDiplomatie = 1f;
 
+        [Header("Offset par type")]
+        public Vector2 offsetArmure;
+        public Vector2 offsetDistance;
+        public Vector2 offsetSoin;
+        public Vector2 offsetMagie;
+        public Vector2 offsetDiplomatie;
+
         public Sprite GetSprite(string competence)
         {
             switch (competence.ToLower())
@@ -91,6 +98,63 @@ public class HeroCardGenerator : CardGenerator
                 default: return 1f;
             }
         }
+
+        public Vector2 GetOffset(string competence)
+        {
+            if (string.IsNullOrEmpty(competence)) return Vector2.zero;
+            switch (competence.ToLower())
+            {
+                case "armure": return offsetArmure;
+                case "distance": return offsetDistance;
+                case "soin": return offsetSoin;
+                case "magie": return offsetMagie;
+                case "diplomatie": return offsetDiplomatie;
+                default: return Vector2.zero;
+            }
+        }
+    }
+    #endregion
+
+    #region Couleurs par compétence (pastille icône + identité héros)
+    /// <summary>
+    /// Couleurs associées à chaque compétence / héros.
+    /// Utilisées pour teinter le disque de fond derrière l'icône de compétence.
+    /// Valeurs par défaut = palette définie dans icon_design.md
+    /// </summary>
+    [Serializable]
+    public class CompetenceColors
+    {
+        [Tooltip("Nawel — Bleu acier #2B4F6E")]
+        public Color armure = new Color(0.169f, 0.310f, 0.431f, 0.9f);
+
+        [Tooltip("Daraa — Rouge cramoisi #8B2020")]
+        public Color magie = new Color(0.545f, 0.125f, 0.125f, 0.9f);
+
+        [Tooltip("Aslan — Sienna chaud #7A5B3A")]
+        public Color diplomatie = new Color(0.478f, 0.357f, 0.227f, 0.9f);
+
+        [Tooltip("Isonash — Vert émeraude #2A5E3A")]
+        public Color distance = new Color(0.165f, 0.369f, 0.227f, 0.9f);
+
+        [Tooltip("Gao — Ambre doré #9B7B2F")]
+        public Color soin = new Color(0.608f, 0.482f, 0.184f, 0.9f);
+
+        [Tooltip("Fallback — Brun foncé #3A2E22")]
+        public Color neutre = new Color(0.227f, 0.180f, 0.133f, 0.9f);
+
+        public Color GetColor(string competence)
+        {
+            if (string.IsNullOrEmpty(competence)) return neutre;
+            switch (competence.ToLower())
+            {
+                case "armure":     return armure;
+                case "magie":      return magie;
+                case "diplomatie": return diplomatie;
+                case "distance":   return distance;
+                case "soin":       return soin;
+                default:           return neutre;
+            }
+        }
     }
     #endregion
 
@@ -101,9 +165,13 @@ public class HeroCardGenerator : CardGenerator
 
     [Header("Icônes de compétences")]
     public CompetenceSprites competenceSprites;
+    public CompetenceColors competenceColors;
 
     [Header("Emplacements des icônes de compétences")]
     public SpriteRenderer[] competenceSlots;
+
+    [Tooltip("Disque de fond derrière l'icône compétence (sprite whiteCircle teinté)")]
+    public SpriteRenderer competenceDiscRenderer;
 
     [Header("Données des héros (charger depuis JSON)")]
     public HeroVisualData[] allHeroes;
@@ -179,6 +247,12 @@ public class HeroCardGenerator : CardGenerator
 
         if (competences == null) return;
 
+        // Teinter le disque de fond avec la couleur de la compétence principale
+        if (competenceDiscRenderer != null && competences.Length > 0 && competenceColors != null)
+        {
+            competenceDiscRenderer.color = competenceColors.GetColor(competences[0]);
+        }
+
         for (int i = 0; i < competences.Length && i < competenceSlots.Length; i++)
         {
             var sprite = competenceSprites.GetSprite(competences[i]);
@@ -188,6 +262,9 @@ public class HeroCardGenerator : CardGenerator
                 competenceSlots[i].sprite = sprite;
                 float s = competenceSprites.GetScale(competences[i]);
                 competenceSlots[i].transform.localScale = new Vector3(s, s, 1f);
+                Vector2 o = competenceSprites.GetOffset(competences[i]);
+                var pos = competenceSlots[i].transform.localPosition;
+                competenceSlots[i].transform.localPosition = new Vector3(o.x, o.y, pos.z);
             }
         }
     }

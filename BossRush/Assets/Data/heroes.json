@@ -12,7 +12,7 @@
       "pv": 4,
       "competences": ["magie"],
       "capacite_speciale": "Défausse tous les monstres dans la file avec 1 point de vie restant.",
-      "citation": "« Le feu ne pardonne pas. Elle non plus. »"
+      "citation": "« Le feu est patient. Elle ne l'est pas. »"
     },
     {
       "id": "HERO_002",
@@ -30,7 +30,7 @@
       "pv": 7,
       "competences": ["armure"],
       "capacite_speciale": "Prévient toutes les blessures que ce héros devait subir ce tour.",
-      "citation": "« Il encaisse. Encore. Encore. »"
+      "citation": "« Il encaisse. Encore. Et encore. »"
     },
     {
       "id": "HERO_004",

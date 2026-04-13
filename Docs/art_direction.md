@@ -174,30 +174,51 @@ Chaque heros a sa couleur dominante qui teinte ~70% de l'image (fond, ombres, ar
 
 ## 4. Layout des cartes
 
-### Approche : Cadre dur + panneau opaque (style Root/Everdell)
+### Approche : Illustration plein cadre + overlay parchemin (style Everdell/Flesh and Blood)
 
-Voir `card_frame_templates.md` pour les dimensions et prompts de chaque element.
+**Decision avril 2026** : apres etude des JdS modernes (Everdell, Flesh and Blood, MTG full-art, Oath), le layout "split dur" (image en haut / texte en bas) est abandonne au profit d'un layout overlay.
 
-**Principe** : Separation nette entre illustration et texte. Pas de chevauchement.
-- Bandeau titre en couleur du heros (texte blanc)
-- Illustration plein cadre
-- Barre de separation coloree avec motif tribal central
-- Zone texte fond creme opaque (#F2E8D5)
-- Barre stats en bas
+**Principe** : L'illustration occupe TOUTE la carte. La zone texte est un panneau parchemin semi-opaque pose PAR-DESSUS l'illustration en bas.
 
-**Elements a generer par IA** : barre de separation (motif tribal), icones
-**Elements a creer en code** : cadre, bandeau titre, fond texte, barre stats (plus fiable)
+- Illustration plein cadre (couvre 100% de la carte)
+- Bandeau titre en haut (couleur du heros, texte blanc)
+- Panneau parchemin overlay en bas (~35-40% de la hauteur) — bords irreguliers, vignettage chaud, style Everdell
+- Barre stats en bas du parchemin
+- Le parchemin laisse deviner l'illustration en-dessous sur ses bords (bords irreguliers + legere transparence optionnelle)
+
+**Avantages vs split dur** :
+- Illustration plus immersive (toute la carte = wow factor)
+- Plus proche des standards JdS modernes
+- Le parchemin donne du caractere (vs un aplat creme)
+- Meilleure utilisation de l'espace
+
+**Zone texte parchemin** : voir `Docs/prompt_bottom_texture.md` — parchemin avec bords irreguliers, vignettage burnt sienna, taches organiques style Everdell.
+
+**Elements a generer par IA** : parchemin overlay (prompt_bottom_texture.md), icones
+**Elements a creer en code** : cadre, bandeau titre, barre stats
 
 ---
 
 ## 5. Formats d'illustration
 
-### Recto — Format 3:2 (paysage, zone illustration carte)
+### Bloc mouvement (a ajouter a TOUT prompt de heros)
 
-C'est l'image **fonctionnelle** : on l'utilise pendant le jeu. Sera croppee a 795x500px.
+> Le mouvement vient du CORPS, pas d'effets speciaux cheap.
 
 ```
-[BLOC STYLE] + [BLOC COULEUR] +
+MOVEMENT EFFECTS: Fine dust and dirt kicked up from feet. Leather
+straps, loincloth or cape whipping in the wind of the action. A few
+dry leaves or grass blades carried in the air. The movement comes
+from the BODY — torsion, legs, diagonal lean.
+NO rocks, NO debris, NO floating boulders, NO shockwaves.
+```
+
+### Recto — Format 3:2 (paysage, zone illustration carte)
+
+C'est l'image **fonctionnelle** : on l'utilise pendant le jeu. L'illustration couvre TOUTE la carte (le parchemin texte sera overlay par-dessus en bas).
+
+```
+[BLOC STYLE] + [BLOC COULEUR] + [BLOC MOUVEMENT] +
 Full body character, landscape 3:2 format.
 Heroic proportions — tall, lean, powerful (7-8 heads tall).
 NOT stocky, NOT chibi, NOT cute.
@@ -207,7 +228,11 @@ Strong readable silhouette, must work at thumbnail size.
 Dynamic mid-action pose — weight shifting, muscles tensed, movement.
 Atmospheric background in dominant color tones — suggested, not detailed.
 All body parts within center 80% horizontally.
-Strong directional lighting creating high contrast.
+Strong directional lighting — warm golden light from one side,
+cool shadows on the other.
+IMPORTANT: The bottom 35% of the image will be partially covered
+by a text overlay. Keep the character's key features (head, torso,
+weapon) in the upper 65%. Legs/feet can extend into the lower zone.
 ```
 
 ### Verso — Format 2:3 (portrait vertical)
@@ -215,7 +240,7 @@ Strong directional lighting creating high contrast.
 C'est l'image **hero** : celle qu'on regarde et qu'on retient.
 
 ```
-[BLOC STYLE] + [BLOC COULEUR] +
+[BLOC STYLE] + [BLOC COULEUR] + [BLOC MOUVEMENT] +
 Full body character portrait, portrait vertical 2:3 format.
 Heroic proportions — tall, lean, powerful (7-8 heads tall).
 Wide shot showing full environment.
@@ -223,7 +248,8 @@ Character ~60-70% of frame, full body visible head to toe.
 Dynamic narrative pose with strong diagonal composition.
 Atmospheric background with depth (landscape, ruins, mountains, sky).
 Environment tinted in dominant color.
-Dramatic lighting, strong warm/cold contrast.
+Dramatic lighting — warm golden light from one side, cool shadows
+on the other. Strong warm/cold contrast.
 ```
 
 ### Sous-titre lore (verso uniquement)
@@ -234,6 +260,113 @@ En bas de l'illustration verso, une phrase courte FR + EN :
 - Aslan : *« Cinq tribus parlent par sa bouche. »* / *« Five tribes speak through his mouth. »*
 - Isonash : *« Elle voit ce que le vent oublie. »* / *« She sees what the wind forgets. »*
 - Gao : *« Il ramene les vivants chez les vivants. »* / *« He brings the living back to the living. »*
+
+---
+
+## 5b. Prompts complets prets-a-coller (verso 2:3)
+
+> Copier-coller directement dans ChatGPT. Un seul bloc par heros.
+> Pour le recto 3:2, remplacer le bloc COMPOSITION par le template recto ci-dessus.
+
+### Nawel (Rempart) — Verso 2:3
+
+```
+Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
+
+Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients.
+
+COLOR DIRECTION: The dominant color theme is deep steel blue. 70% deep steel blue tones, 30% warm golden accents. Deep steel blue armor, shadows, background. Warm golden fur highlights provide contrast.
+
+SUBJECT: Anthropomorphic jaguar warrior — massive, powerful feline musculature. Spotted black-on-tawny fur. Heroic proportions (7-8 heads tall), tall, lean, powerful. NOT stocky, NOT chibi. Mapuche tribal warrior: wrought iron, leather and bone armor. Massive round shield with blue geometric solar motifs held forward. Blue war paint on muzzle and cheeks. Natural amber/golden iris eyes, NOT glowing.
+
+POSE: Dynamic aerial shield-bash lunge, weight shifting dramatically, strong diagonal composition. Body twisting with the force of the charge. One foot off the ground.
+
+MOVEMENT: Fine dust kicked up from feet. Leather straps and loincloth whipping in wind. A few dry leaves carried in the air. Movement comes from the BODY torsion and diagonal lean. NO rocks, NO debris, NO floating boulders.
+
+ENVIRONMENT: Wide shot, full body visible head to toe. Stormy mountain landscape tinted deep steel blue. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Strong directional warm golden light from one side, cool blue shadows on the other.
+
+Portrait orientation, 2:3 aspect ratio.
+```
+
+### Daraa (Flamme) — Verso 2:3
+
+```
+Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
+
+Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients.
+
+COLOR DIRECTION: Crimson red and ember orange are the WARM accent colors (30%). The DOMINANT tones (70%) are deep cool shadows — dark indigo blue, charcoal black, deep violet in the shadows and background. The crimson/ember appears ONLY on: the fire magic, the feather headdress, rune glow, and robe accents. The overall image should read as DARK with RED ACCENTS, not as an all-red image.
+
+SUBJECT: Anthropomorphic FEMALE hyena sorceress — lean, elegant, graceful. Distinctly feminine silhouette: narrow waist, longer limbs, sleek refined frame. NOT bulky, NOT brutish, NOT masculine. Short brown-grey fur, ember-colored mane flowing long and swept back like wild hair. Pointed expressive ears. Heroic proportions (7-8 heads tall), tall and slender. NOT stocky, NOT chibi. Afar tribal mage: lightweight layered robes with flowing translucent fabric that shows her silhouette, headdress with ember-colored feathers. NO staff, NO rod, NO weapon — her hands ARE the weapon. Natural dark brown eyes with warm ember reflections, NOT glowing, NOT red.
+
+POSE: Mid-leap or levitating — both feet off the ground, body suspended in the air. Arms spread wide, palms open and facing down. Between her two hands, a sweeping HALF-CIRCLE ARC OF FIRE traces through the air — bright crimson and orange flames forming a crescent shape connecting her palms. Her body arches gracefully, back slightly curved, head tilted with fierce concentration. Three-quarter view. Strong diagonal composition from one hand through the fire arc to the other. This is raw elemental power channeled with dancer-like grace.
+
+MOVEMENT: Robes and long mane streaming upward from the levitation and heat. Translucent fabric layers billowing dramatically around her legs. Fire arc between her hands crackles with ember sparks trailing behind the motion. Fine ash and sand pushed outward below her floating body. The movement is AERIAL and GRACEFUL — like a dancer mid-pirouette, not a brute smashing. NO debris, NO boulders.
+
+ENVIRONMENT: Wide shot, full body visible. Scorched desert at twilight — dark indigo sky with crimson horizon line. Cracked earth. Volcanic silhouettes far away. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Warm crimson glow from below (runes), cool indigo light from above (sky).
+
+Portrait orientation, 2:3 aspect ratio.
+```
+
+### Aslan (Porte-Voix) — Verso 2:3
+
+```
+Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
+
+Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients.
+
+COLOR DIRECTION: The dominant color theme is warm sienna brown and gold. 70% sienna/gold tones, 30% cool blue-grey shadow accents. Golden mane, sienna cape, warm-toned architecture. Cool blue-grey shadows provide depth.
+
+SUBJECT: Anthropomorphic lion diplomat — majestic, commanding presence. Thick luxurious golden mane, tawny fur. Heroic proportions (7-8 heads tall), tall, proud bearing. NOT stocky, NOT chibi. Circassian-inspired noble: rich leather cape with ornate clasps, light ceremonial armor underneath. Sealed scroll/parchment held forward in one hand. Hidden dagger at belt. Natural warm amber iris eyes, NOT glowing.
+
+POSE: Striding forward with authority, one hand raised holding the sealed scroll as if presenting terms. Cape billowing behind. Strong posture — shoulders back, chin slightly raised. Diagonal composition from trailing cape to outstretched scroll.
+
+MOVEMENT: Cape sweeping dramatically in wind. Mane flowing. Fine dust from his confident stride. A few parchment fragments or leaves caught in the wind. Movement from the STRIDE and the cape, not from effects. NO debris, NO shockwaves.
+
+ENVIRONMENT: Wide shot, full body visible head to toe. Ancient stone architecture (columns, arches) tinted in warm sienna. Torch light. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Strong warm golden torchlight from one side, cool blue-grey shadows on the other.
+
+Portrait orientation, 2:3 aspect ratio.
+```
+
+### Isonash (Piste) — Verso 2:3
+
+```
+Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
+
+Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients.
+
+COLOR DIRECTION: The dominant color theme is deep emerald green. 70% emerald green tones, 30% warm amber light accents. Green hood, green foliage, green-toned shadows. Warm amber light filtering through canopy provides contrast.
+
+SUBJECT: Anthropomorphic brown bear ranger (female) — strong but agile, alert posture. Dark brown fur, attentive refined muzzle. Heroic proportions (7-8 heads tall), tall and lean. NOT stocky, NOT chibi, NOT cute. Ainu-inspired ranger: green hooded cloak with bark and leaf camouflage. Wooden longbow in one hand, arrow nocked but not drawn. Crystal-tipped arrows in quiver. Embroidered patterns on cloak edges. Natural dark amber iris eyes, NOT glowing.
+
+POSE: Mid-stalk — crouching slightly, moving through dense forest. One foot forward, weight low. Bow held ready at her side. Head turned, ears perked, scanning. Strong diagonal from the bow line to her gaze direction. Tension and readiness, not action.
+
+MOVEMENT: Cloak trailing and catching on branches. Leaves disturbed by her passage floating in the air. Ferns bending where she steps. Subtle forest atmosphere — mist, dappled light. Movement is QUIET — suggested by displaced foliage, not explosive. NO debris, NO shockwaves.
+
+ENVIRONMENT: Wide shot, full body visible head to toe. Dense ancient forest tinted deep emerald green. Massive tree trunks, filtered amber light from above. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Warm amber light from canopy gaps, cool green shadows.
+
+Portrait orientation, 2:3 aspect ratio.
+```
+
+### Gao (Gardien) — Verso 2:3
+
+```
+Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
+
+Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients.
+
+COLOR DIRECTION: The dominant color theme is warm golden yellow. 70% golden yellow tones, 30% cool green/earth accent tones. Golden light, golden savanna, warm-toned everything. Cool earth and green tones in shadows provide grounding.
+
+SUBJECT: Anthropomorphic meerkat healer — small, thin, alert upright posture. Short beige-tawny fur, very large expressive dark eyes. Heroic proportions (7-8 heads tall), lean and wiry despite small frame. NOT stocky, NOT chibi, NOT cute-mascot. San tribal healer: simple leather and cloth garments, herb pouch at hip, bandolier of small medicine bottles. Hands luminescent with warm golden healing light. Natural large dark eyes with golden reflections, NOT glowing unnaturally.
+
+POSE: Standing alert on a rocky outcrop, hands raised and emanating warm healing light. One foot on higher ground, the other on lower — dynamic level difference. Body slightly twisted, looking over shoulder as if protecting someone behind him. Sacred symbols float faintly in the healing glow.
+
+MOVEMENT: Healing light radiating softly from open palms. Herb pouch swaying. Simple cloth garments ruffling in warm savanna breeze. Dry grass bending around his feet. The energy is GENTLE — warm, protective, not explosive. NO shockwaves, NO debris.
+
+ENVIRONMENT: Wide shot, full body visible head to toe. Kalahari savanna at golden hour, tinted warm golden yellow. Flat horizon, scattered acacia trees, vast sky. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Strong warm golden sunlight, cool earth-toned shadows.
+
+Portrait orientation, 2:3 aspect ratio.
+```
 
 ---
 
@@ -266,12 +399,14 @@ Loose rendering in periphery, detail concentrated on focal point.
 
 ### Icones (symboles de gameplay)
 
+> **Les icones ne sont PAS en style gouache.** Elles utilisent un style clean/stylise distinct des illustrations. Voir `icon_design.md` pour les prompts complets.
+
 ```
-Bold painted game icon, gouache style.
-{{COULEUR_HERO}} on off-white textured background.
-Clean readable silhouette with visible brushstroke texture.
-MUST be instantly readable at 1cm x 1cm print size.
-Bold, simple, graphic. Slight paint texture visible.
+Clean stylized game icon, smooth surface, NO brushstrokes,
+NO texture, NO grain. Soft gradients for volume, subtle
+highlights, slightly glossy finish. Bold simple shapes,
+highly readable at small size. Centered composition,
+transparent background. Consistent modern UI icon style.
 ```
 
 ---
@@ -356,3 +491,6 @@ Un shader UI/Sprite applique sur toutes les illustrations pour uniformiser le re
 | 2026-04-13 | Lecons IA : specifier proportions heroiques, decrire des poses dynamiques precises, forcer la couleur dominante avec un bloc COLOR DIRECTION explicite, limiter a 1 objet en main (bouclier OU arme, pas les deux). |
 | 2026-04-13 | Nawel (recto) valide apres 8 iterations : jaguar en shield-bash aerien, bouclier Mapuche en avant, style gouache, composition diagonale. Prompt final conserve comme reference. |
 | 2026-04-13 | Lecons supplementaires : PAS de debris/rochers pour suggerer le mouvement (fait cheap). Preferer des elements legers : poussiere fine, feuilles/herbes emportees, cape/lanieres qui fouettent. Le mouvement doit venir du CORPS (jambes, torsion, diagonal) pas d'effets. Les yeux glowing jaunes sont un tell IA recurrent — specifier "natural amber/golden iris, NOT glowing". |
+| 2026-04-13 | **Abandon layout split dur.** Adoption layout **overlay** (style Everdell/Flesh and Blood). L'illustration couvre toute la carte, le parchemin texte est pose par-dessus en bas. Raisons : plus immersif, plus moderne, meilleur wow factor. Etude des JdS (Everdell, Flesh and Blood, MTG full-art, Oath) confirme que c'est le standard actuel. |
+| 2026-04-13 | Texture zone texte : apres tests, la texture de toile/canvas est inutile — les JdS utilisent un fond propre. Le parchemin Everdell extrait du PSD officiel confirme : fond creme plat + bords irreguliers + vignettage chaud burnt sienna. Pas de texture de fibre visible. |
+| 2026-04-13 | Prompts complets prets-a-coller ecrits pour les 5 heros (verso 2:3). Incluent : bloc style gouache, bloc couleur, bloc mouvement (poussiere, lanieres, feuilles — pas de debris), description physique, pose specifique, environnement. |

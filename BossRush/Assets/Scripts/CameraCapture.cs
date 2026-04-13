@@ -29,6 +29,10 @@ public class CameraCapture : MonoBehaviour
         RenderTexture activeRenderTexture = RenderTexture.active;
         RenderTexture.active = Camera.targetTexture;
 
+        // Forcer la mise à jour des outlines avant le rendu
+        foreach (var outline in FindObjectsOfType<SpriteOutline>())
+            outline.ForceUpdate();
+
         Camera.Render();
 
         Texture2D image = new Texture2D(Camera.targetTexture.width, Camera.targetTexture.height);

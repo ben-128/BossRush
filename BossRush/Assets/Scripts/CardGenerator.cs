@@ -91,52 +91,10 @@ public abstract class CardGenerator : MonoBehaviour
     [Range(0f, 1f)]
     public float pvShadowOpacity = 0.7f;
 
-    [Header("Fond de carte par type de héros")]
-    public SpriteRenderer backgroundRenderer;
-    public BackgroundSprites backgroundSprites;
-
-    [Header("Fond bas (multiply subtil sur le portrait)")]
-    public SpriteRenderer bottomRenderer;
-
-    [System.Serializable]
-    public class BackgroundSprites
-    {
-        public Sprite armure;      // Guerrier - rouge
-        public Sprite distance;    // Rodeur - vert
-        public Sprite soin;        // Soigneur - or
-        public Sprite magie;       // Mage - bleu
-        public Sprite diplomatie;  // Diplomate - marron
-        public Sprite neutre;      // Cartes sans héros - gris
-
-        public Sprite GetSprite(string competence)
-        {
-            if (string.IsNullOrEmpty(competence)) return neutre;
-            switch (competence.ToLower())
-            {
-                case "armure": return armure;
-                case "distance": return distance;
-                case "soin": return soin;
-                case "magie": return magie;
-                case "élémentaire": return magie;
-                case "diplomatie": return diplomatie;
-                default: return neutre;
-            }
-        }
-    }
-
-    private static readonly int BlendTexID = Shader.PropertyToID("_BlendTex");
-
-    protected void SetBackground(string competence)
-    {
-        if (backgroundRenderer == null || backgroundSprites == null) return;
-        var sprite = backgroundSprites.GetSprite(competence);
-        if (sprite != null)
-        {
-            backgroundRenderer.sprite = sprite;
-            if (bottomRenderer != null && sprite.texture != null)
-                bottomRenderer.material.SetTexture(BlendTexID, sprite.texture);
-        }
-    }
+    // Fond de carte par type de héros — supprimé (avril 2026)
+    // Les couleurs par compétence sont maintenant dans CompetenceColors (HeroCardGenerator)
+    // et utilisées uniquement pour teinter le disque de fond des icônes.
+    protected void SetBackground(string competence) { }
 
     public abstract string GetCardName(int index);
     public abstract bool HasSprite(int index);

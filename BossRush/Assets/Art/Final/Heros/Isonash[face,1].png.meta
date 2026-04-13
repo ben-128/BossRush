@@ -1,27 +1,18 @@
 fileFormatVersion: 2
-guid: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6
+guid: 87dbb366edf4ade41a56fd798d34cfdc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1480631072
-    second: separator_neutral
+      213: -167302406533610519
+    second: Isonash[face,1]_0
   - first:
-      213: -1480631073
-    second: separator_nawel
+      213: -8955830170269687061
+    second: Isonash[face,1]_1
   - first:
-      213: -1480631074
-    second: separator_daraa
-  - first:
-      213: -1480631075
-    second: separator_aslan
-  - first:
-      213: -1480631076
-    second: separator_isonash
-  - first:
-      213: -1480631077
-    second: separator_gao
+      213: -2801633088992244579
+    second: Isonash[face,1]_2
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -85,7 +76,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -98,7 +89,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -115,150 +106,87 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: separator_neutral
+      name: Isonash[face,1]_0
       rect:
         serializedVersion: 2
-        x: 100
-        y: 1400
-        width: 824
-        height: 50
+        x: 59
+        y: 948
+        width: 121
+        height: 121
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1000000000000000000000000000001
-      internalID: -1480631072
+      spriteID: 9e30f70095f9dadf0800000000000000
+      internalID: -167302406533610519
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: separator_nawel
+      name: Isonash[face,1]_1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 1160
-        width: 824
-        height: 50
+        x: 104
+        y: 149
+        width: 614
+        height: 387
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1000000000000000000000000000002
-      internalID: -1480631073
+      spriteID: be2695009ef76b380800000000000000
+      internalID: -8955830170269687061
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: separator_daraa
+      name: Isonash[face,1]_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 920
-        width: 824
-        height: 50
+        x: 698
+        y: 53
+        width: 76
+        height: 95
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1000000000000000000000000000003
-      internalID: -1480631074
+      spriteID: d9c03ab9c899e19d0800000000000000
+      internalID: -2801633088992244579
       vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: separator_aslan
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 680
-        width: 824
-        height: 50
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a1000000000000000000000000000004
-      internalID: -1480631075
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: separator_isonash
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 440
-        width: 824
-        height: 50
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a1000000000000000000000000000005
-      internalID: -1480631076
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: separator_gao
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 200
-        width: 824
-        height: 50
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a1000000000000000000000000000006
-      internalID: -1480631077
-      vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
-    spriteID:
+    spriteID: 
     internalID: 0
     vertices: []
-    indices:
+    indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      separator_neutral: -1480631072
-      separator_nawel: -1480631073
-      separator_daraa: -1480631074
-      separator_aslan: -1480631075
-      separator_isonash: -1480631076
-      separator_gao: -1480631077
-  mipmapLimitGroupName:
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

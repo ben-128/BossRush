@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GouachePostProcess
-  m_Shader: {fileID: 4800000, guid: 0000000000000000e000000000000000, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6ffb6ae14ed2a5e43920d5f7ebab6112, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -19,31 +19,31 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties:
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _CanvasTex:
+        m_Texture: {fileID: 2800000, guid: f1f8f10bffcf2774bb36c1a0a16fa668, type: 3}
+        m_Scale: {x: 3, y: 3}
+        m_Offset: {x: 0, y: 0}
+    - _DisplaceTex:
+        m_Texture: {fileID: 2800000, guid: 62256d680e36539499ecbb1508f332f4, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _CanvasTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 3, y: 3}
-        m_Offset: {x: 0, y: 0}
-    - _DisplaceTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 2, y: 2}
-        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CanvasStrength: 0.12
-    - _GrainStrength: 0.06
-    - _GrainScale: 80
-    - _DisplaceStrength: 0.003
-    - _Desaturation: 0.08
-    - _TintStrength: 0.08
     - PixelSnap: 0
+    - _CanvasStrength: 0.12
+    - _Desaturation: 0.08
+    - _DisplaceStrength: 0.003
+    - _GrainScale: 80
+    - _GrainStrength: 0.06
+    - _TintStrength: 0.08
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _TintShift: {r: 0.5, g: 0.55, b: 0.65, a: 1}
