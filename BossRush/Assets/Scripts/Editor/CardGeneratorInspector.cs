@@ -120,6 +120,6 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         if (borders != null) borders.SetActive(true);
 
         AssetDatabase.Refresh();
-        Debug.Log($"{count} cartes exportées dans Final/{generator.outputFolder}/");
+        Debug.Log($"{count} cartes exportées dans Art/Final/{generator.outputFolder}/");
     }
 }

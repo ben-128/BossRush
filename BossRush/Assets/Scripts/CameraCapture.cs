@@ -39,6 +39,6 @@ public class CameraCapture : MonoBehaviour
         byte[] bytes = image.EncodeToPNG();
         DestroyImmediate(image);
         string suffix = string.IsNullOrEmpty(toExport.suffix) ? "face" : toExport.suffix;
-        File.WriteAllBytes(Application.dataPath + "/Final/" + toExport.category + "/"+ toExport.finalName +"[" + suffix + ",1].png", bytes);
+        File.WriteAllBytes(Application.dataPath + "/Art/Final/" + toExport.category + "/"+ toExport.finalName +"[" + suffix + ",1].png", bytes);
     }
 }

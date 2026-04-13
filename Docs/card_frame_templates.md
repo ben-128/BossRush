@@ -1,137 +1,253 @@
 # Templates de cadres de carte - Raid Party
 
-> Cadres UI pour composer les cartes. Style gravure/encre noire, traits epais, tres lisibles.
+> Approche 1 : cadre dur + panneau opaque (style Root/Everdell/MTG).
+> Separation nette entre illustration et texte. Maximum de lisibilite.
 > Format carte classique : 825x1125px (ratio 63x88mm)
 
-## Style commun
+## Philosophie
 
-Tous les cadres partagent ce style :
-- **Encre noire** sur fond transparent (PNG avec alpha)
-- **Traits TRES EPAIS** : bordures larges, pas de hachures fines, pas de petits details
-- **Lisibilite** : doit rester net imprime a 63x88mm
-- **Style** : gravure sur bois (woodcut), ornements fantasy simples (pas de filigrane fin)
-- **Pas de texte**, pas de couleur, juste noir + transparence
-
----
-
-## 1. Cadre de titre (bg_titre)
-
-**Dimensions** : 825 x 120px (horizontal, fin bandeau en haut de carte)
-
-### Prompt
-```
-Black ink ornamental title banner frame on transparent background.
-Horizontal rectangular shape, very wide and short (ratio ~7:1).
-THICK bold black border lines, woodcut engraving style.
-Small decorative corner flourishes, very simple and bold.
-The INTERIOR is filled with a very light warm cream/parchment color,
-smooth and almost solid — designed to have readable text on top.
-NO hatching, NO crosshatching, NO fine lines inside the frame.
-Interior must be clean, smooth, and light for text legibility.
-Dark fantasy style, hand-carved woodblock aesthetic.
-PNG with transparency OUTSIDE the frame.
-Landscape orientation.
-```
-
-**Post-traitement** : recadrer a 825x120, verifier que l'interieur est bien clair et lisse.
+- **Illustration et texte sont dans des zones SEPAREES** — pas de chevauchement
+- **Fond texte opaque** creme/parchemin tres clair — pas de transparence, pas de texture lourde
+- **Barre de separation** coloree (couleur du heros) entre illustration et texte
+- **Cadre exterieur** fin et discret — ne pas voler l'attention a l'illustration
+- **Style** : clean, moderne, avec une touche de motifs tribaux/geometriques dans la barre de separation
+- **Reference** : Root (clean, colore), Everdell (elegance organique), Lorcana (cadres nets)
 
 ---
 
-## 2. Cadre d'image (bg_image)
+## Structure d'une carte (de haut en bas)
 
-**Dimensions** : 825 x 560px (~50% de la hauteur carte, horizontal)
-
-### Prompt
 ```
-Black ink ornamental picture frame on transparent background.
-Horizontal rectangular shape (ratio ~3:2).
-THICK bold black border lines, woodcut engraving style.
-Simple bold corner ornaments — fantasy knotwork or angular flourishes.
-The border is THIN relative to the frame size (about 3-5% of width).
-The INTERIOR is COMPLETELY TRANSPARENT / EMPTY — pure alpha zero.
-Only the border frame itself is visible, everything inside is cut out.
-NO fill, NO hatching, NO texture inside the frame.
-Dark fantasy style, hand-carved woodblock aesthetic.
-PNG with transparency both OUTSIDE and INSIDE the frame.
-Landscape orientation.
++------------------------------------------+
+|  [CADRE EXTERIEUR - fin, couleur heros]  |
+|  +--------------------------------------+|
+|  |  BANDEAU TITRE (bg_titre)            ||
+|  |  Fond: couleur heros saturee         ||
+|  |  Texte: blanc ou creme, gros, bold   ||
+|  +--------------------------------------+|
+|  |                                      ||
+|  |  ILLUSTRATION (bg_image)             ||
+|  |  Pas de cadre interne               ||
+|  |  L'image remplit toute la zone       ||
+|  |                                      ||
+|  +--------------------------------------+|
+|  |  BARRE SEPARATION (bg_separator)     ||
+|  |  Fine bande couleur heros            ||
+|  |  Motif geometrique tribal au centre  ||
+|  +--------------------------------------+|
+|  |                                      ||
+|  |  ZONE TEXTE (bg_texte)              ||
+|  |  Fond: creme opaque tres clair       ||
+|  |  Texte: brun fonce, lisible          ||
+|  |                                      ||
+|  +--------------------------------------+|
+|  |  BARRE STATS (bg_stats)             ||
+|  |  Icones PV/degats/competence         ||
+|  +--------------------------------------+|
++------------------------------------------+
 ```
-
-**Post-traitement** : recadrer a 825x560, decoupe alpha interieur dans Photoshop/GIMP si l'IA n'a pas fait un vrai transparent.
 
 ---
 
-## 3. Cadre de texte (bg_texte)
+## 1. Cadre exterieur (bg_cadre)
 
-**Dimensions** : 825 x 450px (~40% de la hauteur carte, horizontal)
+**Dimensions** : 825 x 1125px (carte entiere)
+**Role** : Entoure toute la carte, donne l'identite couleur du heros.
 
 ### Prompt
 ```
-Black ink ornamental text box frame on transparent background.
-Horizontal rectangular shape (ratio ~2:1).
-THICK bold black border lines, woodcut engraving style.
-Simple bold corner ornaments — small angular fantasy flourishes.
-The INTERIOR is filled with a very light warm cream/parchment color,
-smooth and almost solid — designed to have readable text on top.
-NO hatching, NO crosshatching, NO fine lines inside the frame.
-Interior must be clean, smooth, and light for maximum text legibility.
-Dark fantasy style, hand-carved woodblock aesthetic.
-PNG with transparency OUTSIDE the frame.
-Landscape orientation.
+Clean flat colored card border frame on transparent background.
+A thin elegant border (~15px wide) in {{COULEUR_HERO}} color.
+Slightly rounded corners (radius ~20px).
+The INTERIOR is COMPLETELY TRANSPARENT — pure alpha zero.
+Only the border frame itself is visible.
+Very subtle inner shadow/bevel for depth — almost imperceptible.
+NO ornaments, NO flourishes, NO textures.
+Modern, clean, minimal.
+Portrait orientation, 3:4 ratio.
+PNG with transparency inside and outside.
 ```
 
-**Post-traitement** : recadrer a 825x450, verifier que l'interieur est uniforme et clair.
+**Variables** : `{{COULEUR_HERO}}` = deep steel blue / crimson red / emerald green / warm sienna / golden amber
+
+**Post-traitement** : Recadrer a 825x1125. Si DALL-E ne fait pas un bon cadre, creer en code (rectangle arrondi en Unity/Photoshop, plus fiable).
+
+**Alternative recommandee** : Creer ce cadre en code (Unity UI Image avec border) plutot que de le generer par IA. Plus propre et parametrable.
 
 ---
 
-## 4. Cercle receptacle a icones (bg_icone)
+## 2. Bandeau titre (bg_titre)
 
-**Dimensions** : 120 x 120px (carre, petit)
+**Dimensions** : 795 x 100px (largeur carte moins marges)
+**Role** : Affiche le nom du heros/carte. Premier element visible.
 
 ### Prompt
 ```
-Black ink ornamental circular frame on transparent background.
-Perfect circle shape with THICK bold black border ring.
-Woodcut engraving style, bold linework.
-Very simple decoration: small notches or angular marks on the ring,
-like a carved stone medallion holder. Keep it very simple and bold.
-The INTERIOR is COMPLETELY TRANSPARENT / EMPTY — pure alpha zero.
-Only the circular border ring is visible, everything inside is cut out.
-NO fill, NO hatching, NO texture inside the circle.
-Dark fantasy style, hand-carved woodblock aesthetic.
-PNG with transparency both OUTSIDE and INSIDE the circle.
+Clean flat colored title banner for a fantasy board game card.
+Horizontal rectangular shape, very wide and short (ratio ~8:1).
+Solid fill in {{COULEUR_HERO}} color — deep, rich, saturated.
+Very subtle texture — like thick matte paint on paper. Not smooth
+digital color, slightly tactile. Think gouache paint swatch.
+Edges are CLEAN and STRAIGHT — no torn edges, no ornaments.
+Very subtle darker shade at the top and bottom edges (1-2px) for
+depth — like a printed band with slight ink variation.
+NO text, NO symbols, NO borders.
+PNG format, landscape orientation.
+```
+
+**Post-traitement** : Recadrer a 795x100. Le texte du titre sera superpose en Unity (blanc/creme, bold, avec leger drop shadow).
+
+---
+
+## 3. Zone illustration (bg_image)
+
+**Dimensions** : 795 x 500px
+**Role** : Contient l'illustration du heros/monstre. PAS de cadre propre — l'image remplit la zone bord a bord.
+
+**Pas de prompt necessaire** — c'est l'illustration generee par ChatGPT (voir art_direction.md). Elle est simplement croppee/redimensionnee pour remplir cette zone.
+
+**Post-traitement** : Cropper l'illustration generee a 795x500 en gardant le personnage centre.
+
+---
+
+## 4. Barre de separation (bg_separator)
+
+**Dimensions** : 795 x 40px
+**Role** : Separe l'illustration de la zone texte. C'est le seul element decoratif — il porte l'identite visuelle tribale.
+
+### Prompt (6 variantes : 1 par heros + neutre)
+```
+A thin decorative horizontal divider bar floating in empty white
+space. The bar is centered vertically. ABOVE and BELOW the bar
+there is NOTHING — just plain white / transparent. No background
+image, no gradient, no shadow, no glow, no reflection. ONLY the
+bar itself exists.
+
+The bar: a narrow solid band in {{COULEUR_BAR}} color. Clean
+straight top and bottom edges. Thin gold/cream (#D4B87A) pinstripe
+lines along the very top and bottom edges for definition.
+
+In the exact CENTER: a small geometric tribal ornament — a simple
+diamond/rhombus shape with small radiating lines, like a stylized
+compass or sun. Bold, angular, symmetrical. Rendered in GOLD/CREAM
+(#D4B87A). About 80px wide. Very simple, must be readable at 1cm.
+
+The rest of the bar: plain solid {{COULEUR_BAR}}. NO repeating
+pattern, NO gradient, NO texture.
+
+NO text, NO other elements. ONLY the bar on a white background.
+PNG format, extreme landscape ratio 20:1.
+```
+
+**6 variantes a generer** :
+
+| Variante | COULEUR_BAR | Hex | Usage |
+|---|---|---|---|
+| Neutre | Warm dark brown | `#3A2E22` | Cartes sans heros, monstres, epreuves |
+| Nawel | Deep steel blue | `#2B4F6E` | Cartes Nawel / armure |
+| Daraa | Crimson red | `#8B2020` | Cartes Daraa / magie |
+| Aslan | Warm sienna | `#7A5B3A` | Cartes Aslan / diplomatie |
+| Isonash | Deep emerald | `#2A5E3A` | Cartes Isonash / distance |
+| Gao | Golden amber | `#9B7B2F` | Cartes Gao / soin |
+
+**Post-traitement** : Cropper la barre seule (retirer le blanc au-dessus et en-dessous). Redimensionner a 795x40.
+
+---
+
+## 5. Zone texte (bg_texte)
+
+**Dimensions** : 795 x 380px
+**Role** : Fond pour le texte de description/effets. DOIT etre ultra-lisible.
+
+### Prompt
+```
+Clean flat cream/parchment panel for a board game card text zone.
+Solid warm cream color (#F2E8D5) — almost flat but with very
+subtle paint texture. Like one thick coat of cream gouache paint
+on illustration board — barely visible brushstroke direction.
+The texture must be SO SUBTLE that text printed on top remains
+perfectly readable. If in doubt, make it MORE flat, LESS textured.
+NO borders, NO frames, NO ornaments, NO shadows, NO gradients,
+NO torn edges, NO vignetting, NO dark spots, NO stains.
+Just a clean, warm, cream-colored rectangle.
+Edges are straight and clean.
+PNG format, landscape orientation, ratio ~2:1.
+```
+
+**Post-traitement** : Recadrer a 795x380. Verifier que le fond est VRAIMENT uniforme — aucune zone sombre qui generait le texte. Si trop texture, ajouter un calque creme semi-transparent par-dessus pour attenuer.
+
+**Alternative recommandee** : Utiliser une simple couleur unie #F2E8D5 en Unity (UI Image, pas de texture). Plus propre, plus leger, zero risque de lisibilite. Ajouter la canvas_texture.png en overlay tres leger (5%) si on veut un soupcon de grain.
+
+---
+
+## 6. Barre stats (bg_stats)
+
+**Dimensions** : 795 x 80px
+**Role** : Bande en bas de carte avec les icones de stats (PV, degats, competence).
+
+### Prompt
+```
+Thin colored stats bar for a fantasy board game card bottom.
+Same color as title banner: {{COULEUR_HERO}}, solid fill.
+Slightly DARKER than the title banner — like a footer.
+Very subtle texture (matte gouache paint feel).
+Straight edges, clean, minimal.
+NO text, NO symbols, NO ornaments.
+PNG format, extreme landscape orientation.
+```
+
+**Post-traitement** : Recadrer a 795x80. Les icones seront superposees en Unity.
+
+**Alternative** : Meme couleur que le bandeau titre, cree en code.
+
+---
+
+## 7. Cercle icone (bg_icone)
+
+**Dimensions** : 100 x 100px
+**Role** : Receptacle pour les icones de competence/type.
+
+### Prompt
+```
+Small circular icon holder for a board game card.
+A perfect circle with a THIN border ring (~4px) in {{COULEUR_HERO}}.
+Interior filled with cream/off-white (#F2E8D5) — flat, clean.
+Very subtle drop shadow behind the circle for depth.
+NO ornaments, NO text. Just a clean colored circle.
+PNG with transparency outside the circle.
 Square format, 1:1 ratio.
 ```
 
-**Post-traitement** : recadrer a 120x120, decoupe alpha interieur si necessaire.
+**Post-traitement** : Recadrer a 100x100.
+
+**Alternative** : Creer en code (Unity UI, cercle colore). Beaucoup plus propre.
 
 ---
 
-## Palette de reference (extraite du Guerrier)
+## Palette de reference
 
 | Zone | Hex | Usage |
 |---|---|---|
-| **Fond parchemin base** | `#D8C2A3` | Couleur principale du fond |
-| **Parchemin clair** | `#E6D3B8` | Zones claires, centre, rehauts |
-| **Parchemin fonce** | `#BFA07A` | Zones foncees, bords, vignettage |
-| **Encre noire** | `#1A1A1A` | Contours, hachures principales |
-| **Ombres hachures** | `#3A3228` | Hachures denses, ombres profondes |
-| **Hachures moyennes** | `#6B5E50` | Armure, sol, details mi-tons |
-| **Ciel/fond lointain** | `#8A7D6F` | Arriere-plan, gris chaud |
-| **Blanc casse** | `#E8DDD0` | Bouclier, zones les plus claires |
+| **Fond texte creme** | `#F2E8D5` | Zone texte, interieur icones |
+| **Texte principal** | `#2A1F14` | Brun fonce, pas noir pur |
+| **Texte titre** | `#FFFFFF` ou `#F5ECD8` | Blanc ou creme sur fond colore |
+| **Ombre texte** | `#1A1A1A` a 30% | Drop shadow discret |
 
-## Prompt de changement de couleur
+### Couleurs par heros (pour cadre, titre, separator, stats)
 
-Pour recoloriser un element d'une couleur a une autre :
-```
-Take this image and shift its color tone from {{COULEUR_ACTUELLE}}
-to {{COULEUR_CIBLE}}. Keep the exact same texture, grain, pattern,
-and tonal variation. Only change the hue/tint. Keep it muted and
-desaturated. Do not change the black ink lines or the overall
-contrast.
-```
+| Heros | Hex principal | Hex fonce (stats) | Hex clair (motif separator) |
+|---|---|---|---|
+| Nawel | `#2B4F6E` | `#1E3A52` | `#5B8AAF` |
+| Daraa | `#8B2020` | `#6B1515` | `#C45050` |
+| Aslan | `#7A5B3A` | `#5C4228` | `#A8855E` |
+| Isonash | `#2A5E3A` | `#1B4228` | `#4E8F62` |
+| Gao | `#9B7B2F` | `#7A5F20` | `#C9A84E` |
 
-## Notes generales
+---
 
-- DALL-E a du mal avec la transparence selective (interieur opaque + exterieur transparent) — generer sans transparence (fond blanc) et retirer le blanc en post si necessaire
-- Les coins/ornements doivent etre GROS et SIMPLES — pas de filigrane fin qui disparait a l'impression
-- Tester la lisibilite en superposant sur les fonds colores (rouge, bleu, vert, marron, or, gris)
+## Notes
+
+- **Privilegier la creation en code** pour cadre, titre, fond texte et stats — c'est plus propre, parametrable, et evite les aleas de generation IA
+- **Generer par IA uniquement** : la barre de separation (motif tribal central) et eventuellement les icones
+- **L'illustration** est l'element hero — tout le reste du layout doit etre au service de sa lisibilite, pas en competition
+- Le style "cadre dur" est utilise par Root, Everdell, MTG, Arkham Horror — c'est le standard pour une bonne raison : ca marche

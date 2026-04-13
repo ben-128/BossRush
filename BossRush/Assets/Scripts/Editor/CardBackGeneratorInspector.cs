@@ -105,6 +105,6 @@ public class CardBackGeneratorInspector : Editor
         if (borders != null) borders.SetActive(true);
 
         AssetDatabase.Refresh();
-        Debug.Log($"{count} dos exportés dans Final/{generator.outputFolder}/");
+        Debug.Log($"{count} dos exportés dans Art/Final/{generator.outputFolder}/");
     }
 }
