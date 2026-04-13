@@ -1,127 +1,343 @@
 # Design des Icones - Raid Party
 
-> Reference principale : **Sleeping Gods** (Ryan Laukat) — icones geometriques simples dans cercles colores sur fond peint.
+> Style : **silhouettes plates et bold sur pastilles colorees** (style Root/Wingspan).
+> Principe : le contraste entre icones FLAT et illustrations PEINTES = lisibilite maximale.
 
 ---
 
 ## Principes generaux
 
-- **Style** : silhouettes noires ou bicolores (noir + couleur hero) sur pastille claire/papier
-- **Coherence riso** : grain halftone visible, bords legerement fuzzy, pas de degrade lisse
-- **Lisibilite** : chaque icone doit fonctionner a **1cm x 1cm** sur carte imprimee
-- **Contraste** : icone simple/flat vs illustration complexe — le contraste de style EST la lisibilite
-- **Pastille** : cercle ou forme geometrique de couleur unie (papier off-white ou couleur hero) avec contour noir epais
+- **Style** : silhouettes blanches ou noires sur pastilles de couleur unie — PAS de texture, PAS de grain, PAS de gouache
+- **Forme** : contours epais et simplifies — chaque icone doit etre reconnaissable en 0.5 seconde
+- **Lisibilite** : DOIT fonctionner a **1cm x 1cm** sur carte imprimee (63x88mm)
+- **Contraste** : icone flat/geometrique vs illustration painterly — le contraste de style EST la lisibilite
+- **Pastille** : cercle ou rectangle arrondi de couleur unie avec fin contour sombre (2px)
+- **Pas de detail** : si un element necessite plus de 5 traits pour etre dessine, il est trop complexe
+- **Reference** : Root (Kyle Ferrin), Wingspan, Sleeping Gods — icones simples, bold, instantanement lisibles
 
 ---
 
-## Inventaire complet des icones necessaires
+## Style recommande : pourquoi FLAT sur fond peint
 
-### Icones de statut (universelles)
-
-| Icone | Concept visuel | Description |
-|---|---|---|
-| **Vie (PV)** | Coeur stylise | Coeur plein avec grain riso. Noir sur fond papier. Forme simple, pas anatomique — un coeur de carte a jouer simplifie avec texture halftone |
-| **Blessure** | Griffure / entaille | 3 traits diagonaux paralleles (griffes), rouges sur fond papier. Evoque une laceration. Alternatif : goutte de sang stylisee avec eclats |
-| **Capacite speciale (utilisee)** | Rotation 90° | Fleche courbe a 90° dans un cercle. Indique la carte tournee. Sobre, noir |
-| **Capacite speciale (disponible)** | Eclat / etincelle | Etoile a 4 branches dans un cercle. Symbolise le pouvoir pret a etre utilise. Couleur du hero |
-
-### Icones de competence (prerequis hero)
-
-Chaque hero a une competence qui sert de prerequis pour ses cartes Arsenal. L'icone apparait en haut a droite de chaque carte.
-
-| Competence | Hero | Concept visuel | Description |
+| Option | Lisibilite | Coherence | Verdict |
 |---|---|---|---|
-| **Armure** | Nawel (Rempart) | Bouclier | Bouclier rond vu de face, motif geometrique simple au centre (soleil mapuche). Bleu acier + noir |
-| **Elementaire / Magie** | Daraa (Flamme) | Flamme | Flamme stylisee a 3 langues, montante. Rouge cramoisi + noir. Forme simple, pas de detail — juste la silhouette de feu |
-| **Soin** | Gao (Gardien) | Main ouverte + lumiere | Main ouverte paume vers le haut avec halo lumineux (points halftone dorés). Or/jaune + noir |
-| **Distance** | Isonash (Piste) | Fleche / cible | Fleche en vol (diagonale, pointe vers le haut-droit) OU cible (cercles concentriques). Vert emeraude + noir |
-| **Diplomatie** | Aslan (Porte-Voix) | Parchemin scelle | Rouleau de parchemin avec sceau en bas. Brun dore + noir. Alternatif : deux mains serrees |
+| Icones gouache/peintes | Faible — se perdent dans l'illus | Haute | NON — illisible a petite taille |
+| Icones riso/grain | Moyenne — le grain brouille | Haute | NON — grain + petite taille = bouillie |
+| **Icones flat/silhouette** | **Maximale** — contraste total | Moyenne | **OUI — standard industrie** |
+| Icones 3D/embossees | Bonne | Faible | NON — clash avec gouache |
 
-### Icones de type de carte Arsenal
+Le flat fonctionne PARCE QUE ca contraste avec les illustrations. C'est un langage visuel different qui dit "ceci est de l'information de jeu, pas de l'art".
 
-| Type | Concept visuel | Description |
-|---|---|---|
-| **Action** | Eclair / flash | Eclair angulaire simple (zigzag). Noir sur pastille. Indique l'immédiateté |
-| **Objet** | Sac / sacoche | Petit sac noue en haut. Noir sur pastille. Evoque l'equipement portable |
-| **Attaque (melee)** | Epee / hache | Lame simple croisee ou toki mapuche. Noir. Indique le contact |
-| **Attaque (distance)** | Arc + fleche | Arc bande avec fleche. Noir. Distingue clairement de la melee |
+---
 
-### Icones de boss / epreuves
+## Systeme de couleurs des pastilles
 
-| Icone | Concept visuel | Description |
-|---|---|---|
-| **Invocation (boss)** | Portail / fissure | Cercle brise avec eclats sortants — comme un portail qui craque. Rouge + noir. Des silhouettes de monstres emergent de la fissure. Tres reconnaissable |
-| **Degats boss** | Poing / impact | Poing ferme ou onde de choc (cercles concentriques d'impact). Rouge + noir |
-| **Action speciale boss** | Oeil / symbole de danger | Oeil ouvert avec pupille fendue (reptilien) dans un triangle. Rouge + noir. Evoque la menace intelligente |
-| **Passif boss** | Aura / halo permanent | Cercle avec rayons courts autour (comme un soleil sombre). Rouge + noir. Indique un effet toujours actif |
-| **Soin boss** | Coeur + fleche montante | Coeur avec fleche vers le haut. Vert sombre + noir. Le boss se regenere |
+### Par hero (competences et cartes associees)
 
-### Icones de monstre
+| Hero | Couleur pastille | Hex | Silhouette |
+|---|---|---|---|
+| Nawel (armure) | Bleu acier | `#2B4F6E` | Blanc |
+| Daraa (magie) | Rouge cramoisi | `#8B2020` | Blanc |
+| Aslan (diplomatie) | Sienna chaud | `#7A5B3A` | Blanc |
+| Isonash (distance) | Vert emeraude | `#2A5E3A` | Blanc |
+| Gao (soin) | Ambre dore | `#9B7B2F` | Blanc |
 
-| Icone | Concept visuel | Description |
-|---|---|---|
-| **PV monstre** | Petit coeur | Version reduite du coeur PV, en rouge + noir |
-| **Degats monstre** | Griffe | Griffe unique (1 trait courbe acere). Rouge + noir |
-| **Capacite monstre** | Point d'exclamation | "!" dans un losange. Rouge + noir. Alerte : lire le texte |
+### Universelles (stats, types, gameplay)
 
-### Icones speciales de gameplay
+| Usage | Couleur pastille | Hex | Silhouette |
+|---|---|---|---|
+| Vie/PV | Rouge vif | `#C0392B` | Blanc |
+| Blessure/degats | Noir | `#1A1A1A` | Rouge `#C0392B` |
+| Boss/danger | Rouge sombre | `#6B1515` | Blanc |
+| Neutre/gameplay | Brun fonce | `#3A2E22` | Blanc ou creme |
 
-| Icone | Concept visuel | Description |
-|---|---|---|
-| **Pioche** | Pile de cartes + main | Main qui tire une carte d'une pile. Noir |
-| **Echange** | Deux fleches croisees | Fleches en sens inverse, croisees en X. Noir |
-| **Defausse** | Carte + fleche descendante | Carte avec fleche vers le bas. Noir |
-| **Melee (cible)** | Tete de file | Fleche pointant vers la gauche (vers la tete de file). Noir |
-| **Distance (cible)** | Fleche libre | Fleche pointant dans toutes les directions (choix). Noir |
+---
+
+## Inventaire des icones + prompts
+
+### Prompt template (prefixer a TOUS les prompts d'icone)
+
+```
+Flat vector game icon for a board game. Bold simple silhouette,
+{{SILHOUETTE_COLOR}} on {{PASTILLE_COLOR}} solid circle background.
+EXTREMELY SIMPLE — maximum 5 shapes/strokes. Must be instantly
+readable at 1cm x 1cm. Thick lines, no thin details.
+NO texture, NO grain, NO gradient, NO shadow, NO 3D effect,
+NO halftone, NO painterly style. Pure flat graphic design.
+Clean edges, geometric, modern. Think: Root board game icons or
+universal pictograms.
+Square format, 1:1 ratio, PNG with transparent background
+outside the circle.
+```
+
+---
+
+### A. Icones de statut (universelles)
+
+#### Vie / PV
+- **Concept** : Coeur simple
+- **Pastille** : Rouge vif `#C0392B`
+- **Silhouette** : Blanc
+
+```
+[TEMPLATE] +
+A simple heart shape, symmetrical, slightly rounded.
+Classic playing card heart — NOT anatomical. Bold and chunky.
+White heart on solid red (#C0392B) circle.
+```
+
+#### Blessure
+- **Concept** : 3 griffures diagonales
+- **Pastille** : Noir `#1A1A1A`
+- **Silhouette** : Rouge `#C0392B`
+
+```
+[TEMPLATE] +
+Three diagonal parallel scratch marks (claw scratches).
+Bold thick lines, slightly curved like animal claws.
+Red (#C0392B) scratches on solid black circle.
+```
+
+#### Capacite speciale (disponible)
+- **Concept** : Etoile/eclat a 4 branches
+- **Pastille** : Couleur du hero
+- **Silhouette** : Blanc
+
+```
+[TEMPLATE] +
+A four-pointed star burst / spark shape. Bold, symmetrical.
+Like a compass rose or magic spark. Simple geometric.
+White star on solid {{COULEUR_HERO}} circle.
+```
+
+#### Capacite speciale (utilisee / tournee)
+- **Concept** : Fleche courbe 90°
+- **Pastille** : Gris `#666666`
+- **Silhouette** : Blanc
+
+```
+[TEMPLATE] +
+A curved arrow rotating 90 degrees clockwise.
+Bold thick arrow, simple curve. Indicates "tapped/used".
+White arrow on solid grey (#666666) circle.
+```
+
+---
+
+### B. Icones de competence hero (prerequis cartes)
+
+#### Armure (Nawel)
+- **Concept** : Bouclier rond
+- **Pastille** : Bleu acier `#2B4F6E`
+
+```
+[TEMPLATE] +
+A simple round shield seen from the front.
+Bold circular shape with a small cross or diamond motif in the
+center. Very simple — just the shield outline + one center mark.
+White shield on solid deep steel blue (#2B4F6E) circle.
+```
+
+#### Magie / Elementaire (Daraa)
+- **Concept** : Flamme a 3 langues
+- **Pastille** : Rouge cramoisi `#8B2020`
+
+```
+[TEMPLATE] +
+A simple stylized flame with 3 tongues/tips pointing upward.
+Bold silhouette, organic but simple. Classic fire symbol.
+White flame on solid crimson red (#8B2020) circle.
+```
+
+#### Diplomatie (Aslan)
+- **Concept** : Parchemin scelle
+- **Pastille** : Sienna `#7A5B3A`
+
+```
+[TEMPLATE] +
+A simple scroll / rolled parchment with a small seal or ribbon
+at the bottom. Bold silhouette, minimal detail.
+White scroll on solid warm sienna (#7A5B3A) circle.
+```
+
+#### Distance (Isonash)
+- **Concept** : Fleche en vol
+- **Pastille** : Vert emeraude `#2A5E3A`
+
+```
+[TEMPLATE] +
+A single arrow in flight, pointing diagonally upper-right.
+Bold simple shape — triangular arrowhead + straight shaft +
+small fletching at the tail. One clean diagonal line.
+White arrow on solid deep emerald green (#2A5E3A) circle.
+```
+
+#### Soin (Gao)
+- **Concept** : Main ouverte + halo
+- **Pastille** : Ambre `#9B7B2F`
+
+```
+[TEMPLATE] +
+A simple open hand/paw, palm facing viewer, with a small
+starburst or glow above the palm. Very simple — hand is just
+a basic mitten shape (NOT detailed fingers), glow is 4-6 small
+lines radiating from above the palm.
+White hand on solid golden amber (#9B7B2F) circle.
+```
+
+---
+
+### C. Icones de type de carte
+
+#### Action
+- **Concept** : Eclair angulaire
+- **Pastille** : Brun fonce `#3A2E22`
+
+```
+[TEMPLATE] +
+A simple lightning bolt / zigzag shape. Classic comic-style
+lightning. Bold, angular, 3 segments. Indicates immediacy.
+White lightning bolt on solid dark brown (#3A2E22) circle.
+```
+
+#### Objet
+- **Concept** : Sac/sacoche
+- **Pastille** : Brun fonce `#3A2E22`
+
+```
+[TEMPLATE] +
+A simple drawstring pouch/bag, tied at the top. Rounded bottom,
+cinched neck. Very basic shape — like a coin purse silhouette.
+White pouch on solid dark brown (#3A2E22) circle.
+```
+
+---
+
+### D. Icones boss / monstre
+
+#### Degats boss
+- **Concept** : Poing / impact
+- **Pastille** : Rouge sombre `#6B1515`
+
+```
+[TEMPLATE] +
+A clenched fist seen from the front, punching toward the viewer.
+Bold simple silhouette — no finger detail, just the chunky fist shape.
+White fist on solid dark red (#6B1515) circle.
+```
+
+#### Invocation boss
+- **Concept** : Portail brise
+- **Pastille** : Rouge sombre `#6B1515`
+
+```
+[TEMPLATE] +
+A broken circle / cracked portal with small triangular shards
+flying outward. Like a ring that shattered. Simple geometric.
+White broken circle on solid dark red (#6B1515) circle.
+```
+
+#### PV monstre
+- **Concept** : Petit coeur
+- **Pastille** : Rouge sombre `#6B1515`
+
+```
+[TEMPLATE] +
+Same heart as PV icon but smaller scale. Simple bold heart.
+White heart on solid dark red (#6B1515) circle.
+```
+
+#### Degats monstre
+- **Concept** : Griffe unique
+- **Pastille** : Rouge sombre `#6B1515`
+
+```
+[TEMPLATE] +
+A single curved claw / talon shape. Bold, sharp, like one
+animal claw swiping. Simple crescent with pointed tip.
+White claw on solid dark red (#6B1515) circle.
+```
+
+---
+
+### E. Icones de gameplay
+
+#### Pioche
+- **Concept** : Carte + fleche montante
+
+```
+[TEMPLATE] +
+A card shape (small rectangle) with an upward arrow emerging
+from it. Simple: rectangle + arrow pointing up.
+White on solid dark brown (#3A2E22) circle.
+```
+
+#### Defausse
+- **Concept** : Carte + fleche descendante
+
+```
+[TEMPLATE] +
+A card shape (small rectangle) with a downward arrow.
+Simple: rectangle + arrow pointing down.
+White on solid dark brown (#3A2E22) circle.
+```
+
+#### Echange
+- **Concept** : Deux fleches croisees
+
+```
+[TEMPLATE] +
+Two arrows crossing in opposite directions (left-right swap).
+Simple X shape made of two bold arrows.
+White on solid dark brown (#3A2E22) circle.
+```
+
+#### Cible melee
+- **Concept** : Fleche vers la gauche
+
+```
+[TEMPLATE] +
+A bold arrow pointing LEFT. Simple triangular arrowhead +
+thick shaft. Indicates "target the front of the monster queue".
+White on solid dark brown (#3A2E22) circle.
+```
 
 ---
 
 ## Regles de placement sur carte
 
 ### Carte Hero
-- **Haut gauche** : icone Vie + nombre PV
-- **Haut droite** : icone(s) Competence
-- **Bas** : texte capacite speciale + icone "eclat" si disponible
+- **Haut gauche** : pastille PV (coeur rouge + nombre blanc en overlay)
+- **Haut droite** : pastille competence (couleur hero)
+- **Bas** : texte capacite speciale
 
 ### Carte Arsenal (Action/Objet)
-- **Haut gauche** : icone Type (Action ou Objet)
-- **Haut droite** : icone Prerequis competence (armure, magie, soin, distance, diplomatie)
-- **Centre** : illustration
-- **Bas** : zone texte effet + valeurs (degats, soin, etc.)
+- **Haut gauche** : pastille type (eclair ou sac, brun)
+- **Haut droite** : pastille prerequis competence (couleur hero)
+- **Zone texte** : icones de degats/soin inline si applicable
 
 ### Carte Monstre
-- **Haut gauche** : PV (coeur + nombre)
-- **Haut droite** : Degats (griffe + nombre)
-- **Centre** : illustration
-- **Bas** : capacite speciale si applicable (icone "!" + texte)
-
-### Carte Epreuve
-- **Haut** : type (Assaut / Evenement) + icone correspondante
-- **Centre** : illustration ou texte d'evenement
-- **Bas** : effet mecanique avec references aux stats boss ("?" = voir fiche)
-
-### Fiche Boss
-- **4 zones** alignees, chacune avec son icone :
-  - Degats (poing) + valeur
-  - Invocations (portail) + valeur
-  - Action speciale (oeil) + texte
-  - Passif (aura) + texte
+- **Haut gauche** : pastille PV monstre (coeur, rouge sombre)
+- **Haut droite** : pastille degats monstre (griffe, rouge sombre)
+- **Bas** : texte capacite si applicable
 
 ---
 
-## Implementation riso
+## Generation et post-traitement
 
-Chaque icone suit le template du `art_direction.md` :
+### Methode recommandee : creation en code
 
-```
-Risograph-style game icon.
-2 colors: charcoal black + {{COULEUR}}.
-Clean silhouette on off-white background.
-Halftone grain texture visible.
-MUST be instantly readable at 1cm x 1cm print size.
-Bold, simple, graphic.
-```
+Pour les icones flat/silhouette, la **generation par code** (SVG ou Unity UI) est PLUS FIABLE que l'IA :
+- Les formes sont geometriques et simples
+- L'IA a tendance a ajouter du detail, des ombres, de la texture
+- Un SVG ou un sprite Unity avec les bonnes couleurs sera pixel-perfect
 
-Les icones universelles (vie, blessure, pioche, etc.) utilisent **noir seul** sur papier.
-Les icones liees a un hero utilisent **noir + couleur du hero**.
-Les icones boss/monstre utilisent **noir + rouge cramoisi**.
+**Utiliser l'IA uniquement si** la forme est trop complexe pour du code (ex: la flamme, la main, le parchemin).
+
+### Si generation IA
+
+1. Generer en 512x512 minimum
+2. Verifier que c'est VRAIMENT flat — pas d'ombre, pas de gradient sneaky
+3. Supprimer le fond (transparence hors pastille)
+4. Redimensionner a 120x120 pour usage carte
+5. Tester a 1cm x 1cm — si un detail disparait, simplifier
