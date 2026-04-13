@@ -8,11 +8,19 @@
 
 ## Concept
 
-Un monde où des colosses errent sur la terre. Les tribus humaines survivent dans leur ombre. Quand un colosse menace un territoire, les tribus envoient leurs meilleurs chasseurs — un par tribu — pour l'abattre ensemble.
+Un monde où des colosses errent sur la terre. Les tribus survivent dans leur ombre. Quand un colosse menace un territoire, les tribus envoient leurs meilleurs chasseurs — un par tribu — pour l'abattre ensemble.
 
 **Ton :** Primitif, viscéral, respect de la bête. On tue pour survivre, pas pour la gloire.
 
 **Inspiration culturelle :** Chaque héros vient d'un peuple réel peu représenté dans les jeux, issu d'un continent différent. Ils se réunissent pour chasser ensemble.
+
+**Personnages animaux anthropomorphes :** Les héros sont des animaux anthropomorphes (bipèdes, armés, expressifs) plutôt que des humains. Chaque héros est un animal lié à la culture de sa tribu. Ce choix :
+- Évite les problèmes de représentation ethnique
+- Permet une meilleure génération IA (museaux > visages humains, pattes > mains)
+- Donne une identité visuelle forte et immédiatement reconnaissable
+- S'inscrit dans la tradition JdS (Root, Everdell, Oath)
+
+Les inspirations culturelles restent intactes (noms, mythologies, tribus, couleurs) — seule l'apparence physique change.
 
 ---
 
@@ -29,6 +37,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 | Soigneur | **Gao** | Nom San traditionnel | Le Gardien | The Warden | Tribu du Bosquet | San (Kalahari, Afrique australe) |
 
 ### Nawel — Le Rempart / The Bulwark
+- **Animal :** Jaguar anthropomorphe — fourrure tachetée, musculature féline puissante
 - **Tribu du Fer** : forgerons guerriers, armures lourdes
 - **Ethnie :** Mapuche — peuple guerrier qui a résisté aux Incas et aux Espagnols
 - Rôle : tank, absorbe les coups, protège le groupe
@@ -37,6 +46,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Voir [hero_nawel.md](hero_nawel.md) pour la fiche complète
 
 ### Daraa — La Flamme / The Flame
+- **Animal :** Hyène anthropomorphe — pelage brun-gris, crinière hérissée couleur braise
 - **Tribu du Brasier** : maîtres du feu et des forces élémentaires
 - **Ethnie :** Afar — peuple du désert volcanique du Danakil, vivent sur l'endroit le plus chaud de la Terre, entre volcans actifs et lacs de lave
 - Rôle : dégâts magiques, effets de zone
@@ -45,6 +55,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Voir [hero_killa.md](hero_killa.md) pour la fiche complète
 
 ### Aslan — Le Porte-Voix / The Herald
+- **Animal :** Lion anthropomorphe — crinière épaisse et majestueuse, pelage doré
 - **Tribu du Gué** : ceux qui unissent les tribus, médiateurs
 - **Ethnie :** Circassien — peuple du Caucase, culture du code d'honneur (Adyghe Khabze), respect, parole donnée, médiation
 - Rôle : coordination, échanges, soutien tactique
@@ -53,6 +64,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Voir [hero_aslan.md](hero_aslan.md) pour la fiche complète
 
 ### Isonash — La Piste / The Tracker
+- **Animal :** Ourse brune anthropomorphe — fourrure brun foncé, museau fin et attentif
 - **Tribu de la Lisière** : pisteurs de colosses, éclaireurs
 - **Ethnie :** Aïnou — peuple chasseur du nord du Japon, culture animiste, lien profond avec la nature et les animaux
 - Rôle : attaques à distance, ciblage précis
@@ -61,6 +73,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Voir [hero_isonash.md](hero_isonash.md) pour la fiche complète
 
 ### Gao — Le Gardien / The Warden
+- **Animal :** Suricate anthropomorphe — petit, agile, posture alerte, grands yeux expressifs
 - **Tribu du Bosquet** : guérisseurs herboristes, gardiens de la vie
 - **Ethnie :** San — plus ancien peuple d'Afrique australe (Kalahari), guérisseurs, transe chamanique, médecine par les plantes
 - Rôle : soins, protection, maintien du groupe

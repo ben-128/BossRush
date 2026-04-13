@@ -2,11 +2,16 @@
 
 > Document de reference unique pour la generation et le post-traitement de toutes les illustrations du jeu.
 
-## Style retenu : Gravure / Encre noire + couleur selective
+## Style retenu : Risograph / Serigraphie 2-3 couleurs
 
-**Decision :** avril 2026, apres comparaison de l'original (peinture numerique IA) avec un test en style gravure sur le Guerrier.
+**Decision :** avril 2026, apres exploration de plusieurs pistes (gravure encre, impasto, gouache). Le risograph est retenu pour son equilibre entre beaute, faisabilite IA et originalite sur le marche JdS.
 
-**Justification :** Le rendu "IA" de l'illustration originale etait trop visible (flou, textures lisses, fond generique). Le style gravure masque efficacement l'origine IA et donne une identite visuelle distinctive, reconnaissable en rayon JdS.
+**Justification :**
+- Le grain halftone, le decalage de couleurs et les textures d'impression masquent efficacement l'origine IA
+- Les aplats de couleur et l'absence de degradés empechent les artefacts IA typiques (lissage, uncanny valley)
+- Style unique en JdS — aucun concurrent direct ne l'utilise
+- Palette ultra-limitee (2-3 couleurs) = coherence naturelle entre les 180 cartes
+- Les imperfections d'impression (bavures, grain, decalage) SONT le style
 
 **Principe :** Toutes les illustrations (heros, monstres, epreuves) partagent ce style pour assurer la coherence visuelle du jeu.
 
@@ -14,365 +19,287 @@
 
 ## 1. Prompt template
 
-### Generation nouvelle illustration
+### Bloc style (a prefixer a TOUT prompt de generation)
 
 ```
-Dark fantasy ink engraving illustration of {{SUJET}}.
-Style of Gustave Dore woodcut engraving with heavy crosshatching,
-dramatic chiaroscuro.
-Black ink on a flat smooth light grey-beige background.
-No paper grain, no fiber texture, no paper tooth.
-Plain smooth flat light background color.
-Bold confident linework, THICK SPACED OUT hatching strokes for shading,
-no smooth gradients. NOT fine dense hatching - big bold woodcut strokes.
-Overall ink coverage should be around 50%, with plenty of open light
-areas in sky and ground for the image to breathe.
-High contrast, limited palette: black ink with selective {{COULEUR}} accent on {{ELEMENTS_COULEUR}} only.
-Printmaking aesthetic, hand-carved feel.
-{{PROMPT_VISAGE}}
-Landscape orientation, 3:2 aspect ratio.
+Risograph art print, {{NB_COULEURS}}-color overprint ({{COULEURS}}) on
+off-white textured paper. Visible halftone dot grain throughout.
+Slight color misregistration between printed layers — colors do not
+align perfectly, creating visible offset at edges.
+Bold graphic style with strong readable silhouette.
+Flat color areas, NO smooth gradients. Shadows rendered as hatched
+lines or halftone dots in the black layer. Color areas printed as
+solid or halftone fills in the color layer(s).
+Textured risograph grain visible on every surface.
+Slight ink bleed at shape edges. Paper texture shows through in
+light areas.
+Looks like a hand-pulled screen print on craft paper.
+NOT digital, NOT photorealistic, NOT smooth, NOT painted.
+Raw, tactile, graphic, powerful.
+Think indie zine art meets dark fantasy illustration.
+{{FORMAT}}
 ```
 
-### Correction illustration existante (img2img)
-
-Uploader l'illustration originale, puis utiliser ce prompt :
-
-```
-This is an existing ink engraving illustration. Recreate it as a
-PIXEL-PERFECT copy. Same character, same pose, same equipment.
-Same background, same smoke, same clouds, same sky covering the
-ENTIRE top portion, same distant elements, same foreground debris.
-Every single element must be in the same position.
-The ONLY change allowed: shift the base paper color from warm beige
-to flat smooth light grey-beige. No texture change, no composition
-change, no removal of any sky or background element. The sky must
-remain fully detailed with ink hatching and clouds exactly as the
-original.
-Also make the hatching strokes BOLDER and more SPACED OUT, like
-woodcut style. Currently the hatching is too fine and dense. Open
-up more light areas in the sky and ground to let the background
-breathe. The overall image should be lighter and airier, closer
-to 50% ink coverage, not 80%.
-```
-
-### Variables par type d'asset
+### Variables
 
 | Variable | Description | Exemples |
 |---|---|---|
+| `{{NB_COULEURS}}` | Nombre de couches d'impression | `2` ou `3` |
+| `{{COULEURS}}` | Couleurs des couches riso | `deep steel blue + charcoal black`, `crimson red + charcoal black + warm ochre` |
 | `{{SUJET}}` | Description du personnage/scene, pose, equipement, decor | voir section 3 |
-| `{{COULEUR}}` | Couleur d'accent unique du hero | `red`, `electric blue`, `emerald green` |
-| `{{ELEMENTS_COULEUR}}` | Element(s) portant l'accent colore | `cape and shield emblem`, `glowing runes`, `crystal arrowhead` |
-| `{{PROMPT_VISAGE}}` | Description du visage : traits uniques, imperfections, expression | voir section 3 |
+| `{{FORMAT}}` | Ratio de l'image | `Landscape orientation, 3:2 aspect ratio.` ou `Portrait orientation, 2:3 aspect ratio.` |
 
-### Prompt negatif
+### Prompt negatif (a ajouter si ChatGPT/DALL-E lisse trop)
 
 ```
-smooth, airbrushed, digital painting, photorealistic, soft focus, blurry, generic,
-stock art, midjourney style, artstation trending, watercolor, pastel, gradient,
-multiple colors, colorful, saturated, paper texture, paper grain, fiber texture,
-fine hatching, dense crosshatching, dark heavy image, mostly black
+smooth, airbrushed, digital painting, photorealistic, soft focus,
+blurry, oil painting, watercolor, pencil drawing, concept art,
+artstation trending, multiple colors, full color, gradient,
+3D render, CGI, anime, cartoon, comic book coloring
 ```
 
 ---
 
 ## 2. Regles visuelles
 
-### Palette
-- **Dominante :** Noir encre (hachures, contours, ombres). Quasi-totalite de l'image est en noir et blanc.
-- **Accent :** UNE SEULE couleur selective par hero, appliquee sur 1-2 elements forts maximum
-- **Fond :** Gris-beige clair, lisse, plat, uniforme. PAS de parchemin chaud/sepia.
-- **Interdit :** Pas de melange de couleurs. Une illustration = noir + une couleur. Le reste est en niveaux de gris/encre. Pas de jaune, pas d'orange, pas de sepia chaud.
+### Palette par illustration
 
-### Palette de reference
+- **Maximum 3 couleurs** par illustration : noir (toujours present) + 1-2 couleurs thematiques
+- **Fond :** papier off-white / craft naturel — PAS blanc pur, PAS gris fonce
+- **Noir :** contours, hachures, ombres, details fins — c'est la couche structurelle
+- **Couleur(s)** : aplats ou halftone sur les elements thematiques — c'est la couche emotionnelle
+- **Interdit :** degradés lisses, plus de 3 couleurs, melange de couleurs en fondu
 
-| Zone | Hex | Description |
-|---|---|---|
-| **Fond base** | `#D8C2A3` | Gris-beige neutre (cible apres correction) |
-| **Fond clair** | `#E6D3B8` | Zones les plus claires |
-| **Fond fonce** | `#BFA07A` | Zones plus sombres, bords |
-| **Encre noire** | `#1A1A1A` | Contours, hachures principales |
-| **Ombres hachures** | `#3A3228` | Hachures denses, ombres profondes |
-| **Hachures moyennes** | `#6B5E50` | Armure, sol, details mi-tons |
-| **Ciel/fond lointain** | `#8A7D6F` | Arriere-plan, gris chaud |
-| **Blanc casse** | `#E8DDD0` | Zones les plus claires (bouclier, etc.) |
+### Grain et texture
 
-### Trait
-- Hachures visibles, croisees pour les ombres
-- Hachures EPAISSES et ESPACEES, style gravure sur bois. PAS de hachures fines et serrees (trop digital, illisible a petite taille)
-- Contours nets et affirmes
-- Pas de degrade lisse ni de flou artistique
-- Rendu "grave dans le bois" (woodcut)
+- Grain halftone visible — simuler les points d'impression riso
+- Decalage de couleur (misregistration) — les couches de couleur ne s'alignent pas parfaitement
+- Bavure d'encre aux bords des formes — bords PAS nets, legerement fuzzy
+- Texture papier visible dans les zones claires
+- **En post-prod :** appliquer un overlay de grain halftone + texture papier pour uniformiser le rendu si l'IA ne le fait pas assez
 
-### Densite d'encre
-- Cible : environ **50% de couverture encre** sur l'image totale
-- Il FAUT des zones de respiration : ciel ouvert, sol degage, zones claires visibles
-- PAS de hachures denses partout (sinon aplat noir a taille carte)
-- Le personnage doit se DETACHER clairement du fond grace au contraste
-- Reference : le Guerrier corrige est le bon ratio de densite
+### Trait et formes
+
+- Contours noirs epais et affirmes
+- Formes simplifiees, graphiques — pas de hyper-detail anatomique
+- Ombres en hachures ou halftone, PAS en degrade
+- Silhouettes fortes et lisibles a petite taille
+- Style "affiche serigraphiee" — lecture instantanee
 
 ### Composition
-- Le personnage/sujet occupe ~70% du cadre
+
+- Le personnage/sujet occupe ~60-70% du cadre
+- Silhouette forte et reconnaissable — doit fonctionner en 2cm de large
 - Fond suggestif, pas trop detaille (risque de bruit a petite taille)
-- Contraste figure/fond : le sujet doit se detacher clairement
+- Contraste figure/fond : le sujet doit se detacher clairement grace au contraste noir/couleur
 
 ### Visages
-- Le visage doit rester PRINCIPALEMENT rendu en hachures noires, comme le reste du corps
-- Les tons chair sont un LAVIS SUBTIL visible entre les hachures, PAS un aplat de couleur peau realiste
-- Le visage ne doit PAS etre plus "realiste" ou "peint" que le reste de l'illustration
-- Penser "gravure ancienne legerement teintee a la main" PAS "portrait realiste colle sur gravure"
-- Les hachures du visage doivent etre aussi visibles et dominantes que partout ailleurs
-- Reference : le Guerrier est le bon dosage — tons chair a peine perceptibles sous les hachures
 
-### Lisibilite a taille carte (63x88mm)
-- Eviter les hachures trop denses qui deviennent un aplat sombre
-- Eclaircir legerement la zone du personnage
-- Les details importants (visage, arme, embleme) doivent rester lisibles
+- Stylises, PAS realistes — traits reduits a l'essentiel (forme du visage, expression, marques distinctives)
+- L'expression doit etre lisible meme en simplifie
+- Chaque heros a 1-2 traits faciaux uniques et memorables (cicatrice, peinture de guerre, tatouage, etc.)
+- Pas de "beau visage IA" — rugueux, imparfait, stylise par le medium riso
+- Le grain halftone sur le visage masque naturellement les artefacts IA
 
----
+### Mains
 
-## 3. Sujets par hero
+- Cachees ou simplifiees : gantelets, gants, lumiere, arme qui cache les doigts
+- Si visibles, rendues en silhouette noire simple — pas de detail de doigts
 
-Chaque hero a **une couleur d'accent unique**. L'illustration est quasi entierement noire/encre, avec cette couleur appliquee sur 1-2 elements forts seulement.
+### Lisibilite carte (63x88mm)
 
-Le **visage** est l'element le plus important de chaque illustration. Il doit etre net, detaille, avec une forte personnalite. Chaque hero a un visage unique, memorable, avec des imperfections, de l'asymetrie et du caractere. Pas de "beau visage generique IA".
-
-| Hero | Couleur | Sujet | Elements couleur | Visage |
-|---|---|---|---|---|
-| **Guerrier** | Rouge | An armored warrior in defensive stance holding a large shield with a phoenix emblem, cape flowing, battlefield background at dusk | cape and shield emblem | Sharp detailed face of a weathered black male soldier, broken nose, deep scar across left cheek, intense determined gaze, square jaw clenched, short cropped hair, asymmetric brow ridge |
-| **Mage** | Bleu electrique | A female mage channeling lightning through a sapphire crystal staff, arcane circle glowing beneath her, storm clouds background | arcane runes and lightning arcs | Sharp detailed face of a gaunt woman with hollow cheekbones, piercing asymmetric eyes one slightly larger, thin severe lips, silver-streaked hair pulled tight, burn mark on temple, unsettling knowing expression |
-| **Diplomate** | Brun/sepia chaud | A diplomat in leather cape holding a sealed scroll, grand hall with banners background | wax seal and banner crests | Sharp detailed face of a middle-aged man with a crooked aristocratic nose, laugh lines deeply etched, shrewd narrow eyes, neatly trimmed greying beard, receding hairline, confident half-smile |
-| **Rodeuse** | Vert emeraude | A female Native American ranger crouched on a fallen tree trunk in a primeval forest, holding a bow vertically, quiver on back, green-lined cloak | crystal arrowhead glow, cloak interior lining, leaves in hair | Sharp detailed face of a young Native American woman with high cheekbones, aquiline nose, warm bronze/olive skin, long straight black hair, wide-set dark eyes, proud calm predatory expression |
-| **Soigneur** | Or/jaune dore | A male healer channeling light from open palms, ruined temple background, sacred symbols floating | healing light and sacred symbols | Sharp detailed face of an older man with deep-set compassionate eyes, prominent crow's feet, aquiline nose slightly bent, thin white beard, age spots on forehead, serene but weary expression |
+- Tester chaque illustration reduite a 6cm de large
+- Les hachures trop fines deviennent du bruit — privilegier des traits epais
+- La silhouette du personnage doit rester identifiable en thumbnail
 
 ---
 
-## 4. Post-traitement obligatoire
+## 3. Heroes — Palette et couleurs par personnage
+
+Chaque heros a sa propre combinaison de couleurs riso. Le noir est toujours present comme couche structurelle.
+
+| Hero | Nom | Titre | Couleur riso | Couches d'impression | Palette |
+|---|---|---|---|---|---|
+| **Rempart** | Nawel | Le Rempart | Deep steel blue | noir + bleu acier | charcoal black, deep steel blue, off-white paper |
+| **Flamme** | Daraa | La Flamme | Crimson red | noir + rouge cramoisi | charcoal black, deep crimson red, off-white paper |
+| **Porte-Voix** | Aslan | Le Porte-Voix | Warm brown/gold | noir + brun dore | charcoal black, warm sienna brown, off-white paper |
+| **Piste** | Isonash | La Piste | Emerald green | noir + vert emeraude | charcoal black, deep emerald green, off-white paper |
+| **Gardien** | Gao | Le Gardien | Golden yellow | noir + or/jaune | charcoal black, warm golden yellow, off-white paper |
+
+### Elements portant la couleur (par heros)
+
+| Hero | Elements en couleur | Elements en noir |
+|---|---|---|
+| **Nawel** | Plumes, bouclier (motifs geometriques), peinture de guerre, ciel | Armure, corps, sol, details |
+| **Daraa** | Feu, runes, plumes de coiffe, eclairs magiques | Corps, robes, sol, staff |
+| **Aslan** | Cape, sceau du parchemin, emblemes, torches | Armure legere, corps, architecture |
+| **Isonash** | Plumes de fleche, broderies, feuillage, doublure capuche | Arc, corps, troncs, sol |
+| **Gao** | Lumiere de soin, symboles sacres, herbes, soleil | Corps, ruines, sol, outils |
+
+### Description physique (source de verite pour chaque heros)
+
+> Ces descriptions sont les references definitives. Elles correspondent aux fichiers `hero_*.md` individuels.
+
+> **IMPORTANT : Les heros sont des animaux anthropomorphes.** Voir `Docs/univers.md` pour le contexte. L'animal de chaque heros est lie a la culture de sa tribu. Les inspirations culturelles (noms, tribus, couleurs, equipements) restent identiques.
+
+| Hero | Animal | Lien culturel |
+|---|---|---|
+| Nawel | Jaguar | Nom signifie "jaguar" en mapuche, animal sacre |
+| Daraa | Hyene | Animal emblematique des terres arides Afar, lie aux esprits |
+| Aslan | Lion | Nom signifie "lion" en circassien, autorite naturelle |
+| Isonash | Ours brun | Kimun kamuy (esprit de l'ours) sacre chez les Ainou |
+| Gao | Suricate | Animal du Kalahari, vie communautaire, petit et agile |
+
+**Nawel (Rempart)** — Jaguar anthropomorphe, tribu Mapuche. Guerrier massif, musculature feline puissante. Fourrure tachee de noir sur fond fauve. Armure fer forge + cuir + os. Bouclier rond massif avec motifs geometriques solaires bleus. Toki (hache de guerre mapuche). Peinture de guerre bleue sur le museau et les joues.
+
+**Daraa (Flamme)** — Hyene anthropomorphe, tribu Afar. Mage. Pelage court brun-gris, criniere herissee couleur braise. Oreilles pointues expressives. Coiffe avec plumes couleur braise. Robes legeres. Baton/staff avec cristal. Runes de feu.
+
+**Aslan (Porte-Voix)** — Lion anthropomorphe, tribu Circassienne. Diplomate. Criniere epaisse et majestueuse, pelage dore. Cape en cuir riche. Parchemin scelle. Dague cachee.
+
+**Isonash (Piste)** — Ourse brune anthropomorphe, tribu Ainou. Rodeuse. Fourrure brun fonce, museau fin et attentif. Capuche verte. Arc en bois. Fleches avec pointes cristal. Camouflage ecorce/feuilles.
+
+**Gao (Gardien)** — Suricate anthropomorphe, tribu San. Soigneur, petit et mince, posture alerte. Fourrure courte beige-fauve, grands yeux expressifs. Mains luminescentes. Sacoche d'herbes. Vetements simples en peau/tissu.
+
+---
+
+## 4. Formats de carte
+
+### Recto — Format 3:2 (paysage, vignette en haut de carte)
+
+C'est l'image **fonctionnelle** : on l'utilise pendant le jeu.
+
+```
+[BLOC STYLE] +
+Full body character, landscape 3:2 format.
+Character centered, dominant in frame (~70%).
+Strong readable silhouette, must work at thumbnail size.
+Dynamic pose related to the character's role.
+Simple atmospheric background — suggested, not detailed.
+All body parts within center 75% horizontally.
+Dramatic asymmetric lighting from one side.
+```
+
+### Verso — Format 2:3 (portrait vertical)
+
+C'est l'image **hero** : celle qu'on regarde et qu'on retient.
+
+```
+[BLOC STYLE] +
+Full body character portrait, portrait vertical 2:3 format.
+Wide shot showing full environment.
+Character ~60-70% of frame, full body visible head to toe.
+Dynamic narrative pose.
+Atmospheric background with depth (landscape, ruins, mountains, sky).
+Environment takes a significant role in the composition.
+Dramatic lighting, strong warm/cold contrast.
+```
+
+### Sous-titre lore (verso uniquement)
+
+En bas de l'illustration verso, une phrase courte FR + EN :
+- Nawel : *« Tant qu'il tient debout, ils tiennent. »* / *« While he stands, they stand. »*
+- Daraa : *« Le feu obeit a ceux qu'il a brules. »* / *« Fire obeys those it has burned. »*
+- Aslan : *« Cinq tribus parlent par sa bouche. »* / *« Five tribes speak through his mouth. »*
+- Isonash : *« Elle voit ce que le vent oublie. »* / *« She sees what the wind forgets. »*
+- Gao : *« Il ramene les vivants chez les vivants. »* / *« He brings the living back to the living. »*
+
+---
+
+## 5. Autres types d'assets
+
+### Monstres
+
+```
+[BLOC STYLE] +
+Creature in natural habitat, mid-action threatening pose.
+2-color overprint: charcoal black + crimson red.
+Red on: eyes, claws, blood, hostile magic, corruption marks.
+Emphasis on menacing silhouette over anatomical detail.
+Fantasy adventure tone, not survival horror.
+Must feel dangerous but defeatable.
+```
+
+### Epreuves (scenes/lieux)
+
+```
+[BLOC STYLE] +
+Environmental wide shot, NO prominent characters.
+2-color overprint: charcoal black + crimson red.
+Red on: danger element (trap, glow, blood, hostile magic).
+Strong mood lighting from a single dominant light source.
+Invites the viewer into the scene, suggests narrative and danger.
+Loose rendering in periphery, detail concentrated on focal point.
+```
+
+### Icones (symboles de gameplay)
+
+```
+Risograph-style game icon.
+2 colors: charcoal black + {{COULEUR_HERO}}.
+Clean silhouette on off-white background.
+Halftone grain texture visible.
+MUST be instantly readable at 1cm x 1cm print size.
+Bold, simple, graphic.
+```
+
+---
+
+## 6. Post-traitement obligatoire
 
 Apres chaque generation, appliquer dans l'ordre :
 
-1. **Correction fond (PRIORITE #0)** — Si le fond est trop chaud/sepia/jaune, uploader dans ChatGPT avec le prompt de correction (section 1). Le fond doit etre gris-beige plat et lisse, PAS parchemin chaud.
+1. **Verification grain riso** — Si l'image est trop lisse/digitale, appliquer un overlay de :
+   - Grain halftone (dots pattern) a ~15-20% opacite
+   - Texture papier craft (off-white, grain visible) en mode Multiply ~10%
+   - Leger decalage de la couche couleur (2-5px shift) pour simuler la misregistration
 
-2. **Visage (inpainting - PRIORITE #1)** — Le visage fait ou defait l'illustration. Toujours regenerer en zoom avec le prompt visage de la section 3. Criteres :
-   - **Nettete** : le visage doit etre la zone la plus nette de l'image
-   - **Identite** : traits uniques et memorables, pas un visage generique
-   - **Imperfections** : cicatrices, asymetrie, rides, nez casse, marques — ce qui rend le personnage humain et credible
-   - **Expression** : emotion lisible, coherente avec le personnage
-   - **Lisibilite** : doit rester lisible imprime a 63x88mm
-   - Si le visage est "trop beau" ou "trop lisse" apres generation, c'est rate — recommencer.
+2. **Verification palette** — Maximum 3 couleurs : noir + couleur(s) hero + papier. Aucune couleur parasite (pas de rose, pas d'orange non voulu, pas de bleu sur un hero rouge, etc.)
 
-3. **Details equipement (inpainting)** — Retoucher les zones d'armure, armes, emblemes si les textures sont trop "fondues". Ajouter nettete et bords durs.
+3. **Visage** — Doit rester stylise et lisible. Si trop realiste ou trop lisse, re-generer ou appliquer le grain plus fortement sur le visage.
 
-4. **Contraste figure/fond** — Si le personnage se perd dans le decor, assombrir le fond. Eventuellement ajouter un vignettage leger.
+4. **Contraste figure/fond** — Le personnage doit se detacher clairement. Assombrir le fond ou augmenter le contraste si necessaire.
 
-5. **Verification palette** — S'assurer qu'aucune couleur parasite n'est apparue. Seuls le noir, le gris-beige et la couleur d'accent du hero sont autorises. PAS de jaune, PAS d'orange, PAS de sepia chaud.
+5. **Test taille carte** — Reduire l'image a 6cm de large. La silhouette et le personnage doivent rester identifiables.
 
-6. **Finitions optionnelles** :
-   - Sharpening selectif sur le personnage
-   - Bruit chromatique subtil (2-3%)
+### Overlay riso (recette Photoshop/GIMP)
 
----
+Pour garantir le look riso meme si DALL-E ne le fait pas assez :
 
-## 5. Application aux autres types d'assets
+1. Creer une couche "halftone dots" :
+   - Nouveau calque gris 50%
+   - Filtre > Pixeliser > Demi-teintes couleur (rayon 4-6px)
+   - Mode de fusion : Multiply, opacite 15-25%
 
-### Monstres
-Meme prompt template. La couleur selective est le rouge pour les elements menacants (yeux, griffes sanglantes, magie hostile).
+2. Creer une couche "paper texture" :
+   - Importer une texture papier craft (off-white, grain visible)
+   - Mode de fusion : Multiply, opacite 8-12%
 
-### Epreuves (scenes)
-Meme prompt template. Le sujet est un lieu ou une situation. La couleur selective est le rouge pour l'element de danger ou d'interet (piege, lueur, sang).
-
-### Icones
-- Format 1:1 au lieu de paysage
-- Le rouge selectif est l'element central de l'icone
-- Fond blanc ou gris-beige uni
-
-### Cadres de carte (frames)
-- Style encre noire woodcut, traits TRES EPAIS
-- Pas de hachures fines, pas de filigrane
-- Interieur des zones texte : creme clair lisse opaque
-- Voir `Docs/card_frame_templates.md` pour les prompts
-
-### Fonds de carte colores
-- Texture marbrée/cuir par couleur de hero (rouge, bleu, vert, marron, or, gris neutre)
-- Voir `Docs/card_backgrounds.md` pour les prompts
+3. Creer une couche "misregistration" :
+   - Dupliquer la couche couleur uniquement
+   - Decaler de 3-5px en horizontal et 1-2px en vertical
+   - Opacite 60-80%
 
 ---
 
----
+## 7. Points de vigilance ChatGPT / DALL-E
 
-## 6. NOUVEAU STYLE EN TEST : Impasto / Huile epaisse
-
-> **Statut :** En exploration (avril 2026). Pourrait remplacer le style gravure.
-
-### Pourquoi ce changement
-
-- Le style gravure noir + couleur selective est beau mais limite l'identite visuelle (pas de couleur, pas de wow en rayon)
-- L'univers evolue vers un cadre tribal/heroic fantasy colore (voir `Docs/univers.md`)
-- L'impasto est un territoire **vierge en JdS** — aucun jeu connu ne l'utilise
-- Les coups de couteau/pinceau epais masquent les artefacts IA
-- Les imperfections du style (textures rugueuses, formes pas lisses) sont voulues = pas de "uncanny valley"
-
-### Principe du style
-
-- Peinture a l'huile epaisse au couteau/pinceau large
-- Coups de pinceau visibles et sculpturaux, texture en relief
-- Formes solides et lisibles, PAS d'impressionnisme flou
-- Palette riche et saturee mais controlee : 5-6 couleurs dominantes
-- Visages rugueux, imparfaits, PAS lisses ni "beaux" — des guerriers, pas des mannequins
-- Fond/decor visible et atmospherique (paysages, ruines, jungle, montagnes)
-
-### Palette de reference (par heros)
-
-| Hero | Couleur dominante | Elements portant la couleur | Palette |
-|---|---|---|---|
-| **Nawel (Rempart)** | Bleu acier | Plumes, bouclier, peinture de guerre | deep steel blue, burnt sienna, warm ochre, charcoal, dark brown, cream |
-| **Killa (Flamme)** | Rouge/cramoisi | Feu, runes, plumes | deep crimson, amber orange, molten gold, charcoal, dark brown, cream |
-| **Karai (Porte-Voix)** | Brun/or | a definir | a definir |
-| **Liwen (Piste)** | Vert emeraude | a definir | a definir |
-| **Amaru (Gardien)** | Or/jaune | a definir | a definir |
-
-### Prompt template impasto
-
-> **IMPORTANT :** Le bloc "Style" doit être formulé avec des mots-clés TRÈS précis pour éviter que l'IA applique un simple filtre de texture. Il faut parler de coups de pinceau individuels, visibles, différents les uns des autres. Référencer **Leonid Afremov** et **Van Gogh (Starry Night)** qui sont bien connus de l'IA.
-
-```
-{{DESCRIPTION_PERSONNAGE_ET_DECOR}}
-
-IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES,
-like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a
-separate long thick ribbon of oil paint, clearly distinct from the next stroke.
-The paint looks like toothpaste squeezed in long lines onto the canvas. You
-should be able to count individual strokes one by one. Strokes have different
-sizes, directions, and thicknesses — never uniform. Some strokes are big and
-thick, others smaller. Strokes overlap chaotically, some areas have empty spaces
-between them where canvas shows. The paint builds form through deliberate
-directional lines, not blended smoothly. The entire image (character AND
-background) must have the same thick paint stroke technique — not smoother on
-the figure. Palette: {{PALETTE}}. Palette knife and thick brush technique.
-Dramatic lighting with strong light source creating highlights and shadows,
-warm rim light on the figure.
-
-Forbidden: uniform texture, grain filter effect, smooth painting, evenly
-distributed brushwork, digital painting with impasto filter, AI-style neat
-strokes, smooth character on textured background.
-```
-
-### Points clés du style impasto
-
-- **Coups de pinceau VISIBLES et COMPTABLES** — on doit pouvoir en compter individuellement
-- **Variations de taille et direction** — jamais uniformes, jamais systématiques
-- **Pâte épaisse comme du dentifrice** — long rubans de peinture, pas un filtre
-- **Canvas visible entre les coups** — zones vides assumées
-- **Personnage ET décor au même niveau d'empâtement** — pas de perso lisse sur fond texturé
-- **Lumière dramatique** — fort contraste, halo, rim light
-- **Références explicites** : Leonid Afremov, Van Gogh (Starry Night), peintures de Santorini
-
-### Prompt negatif impasto
-
-```
-smooth, digital, photorealistic, airbrushed, impressionism blur,
-uniform texture, grain filter, regular brushwork, neat strokes,
-systematic painting, AI painting style, even paint distribution,
-character smoother than background, blurry face, beautiful face,
-model face, studio lighting
-```
-
-### Points de vigilance
-
-- **Visages** : doivent rester rugueux, asymetriques, imparfaits. Si trop beau/lisse = re-generer
-- **Peau** : doit correspondre a l'ethnie du personnage. PAS de peau blanche par defaut
-- **Pose** : dynamique, pas statique. Chaque heros dans une action liee a son role
-- **Lisibilite carte** : les zones de texte/icones devront etre sur fond plus clean (pas impasto)
-- **Consistance** : a tester sur les 5 heros avant de valider le style
+- **Risograph pas assez marque** : DALL-E tend a lisser le rendu. Insister sur "visible halftone dot pattern", "ink bleed at edges", "hand-pulled screen print". Ajouter "NOT digital, NOT smooth" explicitement.
+- **Trop de couleurs** : DALL-E ajoute des couleurs non demandees. Etre tres explicite : "ONLY {{COULEUR}} and black. No other colors."
+- **Visages trop realistes** : ajouter "stylized face, graphic simplified features, NOT photorealistic face"
+- **Mains** : toujours specifier comment les cacher (gantelets, arme, lumiere, cadrage)
+- **Format** : DALL-E genere en 1024x1024, 1024x1792, ou 1792x1024. Pour le paysage 3:2 on obtient 1536x1024. Cropper en post a 1536x922 (5:3) pour la zone illustration carte.
+- **Ne JAMAIS nommer** de jeu (MTG, Hearthstone) ou d'artiste protege dans le prompt
+- **Anti-IA** : le grain riso + misregistration + texture papier en post-prod sont les meilleurs outils anti-detection IA. Toujours les appliquer.
 
 ---
 
-## 7. Deux formats par héros et boss
-
-Chaque **héros** et chaque **boss** a **deux illustrations distinctes**, générées séparément mais cohérentes entre elles.
-
-### Verso de carte — Format 2:3 (portrait vertical)
-
-- **Plein cadre** : illustration immersive sur tout le verso
-- C'est l'**image héro** : celle qu'on regarde, qu'on apprécie, qu'on retient
-- Composition portrait verticale avec décor riche
-- Le personnage occupe ~60-70% du cadre, environnement étendu visible
-- Pose dynamique et narrative
-- En bas : un **sous-titre** lore (1 phrase courte FR + EN)
-
-**Caractéristiques du prompt 2:3 :**
-```
-- Format: portrait vertical 2:3
-- Wide shot showing full environment
-- Character full body visible
-- Dramatic narrative pose
-- Atmospheric background with depth
-- Environment takes a significant role in the composition
-```
-
-### Recto de carte — Format 3:2 (paysage, vignette en haut)
-
-- **Vignette paysage** en haut de la carte (le bas contient stats / effets)
-- C'est l'**image fonctionnelle** : on l'utilise pendant le jeu, doit être claire à petite taille
-- Composition centrée, sujet dominant, lecture rapide
-- Le personnage occupe ~80% du cadre, fond plus simple ou flou
-- Pose plus iconique/statique (buste ou portrait américain)
-- Doit rester lisible imprimé en petit format (~5cm)
-
-**Caractéristiques du prompt 3:2 :**
-```
-- Format: landscape 3:2
-- Medium close-up shot, bust to upper body
-- Character centered, dominant in frame (~80%)
-- Simpler less detailed background
-- Iconic identifying pose (not action shot)
-- Strong silhouette readable at small size
-- Same character description as the 2:3 version (consistency)
-```
-
-### Stratégie de cohérence visuelle entre 2:3 et 3:2
-
-L'IA ne garantit pas que le 2:3 et le 3:2 montrent **le même** personnage. Pour assurer la cohérence :
-
-**Option A — Description identique (recommandée pour démarrer)**
-1. Écrire d'abord le 2:3 avec une description physique très précise (ethnie, traits, cheveux, peinture de guerre, vêtements, accessoires colorés)
-2. Reprendre **mot pour mot** la description physique dans le 3:2
-3. Seul le cadrage et la pose changent
-
-**Option B — Image-to-image (plus précis)**
-1. Générer le 2:3 d'abord
-2. Cropper une zone carrée du visage/buste depuis le 2:3
-3. Utiliser ce crop comme **image de référence** dans DALL-E pour générer le 3:2
-4. Avantage : visage et tenue identiques garantis
-
-**Option C — Référence visuelle externe**
-1. Générer le 2:3
-2. L'utiliser comme reference image dans le prompt 1:1 (`reference image of the same character`)
-
-**Recommandation :** commencer par l'option A (descriptions identiques). Si la cohérence n'est pas suffisante, passer à l'option B.
-
-### Sous-titre lore (verso 2:3 uniquement)
-
-Chaque carte verso porte un **sous-titre court** en bas de l'illustration, en italique, qui suggère du lore sans tout expliquer.
-
-- **Longueur** : 1 phrase, 8 mots max idéalement
-- **Bilingue** : version FR + version EN
-- **Ton** : sobre, suggestif, jamais explicatif
-- **Style** : *« Phrase courte. »* en italique avec guillemets français
-
-Exemples :
-- Nawel : *« Tant qu'il tient debout, ils tiennent. »* / *« While he stands, they stand. »*
-- Hobab : *« Il était la pluie. Il est devenu la cendre. »* / *« He was the rain. He became the ash. »*
-
----
-
-## Historique des decisions
+## 8. Historique des decisions
 
 | Date | Decision |
 |---|---|
-| 2026-04-09 | Style gravure retenu apres test sur le Guerrier. Abandon du style "MTG painterly" initial. |
-| 2026-04-10 | Fond des illustrations change de parchemin chaud/sepia vers gris-beige plat lisse. Raison : uniformite entre illustrations et meilleure integration avec les fonds de carte colores. |
-| 2026-04-10 | Ajout des fonds de carte colores par type de hero (style MTG). |
-| 2026-04-10 | Ajout des cadres de carte (titre, image, texte, icone) en style woodcut traits epais. |
-| 2026-04-11 | Test style impasto/huile epaisse suite au changement d'univers (tribal/colosses). Premier test sur Nawel (Rempart) concluant — pose dynamique, defensif, peau amerindienne, decor ruines/jungle. |
-| 2026-04-12 | Adoption de 2 formats par hero/boss : verso 2:3 (image hero immersive) + recto 3:2 paysage (vignette en haut de carte). Sous-titre lore FR/EN sur le verso. |
-| 2026-04-12 | Refonte du bloc style impasto : mots-clés plus precis (Afremov, Van Gogh Starry Night, "toothpaste strokes", "count individual strokes") pour eviter que l'IA applique un simple filtre de texture. Emphase sur lumiere dramatique et uniformite du rendu entre perso et decor. |
+| 2026-04-09 | Style gravure retenu apres test sur le Guerrier generique. |
+| 2026-04-10 | Fond gris-beige plat. Ajout fonds de carte colores et cadres woodcut. |
+| 2026-04-11 | Test impasto/huile epaisse suite au changement d'univers tribal. Premier test Nawel concluant. |
+| 2026-04-12 | Adoption 2 formats : verso 2:3 + recto 3:2. Sous-titres lore FR/EN. |
+| 2026-04-12 | Refonte bloc style impasto (Afremov, Van Gogh references). |
+| 2026-04-13 | **Abandon impasto/gravure/gouache.** Adoption style **Risograph / serigraphie 2-3 couleurs**. Raisons : meilleur masquage IA, originalite marche JdS, coherence palette naturelle, imperfections voulues. Correction des noms de heros (Nawel/Daraa/Aslan/Isonash/Gao) et couleurs (Nawel = bleu acier, pas rouge). |

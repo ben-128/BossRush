@@ -11,14 +11,14 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Frappe",
-      "description": "Le boss attaque le héros actif. Inflige ? dégâts. Le monstre en tête de file attaque aussi."
+      "description": "Le boss attaque le héros actif. Inflige ? dégâts."
     },
     {
       "id": "EPR_002",
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Frappe",
-      "description": "Le boss attaque le héros actif. Inflige ? dégâts. Le monstre en tête de file attaque aussi."
+      "description": "Le boss attaque le héros actif. Inflige ? dégâts."
     },
     {
       "id": "EPR_003",
@@ -46,14 +46,14 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Balayage",
-      "description": "Chaque héros subit 1 dégât. Le monstre en tête de file attaque aussi."
+      "description": "Chaque héros subit 1 dégât."
     },
     {
       "id": "EPR_007",
       "type": "assaut",
       "sous_type": "invocation",
       "nom": "Invocation",
-      "description": "Le boss invoque. Piocher ? monstre(s) et les placer en file. Le monstre en tête de file attaque le héros actif."
+      "description": "Le boss invoque. Piocher ? monstre(s) et les placer en file."
     },
     {
       "id": "EPR_008",
@@ -72,23 +72,23 @@
     {
       "id": "EPR_010",
       "type": "assaut",
-      "sous_type": "ordre",
-      "nom": "Ordre d'attaque",
-      "description": "Le monstre en tête de file attaque le héros actif. S'il n'y a pas de monstre, le boss inflige ? dégâts."
+      "sous_type": "attaque",
+      "nom": "Frappe vicieuse",
+      "description": "Le boss attaque le héros actif. Inflige ? dégâts. Le héros actif défausse 1 carte Arsenal de sa main."
     },
     {
       "id": "EPR_011",
       "type": "assaut",
-      "sous_type": "ordre",
-      "nom": "Ordre d'attaque",
-      "description": "Le monstre en tête de file attaque le héros actif. S'il n'y a pas de monstre, le boss inflige ? dégâts."
+      "sous_type": "attaque",
+      "nom": "Rugissement",
+      "description": "Chaque héros défausse 1 carte Arsenal de sa main."
     },
     {
       "id": "EPR_012",
       "type": "assaut",
       "sous_type": "action_speciale",
       "nom": "Action spéciale",
-      "description": "Le boss déclenche son action spéciale (voir fiche boss). Le monstre en tête de file attaque aussi."
+      "description": "Le boss déclenche son action spéciale (voir fiche boss)."
     },
     {
       "id": "EPR_013",
@@ -102,14 +102,14 @@
       "type": "assaut",
       "sous_type": "soin",
       "nom": "Régénération",
-      "description": "Le boss se soigne 2 PV. Le monstre en tête de file attaque le héros actif."
+      "description": "Le boss se soigne 2 PV."
     },
     {
       "id": "EPR_015",
       "type": "assaut",
       "sous_type": "combo",
       "nom": "Assaut coordonné",
-      "description": "Le boss inflige ? dégâts au héros actif, invoque 1 monstre, et le monstre en tête de file attaque."
+      "description": "Le boss inflige ? dégâts au héros actif et invoque 1 monstre."
     },
     {
       "id": "EPR_016",
@@ -187,13 +187,13 @@
       "id": "EPR_028",
       "type": "evenement",
       "nom": "Trouvaille",
-      "description": "Un sac abandonné dans les décombres.\n\n• Fouiller (le héros pioche 1 carte Arsenal)\n\nOU\n\n• Fouiller à fond (chaque héros pioche 1 carte Arsenal, mais le monstre en tête de file attaque)"
+      "description": "Un sac abandonné dans les décombres.\n\n• Fouiller (le héros pioche 1 carte Arsenal)\n\nOU\n\n• Fouiller à fond (chaque héros pioche 1 carte Arsenal, mais le héros actif subit 1 dégât)"
     },
     {
       "id": "EPR_029",
       "type": "evenement",
       "nom": "Embuscade",
-      "description": "Le boss prépare un piège !\n\n• Esquiver (défausser 1 Action, aucun effet)\n\nOU\n\n• Subir le piège (le héros subit ? dégâts et le monstre en tête de file attaque)"
+      "description": "Le boss prépare un piège !\n\n• Esquiver (défausser 1 Action, aucun effet)\n\nOU\n\n• Subir le piège (le héros subit ? dégâts)"
     },
     {
       "id": "EPR_030",

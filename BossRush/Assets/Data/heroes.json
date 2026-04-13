@@ -12,7 +12,7 @@
       "pv": 4,
       "competences": ["magie"],
       "capacite_speciale": "Défausse tous les monstres dans la file avec 1 point de vie restant.",
-      "citation": "« Le feu obéit à ceux qu'il a brûlés. »"
+      "citation": "« Le feu ne pardonne pas. Elle non plus. »"
     },
     {
       "id": "HERO_002",
@@ -21,7 +21,7 @@
       "pv": 4,
       "competences": ["soin"],
       "capacite_speciale": "Retire toutes les blessures d'un héros au choix.",
-      "citation": "« Il ramène les vivants chez les vivants. »"
+      "citation": "« Tant qu'il respire, personne ne tombe. »"
     },
     {
       "id": "HERO_003",
@@ -30,7 +30,7 @@
       "pv": 7,
       "competences": ["armure"],
       "capacite_speciale": "Prévient toutes les blessures que ce héros devait subir ce tour.",
-      "citation": "« Ils frappent. Je reste. »"
+      "citation": "« Il encaisse. Encore. Encore. »"
     },
     {
       "id": "HERO_004",
@@ -39,7 +39,7 @@
       "pv": 5,
       "competences": ["distance"],
       "capacite_speciale": "Joue immédiatement 2 cartes Action de sa main.",
-      "citation": "« Elle voit ce que le vent oublie. »"
+      "citation": "« On voit la première flèche. Jamais les suivantes. »"
     },
     {
       "id": "HERO_005",
