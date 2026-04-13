@@ -47,7 +47,7 @@
       "titre": "Le Porte-Voix",
       "pv": 5,
       "competences": ["diplomatie"],
-      "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent.",
+      "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent jusqu'à la fin du tour.",
       "citation": "« Cinq tribus parlent par sa bouche. »"
     }
   ]

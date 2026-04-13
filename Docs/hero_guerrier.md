@@ -1,5 +1,7 @@
 # Guerrier - Illustration
 
+> **OBSOLETE** — Ce fichier correspond a l'ancien style gravure et aux heros humains. Les heros sont maintenant des animaux anthropomorphes en style gouache narrative. Voir `hero_nawel.md` pour le Rempart actuel (jaguar).
+
 ## Fichier
 `BossRush/Assets/Raw/Heros/Guerrier.png`
 

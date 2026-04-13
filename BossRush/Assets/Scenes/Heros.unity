@@ -339,8 +339,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 2.1
+  m_fontSizeBase: 2.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 3.1746268, y: 0.9807398, z: 3.2851722, w: 1.0937016}
+  m_margin: {x: 3.3091817, y: 0.9807398, z: 3.2851722, w: 1.0937016}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -720,7 +720,7 @@ MonoBehaviour:
   portraitRenderer: {fileID: 1603593783}
   textColor: {r: 0, g: 0, b: 0, a: 1}
   citationColor: {r: 0, g: 0, b: 0, a: 1}
-  enableDropShadow: 0
+  enableDropShadow: 1
   shadowColor: {r: 0, g: 0, b: 0, a: 0.49019608}
   shadowOffsetX: 1
   shadowOffsetY: 1
@@ -730,7 +730,7 @@ MonoBehaviour:
   titleOutlineWidth: 0.15
   descriptionOutline: 1
   descriptionOutlineColor: {r: 0, g: 0, b: 0, a: 1}
-  descriptionOutlineWidth: 0.4
+  descriptionOutlineWidth: 0.25
   citationOutline: 1
   citationOutlineColor: {r: 0, g: 0, b: 0, a: 1}
   citationOutlineWidth: 0.4
@@ -748,12 +748,12 @@ MonoBehaviour:
     soin: {fileID: 21300000, guid: 2b7abf394cc895c4489d4c123e4c130a, type: 3}
     magie: {fileID: 21300000, guid: f24a78e92668f0647b399e991ae57b70, type: 3}
     diplomatie: {fileID: 21300000, guid: fb4f67b90cd7a764ebf9986d8963e538, type: 3}
-    scaleArmure: 0.09
+    scaleArmure: 0.15
     scaleDistance: 0.09
     scaleSoin: 0.09
     scaleMagie: 0.11
     scaleDiplomatie: 0.09
-    offsetArmure: {x: 0, y: 0}
+    offsetArmure: {x: 0, y: 0.025}
     offsetDistance: {x: 0, y: 0}
     offsetSoin: {x: 0, y: 0}
     offsetMagie: {x: 0, y: 0}
@@ -780,7 +780,7 @@ MonoBehaviour:
     capacite_speciale: "D\xE9fausse tous les monstres dans la file avec 1 point de
       vie restant."
     description: 
-    citation: "\xAB Le feu ne pardonne pas. Elle non plus. \xBB"
+    citation: "\xAB Elle forge son destin dans la destruction. \xBB"
   - nom: Gao
     sprite: {fileID: 0}
     offset: {x: 0, y: 0.5}
@@ -824,7 +824,7 @@ MonoBehaviour:
     competences:
     - diplomatie
     capacite_speciale: "Tous les h\xE9ros peuvent s'\xE9changer autant de cartes
-      qu'ils le souhaitent."
+      qu'ils le souhaitent jusqu'\xE0 la fin du tour."
     description: 
     citation: "\xAB Cinq tribus parlent par sa bouche. \xBB"
 --- !u!21 &294818322
@@ -840,6 +840,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - OUTLINE_ON
+  - UNDERLAY_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -898,7 +899,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.4
+    - _OutlineWidth: 0.25
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.6666667
@@ -934,7 +935,7 @@ Material:
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.442}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.4}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!1 &442832019
@@ -1261,6 +1262,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - OUTLINE_ON
+  - UNDERLAY_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -1355,7 +1357,7 @@ Material:
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.442}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.4}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!1 &1000190558
@@ -1480,7 +1482,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 6.3478193, y: 2.4236767, z: 6.334628, w: 2.0036716}
+  m_margin: {x: 7.1861978, y: 2.4236767, z: 7.1730146, w: 2.0036716}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -1649,7 +1651,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3, y: -4.3, z: -1}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1.3333331}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 1.6666664}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2090081215}
@@ -1738,7 +1740,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - UNDERLAY_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -1833,7 +1836,7 @@ Material:
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.442}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.4}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!1 &1333057185
@@ -2113,6 +2116,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - OUTLINE_ON
+  - UNDERLAY_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -2171,7 +2175,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.4
+    - _OutlineWidth: 0.25
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.75
@@ -2207,7 +2211,7 @@ Material:
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.442}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.4}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!1 &1602578961
@@ -2797,7 +2801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -3.56}
+  m_AnchoredPosition: {x: 0, y: -3.5}
   m_SizeDelta: {x: 12.2061, y: 2.4363}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2063036563
@@ -2820,7 +2824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Le feu ne pardonne pas. Elle non plus. \xBB</i>"
+  m_text: "<i>\xAB Elle forge son destin dans la destruction. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -2853,7 +2857,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 3
+  m_fontStyle: 2
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
   m_textAlignment: 65535

@@ -46,7 +46,7 @@ with real paint on real paper.
 | `{{COULEUR_DOMINANTE}}` | Couleur thematique du heros (~70% de l'image) | `deep steel blue`, `crimson red` |
 | `{{COULEUR_ACCENT}}` | Couleur de contraste chaud/froid (~30%) | `warm golden`, `cool blue` |
 | `{{SUJET}}` | Description du personnage/scene, pose, equipement, decor | voir section 3 |
-| `{{FORMAT}}` | Ratio de l'image | `Landscape orientation, 3:2 aspect ratio.` ou `Portrait orientation, 2:3 aspect ratio.` |
+| `{{FORMAT}}` | Ratio de l'image | `Portrait orientation, 2:3 aspect ratio.` |
 
 ### Bloc couleur (a inserer apres le bloc style)
 
@@ -213,48 +213,31 @@ from the BODY — torsion, legs, diagonal lean.
 NO rocks, NO debris, NO floating boulders, NO shockwaves.
 ```
 
-### Recto — Format 3:2 (paysage, zone illustration carte)
+### Format unique : 2:3 (portrait vertical)
 
-C'est l'image **fonctionnelle** : on l'utilise pendant le jeu. L'illustration couvre TOUTE la carte (le parchemin texte sera overlay par-dessus en bas).
-
-```
-[BLOC STYLE] + [BLOC COULEUR] + [BLOC MOUVEMENT] +
-Full body character, landscape 3:2 format.
-Heroic proportions — tall, lean, powerful (7-8 heads tall).
-NOT stocky, NOT chibi, NOT cute.
-Character offset slightly from center, creating dynamic asymmetry.
-Dominant in frame (~65-70%).
-Strong readable silhouette, must work at thumbnail size.
-Dynamic mid-action pose — weight shifting, muscles tensed, movement.
-Atmospheric background in dominant color tones — suggested, not detailed.
-All body parts within center 80% horizontally.
-Strong directional lighting — warm golden light from one side,
-cool shadows on the other.
-IMPORTANT: The bottom 35% of the image will be partially covered
-by a text overlay. Keep the character's key features (head, torso,
-weapon) in the upper 65%. Legs/feet can extend into the lower zone.
-```
-
-### Verso — Format 2:3 (portrait vertical)
-
-C'est l'image **hero** : celle qu'on regarde et qu'on retient.
+Toutes les illustrations de cartes (heros, boss, monstres) sont en **portrait 2:3**. L'illustration couvre TOUTE la carte. La zone texte est un panneau parchemin overlay en bas.
 
 ```
 [BLOC STYLE] + [BLOC COULEUR] + [BLOC MOUVEMENT] +
 Full body character portrait, portrait vertical 2:3 format.
 Heroic proportions — tall, lean, powerful (7-8 heads tall).
+NOT stocky, NOT chibi, NOT cute.
 Wide shot showing full environment.
 Character ~60-70% of frame, full body visible head to toe.
+Character offset slightly from center, creating dynamic asymmetry.
+Strong readable silhouette, must work at thumbnail size.
 Dynamic narrative pose with strong diagonal composition.
-Atmospheric background with depth (landscape, ruins, mountains, sky).
-Environment tinted in dominant color.
+Atmospheric background with depth, tinted in dominant color.
 Dramatic lighting — warm golden light from one side, cool shadows
 on the other. Strong warm/cold contrast.
+IMPORTANT: The bottom 35% of the image will be partially covered
+by a text overlay. Keep the character's key features (head, torso,
+weapon) in the upper 65%. Legs/feet can extend into the lower zone.
 ```
 
-### Sous-titre lore (verso uniquement)
+### Sous-titre lore
 
-En bas de l'illustration verso, une phrase courte FR + EN :
+En bas de l'illustration, une phrase courte FR + EN :
 - Nawel : *« Tant qu'il tient debout, ils tiennent. »* / *« While he stands, they stand. »*
 - Daraa : *« Le feu obeit a ceux qu'il a brules. »* / *« Fire obeys those it has burned. »*
 - Aslan : *« Cinq tribus parlent par sa bouche. »* / *« Five tribes speak through his mouth. »*
@@ -263,12 +246,11 @@ En bas de l'illustration verso, une phrase courte FR + EN :
 
 ---
 
-## 5b. Prompts complets prets-a-coller (verso 2:3)
+## 5b. Prompts complets prets-a-coller (2:3)
 
 > Copier-coller directement dans ChatGPT. Un seul bloc par heros.
-> Pour le recto 3:2, remplacer le bloc COMPOSITION par le template recto ci-dessus.
 
-### Nawel (Rempart) — Verso 2:3
+### Nawel (Rempart) — 2:3
 
 ```
 Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
@@ -288,7 +270,7 @@ ENVIRONMENT: Wide shot, full body visible head to toe. Stormy mountain landscape
 Portrait orientation, 2:3 aspect ratio.
 ```
 
-### Daraa (Flamme) — Verso 2:3
+### Daraa (Flamme) — 2:3
 
 ```
 Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
@@ -308,7 +290,7 @@ ENVIRONMENT: Wide shot, full body visible. Scorched desert at twilight — dark 
 Portrait orientation, 2:3 aspect ratio.
 ```
 
-### Aslan (Porte-Voix) — Verso 2:3
+### Aslan (Porte-Voix) — 2:3
 
 ```
 Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
@@ -328,7 +310,7 @@ ENVIRONMENT: Wide shot, full body visible head to toe. Ancient stone architectur
 Portrait orientation, 2:3 aspect ratio.
 ```
 
-### Isonash (Piste) — Verso 2:3
+### Isonash (Piste) — 2:3
 
 ```
 Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
@@ -348,7 +330,7 @@ ENVIRONMENT: Wide shot, full body visible head to toe. Dense ancient forest tint
 Portrait orientation, 2:3 aspect ratio.
 ```
 
-### Gao (Gardien) — Verso 2:3
+### Gao (Gardien) — 2:3
 
 ```
 Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
@@ -460,7 +442,7 @@ Un shader UI/Sprite applique sur toutes les illustrations pour uniformiser le re
 - **Mains/pattes deformees** : Probleme majeur quand le personnage tient des objets. **Solution : un seul objet en main max.** Privilegier le bouclier seul (l'objet le plus iconique). Cacher l'arme ou la mettre dans le dos/ceinture.
 - **Armes deformees** : Les armes tenues sont souvent bizarres (lame tordue, manche deforme). Mieux vaut ne pas montrer l'arme ou la montrer rangee/dans le dos.
 - **Brushstrokes trop uniformes** : Insister sur "varied in direction and pressure", "palette knife in some areas", "drips and paint splatter". Ajouter "NOT uniform" explicitement.
-- **Format** : DALL-E genere en 1024x1024, 1024x1792, ou 1792x1024. Pour le paysage 3:2 on obtient ~1792x1024.
+- **Format** : DALL-E genere en 1024x1024, 1024x1792, ou 1792x1024. Pour le portrait 2:3 on obtient ~1024x1792.
 - **Ne JAMAIS nommer** de jeu (MTG, Hearthstone, Root) ou d'artiste protege dans le prompt.
 - **Anti-IA** : le post-traitement Unity (overlay toile + grain + displacement) est le meilleur outil. Toujours l'appliquer.
 
@@ -483,7 +465,7 @@ Un shader UI/Sprite applique sur toutes les illustrations pour uniformiser le re
 | 2026-04-09 | Style gravure retenu apres test sur le Guerrier generique. |
 | 2026-04-10 | Fond gris-beige plat. Ajout fonds de carte colores et cadres woodcut. |
 | 2026-04-11 | Test impasto/huile epaisse suite au changement d'univers tribal. Premier test Nawel concluant. |
-| 2026-04-12 | Adoption 2 formats : verso 2:3 + recto 3:2. Sous-titres lore FR/EN. |
+| 2026-04-12 | Adoption 2 formats : verso 2:3 + recto 3:2. Sous-titres lore FR/EN. (abandonne le 14/04 — format unique 2:3) |
 | 2026-04-12 | Refonte bloc style impasto (Afremov, Van Gogh references). |
 | 2026-04-13 | Test risograph sur Nawel jaguar : trop cartoon/blocky, detectablement IA. |
 | 2026-04-13 | Test gouache narrative sur Nawel jaguar : bien meilleur rendu, style "peint a la main". Problemes : proportions trapues, pose statique, couleur bleue absente, arme/mains deformees. |
@@ -494,3 +476,4 @@ Un shader UI/Sprite applique sur toutes les illustrations pour uniformiser le re
 | 2026-04-13 | **Abandon layout split dur.** Adoption layout **overlay** (style Everdell/Flesh and Blood). L'illustration couvre toute la carte, le parchemin texte est pose par-dessus en bas. Raisons : plus immersif, plus moderne, meilleur wow factor. Etude des JdS (Everdell, Flesh and Blood, MTG full-art, Oath) confirme que c'est le standard actuel. |
 | 2026-04-13 | Texture zone texte : apres tests, la texture de toile/canvas est inutile — les JdS utilisent un fond propre. Le parchemin Everdell extrait du PSD officiel confirme : fond creme plat + bords irreguliers + vignettage chaud burnt sienna. Pas de texture de fibre visible. |
 | 2026-04-13 | Prompts complets prets-a-coller ecrits pour les 5 heros (verso 2:3). Incluent : bloc style gouache, bloc couleur, bloc mouvement (poussiere, lanieres, feuilles — pas de debris), description physique, pose specifique, environnement. |
+| 2026-04-14 | **Format unique 2:3 portrait** pour toutes les illustrations (heros, boss, monstres). Abandon du recto 3:2 et du 1:1. |

@@ -1,81 +1,70 @@
-# Killa — La Flamme / The Flame
+# Killa (Daraa) — La Flamme / The Flame
 
 ## Identité
 
-- **Nom :** Killa (Quechua : "lune")
+- **Nom :** Daraa
 - **Classe FR :** La Flamme
 - **Classe EN :** The Flame
 - **Tribu :** Tribu du Brasier — maîtres du feu et des forces élémentaires
+- **Animal :** Hyène anthropomorphe (femelle)
 - **Rôle :** Dégâts magiques, effets de zone
-- **Ethnie :** Afar (Éthiopie/Djibouti) — peuple du désert volcanique du Danakil
 
 ## Description visuelle
 
-- Femme élancée, féroce, nerveuse
-- Peau très sombre (noire), traits est-africains fins (pommettes hautes, nez fin et droit, mâchoire étroite)
-- Visage anguleux, sévère, lèvres fines serrées en concentration — pas belle mais magnétique
-- Cheveux crépus courts, partiellement roussis aux pointes par la chaleur
-- Robes légères drapées sur armure de cuir fin, adaptées à la chaleur extrême
-- Bijoux en os et obsidienne, amulettes volcaniques
+- Hyène anthropomorphe femelle, élancée, gracieuse, silhouette féminine distincte
+- Pelage court brun-gris, crinière couleur braise longue et balayée en arrière
+- Oreilles pointues expressives
 - Coiffe avec plumes couleur braise (rouges/cramoisies)
-- **Bâton d'obsidienne sculpté** — canalise le feu
-- Feu et flammes comme éléments visuels dominants
-- Scarifications rituelles sur les bras
+- Robes légères à tissu translucide, montrant sa silhouette
+- PAS de bâton/arme — ses mains SONT l'arme
+- Yeux brun foncé naturels avec reflets ambrés, PAS lumineux
 
 ## Pose de référence
 
-Pose de spellcasting offensive : un bras tendu vers l'avant libérant une déferlante de feu depuis la paume ouverte, l'autre main agrippant le bâton d'obsidienne planté au sol. Corps en tension, énergie qui irradie.
+En lévitation, pieds décollés du sol, bras écartés paumes vers le bas. Arc de feu cramoisi en demi-cercle entre ses deux mains. Corps arqué avec grâce, comme une danseuse en plein saut.
 
 ## Couleur dominante
 
-Deep crimson red
+Deep crimson red (30% accents chauds, 70% ombres froides dominantes — indigo, charcoal, violet)
 
 ## Éléments portant la couleur
 
-- Feu et flammes
+- Feu et flammes (arc entre les mains)
 - Plumes de la coiffe
-- Runes/motifs lumineux sur le bâton et les vêtements
-- Reflets rouges sur la peau et l'armure
+- Runes lumineuses sur les robes
+- Reflets rouges sur la fourrure
 
 ## Palette
 
-Deep crimson, amber orange, molten gold, charcoal black, dark brown, cream white
+Deep crimson, amber orange, molten gold, dark indigo, charcoal black, deep violet, cream white
 
-## Sous-titre verso (lore)
+## Sous-titre (lore)
 
 - **FR :** *« Le feu obéit à ceux qu'il a brûlés. »*
 - **EN :** *« Fire obeys those it has burned. »*
 
-## Prompt VERSO (DALL-E, impasto, 2:3 portrait)
+## Prompt (DALL-E, gouache narrative, 2:3 portrait)
 
 ```
-Full body character portrait, portrait vertical 2:3 format, wide shot showing full environment. A lean and fierce East African woman in a powerful spellcasting pose, one arm thrust forward releasing a torrent of crimson fire from her open palm, her other hand gripping a carved obsidian staff planted in the ground. She wears light draped robes over thin leather armor, bone and obsidian jewelry, a headdress with deep red and crimson feathered plumes. Very dark black skin, fine East African features, high cheekbones, narrow straight nose, angular jaw, thin lips pressed tight in concentration. Short cropped curly hair, partially singed at the tips. Ritual scarification marks on her arms.
+Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
 
-Behind her: a volcanic landscape, dark basalt rocks, rivers of glowing lava in the distance, sulfurous yellow vents, ash clouds rising into a deep orange and purple sky. Ancient carved stone pillars covered in glowing red runes frame the scene.
+Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients.
 
-IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. The paint looks like toothpaste squeezed in long lines onto the canvas. You should be able to count individual strokes one by one. Strokes have different sizes, directions, and thicknesses — never uniform. Some strokes are big and thick, others smaller. Strokes overlap chaotically, some areas have empty spaces between them where canvas shows. The paint builds form through deliberate directional lines, not blended smoothly. The entire image (character/creature AND background) must have the same thick paint stroke technique — not smoother on the figure. Palette: deep crimson red, amber orange, molten gold, charcoal black, dark brown, cream white. Palette knife and thick brush technique. Dramatic lighting with strong light source creating highlights and shadows, warm rim light on the figure.
+COLOR DIRECTION: Crimson red and ember orange are the WARM accent colors (30%). The DOMINANT tones (70%) are deep cool shadows — dark indigo blue, charcoal black, deep violet in the shadows and background. The crimson/ember appears ONLY on: the fire magic, the feather headdress, rune glow, and robe accents. The overall image should read as DARK with RED ACCENTS, not as an all-red image.
 
-Forbidden: uniform texture, grain filter effect, smooth painting, evenly distributed brushwork, digital painting with impasto filter, AI-style neat strokes, smooth character on textured background.
+SUBJECT: Anthropomorphic FEMALE hyena sorceress — lean, elegant, graceful. Distinctly feminine silhouette: narrow waist, longer limbs, sleek refined frame. NOT bulky, NOT brutish, NOT masculine. Short brown-grey fur, ember-colored mane flowing long and swept back like wild hair. Pointed expressive ears. Heroic proportions (7-8 heads tall), tall and slender. NOT stocky, NOT chibi. Afar tribal mage: lightweight layered robes with flowing translucent fabric that shows her silhouette, headdress with ember-colored feathers. NO staff, NO rod, NO weapon — her hands ARE the weapon. Natural dark brown eyes with warm ember reflections, NOT glowing, NOT red.
 
-Character takes up about 60-70% of the frame, full body visible head to toe, environment with significant depth around and behind her.
-```
+POSE: Mid-leap or levitating — both feet off the ground, body suspended in the air. Arms spread wide, palms open and facing down. Between her two hands, a sweeping HALF-CIRCLE ARC OF FIRE traces through the air — bright crimson and orange flames forming a crescent shape connecting her palms. Her body arches gracefully, back slightly curved, head tilted with fierce concentration. Three-quarter view. Strong diagonal composition from one hand through the fire arc to the other. This is raw elemental power channeled with dancer-like grace.
 
-## Prompt RECTO (DALL-E, impasto, 1:1 carré, vignette)
+MOVEMENT: Robes and long mane streaming upward from the levitation and heat. Translucent fabric layers billowing dramatically around her legs. Fire arc between her hands crackles with ember sparks trailing behind the motion. Fine ash and sand pushed outward below her floating body. The movement is AERIAL and GRACEFUL — like a dancer mid-pirouette, not a brute smashing. NO debris, NO boulders.
 
-```
-Iconic medium close-up character portrait, square 1:1 format. Same character as the verso: a lean and fierce East African woman, very dark black skin, fine East African features, high cheekbones, narrow straight nose, angular jaw, thin lips pressed tight in concentration. Short cropped curly hair partially singed at the tips. Ritual scarification marks on her arms. Wearing light draped robes, bone and obsidian jewelry, a headdress with deep red and crimson feathered plumes. Bust to upper body shot, one hand raised holding a small flame of crimson fire, the other gripping the top of her obsidian staff. Intense focused gaze directly at the viewer.
+ENVIRONMENT: Wide shot, full body visible. Scorched desert at twilight — dark indigo sky with crimson horizon line. Cracked earth. Volcanic silhouettes far away. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Warm crimson glow from below (runes), cool indigo light from above (sky).
 
-Background: a simple atmospheric wash of deep red and orange embers with smoke, dramatic but not detailed, no narrative scene.
-
-IMPORTANT STYLE: This painting is made of VISIBLE INDIVIDUAL THICK PAINT STROKES, like a Leonid Afremov painting or Van Gogh's Starry Night. Each stroke is a separate long thick ribbon of oil paint, clearly distinct from the next stroke. Paint like toothpaste squeezed in long lines. Strokes have different sizes and directions, never uniform. The entire image must have the same thick paint stroke technique. Palette: deep crimson red, amber orange, molten gold, charcoal black, dark brown, cream white. Palette knife and thick brush technique. Dramatic lighting with strong light source, warm rim light on the figure. Forbidden: uniform texture, grain filter, smooth painting, AI-style neat strokes.
-
-Character takes up about 80% of the frame, centered, simple background.
+Portrait orientation, 2:3 aspect ratio.
 ```
 
 ## Notes
 
-- Couleur dominante rouge/cramoisi (inversée avec le guerrier qui passe en bleu)
-- Le rouge doit être visible sur : le feu, les plumes, les runes
-- Le visage doit rester rugueux comme le reste de la peinture
-- Ethnie Afar (Éthiopie/Djibouti) — peuple du désert volcanique, vivent sur des volcans actifs
-- Peau très sombre, traits est-africains fins — contraste fort avec Nawel
+- Le rouge est un ACCENT (30%), pas la dominante — l'image doit lire sombre avec des eclats rouges
+- La fourrure de hyene masque les artefacts IA
+- Silhouette feminine distincte — grace de danseuse, pas brute

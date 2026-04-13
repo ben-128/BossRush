@@ -1,5 +1,7 @@
 # Diplomate - Illustration
 
+> **OBSOLETE** — Ce fichier correspond a l'ancien style gravure et aux heros humains. Les heros sont maintenant des animaux anthropomorphes en style gouache narrative. Voir `hero_aslan.md` pour le Porte-Voix actuel (lion).
+
 ## Fichier
 `BossRush/Assets/Raw/Heros/Diplomate.png`
 

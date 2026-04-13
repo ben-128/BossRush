@@ -230,7 +230,7 @@ public class HeroCardGenerator : CardGenerator
         SetCompetenceIcons(hero.competences);
         SetBackground(mainCompetence);
 
-        ApplyTextStyle(titreText);
+        ApplyTextStyle(titreText, isSubtitle: true);
         ApplyTextStyle(capaciteText);
         ApplyPvStyle(pvText);
     }

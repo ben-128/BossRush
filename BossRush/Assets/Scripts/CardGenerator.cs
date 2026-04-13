@@ -61,6 +61,17 @@ public abstract class CardGenerator : MonoBehaviour
     [Range(0f, 1f)]
     public float descriptionOutlineWidth = 0.15f;
 
+    [Header("Outline sous-titre")]
+    [Tooltip("Activer un outline sur le sous-titre (ex: Le Rempart)")]
+    public bool subtitleOutline = true;
+
+    [Tooltip("Couleur de l'outline sous-titre")]
+    public Color subtitleOutlineColor = new Color(0.165f, 0.122f, 0.078f, 0.4f);
+
+    [Tooltip("Épaisseur de l'outline sous-titre")]
+    [Range(0f, 1f)]
+    public float subtitleOutlineWidth = 0.15f;
+
     [Header("Outline citation")]
     [Tooltip("Activer un outline sur la citation")]
     public bool citationOutline = true;
@@ -101,13 +112,14 @@ public abstract class CardGenerator : MonoBehaviour
     public abstract void GenerateCard(int index);
     public abstract void LoadFromJson();
 
-    private enum TextRole { Title, Description, Citation }
+    private enum TextRole { Title, Subtitle, Description, Citation }
 
-    protected void ApplyTextStyle(TextMeshPro tmp, bool isCitation = false)
+    protected void ApplyTextStyle(TextMeshPro tmp, bool isCitation = false, bool isSubtitle = false)
     {
         TextRole role;
         if (isCitation) role = TextRole.Citation;
         else if (tmp == nomText) role = TextRole.Title;
+        else if (isSubtitle) role = TextRole.Subtitle;
         else role = TextRole.Description;
 
         ApplyTextStyleForRole(tmp, role);
@@ -148,6 +160,11 @@ public abstract class CardGenerator : MonoBehaviour
                 outlineOn = titleOutline;
                 outlineCol = titleOutlineColor;
                 outlineW = titleOutlineWidth;
+                break;
+            case TextRole.Subtitle:
+                outlineOn = subtitleOutline;
+                outlineCol = subtitleOutlineColor;
+                outlineW = subtitleOutlineWidth;
                 break;
             case TextRole.Citation:
                 outlineOn = citationOutline;

@@ -1,5 +1,7 @@
 # Mage - Illustration
 
+> **OBSOLETE** — Ce fichier correspond a l'ancien style gravure et aux heros humains. Les heros sont maintenant des animaux anthropomorphes en style gouache narrative. Voir `hero_killa.md` pour la Flamme actuelle (hyene).
+
 ## Fichier
 `BossRush/Assets/Raw/Heros/Mage.png`
 

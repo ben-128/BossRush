@@ -1,5 +1,7 @@
 # Rodeuse - Illustration
 
+> **OBSOLETE** — Ce fichier correspond a l'ancien style gravure et aux heros humains. Les heros sont maintenant des animaux anthropomorphes en style gouache narrative. Voir `hero_isonash.md` pour la Piste actuelle (ourse).
+
 ## Fichier
 `BossRush/Assets/Raw/Heros/Rodeur.png`
 
