@@ -1,53 +1,91 @@
-# Prompt — Fond zone texte (creme avec subtilites visuelles)
+# Prompt — Parchemin zone texte (4 bords visibles, style Everdell/Res Arcana)
 
-> Un seul fond neutre partage par toutes les cartes.
-> Objectif : avoir de la MATIERE et du CARACTERE sans jamais gener la lisibilite du texte.
+> Morceau de parchemin flottant avec transparence, a placer par-dessus l'illustration.
+> Inspire des cartes Everdell (blotches bruns sur les bords) et Res Arcana (vignettage chaud).
 
 ## Prompt
 
 ```
-Painted parchment texture panel for a fantasy board game card text zone.
-Warm cream/ivory base (#F2E8D5) with subtle visual richness.
+A single piece of aged parchment paper, seen from directly above, 
+floating on a transparent background (RGBA, alpha channel).
 
-VIGNETTING: edges slightly darker and warmer — gradual, natural,
-like aged paper handled many times. The darkening is subtle (maybe
-10-15% darker than center). Corners are the darkest areas.
-CENTER is the lightest zone — this is where text will be placed.
+FORMAT: PNG with transparency. The parchment piece occupies roughly 
+85-90% of the image. Everything outside the parchment edges is 
+fully transparent.
 
-PAINT TEXTURE: very faint gouache brushstroke traces — mostly
-horizontal, barely visible. Like one thick coat of cream paint was
-applied and dried. Not smooth digital flat color — slightly tactile
-and organic. The strokes must be SO FAINT that they don't interfere
-with text readability.
+SHAPE: rectangular piece of old parchment/vellum, roughly landscape 
+ratio (~2:1). ALL FOUR EDGES are visible and IRREGULAR — not cut 
+straight, but torn, worn, and slightly wavy like real old paper. 
+Each edge is different:
+- Top edge: the most irregular — torn and wavy, with a few small 
+  notches and one slightly larger bite taken out
+- Bottom edge: less torn but still uneven, slightly curled
+- Left and right edges: wavy, worn, with subtle fiber fraying
 
-TONAL VARIATION: very subtle warm/cool patches across the surface.
-Some areas slightly more yellow-warm, others slightly more grey-cool.
-Like natural parchment color variation. Gentle, not spotty.
+The parchment is NOT a perfect rectangle. It looks like a real 
+piece of old document that was handled, folded, and aged.
 
-CANVAS GRAIN: faint woven linen texture visible underneath the paint.
-Very subtle — like the canvas weave shows through where the paint
-is thinnest.
+SURFACE — inspired by Everdell / Res Arcana card text panels:
 
-IMPORTANT CONSTRAINTS:
-- NO dark spots, NO stains, NO foxing marks, NO age damage
-- NO torn edges, NO burnt edges, NO wrinkles
-- NO borders, NO frames, NO ornaments, NO symbols, NO text
-- NO strong contrast — everything stays within 15% brightness
-  range of the base cream color
-- The overall impression is WARM, CLEAN, INVITING — not old/damaged
-- Text in dark brown (#2A1F14) must remain perfectly readable
-  everywhere on this surface
+CENTER (text zone, ~60% of area):
+- Warm cream/ivory base (#F0E4D0), the lightest area
+- Visible but subtle gouache brushstrokes — thick, horizontal, 
+  matte. The paint is opaque cream over the parchment.
+- Clean enough for dark text to be perfectly readable
+- Very slight tonal variation — not perfectly uniform, some 
+  patches marginally warmer or cooler
 
-Think: a fresh sheet of high-quality illustration board with one
-coat of warm cream gesso, ready for an artist to paint on.
-Clean but not sterile. Warm but not yellowed.
+EDGES AND BORDERS (the key character):
+- ALL four edges darken significantly — burnt sienna / raw umber 
+  tones (#6B4226 to #3D2211), 30-40% darker than center
+- The darkening is ORGANIC and UNEVEN — like water stains, age 
+  foxing, and handling marks accumulated over centuries
+- Some edges have darker BLOTCHES — 2-3 larger stain-like areas 
+  where the brown is more concentrated, like tea stains or old 
+  ink spills. These are the signature Everdell look.
+- The transition from dark edges to light center is GRADUAL — 
+  a soft 15-20% of the width on each side, not a hard line
+- CORNERS: darkest areas (~40-45% darker than center), each 
+  corner slightly different in shape and darkness
 
-PNG format, landscape orientation, ratio ~2:1.
+TEXTURE DETAILS:
+- Visible paper/vellum fiber texture throughout, more apparent 
+  where the paint is thinner (near edges)
+- Very faint crackle pattern in a few spots — like old dried 
+  paint on paper, not dramatic
+- 1-2 tiny foxing dots (age spots) scattered naturally
+- The overall feel is WARM — sienna, umber, ochre tones. 
+  Never grey, never cold.
+
+SHADOW:
+- A very soft, warm drop shadow around the entire parchment piece 
+  (as if it's slightly lifted off the surface below)
+- Shadow is subtle — just enough to give depth, ~3-5px blur, 
+  dark brown, 20-30% opacity
+
+STYLE: photorealistic aged parchment with painted gouache surface. 
+The feeling of a 300-year-old manuscript page that a painter used 
+as a palette — warm, tactile, full of character.
+
+IMPORTANT:
+- NO text, NO symbols, NO writing, NO drawings on the surface
+- NO perfectly straight edges anywhere
+- NO uniform color — every area has subtle variation
+- The dark edge stains are the MOST IMPORTANT visual feature — 
+  they give the parchment its character and depth
+- Must work as a text panel overlay on a dark/colorful background
 ```
+
+## References visuelles
+
+- **Everdell** : `Docs/everdell_textures/parchment_clean.png` — forme et bords
+- **Everdell** : `Docs/everdell_textures/full_composite.png` — carte complete avec parchemin en contexte
+- **Res Arcana** : vignettage chaud, transition sombre sous l'illustration
 
 ## Post-traitement
 
-1. Recadrer a 795x380
-2. Verifier lisibilite : superposer du texte brun fonce en 10pt et 8pt — doit etre parfaitement lisible partout
-3. Si trop de contraste dans la texture : ajouter un calque creme #F2E8D5 a 20-30% par-dessus
-4. Le vignettage ne doit PAS assombrir la zone centrale ou le texte sera place
+1. Recadrer/resize pour correspondre a la zone texte de la carte
+2. Verifier lisibilite : texte brun fonce (#2A1F14) en 10pt et 8pt doit etre parfaitement lisible dans la zone centrale (60%)
+3. Si le vignettage est trop fort sur les bords : calque creme #F0E4D0 a 15% sur les bords
+4. Si pas assez de texture : augmenter contraste local (clarity +10)
+5. Le centre doit rester CLAIR — tout le caractere est sur les bords
