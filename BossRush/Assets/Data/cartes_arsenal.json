@@ -11,7 +11,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-	  "effet": "Lorsque ce monstre devrait attaquer, défaussez cette carte et annulez l'attaque.",
+	  "effet": "Lorsque le monstre ciblé attaque, défaussez cette carte pour annuler l'attaque.",
       "quantite": 3
     },
     {
@@ -20,7 +20,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Le monstre passe en dernière position de la file",
+      "effet": "Le monstre ciblé passe en dernière position de la file.",
       "quantite": 2
     },
     {
@@ -29,7 +29,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Le monstre attaque immédiatement le héros.",
+      "effet": "Le monstre ciblé attaque immédiatement ce héros.",
       "quantite": 2
     },
     {
@@ -38,7 +38,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-	  "effet": "Retire 1 blessure au héros.",
+	  "effet": "Soignez ce héros de 1.",
       "quantite": 2
     },
     {
@@ -46,7 +46,7 @@
       "nom": "Second souffle",
       "categorie": "action",
       "prerequis": "Nawel",
-	  "effet": "Retire jusqu'à 3 blessures au héros.",
+	  "effet": "Soignez ce héros de 3.",
       "quantite": 2
     },
     {
@@ -54,7 +54,7 @@
       "nom": "Rage du blessé",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Pioche une carte Arsenal pour chaque blessure sur le héros.",
+      "effet": "Piochez 1 carte Arsenal par blessure sur ce héros.",
       "quantite": 1
     },
     {
@@ -62,7 +62,7 @@
       "nom": "Provocation",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Chaque monstre de la file attaque immédiatement le héros.",
+      "effet": "Chaque monstre de la file attaque immédiatement ce héros.",
       "quantite": 1
     },
     {
@@ -70,7 +70,7 @@
       "nom": "Endosser",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Déplace jusqu'à 4 blessures répartis sur un ou plusieurs alliés sous ce héros.",
+      "effet": "Déplacez jusqu'à 4 blessures d'autres héros vers ce héros.",
       "quantite": 2
     },
     {
@@ -79,7 +79,7 @@
       "categorie": "objet",
       "prerequis": "Nawel",
       "bonus_degats": 2,
-      "effet": "Ajoute 2 dégâts à une attaque mélée jouée en même temps.",
+      "effet": "Ajoutez 2 dégâts à une attaque mélée jouée en même temps.",
       "quantite": 1
     },
     {
@@ -87,7 +87,7 @@
       "nom": "Bouclier de fer",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Défausse immédiatement la carte qui devait infliger des blessures au héros.",
+      "effet": "Annulez la prochaine source de blessures infligées à ce héros.",
       "quantite": 1
     },
     {
@@ -95,7 +95,7 @@
       "nom": "Armure lourde",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Les 2 prochains dégâts subis par le héros sont réduits de 1 (minimum 0).",
+      "effet": "Les 2 prochaines fois que ce héros subit des dégâts, réduisez-les de 1 (minimum 0).",
       "quantite": 1
     },
     {
@@ -103,8 +103,7 @@
       "nom": "Bandages d'urgence",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "bonus_degats": 1,
-      "effet": "Retire jusqu'à 2 blessures au héros.",
+      "effet": "Soignez ce héros de 2.",
       "quantite": 1
     },
     {
@@ -112,7 +111,7 @@
       "nom": "Heaume de guerre",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Le héros peut ignorer la carte épreuve qu'il est en train de subir.",
+      "effet": "Ignorez la carte Épreuve en cours.",
       "quantite": 1
     },
     {
@@ -129,7 +128,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Daraa",
-      "effet": "Peut cibler directement le Colosse ou n'importe quel monstre de la file.",
+      "effet": "Ciblez le Colosse ou un monstre au choix dans la file.",
       "quantite": 2
     },
     {
@@ -138,7 +137,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Daraa",
-      "effet": "Si le monstre suivant dans la file n'a qu'1 point de vie restant, le défausse.",
+      "effet": "Si le monstre suivant dans la file n'a qu'1 PV restant, éliminez-le.",
       "quantite": 2
     },
     {
@@ -154,7 +153,7 @@
       "nom": "Transfert de cendres",
       "categorie": "action",
       "prerequis": "Daraa",
-      "effet": "Déplace 1 blessure de ce héros sous un monstre ou Colosse au choix.",
+      "effet": "Déplacez 1 blessure de ce héros vers un monstre ou le Colosse.",
       "quantite": 2
     },
     {
@@ -162,7 +161,7 @@
       "nom": "Brasier intérieur",
       "categorie": "action",
       "prerequis": "Daraa",
-      "effet": "Pioche 4 cartes Arsenal.",
+      "effet": "Piochez 4 cartes Arsenal.",
       "quantite": 2
     },
     {
@@ -170,16 +169,16 @@
       "nom": "Flamme ravivée",
       "categorie": "action",
       "prerequis": "Daraa",
-      "effet": "Régénère la capacité spéciale du héros.",
+      "effet": "Régénérez la capacité spéciale de ce héros.",
       "quantite": 1
     },
 	 {
-      "id": "MAG_A10",
+      "id": "MAG_A07",
       "nom": "Explosion de cadavre",
       "categorie": "action",
       "prerequis": "Daraa",
 	  "degats": 1,
-      "effet": "Si la cible meurt, placez la blessure sur le monstre suivant dans la file.",
+      "effet": "Si la cible est éliminée, infligez 1 dégât au monstre suivant dans la file.",
       "quantite": 2
     },
     {
@@ -187,7 +186,7 @@
       "nom": "Poudre arcanique",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Le héros peut utiliser sa capacité spéciale une seconde fois dans ce combat.",
+      "effet": "Ce héros peut utiliser sa capacité spéciale une seconde fois ce combat.",
       "quantite": 1
     },
     {
@@ -195,7 +194,7 @@
       "nom": "Parchemin ancien",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Le héros joue la prochaine carte Action de sa main sans prérequis.",
+      "effet": "Ce héros joue sa prochaine carte Action en ignorant le prérequis.",
       "quantite": 1
     },
     {
@@ -204,7 +203,7 @@
       "categorie": "objet",
       "prerequis": "Daraa",
       "bonus_degats": 3,
-      "effet": "Ajoute 3 dégâts à une attaque à distance jouée en même temps.",
+      "effet": "Ajoutez 3 dégâts à une attaque à distance jouée en même temps.",
       "quantite": 1
     },
     {
@@ -212,7 +211,7 @@
       "nom": "Cristal élémentaire",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Inflige 2 dégâts à un monstre au choix dans la file.",
+      "effet": "Infligez 2 dégâts à un monstre au choix dans la file.",
       "quantite": 1
     },
     {
@@ -221,7 +220,7 @@
       "categorie": "objet",
       "prerequis": "Daraa",
       "bonus_degats": 2,
-      "effet": "Ajoute 2 dégâts à une attaque mélée jouée en même temps.",
+      "effet": "Ajoutez 2 dégâts à une attaque mélée jouée en même temps.",
       "quantite": 1
     },
     {

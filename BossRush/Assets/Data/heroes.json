@@ -11,7 +11,7 @@
       "titre": "La Flamme",
       "pv": 4,
       "competences": ["magie"],
-      "capacite_speciale": "Défausse tous les monstres dans la file avec 1 point de vie restant.",
+      "capacite_speciale": "Éliminez tous les monstres de la file ayant 1 PV restant.",
       "citation": "« Le feu est patient. Elle ne l'est pas. »"
     },
     {
@@ -29,7 +29,7 @@
       "titre": "Le Rempart",
       "pv": 7,
       "competences": ["armure"],
-      "capacite_speciale": "Prévient toutes les blessures que ce héros devait subir ce tour.",
+      "capacite_speciale": "Annulez toutes les blessures infligées à ce héros ce tour.",
       "citation": "« Il encaisse. Encore. Et encore. »"
     },
     {
