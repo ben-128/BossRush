@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Isonash[face,1]_0: -167302406533610519
+      Isonash[face,1]_1: -8955830170269687061
+      Isonash[face,1]_2: -2801633088992244579
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

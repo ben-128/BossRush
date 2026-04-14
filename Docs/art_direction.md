@@ -259,11 +259,13 @@ Narrative gouache painting on textured illustration board. Thick opaque brushstr
 
 COLOR DIRECTION: The dominant color theme is deep steel blue. 70% deep steel blue tones, 30% warm golden accents. Deep steel blue armor, shadows, background. Warm golden fur highlights provide contrast.
 
-SUBJECT: Anthropomorphic jaguar warrior — massive, powerful feline musculature. Spotted black-on-tawny fur. Heroic proportions (7-8 heads tall), tall, lean, powerful. NOT stocky, NOT chibi. Mapuche tribal warrior: wrought iron, leather and bone armor. Massive round shield with blue geometric solar motifs held forward. Blue war paint on muzzle and cheeks. Natural amber/golden iris eyes, NOT glowing.
+SUBJECT: Anthropomorphic jaguar warrior — massive, powerful feline musculature. Spotted black-on-tawny fur. Heroic proportions (7-8 heads tall), tall, lean, powerful. NOT stocky, NOT chibi. Mapuche tribal warrior: wrought iron, leather and bone armor. Massive round shield with blue geometric solar motifs held forward in his RIGHT hand, covering most of his torso. His LEFT arm is fully hidden behind the shield and his flowing jaguar pelt cape — we cannot see it at all. Only ONE visible hand gripping the shield. Blue war paint on muzzle and cheeks. Natural amber/golden iris eyes, NOT glowing. NO weapon in hand, NO axe, NO secondary object.
 
-POSE: Dynamic aerial shield-bash lunge, weight shifting dramatically, strong diagonal composition. Body twisting with the force of the charge. One foot off the ground.
+EXPRESSION: Fierce determined stare — eyes WIDE OPEN, locked forward on the enemy, intense and focused. Mouth CLOSED, jaw clenched tight, lips pressed together. NOT roaring, NOT screaming, NOT eyes closed. The expression is SILENT FURY — controlled rage, not wild screaming. Think predator about to strike, not animal howling.
 
-MOVEMENT: Fine dust kicked up from feet. Leather straps and loincloth whipping in wind. A few dry leaves carried in the air. Movement comes from the BODY torsion and diagonal lean. NO rocks, NO debris, NO floating boulders.
+POSE: Mid-leap charge — launching off a rocky ledge, body fully airborne, head facing forward, eyes locked on the target, jaw clenched. His RIGHT arm thrusts the shield forward, strapped tight to his forearm with leather bindings (NOT gripped with fingers — the shield is BOUND to the arm). His LEFT arm is completely hidden behind the shield and the sweeping cape. We see ZERO fingers, ZERO left hand. Strong diagonal from bottom-left (where he leapt) to upper-right (where he flies). Full body stretched out in the air, legs extended behind, maximum sense of forward momentum.
+
+MOVEMENT: Fine dust cloud where he launched from the ledge. Cape and jaguar pelt streaming violently behind him, wide and dramatic, completely hiding the left arm. Leather straps and loincloth whipping upward from the leap. A few dry leaves caught in the rush of air. Movement comes from the FULL BODY — airborne trajectory, arched spine, extended limbs.
 
 ENVIRONMENT: Wide shot, full body visible head to toe. Stormy mountain landscape tinted deep steel blue. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Strong directional warm golden light from one side, cool blue shadows on the other.
 

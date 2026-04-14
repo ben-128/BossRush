@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Aslan[face,1]_0: -509006480278209272
+      Aslan[face,1]_1: 2129963536845094867
+      Aslan[face,1]_2: 7772867122796919740
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

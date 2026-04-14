@@ -11,7 +11,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-	  "effet": "Lorsque le monstre ciblé attaque, défaussez cette carte pour annuler l'attaque.",
+	  "effet": "Lorsque le monstre ciblé attaque, défaussez cette carte et annulez l'attaque.",
       "quantite": 3
     },
     {
@@ -38,7 +38,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-	  "effet": "Soignez ce héros de 1.",
+	  "effet": "Soignez ce héros de 1 blessure.",
       "quantite": 2
     },
     {
@@ -46,7 +46,7 @@
       "nom": "Second souffle",
       "categorie": "action",
       "prerequis": "Nawel",
-	  "effet": "Soignez ce héros de 3.",
+	  "effet": "Soignez ce héros de 3 blessures.",
       "quantite": 2
     },
     {
@@ -54,7 +54,7 @@
       "nom": "Rage du blessé",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Piochez 1 carte Chasse par blessure sur ce héros.",
+      "effet": "?",
       "quantite": 1
     },
     {
@@ -79,7 +79,7 @@
       "categorie": "objet",
       "prerequis": "Nawel",
       "bonus_degats": 2,
-      "effet": "Ajoutez 2 dégâts à une attaque mélée jouée en même temps.",
+      "effet": "Ajoutez 2 dégâts à une attaque jouée en même temps.",
       "quantite": 1
     },
     {
@@ -92,10 +92,10 @@
     },
     {
       "id": "GUE_O03",
-      "nom": "Armure lourde",
+      "nom": "Potion de Rage",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Les 2 prochaines fois que ce héros subit des dégâts, réduisez-les de 1 (minimum 0).",
+      "effet": "Piochez 1 carte Chasse par blessure sur ce héros.",
       "quantite": 1
     },
     {
@@ -103,7 +103,7 @@
       "nom": "Bandages d'urgence",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Soignez ce héros de 2.",
+      "effet": "Soignez ce héros de 2 blessures.",
       "quantite": 1
     },
     {
@@ -178,7 +178,7 @@
       "categorie": "action",
       "prerequis": "Daraa",
 	  "degats": 1,
-      "effet": "Si la cible est éliminée, infligez 1 dégât au monstre suivant dans la file.",
+      "effet": "Si la cible est éliminée, infligez les dégâts du monstre au monstre suivant dans la file.",
       "quantite": 2
     },
     {
@@ -186,7 +186,7 @@
       "nom": "Poudre arcanique",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Ce héros peut utiliser sa capacité spéciale une seconde fois ce combat.",
+      "effet": "Ce héros recharge sa capacité spéciale.",
       "quantite": 1
     },
     {
@@ -199,28 +199,28 @@
     },
     {
       "id": "MAG_O03",
-      "nom": "Catalyseur arcanique",
+      "nom": "Catalyseur",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "bonus_degats": 3,
-      "effet": "Ajoutez 3 dégâts à une attaque à distance jouée en même temps.",
+      "bonus_degats": 2,
+      "effet": "Renforcez une attaque et infligez 2 dégâts à un Monstre ou Colosse différent de la cible.",
       "quantite": 1
     },
     {
       "id": "MAG_O04",
-      "nom": "Cristal élémentaire",
+      "nom": "Cristal explosif",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Infligez 2 dégâts à un monstre au choix dans la file.",
+      "effet": "Eliminez un monstre attaquant ayant 2 points de vie ou moins.",
       "quantite": 1
     },
     {
       "id": "MAG_O05",
-      "nom": "Baguette de feu",
+      "nom": "Potion du feu intérieur",
       "categorie": "objet",
       "prerequis": "Daraa",
       "bonus_degats": 2,
-      "effet": "Ajoutez 2 dégâts à une attaque mélée jouée en même temps.",
+      "effet": "Soignez 1 blessure et piochez 2 cartes Chasse.",
       "quantite": 1
     },
     {

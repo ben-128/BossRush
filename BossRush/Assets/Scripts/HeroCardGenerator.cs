@@ -25,7 +25,7 @@ public class HeroCardGenerator : CardGenerator
         public string id;
         public string nom;
         public string titre;
-        public int pv;
+        public int vie;
         public string[] competences;
         public string capacite_speciale;
         public string description;
@@ -200,7 +200,7 @@ public class HeroCardGenerator : CardGenerator
             {
                 nom = json.nom,
                 titre = json.titre,
-                pv = json.pv,
+                pv = json.vie,
                 competences = json.competences,
                 capacite_speciale = json.capacite_speciale,
                 description = json.description,
