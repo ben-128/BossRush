@@ -54,7 +54,7 @@
       "nom": "Rage du blessé",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Eliminez n'importe quelle monstre dans la file. Utilisable uniquement si ce héros a 4 blessures ou plus.",
+      "effet": "Éliminez n'importe quel monstre dans la file. Uniquement utilisable si ce héros a 4 blessures ou plus.",
       "quantite": 1
     },
     {
@@ -92,7 +92,7 @@
     },
     {
       "id": "GUE_O03",
-      "nom": "Potion de Rage",
+      "nom": "Sang du jaguar",
       "categorie": "objet",
       "prerequis": "Nawel",
       "effet": "Piochez 1 carte Chasse par blessure sur ce héros.",
@@ -100,7 +100,7 @@
     },
     {
       "id": "GUE_O04",
-      "nom": "Bandages d'urgence",
+      "nom": "Peau de fer",
       "categorie": "objet",
       "prerequis": "Nawel",
       "effet": "Soignez ce héros de 2 blessures.",
@@ -111,7 +111,7 @@
       "nom": "Heaume de guerre",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Annuler l'effet de la carte Menace en cours.",
+      "effet": "Annulez l'effet de la carte Menace en cours.",
       "quantite": 1
     },
     {
@@ -174,7 +174,7 @@
     },
 	 {
       "id": "MAG_A07",
-      "nom": "Explosion de cadavre",
+      "nom": "Combustion",
       "categorie": "action",
       "prerequis": "Daraa",
 	  "degats": 1,
@@ -183,7 +183,7 @@
     },
     {
       "id": "MAG_O01",
-      "nom": "Poudre arcanique",
+      "nom": "Cendres du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
       "effet": "Ce héros recharge sa capacité spéciale.",
@@ -191,7 +191,7 @@
     },
     {
       "id": "MAG_O02",
-      "nom": "Parchemin ancien",
+      "nom": "Braise errante",
       "categorie": "objet",
       "prerequis": "Daraa",
       "effet": "Ce héros joue sa prochaine carte Action en ignorant le prérequis.",
@@ -216,135 +216,144 @@
     },
     {
       "id": "MAG_O05",
-      "nom": "Potion du feu intérieur",
+      "nom": "Lave du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
       "bonus_degats": 2,
       "effet": "Soignez 1 blessure et piochez 2 cartes Chasse.",
       "quantite": 1
     },
+	
     {
       "id": "SOI_A01",
-      "nom": "Frappe lumineuse",
+      "nom": "Épine nourricière",
       "categorie": "action",
       "degats": 1,
       "prerequis": "Gao",
-      "quantite": 3
+      "effet": "Si la cible survit, soignez 1 blessure d'un héros au choix.",
+      "quantite": 2
+    },
+	{
+      "id": "SOI_A12",
+      "nom": "Harmonie du Bosquet",
+      "categorie": "action",
+      "prerequis": "Gao",
+	  "degats": 3,
+      "effet": "Uniquement utilisable si aucun allié n'a de blessures.",
+      "quantite": 1
     },
     {
       "id": "SOI_A02",
-      "nom": "Châtiment sacré",
+      "nom": "Transfert de traumas",
+      "categorie": "action",
+      "prerequis": "Gao",
+      "effet": "Transférez 1 carte Blessure d'un autre héros vers le monstre ciblé, quel que soit son montant.",
+      "quantite": 3
+    },
+	 {
+      "id": "SOI_A11",
+      "nom": "Drain de vie",
       "categorie": "action",
       "degats": 1,
       "prerequis": "Gao",
-      "effet": "Retire 1 blessure d'un héros au choix.",
+      "effet": "Si la cible est éliminée, soignez 2 blessures de ce héros.",
       "quantite": 2
-    },
-    {
-      "id": "SOI_A03",
-      "nom": "Éclat divin",
-      "categorie": "action",
-      "degats": 1,
-      "prerequis": "Gao",
-      "effet": "Retire 1 blessure du héros.",
-      "quantite": 2
-    },
-    {
-      "id": "SOI_A04",
-      "nom": "Flamme purificatrice",
-      "categorie": "action",
-      "degats": 2,
-      "prerequis": "Gao",
-      "quantite": 1
-    },
-    {
-      "id": "SOI_A05",
-      "nom": "Jugement céleste",
-      "categorie": "action",
-      "degats": 2,
-      "prerequis": "Gao",
-      "effet": "Retire 1 blessure de chaque héros.",
-      "quantite": 1
-    },
-    {
-      "id": "SOI_A06",
-      "nom": "Frappe bénie",
-      "categorie": "action",
-      "degats": 1,
-      "prerequis": "Gao",
-      "effet": "Le héros pioche 1 carte Chasse.",
-      "quantite": 1
     },
     {
       "id": "SOI_A07",
-      "nom": "Soin majeur",
+      "nom": "Transe chamanique",
       "categorie": "action",
       "prerequis": "Gao",
-      "effet": "Retire 2 blessures d'un héros au choix.",
+      "effet": "Soignez 3 blessures d'un héros au choix.",
       "quantite": 1
     },
     {
       "id": "SOI_A08",
-      "nom": "Résurrection",
+      "nom": "Souffle du Kalahari",
       "categorie": "action",
       "prerequis": "Gao",
-      "effet": "Ressuscite un héros mort avec 1 point de vie restant.",
+      "effet": "Ressuscitez un héros mort et soignez-le de 1 blessure.",
       "quantite": 1
     },
     {
       "id": "SOI_A09",
-      "nom": "Ondes de soin",
+      "nom": "Pollen apaisant",
       "categorie": "action",
       "prerequis": "Gao",
-      "effet": "Retire 1 blessure de chaque héros.",
-      "quantite": 2
-    },
-    {
-      "id": "SOI_A10",
-      "nom": "Régénération",
-      "categorie": "action",
-      "prerequis": "Gao",
-      "effet": "Un héros au choix régénère sa capacité spéciale.",
+      "effet": "Soignez 1 blessure de chaque héros.",
       "quantite": 1
     },
     {
+      "id": "SOI_A10",
+      "nom": "Rituel des ancêtres",
+      "categorie": "action",
+      "prerequis": "Gao",
+      "effet": "Un autre héros au choix régénère sa capacité spéciale.",
+      "quantite": 1
+    },
+	 {
+      "id": "SOI_A11",
+      "nom": "Mémoire des racines",
+      "categorie": "action",
+      "prerequis": "Gao",
+      "effet": "Un autre héros au choix pioche 4 cartes Chasse dans la défausse.",
+      "quantite": 1
+    },
+	 {
+      "id": "SOI_A13",
+      "nom": "Transfert de vie",
+      "categorie": "action",
+      "prerequis": "Gao",
+      "effet": "Soignez toutes les blessures d'un héros au choix. Un autre héros au choix subit 2 blessures.",
+      "quantite": 1
+    },
+    {
+      "id": "SOI_A14",
+      "nom": "Communion du Bosquet",
+      "categorie": "action",
+      "prerequis": "Gao",
+      "effet": "Redistribuez librement toutes les blessures entre les héros.",
+      "quantite": 1
+    },	
+    {
       "id": "SOI_O01",
-      "nom": "Potion de soin majeure",
+      "nom": "Élixir de sève-mère",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Retire toutes les cartes blessure d'un héros au choix.",
+      "effet": "Soignez de 2 blessures un héros au choix.",
       "quantite": 1
     },
     {
       "id": "SOI_O02",
-      "nom": "Amulette de résurrection",
+      "nom": "Totem de transe",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Ressuscite un héros mort avec la moitié de sa vie.",
+      "effet": "Si ce héros devrait recevoir une blessure mortelle ce tour-ci, annulez-la ainsi que toutes les blessures suivantes jusqu'à la fin du tour.",
       "quantite": 1
     },
     {
       "id": "SOI_O03",
-      "nom": "Herbes médicinales",
+      "nom": "Gemme du sacrifice",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Retire 1 blessure de 2 héros différents au choix.",
+      "effet": "Soignez de un autre héros allié autant de blessures que ce héros en a.",
       "quantite": 1
     },
     {
       "id": "SOI_O04",
-      "nom": "Calice sacré",
+      "nom": "Masque des ancêtres",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Régénère la capacité spéciale du héros.",
+      "effet": "Régénérez la capacité spéciale d'un héros au choix.",
       "quantite": 1
     },
-    {
+	 {
       "id": "SOI_O05",
-      "nom": "Onguent miraculeux",
+      "nom": "Dard de sève",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Retire 3 blessures d'un héros au choix.",
+	  "degats": 2,
+      "effet": "Uniquement utilisable si un héros a été soigné ce tour-ci.",
       "quantite": 1
     },
     {
@@ -393,23 +402,23 @@
     },
     {
       "id": "ROD_A06",
-      "nom": "Sprint",
+      "nom": "Instinct de l'ourse",
       "categorie": "action",
       "prerequis": "Isonash",
-      "effet": "Pioche 4 cartes Chasse.",
+      "effet": "Piochez 4 cartes Chasse.",
       "quantite": 2
     },
     {
       "id": "ROD_A09",
-      "nom": "Repérage",
+      "nom": "Flair de la Lisière",
       "categorie": "action",
       "prerequis": "Isonash",
-      "effet": "Regarde les 5 premières cartes Chasse, en garde 2, remet le reste dans l'ordre souhaité.",
+      "effet": "Regardez les 5 premières cartes Chasse, gardez en 2, remettez le reste dans l'ordre souhaité.",
       "quantite": 1
     },
     {
       "id": "ROD_O01",
-      "nom": "Carquois enchanté",
+      "nom": "Carquois d'os",
       "categorie": "objet",
       "prerequis": "Isonash",
       "bonus_degats": 2,
@@ -426,18 +435,18 @@
     },
     {
       "id": "ROD_O03",
-      "nom": "Totem de frénésie curative",
+      "nom": "Amulette kamuy",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Soignez une blessure pour chaque carte action jouée et chaque objet utilisé ce tour ci, celui compris.",
+      "effet": "Soignez 1 blessure pour chaque carte Action jouée et chaque Objet utilisé ce tour-ci, celui-ci compris.",
       "quantite": 1
     },
     {
       "id": "ROD_O04",
-      "nom": "Totem de frénésie mortelle",
+      "nom": "Griffe de kamuy",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Eliminez n'importe quel monstre de la file. Uniquement disponible si au moins 2 cartes Chasse ont été jouées ce tour ci.",
+      "effet": "Éliminez n'importe quel monstre de la file. Uniquement utilisable si au moins 2 cartes Chasse ont été jouées ce tour-ci.",
       "quantite": 1
     },
     {
@@ -477,11 +486,11 @@
     },
     {
       "id": "DIP_A04",
-      "nom": "?",
+      "nom": "Lame du pacte",
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-	  "effet": "Deux héros ciblés peuvent s'échanger des cartes Objets de leurs mains.",
+	  "effet": "Deux héros ciblés peuvent s'échanger des cartes Objet de leurs mains.",
       "quantite": 1
     },
     {
@@ -506,7 +515,7 @@
       "nom": "Négociation",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Eliminez le monstre en tête de file.",
+      "effet": "Éliminez le monstre en tête de file.",
       "quantite": 1
     },
     {
@@ -514,15 +523,15 @@
       "nom": "Troc astucieux",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Deux héros au choix échangent autant de cartes objets posés qu'ils le souhaitent. Ils peuvent les utiliser sans restrictions.",
+      "effet": "Deux héros au choix échangent autant de cartes Objet posées qu'ils le souhaitent. Ils peuvent les utiliser sans restriction.",
       "quantite": 1
     },
     {
       "id": "DIP_A09",
-      "nom": "Echange fructueux",
+      "nom": "Don du Gué",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Donne jusqu'à 3 cartes chasses à un héros allié. Soignez 1 blessure pour chaque carte pouvant être utilisé par le héros cible.",
+      "effet": "Donnez jusqu'à 3 cartes Chasse à un héros allié. Soignez 1 blessure pour chaque carte pouvant être utilisée par le héros cible.",
       "quantite": 1
     },
     {
@@ -535,7 +544,7 @@
     },
     {
       "id": "DIP_O02",
-      "nom": "Sacoche du marchand",
+      "nom": "Crinière d'or",
       "categorie": "objet",
       "prerequis": "Aslan",
       "effet": "Ce héros peut donner 1 carte Action à chaque héros allié.",
@@ -543,7 +552,7 @@
     },
     {
       "id": "DIP_O03",
-      "nom": "Réserve d'urgence",
+      "nom": "Coffre du Gué",
       "categorie": "objet",
       "prerequis": "Aslan",
       "effet": "N'importe quel héros peut utiliser cet Objet pendant son tour et piocher 3 cartes Chasse.",
@@ -551,10 +560,10 @@
     },
     {
       "id": "DIP_O04",
-      "nom": "Bourse d'or",
+      "nom": "Offrande du destin",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "?",
+      "effet": "Donnez 2 cartes Chasse à un allié. Piochez une carte Destin.",
       "quantite": 1
     },
     {
