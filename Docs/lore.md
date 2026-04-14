@@ -15,17 +15,24 @@ LA CHASSE
 Le monde avait des gardiens. Esprits-bêtes anciens, ils
 veillaient sur les rivières, les forêts, les montagnes.
 
-Puis vint la corruption — une racine noire montée des
+Puis vint la corruption. Une racine noire montée des
 profondeurs. Un par un, les gardiens ont enflé. Devenus
-colosses, ils écrasent ce qu'ils protégeaient.
+colosses, ils écrasent ce qu'ils protégeaient. Autour
+d'eux, les bêtes sombrent à leur tour. Corrompues,
+enragées. Des monstres qui ne reconnaissent plus rien.
 
-Quand l'un d'eux s'éveille, cinq chasseurs se rassemblent.
+Quand un colosse s'éveille, cinq héros se rassemblent.
 Cinq tribus, cinq inconnus. Une seule chasse.
 
 Ils ne viennent pas tuer. Ils viennent libérer.
 ```
 
-**~70 mots**, 4 paragraphes courts.
+**~85 mots**, 4 paragraphes courts.
+
+**Termes de jeu introduits :**
+- **Colosses** = les boss (esprits-bêtes corrompus géants)
+- **Monstres** = les ennemis mineurs (animaux corrompus par les colosses)
+- **Héros** = les personnages joueurs (chasseurs des cinq tribus)
 
 ---
 
