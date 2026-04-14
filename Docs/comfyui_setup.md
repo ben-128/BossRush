@@ -46,12 +46,16 @@
 
 ## 2. Lancement (ZLUDA + AMD RX 6800 XT)
 
-### Commande de lancement (dans CMD, pas PowerShell)
+### Lancement one-click
+Double-cliquer `C:\Users\Ben\ComfyUI-Zluda\launch.bat`
+
+### Commande manuelle (dans CMD, pas PowerShell)
 ```cmd
 cd C:\Users\Ben\ComfyUI-Zluda
 set HIP_VISIBLE_DEVICES=0
 set HSA_OVERRIDE_GFX_VERSION=10.3.0
 set CUDA_MODULE_LOADING=LAZY
+set TORCH_BACKENDS_CUDNN_ENABLED=0
 .\zluda\zluda.exe -- venv\Scripts\python.exe start_zluda.py
 ```
 
@@ -70,6 +74,8 @@ Script custom qui désactive cuDNN avant le lancement (cuDNN incompatible RDNA2 
   2. Supprimer le plugin `ovum-cudnn-wrapper` qui réactivait cuDNN
   3. Supprimer le cache `cfz_cudnn.toggle.cpython-313.pyc`
   4. Utiliser `--use-pytorch-cross-attention` (pas quad-cross-attention)
+  5. Patcher `comfy/ops.py` : remplacer `SDPA_BACKEND_PRIORITY` par `[SDPBackend.MATH]` uniquement
+  6. Variable env `TORCH_BACKENDS_CUDNN_ENABLED=0`
 
 ### Plugins supprimés (incompatibles RDNA2)
 - `custom_nodes/ovum-cudnn-wrapper/` — réactivait cuDNN
@@ -132,13 +138,13 @@ multiple characters, extra limbs, fused limbs, missing limbs
 
 ## 5. TODO
 
-- [ ] Confirmer que ZLUDA génère sans erreur cuDNN
+- [x] Confirmer que ZLUDA génère sans erreur cuDNN ✅ (2026-04-15)
 - [ ] Télécharger des LoRA gouache/painterly pour améliorer le style
 - [ ] Installer Impact Pack (face/hand detailer)
 - [ ] Installer ControlNet (contrôle de pose)
 - [ ] Tester un workflow avec LoRA empilés
 - [ ] Comparer résultat ComfyUI vs DALL-E sur le même prompt Nawel
-- [ ] Créer un .bat de lancement one-click
+- [x] Créer un .bat de lancement one-click ✅ → `launch.bat`
 
 ---
 
@@ -184,7 +190,7 @@ multiple characters, extra limbs, fused limbs, missing limbs
 | **DirectML** | ❌ | Erreur `OpaqueTensorImpl` sur SDXL |
 | **ROCm natif Windows** | ❌ | RDNA3+ seulement |
 | **ZLUDA + cuDNN** | ❌ | cuDNN incompatible RDNA2 |
-| **ZLUDA sans cuDNN** | 🔄 En test | Désactivation cuDNN via start_zluda.py |
+| **ZLUDA sans cuDNN** | ✅ | Patch ops.py + start_zluda.py, ~30-60 sec/image |
 | **CPU** | ✅ | Fonctionne, ~10+ min par image |
 
 ### Variables d'environnement nécessaires
@@ -217,3 +223,5 @@ CUDA_MODULE_LOADING=LAZY
 | 2026-04-14 | DLL ZLUDA patchées, nccl.dll récupéré après exclusion Defender |
 | 2026-04-15 | Debug cuDNN : suppression ovum-cudnn-wrapper, création start_zluda.py |
 | 2026-04-15 | Désactivation cuDNN complète (incompatible RDNA2 via ZLUDA) |
+| 2026-04-15 | **ZLUDA fonctionne !** Patch ops.py (MATH only SDP), suppression cudnn toggles, launch.bat créé |
+| 2026-04-15 | Première image GPU générée avec succès (~30-60 sec) |
