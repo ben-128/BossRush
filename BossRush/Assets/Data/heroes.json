@@ -29,7 +29,7 @@
       "titre": "Le Rempart",
       "vie": 7,
       "competences": ["armure"],
-      "capacite_speciale": "Annulez toutes les blessures infligées à ce héros ce tour.",
+      "capacite_speciale": "Annulez toutes les blessures que devrait subir le héros ce tour-ci.",
       "citation": "« Il encaisse. Encore. Et encore. »"
     },
     {

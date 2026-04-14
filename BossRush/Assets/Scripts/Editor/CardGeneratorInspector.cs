@@ -79,7 +79,8 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         }
 
         var borders = FindBorders();
-        if (borders != null) borders.SetActive(false);
+        bool hideBorders = !capture.keepBorders && borders != null;
+        if (hideBorders) borders.SetActive(false);
 
         generator.GenerateCard(index);
         capture.Capture(new ToExport
@@ -88,7 +89,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
             category = generator.outputFolder
         });
 
-        if (borders != null) borders.SetActive(true);
+        if (hideBorders) borders.SetActive(true);
 
         AssetDatabase.Refresh();
         Debug.Log($"Carte exportée : {generator.GetCardName(index)}");
@@ -104,7 +105,8 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         }
 
         var borders = FindBorders();
-        if (borders != null) borders.SetActive(false);
+        bool hideBorders = !capture.keepBorders && borders != null;
+        if (hideBorders) borders.SetActive(false);
 
         int count = GetCardCount(generator);
         for (int i = 0; i < count; i++)
@@ -117,7 +119,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
             });
         }
 
-        if (borders != null) borders.SetActive(true);
+        if (hideBorders) borders.SetActive(true);
 
         AssetDatabase.Refresh();
         Debug.Log($"{count} cartes exportées dans Art/Final/{generator.outputFolder}/");

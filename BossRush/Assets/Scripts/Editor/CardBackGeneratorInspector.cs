@@ -62,7 +62,8 @@ public class CardBackGeneratorInspector : Editor
         }
 
         var borders = FindBorders();
-        if (borders != null) borders.SetActive(false);
+        bool hideBorders = !capture.keepBorders && borders != null;
+        if (hideBorders) borders.SetActive(false);
 
         generator.GenerateCard(index);
         capture.Capture(new ToExport
@@ -72,7 +73,7 @@ public class CardBackGeneratorInspector : Editor
             suffix = "dos"
         });
 
-        if (borders != null) borders.SetActive(true);
+        if (hideBorders) borders.SetActive(true);
 
         AssetDatabase.Refresh();
         Debug.Log($"Dos exporté : {generator.GetCardName(index)}");
@@ -88,7 +89,8 @@ public class CardBackGeneratorInspector : Editor
         }
 
         var borders = FindBorders();
-        if (borders != null) borders.SetActive(false);
+        bool hideBorders = !capture.keepBorders && borders != null;
+        if (hideBorders) borders.SetActive(false);
 
         int count = generator.Count;
         for (int i = 0; i < count; i++)
@@ -102,7 +104,7 @@ public class CardBackGeneratorInspector : Editor
             });
         }
 
-        if (borders != null) borders.SetActive(true);
+        if (hideBorders) borders.SetActive(true);
 
         AssetDatabase.Refresh();
         Debug.Log($"{count} dos exportés dans Art/Final/{generator.outputFolder}/");

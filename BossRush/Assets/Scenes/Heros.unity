@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: La Flamme
+  m_text: Le Rempart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1588330614}
@@ -751,12 +751,12 @@ MonoBehaviour:
     soin: {fileID: 21300000, guid: 2b7abf394cc895c4489d4c123e4c130a, type: 3}
     magie: {fileID: 21300000, guid: f24a78e92668f0647b399e991ae57b70, type: 3}
     diplomatie: {fileID: 21300000, guid: fb4f67b90cd7a764ebf9986d8963e538, type: 3}
-    scaleArmure: 0.15
+    scaleArmure: 0.4
     scaleDistance: 0.09
     scaleSoin: 0.09
-    scaleMagie: 0.11
+    scaleMagie: 0.3
     scaleDiplomatie: 0.09
-    offsetArmure: {x: 0, y: 0.025}
+    offsetArmure: {x: 0.025, y: 0.08}
     offsetDistance: {x: 0, y: 0}
     offsetSoin: {x: 0, y: 0}
     offsetMagie: {x: 0, y: 0}
@@ -1123,6 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04df4ded4b5aec4a895737e956bcc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keepBorders: 1
 --- !u!21 &610016093
 Material:
   serializedVersion: 8
@@ -1246,6 +1247,93 @@ SpriteRenderer:
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &950655736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 950655737}
+  - component: {fileID: 950655738}
+  m_Layer: 0
+  m_Name: bottom_background (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &950655737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950655736}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.65, y: -0.01999998, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.1, z: 0.855}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1621819922}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &950655738
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950655736}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: ebcbd74c32cebdc43a5905603afcb698, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -3
+  m_Sprite: {fileID: -852254680051760013, guid: 6de494fe3f8b5a24bb843cbfecbcca58, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 10.24, y: 15.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1418,7 +1506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Daraa
+  m_text: Nawel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: 1248990885}
@@ -1598,7 +1686,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f24a78e92668f0647b399e991ae57b70, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0926747be6f8db840bd08797a3e6e1cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1618,11 +1706,11 @@ Transform:
   m_GameObject: {fileID: 1171038901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.11, y: 0.11, z: 1}
+  m_LocalPosition: {x: 0.025, y: 0.08, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1621819922}
+  m_Father: {fileID: 1458131610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1203465507
 GameObject:
@@ -1869,6 +1957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04df4ded4b5aec4a895737e956bcc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keepBorders: 0
 --- !u!20 &1333057187
 Camera:
   m_ObjectHideFlags: 0
@@ -1963,10 +2052,11 @@ Transform:
   m_GameObject: {fileID: 1458131609}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.375, y: 0.375, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_LocalPosition: {x: -0.29, y: 0, z: -1}
+  m_LocalScale: {x: 0.22, y: 0.22, z: 1.4666666}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1171038903}
   m_Father: {fileID: 1621819922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1458131611
@@ -2031,7 +2121,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -3426939317833967985, guid: 67731189084a0fa42a3299711a8559f3, type: 3}
-  m_Color: {r: 0.545, g: 0.125, b: 0.125, a: 1}
+  m_Color: {r: 0.169, g: 0.31, b: 0.431, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2224,7 +2314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xC9liminez tous les monstres de la file ayant 1 point de vie restant."
+  m_text: "Annulez toutes les blessures inflig\xE9es \xE0 ce h\xE9ros ce tour."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 294818322}
@@ -2369,7 +2459,7 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.01}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2418,8 +2508,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 6cfb26ce14e7462459b2b4e549a16a46, type: 3}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 21300000, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2455,12 +2545,12 @@ Transform:
   m_GameObject: {fileID: 1621819921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.77, y: 4.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.65, y: 4.2, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1458131610}
-  - {fileID: 1171038903}
+  - {fileID: 950655737}
   m_Father: {fileID: 247666407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1692387759
@@ -2777,7 +2867,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Le feu est patient. Elle ne l'est pas. \xBB</i>"
+  m_text: "<i>\xAB Il encaisse. Encore. Et encore. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -2934,7 +3024,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1692387759}

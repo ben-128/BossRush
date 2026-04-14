@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 85939466c7492a6449336c5a6a1133d5
+guid: 47d1b50d59a76dd40a8f159750cba93b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6640555561026990762
-    second: Dos_Heros_0
+      213: -6105986195717512811
+    second: TypeHero_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dos_Heros_0
+      name: TypeHero_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1536
+        x: 100
+        y: 92
+        width: 837
+        height: 836
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa2324e791ef72c50800000000000000
-      internalID: 6640555561026990762
+      spriteID: 591a1d8e7ed234ba0800000000000000
+      internalID: -6105986195717512811
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c0abdd8c0eb609c448e8f6501bf07cb1
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dos_Heros_0: 6640555561026990762
+      TypeHero_0: -6105986195717512811
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

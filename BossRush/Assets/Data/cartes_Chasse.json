@@ -12,7 +12,7 @@
       "degats": 1,
       "prerequis": "Nawel",
 	  "effet": "Lorsque le monstre ciblé attaque, défaussez cette carte et annulez l'attaque.",
-      "quantite": 3
+      "quantite": 1
     },
     {
       "id": "GUE_A02",
@@ -30,7 +30,7 @@
       "degats": 1,
       "prerequis": "Nawel",
       "effet": "Le monstre ciblé attaque immédiatement ce héros.",
-      "quantite": 2
+      "quantite": 3
     },
     {
       "id": "GUE_A04",
@@ -39,7 +39,7 @@
       "degats": 1,
       "prerequis": "Nawel",
 	  "effet": "Soignez ce héros de 1 blessure.",
-      "quantite": 2
+      "quantite": 3
     },
     {
       "id": "GUE_A05",
@@ -54,7 +54,7 @@
       "nom": "Rage du blessé",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "?",
+      "effet": "Eliminez n'importe quelle monstre dans la file. Utilisable uniquement si ce héros a 4 blessures ou plus.",
       "quantite": 1
     },
     {
@@ -111,7 +111,7 @@
       "nom": "Heaume de guerre",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Ignorez la carte Menace en cours.",
+      "effet": "Annuler l'effet de la carte Menace en cours.",
       "quantite": 1
     },
     {
@@ -351,17 +351,19 @@
       "id": "ROD_A01",
       "nom": "Tir précis",
       "categorie": "action",
-      "degats": 2,
-      "prerequis": "Isonash",
-      "quantite": 2
+      "degats": 1,
+	  "prerequis": "Isonash",
+      "effet": "Ciblez le Colosse ou un monstre au choix dans la file.",
+      "quantite": 3
     },
     {
       "id": "ROD_A02",
-      "nom": "Flèche perforante",
+      "nom": "Tir rapide",
       "categorie": "action",
-      "degats": 3,
+      "degats": 1,
+	  "effet": "Piochez une carte Chasse.",
       "prerequis": "Isonash",
-      "quantite": 1
+      "quantite": 3
     },
     {
       "id": "ROD_A03",
@@ -369,7 +371,7 @@
       "categorie": "action",
       "degats": 2,
       "prerequis": "Isonash",
-      "quantite": 2
+      "quantite": 1
     },
     {
       "id": "ROD_A04",
@@ -377,8 +379,8 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Isonash",
-      "effet": "Le héros peut jouer 1 carte Action supplémentaire ce tour.",
-      "quantite": 3
+      "effet": "Le héros peut poser 1 carte Objet supplémentaire ce tour.",
+      "quantite": 1
     },
     {
       "id": "ROD_A05",
@@ -386,31 +388,15 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Isonash",
-      "effet": "Inflige 1 dégât à chaque monstre de la file.",
-      "quantite": 2
+      "effet": "Le héros peut jouer 1 carte Action supplémentaire ce tour.",
+      "quantite": 3
     },
     {
       "id": "ROD_A06",
-      "nom": "Embuscade",
-      "categorie": "action",
-      "prerequis": "Isonash",
-      "effet": "Pioche 2 cartes Chasse, puis joue 1 carte Action supplémentaire ce tour.",
-      "quantite": 1
-    },
-    {
-      "id": "ROD_A07",
       "nom": "Sprint",
       "categorie": "action",
       "prerequis": "Isonash",
-      "effet": "Le héros peut jouer 2 cartes Action supplémentaires ce tour.",
-      "quantite": 1
-    },
-    {
-      "id": "ROD_A08",
-      "nom": "Pas de l'ombre",
-      "categorie": "action",
-      "prerequis": "Isonash",
-      "effet": "Pioche 2 cartes Chasse.",
+      "effet": "Pioche 4 cartes Chasse.",
       "quantite": 2
     },
     {
@@ -427,33 +413,31 @@
       "categorie": "objet",
       "prerequis": "Isonash",
       "bonus_degats": 2,
-      "effet": "Ajoute 2 dégâts à une attaque à distance jouée en même temps.",
+      "effet": "Ajoute 2 dégâts à une attaque jouée en même temps.",
       "quantite": 1
     },
     {
       "id": "ROD_O02",
-      "nom": "Flèches incendiaires",
+      "nom": "Flèches transperçantes",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "bonus_degats": 1,
-      "effet": "Ajoute 1 dégât à une attaque distance jouée en même temps.",
+      "effet": "Améliore une attaque : Si la cible est éliminée, l'attaque cible le monstre ou Colosse suivant dans la file.",
       "quantite": 1
     },
     {
       "id": "ROD_O03",
-      "nom": "Arc composite",
+      "nom": "Totem de frénésie curative",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "bonus_degats": 1,
-      "effet": "Ajoute 1 dégât à une attaque distance. Le héros peut jouer 1 carte Action supplémentaire ce tour.",
+      "effet": "Soignez une blessure pour chaque carte action jouée et chaque objet utilisé ce tour ci, celui compris.",
       "quantite": 1
     },
     {
       "id": "ROD_O04",
-      "nom": "Lunette de visée",
+      "nom": "Totem de frénésie mortelle",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "La prochaine attaque distance du héros ce tour inflige +2 dégâts.",
+      "effet": "Eliminez n'importe quel monstre de la file. Uniquement disponible si au moins 2 cartes Chasse ont été jouées ce tour ci.",
       "quantite": 1
     },
     {
@@ -461,7 +445,7 @@
       "nom": "Carquois infini",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Le héros pioche 2 cartes Chasse.",
+      "effet": "Le héros pioche jusqu'à avoir 5 cartes Chasse en main.",
       "quantite": 1
     },
     {
@@ -470,17 +454,17 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Un allié pioche 1 carte Chasse.",
+      "effet": "Un héros allié pioche 1 carte Chasse.",
       "quantite": 3
     },
     {
       "id": "DIP_A02",
       "nom": "Frappe coordonnée",
       "categorie": "action",
-      "degats": 2,
+      "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Le héros pioche 1 carte Chasse.",
-      "quantite": 2
+      "effet": "Deux héros ciblés peuvent s'échanger des cartes Action.",
+      "quantite": 3
     },
     {
       "id": "DIP_A03",
@@ -493,11 +477,12 @@
     },
     {
       "id": "DIP_A04",
-      "nom": "Poignard diplomatique",
+      "nom": "?",
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "quantite": 2
+	  "effet": "Deux héros ciblés peuvent s'échanger des cartes Objets de leurs mains.",
+      "quantite": 1
     },
     {
       "id": "DIP_A05",
@@ -505,7 +490,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Un allié joue 1 carte Action de sa main immédiatement.",
+      "effet": "Un héros allié joue 1 carte Action immédiatement.",
       "quantite": 2
     },
     {
@@ -513,7 +498,7 @@
       "nom": "Discours inspirant",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Tous les héros piochent 1 carte Chasse.",
+      "effet": "Tous les héros piochent 2 cartes Chasse.",
       "quantite": 2
     },
     {
@@ -521,7 +506,7 @@
       "nom": "Négociation",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Défausse le monstre en tête de file sans combat.",
+      "effet": "Eliminez le monstre en tête de file.",
       "quantite": 1
     },
     {
@@ -529,15 +514,15 @@
       "nom": "Troc astucieux",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Deux héros au choix échangent autant de cartes qu'ils le souhaitent. Le héros pioche ensuite 1 carte Chasse.",
+      "effet": "Deux héros au choix échangent autant de cartes objets posés qu'ils le souhaitent. Ils peuvent les utiliser sans restrictions.",
       "quantite": 1
     },
     {
       "id": "DIP_A09",
-      "nom": "Renfort allié",
+      "nom": "Echange fructueux",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Jusqu'à 3 héros alliés (pas ce héros) jouent chacun 1 carte Action immédiatement.",
+      "effet": "Donne jusqu'à 3 cartes chasses à un héros allié. Soignez 1 blessure pour chaque carte pouvant être utilisé par le héros cible.",
       "quantite": 1
     },
     {
@@ -545,7 +530,7 @@
       "nom": "Corne de ralliement",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Tous les héros piochent 1 carte Chasse.",
+      "effet": "Les héros alliés peuvent donner à ce héros 1 carte Action chacun.",
       "quantite": 1
     },
     {
@@ -553,15 +538,15 @@
       "nom": "Sacoche du marchand",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Le héros pioche 3 cartes Chasse.",
+      "effet": "Ce héros peut donner 1 carte Action à chaque héros allié.",
       "quantite": 1
     },
     {
       "id": "DIP_O03",
-      "nom": "Étendard royal",
+      "nom": "Réserve d'urgence",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Chaque héros pioche 1 carte Chasse.",
+      "effet": "N'importe quel héros peut utiliser cet Objet pendant son tour et piocher 3 cartes Chasse.",
       "quantite": 1
     },
     {
@@ -569,7 +554,7 @@
       "nom": "Bourse d'or",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Défausse 1 carte Chasse de sa main. Pioche 2 cartes Chasse.",
+      "effet": "?",
       "quantite": 1
     },
     {
@@ -577,7 +562,7 @@
       "nom": "Traité de paix",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Défausse 1 monstre au choix dans la file (n'importe quelle position).",
+      "effet": "N'importe quel héros peut utiliser cet Objet pendant son tour. Annulez l'effet de la carte Menace.",
       "quantite": 1
     }
   ]

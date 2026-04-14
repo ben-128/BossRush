@@ -36,7 +36,8 @@ public class GenericImageGeneratorInspector : Editor
     {
         var capture = Camera.main.GetComponent<CameraCapture>();
         var borders = FindBorders();
-        if (borders != null) borders.SetActive(false);
+        bool hideBorders = !capture.keepBorders && borders != null;
+        if (hideBorders) borders.SetActive(false);
 
         for (int i = 0; i < myComponent.allimages.Length; i++)
         {
@@ -44,7 +45,7 @@ public class GenericImageGeneratorInspector : Editor
             capture.Capture(new ToExport() { finalName = myComponent.allimages[i].name, category = myComponent.categoryName });
         }
 
-        if (borders != null) borders.SetActive(true);
+        if (hideBorders) borders.SetActive(true);
         AssetDatabase.Refresh();
     }
 
@@ -52,7 +53,8 @@ public class GenericImageGeneratorInspector : Editor
     {
         var capture = Camera.main.GetComponent<CameraCapture>();
         var borders = FindBorders();
-        if (borders != null) borders.SetActive(false);
+        bool hideBorders = !capture.keepBorders && borders != null;
+        if (hideBorders) borders.SetActive(false);
 
         for (int i = myComponent.allimages.Length - 3; i < myComponent.allimages.Length; i++)
         {
@@ -63,7 +65,7 @@ public class GenericImageGeneratorInspector : Editor
             }
         }
 
-        if (borders != null) borders.SetActive(true);
+        if (hideBorders) borders.SetActive(true);
         AssetDatabase.Refresh();
     }
 }
