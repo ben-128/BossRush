@@ -50,21 +50,27 @@ rubbed and burnished into the hide. The color is uneven and organic —
 darker where the pigment has settled into creases, lighter where the
 hide is smoother. NOT a solid fill, NOT digital, NOT uniform.
 
-BORDER: Along all four edges, a tribal pattern has been SCRATCHED
-and BRANDED into the hide with a sharp tool, then rubbed with dark
-ash pigment. The carving is ROUGH, IRREGULAR, HAND-MADE — uneven
-depth, wobbly lines, imperfect spacing. Like a hunter carved it
-by firelight with a bone awl, NOT a craftsman in a workshop.
+BORDER: A continuous band of tribal pattern runs along all four edges,
+SCRATCHED and BRANDED into the hide with a sharp tool, then rubbed
+with dark ash pigment. The carving is ROUGH, IRREGULAR, HAND-MADE —
+uneven depth, wobbly lines, imperfect spacing. Like a hunter carved
+it by firelight with a bone awl, NOT a craftsman in a workshop.
 The pattern is {{MOTIF}}.
+The motifs OVERLAP, INTERLOCK, and ROTATE at different angles —
+like real tracks in mud, NOT stamped in a regular grid. They form
+a dense continuous band, not isolated shapes with gaps between them.
+The band is framed by TWO THIN CARVED LINES running
+parallel — one on the inner edge, one on the outer edge — like
+borders scratched with a blade to contain the pattern.
 NOT sculpted, NOT ornamental, NOT symmetrical, NOT Celtic,
 NOT Art Nouveau, NOT Renaissance frame. Think: scratched into
 leather with a knife, cave painting geometry, scarification marks.
-The border is ~12% of the card width on each side.
-The border pattern goes ALL THE WAY TO THE EDGE of the image —
-no dark vignette, no margin, no frame effect around the outside.
-The hide fills the ENTIRE image edge to edge.
+The border band is ~12% of the card width on each side.
+The hide fills the ENTIRE image edge to edge — the outer carved line
+sits a few millimeters from the image edge, with hide still visible
+beyond it. NO dark vignette, NO margin, NO frame effect.
 
-CENTER: The exact center of the card has a circular area
+CENTER: The EXACT VERTICAL AND HORIZONTAL center of the card has a circular area
 (~30% of card height diameter) where the hide has been RUBBED
 SMOOTH and LIGHTER — like a worn spot from repeated touching,
 or a deliberate burnishing with a smooth stone. The texture inside
@@ -82,12 +88,19 @@ NO characters, NO creatures, NO weapons, NO scene, NO text, NO title.
 Portrait orientation, 2:3 aspect ratio.
 ```
 
-### Retours sur le premier test (v1 Heros)
+### Retours tests
 
+**v1 Heros :**
 - OK : texture cuir credible, cercle central bien place, teinte ocre bonne
-- A corriger : bordure trop sculptee/ornementale (doit etre plus brute, irreguliere, gravee a la main)
-- A corriger : vignettage exterieur trop sombre (le cuir doit aller bord a bord, pas de cadre photo)
-- A corriger : cercle central trop subtil (ajouter une difference de texture, pas juste un trait)
+- Corrige v2 : bordure trop sculptee/ornementale → plus brute, irreguliere
+- Corrige v2 : vignettage exterieur trop sombre → cuir bord a bord
+- Corrige v2 : cercle central trop subtil → difference de texture ajoutee
+
+**v2 Heros :**
+- OK : cuir bord a bord, empreintes plus brutes, cercle mieux marque
+- Corrige v3 : empreintes trop "tamponnees" en grille reguliere → doivent se chevaucher, tourner, s'entrelacer
+- Corrige v3 : bords de la bande de bordure s'arretent de maniere abrupte → ajout de deux lignes gravees paralleles pour encadrer le motif
+- Corrige v3 : cercle un poil trop bas → forcer le centrage exact
 
 ---
 
