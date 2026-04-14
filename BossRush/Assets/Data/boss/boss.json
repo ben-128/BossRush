@@ -1,16 +1,16 @@
 {
   "meta": {
-    "description": "Liste des 10 colosses du jeu. Chaque colosse a une fiche avec 4 stats consultées lors des épreuves génériques.",
+    "description": "Liste des 10 colosses du jeu. Chaque colosse a une fiche avec 4 stats consultées lors des menaces génériques.",
     "version": "2.0",
-    "notes": "PV adaptés au nombre de joueurs via formule. Le deck Épreuve est générique (30 cartes communes). Les valeurs '?' sur les cartes épreuve se réfèrent aux stats de la fiche boss."
+    "notes": "Vie adaptée au nombre de joueurs via formule. Le deck Menace est générique (30 cartes communes). Les valeurs '?' sur les cartes menace se réfèrent aux stats de la fiche boss."
   },
   "boss": [
     {
       "id": "BOSS_001",
       "nom": "Hobab",
       "difficulte": "facile",
-      "pv_formule": "8 + 4 par joueur",
-      "pv_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
+      "vie_formule": "8 + 4 par joueur",
+      "vie_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
@@ -25,13 +25,13 @@
       "id": "BOSS_002",
       "nom": "Pshato",
       "difficulte": "facile",
-      "pv_formule": "10 + 4 par joueur",
-      "pv_par_joueurs": { "2": 18, "3": 22, "4": 26, "5": 30 },
+      "vie_formule": "10 + 4 par joueur",
+      "vie_par_joueurs": { "2": 18, "3": 22, "4": 26, "5": 30 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
-        "action_speciale": "Des racines surgissent du sol : le héros actif défausse 1 carte Arsenal de sa main.",
-        "passif": "Racines régénératrices — Au début du tour du boss, il se soigne 1 PV."
+        "action_speciale": "Des racines surgissent du sol : le héros actif défausse 1 carte Chasse de sa main.",
+        "passif": "Racines régénératrices — Au début du tour du boss, il se soigne 1 point de vie."
       },
       "monstres_ids": [],
       "description": "Colosse mi-arbre mi-géant, corps massif de bois noueux avec mousse verte, racines noires corrompues.",
@@ -41,8 +41,8 @@
       "id": "BOSS_003",
       "nom": "Caicai",
       "difficulte": "moyen",
-      "pv_formule": "9 + 4 par joueur",
-      "pv_par_joueurs": { "2": 17, "3": 21, "4": 25, "5": 29 },
+      "vie_formule": "9 + 4 par joueur",
+      "vie_par_joueurs": { "2": 17, "3": 21, "4": 25, "5": 29 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
@@ -57,8 +57,8 @@
       "id": "BOSS_004",
       "nom": "Invunche",
       "difficulte": "moyen",
-      "pv_formule": "8 + 4 par joueur",
-      "pv_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
+      "vie_formule": "8 + 4 par joueur",
+      "vie_par_joueurs": { "2": 16, "3": 20, "4": 24, "5": 28 },
       "stats": {
         "degats": 1,
         "nb_invocations": 2,
@@ -73,8 +73,8 @@
       "id": "BOSS_005",
       "nom": "Akkoro",
       "difficulte": "moyen",
-      "pv_formule": "8 + 5 par joueur",
-      "pv_par_joueurs": { "2": 18, "3": 23, "4": 28, "5": 33 },
+      "vie_formule": "8 + 5 par joueur",
+      "vie_par_joueurs": { "2": 18, "3": 23, "4": 28, "5": 33 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
@@ -89,8 +89,8 @@
       "id": "BOSS_006",
       "nom": "Hoyau",
       "difficulte": "moyen",
-      "pv_formule": "9 + 4 par joueur",
-      "pv_par_joueurs": { "2": 17, "3": 21, "4": 25, "5": 29 },
+      "vie_formule": "9 + 4 par joueur",
+      "vie_par_joueurs": { "2": 17, "3": 21, "4": 25, "5": 29 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
@@ -105,8 +105,8 @@
       "id": "BOSS_007",
       "nom": "Azhda",
       "difficulte": "difficile",
-      "pv_formule": "11 + 4 par joueur",
-      "pv_par_joueurs": { "2": 19, "3": 23, "4": 27, "5": 31 },
+      "vie_formule": "11 + 4 par joueur",
+      "vie_par_joueurs": { "2": 19, "3": 23, "4": 27, "5": 31 },
       "stats": {
         "degats": 3,
         "nb_invocations": 1,
@@ -121,13 +121,13 @@
       "id": "BOSS_008",
       "nom": "Gaww",
       "difficulte": "difficile",
-      "pv_formule": "7 + 4 par joueur",
-      "pv_par_joueurs": { "2": 15, "3": 19, "4": 23, "5": 27 },
+      "vie_formule": "7 + 4 par joueur",
+      "vie_par_joueurs": { "2": 15, "3": 19, "4": 23, "5": 27 },
       "stats": {
         "degats": 2,
         "nb_invocations": 1,
         "action_speciale": "Le Gaww prend possession : le héros actif défausse sa main, puis pioche 2 cartes.",
-        "passif": "Possession — Au début de chaque tour, le héros actif révèle la première carte de la pile Arsenal et la défausse."
+        "passif": "Possession — Au début de chaque tour, le héros actif révèle la première carte de la pile Chasse et la défausse."
       },
       "monstres_ids": [],
       "description": "Esprit sans forme fixe, masse géante d'ombre et fumée noire, dizaines de visages humains apparaissant et disparaissant.",
@@ -137,8 +137,8 @@
       "id": "BOSS_009",
       "nom": "Kaggen",
       "difficulte": "difficile",
-      "pv_formule": "10 + 5 par joueur",
-      "pv_par_joueurs": { "2": 20, "3": 25, "4": 30, "5": 35 },
+      "vie_formule": "10 + 5 par joueur",
+      "vie_par_joueurs": { "2": 20, "3": 25, "4": 30, "5": 35 },
       "stats": {
         "degats": 3,
         "nb_invocations": 1,
@@ -153,8 +153,8 @@
       "id": "BOSS_010",
       "nom": "Khwa",
       "difficulte": "très difficile",
-      "pv_formule": "12 + 5 par joueur",
-      "pv_par_joueurs": { "2": 22, "3": 27, "4": 32, "5": 37 },
+      "vie_formule": "12 + 5 par joueur",
+      "vie_par_joueurs": { "2": 22, "3": 27, "4": 32, "5": 37 },
       "stats": {
         "degats": 3,
         "nb_invocations": 2,

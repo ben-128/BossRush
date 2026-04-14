@@ -8,7 +8,7 @@
     {
       "id": "MON_001",
       "nom": "La Larve",
-      "pv": 1,
+      "vie": 1,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Ce qui sort de la terre quand la corruption éclôt.",
@@ -18,7 +18,7 @@
     {
       "id": "MON_002",
       "nom": "L'Essaim",
-      "pv": 1,
+      "vie": 1,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Mille bouches pour une seule faim.",
@@ -28,7 +28,7 @@
     {
       "id": "MON_003",
       "nom": "La Spore",
-      "pv": 1,
+      "vie": 1,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Là où elle s'enracine, le sol meurt.",
@@ -38,7 +38,7 @@
     {
       "id": "MON_004",
       "nom": "Le Crochet",
-      "pv": 1,
+      "vie": 1,
       "degats": 2,
       "capacite_speciale": null,
       "description": "Il accroche, il tire, il dévore.",
@@ -48,7 +48,7 @@
     {
       "id": "MON_005",
       "nom": "La Dent",
-      "pv": 1,
+      "vie": 1,
       "degats": 2,
       "capacite_speciale": null,
       "description": "Il n'a gardé que sa morsure.",
@@ -58,7 +58,7 @@
     {
       "id": "MON_006",
       "nom": "L'Aiguillon",
-      "pv": 1,
+      "vie": 1,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Une piqûre suffit à pourrir le sang.",
@@ -68,7 +68,7 @@
     {
       "id": "MON_007",
       "nom": "La Mâchoire",
-      "pv": 3,
+      "vie": 3,
       "degats": 2,
       "capacite_speciale": null,
       "description": "Elle traîne sa faim sur la terre.",
@@ -78,7 +78,7 @@
     {
       "id": "MON_008",
       "nom": "Le Tesson",
-      "pv": 2,
+      "vie": 2,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Les os des morts marchent encore.",
@@ -88,7 +88,7 @@
     {
       "id": "MON_009",
       "nom": "La Carapace",
-      "pv": 3,
+      "vie": 3,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Sous la coque, plus rien qu'un nid de corruption.",
@@ -98,7 +98,7 @@
     {
       "id": "MON_010",
       "nom": "L'Ombre",
-      "pv": 1,
+      "vie": 1,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Elle a perdu son corps, mais pas sa rage.",
@@ -108,7 +108,7 @@
     {
       "id": "MON_011",
       "nom": "La Brume",
-      "pv": 1,
+      "vie": 1,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Elle entre par la bouche et s'installe.",
@@ -118,7 +118,7 @@
     {
       "id": "MON_012",
       "nom": "Le Murmure",
-      "pv": 1,
+      "vie": 1,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Les voix dans ta tête ne sont pas les tiennes.",
@@ -128,7 +128,7 @@
     {
       "id": "MON_013",
       "nom": "La Ronce",
-      "pv": 2,
+      "vie": 2,
       "degats": 1,
       "capacite_speciale": null,
       "description": "Là où elle pousse, plus rien ne marche.",
@@ -138,7 +138,7 @@
     {
       "id": "MON_014",
       "nom": "Le Limon",
-      "pv": 2,
+      "vie": 2,
       "degats": 2,
       "capacite_speciale": null,
       "description": "Il digère lentement ce qui s'y prend.",
@@ -148,7 +148,7 @@
     {
       "id": "MON_015",
       "nom": "Le Rampant",
-      "pv": 2,
+      "vie": 2,
       "degats": 2,
       "capacite_speciale": null,
       "description": "Il suit ta trace depuis le premier jour.",

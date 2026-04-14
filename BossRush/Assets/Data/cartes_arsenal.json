@@ -1,6 +1,6 @@
 {
   "meta": {
-    "description": "Liste des cartes Arsenal du jeu (Actions + Objets). Uniquement des paquets héros, pas de cartes de base.",
+    "description": "Liste des cartes Chasse du jeu (Actions + Objets). Uniquement des paquets héros, pas de cartes de base.",
     "version": "3.0",
     "notes": "100 cartes totales. 20 par héros (15 actions dont 10 attaques + 5 objets). Icône haut gauche = catégorie (Action/Objet). Icône haut droite = prérequis (nom du héros). Toutes les cartes ont un prérequis."
   },
@@ -54,7 +54,7 @@
       "nom": "Rage du blessé",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Piochez 1 carte Arsenal par blessure sur ce héros.",
+      "effet": "Piochez 1 carte Chasse par blessure sur ce héros.",
       "quantite": 1
     },
     {
@@ -111,7 +111,7 @@
       "nom": "Heaume de guerre",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Ignorez la carte Épreuve en cours.",
+      "effet": "Ignorez la carte Menace en cours.",
       "quantite": 1
     },
     {
@@ -137,7 +137,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Daraa",
-      "effet": "Si le monstre suivant dans la file n'a qu'1 PV restant, éliminez-le.",
+      "effet": "Si le monstre suivant dans la file n'a qu'1 point de vie restant, éliminez-le.",
       "quantite": 2
     },
     {
@@ -161,7 +161,7 @@
       "nom": "Brasier intérieur",
       "categorie": "action",
       "prerequis": "Daraa",
-      "effet": "Piochez 4 cartes Arsenal.",
+      "effet": "Piochez 4 cartes Chasse.",
       "quantite": 2
     },
     {
@@ -272,7 +272,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Gao",
-      "effet": "Le héros pioche 1 carte Arsenal.",
+      "effet": "Le héros pioche 1 carte Chasse.",
       "quantite": 1
     },
     {
@@ -288,7 +288,7 @@
       "nom": "Résurrection",
       "categorie": "action",
       "prerequis": "Gao",
-      "effet": "Ressuscite un héros mort avec 1 PV restant.",
+      "effet": "Ressuscite un héros mort avec 1 point de vie restant.",
       "quantite": 1
     },
     {
@@ -320,7 +320,7 @@
       "nom": "Amulette de résurrection",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Ressuscite un héros mort avec la moitié de ses PV.",
+      "effet": "Ressuscite un héros mort avec la moitié de sa vie.",
       "quantite": 1
     },
     {
@@ -394,7 +394,7 @@
       "nom": "Embuscade",
       "categorie": "action",
       "prerequis": "Isonash",
-      "effet": "Pioche 2 cartes Arsenal, puis joue 1 carte Action supplémentaire ce tour.",
+      "effet": "Pioche 2 cartes Chasse, puis joue 1 carte Action supplémentaire ce tour.",
       "quantite": 1
     },
     {
@@ -410,7 +410,7 @@
       "nom": "Pas de l'ombre",
       "categorie": "action",
       "prerequis": "Isonash",
-      "effet": "Pioche 2 cartes Arsenal.",
+      "effet": "Pioche 2 cartes Chasse.",
       "quantite": 2
     },
     {
@@ -418,7 +418,7 @@
       "nom": "Repérage",
       "categorie": "action",
       "prerequis": "Isonash",
-      "effet": "Regarde les 5 premières cartes Arsenal, en garde 2, remet le reste dans l'ordre souhaité.",
+      "effet": "Regarde les 5 premières cartes Chasse, en garde 2, remet le reste dans l'ordre souhaité.",
       "quantite": 1
     },
     {
@@ -461,7 +461,7 @@
       "nom": "Carquois infini",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Le héros pioche 2 cartes Arsenal.",
+      "effet": "Le héros pioche 2 cartes Chasse.",
       "quantite": 1
     },
     {
@@ -470,7 +470,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Un allié pioche 1 carte Arsenal.",
+      "effet": "Un allié pioche 1 carte Chasse.",
       "quantite": 3
     },
     {
@@ -479,7 +479,7 @@
       "categorie": "action",
       "degats": 2,
       "prerequis": "Aslan",
-      "effet": "Le héros pioche 1 carte Arsenal.",
+      "effet": "Le héros pioche 1 carte Chasse.",
       "quantite": 2
     },
     {
@@ -488,7 +488,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Tous les héros piochent 1 carte Arsenal.",
+      "effet": "Tous les héros piochent 1 carte Chasse.",
       "quantite": 1
     },
     {
@@ -513,7 +513,7 @@
       "nom": "Discours inspirant",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Tous les héros piochent 1 carte Arsenal.",
+      "effet": "Tous les héros piochent 1 carte Chasse.",
       "quantite": 2
     },
     {
@@ -529,7 +529,7 @@
       "nom": "Troc astucieux",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Deux héros au choix échangent autant de cartes qu'ils le souhaitent. Le héros pioche ensuite 1 carte Arsenal.",
+      "effet": "Deux héros au choix échangent autant de cartes qu'ils le souhaitent. Le héros pioche ensuite 1 carte Chasse.",
       "quantite": 1
     },
     {
@@ -545,7 +545,7 @@
       "nom": "Corne de ralliement",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Tous les héros piochent 1 carte Arsenal.",
+      "effet": "Tous les héros piochent 1 carte Chasse.",
       "quantite": 1
     },
     {
@@ -553,7 +553,7 @@
       "nom": "Sacoche du marchand",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Le héros pioche 3 cartes Arsenal.",
+      "effet": "Le héros pioche 3 cartes Chasse.",
       "quantite": 1
     },
     {
@@ -561,7 +561,7 @@
       "nom": "Étendard royal",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Chaque héros pioche 1 carte Arsenal.",
+      "effet": "Chaque héros pioche 1 carte Chasse.",
       "quantite": 1
     },
     {
@@ -569,7 +569,7 @@
       "nom": "Bourse d'or",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Défausse 1 carte Arsenal de sa main. Pioche 2 cartes Arsenal.",
+      "effet": "Défausse 1 carte Chasse de sa main. Pioche 2 cartes Chasse.",
       "quantite": 1
     },
     {

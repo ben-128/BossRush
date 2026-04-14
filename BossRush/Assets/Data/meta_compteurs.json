@@ -5,11 +5,11 @@
     "version": "5.0"
   },
 
-  "arsenal": {
-    "_description": "Pile Arsenal = uniquement des paquets héros. 20 cartes par héros (15 actions dont 10 attaques + 5 objets). Toutes les cartes ont un prérequis.",
-    "fichier": "cartes_arsenal.json",
+  "chasse": {
+    "_description": "Pile Chasse = uniquement des paquets héros. 20 cartes par héros (15 actions dont 10 attaques + 5 objets). Toutes les cartes ont un prérequis.",
+    "fichier": "cartes_chasse.json",
     "par_hero": {
-      "_regle": "Après le choix des héros, on mélange dans la pile Arsenal uniquement les paquets de 20 cartes des héros choisis.",
+      "_regle": "Après le choix des héros, on mélange dans la pile Chasse uniquement les paquets de 20 cartes des héros choisis.",
       "cible_actions_par_hero": 15,
       "cible_attaques_par_hero": 10,
       "cible_effets_par_hero": 5,
@@ -87,7 +87,7 @@
   },
 
   "epreuves": {
-    "_regle": "Deck Épreuve générique de 30 cartes, commun à tous les boss. Les valeurs '?' se réfèrent aux stats de la fiche boss.",
+    "_regle": "Deck Menace générique de 30 cartes, commun à tous les boss. Les valeurs '?' se réfèrent aux stats de la fiche boss.",
     "fichier": "epreuves.json",
     "cible_assauts": 15,
     "cible_evenements": 15,
@@ -99,7 +99,7 @@
   },
 
   "boss": {
-    "_regle": "10 fiches boss avec stats (dégâts, nb_invocations, action_spéciale, passif). Pas de deck épreuve spécifique.",
+    "_regle": "10 fiches boss avec stats (dégâts, nb_invocations, action_spéciale, passif). Pas de deck menace spécifique.",
     "fichier": "boss/boss.json",
     "cible": 10,
     "actuel": 10,
@@ -114,11 +114,11 @@
   },
 
   "resume_global": {
-    "complet": ["arsenal", "heros", "monstres", "destins", "boss", "epreuves"],
+    "complet": ["chasse", "heros", "monstres", "destins", "boss", "epreuves"],
     "incomplet": [],
     "total_cartes_jeu": {
       "heros": 5,
-      "arsenal": 100,
+      "chasse": 100,
       "monstres": 25,
       "destins": 20,
       "epreuves": 30,

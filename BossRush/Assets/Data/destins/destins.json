@@ -4,25 +4,25 @@
     "type": "destin"
   },
   "destins": [
-    { "id": "DEN_001", "effet": "Chaque héros pioche 1 carte Arsenal." },
+    { "id": "DEN_001", "effet": "Chaque héros pioche 1 carte Chasse." },
     { "id": "DEN_002", "effet": "Le héros est soigné de 2 blessures." },
     { "id": "DEN_003", "effet": "Un héros au choix régénère sa capacité spéciale." },
-    { "id": "DEN_004", "effet": "Le héros pioche 2 cartes Arsenal." },
+    { "id": "DEN_004", "effet": "Le héros pioche 2 cartes Chasse." },
     { "id": "DEN_005", "effet": "Le héros subit 1 dégât." },
     { "id": "DEN_006", "effet": "Pioche 1 monstre et place-le dans la file." },
     { "id": "DEN_007", "effet": "Le héros subit 2 dégâts." },
     { "id": "DEN_008", "effet": "Chaque héros subit 1 dégât." },
     { "id": "DEN_009", "effet": "Pioche 2 monstres et place-les dans la file." },
-    { "id": "DEN_010", "effet": "Le héros pioche 3 cartes Arsenal. Un autre héros au choix subit 1 dégât." },
-    { "id": "DEN_011", "effet": "Le héros subit 1 dégât et pioche 1 carte Arsenal." },
-    { "id": "DEN_012", "effet": "Le héros défausse 2 cartes Arsenal de type Action pour piocher 2 cartes Arsenal. S'il n'a pas assez de cartes, il subit 2 dégâts." },
-    { "id": "DEN_013", "effet": "Choix collectif : tous les héros piochent 1 carte Arsenal, OU tous les héros retirent 2 blessures." },
+    { "id": "DEN_010", "effet": "Le héros pioche 3 cartes Chasse. Un autre héros au choix subit 1 dégât." },
+    { "id": "DEN_011", "effet": "Le héros subit 1 dégât et pioche 1 carte Chasse." },
+    { "id": "DEN_012", "effet": "Le héros défausse 2 cartes Chasse de type Action pour piocher 2 cartes Chasse. S'il n'a pas assez de cartes, il subit 2 dégâts." },
+    { "id": "DEN_013", "effet": "Choix collectif : tous les héros piochent 1 carte Chasse, OU tous les héros retirent 2 blessures." },
     { "id": "DEN_014", "effet": "Le héros peut échanger ses cartes avec tous les autres héros. Mais pioche 1 monstre et place-le en tête de file." },
-    { "id": "DEN_015", "effet": "Un héros au choix pioche 1 carte Arsenal et subit 1 dégât." },
-    { "id": "DEN_016", "effet": "Le héros retire 2 blessures mais défausse 1 carte Arsenal de sa main." },
-    { "id": "DEN_017", "effet": "Chaque héros pioche 1 carte Arsenal et subit 1 dégât." },
+    { "id": "DEN_015", "effet": "Un héros au choix pioche 1 carte Chasse et subit 1 dégât." },
+    { "id": "DEN_016", "effet": "Le héros retire 2 blessures mais défausse 1 carte Chasse de sa main." },
+    { "id": "DEN_017", "effet": "Chaque héros pioche 1 carte Chasse et subit 1 dégât." },
     { "id": "DEN_018", "effet": "Le héros régénère sa capacité spéciale, mais pioche 1 monstre dans la file." },
-    { "id": "DEN_019", "effet": "Le héros subit 2 dégâts. Il pioche 2 cartes Arsenal." },
-    { "id": "DEN_020", "effet": "Le héros pioche 1 carte Arsenal. Si c'est un Objet, il pioche 1 carte Arsenal supplémentaire." }
+    { "id": "DEN_019", "effet": "Le héros subit 2 dégâts. Il pioche 2 cartes Chasse." },
+    { "id": "DEN_020", "effet": "Le héros pioche 1 carte Chasse. Si c'est un Objet, il pioche 1 carte Chasse supplémentaire." }
   ]
 }
