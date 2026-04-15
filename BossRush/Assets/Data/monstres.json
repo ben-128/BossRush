@@ -43,7 +43,7 @@
       "capacite_speciale": null,
       "description": "Il accroche, il tire, il dévore.",
       "citation": "« Il accroche, il tire, il dévore. »",
-      "quantite": 2
+      "quantite": 1
     },
     {
       "id": "MON_005",
@@ -143,7 +143,7 @@
       "capacite_speciale": null,
       "description": "Il digère lentement ce qui s'y prend.",
       "citation": "« Il digère lentement ce qui s'y prend. »",
-      "quantite": 1
+      "quantite": 2
     },
     {
       "id": "MON_015",
