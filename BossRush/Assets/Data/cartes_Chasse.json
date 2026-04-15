@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Liste des cartes Chasse du jeu (Actions + Objets). Uniquement des paquets héros, pas de cartes de base.",
-    "version": "3.0",
+    "version": "3.1",
     "notes": "100 cartes totales. 20 par héros (15 actions dont 10 attaques + 5 objets). Icône haut gauche = catégorie (Action/Objet). Icône haut droite = prérequis (nom du héros). Toutes les cartes ont un prérequis."
   },
   "cartes_arsenal": [
@@ -11,7 +11,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-	  "effet": "Lorsque le monstre ciblé attaque, défaussez cette carte et annulez l'attaque.",
+      "effet": "Le monstre ciblé ne peut pas attaquer ce tour-ci.",
       "quantite": 1
     },
     {
@@ -38,7 +38,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-	  "effet": "Soignez ce héros de 1 blessure.",
+      "effet": "Soignez ce héros de 1 blessure.",
       "quantite": 3
     },
     {
@@ -46,7 +46,7 @@
       "nom": "Second souffle",
       "categorie": "action",
       "prerequis": "Nawel",
-	  "effet": "Soignez ce héros de 3 blessures.",
+      "effet": "Soignez ce héros de 3 blessures.",
       "quantite": 2
     },
     {
@@ -75,7 +75,7 @@
     },
     {
       "id": "GUE_O01",
-      "nom": "Pierre d'aiguisage",
+      "nom": "Pierre de Wallmapu",
       "categorie": "objet",
       "prerequis": "Nawel",
       "bonus_degats": 2,
@@ -84,7 +84,7 @@
     },
     {
       "id": "GUE_O02",
-      "nom": "Bouclier de fer",
+      "nom": "Bouclier tawan",
       "categorie": "objet",
       "prerequis": "Nawel",
       "effet": "Annulez la prochaine source de blessures infligées à ce héros.",
@@ -108,7 +108,7 @@
     },
     {
       "id": "GUE_O05",
-      "nom": "Heaume de guerre",
+      "nom": "Heaume du toqui",
       "categorie": "objet",
       "prerequis": "Nawel",
       "effet": "Annulez l'effet de la carte Menace en cours.",
@@ -123,7 +123,7 @@
       "quantite": 3
     },
     {
-      "id": "MAG_A03",
+      "id": "MAG_A02",
       "nom": "Boule de feu",
       "categorie": "action",
       "degats": 1,
@@ -132,7 +132,7 @@
       "quantite": 2
     },
     {
-      "id": "MAG_A05",
+      "id": "MAG_A03",
       "nom": "Flammes en chaîne",
       "categorie": "action",
       "degats": 1,
@@ -141,7 +141,7 @@
       "quantite": 2
     },
     {
-      "id": "MAG_A06",
+      "id": "MAG_A04",
       "nom": "Tempête de feu",
       "categorie": "action",
       "degats": 3,
@@ -149,7 +149,16 @@
       "quantite": 1
     },
     {
-      "id": "MAG_A08",
+      "id": "MAG_A05",
+      "nom": "Combustion",
+      "categorie": "action",
+      "degats": 1,
+      "prerequis": "Daraa",
+      "effet": "Si la cible est éliminée, infligez les dégâts du monstre au monstre suivant dans la file.",
+      "quantite": 2
+    },
+    {
+      "id": "MAG_A06",
       "nom": "Transfert de cendres",
       "categorie": "action",
       "prerequis": "Daraa",
@@ -157,7 +166,7 @@
       "quantite": 2
     },
     {
-      "id": "MAG_A09",
+      "id": "MAG_A07",
       "nom": "Brasier intérieur",
       "categorie": "action",
       "prerequis": "Daraa",
@@ -165,21 +174,12 @@
       "quantite": 2
     },
     {
-      "id": "MAG_A10",
-      "nom": "Flamme ravivée",
+      "id": "MAG_A08",
+      "nom": "Chant de Daraartu",
       "categorie": "action",
       "prerequis": "Daraa",
       "effet": "Régénérez la capacité spéciale de ce héros.",
       "quantite": 1
-    },
-	 {
-      "id": "MAG_A07",
-      "nom": "Combustion",
-      "categorie": "action",
-      "prerequis": "Daraa",
-	  "degats": 1,
-      "effet": "Si la cible est éliminée, infligez les dégâts du monstre au monstre suivant dans la file.",
-      "quantite": 2
     },
     {
       "id": "MAG_O01",
@@ -211,7 +211,7 @@
       "nom": "Cristal explosif",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Eliminez un monstre attaquant ayant 2 points de vie ou moins.",
+      "effet": "Éliminez un monstre attaquant ayant 2 points de vie ou moins.",
       "quantite": 1
     },
     {
@@ -219,11 +219,9 @@
       "nom": "Lave du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "bonus_degats": 2,
       "effet": "Soignez 1 blessure et piochez 2 cartes Chasse.",
       "quantite": 1
     },
-	
     {
       "id": "SOI_A01",
       "nom": "Épine nourricière",
@@ -231,27 +229,27 @@
       "degats": 1,
       "prerequis": "Gao",
       "effet": "Si la cible survit, soignez 1 blessure d'un héros au choix.",
-      "quantite": 2
-    },
-	{
-      "id": "SOI_A12",
-      "nom": "Harmonie du Bosquet",
-      "categorie": "action",
-      "prerequis": "Gao",
-	  "degats": 3,
-      "effet": "Uniquement utilisable si aucun allié n'a de blessures.",
       "quantite": 1
     },
     {
       "id": "SOI_A02",
+      "nom": "Harmonie du Bosquet",
+      "categorie": "action",
+      "degats": 3,
+      "prerequis": "Gao",
+      "effet": "Uniquement utilisable si aucun allié n'a de blessures.",
+      "quantite": 1
+    },
+    {
+      "id": "SOI_A03",
       "nom": "Transfert de traumas",
       "categorie": "action",
       "prerequis": "Gao",
-      "effet": "Transférez 1 carte Blessure d'un autre héros vers le monstre ciblé, quel que soit son montant.",
+      "effet": "Transférez 1 carte blessant un autre héros vers le monstre ciblé, quel que soit son nombre de blessures.",
       "quantite": 3
     },
-	 {
-      "id": "SOI_A11",
+    {
+      "id": "SOI_A04",
       "nom": "Drain de vie",
       "categorie": "action",
       "degats": 1,
@@ -260,7 +258,7 @@
       "quantite": 2
     },
     {
-      "id": "SOI_A07",
+      "id": "SOI_A05",
       "nom": "Transe chamanique",
       "categorie": "action",
       "prerequis": "Gao",
@@ -268,7 +266,7 @@
       "quantite": 1
     },
     {
-      "id": "SOI_A08",
+      "id": "SOI_A06",
       "nom": "Souffle du Kalahari",
       "categorie": "action",
       "prerequis": "Gao",
@@ -276,7 +274,7 @@
       "quantite": 1
     },
     {
-      "id": "SOI_A09",
+      "id": "SOI_A07",
       "nom": "Pollen apaisant",
       "categorie": "action",
       "prerequis": "Gao",
@@ -284,37 +282,45 @@
       "quantite": 1
     },
     {
-      "id": "SOI_A10",
+      "id": "SOI_A08",
       "nom": "Rituel des ancêtres",
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Un autre héros au choix régénère sa capacité spéciale.",
       "quantite": 1
     },
-	 {
-      "id": "SOI_A11",
+    {
+      "id": "SOI_A09",
       "nom": "Mémoire des racines",
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Un autre héros au choix pioche 4 cartes Chasse dans la défausse.",
       "quantite": 1
     },
-	 {
-      "id": "SOI_A13",
-      "nom": "Transfert de vie",
+    {
+      "id": "SOI_A10",
+      "nom": "Sacrifice vital",
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Soignez toutes les blessures d'un héros au choix. Un autre héros au choix subit 2 blessures.",
       "quantite": 1
     },
     {
-      "id": "SOI_A14",
-      "nom": "Communion du Bosquet",
+      "id": "SOI_A11",
+      "nom": "Partage du souffle",
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Redistribuez librement toutes les blessures entre les héros.",
       "quantite": 1
-    },	
+    },
+    {
+      "id": "SOI_A12",
+      "nom": "Vision de transe",
+      "categorie": "action",
+      "prerequis": "Gao",
+      "effet": "Piochez 1 carte Destin et consultez-la. Choisissez ensuite quel héros en applique l'effet.",
+      "quantite": 1
+    },
     {
       "id": "SOI_O01",
       "nom": "Élixir de sève-mère",
@@ -328,7 +334,7 @@
       "nom": "Totem de transe",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Si ce héros devrait recevoir une blessure mortelle ce tour-ci, annulez-la ainsi que toutes les blessures suivantes jusqu'à la fin du tour.",
+      "effet": "Si ce héros devait recevoir une blessure mortelle ce tour-ci, annulez-la ainsi que toutes les blessures suivantes jusqu'à la fin du tour.",
       "quantite": 1
     },
     {
@@ -336,7 +342,7 @@
       "nom": "Gemme du sacrifice",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Soignez de un autre héros allié autant de blessures que ce héros en a.",
+      "effet": "Soignez un autre héros allié d'autant de blessures que ce héros en a.",
       "quantite": 1
     },
     {
@@ -347,12 +353,12 @@
       "effet": "Régénérez la capacité spéciale d'un héros au choix.",
       "quantite": 1
     },
-	 {
+    {
       "id": "SOI_O05",
       "nom": "Dard de sève",
       "categorie": "objet",
       "prerequis": "Gao",
-	  "degats": 2,
+      "degats": 2,
       "effet": "Uniquement utilisable si un héros a été soigné ce tour-ci.",
       "quantite": 1
     },
@@ -361,7 +367,7 @@
       "nom": "Tir précis",
       "categorie": "action",
       "degats": 1,
-	  "prerequis": "Isonash",
+      "prerequis": "Isonash",
       "effet": "Ciblez le Colosse ou un monstre au choix dans la file.",
       "quantite": 3
     },
@@ -370,9 +376,9 @@
       "nom": "Tir rapide",
       "categorie": "action",
       "degats": 1,
-	  "effet": "Piochez une carte Chasse.",
       "prerequis": "Isonash",
-      "quantite": 3
+      "effet": "Piochez 1 carte Chasse.",
+      "quantite": 2
     },
     {
       "id": "ROD_A03",
@@ -380,7 +386,7 @@
       "categorie": "action",
       "degats": 2,
       "prerequis": "Isonash",
-      "quantite": 1
+      "quantite": 2
     },
     {
       "id": "ROD_A04",
@@ -388,7 +394,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Isonash",
-      "effet": "Le héros peut poser 1 carte Objet supplémentaire ce tour.",
+      "effet": "Ce héros peut poser 1 carte Objet supplémentaire ce tour.",
       "quantite": 1
     },
     {
@@ -397,7 +403,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Isonash",
-      "effet": "Le héros peut jouer 1 carte Action supplémentaire ce tour.",
+      "effet": "Ce héros peut jouer 1 carte Action supplémentaire ce tour.",
       "quantite": 3
     },
     {
@@ -409,11 +415,11 @@
       "quantite": 2
     },
     {
-      "id": "ROD_A09",
+      "id": "ROD_A07",
       "nom": "Flair de la Lisière",
       "categorie": "action",
       "prerequis": "Isonash",
-      "effet": "Regardez les 5 premières cartes Chasse, gardez en 2, remettez le reste dans l'ordre souhaité.",
+      "effet": "Regardez les 5 premières cartes Chasse, gardez-en 2, remettez le reste dans l'ordre souhaité.",
       "quantite": 1
     },
     {
@@ -422,7 +428,15 @@
       "categorie": "objet",
       "prerequis": "Isonash",
       "bonus_degats": 2,
-      "effet": "Ajoute 2 dégâts à une attaque jouée en même temps.",
+      "effet": "Ajoutez 2 dégâts à une attaque jouée en même temps.",
+      "quantite": 1
+    },
+	{
+      "id": "ROD_O06",
+      "nom": "?",
+      "categorie": "objet",
+      "prerequis": "Isonash",
+      "effet": "Soignez ce héros d'un montant de blessures égal au nombre de cartes piochées ce tour ci.",
       "quantite": 1
     },
     {
@@ -430,7 +444,7 @@
       "nom": "Flèches transperçantes",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Améliore une attaque : Si la cible est éliminée, l'attaque cible le monstre ou Colosse suivant dans la file.",
+      "effet": "Améliore une attaque : si la cible est éliminée, l'attaque cible le monstre ou Colosse suivant dans la file.",
       "quantite": 1
     },
     {
@@ -454,17 +468,17 @@
       "nom": "Carquois infini",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Le héros pioche jusqu'à avoir 5 cartes Chasse en main.",
+      "effet": "Ce héros pioche jusqu'à avoir 5 cartes Chasse en main.",
       "quantite": 1
     },
     {
       "id": "DIP_A01",
-      "nom": "Lame du négociateur",
+      "nom": "Rugissement d'appel",
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
       "effet": "Un héros allié pioche 1 carte Chasse.",
-      "quantite": 3
+      "quantite": 2
     },
     {
       "id": "DIP_A02",
@@ -490,7 +504,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-	  "effet": "Deux héros ciblés peuvent s'échanger des cartes Objet de leurs mains.",
+      "effet": "Deux héros ciblés peuvent s'échanger des cartes Objet de leurs mains.",
       "quantite": 1
     },
     {
@@ -512,7 +526,7 @@
     },
     {
       "id": "DIP_A07",
-      "nom": "Négociation",
+      "nom": "Ultimatum",
       "categorie": "action",
       "prerequis": "Aslan",
       "effet": "Éliminez le monstre en tête de file.",
@@ -532,6 +546,14 @@
       "categorie": "action",
       "prerequis": "Aslan",
       "effet": "Donnez jusqu'à 3 cartes Chasse à un héros allié. Soignez 1 blessure pour chaque carte pouvant être utilisée par le héros cible.",
+      "quantite": 1
+    },
+	 {
+      "id": "DIP_A10",
+      "nom": "Rebellion",
+      "categorie": "action",
+      "prerequis": "Aslan",
+      "effet": "Le monstre cible attaque le Colosse. Uniquement possible s'il est le seul monstre de la file.",
       "quantite": 1
     },
     {
@@ -563,7 +585,7 @@
       "nom": "Offrande du destin",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Donnez 2 cartes Chasse à un allié. Piochez une carte Destin.",
+      "effet": "Donnez 2 cartes Chasse à un allié. Piochez 1 carte Destin.",
       "quantite": 1
     },
     {

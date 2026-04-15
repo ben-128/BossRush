@@ -30,7 +30,7 @@ Avant de commencer, voici les termes utilisés dans le jeu.
 | **Carte Monstre** | Un ennemi qui rejoint la file. Indique sa vie, ses dégâts et son éventuel effet spécial. |
 | **Carte Menace — Assaut** | Le Colosse agit : il attaque, invoque des monstres ou déclenche son action spéciale. |
 | **Carte Menace — Événement** | Une situation survient. Le héros actif choisit entre les options proposées (risque/récompense). |
-| **Carte Destin** | Événement narratif ponctuel qui modifie le cours du combat. |
+| **Carte Destin** | Événement narratif ponctuel qui modifie le cours du combat. Piochée via divers effets (cartes Menace principalement, mais aussi certaines cartes Chasse). Résolue immédiatement puis défaussée. |
 | **Fiche Colosse** | Fiche de référence du boss choisi : dégâts, nombre d'invocations, action spéciale, passif. |
 
 ### Mots-clés
@@ -40,8 +40,9 @@ Avant de commencer, voici les termes utilisés dans le jeu.
 | **Vie** | Maximum de blessures qu'un héros ou monstre peut encaisser avant d'être éliminé ou hors combat. |
 | **Blessure** | Carte placée sous un héros ou un monstre pour matérialiser les dégâts subis. Chaque carte blessure a une valeur en dégâts. |
 | **Soigner de X** | Retirez des cartes blessure dont le total est ≤ X. Une carte ne peut pas être partiellement soignée. *(Ex : soigner de 3 → retirez 2+1 ou 3, mais pas une carte de valeur 4.)* |
-| **Éliminer** | Un monstre dont les blessures atteignent ou dépassent sa vie est éliminé et défaussé. |
-| **Hors combat** | Un héros dont les blessures atteignent ou dépassent sa vie ne peut plus agir. |
+| **Éliminer** | Un monstre est **éliminé** quand une attaque ou un effet lui inflige suffisamment de dégâts pour que ses blessures atteignent ou dépassent sa vie. La carte part alors à la défausse. **Seule cette forme de mise à l'écart déclenche les effets « quand ce monstre est éliminé ».** Ne sont **pas** des éliminations : un monstre qui a attaqué un héros et dont la carte est passée sous lui, ou une carte Monstre placée comme blessure sous un héros qui finit à la défausse parce que ce héros a été soigné. |
+| **Mort** | Un héros dont les blessures atteignent ou dépassent sa vie est mort (et donc hors combat). Il ne peut plus agir jusqu'à ce qu'il soit ressuscité. |
+| **Blessure mortelle** | Blessure qui ferait mourir un héros (total de blessures ≥ vie). Certaines cartes permettent d'annuler une blessure mortelle. |
 | **File** | File de monstres placée entre les héros et le Colosse. Les nouveaux monstres arrivent au fond (côté Colosse). |
 | **Tête de file** | Le premier monstre de la file, côté héros. C'est lui qui attaque et qui est ciblé par les attaques mélée. |
 | **Mélée** | Attaque qui cible uniquement la tête de file. Si la file est vide, frappe le Colosse. |
@@ -49,7 +50,7 @@ Avant de commencer, voici les termes utilisés dans le jeu.
 | **Prérequis** | Icône en haut à droite d'une carte Chasse. Votre héros doit posséder la compétence correspondante pour la jouer. |
 | **Capacité spéciale** | Pouvoir unique de votre héros, utilisable 1 fois par combat. Tournez la carte à 90° quand vous l'activez. |
 | **Régénérer** | Remettre une capacité spéciale déjà utilisée en état. Redressez la carte du héros. |
-| **Renfort** | Objet joué en même temps qu'une attaque Action pour en augmenter les dégâts. Les deux cartes vont sous la cible. |
+| **Renfort** | Objet joué en même temps qu'une carte Action d'attaque. Déclenche son effet (dégâts bonus à la cible, ou effet divers selon la carte). Si l'effet ajoute des dégâts à la cible attaquée, les deux cartes vont sous la cible ; sinon, l'objet est défaussé après résolution. |
 | **Débordement** | Si un effet demande de piocher un monstre et que la pile est vide, c'est la défaite immédiate. |
 
 ---
@@ -97,7 +98,7 @@ Pile unique. Deux types identifiés par une icône en haut à gauche :
 - Reste en main jusqu'à ce que le héros décide de le poser.
 - Posé face visible devant le héros lors de son tour (voir déroulement).
 - **Effet immédiat** → appliquer puis défausser.
-- **Renfort** → renforce une attaque Action jouée en même temps. Les deux cartes vont sous la cible.
+- **Renfort** → objet joué en même temps qu'une carte Action d'attaque. Déclenche son effet (dégâts bonus, ou effet divers). Si l'effet ajoute des dégâts à la cible, les deux cartes vont sous la cible ; sinon, défaussez l'objet après résolution.
 
 ### Prérequis
 Icône en haut à droite. Le héros doit posséder la compétence correspondante. Sinon, la carte ne peut pas être jouée (mais peut être échangée avec un allié qui possède la compétence).
@@ -174,9 +175,11 @@ Continuer jusqu'à victoire ou défaite. Si le deck Menace est épuisé, mélang
 La carte infligeant les dégâts se place **sous le héros** = blessure. Si total ≥ vie → hors combat.
 
 ### Soins
-Soigne X points = retirer des cartes blessure totalisant **≤ X**. Une carte ne peut pas être partiellement soignée.
+Soigne X points = retirer des cartes blessure totalisant **≤ X**. Une carte ne peut pas être partiellement soignée. Les cartes retirées vont à la défausse.
 
 > Exemple : soin 3 → retirer 2+1 ✓ ou 3 ✓, mais pas 2+2 ✗
+
+> **Important** : si la carte blessure retirée est une carte Monstre (un monstre qui avait attaqué ce héros), elle part à la défausse comme les autres mais ceci n'est **pas** une élimination. Les effets « quand ce monstre est éliminé » ne se déclenchent pas.
 
 ---
 
@@ -220,7 +223,15 @@ Chaque boss possède une fiche avec 4 stats consultées lors des épreuves :
 ## Monstres
 
 - **Vie** / **Dégâts** / **Capacité spéciale** éventuelle.
-- Quand un monstre attaque : sa carte va sous le héros. Si contré → défaussé sans effet.
+- Quand un monstre attaque : sa carte quitte la file et se place **sous le héros ciblé** pour matérialiser la blessure. Elle y reste pour compter les dégâts. Si l'attaque est contrée → la carte est défaussée sans effet.
+- **Important** : un monstre qui passe sous un héros après avoir attaqué n'est **pas** considéré comme éliminé. Ses effets « quand ce monstre est éliminé » ne se déclenchent pas. Seul un monstre qui reçoit suffisamment de dégâts pour être envoyé à la défausse depuis la file est éliminé.
+
+### Types d'effets de capacité
+Les capacités spéciales des monstres se déclenchent toujours sur un événement précis :
+- **Quand ce monstre arrive en jeu** → au moment où il est pioché et placé dans la file.
+- **Quand ce monstre doit attaquer** → juste avant de résoudre son attaque à l'étape 4 du tour. L'effet s'applique avant que les dégâts ne soient infligés et peut modifier ou annuler l'attaque.
+- **Quand ce monstre inflige des dégâts à un héros** → au moment où sa carte passe sous le héros ciblé (y compris si l'attaque n'est que partiellement contrée).
+- **Quand ce monstre est éliminé** → quand il est envoyé à la défausse parce que ses blessures ont atteint ou dépassé sa vie. Ne se déclenche jamais après une attaque résolue ni après un soin qui retire la carte.
 
 ### Pile vide (débordement)
 Si la pile Monstres est épuisée et qu'un effet demande de piocher un monstre → **défaite immédiate**. Les héros sont submergés.
