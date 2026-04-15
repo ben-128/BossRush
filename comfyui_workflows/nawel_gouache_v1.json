@@ -1,0 +1,276 @@
+{
+  "last_node_id": 15,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [20, 100],
+      "size": [320, 98],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [1], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [2], "slot_index": 1},
+        {"name": "VAE", "type": "VAE", "links": [14], "slot_index": 2}
+      ],
+      "properties": {"Node name for S&R": "CheckpointLoaderSimple"},
+      "widgets_values": ["tulpainterlyXL_masterworks.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "LoraLoader",
+      "pos": [380, 100],
+      "size": [320, 126],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 1},
+        {"name": "clip", "type": "CLIP", "link": 2}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [3], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [4], "slot_index": 1}
+      ],
+      "properties": {"Node name for S&R": "LoraLoader"},
+      "widgets_values": ["maly007_fantasy.safetensors", 0.8, 0.8]
+    },
+    {
+      "id": 3,
+      "type": "LoraLoader",
+      "pos": [740, 100],
+      "size": [320, 126],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 3},
+        {"name": "clip", "type": "CLIP", "link": 4}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [5], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [6], "slot_index": 1}
+      ],
+      "properties": {"Node name for S&R": "LoraLoader"},
+      "widgets_values": ["v67_zfurry_oil.safetensors", 0.7, 0.7]
+    },
+    {
+      "id": 4,
+      "type": "LoraLoader",
+      "pos": [1100, 100],
+      "size": [320, 126],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 5},
+        {"name": "clip", "type": "CLIP", "link": 6}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [7], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [8], "slot_index": 1}
+      ],
+      "properties": {"Node name for S&R": "LoraLoader"},
+      "widgets_values": ["achenbach_oil.safetensors", 0.5, 0.5]
+    },
+    {
+      "id": 5,
+      "type": "LoraLoader",
+      "pos": [1460, 100],
+      "size": [320, 126],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 7},
+        {"name": "clip", "type": "CLIP", "link": 8}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [9], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [10, 11], "slot_index": 1}
+      ],
+      "properties": {"Node name for S&R": "LoraLoader"},
+      "widgets_values": ["painterly_impasto_il.safetensors", 0.5, 0.5]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [1820, 80],
+      "size": [460, 260],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 10}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [12], "slot_index": 0}],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["masterpiece, best quality, absurdres, highly detailed,\n\nmalyfantasystyle, oil painting, zfurry, oil style, cinematic, anthro, detailed fur, achenbach, oil painting (medium), impasto, painterly, traditional media, muted colors, earthy tones, visible brushstrokes, palette knife, textured canvas, matte finish, hand-painted,\n\nsolo, 1boy, anthro jaguar, male, muscular body, large pectorals, thick thighs, feline features, spotted fur, tawny fur with black rosettes, amber eyes, fierce expression, clenched jaw, blue war paint on muzzle, tribal face paint,\n\ndynamic pose, mid-leap, airborne, charging forward, strong diagonal composition, looking at viewer, full body, heroic proportions,\n\nwearing (heavy medieval armor:1.2), wrought iron armor, bone plates, leather straps, loincloth, fur cape flowing behind, holding (massive round shield:1.3), blue geometric sun motif on shield, tribal patterns,\n\nstormy mountain landscape background, dramatic sky, deep steel blue atmosphere, dark storm clouds, lightning in distance,\n\nvolumetric lighting, warm golden rim light from left, cool blue shadows from right, cinematic lighting, depth of field, chiaroscuro,\n\n1980s fantasy book cover art, frank frazetta style, narrative painting, epic fantasy, heroic fantasy illustration"]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [1820, 370],
+      "size": [460, 200],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 11}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [13], "slot_index": 0}],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["worst quality, low quality, normal quality, lowres, blurry, jpeg artifacts, text, watermark, signature, username, error,\n\nbad anatomy, bad hands, extra fingers, missing fingers, deformed hands, extra limbs, missing limbs, fused fingers, malformed, mutated,\n\nsmooth digital art, airbrushed, photorealistic, photo, 3d render, cgi, clean lines, flat colors, cel shading, vector art, anime screencap, chibi, cartoon,\n\nsimple background, white background, multiple characters, duplicate, symmetric composition, centered, static pose, stiff pose, boring pose"]
+    },
+    {
+      "id": 8,
+      "type": "EmptyLatentImage",
+      "pos": [1820, 600],
+      "size": [320, 106],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [15], "slot_index": 0}],
+      "properties": {"Node name for S&R": "EmptyLatentImage"},
+      "widgets_values": [832, 1216, 1]
+    },
+    {
+      "id": 9,
+      "type": "KSampler",
+      "pos": [2320, 100],
+      "size": [320, 262],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 9},
+        {"name": "positive", "type": "CONDITIONING", "link": 12},
+        {"name": "negative", "type": "CONDITIONING", "link": 13},
+        {"name": "latent_image", "type": "LATENT", "link": 15}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [16], "slot_index": 0}],
+      "properties": {"Node name for S&R": "KSampler"},
+      "widgets_values": [42, "randomize", 32, 6.0, "dpmpp_2m", "karras", 1]
+    },
+    {
+      "id": 10,
+      "type": "VAEDecode",
+      "pos": [2680, 100],
+      "size": [210, 46],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 16},
+        {"name": "vae", "type": "VAE", "link": 14}
+      ],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [17, 19], "slot_index": 0}],
+      "properties": {"Node name for S&R": "VAEDecode"}
+    },
+    {
+      "id": 11,
+      "type": "SaveImage",
+      "pos": [2680, 200],
+      "size": [420, 450],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [{"name": "images", "type": "IMAGE", "link": 17}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["bossrush/nawel"]
+    },
+    {
+      "id": 12,
+      "type": "UpscaleModelLoader",
+      "pos": [2680, 700],
+      "size": [320, 58],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{"name": "UPSCALE_MODEL", "type": "UPSCALE_MODEL", "links": [18], "slot_index": 0}],
+      "properties": {"Node name for S&R": "UpscaleModelLoader"},
+      "widgets_values": ["4x-UltraSharp.pth"]
+    },
+    {
+      "id": 13,
+      "type": "ImageUpscaleWithModel",
+      "pos": [3020, 700],
+      "size": [260, 46],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {"name": "upscale_model", "type": "UPSCALE_MODEL", "link": 18},
+        {"name": "image", "type": "IMAGE", "link": 19}
+      ],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [20], "slot_index": 0}],
+      "properties": {"Node name for S&R": "ImageUpscaleWithModel"}
+    },
+    {
+      "id": 14,
+      "type": "SaveImage",
+      "pos": [3300, 700],
+      "size": [420, 450],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [{"name": "images", "type": "IMAGE", "link": 20}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["bossrush/nawel_4x"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "MODEL"],
+    [2, 1, 1, 2, 1, "CLIP"],
+    [3, 2, 0, 3, 0, "MODEL"],
+    [4, 2, 1, 3, 1, "CLIP"],
+    [5, 3, 0, 4, 0, "MODEL"],
+    [6, 3, 1, 4, 1, "CLIP"],
+    [7, 4, 0, 5, 0, "MODEL"],
+    [8, 4, 1, 5, 1, "CLIP"],
+    [9, 5, 0, 9, 0, "MODEL"],
+    [10, 5, 1, 6, 0, "CLIP"],
+    [11, 5, 1, 7, 0, "CLIP"],
+    [12, 6, 0, 9, 1, "CONDITIONING"],
+    [13, 7, 0, 9, 2, "CONDITIONING"],
+    [14, 1, 2, 10, 1, "VAE"],
+    [15, 8, 0, 9, 3, "LATENT"],
+    [16, 9, 0, 10, 0, "LATENT"],
+    [17, 10, 0, 11, 0, "IMAGE"],
+    [18, 12, 0, 13, 0, "UPSCALE_MODEL"],
+    [19, 10, 0, 13, 1, "IMAGE"],
+    [20, 13, 0, 14, 0, "IMAGE"]
+  ],
+  "groups": [
+    {
+      "title": "LoRA Stack (gouache narrative)",
+      "bounding": [370, 50, 1420, 200],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "Prompting",
+      "bounding": [1810, 50, 480, 660],
+      "color": "#a1309b",
+      "font_size": 24
+    },
+    {
+      "title": "Generation",
+      "bounding": [2310, 50, 800, 620],
+      "color": "#8AA",
+      "font_size": 24
+    },
+    {
+      "title": "Upscale 4x",
+      "bounding": [2670, 680, 1060, 480],
+      "color": "#b58b2a",
+      "font_size": 24
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

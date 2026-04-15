@@ -6,12 +6,9 @@
 
 ## 1. Installation de base
 
-### ComfyUI classique (C:\Users\Ben\ComfyUI) — ABANDONNÉ
-- Clone du repo officiel : `git clone https://github.com/comfyanonymous/ComfyUI.git`
-- Venv Python 3.13
-- **torch-directml** : erreur `OpaqueTensorImpl` avec les modèles SDXL
-- **Mode CPU fonctionne** (`python main.py --cpu`) mais très lent (~10+ min par image)
-- Utilisé uniquement pour le premier test de workflow
+### ComfyUI classique (C:\Users\Ben\ComfyUI) — SUPPRIME
+- Premier test d'installation, abandonne : torch-directml incompatible SDXL, Python 3.13 cassait tout
+- Dossier entier supprime le 2026-04-16 (cleanup) — ComfyUI-ZLUDA est la seule install active
 
 ### ComfyUI-ZLUDA (C:\Users\Ben\ComfyUI-Zluda) ← ACTIF
 - Clone du fork patientx : `git clone https://github.com/patientx/ComfyUI-Zluda.git`
@@ -87,87 +84,106 @@ Script custom qui désactive cuDNN avant le lancement (cuDNN incompatible RDNA2 
 
 ---
 
-## 3. Modèle checkpoint
+## 3. Checkpoints installes
 
-| Modèle | Fichier | Emplacement | Source |
+| Modele | Fichier | Base | Usage |
 |---|---|---|---|
-| **Tulpainterly XL Masterworks** | `tulpainterlyXL_masterworks.safetensors` | `models\checkpoints\` | [CivitAI](https://civitai.com/models/2357432/tulpainterly-xl) |
+| **Tulpainterly XL Masterworks** | `tulpainterlyXL_masterworks.safetensors` (6.5 Go) | Illustrious XL | Premier test — a un bias anime/cel-shaded trop fort, difficile a faire du vrai gouache avec |
+| **Painter's Checkpoint v1.1** | `painters_checkpoint_v11.safetensors` (~6 Go) | SDXL 1.0 | Checkpoint dedie oil painting, SDXL base pur (pas d'anime bias) — choix recommande pour le style gouache narratif |
 
-Choisi pour : style gouache/peinture traditionnelle, basé sur Illustrious XL (2026).
+### Lecons apprises sur les checkpoints
+- **Illustrious XL** (Tulpainterly, etc.) : mieux pour les anthro/anime mais tire toujours vers un look cel-shaded meme avec LoRA painterly a 1.0
+- **SDXL 1.0 base** (Painter's Checkpoint) : meilleur pour les styles peinture traditionnelle car pas de contamination anime
+- **Pour ton style gouache narratif (Frazetta/DALL-E like)** : preferer SDXL base
+- **IP-Adapter** : ne peut pas forcer un modele a sortir d'un style qui est profondement dans ses biases
+
+Sources :
+- [Tulpainterly XL](https://civitai.com/models/2357432/tulpainterly-xl)
+- [Painter's Checkpoint](https://civitai.com/models/240154/painters-checkpoint-oil-paint-oil-painting-art-style)
 
 ---
 
-## 4. Workflow de base
+## 4. Workflows
 
-Pipeline : CheckpointLoader → CLIP Text Encode (pos/neg) → KSampler → VAE Decode → Save Image
+Fichiers dans : `D:\projets\Boss_Rush\comfyui_workflows\`
 
-### Paramètres KSampler
-- **steps** : 30
-- **cfg** : 7.5
-- **sampler** : euler_ancestral
-- **scheduler** : normal
-- **résolution** : 832 x 1216 (ratio 2:3)
-
-### Prompt positif (v2 — tags Illustrious)
+### nawel_gouache_v1.json — Workflow LoRA stack + IP-Adapter
+Pipeline :
 ```
-masterpiece, best quality, absurdres, traditional media, gouache \(medium\), thick paint, palette knife, impasto, visible brushstrokes, textured canvas, matte finish,
-
-solo, anthro jaguar male, muscular, feline, spotted fur, tawny and black fur, amber eyes, war paint on face, blue face paint, tribal markings,
-steel blue heavy armor, wrought iron and bone armor, leather straps, massive round shield with blue geometric sun motifs, mapuche warrior,
-heroic proportions, dynamic pose, mid-leap, airborne, charging forward, legs extended, cape flowing behind, shield thrust forward,
-strong diagonal composition, full body portrait, looking at viewer with fierce determination, clenched jaw,
-
-stormy mountain landscape background, dramatic sky, deep steel blue atmosphere, volumetric lighting, warm golden rim light from left, cool blue shadows from right, cinematic lighting, depth of field,
-
-fantasy illustration, book cover art, 1980s fantasy art style, narrative painting, painterly, epic, dramatic
+CheckpointLoader → [LoRA Stack ×4] → IPAdapterUnifiedLoader → IPAdapterAdvanced → KSampler → VAEDecode → SaveImage
+                                                                ^
+                                                    LoadImage (guerrier_ref.png)
 ```
 
-### Prompt négatif (v2)
-```
-worst quality, low quality, normal quality, lowres, bad anatomy, bad hands, extra fingers, missing fingers, deformed hands, error, text, watermark, signature, username, blurry, jpeg artifacts,
-smooth digital art, airbrushed, photorealistic, 3d render, cgi, anime style, cartoon, comic book, flat colors, cel shading, vector art, clean lines, uniform texture, perfect symmetry, centered composition, static pose, stiff pose,
-multiple characters, extra limbs, fused limbs, missing limbs
-```
+### Parametres KSampler
+- **steps** : 32
+- **cfg** : 6.0
+- **sampler** : dpmpp_2m / karras
+- **resolution** : 832 x 1216 (natif SDXL 2:3)
 
-### Résultat premier test (CPU)
-- L'image sort mais le style est trop "comics/cartoon", pas assez gouache
-- Besoin de LoRA gouache/painterly pour pousser le style
-- La pose est statique (besoin ControlNet plus tard)
+### IP-Adapter (style transfer depuis image de reference)
+- Reference : `C:\Users\Ben\ComfyUI-Zluda\input\guerrier_ref.png` (copie de `BossRush\Assets\Art\Raw\Heros\Guerrier.png`)
+- Preset : `PLUS (high strength)`
+- weight : 0.75
+- weight_type : `linear` (plus doux que "style transfer")
+- start_at : 0.0, end_at : 0.8
+
+### Upscale (bypass par defaut, activable)
+- `UpscaleModelLoader` (4x-UltraSharp) → `ImageUpscaleWithModel` → `ImageScale` (resize 1650x2250) → `SaveImage`
+- Active uniquement pour les generations finales validees (economise temps en iteration)
+
+### Resultats actuels — pas encore satisfaisants
+- **Tulpainterly XL + 4 LoRA + IP-Adapter** : style reste cel-shaded cartoon, pas gouache
+- **Tulpainterly XL + IP-Adapter seul (LoRAs desactives)** : meme probleme, bias anime trop fort
+- **Prochain test** : `Painter's Checkpoint v1.1` (SDXL 1.0 base pur) + IP-Adapter
 
 ---
 
 ## 5. TODO
 
-- [x] Confirmer que ZLUDA génère sans erreur cuDNN ✅ (2026-04-15)
-- [ ] Télécharger des LoRA gouache/painterly pour améliorer le style
+- [x] ZLUDA fonctionne sur GPU (2026-04-15)
+- [x] Creer launch.bat one-click
+- [x] Telecharger 4 LoRA gouache/painterly Illustrious (Maly007, V67, Achenbach, Painterly Impasto)
+- [x] Telecharger 4x-UltraSharp upscaler
+- [x] Installer IP-Adapter custom node + models (CLIP-ViT-H + IPAdapter Plus SDXL)
+- [x] Construire workflow avance avec LoRA stack + IP-Adapter style transfer
+- [x] Cleanup ancienne install ComfyUI (~15 Go)
+- [ ] Tester Painter's Checkpoint (SDXL 1.0 base) pour vrai style oil painting
+- [ ] Comparer resultat final ComfyUI vs DALL-E reference
 - [ ] Installer Impact Pack (face/hand detailer)
-- [ ] Installer ControlNet (contrôle de pose)
-- [ ] Tester un workflow avec LoRA empilés
-- [ ] Comparer résultat ComfyUI vs DALL-E sur le même prompt Nawel
-- [x] Créer un .bat de lancement one-click ✅ → `launch.bat`
+- [ ] Installer ControlNet (controle de pose)
 
 ---
 
-## 6. LoRA recommandés (à télécharger)
+## 6. LoRA installes
 
-### Style gouache/peinture
-| LoRA | Usage | Poids suggéré | Compatibilité |
-|---|---|---|---|
-| Gouache Style / Traditional Media | Brushstrokes visibles, texture peinture | 0.6-0.8 | SDXL / Illustrious |
-| Impasto Painting | Peinture épaisse, palette knife | 0.4-0.6 | SDXL |
-| Fantasy Book Cover | Style couverture livre 80-90s | 0.5-0.7 | SDXL |
+Dans `C:\Users\Ben\ComfyUI-Zluda\models\loras\` :
 
-### Sujets
-| LoRA | Usage | Compatibilité |
+| Fichier | CivitAI ID / Version | Triggers | Usage | Publie |
+|---|---|---|---|---|
+| `maly007_fantasy.safetensors` (218 Mo) | 2508823 / 2820049 | `malyfantasystyle, oil painting` | Knight fantasy oil painting Frazetta-like | Mar 31 2026 |
+| `v67_zfurry_oil.safetensors` (218 Mo) | 2496206 / 2806058 | `zfurry, oil style, cinematic, anthro, detailed fur` | Animaux anthropomorphes oil painting | Mar 27 2026 |
+| `achenbach_oil.safetensors` (465 Mo) | 2444283 / 2748243 | `achenbach, oil painting (medium), impasto, painterly, traditional media, muted colors, earthy tones` | 19e siecle oil painting, impasto | Mar 6 2026 |
+| `painterly_impasto_il.safetensors` (110 Mo) | 1763670 / 1995905 | `painterly` | Style Illustrious natif impasto | 2025 |
+
+Tous Illustrious XL base.
+
+### Upscaler
+Dans `C:\Users\Ben\ComfyUI-Zluda\models\upscale_models\` :
+
+| Fichier | Source | Usage |
 |---|---|---|
-| Anthro/Furry character | Animaux anthropomorphes | Pony / Illustrious |
-| Fantasy Armor | Armures fantasy | SDXL |
+| `4x-UltraSharp.pth` (67 Mo) | [lokCX/4x-Ultrasharp (HF)](https://huggingface.co/lokCX/4x-Ultrasharp) | Upscale 4x general |
 
-### UI / Icônes (style clean, pas gouache)
-| LoRA | Usage |
-|---|---|
-| Game Icon | Icônes stylisées propres |
-| Flat Design Icon | Style clean pour UI |
+### IP-Adapter
+Dans `C:\Users\Ben\ComfyUI-Zluda\models\` :
+
+| Fichier | Dossier | Source |
+|---|---|---|
+| `CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors` (~2.5 Go) | `clip_vision/` | [h94/IP-Adapter (HF)](https://huggingface.co/h94/IP-Adapter) |
+| `ip-adapter-plus_sdxl_vit-h.safetensors` (~1 Go) | `ipadapter/` | [h94/IP-Adapter (HF)](https://huggingface.co/h94/IP-Adapter) |
+
+Custom node : `comfyui_ipadapter_plus` (via Manager)
 
 ---
 
@@ -203,13 +219,18 @@ CUDA_MODULE_LOADING=LAZY
 ### Fichiers importants
 | Chemin | Usage |
 |---|---|
-| `C:\Users\Ben\ComfyUI\` | Install ComfyUI classique (CPU only) |
-| `C:\Users\Ben\ComfyUI-Zluda\` | Install ComfyUI-ZLUDA (GPU AMD) |
-| `C:\Users\Ben\ComfyUI-Zluda\start_zluda.py` | Script de lancement custom (désactive cuDNN) |
-| `C:\Users\Ben\ComfyUI-Zluda\models\checkpoints\` | Modèles checkpoint |
+| `C:\Users\Ben\ComfyUI-Zluda\` | Install ComfyUI-ZLUDA (seule install active) |
+| `C:\Users\Ben\ComfyUI-Zluda\start_zluda.py` | Script de lancement custom (desactive cuDNN) |
+| `C:\Users\Ben\ComfyUI-Zluda\launch.bat` | Lancement one-click local |
+| `D:\projets\Boss_Rush\launch_comfyui.bat` | Lancement one-click depuis le projet |
+| `C:\Users\Ben\ComfyUI-Zluda\models\checkpoints\` | Checkpoints |
 | `C:\Users\Ben\ComfyUI-Zluda\models\loras\` | LoRA |
-| `C:\Users\Ben\ComfyUI-Zluda\models\controlnet\` | ControlNet |
+| `C:\Users\Ben\ComfyUI-Zluda\models\upscale_models\` | Upscalers |
+| `C:\Users\Ben\ComfyUI-Zluda\models\clip_vision\` | CLIP Vision (pour IP-Adapter) |
+| `C:\Users\Ben\ComfyUI-Zluda\models\ipadapter\` | IP-Adapter models |
+| `C:\Users\Ben\ComfyUI-Zluda\input\guerrier_ref.png` | Image de reference style (IP-Adapter) |
 | `C:\Users\Ben\ComfyUI-Zluda\zluda\` | Binaires ZLUDA |
+| `D:\projets\Boss_Rush\comfyui_workflows\` | Workflows JSON sauvegardes |
 
 ---
 
@@ -218,10 +239,19 @@ CUDA_MODULE_LOADING=LAZY
 | Date | Action |
 |---|---|
 | 2026-04-14 | Installation ComfyUI classique, test CPU, premier test Tulpainterly XL |
-| 2026-04-14 | Installation ComfyUI-ZLUDA, HIP SDK 6.4.2, variables système |
-| 2026-04-14 | ZLUDA téléchargé manuellement (Windows Defender bloquait) |
-| 2026-04-14 | DLL ZLUDA patchées, nccl.dll récupéré après exclusion Defender |
-| 2026-04-15 | Debug cuDNN : suppression ovum-cudnn-wrapper, création start_zluda.py |
-| 2026-04-15 | Désactivation cuDNN complète (incompatible RDNA2 via ZLUDA) |
-| 2026-04-15 | **ZLUDA fonctionne !** Patch ops.py (MATH only SDP), suppression cudnn toggles, launch.bat créé |
-| 2026-04-15 | Première image GPU générée avec succès (~30-60 sec) |
+| 2026-04-14 | Installation ComfyUI-ZLUDA, HIP SDK 6.4.2, variables systeme |
+| 2026-04-14 | ZLUDA telecharge manuellement (Windows Defender bloquait) |
+| 2026-04-14 | DLL ZLUDA patchees, nccl.dll recupere apres exclusion Defender |
+| 2026-04-15 | Debug cuDNN : suppression ovum-cudnn-wrapper, creation start_zluda.py |
+| 2026-04-15 | Desactivation cuDNN complete (incompatible RDNA2 via ZLUDA) |
+| 2026-04-15 | **ZLUDA fonctionne !** Patch ops.py (MATH only SDP), launch.bat cree |
+| 2026-04-15 | Premiere image GPU generee avec succes (~30-60 sec) |
+| 2026-04-16 | Telechargement 4 LoRA gouache CivitAI (Maly007, V67, Achenbach, Painterly Impasto) |
+| 2026-04-16 | Telechargement 4x-UltraSharp upscaler |
+| 2026-04-16 | Workflow avance v1 : LoRA stack ×4 + upscale |
+| 2026-04-16 | Resultat v1 decu : style trop "comics/digital", pas gouache |
+| 2026-04-16 | Installation IP-Adapter (CLIP-ViT-H + IPAdapter Plus SDXL + custom node) |
+| 2026-04-16 | Workflow v2 avec IP-Adapter style transfer depuis `guerrier_ref.png` |
+| 2026-04-16 | **Constat** : Tulpainterly XL a un bias anime/cel-shaded trop fort qui domine meme avec IP-Adapter solo |
+| 2026-04-16 | Cleanup install : suppression ancienne `C:\Users\Ben\ComfyUI\` (~15 Go), LoRA HF inutilises |
+| 2026-04-16 | Telechargement **Painter's Checkpoint v1.1** (SDXL 1.0 base pur) pour resoudre le bias |

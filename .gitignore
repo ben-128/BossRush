@@ -18,3 +18,8 @@ Thumbs.db
 
 # Claude
 .claude/
+
+# ComfyUI working files (secrets, tokens, throwaway scripts)
+comfyui_workflows/download.txt
+comfyui_workflows/*_secret*
+comfyui_workflows/*_token*
