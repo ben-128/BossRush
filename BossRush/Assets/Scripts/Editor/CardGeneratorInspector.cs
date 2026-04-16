@@ -83,6 +83,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         if (hideBorders) borders.SetActive(false);
 
         generator.GenerateCard(index);
+        ForceUpdateVisualComponents();
         capture.Capture(new ToExport
         {
             finalName = generator.GetCardName(index),
@@ -93,6 +94,14 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
 
         AssetDatabase.Refresh();
         Debug.Log($"Carte exportée : {generator.GetCardName(index)}");
+    }
+
+    private static void ForceUpdateVisualComponents()
+    {
+        foreach (var shadow in Object.FindObjectsOfType<SpriteDropShadow>())
+            shadow.ForceUpdate();
+        foreach (var outline in Object.FindObjectsOfType<SpriteOutline>())
+            outline.ForceUpdate();
     }
 
     private void ExportAll(T generator)
@@ -112,6 +121,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         for (int i = 0; i < count; i++)
         {
             generator.GenerateCard(i);
+            ForceUpdateVisualComponents();
             capture.Capture(new ToExport
             {
                 finalName = generator.GetCardName(i),

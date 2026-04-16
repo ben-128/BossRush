@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Le Porte-Voix
+  m_text: Le Gardien
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1588330614}
@@ -750,15 +750,15 @@ MonoBehaviour:
     distance: {fileID: 21300000, guid: 5b9014a589c978a49b1bc410fb3d6827, type: 3}
     soin: {fileID: 21300000, guid: 91f982a4bd826b744945ac8af3d42553, type: 3}
     magie: {fileID: 21300000, guid: f24a78e92668f0647b399e991ae57b70, type: 3}
-    diplomatie: {fileID: 21300000, guid: fb4f67b90cd7a764ebf9986d8963e538, type: 3}
+    diplomatie: {fileID: 21300000, guid: 0c686d7bfc0c36341bd5fa9cd8ab8c6e, type: 3}
     scaleArmure: 0.1
     scaleDistance: 0.07
     scaleSoin: 0.1
     scaleMagie: 0.09
-    scaleDiplomatie: 0.09
+    scaleDiplomatie: 0.05
     offsetArmure: {x: -0.26, y: 0}
     offsetDistance: {x: -0.26, y: -0.14}
-    offsetSoin: {x: -0.26, y: 0}
+    offsetSoin: {x: -0.26, y: -0.04}
     offsetMagie: {x: -0.26, y: -0.08}
     offsetDiplomatie: {x: -0.26, y: 0}
   competenceColors:
@@ -821,7 +821,7 @@ MonoBehaviour:
   - nom: Aslan
     sprite: {fileID: 21300000, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
     offset: {x: 0, y: -0.25}
-    scale: 0.7
+    scale: 0.75
     titre: Le Porte-Voix
     pv: 5
     competences:
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Aslan
+  m_text: Gao
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: 1248990885}
@@ -1689,12 +1689,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fb4f67b90cd7a764ebf9986d8963e538, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91f982a4bd826b744945ac8af3d42553, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 12.23, y: 12.86}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1709,8 +1709,8 @@ Transform:
   m_GameObject: {fileID: 1171038901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26, y: 0, z: -1}
-  m_LocalScale: {x: 0.09, y: 0.09, z: 1}
+  m_LocalPosition: {x: -0.26, y: -0.04, z: -1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1621819922}
@@ -2216,8 +2216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tous les h\xE9ros peuvent s'\xE9changer autant de cartes qu'ils le souhaitent
-    jusqu'\xE0 la fin du tour."
+  m_text: "Retire toutes les blessures d'un h\xE9ros au choix."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 294818322}
@@ -2362,8 +2361,8 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0.01}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0.01}
+  m_LocalScale: {x: 0.725, y: 0.725, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -2412,7 +2411,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52a6172166028334a98bf92665540e0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2772,7 +2771,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Cinq tribus parlent par sa bouche. \xBB</i>"
+  m_text: "<i>\xAB Tant qu'il respire, personne ne tombe. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -2929,7 +2928,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1692387759}

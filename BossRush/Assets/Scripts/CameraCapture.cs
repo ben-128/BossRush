@@ -36,7 +36,9 @@ public class CameraCapture : MonoBehaviour
         RenderTexture activeRenderTexture = RenderTexture.active;
         RenderTexture.active = Camera.targetTexture;
 
-        // Forcer la mise à jour des outlines avant le rendu
+        // Forcer la mise à jour des ombres et outlines avant le rendu
+        foreach (var shadow in FindObjectsOfType<SpriteDropShadow>())
+            shadow.ForceUpdate();
         foreach (var outline in FindObjectsOfType<SpriteOutline>())
             outline.ForceUpdate();
 
