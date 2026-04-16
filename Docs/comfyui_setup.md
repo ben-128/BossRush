@@ -93,9 +93,12 @@ Script custom qui désactive cuDNN avant le lancement (cuDNN incompatible RDNA2 
 
 ### Lecons apprises sur les checkpoints
 - **Illustrious XL** (Tulpainterly, etc.) : mieux pour les anthro/anime mais tire toujours vers un look cel-shaded meme avec LoRA painterly a 1.0
-- **SDXL 1.0 base** (Painter's Checkpoint) : meilleur pour les styles peinture traditionnelle car pas de contamination anime
-- **Pour ton style gouache narratif (Frazetta/DALL-E like)** : preferer SDXL base
+- **SDXL 1.0 fine-tune** (Painter's Checkpoint) : meilleur pour les styles peinture traditionnelle car pas de contamination anime, mais reste trop "polished/finished"
 - **IP-Adapter** : ne peut pas forcer un modele a sortir d'un style qui est profondement dans ses biases
+- **SDXL en general** : tous les checkpoints SDXL tendent a "finir" et "polir" les images — le look "loose/rough/unfinished" de DALL-E est fondamentalement different
+
+### Probleme fondamental : SDXL vs DALL-E
+Le style cible (gouache narrative, eclaboussures, bords bruts, coups de pinceau visibles, rendu "inacheve") est une **signature DALL-E** specifique. Les modeles SDXL sont entraines sur de l'art fini/poli et "lissent" naturellement les generations meme avec LoRA + IP-Adapter agressif. Aucune combinaison checkpoint+LoRA SDXL testee n'a reussi a reproduire fidelement ce rendu.
 
 Sources :
 - [Tulpainterly XL](https://civitai.com/models/2357432/tulpainterly-xl)
@@ -132,26 +135,76 @@ CheckpointLoader → [LoRA Stack ×4] → IPAdapterUnifiedLoader → IPAdapterAd
 - `UpscaleModelLoader` (4x-UltraSharp) → `ImageUpscaleWithModel` → `ImageScale` (resize 1650x2250) → `SaveImage`
 - Active uniquement pour les generations finales validees (economise temps en iteration)
 
-### Resultats actuels — pas encore satisfaisants
-- **Tulpainterly XL + 4 LoRA + IP-Adapter** : style reste cel-shaded cartoon, pas gouache
-- **Tulpainterly XL + IP-Adapter seul (LoRAs desactives)** : meme probleme, bias anime trop fort
-- **Prochain test** : `Painter's Checkpoint v1.1` (SDXL 1.0 base pur) + IP-Adapter
+### Resultats des tests (chronologique)
+
+| Workflow | Checkpoint | LoRA | IP-Adapter | Resultat |
+|---|---|---|---|---|
+| v1 | Tulpainterly XL | 4 LoRA (0.5-1.0) | Non | Style comics/digital, pas du tout gouache |
+| v1.1 | Tulpainterly XL | 4 LoRA + triggers | Non | Toujours digital art, legere amelioration |
+| v2 | Tulpainterly XL | 4 LoRA (0) desactives | IP-Adapter 1.0 style transfer | Cel-shaded cartoon, bias anime de Tulpainterly domine |
+| v2 | Tulpainterly XL | 0 | IP-Adapter 0.75 linear | Meme probleme, bias anime trop fort |
+| v2 | Painter's Chkpt | 0 | IP-Adapter 0.8 linear | Bon niveau de detail, palette correcte, mais reste "oil painting poli" pas "gouache brut" |
+| v2.1 | Painter's Chkpt | 0 | IP-Adapter 1.0 strong style transfer | Pose + palette OK mais style trop lisse, pas de roughness |
+| v3 img2img | Painter's Chkpt | 0 | IP-Adapter 1.0 + denoise 0.75 | Meilleur resultat, mais toujours pas le rendu gouache DALL-E |
+
+**Conclusion** : aucune combinaison checkpoint SDXL + LoRA + IP-Adapter ne reproduit fidelement le style gouache narratif DALL-E.
 
 ---
 
 ## 5. TODO
 
+### Fait
 - [x] ZLUDA fonctionne sur GPU (2026-04-15)
 - [x] Creer launch.bat one-click
-- [x] Telecharger 4 LoRA gouache/painterly Illustrious (Maly007, V67, Achenbach, Painterly Impasto)
+- [x] Telecharger 4 LoRA gouache/painterly Illustrious
 - [x] Telecharger 4x-UltraSharp upscaler
-- [x] Installer IP-Adapter custom node + models (CLIP-ViT-H + IPAdapter Plus SDXL)
-- [x] Construire workflow avance avec LoRA stack + IP-Adapter style transfer
+- [x] Installer IP-Adapter custom node + models
+- [x] Construire workflow avance v1/v2/v3 avec LoRA stack + IP-Adapter + img2img
 - [x] Cleanup ancienne install ComfyUI (~15 Go)
-- [ ] Tester Painter's Checkpoint (SDXL 1.0 base) pour vrai style oil painting
-- [ ] Comparer resultat final ComfyUI vs DALL-E reference
+- [x] Tester Tulpainterly + LoRA (resultat : bias anime, echec)
+- [x] Tester Painter's Checkpoint + IP-Adapter (resultat : mieux mais trop poli)
+- [x] Tester img2img hybride (resultat : proche mais toujours pas gouache DALL-E)
+
+### Prochaines etapes — trouver le bon style
+- [ ] **Test rapide** : SDXL 1.0 base pur (pas de fine-tune) avec les 4 LoRA existants
+- [ ] **Test Flux.1 Dev** : architecture completement differente, meilleure reproduction de style (besoin DL ~12 Go, tight sur 16 Go VRAM en fp8)
+- [ ] **Test Pony V6 XL** : roi des anthro, bias different d'Illustrious
+- [ ] **Train LoRA custom** : generer 15-20 images DALL-E + entrainer un LoRA dedié style gouache (seule solution garantie, 4-6h)
+- [ ] **Alternative** : garder DALL-E pour les heros, ComfyUI pour les assets secondaires
+
+### Prochaines etapes — fonctionnelles
 - [ ] Installer Impact Pack (face/hand detailer)
 - [ ] Installer ControlNet (controle de pose)
+- [ ] Tester workflow batch (generer les 5 heros en serie)
+
+---
+
+## 5b. Pistes de modeles/architectures a explorer
+
+### Architectures non testees
+| Architecture | Avantage potentiel | Inconvenient | VRAM |
+|---|---|---|---|
+| **Flux.1 Dev** | Meilleure reproduction de style, naturel language prompting | Lent sur AMD, 12+ Go VRAM, LoRA incompatibles avec SDXL | 13-16 Go (fp8 : 10 Go) |
+| **Flux.2** | Encore meilleur que Flux.1 | Tres recent, peu de LoRA | 13-16 Go |
+| **Pony V6 XL** | Roi des anthro/furry, enorme ecosysteme LoRA | 2024, bias specifique | 8+ Go |
+| **SDXL 1.0 base** | Zero bias, accepte tous LoRA SDXL | Pas de specialisation | 8+ Go |
+| **NoobAI XL** | Prompt adherence++, base Illustrious amelioree | Moins d'ecosysteme que Pony | 8+ Go |
+| **Anima** (ComfyOrg 2026) | Natif ComfyUI, recent | Non-photorealiste, peu teste | 8+ Go |
+
+### LoRA CivitAI a tester
+| LoRA | Base | CivitAI ID | Interet |
+|---|---|---|---|
+| **Frank Frazetta Style** (alexsmileface) | Illustrious | 410093 / 1260174 | 4.8K DL, 651 likes, style fantasy book cover classique |
+| **Frank Frazetta Art Style** (xJollyboyx) | Illustrious | recent | Plus recent |
+| **FRAZETTA Oil Style** | Z-Image | 2236977 | Si on passe a Z-Image |
+
+### Approche "LoRA custom" (la plus prometteuse)
+1. Generer 15-20 images DALL-E dans le style gouache exact (heros, monstres, scenes)
+2. Caption avec WD Tagger ou Florence-2
+3. Entrainer un LoRA avec kohya_ss (ou ai-toolkit)
+4. Utiliser avec n'importe quel checkpoint SDXL ou Illustrious
+5. **Temps estime** : 4-6h dont 2-4h d'entrainement GPU
+6. **Difficulte** : kohya_ss sur AMD (ZLUDA) peut etre complique
 
 ---
 
@@ -255,3 +308,9 @@ CUDA_MODULE_LOADING=LAZY
 | 2026-04-16 | **Constat** : Tulpainterly XL a un bias anime/cel-shaded trop fort qui domine meme avec IP-Adapter solo |
 | 2026-04-16 | Cleanup install : suppression ancienne `C:\Users\Ben\ComfyUI\` (~15 Go), LoRA HF inutilises |
 | 2026-04-16 | Telechargement **Painter's Checkpoint v1.1** (SDXL 1.0 base pur) pour resoudre le bias |
+| 2026-04-16 | Workflow v2 : Painter's Checkpoint + IP-Adapter — palette correcte mais rendu trop poli |
+| 2026-04-16 | Workflow v2.1 : strong style transfer @ 1.0 — pose OK, style encore trop lisse |
+| 2026-04-16 | Workflow v3 : img2img hybride (denoise 0.75 depuis guerrier_ref) — plus proche mais toujours digital polish |
+| 2026-04-16 | **Constat** : aucun checkpoint SDXL (Illustrious, Painter's) ne reproduit le rendu gouache loose/brut de DALL-E |
+| 2026-04-16 | Recherche CivitAI : Frank Frazetta Style IL (4.8K DL) trouve comme LoRA prometteur a tester |
+| 2026-04-16 | Pistes identifiees : Flux.1 Dev (style++), Pony V6 (anthro++), SDXL base pur, LoRA custom
