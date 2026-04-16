@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: fb4f67b90cd7a764ebf9986d8963e538
+guid: 0c686d7bfc0c36341bd5fa9cd8ab8c6e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9104136478300700862
-    second: Diploma_0
-  - first:
-      213: 6040297987273658278
-    second: Diploma_1
-  - first:
-      213: 2212033553632398024
-    second: Diploma_2
+      213: -5297165494378659135
+    second: Icone_Diplomate_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -106,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Diploma_0
+      name: Icone_Diplomate_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 219
-        width: 1019
-        height: 581
+        x: 22
+        y: 52
+        width: 1185
+        height: 1160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24ff538db1c97a180800000000000000
-      internalID: -9104136478300700862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diploma_1
-      rect:
-        serializedVersion: 2
-        x: 467
-        y: 791
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6af04fc340373d350800000000000000
-      internalID: 6040297987273658278
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diploma_2
-      rect:
-        serializedVersion: 2
-        x: 1007
-        y: 511
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8ca01831cc8b2be10800000000000000
-      internalID: 2212033553632398024
+      spriteID: 1c28a176c00bc76b0800000000000000
+      internalID: -5297165494378659135
       vertices: []
       indices: 
       edges: []
@@ -185,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Diploma_0: -9104136478300700862
-      Diploma_1: 6040297987273658278
-      Diploma_2: 2212033553632398024
+      Icone_Diplomate_0: -5297165494378659135
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -32,7 +32,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 |-------|-----------|---------------|-----------|-----------|-------|--------|
 | Guerrier | **Nawel** | Jaguar | Le Rempart | The Bulwark | Tribu du Fer | Mapuche (Chili/Argentine) |
 | Mage | **Daraa** | Figure mythique maîtresse des esprits | La Flamme | The Flame | Tribu du Brasier | Afar (Éthiopie/Djibouti) |
-| Diplomate | **Aslan** | Lion | Le Porte-Voix | The Herald | Tribu du Gué | Circassien (Caucase) |
+| Diplomate | **Aslan** | Tur du Caucase | Le Porte-Voix | The Herald | Tribu du Gué | Circassien (Caucase) |
 | Rôdeuse | **Isonash** | Grand chasseur | La Piste | The Tracker | Tribu de la Lisière | Aïnou (Nord du Japon) |
 | Soigneur | **Gao** | Nom San traditionnel | Le Gardien | The Warden | Tribu du Bosquet | San (Kalahari, Afrique australe) |
 
@@ -55,11 +55,11 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - Voir [hero_killa.md](hero_killa.md) pour la fiche complète
 
 ### Aslan — Le Porte-Voix / The Herald
-- **Animal :** Lion anthropomorphe — crinière épaisse et majestueuse, pelage doré
+- **Animal :** Tur du Caucase anthropomorphe — pelage brun laineux, grandes cornes recourbées striées
 - **Tribu du Gué** : ceux qui unissent les tribus, médiateurs
-- **Ethnie :** Circassien — peuple du Caucase, culture du code d'honneur (Adyghe Khabze), respect, parole donnée, médiation
+- **Ethnie :** Circassien — peuple du Caucase, culture du code d'honneur (Adyghe Khabze), respect, parole donnée, médiation. Le tur est le bouquetin endémique des montagnes du Caucase
 - Rôle : coordination, échanges, soutien tactique
-- Nom signifie "lion" en circassien — autorité naturelle, noblesse
+- Nom signifie "lion" en circassien — conservé pour l'autorité naturelle
 - Couleur dominante : **brun / or**
 - Voir [hero_aslan.md](hero_aslan.md) pour la fiche complète
 

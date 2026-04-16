@@ -156,7 +156,7 @@ Chaque heros a sa couleur dominante qui teinte ~70% de l'image (fond, ombres, ar
 |---|---|---|
 | Nawel | Jaguar | Nom signifie "jaguar" en mapuche, animal sacre |
 | Daraa | Hyene | Animal emblematique des terres arides Afar, lie aux esprits |
-| Aslan | Lion | Nom signifie "lion" en circassien, autorite naturelle |
+| Aslan | Tur du Caucase | Nom signifie "lion" en circassien, tur = bouquetin endemique du Caucase |
 | Isonash | Ours brun | Kimun kamuy (esprit de l'ours) sacre chez les Ainou |
 | Gao | Suricate | Animal du Kalahari, vie communautaire, petit et agile |
 
@@ -164,7 +164,7 @@ Chaque heros a sa couleur dominante qui teinte ~70% de l'image (fond, ombres, ar
 
 **Daraa (Flamme)** — Hyene anthropomorphe, tribu Afar. Mage. Pelage court brun-gris, criniere herissee couleur braise. Oreilles pointues expressives. Coiffe avec plumes couleur braise. Robes legeres. Baton/staff avec cristal. Runes de feu.
 
-**Aslan (Porte-Voix)** — Lion anthropomorphe, tribu Circassienne. Diplomate. Criniere epaisse et majestueuse, pelage dore. Cape en cuir riche. Parchemin scelle. Dague cachee.
+**Aslan (Porte-Voix)** — Tur du Caucase anthropomorphe, tribu Circassienne. Diplomate. Pelage brun laineux, grandes cornes recourbees. Cherkeska circassien, papakha, kinjal. Parchemin roule. Gants blancs. Peinture de guerre sienna.
 
 **Isonash (Piste)** — Ourse brune anthropomorphe, tribu Ainou. Rodeuse. Fourrure brun fonce, museau fin et attentif. Capuche verte. Arc en bois. Fleches avec pointes cristal. Camouflage ecorce/feuilles.
 
@@ -301,17 +301,21 @@ Portrait orientation, 2:3 aspect ratio.
 ```
 Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
 
-Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients.
+Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. UNFINISHED EDGES — the painting fades to raw unpainted canvas/board at the borders, with rough brushstroke edges where the paint stops. The corners and edges show bare textured illustration board with no paint. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients. The face is painted with LESS detail than the clothing and environment — the woolly fur, horns, and beard are rough impasto texture, the eyes are simple dabs, the muzzle is suggested in a few strokes. The cherkeska and background should have MORE visible detail than the face.
 
-COLOR DIRECTION: The dominant color theme is warm sienna brown and gold. 70% sienna/gold tones, 30% cool blue-grey shadow accents. Golden mane, sienna cape, warm-toned architecture. Cool blue-grey shadows provide depth.
+COLOR DIRECTION: The dominant color theme is warm sienna brown and gold. 70% sienna/gold tones, 30% cool blue-grey shadow accents. Dark brown woolly coat, massive curved horns, deep red cherkeska, warm-toned stone. Cool blue-grey shadows provide depth.
 
-SUBJECT: Anthropomorphic lion diplomat — majestic, commanding presence. Thick luxurious golden mane, tawny fur. Heroic proportions (7-8 heads tall), tall, proud bearing. NOT stocky, NOT chibi. Circassian-inspired noble: rich leather cape with ornate clasps, light ceremonial armor underneath. Sealed scroll/parchment held forward in one hand. Hidden dagger at belt. Natural warm amber iris eyes, NOT glowing.
+SUBJECT: Anthropomorphic CAUCASIAN TUR diplomat — a mountain goat-like creature standing upright on two legs. Thick dark brown woolly coat, powerful stocky neck. LARGE HEAD — proportionally bigger than realistic, taking up more space in the frame to show expression. Two massive CURVED RIBBED HORNS sweeping back from his head — the tur's signature feature, bold and iconic. Short beard under the chin. WARM SIENNA WAR PAINT — bold geometric lines painted across the bridge of his nose and cheekbones in rich brown-sienna pigment, ritual markings of the Herald's rank. Heroic proportions (7-8 heads tall), tall, proud bearing. NOT stocky, NOT chibi. CIRCASSIAN NOBLE CLOTHING (NOT generic fantasy): a long DEEP RED CHERKESKA coat — the red reserved for Circassian nobility. Fitted at the waist with a gold ornamental belt, flared skirt below. Clean chest — NO cartridges, NO ammunition, NO pouches on the torso. A BASHLIK wool hood draped around his neck like a scarf, trailing ends whipping in the wind. NO hat — his horns are fully visible. A curved KINJAL dagger at his belt. Both hands wear bright WHITE fitted leather GLOVES — stark white against his tawny fur, clearly visible as gloves NOT skin. RIGHT hand raised HIGH, gripping a rolled PARCHMENT — a simple closed scroll of aged paper, NO seal, NO ribbon. Just a rolled document held high like a declaration. Natural warm amber iris eyes, NOT glowing.
 
-POSE: Striding forward with authority, one hand raised holding the sealed scroll as if presenting terms. Cape billowing behind. Strong posture — shoulders back, chin slightly raised. Diagonal composition from trailing cape to outstretched scroll.
+EXPRESSION: Mid-speech gravitas — mouth open in the middle of a powerful word, chin lifted. Eyes sharp, INTELLIGENT, knowing — the gaze of someone who has already seen every outcome and chosen the best one. A deep calm wisdom behind the intensity. NOT roaring, NOT screaming — ORATING. Think Gandalf addressing kings — authority born from intelligence, not from force.
 
-MOVEMENT: Cape sweeping dramatically in wind. Mane flowing. Fine dust from his confident stride. A few parchment fragments or leaves caught in the wind. Movement from the STRIDE and the cape, not from effects. NO debris, NO shockwaves.
+POSE: Standing on a rocky promontory, RIGHT arm raised HIGH above his head gripping the rolled parchment, body leaning FORWARD into the wind toward an unseen army below. LEFT hand gripping the kinjal at his belt. Weight on his front foot, back foot bracing against the rock. Cherkeska flaring dramatically behind him in the wind. Strong upward diagonal — from the rock base through his leaning body to the raised scroll at the apex. He is ABOVE the viewer, looking down and outward — a leader addressing his people from a height.
 
-ENVIRONMENT: Wide shot, full body visible head to toe. Ancient stone architecture (columns, arches) tinted in warm sienna. Torch light. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Strong warm golden torchlight from one side, cool blue-grey shadows on the other.
+MOVEMENT: Maximum wind energy. His thick woolly fur and beard whip in the gale. The cherkeska skirt flares wide behind him like a flag. Bashlik trailing ends streaming horizontally. Dust and small stones kicked up from the promontory edge. Parchment fragments and dry leaves caught in the wind swirling around him. The parchment catches the golden light against the sky. His fur ripples against the wind direction. The movement is ELEMENTAL — wind and voice, not combat.
+
+ENVIRONMENT & COMPOSITION: WIDE SHOT — full body visible head to toe. Aslan takes up the TOP 50% of the frame ONLY. The BOTTOM 50% is environment: rocky cliff face dropping away below the promontory, distant Caucasus mountain landscape, stone ruins, atmospheric haze — a vast panoramic vista below him. Character ~50% of frame, NOT more. He is SMALL against the landscape, standing on a high point. Framed against the sky — warm golden sunset light from one side, cool blue-grey storm clouds on the other. This is a LANDSCAPE with a character in it, not a close-up portrait.
+
+FINAL COMPOSITION RULE: Aslan's full body fits in the TOP HALF. His feet stand on the promontory at the 50% line. The BOTTOM HALF is purely landscape — mountains, ruins, depth. DO NOT zoom in on the character. DO NOT crop at the waist. Full body, wide framing.
 
 Portrait orientation, 2:3 aspect ratio.
 ```
