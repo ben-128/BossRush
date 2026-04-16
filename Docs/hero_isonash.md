@@ -11,16 +11,19 @@
 
 ## Description visuelle
 
-- Ourse brune anthropomorphe, forte mais agile, posture alerte
+- Ourse brune anthropomorphe femelle — silhouette féminine distincte : épaules moins larges, taille marquée, membres longs et gracieux
 - Fourrure brun foncé, museau fin et attentif
-- Capuche verte avec camouflage écorce/feuilles
+- **Attush** (robe traditionnelle aïnoue en écorce d'orme tissée) teint vert forêt, ouvert devant pour le mouvement
+- Broderies géométriques aïnoues protectrices sur tous les bords — spirales, S-curves, losanges, motifs "cornés" en crème et teal
+- **Matanpushi** (bandeau brodé aïnou) sur le front, partiellement caché sous la capuche
+- **Tamasay** (long collier de perles de verre avec médaillon) au poitrail
+- **Ninkari** (grandes boucles d'oreilles en laiton) 
 - Arc long en bois, flèches à pointe cristal
-- Broderies aïnou sur les bords du manteau
 - Yeux ambre foncé naturels, PAS lumineux
 
 ## Pose de référence
 
-En pleine traque — accroupie, un pied en avant, poids bas. Arc prêt à son côté. Tête tournée, oreilles dressées, aux aguets. Tension et vigilance, pas action explosive.
+Descente le long d'un tronc géant — glisse à toute vitesse, une main griffant l'écorce, l'autre bras libre. Arc sur le dos. Cape et vêtements soufflés vers le haut par la chute. Éclats d'écorce, griffures verticales sur le tronc, traits de mouvement descendants.
 
 ## Couleur dominante
 
@@ -47,17 +50,21 @@ Deep emerald green, dark forest brown, charcoal black, warm cream, deep teal, co
 ```
 Generate this image with DALL-E. Portrait vertical 2:3 format. High resolution PNG.
 
-Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients.
+Narrative gouache painting on textured illustration board. Thick opaque brushstrokes clearly visible — loose, confident, varied in direction and pressure. NOT uniform, NOT smooth, NOT digital. Matte finish. Paint applied with palette knife in some areas for thick impasto texture. Visible paper grain in thin wash areas. Drips and paint splatter in margins. Style of classic hand-painted fantasy book cover illustration from the 1980s-90s. Raw, expressive, energetic brushwork. NOT digital painting, NOT airbrushed, NOT photorealistic, NOT concept art, NOT smooth gradients. The face is painted with the same loose impasto brushwork as the rest of the body — NOT smoother, NOT more polished, NOT more refined than the limbs or background.
 
-COLOR DIRECTION: The dominant color theme is deep emerald green. 70% emerald green tones, 30% warm amber light accents. Green hood, green foliage, green-toned shadows. Warm amber light filtering through canopy provides contrast.
+COLOR DIRECTION: The dominant color theme is deep emerald green. The background is a BRIGHT OPEN forest — warm golden-green canopy light, soft amber haze between the trunks, visible sky gaps of warm cream-gold. NOT a dark cave, NOT near-black. Think sunlit old-growth forest with shafts of warm light. The trunk she slides on is PALE — light grey birch-like bark, almost white. Against this bright warm background, Isonash's dark brown fur and deep emerald attush robe stand out clearly. Strong warm amber rim light from a canopy gap behind her outlines her silhouette. 40% warm bright forest background, 30% emerald green on character, 20% pale trunk, 10% amber rim light.
 
-SUBJECT: Anthropomorphic brown bear ranger (female) — strong but agile, alert posture. Dark brown fur, attentive refined muzzle. Heroic proportions (7-8 heads tall), tall and lean. NOT stocky, NOT chibi, NOT cute. Ainu-inspired ranger: green hooded cloak with bark and leaf camouflage. Wooden longbow in one hand, arrow nocked but not drawn. Crystal-tipped arrows in quiver. Embroidered patterns on cloak edges. Natural dark amber iris eyes, NOT glowing.
+SUBJECT: Anthropomorphic brown bear — clearly FEMALE, unmistakably feminine. Narrow waist cinched by a woven belt, wider hips, long elegant limbs, leaner and more slender than a male bear. Graceful S-curve posture even while sliding down the trunk — spine arched, one hip slightly cocked. Think female gymnast or dancer, not wrestler. Dark brown fur, REFINED NARROW MUZZLE with softer rounder features than a male bear — smaller nose, larger expressive eyes, more delicate jaw line. Long eyelashes visible. Heroic proportions (7-8 heads tall), tall and lean. NOT stocky, NOT chibi, NOT cute, NOT masculine, NOT bulky, NOT square-jawed. AINU TRADITIONAL CLOTHING (NOT generic fantasy): an ATTUSH robe — woven elm-bark textile with a rough organic weave texture, dyed deep forest green, open at the front for movement. Bold geometric Ainu embroidery along all edges and hems — protective spiral patterns, S-curves, lozenges, and angular "thorned" designs in cream and dark teal thread. A MATANPUSHI (embroidered headband) across her forehead with dense geometric needlework, partially hidden under her hood. A TAMASAY (long beaded necklace) with large glass beads hanging to her chest, swinging from the leap. Large brass NINKARI hoop earrings catching the light. Crystal-tipped arrows in a quiver on her back. Natural dark amber iris eyes, NOT glowing.
 
-POSE: Mid-stalk — crouching slightly, moving through dense forest. One foot forward, weight low. Bow held ready at her side. Head turned, ears perked, scanning. Strong diagonal from the bow line to her gaze direction. Tension and readiness, not action.
+EXPRESSION: Confident hunter's smirk — a visible SMILE, one corner of her mouth lifted higher than the other. Eyes open, looking DOWN at prey below. She's enjoying this. The hunt is her element and she knows she's the best at it. NOT serious, NOT angry — AMUSED. Think Aloy spotting a machine she's about to take down.
 
-MOVEMENT: Cloak trailing and catching on branches. Leaves disturbed by her passage floating in the air. Ferns bending where she steps. Subtle forest atmosphere — mist, dappled light. Movement is QUIET — suggested by displaced foliage, not explosive. NO debris, NO shockwaves.
+POSE: SLIDING DOWN a massive vertical tree trunk — body in strong diagonal, feet bracing against the bark, ONE hand clawing into the trunk to control the descent, the other arm trailing free behind her. NO bow visible — only the quiver of arrows on her back. Her body follows the trunk's vertical line, angled slightly outward, weight committed to the slide. Strong top-to-bottom diagonal composition. She is DESCENDING — gravity pulls her DOWN. NOT standing, NOT posing, NOT static.
 
-ENVIRONMENT: Wide shot, full body visible head to toe. Dense ancient forest tinted deep emerald green. Massive tree trunks, filtered amber light from above. Atmospheric, suggested, not detailed. Character ~60-70% of frame. Warm amber light from canopy gaps, cool green shadows.
+MOVEMENT: Everything in the image screams DOWNWARD MOTION. Her claws have left long VERTICAL SCRATCH MARKS gouged into the bark ABOVE her — four parallel lines showing her descent path like speed lines. A cloud of BARK DUST and wood chips sprays outward from her gripping hand. Her cape and attush robe are BLOWN STRAIGHT UP above her head — fabric stretched vertical by the rush of air, flapping violently upward. Tamasay necklace lifted upward, beads floating. Ninkari earrings pulled up. ALL her fur is blown upward against gravity — every strand points UP. Dozens of loose LEAVES and moss chunks ripped from the trunk are swirling ABOVE her in a debris trail, fanning outward. Fine dust and bark particles fill the air around her in a haze. The forest floor below her is still FAR — she has a long way to fall. The movement is SILENT BUT FAST — a predator dropping on prey, no warning.
+
+ENVIRONMENT & COMPOSITION: HIGH CHARACTER FRAMING. Isonash's HEAD sits in the TOP 15-20% of the frame. She is sliding down the trunk from the UPPER portion of the image — her gripping hand is near the top of the frame, her feet are around the 50% line. The BOTTOM 40% shows the trunk continuing downward into dark forest floor — roots, ferns, deep shadow. The trunk she slides on runs from upper-right to lower-left, dominating the frame. Dense ancient forest tinted deep emerald green. Amber light filtering through canopy above. Atmospheric, suggested, not detailed. Character ~60-70% of frame.
+
+FINAL COMPOSITION RULE: Isonash's HEAD in the TOP 20%. Her body occupies the UPPER HALF of the frame. The BOTTOM 40% is empty trunk and dark forest floor. She is HIGH on the tree, not near the ground. This is NOT a centered portrait.
 
 Portrait orientation, 2:3 aspect ratio.
 ```

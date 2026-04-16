@@ -39,15 +39,16 @@ public class SpriteDropShadow : MonoBehaviour
     private SpriteRenderer sr;
     private GameObject shadowGO;
     private SpriteRenderer shadowSR;
-    private MaterialPropertyBlock mpb;
+    private Material shadowMat;
 
     // Cache centroïde par sprite (clé: instanceID) pour éviter de relire la texture chaque frame.
     private static readonly Dictionary<int, Vector2> centroidCache = new Dictionary<int, Vector2>();
 
+    private static Shader silhouetteShader;
+
     private void OnEnable()
     {
         sr = GetComponent<SpriteRenderer>();
-        mpb = new MaterialPropertyBlock();
         Rebuild();
     }
 
@@ -77,9 +78,9 @@ public class SpriteDropShadow : MonoBehaviour
 
         ApplyShadowTransform();
 
-        // Couleur via PropertyBlock (pas de material instance)
-        mpb.SetColor("_Color", shadowColor);
-        shadowSR.SetPropertyBlock(mpb);
+        // Couleur via material (SpriteSilhouette : remplace tous les pixels par shadowColor)
+        if (shadowMat != null)
+            shadowMat.SetColor("_Color", shadowColor);
 
         // Sorting
         shadowSR.sortingLayerID = sr.sortingLayerID;
@@ -202,6 +203,10 @@ public class SpriteDropShadow : MonoBehaviour
 
         DestroyShadow();
 
+        // Charger le shader SpriteSilhouette (cache statique).
+        if (silhouetteShader == null)
+            silhouetteShader = Shader.Find("Custom/SpriteSilhouette");
+
         shadowGO = new GameObject("_DropShadow");
         shadowGO.hideFlags = HideFlags.DontSave;
         shadowGO.transform.SetParent(transform, false);
@@ -214,12 +219,19 @@ public class SpriteDropShadow : MonoBehaviour
         shadowSR.flipX = sr.flipX;
         shadowSR.flipY = sr.flipY;
 
-        ApplyShadowTransform();
+        // Material silhouette : remplace tous les pixels opaques par shadowColor.
+        if (silhouetteShader != null)
+        {
+            shadowMat = new Material(silhouetteShader);
+            shadowMat.hideFlags = HideFlags.DontSave;
+            shadowMat.SetColor("_Color", shadowColor);
+            shadowMat.SetFloat("_AlphaCutoff", 0.01f);
+            shadowMat.SetFloat("_Expand", 0f);
+            shadowMat.SetFloat("_Erode", 0f);
+            shadowSR.material = shadowMat;
+        }
 
-        // Teinter en noir semi-transparent via PropertyBlock
-        mpb = new MaterialPropertyBlock();
-        mpb.SetColor("_Color", shadowColor);
-        shadowSR.SetPropertyBlock(mpb);
+        ApplyShadowTransform();
     }
 
     /// <summary>
@@ -244,6 +256,14 @@ public class SpriteDropShadow : MonoBehaviour
 
     private void DestroyShadow()
     {
+        if (shadowMat != null)
+        {
+            if (Application.isPlaying)
+                Destroy(shadowMat);
+            else
+                DestroyImmediate(shadowMat);
+            shadowMat = null;
+        }
         if (shadowGO != null)
         {
             if (Application.isPlaying)

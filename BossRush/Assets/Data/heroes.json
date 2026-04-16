@@ -29,7 +29,7 @@
       "titre": "Le Rempart",
       "vie": 7,
       "competences": ["armure"],
-      "capacite_speciale": "Annulez toutes les blessures que devrait subir le héros ce tour-ci.",
+      "capacite_speciale": "Ce héros ne subit aucune blessures jusqu'à la fin du tour.",
       "citation": "« Il encaisse. Encore. Et encore. »"
     },
     {
@@ -38,7 +38,7 @@
       "titre": "La Piste",
       "vie": 5,
       "competences": ["distance"],
-      "capacite_speciale": "Joue immédiatement 2 cartes Action de sa main.",
+      "capacite_speciale": "Jouez immédiatement 2 cartes Action de votre main.",
       "citation": "« On voit la première flèche. Jamais les suivantes. »"
     },
     {
