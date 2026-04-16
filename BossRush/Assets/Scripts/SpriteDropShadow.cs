@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -23,16 +24,25 @@ public class SpriteDropShadow : MonoBehaviour
     public float offsetY = -0.015f;
 
     [Tooltip("Échelle de l'ombre par rapport à l'icône (1.05 = légèrement plus grande)")]
-    [Range(1f, 1.2f)]
+    [Range(1f, 2f)]
     public float shadowScale = 1.03f;
 
     [Tooltip("Sorting order offset (négatif = derrière le sprite parent)")]
     public int sortingOrderOffset = -1;
 
+    [Tooltip("Si activé, calcule le centroïde alpha du sprite pour centrer le shadowScale sur le contenu visible (pas sur le pivot). Nécessite Read/Write sur la texture sinon fallback bounds.")]
+    public bool centerOnAlphaCentroid = true;
+
+    [Tooltip("Log en console le centroïde calculé et si c'est un fallback bounds.")]
+    public bool debugLog = false;
+
     private SpriteRenderer sr;
     private GameObject shadowGO;
     private SpriteRenderer shadowSR;
     private MaterialPropertyBlock mpb;
+
+    // Cache centroïde par sprite (clé: instanceID) pour éviter de relire la texture chaque frame.
+    private static readonly Dictionary<int, Vector2> centroidCache = new Dictionary<int, Vector2>();
 
     private void OnEnable()
     {
@@ -65,9 +75,7 @@ public class SpriteDropShadow : MonoBehaviour
         if (shadowSR.sprite != sr.sprite)
             shadowSR.sprite = sr.sprite;
 
-        // Position
-        shadowGO.transform.localPosition = new Vector3(offsetX, offsetY, 0.001f);
-        shadowGO.transform.localScale = new Vector3(shadowScale, shadowScale, 1f);
+        ApplyShadowTransform();
 
         // Couleur via PropertyBlock (pas de material instance)
         mpb.SetColor("_Color", shadowColor);
@@ -76,6 +84,116 @@ public class SpriteDropShadow : MonoBehaviour
         // Sorting
         shadowSR.sortingLayerID = sr.sortingLayerID;
         shadowSR.sortingOrder = sr.sortingOrder + sortingOrderOffset;
+    }
+
+    /// <summary>
+    /// Positionne et scale l'ombre en compensant pour que shadowScale soit centré
+    /// sur le contenu visible du sprite (centroïde alpha), pas sur le pivot.
+    /// </summary>
+    private void ApplyShadowTransform()
+    {
+        Vector2 center = GetVisualCenterLocal(sr.sprite);
+        // Quand on scale le child par s autour de son origine (= pivot du sprite),
+        // un point p passe de p à p*s. Pour que le point "visual center" reste fixe,
+        // on translate le child de center * (1 - s).
+        Vector2 comp = center * (1f - shadowScale);
+        shadowGO.transform.localPosition = new Vector3(offsetX + comp.x, offsetY + comp.y, 0.001f);
+        shadowGO.transform.localScale = new Vector3(shadowScale, shadowScale, 1f);
+    }
+
+    /// <summary>
+    /// Retourne le centre visuel du sprite en unités locales (relatif au pivot).
+    /// Utilise le centroïde alpha si la texture est lisible, sinon bounds.center.
+    /// </summary>
+    private Vector2 GetVisualCenterLocal(Sprite sprite)
+    {
+        if (sprite == null) return Vector2.zero;
+
+        if (centerOnAlphaCentroid)
+        {
+            int key = sprite.GetInstanceID();
+            if (centroidCache.TryGetValue(key, out var cached))
+                return cached;
+
+            if (TryComputeAlphaCentroid(sprite, out var centroid))
+            {
+                centroidCache[key] = centroid;
+                if (debugLog) Debug.Log($"[SpriteDropShadow] {name}: alpha centroid OK pour '{sprite.name}' = {centroid} (tex {sprite.texture?.name}, readable={sprite.texture?.isReadable})", this);
+                return centroid;
+            }
+            // Fallback bounds — NE PAS cacher pour pouvoir retenter quand la texture devient lisible.
+            if (debugLog) Debug.LogWarning($"[SpriteDropShadow] {name}: fallback bounds pour '{sprite.name}' (tex {sprite.texture?.name}, readable={sprite.texture?.isReadable}) → l'ombre risque d'être décalée si le pivot n'est pas centré sur le contenu visible", this);
+        }
+        return sprite.bounds.center;
+    }
+
+    [ContextMenu("Clear centroid cache & rebuild")]
+    private void ContextClearAndRebuild()
+    {
+        ClearCentroidCache();
+        Rebuild();
+    }
+
+    /// <summary>
+    /// Calcule le centroïde pondéré par l'alpha des pixels opaques du sprite,
+    /// en unités locales relatives au pivot.
+    /// </summary>
+    private static bool TryComputeAlphaCentroid(Sprite sprite, out Vector2 localCenter)
+    {
+        localCenter = Vector2.zero;
+        Texture2D tex = sprite.texture;
+        if (tex == null) return false;
+        if (!tex.isReadable) return false;
+
+        // GetPixels peut lever si la texture n'est pas en Read/Write.
+        Color[] pixels;
+        try
+        {
+            Rect tr = sprite.textureRect;
+            int x = Mathf.FloorToInt(tr.x);
+            int y = Mathf.FloorToInt(tr.y);
+            int w = Mathf.FloorToInt(tr.width);
+            int h = Mathf.FloorToInt(tr.height);
+            if (w <= 0 || h <= 0) return false;
+            pixels = tex.GetPixels(x, y, w, h);
+
+            double sumW = 0.0;
+            double sumX = 0.0;
+            double sumY = 0.0;
+            // Sous-échantillonnage pour éviter les surcoûts sur grosses textures.
+            int step = Mathf.Max(1, Mathf.Min(w, h) / 128);
+            for (int j = 0; j < h; j += step)
+            {
+                int row = j * w;
+                for (int i = 0; i < w; i += step)
+                {
+                    float a = pixels[row + i].a;
+                    if (a <= 0.01f) continue;
+                    sumW += a;
+                    sumX += a * i;
+                    sumY += a * j;
+                }
+            }
+            if (sumW <= 0.0) return false;
+
+            // Centroïde en pixels locaux au textureRect.
+            float cx = (float)(sumX / sumW);
+            float cy = (float)(sumY / sumW);
+
+            // Pivot en pixels locaux au textureRect.
+            Vector2 pivotPx = sprite.pivot; // depuis bottom-left du rect
+
+            // Conversion en unités locales : (centroïde - pivot) / PPU
+            float ppu = sprite.pixelsPerUnit;
+            if (ppu <= 0f) ppu = 100f;
+            localCenter = new Vector2((cx - pivotPx.x) / ppu, (cy - pivotPx.y) / ppu);
+            return true;
+        }
+        catch (System.Exception)
+        {
+            // Texture pas en Read/Write ou inaccessible, fallback.
+            return false;
+        }
     }
 
     private void Rebuild()
@@ -87,9 +205,7 @@ public class SpriteDropShadow : MonoBehaviour
         shadowGO = new GameObject("_DropShadow");
         shadowGO.hideFlags = HideFlags.DontSave;
         shadowGO.transform.SetParent(transform, false);
-        shadowGO.transform.localPosition = new Vector3(offsetX, offsetY, 0.001f);
         shadowGO.transform.localRotation = Quaternion.identity;
-        shadowGO.transform.localScale = new Vector3(shadowScale, shadowScale, 1f);
 
         shadowSR = shadowGO.AddComponent<SpriteRenderer>();
         shadowSR.sprite = sr.sprite;
@@ -97,6 +213,8 @@ public class SpriteDropShadow : MonoBehaviour
         shadowSR.sortingOrder = sr.sortingOrder + sortingOrderOffset;
         shadowSR.flipX = sr.flipX;
         shadowSR.flipY = sr.flipY;
+
+        ApplyShadowTransform();
 
         // Teinter en noir semi-transparent via PropertyBlock
         mpb = new MaterialPropertyBlock();
@@ -114,6 +232,14 @@ public class SpriteDropShadow : MonoBehaviour
             Rebuild();
         else
             LateUpdate();
+    }
+
+    /// <summary>
+    /// Invalide le cache de centroïdes. À appeler si une texture change en cours d'exécution.
+    /// </summary>
+    public static void ClearCentroidCache()
+    {
+        centroidCache.Clear();
     }
 
     private void DestroyShadow()
