@@ -14,11 +14,10 @@ Humanoïde géant horriblement déformé. Tête retournée à 180° sur le corps
 
 ## Stats
 
-- **PV :** 8 + 4 par joueur (16/20/24/28)
-- **Dégâts :** 1
-- **Invocations :** 2
+- **PV :** 👤 × ❤7
+- **Fin de tour :** 🐾 → 🃏
 - **Passif :** *Difforme et tenace* — Le boss ignore le 1er dégât de chaque attaque contre lui (min 0).
-- **Action spéciale :** L'Invunche déforme le héros actif : il ne pourra jouer aucune carte Action à son prochain tour.
+- **⚡ Actif :** Difformité : le héros actif ne peut jouer aucune carte Action à son prochain tour.
 
 ## Sous-titre
 

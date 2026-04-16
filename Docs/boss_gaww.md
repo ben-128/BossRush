@@ -14,11 +14,10 @@ Esprit sans forme fixe. Une masse géante d'ombre et de fumée noire qui flotte 
 
 ## Stats
 
-- **PV :** 7 + 4 par joueur (15/19/23/27)
-- **Dégâts :** 2
-- **Invocations :** 1
-- **Passif :** *Possession* — Au début de chaque tour, le héros actif révèle la première carte de la pile Arsenal et la défausse.
-- **Action spéciale :** Le Gaww prend possession : le héros actif défausse sa main, puis pioche 2 cartes.
+- **PV :** 👤 × ❤8
+- **Fin de tour :** 🃏 → ⚡
+- **Passif :** *Murmures* — Quand un héros pioche des cartes Chasse, il en pioche 1 de moins (min 1).
+- **⚡ Actif :** Possession : le héros actif défausse sa main, puis pioche 2 cartes.
 
 ## Sous-titre
 

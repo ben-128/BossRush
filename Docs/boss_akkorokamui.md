@@ -14,11 +14,10 @@ Pieuvre colossale d'un rouge vif éclatant, presque luminescent. Huit tentacules
 
 ## Stats
 
-- **PV :** 8 + 5 par joueur (18/23/28/33)
-- **Dégâts :** 2
-- **Invocations :** 1
-- **Passif :** *Tentacules multiples* — Quand le boss attaque, il attaque 2 héros au lieu d'1 (le héros actif + 1 au choix).
-- **Action spéciale :** Saisie : un héros au choix défausse 1 Objet posé devant lui.
+- **PV :** 👤 × ❤6
+- **Fin de tour :** 🃏 → ⚔
+- **Passif :** *Tentacules* — Quand un héros joue une carte Action, il défausse la carte du dessus de la pile Chasse.
+- **⚡ Actif :** Saisie : le héros actif défausse 1 Objet posé devant lui.
 
 ## Sous-titre
 

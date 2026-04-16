@@ -14,11 +14,10 @@ Géant humanoïde immense. Peau rouge vif éclatante, presque luminescente. Long
 
 ## Stats
 
-- **PV :** 12 + 5 par joueur (22/27/32/37)
-- **Dégâts :** 3
-- **Invocations :** 2
-- **Passif :** *Insaisissable* — Annule la 1ère attaque jouée contre le boss à chaque tour.
-- **Action spéciale :** L'eau se retire : tous les héros subissent 2 dégâts et le boss invoque 2 monstres.
+- **PV :** 👤 × ❤9
+- **Fin de tour :** 🃏 → 🐾 → ⚔
+- **Passif :** *Insaisissable* — Le boss ne peut pas recevoir plus de 3 dégâts par tour.
+- **⚡ Actif :** Reflux : 🐾 dans la file de chaque héros + ⚔ dans la file du héros actif.
 
 ## Sous-titre
 

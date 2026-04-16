@@ -28,10 +28,10 @@ Avant de commencer, voici les termes utilisés dans le jeu.
 | **Carte Chasse — Action** | Carte jouée depuis votre main. Attaque ou effet immédiat (soin, pioche…). Défaussée après utilisation. |
 | **Carte Chasse — Objet** | Carte posée devant votre héros. Soit un effet immédiat, soit un renfort qui booste une attaque jouée en même temps. |
 | **Carte Monstre** | Un ennemi qui rejoint la file d'un héros. Indique sa vie, ses dégâts et son éventuel effet spécial. |
-| **Carte Menace — Assaut** | Le Colosse agit : il attaque, invoque des monstres ou déclenche son action spéciale. |
+| **Carte Menace — Assaut** | Le Colosse agit : il attaque, invoque des monstres (🐾), donne un ordre d'attaque (⚔), ou déclenche son actif (⚡). |
 | **Carte Menace — Événement** | Une situation survient. Le héros actif choisit entre les options proposées (risque/récompense). |
 | **Carte Destin** | Événement narratif ponctuel qui modifie le cours du combat. Piochée via divers effets (cartes Menace principalement, mais aussi certaines cartes Chasse). Résolue immédiatement puis défaussée. |
-| **Fiche Colosse** | Fiche de référence du boss choisi : dégâts, nombre d'invocations, action spéciale, passif. |
+| **Fiche Colosse** | Fiche de référence du boss choisi : séquence de fin de tour, passif et actif. |
 
 ### Mots-clés
 
@@ -54,6 +54,17 @@ Avant de commencer, voici les termes utilisés dans le jeu.
 | **Défausse associée** | Chaque type de carte possède sa propre défausse, placée à côté de sa pile : Chasse, Menace, Monstres, Destins. |
 | **Pile vide** | Si un effet demande de piocher une carte d'un type donné et que sa pile est vide, mélangez sa défausse associée pour former une nouvelle pioche, puis continuez l'effet. |
 
+### Icônes d'action
+
+Ces icônes apparaissent sur la fiche du Colosse (séquence de fin de tour) et dans les descriptions de certaines cartes Menace, Destin et Chasse. Elles forment un vocabulaire visuel unifié pour tout le jeu.
+
+| Icône | Nom | Effet |
+|---|---|---|
+| 🃏 | **Menace** | Piocher 1 carte Menace et la résoudre immédiatement. |
+| 🐾 | **Invocation** | Piocher 1 carte Monstre et la placer au fond de la file du héros actif. |
+| ⚔ | **Ordre d'attaque** | Le monstre en tête de la file du héros actif attaque immédiatement ce héros. S'il n'y a aucun monstre, aucun effet. |
+| ⚡ | **Actif du Colosse** | Déclencher l'effet actif indiqué sur la fiche du Colosse. |
+
 ---
 
 ## Contenu du jeu
@@ -64,7 +75,7 @@ Avant de commencer, voici les termes utilisés dans le jeu.
 | Chasse (Actions + Objets) | 100 | 20 par héros × 5 héros (toutes avec prérequis) |
 | Monstres | 25 | Paquet commun |
 | Destins | 20 | Paquet unique mélangé |
-| Fiches Boss | 10 | 1 par boss (statistiques + passif) |
+| Fiches Boss | 10 | 1 par boss (séquence + passif + actif) |
 | Menaces (génériques) | 30 | 15 assauts + 15 événements à choix — commun à tous les boss |
 
 ---
@@ -72,7 +83,7 @@ Avant de commencer, voici les termes utilisés dans le jeu.
 ## Mise en place
 
 1. **Choisir un boss** (facile, moyen ou difficile). Placer sa carte au centre.
-2. **Fiche Boss** : placer la fiche du boss choisi à côté de sa carte. Elle indique ses statistiques (dégâts, nombre d'invocations, action spéciale, passif).
+2. **Fiche Boss** : placer la fiche du boss choisi à côté de sa carte. Elle indique sa séquence de fin de tour (icônes), son passif et son actif (⚡). Ses PV sont indiqués en bas-droite au format 👤 × ❤X (multiplier le chiffre par le nombre de joueurs).
 3. **Deck Menace** : mélanger les 30 cartes Menace génériques. Placer la pile face cachée.
 4. **Piles communes** : former les piles Monstres, Destins. Mélanger.
 5. **Défausses** : prévoir à côté de chaque pile sa défausse associée (Chasse, Menace, Monstres, Destins).
@@ -138,17 +149,20 @@ Le combat commence immédiatement. Tour par tour (sens horaire) :
 ### 2. Capacité spéciale (optionnel)
 À tout moment pendant son tour, le héros peut activer sa capacité spéciale (1 fois par combat).
 
-### 3. Carte Menace
-Piocher 1 carte du deck Menace et la résoudre :
-- **Assaut** : le colosse attaque (dégâts, invocation de monstres dans la file du héros actif, soin du colosse…). Appliquer l'effet.
-- **Événement** : une situation survient pendant le combat. Le héros actif choisit entre les options proposées.
+### 3. Séquence du Colosse (fin de tour)
+Résoudre les icônes de la séquence indiquée sur la fiche du Colosse, **de gauche à droite** :
+- 🃏 = piocher 1 carte Menace et la résoudre (**Assaut** : appliquer l'effet ; **Événement** : le héros actif choisit entre les options)
+- 🐾 = piocher 1 monstre dans la file du héros actif
+- ⚔ = le monstre en tête de file attaque le héros actif
+- ⚡ = déclencher l'actif du Colosse (voir fiche)
 
-### 4. Fin du tour
-Passer au joueur suivant. Les monstres n'attaquent pas automatiquement : ils n'attaquent que lorsqu'une carte Menace ou un effet de carte donne explicitement un ordre d'attaque.
+> Exemple : un Colosse avec la séquence `🃏 → 🐾 → ⚔` pioche d'abord une Menace, puis invoque un monstre, puis le monstre en tête de file attaque.
 
-### 5. Tour suivant
+Les monstres n'attaquent jamais d'eux-mêmes. Ils n'attaquent que lorsqu'un ⚔ apparaît dans la séquence, sur une carte Menace, ou via un autre effet.
 
-Continuer jusqu'à victoire ou défaite. Toutefois, chaque fois qu'une pioche est vide, mélangez sa défausse associée pour former une nouvelle pile, puis continuez l'effet.
+### 4. Tour suivant
+
+Passer au joueur suivant. Continuer jusqu'à victoire ou défaite. Chaque fois qu'une pioche est vide, mélangez sa défausse associée pour former une nouvelle pile.
 
 ---
 
@@ -261,21 +275,23 @@ Soigne X points = retirer des cartes blessure dont le total d'icônes 🩸 est *
 
 ## Boss
 
-- **Vie** : formule adaptée au nombre de joueurs (ex : 8 + 4/joueur).
+- **Vie** : 👤 × ❤X (multiplier le chiffre par le nombre de joueurs). Indiqué en bas-droite de la fiche boss.
 - **Mort** : dégâts accumulés ≥ vie → **victoire !**
 
-### Fiche Boss (statistiques)
-Chaque boss possède une fiche avec 4 statistiques consultées lors des épreuves :
-| Stat | Utilisation |
-|---|---|
-| **Dégâts** | Valeur infligée par les cartes Assaut marquées `?` |
-| **Nb Invocations** | Nombre de monstres piochés par les cartes Invocation dans la file du héros actif |
-| **Action spéciale** | Effet déclenché par les cartes Action spéciale |
-| **Passif** | Effet permanent actif pendant tout le combat |
+### Fiche Boss (3 éléments)
+Chaque boss possède une fiche avec 3 éléments :
+
+| Élément | Position sur la fiche | Signification |
+|---|---|---|
+| **Séquence de fin de tour** | Ligne du haut (icônes seules) | 1 à 3 icônes (🃏🐾⚔⚡) résolues de gauche à droite à chaque fin de tour du héros actif. |
+| **Passif** | Texte au milieu | Effet permanent actif pendant tout le combat. |
+| **⚡ Actif** | ⚡ + texte en bas | Effet déclenché par la séquence de fin de tour (si ⚡ y figure) et/ou par certaines cartes Menace. |
+
+> La difficulté d'un boss se lit directement au nombre d'icônes dans sa séquence : 1 icône (facile), 2 icônes (moyen), 3 icônes (difficile).
 
 ### Deck Menace (générique)
 30 cartes communes à tous les boss (15 assauts + 15 événements à choix) :
-- **Assaut** : attaque (`?` dégâts → voir fiche boss), invocation (`?` monstres → voir fiche boss, dans la file du héros actif), action spéciale (→ voir fiche boss), soin du boss, ordre d'attaque monstre
+- **Assaut** : attaque (🩸 fixes sur la carte), invocation (🐾), ordre d'attaque (⚔), déclenchement de l'actif boss (⚡), soin du boss
 - **Événement** : situation de combat avec un choix à faire (risque/récompense). Effets génériques applicables à tout boss.
 
 ---
@@ -311,14 +327,13 @@ Les capacités spéciales des monstres se déclenchent toujours sur un événeme
 │ 2. CAPACITÉ SPÉCIALE (optionnel, 1 fois │
 │    par combat)                          │
 ├─────────────────────────────────────────┤
-│ 3. CARTE ÉPREUVE                        │
-│  → Piocher + résoudre (assaut/événement)│
+│ 3. SÉQUENCE DU COLOSSE                  │
+│  → Résoudre les icônes de la fiche boss │
+│    de gauche à droite :                 │
+│    🃏 Menace  🐾 Invocation             │
+│    ⚔ Ordre   ⚡ Actif boss             │
 ├─────────────────────────────────────────┤
-│ 4. FIN DU TOUR                          │
-│  → Aucun monstre n'attaque sauf si une  │
-│    Menace ou un effet l'ordonne         │
-├─────────────────────────────────────────┤
-│ 5. TOUR SUIVANT                         │
+│ 4. TOUR SUIVANT                         │
 └─────────────────────────────────────────┘
 ```
 

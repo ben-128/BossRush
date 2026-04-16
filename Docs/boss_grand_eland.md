@@ -14,11 +14,10 @@
 
 ## Stats
 
-- **PV :** 10 + 5 par joueur (20/25/30/35)
-- **Dégâts :** 3
-- **Invocations :** 1
-- **Passif :** *Aura sacrée* — Le boss ne peut pas subir plus de 4 dégâts par tour.
-- **Action spéciale :** Lueur aveuglante : tous les héros défaussent 1 carte au hasard de leur main.
+- **PV :** 👤 × ❤8
+- **Fin de tour :** 🃏 → 🐾 → ⚔
+- **Passif :** *Aura sacrée* — Les monstres invoqués arrivent avec +1 PV effectif (1 blessure de moins à encaisser avant élimination).
+- **⚡ Actif :** Lueur aveuglante : tous les héros défaussent 1 carte au hasard de leur main.
 
 ## Sous-titre
 

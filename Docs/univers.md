@@ -120,18 +120,18 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 
 ### Stats résumées
 
-| # | Boss | Diff. | PV (4j) | DGT | Inv | Thème mécanique |
-|---|------|-------|---------|-----|-----|-----------------|
-| 1 | Hobab | F | 24 | 2 | 1 | Brûlures continues |
-| 2 | Pshato | F | 26 | 2 | 1 | Régénération + contrôle |
-| 3 | Caicai | M | 25 | 2 | 1 | AOE marin, anti-frappe directe |
-| 4 | Invunche | M | 24 | 1 | 2 | Réduction de dégâts, paralysie |
-| 5 | Akkoro | M | 28 | 2 | 1 | Multi-cibles |
-| 6 | Hoyau | M | 25 | 2 | 1 | Poison anti-soin |
-| 7 | Azhda | D | 27 | 3 | 1 | Double attaque |
-| 8 | Gaww | D | 23 | 2 | 1 | Drain de deck |
-| 9 | Kaggen | D | 30 | 3 | 1 | Cap de dégâts |
-| 10 | Khwa | TD | 32 | 3 | 2 | Esquive + AOE |
+| # | Boss | Diff. | PV (👤×❤) | Séquence | Thème mécanique |
+|---|------|-------|-----------|----------|-----------------|
+| 1 | Hobab | F | ❤5 | 🃏 | Brûlures, anti-soin temporaire |
+| 2 | Pshato | F | ❤5 | 🃏 | Régénération, blocage pioche |
+| 3 | Caicai | M | ❤6 | 🃏→🐾 | Marée, déplacement de monstres |
+| 4 | Invunche | M | ❤7 | 🐾→🃏 | Submersion, réduction de dégâts |
+| 5 | Akkoro | M | ❤6 | 🃏→⚔ | Ordre d'attaque, drain d'objets |
+| 6 | Hoyau | M | ❤7 | 🃏→🐾 | Venin anti-soin, drain de main |
+| 7 | Azhda | D | ❤7 | 🃏→⚔→⚔ | Double ordre d'attaque, multi-têtes |
+| 8 | Gaww | D | ❤8 | 🃏→⚡ | Possession chaque tour, drain de deck |
+| 9 | Kaggen | D | ❤8 | 🃏→🐾→⚔ | Monstres renforcés, défausse aléatoire |
+| 10 | Khwa | TD | ❤9 | 🃏→🐾→⚔ | Cap dégâts/tour, invocation massive |
 
 ### Répartition par mythologie
 

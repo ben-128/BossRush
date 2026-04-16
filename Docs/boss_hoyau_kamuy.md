@@ -14,11 +14,10 @@ Hybride dragon-requin volant. Corps allongé de requin avec des écailles bleu-v
 
 ## Stats
 
-- **PV :** 9 + 4 par joueur (17/21/25/29)
-- **Dégâts :** 2
-- **Invocations :** 1
-- **Passif :** *Venin* — Quand le boss inflige des dégâts, le héros touché ne peut pas être soigné jusqu'à la fin de son prochain tour.
-- **Action spéciale :** Le boss libère un nuage venimeux : tous les héros subissent 1 dégât et défaussent 1 carte.
+- **PV :** 👤 × ❤7
+- **Fin de tour :** 🃏 → 🐾
+- **Passif :** *Venin* — Les soins sont réduits de 1 (min 0).
+- **⚡ Actif :** Nuage venimeux : tous les héros défaussent 1 carte Chasse de leur main.
 
 ## Sous-titre
 

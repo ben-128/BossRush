@@ -14,11 +14,10 @@ Dragon colossal à plusieurs têtes (3 ou 4). Corps serpentin massif couvert d'u
 
 ## Stats
 
-- **PV :** 11 + 4 par joueur (19/23/27/31)
-- **Dégâts :** 3
-- **Invocations :** 1
-- **Passif :** *Plusieurs têtes* — Le boss attaque deux fois par tour (chaque tête frappe).
-- **Action spéciale :** Une tête crache du feu : tous les héros subissent 1 dégât, ignore les boucliers/réductions.
+- **PV :** 👤 × ❤7
+- **Fin de tour :** 🃏 → ⚔ → ⚔
+- **Passif :** *Plusieurs têtes* — Quand le boss est attaqué, si la file du héros actif contient au moins 2 monstres, le boss ignore 1 dégât.
+- **⚡ Actif :** Souffle : ⚔ dans la file de chaque héros (chaque monstre en tête de file attaque son héros).
 
 ## Sous-titre
 

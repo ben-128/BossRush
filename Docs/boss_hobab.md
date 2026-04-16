@@ -14,11 +14,10 @@ Dragon colossal des terres sèches. Corps long et serpentin couvert d'écailles 
 
 ## Stats
 
-- **PV :** 8 + 4 par joueur (16/20/24/28)
-- **Dégâts :** 2
-- **Invocations :** 1
-- **Passif :** *Brûlures persistantes* — Quand le boss inflige des dégâts, le héros actif subit 1 dégât supplémentaire au début de son prochain tour.
-- **Action spéciale :** Le boss souffle du sable brûlant : tous les héros subissent 1 dégât.
+- **PV :** 👤 × ❤5
+- **Fin de tour :** 🃏
+- **Passif :** *Brûlures persistantes* — Les cartes blessure infligées par des Menaces ne peuvent pas être soignées ce tour-ci.
+- **⚡ Actif :** Brûlure : chaque héros ayant au moins 1 blessure défausse 1 carte Chasse de sa main.
 
 ## Sous-titre
 

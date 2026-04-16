@@ -9,7 +9,7 @@
       "id": "GUE_A01",
       "nom": "Coup de bouclier",
       "categorie": "action",
-      "degats": 1,
+      "degats": 2,
       "prerequis": "Nawel",
       "effet": "Le monstre ciblé ne peut pas attaquer ce tour-ci.",
       "quantite": 1
@@ -252,7 +252,7 @@
       "id": "SOI_A04",
       "nom": "Drain de vie",
       "categorie": "action",
-      "degats": 1,
+      "degats": 2,
       "prerequis": "Gao",
       "effet": "Si la cible est éliminée, soignez 2 blessures de ce héros.",
       "quantite": 2
