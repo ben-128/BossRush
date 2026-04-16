@@ -1,6 +1,6 @@
 # Monstres
 
-> Pour les règles, voir [REGLES_RESUME.md](../BossRush/Assets/Data/REGLES_RESUME.md)
+> Pour les règles, voir [REGLES_RESUME.md](../BossRush/Assets/Data/regles/REGLES_RESUME.md)
 > Pour l'univers, voir [univers.md](univers.md)
 
 ---

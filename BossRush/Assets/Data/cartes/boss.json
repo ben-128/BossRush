@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "description": "Liste des 10 colosses du jeu. Chaque colosse a une fiche avec 3 éléments : séquence de fin de tour, passif et actif.",
+    "version": "3.0",
+    "notes": "PV = multiplicateur × nombre de joueurs. La séquence de fin de tour utilise les icônes unifiées : <ico:menace> (Menace), <ico:invocation> (Invocation), <ico:attaque> (Ordre d'attaque), <ico:actif_boss> (Actif boss)."
+  },
+  "boss": [
+    {
+      "id": "BOSS_001",
+      "nom": "Hobab",
+      "difficulte": "facile",
+      "vie_multiplicateur": 5,
+      "stats": {
+        "sequence": [
+          "<ico:menace>"
+        ],
+        "passif": "Les <ico:degat> infligées par des Menaces ne peuvent pas être soignées.",
+        "actif": "Chaque héros ayant au moins 1 <ico:degat> défausse 1 carte de sa main."
+      },
+      "monstres_ids": [],
+      "description": "Dragon colossal des terres sèches, corps serpentin couvert d'écailles craquelées avec braises rougeoyantes entre les fissures.",
+      "citation": "« Il était la pluie. Il est devenu la cendre. »"
+    },
+    {
+      "id": "BOSS_002",
+      "nom": "Pshato",
+      "difficulte": "facile",
+      "vie_multiplicateur": 5,
+      "stats": {
+        "sequence": [
+          "<ico:menace>"
+        ],
+        "passif": "Racines régénératrices — Au début de chaque tour, si le boss a au moins 1 <ico:degat>, défaussez-en 1.",
+        "actif": "Enchevêtrement : le héros actif ne peut pas piocher de cartes au prochain tour."
+      },
+      "monstres_ids": [],
+      "description": "Colosse mi-arbre mi-géant, corps massif de bois noueux avec mousse verte, racines noires corrompues.",
+      "citation": "« La forêt l'a fait. La forêt le pleure. »"
+    },
+    {
+      "id": "BOSS_003",
+      "nom": "Caicai",
+      "difficulte": "moyen",
+      "vie_multiplicateur": 6,
+      "stats": {
+        "sequence": [
+          "<ico:menace>",
+          "<ico:invocation>"
+        ],
+        "passif": "Marée noire — La première attaque qui cible directement le boss à chaque tour inflige 1 <ico:degat> de moins (min 1).",
+        "actif": "Marée : déplacez le monstre en tête de chaque file au fond de la file du héros suivant (sens horaire)."
+      },
+      "monstres_ids": [],
+      "description": "Serpent de mer titanesque, corps couvert d'écailles bleu-noir, cristaux noirs poussant entre les écailles.",
+      "citation": "« Les vagues s'écartaient pour lui. Maintenant elles fuient. »"
+    },
+    {
+      "id": "BOSS_004",
+      "nom": "Invunche",
+      "difficulte": "moyen",
+      "vie_multiplicateur": 7,
+      "stats": {
+        "sequence": [
+          "<ico:invocation>",
+          "<ico:menace>"
+        ],
+        "passif": "Difforme et tenace — Le boss ignore le 1er <ico:degat> de chaque attaque contre lui (min 0).",
+        "actif": "Difformité : le héros actif ne peut jouer aucune <ico:action> à son prochain tour."
+      },
+      "monstres_ids": [],
+      "description": "Humanoïde géant horriblement déformé, tête retournée à 180°, membres tordus, peau grise avec cicatrices rituelles.",
+      "citation": "« Ce qui reste d'un esprit qu'on a tordu. »"
+    },
+    {
+      "id": "BOSS_005",
+      "nom": "Akkoro",
+      "difficulte": "moyen",
+      "vie_multiplicateur": 6,
+      "stats": {
+        "sequence": [
+          "<ico:menace>",
+          "<ico:attaque>"
+        ],
+        "passif": "Tentacules — Quand un héros joue une <ico:action>, il défausse la carte du dessus de la pile Chasse.",
+        "actif": "Saisie : le héros actif défausse 1 Objet posé devant lui."
+      },
+      "monstres_ids": [],
+      "description": "Pieuvre colossale rouge vif, huit tentacules immenses couverts de ventouses ressemblant à des bouches béantes.",
+      "citation": "« Les profondeurs n'avaient pas de nom. Maintenant si. »"
+    },
+    {
+      "id": "BOSS_006",
+      "nom": "Hoyau",
+      "difficulte": "moyen",
+      "vie_multiplicateur": 7,
+      "stats": {
+        "sequence": [
+          "<ico:menace>",
+          "<ico:invocation>"
+        ],
+        "passif": "Venin — Les soins sont réduits de 1 (min 0).",
+        "actif": "Nuage venimeux : tous les héros défaussent 1 <ico:chasse> de leur main."
+      },
+      "monstres_ids": [],
+      "description": "Hybride dragon-requin volant, corps de requin bleu-vert, mâchoire verticale, ailes membraneuses, venin vert suintant.",
+      "citation": "« Il portait le ciel. Il l'empoisonne. »"
+    },
+    {
+      "id": "BOSS_007",
+      "nom": "Azhda",
+      "difficulte": "difficile",
+      "vie_multiplicateur": 7,
+      "stats": {
+        "sequence": [
+          "<ico:menace>",
+          "<ico:attaque>",
+          "<ico:attaque>"
+        ],
+        "passif": "Plusieurs têtes — Quand le boss est attaqué, si la file du héros actif contient au moins 2 monstres, le boss ignore 1 <ico:degat>.",
+        "actif": "Souffle : <ico:attaque> dans la file de chaque héros (chaque monstre en tête de file attaque son héros)."
+      },
+      "monstres_ids": [],
+      "description": "Dragon colossal à plusieurs têtes, corps serpentin couvert d'écailles et fourrure noire, ailes de chauve-souris déchirées.",
+      "citation": "« Une tête pour chaque peuple qu'il gardait. »"
+    },
+    {
+      "id": "BOSS_008",
+      "nom": "Gaww",
+      "difficulte": "difficile",
+      "vie_multiplicateur": 8,
+      "stats": {
+        "sequence": [
+          "<ico:menace>",
+          "<ico:actif_boss>"
+        ],
+        "passif": "Murmures — Quand un héros pioche des <ico:chasse>, il en pioche 1 de moins (min 1).",
+        "actif": "Possession : le héros actif défausse sa main, puis pioche 2 cartes."
+      },
+      "monstres_ids": [],
+      "description": "Esprit sans forme fixe, masse géante d'ombre et fumée noire, dizaines de visages humains apparaissant et disparaissant.",
+      "citation": "« Il habitait les vivants. Maintenant il les vide. »"
+    },
+    {
+      "id": "BOSS_009",
+      "nom": "Kaggen",
+      "difficulte": "difficile",
+      "vie_multiplicateur": 8,
+      "stats": {
+        "sequence": [
+          "<ico:menace>",
+          "<ico:invocation>",
+          "<ico:attaque>"
+        ],
+        "passif": "Aura sacrée — Les monstres invoqués arrivent avec +1 PV effectif (1 <ico:degat> de moins à encaisser avant élimination).",
+        "actif": "Lueur aveuglante : tous les héros défaussent 1 carte au hasard de leur main."
+      },
+      "monstres_ids": [],
+      "description": "Éland colossal lumineux, pelage doré brillant de lumière intérieure, cornes spiralées immenses.",
+      "citation": "« Son sang faisait pousser le monde. »"
+    },
+    {
+      "id": "BOSS_010",
+      "nom": "Khwa",
+      "difficulte": "très difficile",
+      "vie_multiplicateur": 9,
+      "stats": {
+        "sequence": [
+          "<ico:menace>",
+          "<ico:invocation>",
+          "<ico:attaque>"
+        ],
+        "passif": "Insaisissable — Le boss ne peut pas recevoir plus de 3 <ico:degat> par tour.",
+        "actif": "Reflux : <ico:invocation> dans la file de chaque héros + <ico:attaque> dans la file du héros actif."
+      },
+      "monstres_ids": [],
+      "description": "Géant humanoïde immense, peau rouge vif éclatante, longs cheveux blancs ondulant, cristal noir massif visible au cœur.",
+      "citation": "« Il était la source. Il est devenu la soif. »"
+    }
+  ]
+}

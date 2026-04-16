@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Le Gardien
+  m_text: La Piste
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1588330614}
@@ -780,8 +780,8 @@ MonoBehaviour:
     pv: 4
     competences:
     - magie
-    capacite_speciale: "\xC9liminez tous les monstres de la file ayant 1 point de
-      vie restant."
+    capacite_speciale: "\xC9liminez tous les monstres de votre file ayant 1 point
+      de vie restant."
     description: 
     citation: "\xAB Le feu est patient. Elle ne l'est pas. \xBB"
   - nom: Gao
@@ -815,13 +815,13 @@ MonoBehaviour:
     pv: 5
     competences:
     - distance
-    capacite_speciale: "Jouez imm\xE9diatement 2 cartes Action de votre main."
+    capacite_speciale: "Jouez imm\xE9diatement 2 <ico:action> de votre main."
     description: 
     citation: "\xAB On voit la premi\xE8re fl\xE8che. Jamais les suivantes. \xBB"
   - nom: Aslan
     sprite: {fileID: 21300000, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
-    offset: {x: 0, y: -0.25}
-    scale: 0.75
+    offset: {x: 0, y: -0.35}
+    scale: 0.725
     titre: Le Porte-Voix
     pv: 5
     competences:
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gao
+  m_text: Isonash
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: 1248990885}
@@ -1689,7 +1689,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 91f982a4bd826b744945ac8af3d42553, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b9014a589c978a49b1bc410fb3d6827, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1709,8 +1709,8 @@ Transform:
   m_GameObject: {fileID: 1171038901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26, y: -0.04, z: -1}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalPosition: {x: -0.26, y: -0.14, z: -1}
+  m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1621819922}
@@ -2216,7 +2216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Retire toutes les blessures d'un h\xE9ros au choix."
+  m_text: "Jouez imm\xE9diatement 2 <sprite name=\"action\"> de votre main."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 294818322}
@@ -2361,8 +2361,8 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0.01}
-  m_LocalScale: {x: 0.725, y: 0.725, z: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0.01}
+  m_LocalScale: {x: 0.69, y: 0.69, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -2411,7 +2411,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: 52a6172166028334a98bf92665540e0a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 345ad6f44c425394a8164b1dfdfd9036, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2437,7 +2437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1621819922
 Transform:
   m_ObjectHideFlags: 0
@@ -2771,7 +2771,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Tant qu'il respire, personne ne tombe. \xBB</i>"
+  m_text: "<i>\xAB On voit la premi\xE8re fl\xE8che. Jamais les suivantes. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -2928,7 +2928,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1692387759}

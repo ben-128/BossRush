@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "description": "Liste des héros jouables",
+    "version": "0.1",
+    "notes": "Chaque héros a des point de vie, une ou plusieurs compétences (icônes), et une <ico:capacite> utilisable une fois par combat (carte tournée à 90°). Certains effets peuvent régénérer la capacité."
+  },
+  "heroes": [
+    {
+      "id": "HERO_001",
+      "nom": "Daraa",
+      "titre": "La Flamme",
+      "vie": 4,
+      "competences": [
+        "magie"
+      ],
+      "capacite_speciale": "Éliminez tous les monstres de votre file ayant 1 point de vie restant.",
+      "citation": "« Le feu est patient. Elle ne l'est pas. »"
+    },
+    {
+      "id": "HERO_002",
+      "nom": "Gao",
+      "titre": "Le Gardien",
+      "vie": 4,
+      "competences": [
+        "soin"
+      ],
+      "capacite_speciale": "Retire toutes les <ico:degat> d'un héros au choix.",
+      "citation": "« Tant qu'il respire, personne ne tombe. »"
+    },
+    {
+      "id": "HERO_003",
+      "nom": "Nawel",
+      "titre": "Le Rempart",
+      "vie": 7,
+      "competences": [
+        "armure"
+      ],
+      "capacite_speciale": "Ce héros ne subit aucune <ico:degat> jusqu'à la fin du tour.",
+      "citation": "« Il encaisse. Encore. Et encore. »"
+    },
+    {
+      "id": "HERO_004",
+      "nom": "Isonash",
+      "titre": "La Piste",
+      "vie": 5,
+      "competences": [
+        "distance"
+      ],
+      "capacite_speciale": "Jouez immédiatement 2 <ico:action> de votre main.",
+      "citation": "« On voit la première flèche. Jamais les suivantes. »"
+    },
+    {
+      "id": "HERO_005",
+      "nom": "Aslan",
+      "titre": "Le Porte-Voix",
+      "vie": 5,
+      "competences": [
+        "diplomatie"
+      ],
+      "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent jusqu'à la fin du tour.",
+      "citation": "« Cinq tribus parlent par sa bouche. »"
+    }
+  ]
+}

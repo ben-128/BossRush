@@ -130,7 +130,7 @@ public class MonsterCardGenerator : CardGenerator
         var monster = allMonsters[index];
 
         bool hasCapacite = !string.IsNullOrEmpty(monster.capacite_speciale);
-        string texte = hasCapacite ? monster.capacite_speciale : $"<i>{monster.description}</i>";
+        string texte = hasCapacite ? IconTagParser.Parse(monster.capacite_speciale) : $"<i>{monster.description}</i>";
 
         SetBaseTexts(monster.nom, texte);
         if (pvText != null) pvText.text = monster.pv.ToString();

@@ -68,7 +68,11 @@ public class DestinCardGenerator : CardGenerator
 
         // Pas de nom, pas de portrait — juste l'effet
         if (nomText != null) nomText.text = "";
-        if (descriptionText != null) descriptionText.text = destin.effet;
+        if (descriptionText != null)
+        {
+            EnsureSpriteAsset(descriptionText);
+            descriptionText.text = IconTagParser.Parse(destin.effet);
+        }
         if (portraitRenderer != null) portraitRenderer.gameObject.SetActive(false);
     }
 }

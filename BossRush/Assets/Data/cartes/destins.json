@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "description": "Destins — Effets aléatoires tirés pendant le combat",
+    "type": "destin"
+  },
+  "destins": [
+    {
+      "id": "DEN_001",
+      "effet": "Chaque héros pioche 1 <ico:chasse>."
+    },
+    {
+      "id": "DEN_002",
+      "effet": "Le héros est soigné de 2 <ico:degat>."
+    },
+    {
+      "id": "DEN_003",
+      "effet": "Un héros au choix régénère sa <ico:capacite>."
+    },
+    {
+      "id": "DEN_004",
+      "effet": "Le héros pioche 2 <ico:chasse>."
+    },
+    {
+      "id": "DEN_005",
+      "effet": "Le héros subit 1 <ico:degat>."
+    },
+    {
+      "id": "DEN_006",
+      "effet": "<ico:invocation>"
+    },
+    {
+      "id": "DEN_007",
+      "effet": "Le héros subit 2 <ico:degat>."
+    },
+    {
+      "id": "DEN_008",
+      "effet": "Chaque héros subit 1 <ico:degat>."
+    },
+    {
+      "id": "DEN_009",
+      "effet": "<ico:invocation> <ico:invocation>"
+    },
+    {
+      "id": "DEN_010",
+      "effet": "Le héros pioche 3 <ico:chasse>. Un autre héros au choix subit 1 <ico:degat>."
+    },
+    {
+      "id": "DEN_011",
+      "effet": "Le héros subit 1 <ico:degat> et pioche 1 <ico:chasse>."
+    },
+    {
+      "id": "DEN_012",
+      "effet": "Le héros défausse 2 <ico:chasse> de type Action pour piocher 2 <ico:chasse>. S'il n'a pas assez de cartes, il subit 2 <ico:degat>."
+    },
+    {
+      "id": "DEN_013",
+      "effet": "Choix collectif : tous les héros piochent 1 <ico:chasse>, OU tous les héros retirent 2 <ico:degat>."
+    },
+    {
+      "id": "DEN_014",
+      "effet": "Le héros peut échanger ses cartes avec tous les autres héros. Mais <ico:invocation> et place-le en tête de file."
+    },
+    {
+      "id": "DEN_015",
+      "effet": "Un héros au choix pioche 1 <ico:chasse> et subit 1 <ico:degat>."
+    },
+    {
+      "id": "DEN_016",
+      "effet": "Le héros retire 2 <ico:degat> mais défausse 1 <ico:chasse> de sa main."
+    },
+    {
+      "id": "DEN_017",
+      "effet": "Chaque héros pioche 1 <ico:chasse> et subit 1 <ico:degat>."
+    },
+    {
+      "id": "DEN_018",
+      "effet": "Le héros régénère sa <ico:capacite>, mais <ico:invocation> dans la file."
+    },
+    {
+      "id": "DEN_019",
+      "effet": "Le héros subit 2 <ico:degat>. Il pioche 2 <ico:chasse>."
+    },
+    {
+      "id": "DEN_020",
+      "effet": "Le héros pioche 1 <ico:chasse>. Si c'est un Objet, il pioche 1 <ico:chasse> supplémentaire."
+    }
+  ]
+}

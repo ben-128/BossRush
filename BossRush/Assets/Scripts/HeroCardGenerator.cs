@@ -224,7 +224,11 @@ public class HeroCardGenerator : CardGenerator
         SetBaseTexts(hero.nom, hero.description);
         if (titreText != null) titreText.text = hero.titre ?? "";
         if (pvText != null) pvText.text = hero.pv.ToString();
-        if (capaciteText != null) capaciteText.text = hero.capacite_speciale ?? "";
+        if (capaciteText != null)
+        {
+            EnsureSpriteAsset(capaciteText);
+            capaciteText.text = IconTagParser.Parse(hero.capacite_speciale);
+        }
         SetPortrait(hero.sprite, hero.offset, hero.scale);
         SetCitation(hero.citation);
         SetCompetenceIcons(hero.competences);

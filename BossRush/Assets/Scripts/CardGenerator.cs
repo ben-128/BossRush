@@ -236,12 +236,27 @@ public abstract class CardGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Assigne le TMP_SpriteAsset par defaut sur un composant TMP
+    /// pour que les balises <sprite name="xxx"> fonctionnent.
+    /// </summary>
+    protected static void EnsureSpriteAsset(TextMeshPro tmp)
+    {
+        if (tmp == null || tmp.spriteAsset != null) return;
+        var defaultAsset = TMP_Settings.defaultSpriteAsset;
+        if (defaultAsset != null)
+            tmp.spriteAsset = defaultAsset;
+    }
+
     protected void SetBaseTexts(string nom, string description)
     {
         if (nomText != null)
             nomText.text = nom;
         if (descriptionText != null)
-            descriptionText.text = description ?? "";
+        {
+            EnsureSpriteAsset(descriptionText);
+            descriptionText.text = IconTagParser.Parse(description);
+        }
 
         ApplyTextStyle(nomText);
         ApplyTextStyle(descriptionText);

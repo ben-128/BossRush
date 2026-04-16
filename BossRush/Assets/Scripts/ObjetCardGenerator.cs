@@ -91,7 +91,11 @@ public class ObjetCardGenerator : CardGenerator
 
         if (typeText != null) typeText.text = objet.type;
         if (prerequisText != null) prerequisText.text = objet.prerequis ?? "";
-        if (effetText != null) effetText.text = objet.effet ?? "";
+        if (effetText != null)
+        {
+            EnsureSpriteAsset(effetText);
+            effetText.text = IconTagParser.Parse(objet.effet);
+        }
 
         if (bonusDegatsText != null)
         {

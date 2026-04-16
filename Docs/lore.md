@@ -1,7 +1,7 @@
 # Lore — Texte d'introduction
 
 > Pour le concept complet, voir [univers.md](univers.md)
-> Pour les règles, voir [REGLES_RESUME.md](../BossRush/Assets/Data/REGLES_RESUME.md)
+> Pour les règles, voir [REGLES_RESUME.md](../BossRush/Assets/Data/regles/REGLES_RESUME.md)
 
 ---
 

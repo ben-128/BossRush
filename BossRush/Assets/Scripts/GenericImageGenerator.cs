@@ -44,7 +44,7 @@ public class GenericImageGenerator : MonoBehaviour
             public enum MoveType
             {
                 None,
-                Mêlee,
+                Melee,
                 Back,
             }
 
@@ -115,6 +115,14 @@ public class GenericImageGenerator : MonoBehaviour
     public string categoryName;
     public GeneralVisuals visuals;
     public AllImageData[] allimages;
+    private static void EnsureSpriteAsset(TextMeshPro tmp)
+    {
+        if (tmp == null || tmp.spriteAsset != null) return;
+        var defaultAsset = TMP_Settings.defaultSpriteAsset;
+        if (defaultAsset != null)
+            tmp.spriteAsset = defaultAsset;
+    }
+
     public TextMeshPro titre;
     public SpriteRenderer objectRender;
     public TextMeshPro description;
@@ -151,10 +159,12 @@ public class GenericImageGenerator : MonoBehaviour
             objectRender.transform.localScale = new Vector3(data.scale, data.scale, 1f);
         }
 
-        description.text = (data.description).Replace("\\n", "\n");
+        EnsureSpriteAsset(description);
+        description.text = IconTagParser.Parse((data.description).Replace("\\n", "\n"));
         if (description2)
         {
-            description2.text = (data.description2).Replace("\\n", "\n");
+            EnsureSpriteAsset(description2);
+            description2.text = IconTagParser.Parse((data.description2).Replace("\\n", "\n"));
         }
 
         Canvas.ForceUpdateCanvases();
@@ -237,7 +247,7 @@ public class GenericImageGenerator : MonoBehaviour
 
         if (atkTxt)
         {
-            atkTxt.text = data.description2;
+            atkTxt.text = IconTagParser.Parse(data.description2);
         }
 
         if (requirementTxt)
@@ -254,7 +264,7 @@ public class GenericImageGenerator : MonoBehaviour
             Life.text = data.monsterStats.Life.ToString();
             if (data.monsterStats.lifePerHeros > 0)
             {
-                Life.text = data.monsterStats.Life + " + " + data.monsterStats.lifePerHeros + "/Héros";
+                Life.text = data.monsterStats.Life + " + " + data.monsterStats.lifePerHeros + "/HÃ©ros";
             }
         }
 
@@ -277,17 +287,17 @@ public class GenericImageGenerator : MonoBehaviour
                         atk.plusSign.SetActive(false);
                         atk.moveObject.SetActive(false);
                         break;
-                    case AllImageData.Atk.MoveType.Mêlee:
+                    case AllImageData.Atk.MoveType.Melee:
                         atk.plusSign.SetActive(true);
                         atk.moveObject.SetActive(true);
                         atk.moveImg.sprite = visuals.moveMelee;
-                        atk.moveTxt.text = "Mêlée";
+                        atk.moveTxt.text = "MÃªlÃ©e";
                         break;
                     case AllImageData.Atk.MoveType.Back:
                         atk.plusSign.SetActive(true);
                         atk.moveObject.SetActive(true);
                         atk.moveImg.sprite = visuals.Moveback;
-                        atk.moveTxt.text = "Arrière";
+                        atk.moveTxt.text = "ArriÃ¨re";
                         break;
                 }
             }
