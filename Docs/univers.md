@@ -67,7 +67,7 @@ Chaque héros vient d'une tribu différente, inspirée d'un peuple réel raremen
 - **Animal :** Ourse brune anthropomorphe — fourrure brun foncé, museau fin et attentif
 - **Tribu de la Lisière** : pisteurs de colosses, éclaireurs
 - **Ethnie :** Aïnou — peuple chasseur du nord du Japon, culture animiste, lien profond avec la nature et les animaux
-- Rôle : attaques à distance, ciblage précis
+- Rôle : ciblage précis, mobilité tactique
 - Nom signifie "grand chasseur" en Aïnou
 - Couleur dominante : **vert émeraude**
 - Voir [hero_isonash.md](hero_isonash.md) pour la fiche complète
@@ -124,8 +124,8 @@ Les colosses sont des esprits-bêtes corrompus — d'anciens gardiens de la natu
 |---|------|-------|---------|-----|-----|-----------------|
 | 1 | Hobab | F | 24 | 2 | 1 | Brûlures continues |
 | 2 | Pshato | F | 26 | 2 | 1 | Régénération + contrôle |
-| 3 | Caicai | M | 25 | 2 | 1 | AOE marin, anti-distance |
-| 4 | Invunche | M | 24 | 1 | 2 | Anti-mêlée, paralysie |
+| 3 | Caicai | M | 25 | 2 | 1 | AOE marin, anti-frappe directe |
+| 4 | Invunche | M | 24 | 1 | 2 | Réduction de dégâts, paralysie |
 | 5 | Akkoro | M | 28 | 2 | 1 | Multi-cibles |
 | 6 | Hoyau | M | 25 | 2 | 1 | Poison anti-soin |
 | 7 | Azhda | D | 27 | 3 | 1 | Double attaque |

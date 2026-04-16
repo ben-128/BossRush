@@ -20,7 +20,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Le monstre ciblé passe en dernière position de la file.",
+      "effet": "Déplacez le monstre en tête de la file d'un autre héros au fond de votre file.",
       "quantite": 2
     },
     {
@@ -29,7 +29,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Le monstre ciblé attaque immédiatement ce héros.",
+      "effet": "Choisissez le monstre en tête de la file d'un autre héros. Déplacez-le en tête de votre file. Il attaque immédiatement ce héros.",
       "quantite": 3
     },
     {
@@ -54,7 +54,7 @@
       "nom": "Rage du blessé",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Éliminez n'importe quel monstre dans la file. Uniquement utilisable si ce héros a 4 blessures ou plus.",
+      "effet": "Éliminez n'importe quel monstre de votre file. Uniquement utilisable si ce héros a 4 blessures ou plus.",
       "quantite": 1
     },
     {
@@ -62,7 +62,7 @@
       "nom": "Provocation",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Chaque monstre de la file attaque immédiatement ce héros.",
+      "effet": "Choisissez jusqu'à 2 monstres en tête d'autres files. Déplacez-les au fond de votre file.",
       "quantite": 1
     },
     {
@@ -128,7 +128,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Daraa",
-      "effet": "Ciblez le Colosse ou un monstre au choix dans la file.",
+      "effet": "Ciblez le Colosse ou un monstre au choix dans n'importe quelle file.",
       "quantite": 2
     },
     {
@@ -137,7 +137,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Daraa",
-      "effet": "Si le monstre suivant dans la file n'a qu'1 point de vie restant, éliminez-le.",
+      "effet": "Si le monstre suivant dans votre file n'a qu'1 point de vie restant, éliminez-le.",
       "quantite": 2
     },
     {
@@ -154,7 +154,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Daraa",
-      "effet": "Si la cible est éliminée, infligez les dégâts du monstre au monstre suivant dans la file.",
+      "effet": "Si la cible est éliminée, infligez les dégâts du monstre au monstre suivant dans votre file.",
       "quantite": 2
     },
     {
@@ -368,7 +368,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Isonash",
-      "effet": "Ciblez le Colosse ou un monstre au choix dans la file.",
+      "effet": "Ciblez le Colosse ou un monstre au choix dans n'importe quelle file.",
       "quantite": 3
     },
     {
@@ -444,7 +444,7 @@
       "nom": "Flèches transperçantes",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Améliore une attaque : si la cible est éliminée, l'attaque cible le monstre ou Colosse suivant dans la file.",
+      "effet": "Améliore une attaque : si la cible est éliminée, l'attaque cible le monstre suivant dans votre file, ou le Colosse si votre file est vide.",
       "quantite": 1
     },
     {
@@ -460,7 +460,7 @@
       "nom": "Griffe de kamuy",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Éliminez n'importe quel monstre de la file. Uniquement utilisable si au moins 2 cartes Chasse ont été jouées ce tour-ci.",
+      "effet": "Éliminez n'importe quel monstre dans n'importe quelle file. Uniquement utilisable si au moins 2 cartes Chasse ont été jouées ce tour-ci.",
       "quantite": 1
     },
     {
@@ -529,7 +529,7 @@
       "nom": "Ultimatum",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Éliminez le monstre en tête de file.",
+      "effet": "Éliminez le monstre en tête de votre file, ou celui d'un héros allié.",
       "quantite": 1
     },
     {
@@ -553,7 +553,7 @@
       "nom": "Rebellion",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Le monstre cible attaque le Colosse. Uniquement possible s'il est le seul monstre de la file.",
+      "effet": "Choisissez le monstre en tête de la file d'un héros. Il attaque le Colosse. Il est ensuite défaussé.",
       "quantite": 1
     },
     {

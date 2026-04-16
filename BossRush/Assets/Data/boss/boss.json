@@ -47,7 +47,7 @@
         "degats": 2,
         "nb_invocations": 1,
         "action_speciale": "Une vague immense déferle : tous les héros subissent 2 dégâts.",
-        "passif": "Marée noire — Les attaques à distance contre le boss infligent 1 dégât de moins (min 1)."
+        "passif": "Marée noire — La première attaque qui cible directement le boss à chaque tour inflige 1 dégât de moins (min 1)."
       },
       "monstres_ids": [],
       "description": "Serpent de mer titanesque, corps couvert d'écailles bleu-noir, cristaux noirs poussant entre les écailles.",
@@ -63,7 +63,7 @@
         "degats": 1,
         "nb_invocations": 2,
         "action_speciale": "L'Invunche déforme le héros actif : il ne pourra jouer aucune carte Action à son prochain tour.",
-        "passif": "Difforme et tenace — Le boss ignore le 1er dégât de chaque attaque mêlée (min 0)."
+        "passif": "Difforme et tenace — Le boss ignore le 1er dégât de chaque attaque contre lui (min 0)."
       },
       "monstres_ids": [],
       "description": "Humanoïde géant horriblement déformé, tête retournée à 180°, membres tordus, peau grise avec cicatrices rituelles.",

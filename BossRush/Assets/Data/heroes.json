@@ -11,7 +11,7 @@
       "titre": "La Flamme",
       "vie": 4,
       "competences": ["magie"],
-      "capacite_speciale": "Éliminez tous les monstres de la file ayant 1 point de vie restant.",
+      "capacite_speciale": "Éliminez tous les monstres de votre file ayant 1 point de vie restant.",
       "citation": "« Le feu est patient. Elle ne l'est pas. »"
     },
     {

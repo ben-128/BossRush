@@ -17,7 +17,7 @@ Serpent de mer titanesque, corps interminable couvert d'écailles bleu-noir luis
 - **PV :** 9 + 4 par joueur (17/21/25/29)
 - **Dégâts :** 2
 - **Invocations :** 1
-- **Passif :** *Marée noire* — Les attaques à distance contre le boss infligent 1 dégât de moins (min 1).
+- **Passif :** *Marée noire* — La première attaque qui cible directement le boss à chaque tour inflige 1 dégât de moins (min 1).
 - **Action spéciale :** Une vague immense déferle : tous les héros subissent 2 dégâts.
 
 ## Sous-titre

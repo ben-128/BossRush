@@ -51,23 +51,23 @@
     {
       "id": "EPR_007",
       "type": "assaut",
-      "sous_type": "invocation",
-      "nom": "Invocation",
-      "description": "Le boss invoque. Piocher ? monstre(s) et les placer en file."
+      "sous_type": "ordre_attaque",
+      "nom": "Ordre d'attaque",
+      "description": "Le monstre en tête de la file du héros actif attaque immédiatement ce héros. S'il n'y a aucun monstre, aucun effet."
     },
     {
       "id": "EPR_008",
       "type": "assaut",
-      "sous_type": "invocation",
-      "nom": "Invocation",
-      "description": "Le boss invoque. Piocher ? monstre(s) et les placer en file."
+      "sous_type": "ordre_attaque",
+      "nom": "Ordre d'attaque",
+      "description": "Le monstre en tête de la file du héros actif attaque immédiatement ce héros. S'il n'y a aucun monstre, aucun effet."
     },
     {
       "id": "EPR_009",
       "type": "assaut",
-      "sous_type": "invocation",
-      "nom": "Invocation",
-      "description": "Le boss invoque. Piocher ? monstre(s) et les placer en file."
+      "sous_type": "ordre_attaque",
+      "nom": "Ruée",
+      "description": "Les deux premiers monstres de la file du héros actif attaquent immédiatement ce héros, l'un après l'autre. S'il n'y en a qu'un, seul lui attaque."
     },
     {
       "id": "EPR_010",
@@ -109,7 +109,7 @@
       "type": "assaut",
       "sous_type": "combo",
       "nom": "Assaut coordonné",
-      "description": "Le boss inflige ? dégâts au héros actif et invoque 1 monstre."
+      "description": "Le boss inflige ? dégâts au héros actif. Puis le monstre en tête de la file du héros actif attaque immédiatement ce héros. S'il n'y a aucun monstre, ignorez cette seconde partie."
     },
     {
       "id": "EPR_016",
@@ -139,7 +139,7 @@
       "id": "EPR_020",
       "type": "evenement",
       "nom": "Accalmie",
-      "description": "L'ennemi recule un instant.\n\n• Souffler (régénérer sa capacité spéciale, mais 1 monstre est invoqué)\n\nOU\n\n• Rester concentré (piocher 1 Destin)"
+      "description": "L'ennemi recule un instant.\n\n• Souffler (régénérer sa capacité spéciale, mais 1 monstre est invoqué dans votre file)\n\nOU\n\n• Rester concentré (piocher 1 Destin)"
     },
     {
       "id": "EPR_021",
@@ -175,7 +175,7 @@
       "id": "EPR_026",
       "type": "evenement",
       "nom": "Renfort inattendu",
-      "description": "Un ennemi surgit sur le flanc !\n\n• Un héros défausse 1 Action pour l'éliminer (piocher 1 carte Chasse)\n\nOU\n\n• L'ignorer (piocher 1 monstre dans la file)"
+      "description": "Un ennemi surgit sur le flanc !\n\n• Un héros défausse 1 Action pour l'éliminer (piocher 1 carte Chasse)\n\nOU\n\n• L'ignorer (piocher 1 monstre dans votre file)"
     },
     {
       "id": "EPR_027",
