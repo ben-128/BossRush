@@ -16,6 +16,7 @@
 
 import type { Boss, CarteChasse, Destin, Hero, Menace, Monstre } from './types.js';
 import type { GameEvent } from './events.js';
+import type { EffectsCatalog } from './effectTypes.js';
 
 export type Result = 'running' | 'victory' | 'defeat';
 
@@ -109,6 +110,13 @@ export interface GameState {
    * from SETUP event + actions, so state serialization is not needed.
    */
   catalog: DesignCatalog;
+
+  /**
+   * Simulator-owned DSL effect annotations, keyed by card / capacity id.
+   * A card present here is interpreted via runOps(); a card absent falls back
+   * to J2 "raw degats" behaviour. Empty by default (effects.json optional).
+   */
+  effects: EffectsCatalog;
 }
 
 // ---------------------------------------------------------------------------

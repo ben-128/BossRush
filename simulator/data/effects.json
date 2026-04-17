@@ -1,0 +1,173 @@
+{
+  "_meta": {
+    "description": "DSL d'effets pour le simulateur. Une entrée par id (carte ou héros). Présence = comportement remplacé par le DSL. Absence = fallback 'raw degats' (J2).",
+    "version": "0.1"
+  },
+  "cards": {
+    "GUE_A04": {
+      "effet": "1 dégât + soigne ce héros de 1",
+      "tag": "attack_sustain",
+      "ops": [
+        { "op": "attack" },
+        { "op": "heal", "target": "self", "amount": 1 }
+      ]
+    },
+    "GUE_O04": {
+      "effet": "Soigne ce héros de 2",
+      "tag": "reactive_heal",
+      "ops": [
+        { "op": "heal", "target": "self", "amount": 2 }
+      ]
+    },
+
+    "MAG_A02": {
+      "effet": "1 dégât ciblage libre",
+      "tag": "attack_free_target",
+      "ops": [
+        { "op": "attack", "target": { "pick": "monster_in_any_queue" } }
+      ]
+    },
+    "MAG_A07": {
+      "effet": "Pioche 4",
+      "tag": "draw_engine",
+      "ops": [
+        { "op": "draw", "target": "self", "n": 4 }
+      ]
+    },
+    "MAG_A08": {
+      "effet": "Régénère capacité de ce héros",
+      "tag": "regen_capacity",
+      "ops": [
+        { "op": "regenCapacite", "target": "self" }
+      ]
+    },
+    "MAG_O01": {
+      "effet": "Recharge la capacité de ce héros",
+      "tag": "regen_capacity",
+      "ops": [
+        { "op": "regenCapacite", "target": "self" }
+      ]
+    },
+    "MAG_O05": {
+      "effet": "Soigne 1 + pioche 2",
+      "tag": "sustain_draw",
+      "ops": [
+        { "op": "heal", "target": "self", "amount": 1 },
+        { "op": "draw", "target": "self", "n": 2 }
+      ]
+    },
+
+    "SOI_A02": {
+      "effet": "3 dégâts si aucun allié n'a de blessures",
+      "tag": "attack_conditional",
+      "ops": [
+        { "op": "require", "cond": { "no_ally_has_damage": true } },
+        { "op": "attack" }
+      ]
+    },
+    "SOI_A05": {
+      "effet": "Soigne 3 d'un héros au choix",
+      "tag": "burst_heal",
+      "ops": [
+        { "op": "heal", "target": "any_hero", "amount": 3 }
+      ]
+    },
+    "SOI_A07": {
+      "effet": "Soigne 1 de chaque héros",
+      "tag": "aoe_heal",
+      "ops": [
+        { "op": "heal", "target": "each_hero", "amount": 1 }
+      ]
+    },
+    "SOI_A08": {
+      "effet": "Un autre héros régénère sa capacité",
+      "tag": "regen_capacity_ally",
+      "ops": [
+        { "op": "regenCapacite", "target": "any_ally" }
+      ]
+    },
+    "SOI_O01": {
+      "effet": "Soigne 2 d'un héros au choix",
+      "tag": "reactive_heal",
+      "ops": [
+        { "op": "heal", "target": "any_hero", "amount": 2 }
+      ]
+    },
+    "SOI_O04": {
+      "effet": "Régénère la capacité d'un héros au choix",
+      "tag": "regen_capacity",
+      "ops": [
+        { "op": "regenCapacite", "target": "any_hero" }
+      ]
+    },
+
+    "ROD_A01": {
+      "effet": "1 dégât ciblage libre",
+      "tag": "attack_free_target",
+      "ops": [
+        { "op": "attack", "target": { "pick": "monster_in_any_queue" } }
+      ]
+    },
+    "ROD_A02": {
+      "effet": "1 dégât + pioche 1",
+      "tag": "attack_cantrip",
+      "ops": [
+        { "op": "attack" },
+        { "op": "draw", "target": "self", "n": 1 }
+      ]
+    },
+    "ROD_A06": {
+      "effet": "Pioche 4",
+      "tag": "draw_engine",
+      "ops": [
+        { "op": "draw", "target": "self", "n": 4 }
+      ]
+    },
+
+    "DIP_A01": {
+      "effet": "1 dégât + un allié pioche 1",
+      "tag": "attack_support",
+      "ops": [
+        { "op": "attack" },
+        { "op": "draw", "target": "any_ally", "n": 1 }
+      ]
+    },
+    "DIP_A03": {
+      "effet": "1 dégât + chaque héros pioche 1",
+      "tag": "attack_support_aoe",
+      "ops": [
+        { "op": "attack" },
+        { "op": "draw", "target": "each_hero", "n": 1 }
+      ]
+    },
+    "DIP_A06": {
+      "effet": "Chaque héros pioche 2",
+      "tag": "draw_aoe",
+      "ops": [
+        { "op": "draw", "target": "each_hero", "n": 2 }
+      ]
+    },
+    "DIP_A11": {
+      "effet": "3 dégâts cible uniquement le Colosse (bypass file)",
+      "tag": "boss_only_burst",
+      "ops": [
+        { "op": "attack", "target": "boss" }
+      ]
+    },
+
+    "HERO_001": {
+      "effet": "Daraa — Élimine tous les monstres blessés (J3: un seul via pick any — sera étendu avec forEach)",
+      "tag": "elim_on_demand",
+      "ops": [
+        { "op": "eliminate", "target": { "pick": "monster_in_any_queue", "where": "has_damage" } }
+      ]
+    },
+    "HERO_002": {
+      "effet": "Gao — Retire toutes les blessures d'un héros (heal 99 émule le 'toutes')",
+      "tag": "reactive_heal",
+      "ops": [
+        { "op": "heal", "target": "any_hero", "amount": 99 }
+      ]
+    }
+  }
+}

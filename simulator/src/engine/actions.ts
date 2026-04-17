@@ -20,6 +20,7 @@ import type { CarteChasse } from './types.js';
 import { emit } from './logger.js';
 import { drawOne, discard } from './piles.js';
 import { damageHero, damageBoss, damageMonster } from './damage.js';
+import { runOps, mkCtx } from './effects.js';
 
 // ---------------------------------------------------------------------------
 // Action types exchanged with the AI policy
@@ -27,6 +28,7 @@ import { damageHero, damageBoss, damageMonster } from './damage.js';
 
 export type PlayerAction =
   | { kind: 'draw' }
+  | { kind: 'useCapacite' }
   | {
       kind: 'play';
       /** Index of an Objet to place this turn, or null. */
@@ -51,20 +53,35 @@ export type PlayerAction =
   | { kind: 'none'; reason: string };
 
 // ---------------------------------------------------------------------------
-// Playability helpers (J2-specific)
+// Playability helpers
 // ---------------------------------------------------------------------------
 
-/** A card is playable in J2 iff it has a numeric `degats` and no `effet`. */
-export function isActionPlayableJ2(c: CarteChasse): boolean {
-  return c.categorie === 'action' && c.degats !== undefined && !c.effet;
+/**
+ * A card is playable when:
+ *   - it has an entry in the effects DSL (cards with coded logic), OR
+ *   - it has no `effet` text and bare `degats` (J2 fallback for simple cards).
+ * Cards with an `effet` text but no DSL entry remain unplayable and the AI
+ * skips them (covered progressively in J6).
+ */
+export function isActionPlayable(state: GameState, c: CarteChasse): boolean {
+  if (c.categorie !== 'action') return false;
+  if (state.effects[c.id]) return true;
+  return c.degats !== undefined && !c.effet;
 }
 
-/** Objets are playable-place-able in J2 only if they are pure renforts
- *  (bonus_degats provided, no `effet` text). Still, we only USE them as
- *  renforts when playing an attack the same turn. */
-export function isObjetPlayableRenfortJ2(c: CarteChasse): boolean {
-  return c.categorie === 'objet' && c.bonus_degats !== undefined && !c.effet;
+/** Kept for backward compat with J2 tests. */
+export const isActionPlayableJ2 = (c: CarteChasse): boolean =>
+  c.categorie === 'action' && c.degats !== undefined && !c.effet;
+
+/** Objets usable as renforts: either pure raw bonus or DSL-coded. */
+export function isObjetPlayableRenfort(state: GameState, c: CarteChasse): boolean {
+  if (c.categorie !== 'objet') return false;
+  if (state.effects[c.id]) return true;
+  return c.bonus_degats !== undefined && !c.effet;
 }
+
+export const isObjetPlayableRenfortJ2 = (c: CarteChasse): boolean =>
+  c.categorie === 'objet' && c.bonus_degats !== undefined && !c.effet;
 
 /** Hero has competence that matches a card's prerequis? */
 export function meetsPrerequisite(h: HeroRuntime, c: CarteChasse, state: GameState): boolean {
@@ -122,21 +139,13 @@ function playAction(
   const card = h.hand[handIdx];
   if (!card) return;
 
-  // Remove the card from hand up front (will either go under target or discard).
   h.hand.splice(handIdx, 1);
 
   const renforts = renfortObjectIndices
     .slice()
-    .sort((a, b) => b - a) // remove from highest index first to keep others valid
-    .map((i) => {
-      const o = h.objects[i];
-      return { idx: i, card: o };
-    })
+    .sort((a, b) => b - a)
+    .map((i) => ({ idx: i, card: h.objects[i] }))
     .filter((x) => x.card !== undefined) as { idx: number; card: CarteChasse }[];
-
-  const totalBonus = renforts.reduce((s, r) => s + (r.card.bonus_degats ?? 0), 0);
-  const baseDmg = card.degats ?? 0;
-  const totalDmg = baseDmg + totalBonus;
 
   emit(state, {
     kind: 'ACTION_PLAY_ACTION',
@@ -145,36 +154,50 @@ function playAction(
     renforts: renforts.map((r) => r.card.id),
   });
 
-  // J2: no `effet` handling. Just resolve damage against default target.
-  if (totalDmg > 0) {
-    const target = chooseDefaultTarget(state, seat);
-    emit(state, {
-      kind: 'ATTACK',
-      src: { kind: 'hero_action', seat, card: card.id },
-      tgt: target,
-      degats: totalDmg,
+  const entry = state.effects[card.id];
+  const bonusDmg = renforts.reduce((s, r) => s + (r.card.bonus_degats ?? 0), 0);
+
+  if (entry) {
+    // DSL path: run ops. If ops include an `attack` without amount, we
+    // synthesise its amount from card.degats + bonus at attack time —
+    // the interpreter reads op.amount, so we adjust by mutating the op list
+    // via a shallow copy.
+    const ops = entry.ops.map((op) => {
+      if (op.op === 'attack') {
+        const base = op.amount ?? card.degats ?? 0;
+        return { ...op, amount: base + bonusDmg };
+      }
+      return op;
     });
-    if (target.kind === 'boss') {
-      damageBoss(state, { amount: totalDmg, source: 'chasse', sourceCardId: card.id });
-    } else {
-      damageMonster(state, target.seat, target.instanceId, {
-        amount: totalDmg,
-        source: 'chasse',
-        sourceCardId: card.id,
-      });
-    }
-    // Attack card stays under the target as its wound (already placed by
-    // damage*, conceptually). We do NOT discard it here: per rules, it goes
-    // under the target. Since our wound records are abstract, the physical
-    // card just "disappears" into the wound. That's fine for simulation:
-    // the wound records all needed info.
+    runOps(state, mkCtx(seat, card.id, 'chasse'), ops);
   } else {
-    // No damage (and J2 ignores effets) → discard the card.
-    discard(state.piles.chasse, card);
-    emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: card.id, fromSeat: seat });
+    // J2 fallback: raw degats against default target.
+    const baseDmg = card.degats ?? 0;
+    const totalDmg = baseDmg + bonusDmg;
+    if (totalDmg > 0) {
+      const target = chooseDefaultTarget(state, seat);
+      emit(state, {
+        kind: 'ATTACK',
+        src: { kind: 'hero_action', seat, card: card.id },
+        tgt: target,
+        degats: totalDmg,
+      });
+      if (target.kind === 'boss') {
+        damageBoss(state, { amount: totalDmg, source: 'chasse', sourceCardId: card.id });
+      } else {
+        damageMonster(state, target.seat, target.instanceId, {
+          amount: totalDmg,
+          source: 'chasse',
+          sourceCardId: card.id,
+        });
+      }
+    } else {
+      discard(state.piles.chasse, card);
+      emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: card.id, fromSeat: seat });
+    }
   }
 
-  // Consume renfort objects: they go to the discard regardless of effect.
+  // Consume renfort objects: they leave the board after the action.
   for (const r of renforts) {
     h.objects.splice(r.idx, 1);
     discard(state.piles.chasse, r.card);
@@ -261,11 +284,34 @@ function placeObject(state: GameState, seat: number, handIdx: number): void {
 // Public entrypoint: apply one PlayerAction
 // ---------------------------------------------------------------------------
 
+function doUseCapacite(state: GameState, seat: number): void {
+  const h = state.heroes[seat];
+  if (!h) return;
+  if (h.capaciteUsed) {
+    emit(state, { kind: 'ACTION_NONE', seat, reason: 'capacite_already_used' });
+    return;
+  }
+  const entry = state.effects[h.heroId];
+  if (!entry) {
+    emit(state, { kind: 'ACTION_NONE', seat, reason: 'capacite_not_implemented' });
+    return;
+  }
+  h.capaciteUsed = true;
+  emit(state, {
+    kind: 'WARN',
+    message: `capacite_used seat=${seat} hero=${h.heroId}`,
+  });
+  runOps(state, mkCtx(seat, h.heroId, 'chasse'), entry.ops);
+}
+
 export function applyPlayerAction(state: GameState, action: PlayerAction): void {
   const seat = state.activeSeat;
   switch (action.kind) {
     case 'draw':
       doDraw(state, seat);
+      return;
+    case 'useCapacite':
+      doUseCapacite(state, seat);
       return;
     case 'play': {
       if (action.placeObject !== undefined) {

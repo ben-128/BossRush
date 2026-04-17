@@ -9,6 +9,7 @@
  */
 
 import { loadDesignData } from '../engine/loader.js';
+import { loadEffectsCatalog } from '../engine/effectsLoader.js';
 import { createGame } from '../engine/setup.js';
 import { runGame } from '../engine/engine.js';
 import { randomPolicy } from '../ai/random.js';
@@ -37,13 +38,14 @@ function parseArgs(): Args {
 
 async function main(): Promise<void> {
   const args = parseArgs();
-  const data = await loadDesignData();
+  const [data, effects] = await Promise.all([loadDesignData(), loadEffectsCatalog()]);
 
   const state = createGame(data, {
     seed: Number.isFinite(Number(args.seed)) ? Number(args.seed) : args.seed,
     nPlayers: args.heroes.length,
     bossId: args.boss,
     heroIds: args.heroes,
+    effects,
   });
 
   const policies = args.heroes.map(() => randomPolicy);

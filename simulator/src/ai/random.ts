@@ -17,8 +17,8 @@ import type { GameState, HeroRuntime } from '../engine/gameState.js';
 import { Rng } from '../engine/rng.js';
 import type { PlayerAction } from '../engine/actions.js';
 import {
-  isActionPlayableJ2,
-  isObjetPlayableRenfortJ2,
+  isActionPlayable,
+  isObjetPlayableRenfort,
   meetsPrerequisite,
 } from '../engine/actions.js';
 
@@ -37,15 +37,15 @@ function withRng<T>(state: GameState, fn: (rng: Rng) => T): T {
 function playableActionIndices(state: GameState, h: HeroRuntime): number[] {
   const out: number[] = [];
   h.hand.forEach((c, i) => {
-    if (isActionPlayableJ2(c) && meetsPrerequisite(h, c, state)) out.push(i);
+    if (isActionPlayable(state, c) && meetsPrerequisite(h, c, state)) out.push(i);
   });
   return out;
 }
 
-function renfortObjectIndices(h: HeroRuntime): number[] {
+function renfortObjectIndices(state: GameState, h: HeroRuntime): number[] {
   const out: number[] = [];
   h.objects.forEach((c, i) => {
-    if (isObjetPlayableRenfortJ2(c)) out.push(i);
+    if (isObjetPlayableRenfort(state, c)) out.push(i);
   });
   return out;
 }
@@ -58,13 +58,19 @@ export const randomPolicy: Policy = {
 
     const playable = playableActionIndices(state, h);
 
+    // Small chance to fire the capacité spéciale if available and coded.
+    if (!h.capaciteUsed && state.effects[h.heroId]) {
+      const roll = withRng(state, (rng) => rng.nextFloat());
+      if (roll < 0.1) return { kind: 'useCapacite' };
+    }
+
     if (playable.length === 0) {
       return { kind: 'draw' };
     }
 
     return withRng(state, (rng) => {
       const handIdx = rng.pick(playable);
-      const renforts = renfortObjectIndices(h);
+      const renforts = renfortObjectIndices(state, h);
       // 50% chance to add one renfort, 25% to add two, 25% none, capped.
       const decision = rng.nextFloat();
       const chosenRenforts: number[] = [];

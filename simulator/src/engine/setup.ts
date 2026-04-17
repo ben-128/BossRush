@@ -21,6 +21,7 @@ import type {
   GameState,
   HeroRuntime,
 } from './gameState.js';
+import type { EffectsCatalog } from './effectTypes.js';
 import { Rng } from './rng.js';
 import { emit } from './logger.js';
 import { shufflePile } from './piles.js';
@@ -31,6 +32,8 @@ export interface SetupOptions {
   bossId: string;
   heroIds: string[]; // length === nPlayers
   turnCap?: number;  // default 200
+  /** Effect DSL annotations. Defaults to empty (raw-damage fallback). */
+  effects?: EffectsCatalog;
 }
 
 export class SetupError extends Error {}
@@ -137,6 +140,7 @@ export function createGame(data: DesignData, options: SetupOptions): GameState {
     counters: { wound: 0, monsterInstance: 0, event: 0 },
     turnCap,
     catalog,
+    effects: options.effects ?? {},
   };
 
   // --- Shuffle all piles (deterministic via seed) ---
