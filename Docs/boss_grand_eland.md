@@ -8,6 +8,14 @@
 - **Culture d'origine :** San (Kalahari, Afrique australe)
 - **Référence mythologique :** ǀKaggen — dieu-mante trickster et créateur dans la mythologie San. L'éland est son animal sacré, et son sang contient l'énergie spirituelle. Ici, le boss prend la forme de l'éland colossal de Kaggen, corrompu
 
+## Lore
+
+**Référence :** ǀKaggen — dieu-mante trickster et créateur dans la mythologie San (Kalahari). L'éland est son animal sacré, et son sang contient l'énergie spirituelle. Ici, le boss prend la forme de l'éland colossal de Kaggen, corrompu.
+
+**Lore :** Éland colossal lumineux, pelage doré qui brille d'une lumière intérieure, cornes spiralées hypnotiques. Le pelage est strié de marques noires malades, et son sang qui coule des plaies est un mélange d'or et de noir.
+
+*« Son sang faisait pousser le monde. »*
+
 ## Description visuelle
 
 Éland colossal lumineux. Corps massif d'antilope géante, pelage doré qui semble briller d'une lumière intérieure. Cornes spiralées immenses, presque hypnotiques. Yeux profonds et intelligents — il regarde le chasseur dans les yeux. Sabots qui laissent des empreintes lumineuses. Quand il respire, de la lumière dorée s'échappe de ses naseaux. Une aura sacrée mais corrompue — le pelage doré est strié de marques noires malades, et son sang qui coule des plaies est un mélange d'or et de noir.

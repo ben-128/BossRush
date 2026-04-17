@@ -8,6 +8,14 @@
 - **Culture d'origine :** Aïnou (Hokkaido, Japon)
 - **Référence mythologique :** Akkorokamui — démon marin tentaculaire colossal des profondeurs dans la mythologie aïnou, l'un des kamuy les plus dangereux
 
+## Lore
+
+**Référence :** Akkorokamui — démon marin tentaculaire colossal des profondeurs dans la mythologie aïnou (Hokkaido), l'un des kamuy les plus dangereux.
+
+**Lore :** Corrompu, c'est une pieuvre colossale rouge vif, huit tentacules immenses couverts de ventouses qui ressemblent à des bouches béantes. Certaines ventouses ont des dents humaines, des cristaux noirs poussent sur sa peau.
+
+*« Les profondeurs n'avaient pas de nom. Maintenant si. »*
+
 ## Description visuelle
 
 Pieuvre colossale d'un rouge vif éclatant, presque luminescent. Huit tentacules immenses et torsadés couverts de ventouses qui ressemblent à de petites bouches béantes. Corps central massif, peau visqueuse et luisante. Yeux énormes jaunes et noirs. Bec acéré au centre des tentacules. Quand elle bouge, l'eau bouillonne autour. Corruption visible : certaines ventouses ont des dents humaines, et des cristaux noirs poussent sur sa peau.

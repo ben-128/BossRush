@@ -8,6 +8,14 @@
 - **Culture d'origine :** Afar (Éthiopie/Djibouti)
 - **Référence mythologique :** Gaww — esprit puissant qui prend possession des corps humains et accorde des pouvoirs surnaturels dans la croyance Afar. Les possédés sont appelés "Gawwala"
 
+## Lore
+
+**Référence :** Gaww — esprit puissant de la croyance Afar (Éthiopie/Djibouti) qui prend possession des corps humains et accorde des pouvoirs surnaturels. Les possédés sont appelés « Gawwala ».
+
+**Lore :** Corrompu, il n'a plus de forme fixe : une masse géante d'ombre et de fumée noire, des dizaines de visages humains apparaissent et disparaissent à l'intérieur. Un cœur de cristal noir pulse au centre de la masse.
+
+*« Il habitait les vivants. Maintenant il les vide. »*
+
 ## Description visuelle
 
 Esprit sans forme fixe. Une masse géante d'ombre et de fumée noire qui flotte au-dessus du sol. À l'intérieur de la masse, des dizaines de visages humains apparaissent et disparaissent — bouches ouvertes, yeux écarquillés. Des bras humains émergent et se rétractent dans la masse. Pas de pieds, juste de la fumée. Une couronne de yeux blancs flottants autour de sa "tête". Corruption : un cœur de cristal noir pulse au centre de la masse, visible par moments.

@@ -8,6 +8,14 @@
 - **Culture d'origine :** Mapuche (Chili/Argentine)
 - **Référence mythologique :** Invunche — créature humanoïde monstrueuse déformée par les sorciers (kalku), gardienne des grottes secrètes dans la mythologie mapuche
 
+## Lore
+
+**Référence :** Invunche — créature humanoïde monstrueuse de la mythologie mapuche (Chili/Argentine), déformée par les sorciers kalku, gardienne des grottes secrètes.
+
+**Lore :** Corrompu, c'est un humanoïde géant horriblement déformé : tête retournée à 180°, membres tordus, peau grise marquée de cicatrices rituelles. Des veines noires palpitent sous sa peau translucide.
+
+*« Ce qui reste d'un esprit qu'on a tordu. »*
+
 ## Description visuelle
 
 Humanoïde géant horriblement déformé. Tête retournée à 180° sur le corps — il regarde derrière lui. Membres tordus, démesurés, articulations à l'envers. Une jambe fusionnée à son dos. Peau pâle et grise, parcourue de cicatrices rituelles. Bouche cousue ou sans lèvres. Cheveux longs et sales tombant sur le visage. Il se déplace en rampant, en se traînant sur ses bras tordus. Murmure et gémit constamment. Corruption : des veines noires palpitantes sous sa peau translucide.

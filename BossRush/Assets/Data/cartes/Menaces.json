@@ -11,7 +11,7 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Frappe",
-      "<ico:degat>": 1,
+      "degats": 1,
       "description": "Le boss attaque le héros actif. Inflige <ico:degat>."
     },
     {
@@ -19,7 +19,7 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Frappe",
-      "<ico:degat>": 1,
+      "degats": 1,
       "description": "Le boss attaque le héros actif. Inflige <ico:degat>."
     },
     {
@@ -27,7 +27,7 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Frappe",
-      "<ico:degat>": 1,
+      "degats": 1,
       "description": "Le boss attaque le héros actif. Inflige <ico:degat>."
     },
     {
@@ -35,7 +35,7 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Frappe brutale",
-      "<ico:degat>": 2,
+      "degats": 2,
       "description": "Le boss attaque le héros actif. Inflige <ico:degat><ico:degat>."
     },
     {
@@ -43,7 +43,7 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Balayage",
-      "<ico:degat>": 1,
+      "degats": 1,
       "description": "Chaque héros subit <ico:degat>."
     },
     {
@@ -51,7 +51,7 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Balayage",
-      "<ico:degat>": 1,
+      "degats": 1,
       "description": "Chaque héros subit <ico:degat>."
     },
     {
@@ -80,7 +80,7 @@
       "type": "assaut",
       "sous_type": "attaque",
       "nom": "Frappe vicieuse",
-      "<ico:degat>": 1,
+      "degats": 1,
       "description": "Le boss attaque le héros actif. Inflige <ico:degat>. Le héros actif défausse 1 <ico:chasse> de sa main."
     },
     {
@@ -116,7 +116,7 @@
       "type": "assaut",
       "sous_type": "combo",
       "nom": "Assaut coordonné",
-      "<ico:degat>": 1,
+      "degats": 1,
       "description": "Le boss inflige <ico:degat> au héros actif. Puis <ico:attaque> le monstre en tête de la file du héros actif attaque immédiatement ce héros. S'il n'y a aucun monstre, ignorez cette seconde partie."
     },
     {

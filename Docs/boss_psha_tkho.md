@@ -8,6 +8,14 @@
 - **Culture d'origine :** Circassien (Caucase)
 - **Référence mythologique :** Psha-tkho — esprit vengeur de la forêt, gardien de la nature qui punit les intrus dans la mythologie circassienne (Adyghe)
 
+## Lore
+
+**Référence :** Psha-tkho — esprit vengeur de la forêt dans la mythologie circassienne (Adyghe, Caucase), gardien de la nature qui punit les intrus.
+
+**Lore :** Corrompu, il apparaît comme un colosse mi-arbre mi-géant fait de bois noueux, de mousse verte et de racines noires qui percent le sol. La mousse pourrit par endroits — taches noires de corruption.
+
+*« La forêt l'a fait. La forêt le pleure. »*
+
 ## Description visuelle
 
 Colosse mi-arbre mi-géant. Corps massif fait de bois noueux, d'écorce craquelée et de mousse verte. Bras énormes terminés par des mains-racines. Jambes immenses comme des troncs centenaires. Visage sculpté dans l'écorce du torse, yeux de sève luminescente verte. Une couronne de branches feuillues. Quand il marche, des racines noires (corrompues) percent le sol et étranglent la végétation autour de lui. Mousse partout sur son corps, mais elle pourrit par endroits — taches noires de corruption.

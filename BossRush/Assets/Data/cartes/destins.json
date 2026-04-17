@@ -1,88 +1,155 @@
 {
   "meta": {
-    "description": "Destins — Effets aléatoires tirés pendant le combat",
-    "type": "destin"
+    "description": "Destins — Événements qui surviennent pendant la chasse. 20 cartes : 6 positives, 6 négatives, 8 ambigues (trade-off ou risque/récompense). Chaque carte décrit un événement concret ancré dans le lore. Les cartes infligeant des dégâts ont un champ `degats` pour l'affichage des icônes de blessure.",
+    "type": "destin",
+    "repartition": "6 positifs (DEN_001-006) | 6 négatifs (DEN_007-012) | 8 ambigus (DEN_013-020)",
+    "convention_degats": "Le champ `degats` (int) représente la quantité de <ico:degat> affichée sur la carte. Le champ `effet` précise la cible (ce héros, un autre, chaque héros, etc.)."
   },
   "destins": [
     {
       "id": "DEN_001",
-      "effet": "Chaque héros pioche 1 <ico:chasse>."
+      "type": "positif",
+      "titre": "L'oiseau-guide",
+      "effet": "Chaque héros pioche 1 <ico:chasse>.",
+      "lore": "« Un rapace tourne au-dessus du camp. Chacun voit où frapper. »"
     },
     {
       "id": "DEN_002",
-      "effet": "Le héros est soigné de 2 <ico:degat>."
+      "type": "positif",
+      "titre": "Source cachée",
+      "effet": "Soignez le héros de 2 <ico:degat>.",
+      "lore": "« De l'eau claire jaillit entre les pierres. La plaie se referme. »"
     },
     {
       "id": "DEN_003",
-      "effet": "Un héros au choix régénère sa <ico:capacite>."
+      "type": "positif",
+      "titre": "Songe ancestral",
+      "effet": "Un héros au choix régénère sa <ico:capacite>.",
+      "lore": "« Un aïeul parle dans le rêve. Les mains se souviennent. »"
     },
     {
       "id": "DEN_004",
-      "effet": "Le héros pioche 2 <ico:chasse>."
+      "type": "positif",
+      "titre": "Cache du chasseur mort",
+      "effet": "Le héros pioche 2 <ico:chasse>.",
+      "lore": "« Sous les racines, ce qu'un pisteur tombé a laissé. »"
     },
     {
       "id": "DEN_005",
-      "effet": "Le héros subit 1 <ico:degat>."
+      "type": "positif",
+      "titre": "Feu de conseil",
+      "effet": "Choix collectif : tous les héros piochent 1 <ico:chasse>, OU tous les héros retirent 2 <ico:degat>.",
+      "lore": "« Autour des braises, chacun propose. Le groupe tranche. »"
     },
     {
       "id": "DEN_006",
-      "effet": "<ico:invocation>"
+      "type": "positif",
+      "titre": "Relique affleurée",
+      "effet": "Le héros pioche 1 <ico:chasse>. Si c'est un Objet, il pioche 1 <ico:chasse> supplémentaire.",
+      "lore": "« La pluie a creusé la terre. Ce qui dormait dessous attendait ce jour. »"
     },
     {
       "id": "DEN_007",
-      "effet": "Le héros subit 2 <ico:degat>."
+      "type": "negatif",
+      "titre": "Averse de cendres",
+      "effet": "Chaque héros défausse 1 <ico:chasse> au hasard de sa main.",
+      "lore": "« La cendre tombe du ciel. Les mains ne tiennent plus rien. »"
     },
     {
       "id": "DEN_008",
-      "effet": "Chaque héros subit 1 <ico:degat>."
+      "type": "negatif",
+      "titre": "Outil brisé",
+      "effet": "Le héros défausse un de ses objets posés.",
+      "lore": "« Trop serré, trop usé. Il cède sous la main. »"
     },
     {
       "id": "DEN_009",
-      "effet": "<ico:invocation> <ico:invocation>"
+      "type": "negatif",
+      "titre": "Angle mort",
+      "degats": 1,
+      "effet": "",
+      "lore": "« Une branche fouette. Des crocs surgissent de nulle part. »"
     },
     {
       "id": "DEN_010",
-      "effet": "Le héros pioche 3 <ico:chasse>. Un autre héros au choix subit 1 <ico:degat>."
+      "type": "negatif",
+      "titre": "Bruissement",
+      "effet": "<ico:invocation>",
+      "lore": "« Quelque chose bouge dans les fourrés. Trop tard pour fuir. »"
     },
     {
       "id": "DEN_011",
-      "effet": "Le héros subit 1 <ico:degat> et pioche 1 <ico:chasse>."
+      "type": "negatif",
+      "titre": "Meute",
+      "effet": "<ico:invocation> pour ce héros et le prochain héros.",
+      "lore": "« Ils chassent en nombre maintenant. La corruption apprend. »"
     },
     {
       "id": "DEN_012",
-      "effet": "Le héros défausse 2 <ico:chasse> de type Action pour piocher 2 <ico:chasse>. S'il n'a pas assez de cartes, il subit 2 <ico:degat>."
+      "type": "negatif",
+      "titre": "Offrande de peur",
+      "effet": "Soignez le Colosse de 2 <ico:degat>.",
+      "lore": "« Ses plaies se referment. Nos cris le nourrissent. »"
     },
     {
       "id": "DEN_013",
-      "effet": "Choix collectif : tous les héros piochent 1 <ico:chasse>, OU tous les héros retirent 2 <ico:degat>."
+      "type": "ambigu",
+      "titre": "Cicatrice",
+      "degats": 1,
+      "effet": "Le héros subit 1 <ico:degat> et pioche 1 <ico:chasse>.",
+      "lore": "« La douleur grave ce que la prudence oubliait. »"
     },
     {
       "id": "DEN_014",
-      "effet": "Le héros peut échanger ses cartes avec tous les autres héros. Mais <ico:invocation> et place-le en tête de file."
+      "type": "ambigu",
+      "titre": "Frappe audacieuse",
+      "degats": 2,
+      "effet": "Le Colosse subit 2 <ico:degat> (placez cette carte sous le Colosse). Puis <ico:invocation> dans la file du héros.",
+      "lore": "« Il frappe avant de réfléchir. Son cri attire d'autres ombres. »"
     },
     {
       "id": "DEN_015",
-      "effet": "Un héros au choix pioche 1 <ico:chasse> et subit 1 <ico:degat>."
+      "type": "ambigu",
+      "titre": "Butin mal partagé",
+      "degats": 1,
+      "effet": "Le héros pioche 3 <ico:chasse>. Un autre héros au choix subit 1 <ico:degat>.",
+      "lore": "« Il prend tout. Un autre reste les mains vides, et saigne. »"
     },
     {
       "id": "DEN_016",
-      "effet": "Le héros retire 2 <ico:degat> mais défausse 1 <ico:chasse> de sa main."
+      "type": "ambigu",
+      "titre": "Gué dangereux",
+      "degats": 1,
+      "effet": "Chaque héros pioche 1 <ico:chasse>. Le héros subit 1 <ico:degat>.",
+      "lore": "« Il ouvre la voie. Les autres profitent. Lui saigne. »"
     },
     {
       "id": "DEN_017",
-      "effet": "Chaque héros pioche 1 <ico:chasse> et subit 1 <ico:degat>."
+      "type": "ambigu",
+      "titre": "Troc du guérisseur",
+      "effet": "Le héros retire 2 <ico:degat> et défausse 1 <ico:chasse> de sa main.",
+      "lore": "« Le vieux soigne. En échange, il prend ce qu'il veut. »"
     },
     {
       "id": "DEN_018",
-      "effet": "Le héros régénère sa <ico:capacite>, mais <ico:invocation> dans la file."
+      "type": "ambigu",
+      "titre": "Éclaireur seul",
+      "effet": "Le héros défausse 2 <ico:chasse> de type Action pour piocher 2 <ico:chasse>. S'il n'a pas assez de cartes, il subit 1 <ico:degat>.",
+      "lore": "« Il part devant. Soit il rapporte, soit il ne revient pas. »"
     },
     {
       "id": "DEN_019",
-      "effet": "Le héros subit 2 <ico:degat>. Il pioche 2 <ico:chasse>."
+      "type": "ambigu",
+      "titre": "Rituel",
+      "effet": "Le héros régénère sa <ico:capacite>, et pioche <ico:invocation>.",
+      "lore": "« Le pouvoir revient. Autre chose a senti son odeur. »"
     },
     {
       "id": "DEN_020",
-      "effet": "Le héros pioche 1 <ico:chasse>. Si c'est un Objet, il pioche 1 <ico:chasse> supplémentaire."
+      "type": "ambigu",
+      "titre": "Palabre interrompue",
+      "effet": "Le héros peut échanger des cartes avec tous les autres héros. Puis piochez <ico:invocation>.",
+      "lore": "« Ils s'accordent. Une ombre grandit derrière eux. »"
     }
   ]
 }

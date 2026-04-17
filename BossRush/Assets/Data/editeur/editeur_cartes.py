@@ -21,6 +21,8 @@ else:
     BASE = Path(__file__).parent
 
 DATA_DIR = BASE.parent / "cartes"
+# Docs lives at the project root: BossRush/Assets/Data/editeur/ -> ../../../../Docs
+DOCS_DIR = BASE.parent.parent.parent.parent / "Docs"
 
 # ── Icon system ──────────────────────────────────────────────
 # Each entry: (balise_tag, display_label, emoji_for_display)
@@ -86,11 +88,12 @@ TABS = [
             ("stats.passif", "Passif", "long"),
             ("stats.actif", "Actif", "long"),
             ("monstres_ids", "Monstres IDs", "tags"),
-            ("description", "Description", "long"),
-            ("citation", "Citation", "long"),
+            ("lore_md", "Fichier MD (Docs/)", "text"),
+            ("lore", "Lore (reference + jeu + citation)", "long"),
         ],
         "defaults": {"id": "", "nom": "", "difficulte": "facile", "vie_multiplicateur": 5,
-                     "stats": {"sequence": [], "passif": "", "actif": ""}, "monstres_ids": [], "description": "", "citation": ""},
+                     "stats": {"sequence": [], "passif": "", "actif": ""}, "monstres_ids": [],
+                     "lore_md": "", "lore": ""},
     },
     {
         "key": "monstres",
@@ -148,9 +151,13 @@ TABS = [
         "data_key": "destins",
         "cols": [
             ("id", "ID", "text"),
+            ("type", "Type", "select:positif,negatif,ambigu"),
+            ("titre", "Titre", "text"),
+            ("degats", "Degats", "int-opt"),
             ("effet", "Effet", "long"),
+            ("lore", "Lore (citation)", "long"),
         ],
-        "defaults": {"id": "", "effet": ""},
+        "defaults": {"id": "", "type": "ambigu", "titre": "", "effet": "", "lore": ""},
     },
 ]
 
@@ -443,7 +450,7 @@ class CardEditorApp(tk.Tk):
         items = self.data[key].get("items", [])
         for i, item in enumerate(items):
             iid = str(i)
-            display = item.get("nom") or item.get("effet", "")[:50] or "—"
+            display = item.get("nom") or item.get("titre") or item.get("effet", "")[:50] or "—"
             tree.insert("", "end", iid=iid, values=(item.get("id", ""), display))
         if key == "chasse":
             self._apply_filter(key)
@@ -753,11 +760,53 @@ class CardEditorApp(tk.Tk):
         with open(path, "w", encoding="utf-8") as f:
             json.dump(out, f, ensure_ascii=False, indent=2)
 
+        # Sync boss lore to the associated Docs/<lore_md> (section ## Lore)
+        md_synced = 0
+        if key == "boss":
+            for item in self.data[key]["items"]:
+                md_name = (item.get("lore_md") or "").strip()
+                lore_txt = item.get("lore") or ""
+                if not md_name:
+                    continue
+                if self._sync_lore_to_md(md_name, lore_txt):
+                    md_synced += 1
+
         self.dirty.discard(key)
         n = len(self.data[key]["items"])
-        self.data[key]["info_label"].configure(text=f"Sauvegarde OK — {n} cartes")
+        msg = f"Sauvegarde OK — {n} cartes"
+        if key == "boss" and md_synced:
+            msg += f" (+ {md_synced} MD synchronises)"
+        self.data[key]["info_label"].configure(text=msg)
         self.after(3000, lambda: self.data[key]["info_label"].configure(
             text=f"{tab['file']} — {n} cartes"))
+
+    def _sync_lore_to_md(self, md_name, lore_text):
+        """Write lore_text into the ## Lore section of DOCS_DIR/<md_name>.
+        Creates the section after ## Identité if missing, or replaces it if present.
+        Returns True on success, False if the md file does not exist.
+        """
+        md_path = DOCS_DIR / md_name
+        if not md_path.exists():
+            return False
+        try:
+            content = md_path.read_text(encoding="utf-8")
+        except Exception:
+            return False
+        import re as _re
+        section = f"## Lore\n\n{lore_text.strip()}\n"
+        pat_existing = _re.compile(r"## Lore\s*\n.*?(?=\n## |\Z)", _re.DOTALL)
+        if pat_existing.search(content):
+            new_content = pat_existing.sub(section.rstrip() + "\n", content)
+        else:
+            pat_after_id = _re.compile(r"(## Identité\s*\n.*?)(\n## )", _re.DOTALL)
+            m = pat_after_id.search(content)
+            if m:
+                new_content = content[:m.end(1)] + "\n" + section + m.group(2) + content[m.end():]
+            else:
+                new_content = content.rstrip() + "\n\n" + section
+        if new_content != content:
+            md_path.write_text(new_content, encoding="utf-8")
+        return True
 
     def _save_all(self):
         for tab in TABS:

@@ -8,6 +8,14 @@
 - **Culture d'origine :** Afar (Éthiopie/Djibouti)
 - **Référence mythologique :** Hobab — dragon des terres arides, lié à l'eau et au feu, créature des déserts du Danakil dans la mythologie Afar
 
+## Lore
+
+**Référence :** Hobab — dragon des terres arides dans la mythologie Afar (Éthiopie/Djibouti), lié à l'eau et au feu, créature des déserts du Danakil.
+
+**Lore :** Corrompu, il est devenu un dragon colossal des terres sèches. Corps serpentin couvert d'écailles craquelées comme la terre desséchée, braises rougeoyantes entre les fissures. Des veines de cristal noir courent entre les écailles.
+
+*« Il était la pluie. Il est devenu la cendre. »*
+
 ## Description visuelle
 
 Dragon colossal des terres sèches. Corps long et serpentin couvert d'écailles craquelées comme la terre desséchée — entre les fissures, on voit des braises rougeoyantes. Pattes courtes et griffues, queue lourde qui frappe le sol. Tête anguleuse aux mâchoires énormes. Quand il rugit, du sable brûlant et des cendres s'échappent de sa gueule. Yeux jaunes lumineux. Corruption visible : des veines de cristal noir entre les écailles.

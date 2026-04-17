@@ -9,34 +9,34 @@
       "id": "GUE_A01",
       "nom": "Coup de bouclier",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Le monstre est envoyé en fin de file du prochain héros.",
+      "effet": "Le monstre est envoyé en fond de file du prochain héros.",
       "quantite": 1
     },
     {
       "id": "GUE_A02",
       "nom": "Bousculade",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Déplacez le monstre en tête de la file d'un autre héros au fond de votre file.",
+      "effet": "Le monstre cible est passé au fond de la file.",
       "quantite": 2
     },
     {
       "id": "GUE_A03",
-      "nom": "Plaquage",
+      "nom": "Cri du toqui",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Choisissez le monstre en tête de la file d'un autre héros. Déplacez-le en tête de votre file. Il attaque immédiatement ce héros.",
+      "effet": "Un monstre en tête de la file d'un autre héros se place au fond de votre file.",
       "quantite": 3
     },
     {
       "id": "GUE_A04",
       "nom": "Frappe du survivant",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Nawel",
       "effet": "Soignez ce héros de 1 <ico:degat>.",
       "quantite": 3
@@ -62,7 +62,7 @@
       "nom": "Provocation",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Choisissez jusqu'à 2 monstres en tête d'autres files. Déplacez-les au fond de votre file.",
+      "effet": "Choisissez jusqu'à 3 monstres en tête d'autres files. Déplacez-les au fond de votre file.",
       "quantite": 1
     },
     {
@@ -118,16 +118,16 @@
       "id": "GUE_O06",
       "nom": "Dernier rempart",
       "categorie": "objet",
-      "<ico:degat>": 3,
+      "degats": 3,
       "prerequis": "Nawel",
-      "effet": "Uniquement déclenchable quand ce héros meurt. Inflige 3 <ico:degat> au Colosse. Défaussez cet Objet après résolution.",
+      "effet": "Uniquement déclenchable quand ce héros meurt.",
       "quantite": 1
     },
     {
       "id": "MAG_A01",
       "nom": "Jet de flammes",
       "categorie": "action",
-      "<ico:degat>": 2,
+      "degats": 2,
       "prerequis": "Daraa",
       "quantite": 3
     },
@@ -135,7 +135,7 @@
       "id": "MAG_A02",
       "nom": "Boule de feu",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Daraa",
       "effet": "Ciblez le Colosse ou un monstre au choix dans n'importe quelle file.",
       "quantite": 2
@@ -144,7 +144,7 @@
       "id": "MAG_A03",
       "nom": "Flammes en chaîne",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Daraa",
       "effet": "Si le monstre suivant dans votre file n'a qu'1 point de vie restant, éliminez-le.",
       "quantite": 2
@@ -153,7 +153,7 @@
       "id": "MAG_A04",
       "nom": "Tempête de feu",
       "categorie": "action",
-      "<ico:degat>": 3,
+      "degats": 3,
       "prerequis": "Daraa",
       "quantite": 1
     },
@@ -161,7 +161,7 @@
       "id": "MAG_A05",
       "nom": "Combustion",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Daraa",
       "effet": "Si la cible est éliminée, infligez les <ico:degat> du monstre au monstre suivant dans votre file.",
       "quantite": 2
@@ -235,7 +235,7 @@
       "id": "SOI_A01",
       "nom": "Épine nourricière",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Gao",
       "effet": "Si la cible survit, soignez 1 <ico:degat> d'un héros au choix.",
       "quantite": 1
@@ -244,7 +244,7 @@
       "id": "SOI_A02",
       "nom": "Harmonie du Bosquet",
       "categorie": "action",
-      "<ico:degat>": 3,
+      "degats": 3,
       "prerequis": "Gao",
       "effet": "Uniquement utilisable si aucun allié n'a de <ico:degat>.",
       "quantite": 1
@@ -261,7 +261,7 @@
       "id": "SOI_A04",
       "nom": "Drain de vie",
       "categorie": "action",
-      "<ico:degat>": 2,
+      "degats": 2,
       "prerequis": "Gao",
       "effet": "Si la cible est éliminée, soignez 2 <ico:degat> de ce héros.",
       "quantite": 2
@@ -367,7 +367,7 @@
       "nom": "Dard de sève",
       "categorie": "objet",
       "prerequis": "Gao",
-      "<ico:degat>": 2,
+      "degats": 2,
       "effet": "Uniquement utilisable si un héros a été soigné ce tour-ci.",
       "quantite": 1
     },
@@ -375,7 +375,7 @@
       "id": "ROD_A01",
       "nom": "Tir précis",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Isonash",
       "effet": "Ciblez le Colosse ou un monstre au choix dans n'importe quelle file.",
       "quantite": 3
@@ -384,7 +384,7 @@
       "id": "ROD_A02",
       "nom": "Tir rapide",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Isonash",
       "effet": "Piochez 1 <ico:chasse>.",
       "quantite": 2
@@ -393,7 +393,7 @@
       "id": "ROD_A03",
       "nom": "Flèche empoisonnée",
       "categorie": "action",
-      "<ico:degat>": 2,
+      "degats": 2,
       "prerequis": "Isonash",
       "quantite": 2
     },
@@ -401,7 +401,7 @@
       "id": "ROD_A04",
       "nom": "Tir de couverture",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Isonash",
       "effet": "Ce héros peut poser 1 carte Objet supplémentaire ce tour.",
       "quantite": 1
@@ -410,7 +410,7 @@
       "id": "ROD_A05",
       "nom": "Volée de flèches",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Isonash",
       "effet": "Ce héros peut jouer 1 <ico:action> supplémentaire ce tour.",
       "quantite": 3
@@ -442,7 +442,7 @@
     },
     {
       "id": "ROD_O06",
-      "nom": "?",
+      "nom": "Sève de tamo ",
       "categorie": "objet",
       "prerequis": "Isonash",
       "effet": "Soignez ce héros d'un montant de <ico:degat> égal au nombre de cartes piochées ce tour ci.",
@@ -484,7 +484,7 @@
       "id": "DIP_A01",
       "nom": "Rugissement d'appel",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Aslan",
       "effet": "Un héros allié pioche 1 <ico:chasse>.",
       "quantite": 2
@@ -493,7 +493,7 @@
       "id": "DIP_A02",
       "nom": "Frappe coordonnée",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Aslan",
       "effet": "Deux héros ciblés peuvent s'échanger des <ico:action>.",
       "quantite": 3
@@ -502,7 +502,7 @@
       "id": "DIP_A03",
       "nom": "Attaque inspirante",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Aslan",
       "effet": "Tous les héros piochent 1 <ico:chasse>.",
       "quantite": 1
@@ -511,7 +511,7 @@
       "id": "DIP_A04",
       "nom": "Lame du pacte",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Aslan",
       "effet": "Deux héros ciblés peuvent s'échanger des cartes Objet de leurs mains.",
       "quantite": 1
@@ -520,7 +520,7 @@
       "id": "DIP_A05",
       "nom": "Ordre d'assaut",
       "categorie": "action",
-      "<ico:degat>": 1,
+      "degats": 1,
       "prerequis": "Aslan",
       "effet": "Un héros allié joue 1 <ico:action> immédiatement.",
       "quantite": 2
@@ -538,7 +538,7 @@
       "nom": "Ultimatum",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Éliminez le monstre en tête de votre file, ou celui d'un héros allié.",
+      "effet": "Éliminez le monstre en tête de votre file d'un héros allié.",
       "quantite": 1
     },
     {
@@ -554,7 +554,7 @@
       "nom": "Don du Gué",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Donnez jusqu'à 3 <ico:chasse> à un héros allié. Soignez 1 <ico:degat> pour chaque carte pouvant être utilisée par le héros cible.",
+      "effet": "Donnez jusqu'à 3 <ico:chasse> à un héros allié. Soignez 1 <ico:degat> de ce héros pour chaque carte pouvant être utilisée par le héros cible.",
       "quantite": 1
     },
     {
@@ -562,14 +562,14 @@
       "nom": "Rebellion",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Choisissez le monstre en tête de la file d'un héros. Il attaque le Colosse. Il est ensuite défaussé.",
+      "effet": "Choisissez le monstre en tête de la file d'un héros. Il attaque le Colosse.",
       "quantite": 1
     },
     {
       "id": "DIP_A11",
       "nom": "Frappe au cœur",
       "categorie": "action",
-      "<ico:degat>": 3,
+      "degats": 3,
       "prerequis": "Aslan",
       "effet": "Cible uniquement le Colosse.",
       "quantite": 1
@@ -587,7 +587,7 @@
       "nom": "Corne de ralliement",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Les héros alliés peuvent donner à ce héros 1 <ico:action> chacun.",
+      "effet": "Les héros alliés peuvent donner à ce héros 1 <ico:chasse> chacun.",
       "quantite": 1
     },
     {
@@ -595,7 +595,7 @@
       "nom": "Crinière d'or",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Ce héros peut donner 1 <ico:action> à chaque héros allié.",
+      "effet": "Ce héros peut donner 1 <ico:chasse> à chaque héros allié.",
       "quantite": 1
     },
     {

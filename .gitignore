@@ -23,3 +23,7 @@ Thumbs.db
 comfyui_workflows/download.txt
 comfyui_workflows/*_secret*
 comfyui_workflows/*_token*
+
+# PyInstaller build artifacts (regenerated on each build)
+BossRush/Assets/Data/editeur/build/
+BossRush/Assets/Data/editeur/dist/

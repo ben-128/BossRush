@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: La Piste
+  m_text: Le Porte-Voix
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1588330614}
@@ -755,7 +755,7 @@ MonoBehaviour:
     scaleDistance: 0.07
     scaleSoin: 0.1
     scaleMagie: 0.09
-    scaleDiplomatie: 0.05
+    scaleDiplomatie: 0.07
     offsetArmure: {x: -0.26, y: 0}
     offsetDistance: {x: -0.26, y: -0.14}
     offsetSoin: {x: -0.26, y: -0.04}
@@ -780,8 +780,7 @@ MonoBehaviour:
     pv: 4
     competences:
     - magie
-    capacite_speciale: "\xC9liminez tous les monstres de votre file ayant 1 point
-      de vie restant."
+    capacite_speciale: "\xC9liminez tous les monstres bless\xE9s."
     description: 
     citation: "\xAB Le feu est patient. Elle ne l'est pas. \xBB"
   - nom: Gao
@@ -792,7 +791,7 @@ MonoBehaviour:
     pv: 4
     competences:
     - soin
-    capacite_speciale: "Retire toutes les blessures d'un h\xE9ros au choix."
+    capacite_speciale: "Retire toutes les <ico:degat> d'un h\xE9ros au choix."
     description: 
     citation: "\xAB Tant qu'il respire, personne ne tombe. \xBB"
   - nom: Nawel
@@ -803,8 +802,8 @@ MonoBehaviour:
     pv: 7
     competences:
     - armure
-    capacite_speciale: "Ce h\xE9ros ne subit aucune blessures jusqu'\xE0 la fin du
-      tour."
+    capacite_speciale: "Ce h\xE9ros ne subit aucune <ico:degat> jusqu'\xE0 la fin
+      du tour."
     description: 
     citation: "\xAB Il encaisse. Encore. Et encore. \xBB"
   - nom: Isonash
@@ -820,8 +819,8 @@ MonoBehaviour:
     citation: "\xAB On voit la premi\xE8re fl\xE8che. Jamais les suivantes. \xBB"
   - nom: Aslan
     sprite: {fileID: 21300000, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
-    offset: {x: 0, y: -0.35}
-    scale: 0.725
+    offset: {x: 0, y: -0.1}
+    scale: 0.69
     titre: Le Porte-Voix
     pv: 5
     competences:
@@ -1508,7 +1507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Isonash
+  m_text: Aslan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: 1248990885}
@@ -1689,7 +1688,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b9014a589c978a49b1bc410fb3d6827, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c686d7bfc0c36341bd5fa9cd8ab8c6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1709,7 +1708,7 @@ Transform:
   m_GameObject: {fileID: 1171038901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26, y: -0.14, z: -1}
+  m_LocalPosition: {x: -0.26, y: 0, z: -1}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1732,7 +1731,7 @@ MonoBehaviour:
   offsetY: 0
   shadowScale: 1.15
   sortingOrderOffset: -1
-  centerOnAlphaCentroid: 1
+  centerOnAlphaCentroid: 0
   debugLog: 0
 --- !u!1 &1203465507
 GameObject:
@@ -2216,7 +2215,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Jouez imm\xE9diatement 2 <sprite name=\"action\"> de votre main."
+  m_text: "Tous les h\xE9ros peuvent s'\xE9changer autant de cartes qu'ils le souhaitent
+    jusqu'\xE0 la fin du tour."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 294818322}
@@ -2235,7 +2235,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: d48c661b3a0935a46b9c95a2510e6870, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -2361,7 +2361,7 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0.01}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.01}
   m_LocalScale: {x: 0.69, y: 0.69, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2411,7 +2411,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: 345ad6f44c425394a8164b1dfdfd9036, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2771,7 +2771,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB On voit la premi\xE8re fl\xE8che. Jamais les suivantes. \xBB</i>"
+  m_text: "<i>\xAB Cinq tribus parlent par sa bouche. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -2790,7 +2790,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: d48c661b3a0935a46b9c95a2510e6870, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
