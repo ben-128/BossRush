@@ -279,6 +279,38 @@ export interface CardEffectEntry {
   ops: EffectOp[];
   /** AI decision tag (§12 of the plan). Used later by heuristic policies. */
   tag?: string;
+
+  /** Monster triggers — only meaningful on MON_xxx entries. */
+  triggers?: {
+    onArrive?: EffectOp[];
+    onAttack?: EffectOp[];
+    onDamage?: EffectOp[];
+    onEliminate?: EffectOp[];
+  };
+
+  /** Boss — only meaningful on BOSS_xxx entries. */
+  actif_ops?: EffectOp[];
+  /** Boss passifs described as modifier recipes applied once at setup. */
+  passif_modifiers?: Array<{
+    effect: ModifierEffect;
+    scope: ModifierScope;
+  }>;
+  /**
+   * Non-modifier passifs that hook at specific runtime points (see boss
+   * passive dispatch). Stored as a list of predicate names; handlers in
+   * `engine/bossPassifs.ts` translate them to concrete behaviour.
+   */
+  passif_hooks?: Array<
+    | 'attack_order_next_queue_too'
+    | 'max_draws_per_turn_1'
+    | 'hand_cap_6_end_of_turn'
+    | 'damage_unhealable_from_menace'
+    | 'reshuffle_heals_boss_2'
+    | 'active_discards_top_chasse_on_action'
+    | 'invunche_draw_destin_on_damage'
+    | 'heal_cap_1'
+    | 'boss_receives_max_1_damage_per_turn'
+  >;
 }
 
 /** Top-level file shape for simulator/data/effects.json. */

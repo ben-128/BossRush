@@ -293,6 +293,97 @@
     "DEN_017": { "effet": "Troc guérisseur : heal 2 + discard 1", "tag": "destin_amb", "ops": [{ "op": "heal", "target": "self", "amount": 2 }, { "op": "discard", "target": "self", "n": 1 }] },
     "DEN_018": { "effet": "Eclaireur seul : discard 2 + draw 2 (stub)", "tag": "destin_amb", "ops": [{ "op": "discard", "target": "self", "n": 2 }, { "op": "draw", "target": "self", "n": 2 }] },
     "DEN_019": { "effet": "Rituel : régénère + invocation", "tag": "destin_amb", "ops": [{ "op": "regenCapacite", "target": "self" }, { "op": "summon", "target": "self", "n": 1 }] },
-    "DEN_020": { "effet": "Palabre : échanges (stub : each draw 1) + invocation", "tag": "destin_amb", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }, { "op": "summon", "target": "self", "n": 1 }] }
+    "DEN_020": { "effet": "Palabre : échanges (stub : each draw 1) + invocation", "tag": "destin_amb", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }, { "op": "summon", "target": "self", "n": 1 }] },
+
+    "BOSS_001": {
+      "effet": "Hobab — actif : chaque héros blessé défausse 1",
+      "actif_ops": [
+        { "op": "forEach", "over": "each_hero", "do": [
+          { "op": "require", "cond": { "self_damage": { "op": ">=", "value": 1 } } },
+          { "op": "discard", "target": "self", "n": 1 }
+        ]}
+      ],
+      "passif_hooks": ["damage_unhealable_from_menace"]
+    },
+    "BOSS_002": {
+      "effet": "Pshato — actif : soigne boss 2 ; passif : main cap 6 fin de tour",
+      "actif_ops": [{ "op": "bossHeal", "amount": 2 }],
+      "passif_hooks": ["hand_cap_6_end_of_turn"]
+    },
+    "BOSS_003": {
+      "effet": "Caicai — actif : déplace chaque tête au fond file suivante (stub : each summon 1) ; passif : ordres d'attaque sur 2 files",
+      "actif_ops": [{ "op": "forEach", "over": "each_hero", "do": [{ "op": "summon", "target": "self", "n": 1 }] }],
+      "passif_hooks": ["attack_order_next_queue_too"]
+    },
+    "BOSS_004": {
+      "effet": "Invunche — actif : pioche Destin ; passif : damage héros → pioche Destin",
+      "actif_ops": [{ "op": "drawDestin", "target": "active" }],
+      "passif_hooks": ["invunche_draw_destin_on_damage"]
+    },
+    "BOSS_005": {
+      "effet": "Akkoro — actif : héros actif défausse 1 objet posé (stub : discard main 1) ; passif : chaque Action → défausse top Chasse",
+      "actif_ops": [{ "op": "discard", "target": "active", "n": 1 }],
+      "passif_hooks": ["active_discards_top_chasse_on_action"]
+    },
+    "BOSS_006": {
+      "effet": "Hoyau — actif : transfère 1 dégât boss → héros actif ; passif : soins cap 1",
+      "actif_ops": [{ "op": "shiftDamage", "from": "self", "to": "boss", "amount": 1 }],
+      "passif_hooks": ["heal_cap_1"],
+      "passif_modifiers": [
+        { "effect": { "kind": "heal_cap", "max": 1 }, "scope": "thisTurn" }
+      ]
+    },
+    "BOSS_007": {
+      "effet": "Azhda — actif : héros actif ne peut que piocher (stub : discard 1 main) ; passif : boss avant héros (non codé)",
+      "actif_ops": [{ "op": "discard", "target": "active", "n": 1 }]
+    },
+    "BOSS_008": {
+      "effet": "Gaww — actif : héros actif défausse main + pioche autant (stub : draw 5) ; passif : reshuffle Chasse → boss heal 2",
+      "actif_ops": [{ "op": "draw", "target": "active", "n": 5 }],
+      "passif_hooks": ["reshuffle_heals_boss_2"]
+    },
+    "BOSS_009": {
+      "effet": "Kaggen — actif : chaque héros défausse 1 au hasard ; passif : max 1 pioche/tour",
+      "actif_ops": [{ "op": "forEach", "over": "each_hero", "do": [{ "op": "discard", "target": "self", "n": 1, "random": true }] }],
+      "passif_hooks": ["max_draws_per_turn_1"]
+    },
+    "BOSS_010": {
+      "effet": "Khwa — actif : invocation dans chaque file ; passif : 1 dmg max reçu/tour",
+      "actif_ops": [{ "op": "forEach", "over": "each_hero", "do": [{ "op": "summon", "target": "self", "n": 1 }] }],
+      "passif_hooks": ["boss_receives_max_1_damage_per_turn"]
+    },
+
+    "MON_002": {
+      "effet": "Essaim — éliminé : pioche 1 monstre au fond de la file",
+      "triggers": { "onEliminate": [{ "op": "summon", "target": "self", "n": 1 }] }
+    },
+    "MON_009": {
+      "effet": "Carapace — éliminé : le tueur pioche 1",
+      "triggers": { "onEliminate": [{ "op": "draw", "target": "self", "n": 1 }] }
+    },
+    "MON_011": {
+      "effet": "Brume — dégât → héros défausse 1",
+      "triggers": { "onDamage": [{ "op": "discard", "target": "self", "n": 1 }] }
+    },
+    "MON_012": {
+      "effet": "Murmure — éliminé : pioche 1 Destin",
+      "triggers": { "onEliminate": [{ "op": "drawDestin", "target": "self" }] }
+    },
+    "MON_015": {
+      "effet": "Rampant — éliminé : soigne héros de 1",
+      "triggers": { "onEliminate": [{ "op": "heal", "target": "self", "amount": 1 }] }
+    },
+    "MON_016": {
+      "effet": "Sangsue — dégât → soigne boss 1",
+      "triggers": { "onDamage": [{ "op": "bossHeal", "amount": 1 }] }
+    },
+    "MON_017": {
+      "effet": "Gangue — éliminé : tous les héros piochent 1",
+      "triggers": { "onEliminate": [{ "op": "draw", "target": "each_hero", "n": 1 }] }
+    },
+    "MON_018": {
+      "effet": "Bond — arrivée : se place en tête (stub : éliminé 0 dégâts ne marche pas, no-op pour l'instant)",
+      "triggers": { "onArrive": [{ "op": "require", "cond": { "hand_size": { "op": ">=", "value": 0 } } }] }
+    }
   }
 }

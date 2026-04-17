@@ -125,6 +125,10 @@ export interface GameState {
   /** Flag set during Menace resolution; op cancelMenace reads this. */
   menaceCancelled?: boolean;
 
+  /** Per-turn bookkeeping for boss passifs. */
+  perTurnDraws?: Record<number, number>;
+  bossDamagedThisTurn?: boolean;
+
   /**
    * Per-seat policy references. Set by runGame()/runTurn() so effect
    * handlers can consult them (pickChoice, pickHeroTarget, ...). Empty by

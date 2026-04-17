@@ -17,6 +17,8 @@ import { applyPlayerAction } from './actions.js';
 import { resolveBossSequence } from './bossSequence.js';
 import { emit } from './logger.js';
 import { clearScope } from './modifiers.js';
+import { hookHandCapAtEndOfTurn, resetPerTurnFlags } from './bossPassifs.js';
+import { addModifier } from './modifiers.js';
 
 export interface RunOptions {
   /** One policy per seat. Length must match nPlayers. */
@@ -52,6 +54,15 @@ export function runTurn(state: GameState, policies: Policy[]): void {
   }
 
   state.turn += 1;
+  resetPerTurnFlags(state);
+  // Install boss passif modifiers for this turn (thisTurn-scoped; they auto
+  // re-install at the start of every turn).
+  const bossEntry = state.effects[state.boss.bossId];
+  if (bossEntry?.passif_modifiers) {
+    for (const pm of bossEntry.passif_modifiers) {
+      addModifier(state, pm.effect, pm.scope, state.boss.bossId);
+    }
+  }
   emit(state, { kind: 'TURN_START', turn: state.turn, seat });
 
   // 1. Hero action
@@ -71,6 +82,7 @@ export function runTurn(state: GameState, policies: Policy[]): void {
   emit(state, { kind: 'PHASE', phase: 'BOSS_SEQUENCE' });
   resolveBossSequence(state);
 
+  hookHandCapAtEndOfTurn(state);
   // Clear modifiers with 'thisTurn' scope at turn end.
   clearScope(state, 'thisTurn');
   emit(state, { kind: 'TURN_END', turn: state.turn, seat });

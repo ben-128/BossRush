@@ -22,6 +22,7 @@ import { drawOne, discard } from './piles.js';
 import { damageHero, damageBoss, damageMonster } from './damage.js';
 import { runOps, mkCtx } from './effects.js';
 import { consumeAttackBonus, onAttackResolved } from './modifiers.js';
+import { hookDiscardTopOnAction, hookDrawAllowed } from './bossPassifs.js';
 
 // ---------------------------------------------------------------------------
 // Action types exchanged with the AI policy
@@ -100,7 +101,10 @@ function doDraw(state: GameState, seat: number): void {
   const h = state.heroes[seat];
   if (!h) return;
   const drew: CarteChasse[] = [];
-  for (let i = 0; i < 2; i++) {
+  // Kaggen passif caps at 1 draw per turn; we still emit ACTION_DRAW but
+  // with fewer cards.
+  const allowed = hookDrawAllowed(state, seat) ? 2 : 0;
+  for (let i = 0; i < allowed; i++) {
     const c = drawOne(state, state.piles.chasse, 'chasse');
     if (!c) break;
     drew.push(c);
@@ -208,6 +212,7 @@ function playAction(
   }
 
   onAttackResolved(state, seat);
+  hookDiscardTopOnAction(state);
 }
 
 /**

@@ -20,6 +20,8 @@ import { emit, notImplemented } from './logger.js';
 import { drawOne, discard } from './piles.js';
 import { damageHero } from './damage.js';
 import { resolveMenace } from './menaces.js';
+import { runOps, mkCtx } from './effects.js';
+import { hookExtraAttackOrderQueue } from './bossPassifs.js';
 
 function nextInstanceId(state: GameState): string {
   state.counters.monsterInstance += 1;
@@ -68,6 +70,11 @@ export function summonMonsterInQueue(state: GameState, seat: number): void {
     cardName: m.nom,
     seat: targetSeat,
   });
+  // onArrive trigger (e.g. Bond goes to head).
+  const trig = state.effects[m.id]?.triggers?.onArrive;
+  if (trig && trig.length > 0) {
+    runOps(state, mkCtx(targetSeat, m.id, 'monstre'), trig);
+  }
 }
 
 /**
@@ -92,6 +99,22 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
   const monsterCard = state.catalog.monstreById.get(head.cardId);
   const dmg = monsterCard?.degats ?? 1;
 
+  // onAttack trigger (e.g. Reflux recule en fond de file, n'attaque pas).
+  const atkTrig = state.effects[head.cardId]?.triggers?.onAttack;
+  if (atkTrig && atkTrig.length > 0) {
+    const skip = { cancelled: false };
+    // Convention: if the trigger moves this monster away, the attack is
+    // considered cancelled for this call.
+    runOps(state, mkCtx(seat, head.cardId, 'monstre'), atkTrig);
+    // If head changed, the trigger redirected; emit an ATTACK_ORDER log and
+    // return — the next queue head (if any) can be tapped by a later call.
+    if (h.queue[0]?.instanceId !== head.instanceId) {
+      emit(state, { kind: 'ATTACK_ORDER', seat, instanceId: null });
+      return;
+    }
+    void skip;
+  }
+
   emit(state, { kind: 'ATTACK_ORDER', seat, instanceId: head.instanceId });
   emit(state, {
     kind: 'ATTACK',
@@ -100,24 +123,29 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
     degats: dmg,
   });
 
-  // Remove from queue first, then apply damage (card becomes a wound under
-  // the hero). This ordering matters: if the hero dies, the queue transfer
-  // to next hero does NOT include this monster (it's now a wound).
   h.queue.shift();
   damageHero(state, seat, {
     amount: dmg,
     source: 'monstre',
     sourceCardId: head.cardId,
   });
+
+  // onDamage trigger (e.g. Brume défausse, Sangsue soigne boss).
+  const dmgTrig = state.effects[head.cardId]?.triggers?.onDamage;
+  if (dmgTrig && dmgTrig.length > 0) {
+    runOps(state, mkCtx(seat, head.cardId, 'monstre'), dmgTrig);
+  }
 }
 
-/** Trigger boss actif (⚡). J2: not implemented — logged only. */
+/** Trigger boss actif (⚡). Uses DSL if present, otherwise logs. */
 function triggerBossActif(state: GameState): void {
-  emit(state, {
-    kind: 'BOSS_ACTIF_TRIGGERED',
-    bossId: state.boss.bossId,
-    implemented: false,
-  });
+  const entry = state.effects[state.boss.bossId];
+  if (entry?.actif_ops && entry.actif_ops.length > 0) {
+    emit(state, { kind: 'BOSS_ACTIF_TRIGGERED', bossId: state.boss.bossId, implemented: true });
+    runOps(state, mkCtx(state.activeSeat, state.boss.bossId, 'boss'), entry.actif_ops);
+    return;
+  }
+  emit(state, { kind: 'BOSS_ACTIF_TRIGGERED', bossId: state.boss.bossId, implemented: false });
   notImplemented(state, 'boss_actif', state.boss.bossId);
 }
 
@@ -139,9 +167,12 @@ function resolveIcon(state: GameState, icon: BossIcon): void {
     case 'invocation':
       summonMonsterInQueue(state, state.activeSeat);
       return;
-    case 'attaque':
+    case 'attaque': {
       resolveAttackOrder(state, state.activeSeat);
+      const extra = hookExtraAttackOrderQueue(state);
+      if (extra !== undefined) resolveAttackOrder(state, extra);
       return;
+    }
     case 'actif_boss':
       triggerBossActif(state);
       return;

@@ -222,11 +222,43 @@ const OpCancelMenace = z.object({
   op: z.literal('cancelMenace'),
 });
 
+const TriggerOps = z.object({
+  onArrive: z.array(EffectOp).optional(),
+  onAttack: z.array(EffectOp).optional(),
+  onDamage: z.array(EffectOp).optional(),
+  onEliminate: z.array(EffectOp).optional(),
+});
+
+const PassifModifierEntry = z.object({
+  effect: ModifierEffect,
+  scope: z.enum(['thisTurn', 'nextDamageToSelf', 'nextAttackByActive']),
+});
+
+const PassifHook = z.enum([
+  'attack_order_next_queue_too',
+  'max_draws_per_turn_1',
+  'hand_cap_6_end_of_turn',
+  'damage_unhealable_from_menace',
+  'reshuffle_heals_boss_2',
+  'active_discards_top_chasse_on_action',
+  'invunche_draw_destin_on_damage',
+  'heal_cap_1',
+  'boss_receives_max_1_damage_per_turn',
+]);
+
 export const CardEffectEntrySchema = z.object({
   effet: z.string().optional(),
-  ops: z.array(EffectOp).min(1),
+  ops: z.array(EffectOp).min(1).optional(),
   tag: z.string().optional(),
-});
+  triggers: TriggerOps.optional(),
+  actif_ops: z.array(EffectOp).optional(),
+  passif_modifiers: z.array(PassifModifierEntry).optional(),
+  passif_hooks: z.array(PassifHook).optional(),
+}).refine(
+  (v) =>
+    v.ops || v.triggers || v.actif_ops || v.passif_modifiers || v.passif_hooks,
+  { message: 'entry must have at least one of: ops, triggers, actif_ops, passif_modifiers, passif_hooks' },
+);
 
 export const EffectsCatalogSchema = z.record(z.string(), CardEffectEntrySchema);
 

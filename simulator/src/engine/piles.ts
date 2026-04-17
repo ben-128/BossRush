@@ -14,6 +14,7 @@ import type { GameState, Pile } from './gameState.js';
 import type { PileName } from './events.js';
 import { Rng } from './rng.js';
 import { emit } from './logger.js';
+import { hookReshuffleHealsBoss } from './bossPassifs.js';
 
 function withRng<T>(state: GameState, fn: (rng: Rng) => T): T {
   const rng = Rng.fromState(state.rngState);
@@ -29,6 +30,7 @@ function ensureDrawable<T>(state: GameState, pile: Pile<T>, name: PileName): voi
   pile.draw = reshuffled;
   pile.discard = [];
   emit(state, { kind: 'PILE_RESHUFFLE', pile: name, size: pile.draw.length });
+  hookReshuffleHealsBoss(state, name);
 }
 
 /** Draw one card from a named pile. Returns undefined if both stacks empty. */
