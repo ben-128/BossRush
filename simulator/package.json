@@ -8,7 +8,8 @@
     "sync-data": "node scripts/sync-data.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "smoke": "tsx src/cli/smoke.ts"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

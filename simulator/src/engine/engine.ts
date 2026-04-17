@@ -1,0 +1,109 @@
+/**
+ * Top-level engine: run a full turn, run a whole game.
+ *
+ * A turn goes through the phases HERO_ACTION → BOSS_SEQUENCE → (next seat).
+ * Capacité Spéciale usage is NOT in J2 and will slot in later (see §12 of
+ * the plan).
+ *
+ * The engine exits early if result !== 'running' at any point.
+ *
+ * A turnCap (default 200) guards against runaway simulations — reaching it
+ * ends the game as a defeat with a specific WARN event.
+ */
+
+import type { GameState } from './gameState.js';
+import type { Policy } from '../ai/random.js';
+import { applyPlayerAction } from './actions.js';
+import { resolveBossSequence } from './bossSequence.js';
+import { emit } from './logger.js';
+
+export interface RunOptions {
+  /** One policy per seat. Length must match nPlayers. */
+  policies: Policy[];
+  /** Console-log events as they happen (for manual debugging). */
+  verbose?: boolean;
+}
+
+/** Advance the active seat clockwise, skipping dead heroes. */
+function advanceSeat(state: GameState): void {
+  for (let offset = 1; offset <= state.nPlayers; offset++) {
+    const idx = (state.activeSeat + offset) % state.nPlayers;
+    const h = state.heroes[idx];
+    if (h && !h.dead) {
+      state.activeSeat = idx;
+      return;
+    }
+  }
+  // No living hero — defeat should already be set.
+}
+
+export function runTurn(state: GameState, policies: Policy[]): void {
+  if (state.result !== 'running') return;
+
+  const seat = state.activeSeat;
+  const hero = state.heroes[seat];
+  if (!hero || hero.dead) {
+    emit(state, { kind: 'SKIP_TURN', seat, reason: 'hero_dead' });
+    return;
+  }
+
+  state.turn += 1;
+  emit(state, { kind: 'TURN_START', turn: state.turn, seat });
+
+  // 1. Hero action
+  state.phase = 'HERO_ACTION';
+  emit(state, { kind: 'PHASE', phase: 'HERO_ACTION' });
+  const policy = policies[seat];
+  if (!policy) {
+    emit(state, { kind: 'SKIP_TURN', seat, reason: 'no_policy' });
+  } else {
+    const action = policy.pickAction(state);
+    applyPlayerAction(state, action);
+  }
+  if (state.result !== 'running') return;
+
+  // 2. Boss sequence
+  state.phase = 'BOSS_SEQUENCE';
+  emit(state, { kind: 'PHASE', phase: 'BOSS_SEQUENCE' });
+  resolveBossSequence(state);
+
+  emit(state, { kind: 'TURN_END', turn: state.turn, seat });
+}
+
+/** Run until victory, defeat, or turnCap reached. */
+export function runGame(state: GameState, options: RunOptions): void {
+  while (state.result === 'running') {
+    if (state.turn >= state.turnCap) {
+      emit(state, {
+        kind: 'WARN',
+        message: `Turn cap (${state.turnCap}) reached — forcing defeat`,
+      });
+      state.result = 'defeat';
+      state.phase = 'GAME_END';
+      break;
+    }
+    runTurn(state, options.policies);
+    if (state.result !== 'running') break;
+    advanceSeat(state);
+  }
+
+  const deadSeats = state.heroes.filter((h) => h.dead).map((h) => h.seatIdx);
+  const bossHpRemaining = Math.max(
+    0,
+    state.boss.vieMax - state.boss.wounds.reduce((s, w) => s + w.degats, 0),
+  );
+  emit(state, {
+    kind: 'GAME_END',
+    result: state.result === 'victory' ? 'victory' : 'defeat',
+    turns: state.turn,
+    bossHpRemaining,
+    deadHeroes: deadSeats,
+  });
+
+  if (options.verbose) {
+    for (const ev of state.events) {
+      // eslint-disable-next-line no-console
+      console.log(JSON.stringify(ev));
+    }
+  }
+}
