@@ -153,17 +153,31 @@ function applyForEachOp(state: GameState, ctx: EffectContext, op: OpForEach): vo
 }
 
 function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice): void {
-  // J3.5: choice is resolved by RNG (policy.pickChoice hook comes later).
-  // A heuristic layer can override this by pre-selecting an option before
-  // runOps is called — for now we record the chosen label for the log.
-  const rng = Rng.fromState(state.rngState);
-  const idx = rng.nextInt(0, op.options.length - 1);
-  state.rngState = rng.state;
+  const who = op.who ?? 'active';
+  const decidingSeat =
+    who === 'active'
+      ? ctx.sourceSeat
+      : (state.heroes.find((h) => !h.dead)?.seatIdx ?? ctx.sourceSeat);
+
+  // Ask policy first; fall back to RNG.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const policy = state.policies[decidingSeat] as any;
+  let idx: number;
+  if (policy && typeof policy.pickChoice === 'function') {
+    idx = policy.pickChoice(state, decidingSeat, ctx.sourceCardId, op.options);
+    if (!Number.isInteger(idx) || idx < 0 || idx >= op.options.length) {
+      idx = 0;
+    }
+  } else {
+    const rng = Rng.fromState(state.rngState);
+    idx = rng.nextInt(0, op.options.length - 1);
+    state.rngState = rng.state;
+  }
   const chosen = op.options[idx];
   if (!chosen) return;
   emit(state, {
     kind: 'WARN',
-    message: `choice source=${ctx.sourceCardId} picked=${chosen.label}`,
+    message: `choice source=${ctx.sourceCardId} picked=${chosen.label} by=${policy?.name ?? 'rng'}`,
   });
   runOps(state, ctx, chosen.ops);
 }

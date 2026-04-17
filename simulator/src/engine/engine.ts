@@ -12,7 +12,7 @@
  */
 
 import type { GameState } from './gameState.js';
-import type { Policy } from '../ai/random.js';
+import type { Policy } from '../ai/policy.js';
 import { applyPlayerAction } from './actions.js';
 import { resolveBossSequence } from './bossSequence.js';
 import { emit } from './logger.js';
@@ -40,6 +40,9 @@ function advanceSeat(state: GameState): void {
 
 export function runTurn(state: GameState, policies: Policy[]): void {
   if (state.result !== 'running') return;
+  // Stash policies on state so effect handlers can consult them (choice op,
+  // target picks). Overwritten at each turn to reflect caller choice.
+  state.policies = policies;
 
   const seat = state.activeSeat;
   const hero = state.heroes[seat];

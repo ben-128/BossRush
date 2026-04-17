@@ -21,11 +21,9 @@ import {
   isObjetPlayableRenfort,
   meetsPrerequisite,
 } from '../engine/actions.js';
+import type { Policy } from './policy.js';
 
-export interface Policy {
-  name: string;
-  pickAction(state: GameState): PlayerAction;
-}
+export type { Policy };
 
 function withRng<T>(state: GameState, fn: (rng: Rng) => T): T {
   const rng = Rng.fromState(state.rngState);

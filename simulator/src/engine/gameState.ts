@@ -121,6 +121,16 @@ export interface GameState {
 
   /** Active persistent modifiers. See engine/modifiers.ts. */
   modifiers: ModifierRec[];
+
+  /**
+   * Per-seat policy references. Set by runGame()/runTurn() so effect
+   * handlers can consult them (pickChoice, pickHeroTarget, ...). Empty by
+   * default — effect handlers fall back to RNG.
+   *
+   * Imported lazily to avoid a cycle with ai/policy.ts.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  policies: any[];
 }
 
 // ---------------------------------------------------------------------------
