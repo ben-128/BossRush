@@ -17,7 +17,7 @@ import { applyPlayerAction } from './actions.js';
 import { resolveBossSequence } from './bossSequence.js';
 import { emit } from './logger.js';
 import { clearScope } from './modifiers.js';
-import { hookHandCapAtEndOfTurn, resetPerTurnFlags } from './bossPassifs.js';
+import { hookBossBeforeHeroes, hookHandCapAtEndOfTurn, resetPerTurnFlags } from './bossPassifs.js';
 import { addModifier } from './modifiers.js';
 
 export interface RunOptions {
@@ -65,22 +65,34 @@ export function runTurn(state: GameState, policies: Policy[]): void {
   }
   emit(state, { kind: 'TURN_START', turn: state.turn, seat });
 
-  // 1. Hero action
-  state.phase = 'HERO_ACTION';
-  emit(state, { kind: 'PHASE', phase: 'HERO_ACTION' });
-  const policy = policies[seat];
-  if (!policy) {
-    emit(state, { kind: 'SKIP_TURN', seat, reason: 'no_policy' });
-  } else {
-    const action = policy.pickAction(state);
-    applyPlayerAction(state, action);
-  }
-  if (state.result !== 'running') return;
+  const bossFirst = hookBossBeforeHeroes(state);
 
-  // 2. Boss sequence
-  state.phase = 'BOSS_SEQUENCE';
-  emit(state, { kind: 'PHASE', phase: 'BOSS_SEQUENCE' });
-  resolveBossSequence(state);
+  const heroPhase = () => {
+    state.phase = 'HERO_ACTION';
+    emit(state, { kind: 'PHASE', phase: 'HERO_ACTION' });
+    const policy = policies[seat];
+    if (!policy) {
+      emit(state, { kind: 'SKIP_TURN', seat, reason: 'no_policy' });
+    } else {
+      const action = policy.pickAction(state);
+      applyPlayerAction(state, action);
+    }
+  };
+  const bossPhase = () => {
+    state.phase = 'BOSS_SEQUENCE';
+    emit(state, { kind: 'PHASE', phase: 'BOSS_SEQUENCE' });
+    resolveBossSequence(state);
+  };
+
+  if (bossFirst) {
+    bossPhase();
+    if (state.result !== 'running') return;
+    heroPhase();
+  } else {
+    heroPhase();
+    if (state.result !== 'running') return;
+    bossPhase();
+  }
 
   hookHandCapAtEndOfTurn(state);
   // Clear modifiers with 'thisTurn' scope at turn end.

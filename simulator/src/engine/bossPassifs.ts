@@ -114,3 +114,8 @@ export function resetPerTurnFlags(state: GameState): void {
   state.perTurnDraws = {};
   state.bossDamagedThisTurn = false;
 }
+
+/** Azhda : true iff the boss acts before the hero this turn. */
+export function hookBossBeforeHeroes(state: GameState): boolean {
+  return hooks(state).includes('boss_before_heroes');
+}

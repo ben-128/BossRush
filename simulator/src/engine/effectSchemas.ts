@@ -151,6 +151,9 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpRemoveAllWounds,
     OpRevive,
     OpCancelMenace,
+    OpMoveSelfMonsterToHead,
+    OpPlayMoreActions,
+    OpOpenFreeExchange,
   ]),
 );
 
@@ -221,6 +224,18 @@ const OpRevive = z.object({
 const OpCancelMenace = z.object({
   op: z.literal('cancelMenace'),
 });
+const OpMoveSelfMonsterToHead = z.object({
+  op: z.literal('moveSelfMonsterToHead'),
+});
+const OpPlayMoreActions = z.object({
+  op: z.literal('playMoreActions'),
+  n: z.number().int().positive(),
+  restrictTo: z.literal('play_action_only').optional(),
+});
+const OpOpenFreeExchange = z.object({
+  op: z.literal('openFreeExchange'),
+  maxSwaps: z.number().int().positive().optional(),
+});
 
 const TriggerOps = z.object({
   onArrive: z.array(EffectOp).optional(),
@@ -244,6 +259,7 @@ const PassifHook = z.enum([
   'invunche_draw_destin_on_damage',
   'heal_cap_1',
   'boss_receives_max_1_damage_per_turn',
+  'boss_before_heroes',
 ]);
 
 export const CardEffectEntrySchema = z.object({

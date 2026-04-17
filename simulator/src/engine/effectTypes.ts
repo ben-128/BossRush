@@ -230,6 +230,35 @@ export interface OpCancelMenace {
   op: 'cancelMenace';
 }
 
+/**
+ * Move the triggering monster instance to the head of its own queue
+ * (used by MON_018 Bond onArrive). Only meaningful inside monster triggers
+ * where `ctx.sourceCardId` corresponds to a monster freshly placed.
+ */
+export interface OpMoveSelfMonsterToHead {
+  op: 'moveSelfMonsterToHead';
+}
+
+/**
+ * Give the control back to the active hero's policy for N extra actions.
+ * Used by Isonash (play 2 more actions) and similar meta-abilities. The
+ * policy picks a PlayerAction each time; the engine executes it as a
+ * regular applyPlayerAction call.
+ */
+export interface OpPlayMoreActions {
+  op: 'playMoreActions';
+  n: number;
+  /** Restrict the follow-up action kind. Default allows any. */
+  restrictTo?: 'play_action_only';
+}
+
+/** Open a free exchange window across all heroes (Aslan capacité). */
+export interface OpOpenFreeExchange {
+  op: 'openFreeExchange';
+  /** Max total swaps to perform (policy-driven). */
+  maxSwaps?: number;
+}
+
 export interface OpModifier {
   op: 'modifier';
   effect: ModifierEffect;
@@ -269,7 +298,10 @@ export type EffectOp =
   | OpShiftDamage
   | OpRemoveAllWounds
   | OpRevive
-  | OpCancelMenace;
+  | OpCancelMenace
+  | OpMoveSelfMonsterToHead
+  | OpPlayMoreActions
+  | OpOpenFreeExchange;
 
 /** One entry per card id in effects.json. */
 export interface CardEffectEntry {
@@ -310,6 +342,7 @@ export interface CardEffectEntry {
     | 'invunche_draw_destin_on_damage'
     | 'heal_cap_1'
     | 'boss_receives_max_1_damage_per_turn'
+    | 'boss_before_heroes'
   >;
 }
 

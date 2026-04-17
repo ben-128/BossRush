@@ -160,6 +160,13 @@ export function damageMonster(
   });
   const m = state.catalog?.monstreById.get(monster.cardId);
   const vie = m?.vie ?? 1;
+  // Ombre-style passif: immune tant que pas en tête de file.
+  if (monster.cardId === 'MON_010' && h.queue[0]?.instanceId !== monster.instanceId) {
+    // Retire immediately the wound we just added — monster ignores damage.
+    monster.wounds.pop();
+    emit(state, { kind: 'WARN', message: `MON_010 Ombre ignores damage (not queue head)` });
+    return false;
+  }
   if (totalWoundsOfMonster(monster) >= vie) {
     eliminateMonster(state, seat, instanceId);
     return true;

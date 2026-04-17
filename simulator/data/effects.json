@@ -199,14 +199,14 @@
       "ops": [{ "op": "modifier", "target": "self", "scope": "thisTurn", "effect": { "kind": "no_damage", "seat": 0 } }]
     },
     "HERO_004": {
-      "effet": "Isonash — Joue 2 Actions (stub : pioche 4)",
-      "tag": "draw_engine",
-      "ops": [{ "op": "draw", "target": "self", "n": 4 }]
+      "effet": "Isonash — Joue 2 Actions immédiatement",
+      "tag": "play_more_actions",
+      "ops": [{ "op": "playMoreActions", "n": 2, "restrictTo": "play_action_only" }]
     },
     "HERO_005": {
-      "effet": "Aslan — Échanges libres (stub : chaque héros pioche 1)",
-      "tag": "draw_aoe",
-      "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }]
+      "effet": "Aslan — Échanges libres (stand-in simplifié)",
+      "tag": "global_buff",
+      "ops": [{ "op": "openFreeExchange", "maxSwaps": 4 }]
     },
 
     "EPR_016": {
@@ -334,8 +334,9 @@
       ]
     },
     "BOSS_007": {
-      "effet": "Azhda — actif : héros actif ne peut que piocher (stub : discard 1 main) ; passif : boss avant héros (non codé)",
-      "actif_ops": [{ "op": "discard", "target": "active", "n": 1 }]
+      "effet": "Azhda — actif : héros actif ne peut que piocher (stub : discard 1) ; passif : boss avant héros",
+      "actif_ops": [{ "op": "discard", "target": "active", "n": 1 }],
+      "passif_hooks": ["boss_before_heroes"]
     },
     "BOSS_008": {
       "effet": "Gaww — actif : héros actif défausse main + pioche autant (stub : draw 5) ; passif : reshuffle Chasse → boss heal 2",
@@ -382,7 +383,11 @@
       "triggers": { "onEliminate": [{ "op": "draw", "target": "each_hero", "n": 1 }] }
     },
     "MON_018": {
-      "effet": "Bond — arrivée : se place en tête (stub : éliminé 0 dégâts ne marche pas, no-op pour l'instant)",
+      "effet": "Bond — arrivée : se place en tête de file",
+      "triggers": { "onArrive": [{ "op": "moveSelfMonsterToHead" }] }
+    },
+    "MON_010": {
+      "effet": "Ombre — immune tant que pas en tête (handle dans damageMonster)",
       "triggers": { "onArrive": [{ "op": "require", "cond": { "hand_size": { "op": ">=", "value": 0 } } }] }
     }
   }

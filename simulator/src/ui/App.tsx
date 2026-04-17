@@ -2,12 +2,15 @@ import { useEffect } from 'react';
 import { useStore } from './store.js';
 import { Setup } from './Setup.js';
 import { Game } from './Game.js';
+import { Dashboard } from './Dashboard.js';
 
 export function App() {
   const loading = useStore((s) => s.loading);
   const error = useStore((s) => s.error);
   const design = useStore((s) => s.design);
   const state = useStore((s) => s.state);
+  const view = useStore((s) => s.view);
+  const setView = useStore((s) => s.setView);
   const load = useStore((s) => s.load);
 
   useEffect(() => {
@@ -27,15 +30,61 @@ export function App() {
     return <div className="p-8 text-stone-400">Chargement des données…</div>;
   }
 
+  const body =
+    view === 'dashboard'
+      ? <Dashboard />
+      : view === 'game' && state
+        ? <Game />
+        : <Setup />;
+
   return (
     <div className="min-h-screen">
       <header className="px-4 py-2 border-b border-stone-700 flex justify-between items-center">
-        <h1 className="text-lg font-semibold">Raid Party — Simulateur</h1>
+        <div className="flex items-center gap-4">
+          <h1 className="text-lg font-semibold">Raid Party — Simulateur</h1>
+          <nav className="flex gap-1 text-xs">
+            <TabBtn active={view === 'setup'} onClick={() => setView('setup')}>Setup</TabBtn>
+            <TabBtn
+              active={view === 'game'}
+              onClick={() => state && setView('game')}
+              disabled={!state}
+            >
+              Partie
+            </TabBtn>
+            <TabBtn active={view === 'dashboard'} onClick={() => setView('dashboard')}>Dashboard</TabBtn>
+          </nav>
+        </div>
         <span className="text-xs text-stone-400">
-          {state ? `Tour ${state.turn} / seed ${state.seed}` : 'Setup'}
+          {state ? `Tour ${state.turn} / seed ${state.seed} / ${state.result}` : 'Setup'}
         </span>
       </header>
-      {state ? <Game /> : <Setup />}
+      {body}
     </div>
+  );
+}
+
+function TabBtn({
+  active,
+  disabled,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`px-2 py-1 rounded ${
+        active
+          ? 'bg-stone-700 text-stone-100'
+          : 'text-stone-400 hover:bg-stone-800'
+      } disabled:opacity-40 disabled:cursor-not-allowed`}
+    >
+      {children}
+    </button>
   );
 }

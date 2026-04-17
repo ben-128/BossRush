@@ -120,6 +120,67 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       state.menaceCancelled = true;
       emit(state, { kind: 'WARN', message: `menace cancelled by ${ctx.sourceCardId}` });
       return;
+    case 'playMoreActions': {
+      // Re-invoke the active hero's policy for N extra decisions.
+      // Dynamic import for applyPlayerAction to avoid circular dep.
+      const policy = state.policies[ctx.sourceSeat];
+      if (!policy) return;
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      import('./actions.js').then(({ applyPlayerAction }) => {
+        for (let i = 0; i < op.n; i++) {
+          if (state.result !== 'running') break;
+          const action = policy.pickAction(state);
+          if (op.restrictTo === 'play_action_only' && action.kind !== 'play') continue;
+          applyPlayerAction(state, action);
+        }
+      });
+      return;
+    }
+    case 'openFreeExchange': {
+      // Policy-driven free exchange window. Simple implementation: for up to
+      // maxSwaps, let each living hero (other than active) offer one card;
+      // the active hero takes it if their hand has room. This is a loose
+      // stand-in for "échanges libres" until a dedicated multi-hero flow is
+      // wired. Log the action for visibility.
+      const max = op.maxSwaps ?? 3;
+      const active = state.heroes[ctx.sourceSeat];
+      if (!active) return;
+      let done = 0;
+      for (const other of state.heroes) {
+        if (done >= max) break;
+        if (other.dead || other.seatIdx === ctx.sourceSeat) continue;
+        if (other.hand.length === 0 || active.hand.length === 0) continue;
+        // Trade one card per pair.
+        const given = active.hand.shift()!;
+        const received = other.hand.shift()!;
+        active.hand.push(received);
+        other.hand.push(given);
+        emit(state, {
+          kind: 'ACTION_EXCHANGE',
+          seat: ctx.sourceSeat,
+          withSeat: other.seatIdx,
+          given: [given.id],
+          received: [received.id],
+        });
+        done++;
+      }
+      return;
+    }
+    case 'moveSelfMonsterToHead': {
+      // Find the newest-added instance of ctx.sourceCardId in the source
+      // seat's queue and bubble it to index 0.
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      for (let i = h.queue.length - 1; i >= 0; i--) {
+        if (h.queue[i]!.cardId === ctx.sourceCardId) {
+          const [inst] = h.queue.splice(i, 1);
+          if (inst) h.queue.unshift(inst);
+          emit(state, { kind: 'WARN', message: `${ctx.sourceCardId} moved to queue head (seat ${ctx.sourceSeat})` });
+          break;
+        }
+      }
+      return;
+    }
     default: {
       const _exhaust: never = op;
       return _exhaust;

@@ -8,6 +8,8 @@ import { runTurn, runGame } from '../engine/engine.js';
 import { randomPolicy } from '../ai/random.js';
 import { loadAllData } from './browserLoader.js';
 
+export type View = 'setup' | 'game' | 'dashboard';
+
 interface Store {
   loading: boolean;
   error: string | null;
@@ -16,6 +18,9 @@ interface Store {
 
   state: GameState | null;
   running: boolean;
+
+  view: View;
+  setView: (v: View) => void;
 
   // Setup form
   form: {
@@ -32,6 +37,7 @@ interface Store {
 
   load: () => Promise<void>;
   start: () => void;
+  replayFromRow: (row: { seed: string; boss: string; heroes: string[] }) => void;
   nextTurn: () => void;
   runToEnd: () => void;
   reset: () => void;
@@ -50,6 +56,8 @@ export const useStore = create<Store>((set, get) => ({
   effects: {},
   state: null,
   running: false,
+  view: 'setup',
+  setView: (v) => set({ view: v }),
   form: { ...DEFAULT_FORM },
 
   setBoss: (id) => set((s) => ({ form: { ...s.form, boss: id } })),
@@ -96,7 +104,28 @@ export const useStore = create<Store>((set, get) => ({
       heroIds: form.heroIds,
       effects,
     });
-    set({ state, running: true });
+    set({ state, running: true, view: 'game' });
+  },
+
+  /** Replay from batch summary: fill form, run, switch to game view. */
+  replayFromRow: (row: { seed: string; boss: string; heroes: string[] }) => {
+    const { design, effects } = get();
+    if (!design) return;
+    const seedNum = Number(row.seed);
+    const seed = Number.isFinite(seedNum) && row.seed.trim() !== '' ? seedNum : row.seed;
+    const state = createGame(design, {
+      seed,
+      nPlayers: row.heroes.length,
+      bossId: row.boss,
+      heroIds: row.heroes,
+      effects,
+    });
+    set({
+      state,
+      running: true,
+      view: 'game',
+      form: { boss: row.boss, heroIds: row.heroes, seed: String(seed) },
+    });
   },
 
   nextTurn: () => {
@@ -128,7 +157,7 @@ export const useStore = create<Store>((set, get) => ({
   },
 
   reset: () => {
-    set({ state: null, running: false });
+    set({ state: null, running: false, view: 'setup' });
   },
 }));
 
