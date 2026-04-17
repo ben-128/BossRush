@@ -1,0 +1,22 @@
+{
+  "name": "raid-party-simulator",
+  "version": "0.0.1",
+  "description": "Simulateur web du jeu Raid Party — outil d'équilibrage et de visualisation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync-data": "node scripts/sync-data.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}
