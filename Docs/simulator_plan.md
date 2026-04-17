@@ -351,3 +351,170 @@ le simu est un outil **en lecture pure**.
 - **Politique IA sur les choix** : paramétrable par run via `--choicePolicy=random|heuristic`. Pas de défaut imposé, à choisir selon ce qu'on teste.
 - **Taille de batch CLI** : paramétrable via `--runs N`, **défaut = 100**. Override libre pour des batchs plus précis (1 000 / 10 000).
 - **Export des valeurs** : aucun. Le simu ne modifie jamais les JSON. Voir § 7.3.
+
+---
+
+## 11. Difficultés potentielles d'implémentation des effets
+
+Recensement fait en lisant tous les JSON de cartes. Classé par criticité pour
+le moteur.
+
+### 11.1 Difficultés structurelles (pas une carte, une mécanique)
+
+1. **Réactions / interrupts (objets + capacités « n'importe quand »)**
+   - Cartes concernées : `GUE_O02` Bouclier tawan (intercepte la prochaine source), `SOI_O02` Totem (annule dégât mortel + suivants), `GUE_O06` Dernier rempart (quand ce héros meurt), `MAG_O04` Cristal (sur monstre attaquant), `GUE_O05` Heaume et `DIP_O05` Traité (annulent une Menace en cours).
+   - Implication : le moteur ne peut pas être une séquence linéaire. Il faut une **pile d'effets interruptible** avec fenêtres de réaction (avant dégât, avant attaque, à la pioche d'une Menace, à la mort d'un héros).
+
+2. **Modifieurs temporaires avec portée**
+   - « Jusqu'à la fin du tour » (capacité Nawel, Totem), « prochaine action » (`MAG_O02` Braise), « 1 action supplémentaire ce tour » (`ROD_A05` Volée), « 1 Objet supplémentaire ce tour » (`ROD_A04` Couverture), objets de type renfort (`GUE_O01`, `ROD_O01`, `MAG_O03`, `MAG_O04`) qui amplifient une attaque.
+   - Implication : système de **buffs** attachés à `thisTurn` / `nextAction` / `nextDamage` / `nextSource`, avec cleanup automatique aux bornes.
+
+3. **Compteurs par tour**
+   - `ROD_O03` Amulette = actions + objets joués ce tour, `ROD_O06` Sève = cartes piochées ce tour, `ROD_O04` Griffe = requiert ≥ 2 cartes jouées ce tour, `SOI_O05` Dard = requiert héros soigné ce tour, capacité Isonash = 2 actions de la main.
+   - Implication : dict de compteurs dans `GameState`, remis à 0 au `END_TURN`.
+
+4. **Passifs boss qui changent la résolution globale**
+   - `BOSS_003` Caicai : ordres d'attaque sur **deux** files.
+   - `BOSS_005` Akkoro : chaque action défausse le top de la pile Chasse.
+   - `BOSS_006` Hoyau : soins cappés à 1.
+   - `BOSS_007` Azhda : **le boss joue avant les héros** (inverse la structure du tour).
+   - `BOSS_008` Gaww : hook sur « pile Chasse vide ».
+   - `BOSS_009` Kaggen : max 1 pioche par tour et par héros (cap global).
+   - `BOSS_010` Khwa : reçoit des dégâts 1 seule fois par tour.
+   - `BOSS_004` Invunche : trigger « quand il inflige des blessures ».
+   - Implication : système de **hooks globaux** (pas juste op par op). Azhda force à généraliser la state machine pour supporter un ordre de tour variable.
+
+5. **Cartes blessures comme entités identifiables**
+   - `SOI_A03` Transfert de traumas, `SOI_A11` Partage du souffle, `GUE_A08` Endosser, `MAG_A06` Transfert de cendres, actif de Hoyau (`BOSS_006`).
+   - Implication : une pile de blessures n'est **pas** un entier. Chaque carte a un ID et une valeur 🩸, peut être déplacée, soignée ou transférée. Le modèle doit tracker chaque carte.
+
+6. **Attaques chaînées / conditionnelles sur résultat**
+   - `MAG_A03` Flammes en chaîne (élimine suivant si 1 PV), `MAG_A05` Combustion (dégâts = valeur du monstre éliminé — **variable**), `ROD_O02` Flèches transperçantes (cible suivante si éliminée), `SOI_A01` « si la cible survit », `SOI_A04` Drain « si cible éliminée ».
+   - Implication : l'exécuteur doit savoir si une attaque a tué sa cible et rerouter vers la cible suivante avec potentiellement un montant dépendant du résultat.
+
+### 11.2 Triggers monstres non standard
+
+7. **Placement et attaque non standard**
+   - `MON_018` Bond : `onArrive` → se place en tête (pas en fond).
+   - `MON_019` Reflux : `onAttack` → si pas seul, part en fond et passe le tour au suivant monstre.
+   - `MON_010` Ombre : modifieur passif — immune tant que pas en tête.
+   - `MON_002` Essaim : `onEliminate` → pioche **une nouvelle carte Monstre** et la place en fond de file (potentiel re-trigger si le pioché est un autre Essaim — à borner dans le moteur pour éviter les boucles infinies).
+   - `MON_011` Brume : `onDamage` → défausse une carte du héros.
+   - `MON_016` Sangsue : `onDamage` → soigne le boss.
+   - `MON_009` Carapace, `MON_012` Murmure, `MON_015` Rampant, `MON_017` Gangue : `onEliminate` → effet sur le tueur ou sur tous.
+
+### 11.3 Interactions inter-joueurs
+
+8. **Un joueur déclenche une action chez un autre**
+   - `DIP_A05` Ordre d'assaut (allié joue une Action immédiatement), `DIP_A09` Don du Gué (3 cartes + soin selon jouabilité par la cible), `DIP_O03` Coffre et `DIP_O05` Traité (objets jouables par n'importe quel héros), capacité Aslan (échanges libres généralisés), `DIP_A08` Troc astucieux (échange d'objets posés, utilisables sans restriction).
+   - Implication : le moteur doit pouvoir **passer la main** temporairement à un autre joueur (UI ou IA). Les politiques IA doivent décider pour le joueur passif.
+
+9. **Manipulations de pioche / défausse**
+   - `SOI_A09` Mémoire des racines : pioche 4 **dans la défausse**.
+   - `ROD_A07` Flair de la Lisière : regarder les 5 du dessus, garder 2, remettre 3 **dans l'ordre choisi**.
+   - Passif `BOSS_005` Akkoro : défausse du top à chaque action.
+   - Passif `BOSS_008` Gaww : hook à la fin de la pile Chasse.
+   - Implication : les défausses ne sont pas des tas abstraits ; il faut y piocher, ordonner, peek.
+
+### 11.4 Ciblage et filtres
+
+10. **Queries de ciblage complexes**
+    - `GUE_A06` Rage du blessé : n'importe quel monstre de ma file + condition (self.degats ≥ 4).
+    - `ROD_O04` Griffe de kamuy : n'importe quel monstre n'importe où + condition (≥ 2 cartes jouées).
+    - `MAG_O04` Cristal : monstre **en train d'attaquer** à ≤ 2 PV — cible contextuelle dépendante du moment.
+    - `GUE_A07` Provocation : jusqu'à 3 têtes d'autres files.
+    - `DIP_A12` Ralliement : tous les monstres de toutes les autres files → une file.
+    - Capacité Daraa : tous les monstres avec ≥ 1 dégât.
+    - Capacité Mage (règles) : tous les monstres à 1 PV.
+    - Implication : le DSL doit supporter un mini-langage de query (`pick`, `all`, `filter by`, `where`).
+
+### 11.5 Tour et structure
+
+11. **Régénération de capacité spéciale**
+    - `MAG_A08` Chant de Daraartu, `MAG_O01` Cendres, `SOI_A08` Rituel, `SOI_O04` Masque, `DEN_003` Songe, `DEN_019` Rituel.
+    - Implication : état `capaciteUtilisee` par héros + op `regenCapacite` qui le repose à false.
+
+12. **Mort et redistribution des files**
+    - Règle : monstres du héros mort → file du suivant horaire.
+    - Interactions : `GUE_O06` Dernier rempart se déclenche à la mort, `SOI_A06` Souffle du Kalahari ressuscite, règles de tour sautent les héros morts.
+    - Implication : ordre de jeu dynamique + hook `onHeroDeath`.
+
+13. **Cibles bypass les règles par défaut**
+    - `DIP_A11` Frappe au cœur : cible uniquement le Colosse, **ignore la règle « vider sa file avant de taper le boss »** (confirmé).
+    - Implication : flag `ignoreDefaultTargeting` ou équivalent sur les attaques concernées.
+
+### 11.6 Ambiguïtés tranchées
+
+- **`DIP_A11` Frappe au cœur** — « cible uniquement le Colosse » : **bypass** la contrainte de file. Peut frapper le boss même si la file n'est pas vide.
+- **`SOI_A10` Sacrifice vital** — « un autre héros au choix subit 2 dégâts » : **le joueur actif choisit** la cible.
+- **`MON_002` Essaim** — `onEliminate` « piochez et placez-le en fond de file » : c'est **la nouvelle carte piochée** qui entre en jeu, pas l'Essaim qui revient. La carte texte pourra être clarifiée plus tard.
+
+### 11.7 Ambiguïtés à trancher
+
+- **`MAG_A03` Flammes en chaîne** — « si le monstre suivant dans votre file n'a qu'1 PV restant » : PV restant = vie - blessures actuelles au moment où l'on vérifie. À confirmer pour les cas après-attaque.
+- **`DEN_019` Rituel** — « pioche `<ico:invocation>` » : une seule invocation, ou autant que d'icônes affichées sur la carte ?
+- **`SOI_A02` Harmonie du Bosquet** — « aucun allié n'a de dégâts » : inclut ce héros (le joueur actif) ou uniquement les autres ?
+- **`SOI_A03` Transfert de traumas** — « quel que soit son nombre de dégâts » : même si la carte blessure a plus de 🩸 que la vie du monstre cible → le monstre est-il éliminé immédiatement, ou le transfert est simplement autorisé ?
+- **Capacité Aslan** — « échanger autant de cartes qu'ils le souhaitent jusqu'à la fin du tour » : Objets posés compris ou uniquement la main ?
+- **Objets utilisables à la mort (`GUE_O06` Dernier rempart)** : si le héros est mort suite à la blessure mortelle, qui décide de le déclencher (le joueur contrôlant ce héros) et dans quel ordre avec les autres réactions ?
+
+Liste à enrichir au fur et à mesure de l'annotation de `effects.json`.
+
+---
+
+## 12. IA pour les objets posés et capacités spéciales
+
+Problème : ces cartes sont **jouables à tout moment pendant le tour du héros**
+et leur valeur dépend du contexte. **V1 = niveau 1 + niveau 2** combinés.
+
+### 12.1 Niveau 1 — Fenêtres de décision fixes
+
+Plutôt que d'autoriser une décision à chaque instant, l'IA ne réfléchit qu'à
+des **points de décision** bien définis :
+
+```
+startOfTurn()               → objets proactifs (pioche, setup)
+beforeAction()              → buffs d'attaque (renforts)
+afterAction()               → post-effets
+beforeBossSequence()        → protection préventive
+onIncomingDamage(amount)    → réactions défensives
+onIncomingMenace(cardId)    → annulations de Menace
+onHeroDeath()               → Dernier rempart
+endOfTurn()                 → rare
+```
+
+Chaque objet / capacité est déclaré comme éligible à une ou plusieurs
+fenêtres dans `effects.json`. Le scheduler de l'IA parcourt uniquement les
+objets éligibles à la fenêtre courante.
+
+### 12.2 Niveau 2 — Scoring par famille
+
+Chaque objet / capacité est taggé avec une **famille** et une **règle de
+déclenchement** stockées dans `effects.json`. La V1 couvre ces familles :
+
+| Tag | Exemples | Règle de déclenchement |
+|---|---|---|
+| `boost_attack` | `GUE_O01`, `ROD_O01`, `MAG_O03` | Avec la plus grosse attaque jouée ce tour |
+| `reactive_heal` | `GUE_O04`, `MAG_O05`, capacité Gao | Si blessures ≥ vie − 2 |
+| `prevent_lethal` | `SOI_O02`, `GUE_O02`, capacité Nawel | Si prochain dégât serait létal |
+| `burst_trigger` | `GUE_O06`, `MAG_O04` | Trigger imposé par la carte, auto-déclenché |
+| `draw_engine` | `MAG_O05`, `ROD_O05`, `DIP_O03` | Début de tour si main < 3 |
+| `utility_condition` | `ROD_O04` (≥ 2 cartes jouées), `SOI_O05` (soin effectué) | Dès que la condition est remplie |
+| `cancel_menace` | `GUE_O05`, `DIP_O05` | À la pioche d'une Menace coûteuse (> seuil) |
+| `regen_capacity` | `MAG_O01`, `SOI_O04`, `MAG_A08` | Si capacité utilisée et valeur estimée > seuil |
+| `global_buff` | Capacité Aslan | Quand un allié a une carte utile à échanger |
+| `elim_on_demand` | Capacité Daraa | Quand ≥ 2 monstres blessés en jeu |
+| `shift_damage` | `GUE_A08`, `MAG_A06`, `SOI_A11` | Rééquilibrage si un allié est critique |
+
+Les tags et seuils vivent dans `effects.json` — ajustables sans recompiler.
+
+### 12.3 Ce qui est volontairement **exclu** de V1
+
+- Scoring continu utility-based (niveau 3).
+- MCTS / rollouts (niveau 4).
+
+Ces niveaux viennent dans V2 **si et seulement si** les logs montrent des
+comportements manifestement bêtes (objet jamais joué, capacité toujours
+gaspillée). Tant que l'heuristique est **cohérente et lisible**, elle sert
+pour l'équilibrage — un biais constant ne fausse pas la comparaison entre
+deux configs.
