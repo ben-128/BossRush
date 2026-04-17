@@ -47,6 +47,8 @@ import { emit } from './logger.js';
 import { Rng } from './rng.js';
 import type { WoundSource } from './events.js';
 import { addModifier } from './modifiers.js';
+import { triggerBossActif, resolveAttackOrder } from './bossSequence.js';
+import { applyPlayerAction } from './actions.js';
 
 export interface EffectContext {
   /** Seat that is resolving the effect (plays the card, triggers the ability). */
@@ -166,6 +168,537 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       }
       return;
     }
+    case 'bossActif':
+      triggerBossActif(state);
+      return;
+    case 'ignorePrereqNext': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (h) {
+        h.nextActionIgnoresPrereq = true;
+        emit(state, {
+          kind: 'WARN',
+          message: `ignorePrereqNext set on seat ${ctx.sourceSeat} by ${ctx.sourceCardId}`,
+        });
+      }
+      return;
+    }
+    case 'drawPerSelfWound': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const n = h.wounds.reduce((s, w) => s + w.degats, 0);
+      if (n === 0) return;
+      for (let i = 0; i < n; i++) {
+        const c = drawOne(state, state.piles.chasse, 'chasse');
+        if (!c) break;
+        h.hand.push(c);
+        emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
+      }
+      return;
+    }
+    case 'rallyToSelf': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      for (const other of state.heroes) {
+        if (other.dead || other.seatIdx === ctx.sourceSeat) continue;
+        while (other.queue.length > 0) {
+          const moved = other.queue.shift()!;
+          self.queue.push(moved);
+          emit(state, {
+            kind: 'MONSTER_MOVED',
+            instanceId: moved.instanceId,
+            cardId: moved.cardId,
+            fromSeat: other.seatIdx,
+            toSeat: ctx.sourceSeat,
+            position: 'tail',
+            sourceCardId: ctx.sourceCardId,
+          });
+        }
+      }
+      return;
+    }
+    case 'giveCardsFromAllies': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      const selfNom = state.catalog.heroesById.get(self.heroId)?.nom;
+      for (const ally of state.heroes) {
+        if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+        if (ally.hand.length === 0) continue;
+        // Prefer a card whose prereq matches self (mutually beneficial).
+        let idx = selfNom ? ally.hand.findIndex((c) => c.prerequis === selfNom) : -1;
+        if (idx === -1) idx = 0;
+        const [card] = ally.hand.splice(idx, 1);
+        if (card) {
+          self.hand.push(card);
+          emit(state, {
+            kind: 'ACTION_EXCHANGE',
+            seat: ctx.sourceSeat,
+            withSeat: ally.seatIdx,
+            given: [],
+            received: [card.id],
+            reason: `don via ${ctx.sourceCardId}`,
+          });
+        }
+      }
+      return;
+    }
+    case 'giveCardsToAllies': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      for (const ally of state.heroes) {
+        if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+        if (self.hand.length === 0) break;
+        const allyNom = state.catalog.heroesById.get(ally.heroId)?.nom;
+        // Prefer a card whose prereq matches the ally (they'll use it).
+        let idx = allyNom ? self.hand.findIndex((c) => c.prerequis === allyNom) : -1;
+        if (idx === -1) idx = 0;
+        const [card] = self.hand.splice(idx, 1);
+        if (card) {
+          ally.hand.push(card);
+          emit(state, {
+            kind: 'ACTION_EXCHANGE',
+            seat: ctx.sourceSeat,
+            withSeat: ally.seatIdx,
+            given: [card.id],
+            received: [],
+            reason: `don via ${ctx.sourceCardId}`,
+          });
+        }
+      }
+      return;
+    }
+    case 'grantExtraPose': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (h) h.extraPoseAvailable = true;
+      return;
+    }
+    case 'swapHandWithAlly': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      const selfNom = state.catalog.heroesById.get(self.heroId)?.nom;
+      // Pick the best ally: one whose hand contains a card matching self AND
+      // where self has a card matching them. Fallback: first living ally.
+      let bestAlly: typeof self | undefined;
+      let bestGive = -1;
+      let bestTake = -1;
+      for (const ally of state.heroes) {
+        if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+        const allyNom = state.catalog.heroesById.get(ally.heroId)?.nom;
+        if (!allyNom || !selfNom) continue;
+        const giveIdx = self.hand.findIndex((c) => c.prerequis === allyNom);
+        const takeIdx = ally.hand.findIndex((c) => c.prerequis === selfNom);
+        if (giveIdx !== -1 && takeIdx !== -1) {
+          bestAlly = ally;
+          bestGive = giveIdx;
+          bestTake = takeIdx;
+          break;
+        }
+      }
+      if (!bestAlly) {
+        for (const ally of state.heroes) {
+          if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+          if (ally.hand.length === 0 || self.hand.length === 0) continue;
+          bestAlly = ally;
+          bestGive = 0;
+          bestTake = 0;
+          break;
+        }
+      }
+      if (!bestAlly) return;
+      const [given] = self.hand.splice(bestGive, 1);
+      const [received] = bestAlly.hand.splice(bestTake, 1);
+      if (given) bestAlly.hand.push(given);
+      if (received) self.hand.push(received);
+      emit(state, {
+        kind: 'ACTION_EXCHANGE',
+        seat: ctx.sourceSeat,
+        withSeat: bestAlly.seatIdx,
+        given: given ? [given.id] : [],
+        received: received ? [received.id] : [],
+        reason: `swap via ${ctx.sourceCardId}`,
+      });
+      return;
+    }
+    case 'swapObjectsWithAlly': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      // Pick the ally whose posed objects would best fit self's prereq, and
+      // whose prereq matches our posed objects.
+      const selfNom = state.catalog.heroesById.get(self.heroId)?.nom;
+      let bestAlly: typeof self | undefined;
+      for (const ally of state.heroes) {
+        if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+        if (ally.objects.length === 0 && self.objects.length === 0) continue;
+        const allyNom = state.catalog.heroesById.get(ally.heroId)?.nom;
+        const mineForAlly = self.objects.some((c) => c.prerequis === allyNom);
+        const allyForMine = ally.objects.some((c) => c.prerequis === selfNom);
+        if (mineForAlly || allyForMine) {
+          bestAlly = ally;
+          break;
+        }
+      }
+      if (!bestAlly) return;
+      const given = self.objects.splice(0, self.objects.length);
+      const received = bestAlly.objects.splice(0, bestAlly.objects.length);
+      self.objects.push(...received);
+      bestAlly.objects.push(...given);
+      emit(state, {
+        kind: 'ACTION_EXCHANGE',
+        seat: ctx.sourceSeat,
+        withSeat: bestAlly.seatIdx,
+        given: given.map((c) => c.id),
+        received: received.map((c) => c.id),
+        reason: `swap objets posés via ${ctx.sourceCardId}`,
+      });
+      return;
+    }
+    case 'giftCardsToAlly': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      // Pick the ally who benefits most: greatest count of self's cards
+      // matching their prereq.
+      let bestAlly: typeof self | undefined;
+      let bestCount = 0;
+      for (const ally of state.heroes) {
+        if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+        const allyNom = state.catalog.heroesById.get(ally.heroId)?.nom;
+        if (!allyNom) continue;
+        const n = self.hand.filter((c) => c.prerequis === allyNom).length;
+        if (n > bestCount) {
+          bestCount = n;
+          bestAlly = ally;
+        }
+      }
+      if (!bestAlly || bestCount === 0) return;
+      const allyNom = state.catalog.heroesById.get(bestAlly.heroId)!.nom;
+      const given: string[] = [];
+      let transferred = 0;
+      for (let i = self.hand.length - 1; i >= 0 && transferred < op.n; i--) {
+        if (self.hand[i]!.prerequis !== allyNom) continue;
+        const [c] = self.hand.splice(i, 1);
+        if (c) {
+          bestAlly.hand.push(c);
+          given.push(c.id);
+          transferred++;
+        }
+      }
+      emit(state, {
+        kind: 'ACTION_EXCHANGE',
+        seat: ctx.sourceSeat,
+        withSeat: bestAlly.seatIdx,
+        given,
+        received: [],
+        reason: `don ×${transferred} via ${ctx.sourceCardId}`,
+      });
+      if (op.healPerCard && transferred > 0) {
+        const budget = op.healPerCard * transferred;
+        // Reuse OpHeal logic inline: bottom-up wound removal.
+        let rem = budget;
+        for (let i = self.wounds.length - 1; i >= 0 && rem > 0; ) {
+          const w = self.wounds[i]!;
+          if (w.degats <= rem) {
+            rem -= w.degats;
+            self.wounds.splice(i, 1);
+          } else break;
+          i--;
+        }
+      }
+      return;
+    }
+    case 'attackChain': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      let amount = op.amount;
+      // Chain as long as the current queue head dies.
+      while (amount > 0) {
+        const head = self.queue[0];
+        if (!head) {
+          // No monster → boss takes remainder.
+          damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+          return;
+        }
+        const before = head.wounds.reduce((s, w) => s + w.degats, 0);
+        damageMonster(state, self.seatIdx, head.instanceId, {
+          amount,
+          source: ctx.sourceKind,
+          sourceCardId: ctx.sourceCardId,
+        });
+        // Did the monster die? If it's still in queue, no chain.
+        if (self.queue[0]?.instanceId === head.instanceId) return;
+        // Otherwise consume the damage portion already spent and continue.
+        const card = state.catalog.monstreById.get(head.cardId);
+        const spent = (card?.vie ?? 1) - before;
+        amount = Math.max(0, amount - spent);
+      }
+      return;
+    }
+    case 'healEqualsActionsThisTurn': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const n = h.actionsPlayedThisTurn ?? 0;
+      if (n > 0) runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
+      return;
+    }
+    case 'healEqualsDrawsThisTurn': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const n = h.drawsThisTurn ?? 0;
+      if (n > 0) runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
+      return;
+    }
+    case 'eliminateIfActionsThisTurn': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      if ((h.actionsPlayedThisTurn ?? 0) < op.minActions) return;
+      runOps(state, ctx, [{ op: 'eliminate', target: { pick: op.from } }]);
+      return;
+    }
+    case 'drawFromDiscard': {
+      const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
+      for (const s of seats) {
+        const h = state.heroes[s];
+        if (!h || h.dead) continue;
+        for (let i = 0; i < op.n; i++) {
+          // Pull from the discard pile; if empty, fall back to regular draw.
+          let c = state.piles.chasse.discard.pop();
+          if (!c) c = drawOne(state, state.piles.chasse, 'chasse');
+          if (!c) break;
+          h.hand.push(c);
+          emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: s });
+        }
+      }
+      return;
+    }
+    case 'redistributeWounds': {
+      const living = state.heroes.filter((hh) => !hh.dead);
+      if (living.length === 0) return;
+      const totalDegats = living.reduce(
+        (s, hh) => s + hh.wounds.reduce((a, w) => a + w.degats, 0),
+        0,
+      );
+      const per = Math.floor(totalDegats / living.length);
+      let remainder = totalDegats - per * living.length;
+      for (const hh of living) {
+        hh.wounds = [];
+        const deg = per + (remainder > 0 ? 1 : 0);
+        if (remainder > 0) remainder--;
+        if (deg > 0) {
+          hh.wounds.push({
+            woundId: `W_RED_${ctx.sourceCardId}_${hh.seatIdx}_${state.counters.event}`,
+            source: ctx.sourceKind,
+            sourceCardId: ctx.sourceCardId,
+            degats: deg,
+          });
+        }
+      }
+      emit(state, { kind: 'WARN', message: `redistributeWounds ${totalDegats} → ${per}/hero` });
+      return;
+    }
+    case 'discardObject': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      for (let i = 0; i < op.n && h.objects.length > 0; i++) {
+        const obj = h.objects.shift()!;
+        discard(state.piles.chasse, obj);
+        emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: ctx.sourceSeat });
+      }
+      return;
+    }
+    case 'restrictToDraw': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (h) h.onlyDrawThisTurn = true;
+      return;
+    }
+    case 'rallyHeadsToSelf': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      let moved = 0;
+      for (const other of state.heroes) {
+        if (moved >= op.max) break;
+        if (other.dead || other.seatIdx === ctx.sourceSeat) continue;
+        const head = other.queue.shift();
+        if (!head) continue;
+        self.queue.push(head);
+        emit(state, {
+          kind: 'MONSTER_MOVED',
+          instanceId: head.instanceId,
+          cardId: head.cardId,
+          fromSeat: other.seatIdx,
+          toSeat: ctx.sourceSeat,
+          position: 'tail',
+          sourceCardId: ctx.sourceCardId,
+        });
+        moved++;
+      }
+      return;
+    }
+    case 'drawUpTo': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      while (h.hand.length < op.n) {
+        const c = drawOne(state, state.piles.chasse, 'chasse');
+        if (!c) break;
+        h.hand.push(c);
+        emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
+      }
+      return;
+    }
+    case 'eliminateAllyHead': {
+      // Pick ally whose head has the most wounds (finish it off) or first alive.
+      let bestAlly: typeof state.heroes[number] | undefined;
+      for (const ally of state.heroes) {
+        if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+        if (ally.queue.length === 0) continue;
+        bestAlly = ally;
+        break;
+      }
+      if (!bestAlly) return;
+      const head = bestAlly.queue[0]!;
+      eliminateMonster(state, bestAlly.seatIdx, head.instanceId);
+      return;
+    }
+    case 'reassignHeadToBoss': {
+      // Pick any queue head; use that monster's vie as boss damage.
+      for (const h of state.heroes) {
+        if (h.dead || h.queue.length === 0) continue;
+        const head = h.queue[0]!;
+        const card = state.catalog.monstreById.get(head.cardId);
+        const amount = card?.vie ?? 1;
+        damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+        // The head attacks the boss — it doesn't die but its queue position
+        // remains. We emit a WARN log entry for clarity.
+        emit(state, {
+          kind: 'WARN',
+          message: `reassignHeadToBoss: ${head.cardId} (seat ${h.seatIdx}) deals ${amount} to boss`,
+        });
+        return;
+      }
+      return;
+    }
+    case 'healAllyEqualsSelfWounds': {
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      const n = self.wounds.reduce((s, w) => s + w.degats, 0);
+      if (n === 0) return;
+      runOps(state, ctx, [{ op: 'heal', target: 'any_ally', amount: n }]);
+      return;
+    }
+    case 'drawWithObjetBonus': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const first = drawOne(state, state.piles.chasse, 'chasse');
+      if (!first) return;
+      h.hand.push(first);
+      emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: first.id, toSeat: ctx.sourceSeat });
+      if (first.categorie === 'objet') {
+        const extra = drawOne(state, state.piles.chasse, 'chasse');
+        if (extra) {
+          h.hand.push(extra);
+          emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: extra.id, toSeat: ctx.sourceSeat });
+        }
+      }
+      return;
+    }
+    case 'damageIfHealed': {
+      if (!state.healedThisTurn) return;
+      runOps(state, ctx, [{ op: 'damage', target: 'queue_head', amount: op.amount }]);
+      return;
+    }
+    case 'allyPlaysAction': {
+      // Find a living ally, run their policy for 1 action (action-only).
+      for (const ally of state.heroes) {
+        if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+        const policy = state.policies[ally.seatIdx];
+        if (!policy) continue;
+        const saved = state.activeSeat;
+        state.activeSeat = ally.seatIdx;
+        const act = policy.pickAction(state);
+        if (act.kind === 'play') applyPlayerAction(state, act);
+        state.activeSeat = saved;
+        return;
+      }
+      return;
+    }
+    case 'scoutSolo': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const actionIdx = h.hand
+        .map((c, i) => (c.categorie === 'action' ? i : -1))
+        .filter((i) => i !== -1);
+      if (actionIdx.length >= 2) {
+        // Discard 2 Actions then draw 2.
+        for (const i of actionIdx.slice(0, 2).sort((a, b) => b - a)) {
+          const [c] = h.hand.splice(i, 1);
+          if (c) {
+            discard(state.piles.chasse, c);
+            emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: ctx.sourceSeat });
+          }
+        }
+        for (let k = 0; k < 2; k++) {
+          const c = drawOne(state, state.piles.chasse, 'chasse');
+          if (!c) break;
+          h.hand.push(c);
+          emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
+        }
+      } else {
+        runOps(state, ctx, [{ op: 'damage', target: 'active_hero', amount: 1 }]);
+      }
+      return;
+    }
+    case 'discardHandDrawSame': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const n = h.hand.length;
+      while (h.hand.length > 0) {
+        const c = h.hand.shift()!;
+        discard(state.piles.chasse, c);
+        emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: ctx.sourceSeat });
+      }
+      for (let i = 0; i < n; i++) {
+        const c = drawOne(state, state.piles.chasse, 'chasse');
+        if (!c) break;
+        h.hand.push(c);
+        emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
+      }
+      return;
+    }
+    case 'scryChasse': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const looked: typeof state.piles.chasse.draw = [];
+      for (let i = 0; i < op.look; i++) {
+        const c = state.piles.chasse.draw.shift();
+        if (!c) break;
+        looked.push(c);
+      }
+      // Keep the first `keep` cards whose prereq matches self (if possible).
+      const selfNom = state.catalog.heroesById.get(h.heroId)?.nom;
+      const scored = looked
+        .map((c, idx) => ({ c, idx, score: c.prerequis === selfNom ? 2 : (c.degats ?? 0) > 0 ? 1 : 0 }))
+        .sort((a, b) => b.score - a.score);
+      const kept = scored.slice(0, op.keep).map((x) => x.c);
+      const rest = scored.slice(op.keep).map((x) => x.c);
+      // Kept cards go into hand; rest goes to discard.
+      for (const c of kept) {
+        h.hand.push(c);
+        emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
+      }
+      for (const c of rest) {
+        state.piles.chasse.discard.push(c);
+        emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id });
+      }
+      return;
+    }
+    case 'attackOrder': {
+      if (op.target === 'self') {
+        resolveAttackOrder(state, ctx.sourceSeat);
+      } else {
+        for (const h of state.heroes) {
+          if (h.dead) continue;
+          resolveAttackOrder(state, h.seatIdx);
+        }
+      }
+      return;
+    }
     case 'moveSelfMonsterToHead': {
       // Find the newest-added instance of ctx.sourceCardId in the source
       // seat's queue and bubble it to index 0.
@@ -174,8 +707,18 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       for (let i = h.queue.length - 1; i >= 0; i--) {
         if (h.queue[i]!.cardId === ctx.sourceCardId) {
           const [inst] = h.queue.splice(i, 1);
-          if (inst) h.queue.unshift(inst);
-          emit(state, { kind: 'WARN', message: `${ctx.sourceCardId} moved to queue head (seat ${ctx.sourceSeat})` });
+          if (inst) {
+            h.queue.unshift(inst);
+            emit(state, {
+              kind: 'MONSTER_MOVED',
+              instanceId: inst.instanceId,
+              cardId: inst.cardId,
+              fromSeat: ctx.sourceSeat,
+              toSeat: ctx.sourceSeat,
+              position: 'head',
+              sourceCardId: ctx.sourceCardId,
+            });
+          }
           break;
         }
       }
@@ -256,8 +799,10 @@ function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice): void
   const chosen = op.options[idx];
   if (!chosen) return;
   emit(state, {
-    kind: 'WARN',
-    message: `choice source=${ctx.sourceCardId} picked=${chosen.label} by=${policy?.name ?? 'rng'}`,
+    kind: 'CHOICE_MADE',
+    sourceCardId: ctx.sourceCardId,
+    seat: decidingSeat,
+    label: chosen.label,
   });
   runOps(state, ctx, chosen.ops);
 }
@@ -550,8 +1095,13 @@ function applyMoveMonsterOp(
   if (dst.position === 'head') toHero.queue.unshift(moved);
   else toHero.queue.push(moved);
   emit(state, {
-    kind: 'WARN',
-    message: `moveMonster ${moved.instanceId} from seat ${src.seat} to seat ${dst.seat} ${dst.position}`,
+    kind: 'MONSTER_MOVED',
+    instanceId: moved.instanceId,
+    cardId: moved.cardId,
+    fromSeat: src.seat,
+    toSeat: dst.seat,
+    position: dst.position,
+    sourceCardId: ctx.sourceCardId,
   });
 }
 

@@ -56,6 +56,16 @@ export interface HeroRuntime {
   capaciteUsed: boolean;
   dead: boolean;
   queue: MonsterInstance[]; // files de monstres, head first
+  /** One-shot flag: next Action played by this hero ignores its prerequis. */
+  nextActionIgnoresPrereq?: boolean;
+  /** One-shot flag: this hero can pose 1 extra Objet this turn (ROD_A04). */
+  extraPoseAvailable?: boolean;
+  /** Actions (ACTION_PLAY_ACTION) played by this hero this turn. */
+  actionsPlayedThisTurn?: number;
+  /** Chasse cards drawn by this hero this turn. */
+  drawsThisTurn?: number;
+  /** Boss Azhda (BOSS_007) actif : this hero can only draw this turn. */
+  onlyDrawThisTurn?: boolean;
 }
 
 export interface BossRuntime {
@@ -124,6 +134,8 @@ export interface GameState {
 
   /** Flag set during Menace resolution; op cancelMenace reads this. */
   menaceCancelled?: boolean;
+  /** Set true when any hero was healed this turn (read by SOI_O05). */
+  healedThisTurn?: boolean;
 
   /** Per-turn bookkeeping for boss passifs. */
   perTurnDraws?: Record<number, number>;

@@ -63,9 +63,19 @@ function playableActions(state: GameState, h: HeroRuntime): number[] {
 }
 
 function renfortIndices(state: GameState, h: HeroRuntime): number[] {
+  // Only attach objects that actually add damage when used as renfort.
+  // Healing/utility/regen objets are NOT run as renforts (the engine only
+  // adds their `bonus_degats` and drops their ops), so attaching them is
+  // pure waste — keep them for active use via pickReaction.
   const out: number[] = [];
   h.objects.forEach((c, i) => {
-    if (isObjetPlayableRenfort(state, c)) out.push(i);
+    if (!isObjetPlayableRenfort(state, c)) return;
+    const boostTag = state.effects[c.id]?.tag;
+    const isBoost =
+      (c.bonus_degats ?? 0) > 0 ||
+      boostTag === 'boost_attack' ||
+      boostTag === 'boost_attack_aoe';
+    if (isBoost) out.push(i);
   });
   return out;
 }
@@ -113,6 +123,40 @@ function scoreAction(state: GameState, h: HeroRuntime, c: CarteChasse): number {
         // actually wounded (otherwise it's a no-op).
         score += totalWounds(h) > 0 ? 6 : -20;
         break;
+      case 'rally_monsters': {
+        // DIP_A12 « Ralliement tactique »: useless if no monster in play.
+        const anyMonster = state.heroes.some((hh) => hh.queue.length > 0);
+        score += anyMonster ? 4 : -20;
+        break;
+      }
+      case 'revive': {
+        // SOI_A06: only useful if a hero is actually dead.
+        const anyDead = state.heroes.some((hh) => hh.dead);
+        score += anyDead ? 15 : -20;
+        break;
+      }
+      case 'reassign_attack': {
+        // DIP_A10: redirect a monster head to the boss — needs a monster.
+        const anyMonster = state.heroes.some((hh) => hh.queue.length > 0);
+        score += anyMonster ? 8 : -10;
+        break;
+      }
+      case 'utility_eliminate': {
+        // Elimination of a monster — valuable if monsters exist.
+        const anyMonster = state.heroes.some((hh) => hh.queue.length > 0);
+        score += anyMonster ? 7 : -15;
+        break;
+      }
+      case 'regen_capacity':
+        // Only useful if this hero's capacité is spent.
+        score += h.capaciteUsed ? 5 : -10;
+        break;
+      case 'play_more_actions':
+        score += 4;
+        break;
+      case 'sustain_draw':
+        score += h.hand.length < 3 ? 5 : 1;
+        break;
     }
   }
   return score;
@@ -125,23 +169,55 @@ function shouldUseCapacite(state: GameState, h: HeroRuntime): boolean {
   if (!entry) return false;
   switch (entry.tag) {
     case 'reactive_heal':
-      // Gao: heal all wounds of most wounded. Fire if someone has 3+ wounds.
-      return state.heroes.some((hh) => !hh.dead && totalWounds(hh) >= 3);
-    case 'elim_on_demand':
-      // Daraa: eliminate all wounded monsters. Fire if ≥ 2 wounded monsters.
-      {
-        let count = 0;
-        for (const hh of state.heroes) {
-          for (const m of hh.queue) {
-            if (m.wounds.length > 0) count++;
-          }
+      // Gao: heal all wounds of most wounded. Fire if someone has 2+ wounds.
+      return state.heroes.some((hh) => !hh.dead && totalWounds(hh) >= 2);
+    case 'elim_on_demand': {
+      // Daraa: eliminate all wounded monsters. Fire as soon as at least one
+      // wounded monster is in play (free removal — no point hoarding).
+      for (const hh of state.heroes) {
+        for (const m of hh.queue) {
+          if (m.wounds.length > 0) return true;
         }
-        return count >= 2;
       }
-    case 'prevent_lethal':
-      // Nawel: cancel all damage this turn. Fire if self is at risk of dying
-      // this turn (wounds >= vie - 1).
-      return totalWounds(h) >= h.vieMax - 1;
+      return false;
+    }
+    case 'prevent_lethal': {
+      // Nawel: cancel all damage this turn. Fire if self is seriously at
+      // risk (≤ 2 HP left) OR already wounded with a monster in our queue
+      // ready to hit.
+      if (totalWounds(h) >= h.vieMax - 2) return true;
+      if (totalWounds(h) >= 2 && h.queue.length > 0) return true;
+      return false;
+    }
+    case 'play_more_actions': {
+      // Isonash: play 2 extra actions immediately. Fire with ≥ 2 plays in
+      // hand — the capacité slot stays mostly used.
+      return playableActions(state, h).length >= 2;
+    }
+    case 'global_buff': {
+      // Aslan: free-exchange window for everyone (not just self ↔ ally).
+      // Count hero-pairs (i<j) where both sides hold a card whose prereq
+      // matches the other — i.e. a mutually-beneficial trade is possible.
+      // Fire if ≥ 2 such pairs exist; in a 2-hero game, ≥ 1 is enough.
+      const living = state.heroes.filter((hh) => !hh.dead);
+      if (living.length < 2) return false;
+      const nomOf = (hh: HeroRuntime) => state.catalog.heroesById.get(hh.heroId)?.nom;
+      let pairs = 0;
+      for (let i = 0; i < living.length; i++) {
+        for (let j = i + 1; j < living.length; j++) {
+          const a = living[i]!;
+          const b = living[j]!;
+          const na = nomOf(a);
+          const nb = nomOf(b);
+          if (!na || !nb) continue;
+          const aForB = a.hand.some((c) => c.prerequis === nb);
+          const bForA = b.hand.some((c) => c.prerequis === na);
+          if (aForB && bForA) pairs++;
+        }
+      }
+      const threshold = living.length <= 2 ? 1 : 2;
+      return pairs >= threshold;
+    }
     default:
       return false;
   }
@@ -189,15 +265,75 @@ function tryExchange(
 export const heuristicPolicy: Policy = {
   name: 'heuristic',
 
-  /** Reactive trigger: use capacité spéciale when situationally valuable. */
+  /** Reactive trigger: use capacité or a posed object when situationally valuable. */
   pickReaction(state: GameState): PlayerAction | null {
     const h = state.heroes[state.activeSeat];
-    if (!h || h.capaciteUsed || !shouldUseCapacite(state, h)) return null;
-    const entry = state.effects[h.heroId];
-    return {
-      kind: 'useCapacite',
-      reason: `capacité "${entry?.tag ?? 'spéciale'}" contextuellement utile`,
-    };
+    if (!h) return null;
+
+    // Priority 0: free extra object pose (ROD_A04 « Tir de couverture »).
+    if (h.extraPoseAvailable) {
+      const poseIdx = h.hand.findIndex(
+        (c) => c.categorie === 'objet' && meetsPrerequisite(h, c, state),
+      );
+      if (poseIdx !== -1) {
+        h.extraPoseAvailable = false;
+        return {
+          kind: 'play',
+          placeObject: poseIdx,
+          reason: `pose bonus via Tir de couverture`,
+        };
+      }
+    }
+
+    // Priority 1: capacité spéciale.
+    if (!h.capaciteUsed && shouldUseCapacite(state, h)) {
+      const entry = state.effects[h.heroId];
+      return {
+        kind: 'useCapacite',
+        reason: `capacité "${entry?.tag ?? 'spéciale'}" contextuellement utile`,
+      };
+    }
+
+    // Priority 2: active object use. Look for a posed object whose DSL is
+    // contextually useful right now.
+    const partyWounds = state.heroes.reduce((s, hh) => s + (hh.dead ? 0 : totalWounds(hh)), 0);
+    const anyMonster = state.heroes.some((hh) => hh.queue.length > 0);
+    const selfMonster = h.queue.length > 0;
+    const shortestHand = Math.min(
+      ...state.heroes.filter((hh) => !hh.dead).map((hh) => hh.hand.length),
+    );
+    const myNom = state.catalog.heroesById.get(h.heroId)?.nom;
+    const mismatchedInHand = myNom
+      ? h.hand.some((c) => c.categorie === 'action' && c.prerequis !== myNom)
+      : false;
+    for (let i = 0; i < h.objects.length; i++) {
+      const card = h.objects[i]!;
+      const entry = state.effects[card.id];
+      if (!entry) continue;
+      const tag = entry.tag;
+      const useful =
+        (tag === 'reactive_heal' && totalWounds(h) > 0) ||
+        (tag === 'regen_capacity' && h.capaciteUsed) ||
+        (tag === 'burst_heal' && state.heroes.some((hh) => !hh.dead && totalWounds(hh) >= 2)) ||
+        (tag === 'aoe_heal' && partyWounds >= 3) ||
+        ((tag === 'utility_eliminate' || tag === 'reactive_eliminate') && anyMonster) ||
+        (tag === 'draw_engine' && h.hand.length <= 1) ||
+        (tag === 'sustain_draw' && (totalWounds(h) > 0 || h.hand.length <= 2)) ||
+        (tag === 'draw_if_wounded' && totalWounds(h) > 0) ||
+        (tag === 'ignore_prereq' && mismatchedInHand) ||
+        ((tag === 'draw_support' || tag === 'draw_support_aoe') && shortestHand <= 1) ||
+        (tag === 'prevent_lethal' &&
+          (totalWounds(h) >= h.vieMax - 2 || (totalWounds(h) >= 2 && selfMonster))) ||
+        ((tag === 'attack_chain' || tag === 'attack_conditional') && selfMonster);
+      if (useful) {
+        return {
+          kind: 'useObject',
+          objectIdx: i,
+          reason: `objet « ${card.nom} » (tag=${tag ?? '—'}) utile`,
+        };
+      }
+    }
+    return null;
   },
 
   pickAction(state: GameState): PlayerAction {
@@ -232,6 +368,15 @@ export const heuristicPolicy: Policy = {
       if (best.card.degats !== undefined && renforts.length > 0 && renforts[0] !== undefined) {
         attaches.push(renforts[0]);
       }
+      // Also look for an objet in hand to pose this turn (free alongside
+      // play). Only pose objets this hero can actually use — the `prerequis`
+      // must match the hero's name, else the objet sits idle.
+      // The engine applies placeObject BEFORE playAction — if the posed objet
+      // sits before the played action, the action index shifts down by one.
+      const poseIdx = h.hand.findIndex(
+        (c, i) => i !== best.i && c.categorie === 'objet' && meetsPrerequisite(h, c, state),
+      );
+      const playIdx = poseIdx !== -1 && poseIdx < best.i ? best.i - 1 : best.i;
       const entry = state.effects[best.card.id];
       const tag = entry?.tag ?? (best.card.degats !== undefined ? 'attack' : 'utility');
       const parts = [
@@ -240,11 +385,13 @@ export const heuristicPolicy: Policy = {
         tag ? `tag=${tag}` : null,
         best.card.degats !== undefined ? `${best.card.degats} dmg` : null,
         attaches.length > 0 ? 'avec renfort' : null,
+        poseIdx !== -1 ? `+ pose ${h.hand[poseIdx]!.nom}` : null,
       ].filter(Boolean);
       return {
         kind: 'play',
-        playAction: best.i,
+        playAction: playIdx,
         renforts: attaches,
+        ...(poseIdx !== -1 ? { placeObject: poseIdx } : {}),
         reason: `joue ${parts.join(' · ')}`,
       };
     }
@@ -277,9 +424,15 @@ export const heuristicPolicy: Policy = {
     // Heuristic: pick option whose label suggests safety/benefit.
     const h = state.heroes[sourceSeat];
     const selfDamage = h ? totalWounds(h) : 0;
-    // Preference order by keyword in label (first match wins).
-    const badKeywords = ['encaisser', 'subir', 'tout_donner', 'defausser', 'accepter'];
-    const goodKeywords = ['soigner', 'piocher', 'souffler', 'rester_concentre', 'tenir_bon', 'allie_defausse'];
+    const badKeywords = [
+      'encaisser', 'subir', 'tout_donner', 'defausser', 'accepter', 'invocation',
+      'capacite_boss', 'attaque_file', 'attaque_toutes',
+    ];
+    const goodKeywords = [
+      'soigner', 'piocher', 'souffler', 'rester_concentre', 'tenir_bon', 'allie_defausse',
+      'refuser', 'esquiver', 'se_proteger', 'retenir', 'couvert', 'canaliser',
+      'frapper_fort', 'frapper_vite', 'jouer_prudent',
+    ];
 
     // If dangerously low, avoid anything that might damage.
     if (h && selfDamage >= h.vieMax - 1) {
@@ -288,10 +441,25 @@ export const heuristicPolicy: Policy = {
         if (!badKeywords.some((k) => label.includes(k))) return i;
       }
     }
-    // Prefer a "good" keyword.
+    const isBad = (label: string) => badKeywords.some((k) => label.includes(k));
+    const isGood = (label: string) => goodKeywords.some((k) => label.includes(k));
+
+    // 1st pass: prefer a "good" non-bad option; skip `soigner` if not wounded.
     for (let i = 0; i < options.length; i++) {
       const label = options[i]!.label.toLowerCase();
-      if (goodKeywords.some((k) => label.includes(k))) return i;
+      if (isBad(label)) continue;
+      if (label.includes('soigner') && selfDamage === 0) continue;
+      if (isGood(label)) return i;
+    }
+    // 2nd pass: any non-bad option (even unknown labels are preferable to bad).
+    for (let i = 0; i < options.length; i++) {
+      const label = options[i]!.label.toLowerCase();
+      if (!isBad(label)) return i;
+    }
+    // 3rd pass: wasted soigner > literally nothing.
+    for (let i = 0; i < options.length; i++) {
+      const label = options[i]!.label.toLowerCase();
+      if (isGood(label)) return i;
     }
     return 0;
   },

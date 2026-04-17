@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import { useStore } from './store.js';
 import { runBatch, rowsToCsv, type BatchOptions, type BatchResult } from '../sim/runBatch.js';
+import { bossLabel, heroName, chasseName } from './naming.js';
+
+const SECONDS_PER_TURN = 30;
+
+/** Format a turn count as "N tours (X min)" with X = N*30s. */
+function turnsWithTime(turns: number | null | undefined): string {
+  if (turns === null || turns === undefined || Number.isNaN(turns)) return '—';
+  const minutes = (turns * SECONDS_PER_TURN) / 60;
+  const t = typeof turns === 'number' ? turns.toFixed(1) : String(turns);
+  return `${t} (${minutes.toFixed(1)} min)`;
+}
 
 /**
  * Browser-side batch panel: fill form, click Run, get results + download
@@ -19,6 +30,27 @@ function download(filename: string, content: string, mime = 'text/plain'): void 
   URL.revokeObjectURL(url);
 }
 
+function InspectLink({
+  kind,
+  id,
+  children,
+}: {
+  kind: 'boss' | 'hero' | 'chasse';
+  id: string;
+  children: React.ReactNode;
+}) {
+  const inspect = useStore((s) => s.inspect);
+  return (
+    <button
+      onClick={() => inspect({ kind, id })}
+      title={`${id} · clic pour détails`}
+      className="underline decoration-dotted decoration-stone-500 hover:text-sky-300 hover:decoration-sky-400 text-left"
+    >
+      {children}
+    </button>
+  );
+}
+
 export function Batch() {
   const design = useStore((s) => s.design);
   const effects = useStore((s) => s.effects);
@@ -26,7 +58,7 @@ export function Batch() {
 
   const [runs, setRuns] = useState(100);
   const [boss, setBoss] = useState('random');
-  const [players, setPlayers] = useState(3);
+  const [players, setPlayers] = useState<number | 'all'>(3);
   const [heroes, setHeroes] = useState('random');
   const [policy, setPolicy] = useState<'random' | 'heuristic'>('heuristic');
   const [choicePolicy, setChoicePolicy] = useState<'random' | 'heuristic'>('heuristic');
@@ -105,15 +137,24 @@ export function Batch() {
               className="w-full bg-stone-800 border border-stone-700 rounded px-2 py-1"
             />
           </Field>
-          <Field label="Joueurs (2-5)">
-            <input
-              type="number"
-              min={2}
-              max={5}
-              value={players}
-              onChange={(e) => setPlayers(Math.max(2, Math.min(5, parseInt(e.target.value || '3', 10))))}
+          <Field
+            label="Joueurs"
+            hint="Nombre de héros par partie. 'all' = lance `runs` parties pour chaque valeur 2,3,4,5 et compare les taux de victoire."
+          >
+            <select
+              value={String(players)}
+              onChange={(e) => {
+                const v = e.target.value;
+                setPlayers(v === 'all' ? 'all' : Math.max(2, Math.min(5, parseInt(v, 10))));
+              }}
               className="w-full bg-stone-800 border border-stone-700 rounded px-2 py-1"
-            />
+            >
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="all">all (2-5)</option>
+            </select>
           </Field>
           <Field label="Seed début">
             <input
@@ -123,7 +164,10 @@ export function Batch() {
               className="w-full bg-stone-800 border border-stone-700 rounded px-2 py-1"
             />
           </Field>
-          <Field label="Policy">
+          <Field
+            label="IA de tour"
+            hint="Décide l'action de tour de chaque héros : jouer, piocher, échanger, utiliser sa capacité en réaction, poser un objet."
+          >
             <select
               value={policy}
               onChange={(e) => setPolicy(e.target.value as 'random' | 'heuristic')}
@@ -142,7 +186,7 @@ export function Batch() {
               <option value="random">random</option>
               {design.boss.map((b) => (
                 <option key={b.id} value={b.id}>
-                  {b.id} — {b.nom}
+                  {b.id} — {b.nom} ({b.difficulte})
                 </option>
               ))}
             </select>
@@ -155,7 +199,10 @@ export function Batch() {
               className="w-full bg-stone-800 border border-stone-700 rounded px-2 py-1"
             />
           </Field>
-          <Field label="Choice policy">
+          <Field
+            label="IA des choix Menace"
+            hint="Choisit parmi les options d'une Menace à choix (ex: Brume apaisante → soigner ou piocher). Indépendant de l'IA de tour."
+          >
             <select
               value={choicePolicy}
               onChange={(e) => setChoicePolicy(e.target.value as 'random' | 'heuristic')}
@@ -223,10 +270,13 @@ export function Batch() {
               value={`${(result.stats.winrate * 100).toFixed(1)}%`}
               accent={result.stats.winrate >= 0.5 ? 'emerald' : 'red'}
             />
-            <Kpi label="Tours moyens" value={result.stats.meanTurns.toFixed(1)} />
             <Kpi
-              label="Vic / Def"
-              value={`${result.stats.meanTurnsVictory?.toFixed(1) ?? '—'} / ${result.stats.meanTurnsDefeat?.toFixed(1) ?? '—'}`}
+              label="Tours moyens"
+              value={turnsWithTime(result.stats.meanTurns)}
+            />
+            <Kpi
+              label="Vic / Def (tours)"
+              value={`${turnsWithTime(result.stats.meanTurnsVictory)} / ${turnsWithTime(result.stats.meanTurnsDefeat)}`}
             />
           </div>
 
@@ -236,7 +286,12 @@ export function Batch() {
                 cols={['Boss', 'W', 'D', '%']}
                 rows={Object.entries(result.stats.byBoss)
                   .sort((a, b) => b[1].winrate - a[1].winrate)
-                  .map(([b, v]) => [b, v.wins, v.defeats, `${(v.winrate * 100).toFixed(1)}%`])}
+                  .map(([b, v]) => [
+                    <InspectLink key={b} kind="boss" id={b}>{`${b} — ${bossLabel(design, b)}`}</InspectLink>,
+                    v.wins,
+                    v.defeats,
+                    `${(v.winrate * 100).toFixed(1)}%`,
+                  ])}
               />
             </Panel>
             <Panel title="Par héros">
@@ -244,15 +299,95 @@ export function Batch() {
                 cols={['Héros', 'Parties', 'Morts', '%']}
                 rows={Object.entries(result.stats.byHero)
                   .sort((a, b) => a[1].deathRate - b[1].deathRate)
-                  .map(([h, v]) => [h, v.games, v.deaths, `${(v.deathRate * 100).toFixed(1)}%`])}
+                  .map(([h, v]) => [
+                    <InspectLink key={h} kind="hero" id={h}>{`${h} — ${heroName(design, h)}`}</InspectLink>,
+                    v.games,
+                    v.deaths,
+                    `${(v.deathRate * 100).toFixed(1)}%`,
+                  ])}
               />
             </Panel>
           </div>
 
-          <Panel title="Top cartes jouées">
+          <div className="grid grid-cols-2 gap-4">
+            <Panel title="Mix d'actions (hors objets utilisés)">
+              <MiniTable
+                cols={['Action', 'Count', '%']}
+                rows={(() => {
+                  const m = result.stats.actionMix;
+                  const total = Math.max(1, m.total);
+                  const rows: Array<[string, number, string]> = [
+                    ['Play (action)', m.play, `${((m.play / total) * 100).toFixed(1)}%`],
+                    ['Pose (objet)', m.playObject, `${((m.playObject / total) * 100).toFixed(1)}%`],
+                    ['Objet — renfort', m.objectRenfort, '—'],
+                    ['Objet — utilisation active', m.objectActive, '—'],
+                    ['Pioche', m.draw, `${((m.draw / total) * 100).toFixed(1)}%`],
+                    ['Échange', m.exchange, `${((m.exchange / total) * 100).toFixed(1)}%`],
+                    ['Capacité', m.useCapacite, `${((m.useCapacite / total) * 100).toFixed(1)}%`],
+                  ];
+                  return rows;
+                })()}
+              />
+            </Panel>
+            <Panel
+              title={`Capacités — moy. ${result.stats.capaciteStats.avgPerHeroPerGame.toFixed(2)} / héros / partie`}
+            >
+              <MiniTable
+                cols={['Héros', 'Utilisations', 'Parties', 'Moy/partie']}
+                rows={Object.entries(result.stats.capaciteStats.byHero)
+                  .sort((a, b) => b[1].avgPerGame - a[1].avgPerGame)
+                  .map(([hid, v]) => [
+                    <InspectLink key={hid} kind="hero" id={hid}>{`${hid} — ${heroName(design, hid)}`}</InspectLink>,
+                    v.uses,
+                    v.games,
+                    v.avgPerGame.toFixed(2),
+                  ])}
+              />
+            </Panel>
+          </div>
+
+          {Object.keys(result.stats.byPlayerCount).length > 1 && (
+            <Panel title="Par nombre de joueurs">
+              <MiniTable
+                cols={['Joueurs', 'Runs', 'W', 'D', '%']}
+                rows={Object.entries(result.stats.byPlayerCount)
+                  .sort((a, b) => Number(a[0]) - Number(b[0]))
+                  .map(([n, v]) => [
+                    `${n} joueurs`,
+                    v.runs,
+                    v.wins,
+                    v.defeats,
+                    `${(v.winrate * 100).toFixed(1)}%`,
+                  ])}
+              />
+            </Panel>
+          )}
+
+          <Panel title="Objets — posés vs utilisés">
+            <MiniTable
+              cols={['Objet', 'Posé', 'Utilisé']}
+              rows={Object.entries(result.stats.objectStats)
+                .map(([id, v]) => ({
+                  id,
+                  used: v.renfort + v.active,
+                  posed: v.posed,
+                }))
+                .sort((a, b) => a.used - b.used || a.posed - b.posed)
+                .map((x) => [
+                  <InspectLink key={x.id} kind="chasse" id={x.id}>{`${x.id} — ${chasseName(design, x.id)}`}</InspectLink>,
+                  x.posed,
+                  x.used,
+                ])}
+            />
+          </Panel>
+
+          <Panel title="Cartes les moins jouées (10)">
             <MiniTable
               cols={['Card', 'Count']}
-              rows={result.stats.topPlayedCards.slice(0, 15)}
+              rows={result.stats.leastPlayedCards.map(([id, n]) => [
+                <InspectLink key={id} kind="chasse" id={id}>{`${id} — ${chasseName(design, id)}`}</InspectLink>,
+                n,
+              ])}
             />
           </Panel>
 
@@ -276,12 +411,26 @@ export function Batch() {
                   {result.rows.slice(0, 500).map((r, i) => (
                     <tr key={i} className="border-t border-stone-800 hover:bg-stone-900">
                       <td className="px-2 py-1">{r.seed}</td>
-                      <td className="px-2 py-1">{r.boss}</td>
-                      <td className="px-2 py-1 text-stone-400">{r.heroes.join(', ')}</td>
+                      <td className="px-2 py-1" title={r.boss}>
+                        <InspectLink kind="boss" id={r.boss}>{bossLabel(design, r.boss)}</InspectLink>
+                      </td>
+                      <td className="px-2 py-1 text-stone-400" title={r.heroes.join(', ')}>
+                        {r.heroes.map((h, idx) => (
+                          <span key={h}>
+                            {idx > 0 && ', '}
+                            <InspectLink kind="hero" id={h}>{heroName(design, h)}</InspectLink>
+                          </span>
+                        ))}
+                      </td>
                       <td className={`px-2 py-1 ${r.result === 'victory' ? 'text-emerald-400' : 'text-red-400'}`}>
                         {r.result}
                       </td>
-                      <td className="px-2 py-1 text-right">{r.turns}</td>
+                      <td
+                        className="px-2 py-1 text-right"
+                        title={`~${((r.turns * SECONDS_PER_TURN) / 60).toFixed(1)} min`}
+                      >
+                        {r.turns}
+                      </td>
                       <td className="px-2 py-1">
                         <button
                           onClick={() =>
@@ -321,10 +470,13 @@ export function Batch() {
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) {
   return (
     <div>
-      <div className="text-xs text-stone-400 mb-1">{label}</div>
+      <div className="text-xs text-stone-400 mb-1" title={hint}>
+        {label}
+        {hint && <span className="text-stone-600 ml-1">ⓘ</span>}
+      </div>
       {children}
     </div>
   );
@@ -341,16 +493,38 @@ function Kpi({ label, value, accent }: { label: string; value: string | number; 
   );
 }
 
-function Panel({ title, children }: { title: string; children: React.ReactNode }) {
+function Panel({
+  title,
+  children,
+  defaultOpen = true,
+}: {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="border border-stone-700 rounded p-3 bg-stone-950/50">
-      <div className="text-xs text-stone-400 uppercase mb-2">{title}</div>
-      {children}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="text-xs text-stone-400 uppercase mb-2 w-full text-left flex items-center gap-2 hover:text-stone-200"
+      >
+        <span className="inline-block w-3">{open ? '▾' : '▸'}</span>
+        <span>{title}</span>
+      </button>
+      {open && children}
     </div>
   );
 }
 
-function MiniTable({ cols, rows }: { cols: string[]; rows: Array<Array<string | number>> }) {
+function MiniTable({
+  cols,
+  rows,
+}: {
+  cols: string[];
+  rows: Array<Array<React.ReactNode>>;
+}) {
   return (
     <table className="text-xs w-full font-mono">
       <thead>

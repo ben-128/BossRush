@@ -4,6 +4,7 @@ import { Setup } from './Setup.js';
 import { Game } from './Game.js';
 import { Dashboard } from './Dashboard.js';
 import { Batch } from './Batch.js';
+import { CardInspector } from './components/CardInspector.js';
 
 export function App() {
   const loading = useStore((s) => s.loading);
@@ -63,6 +64,7 @@ export function App() {
         </span>
       </header>
       {body}
+      <CardInspector />
     </div>
   );
 }

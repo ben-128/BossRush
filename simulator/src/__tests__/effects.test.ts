@@ -225,4 +225,57 @@ describe('effects DSL — integration: full games run with DSL', () => {
     // AI; the point of the test is "still runs and no crash".
     expect(winsYes).toBeGreaterThanOrEqual(winsNo - 1);
   });
+
+  it('GUE_O06 Dernier rempart fires 3 boss damage when hero dies', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const state = createGame(data, {
+      seed: 1,
+      nPlayers: 2,
+      bossId: 'BOSS_001',
+      heroIds: ['HERO_003', 'HERO_001'],
+      effects,
+    });
+    // Give Nawel the death-burst object and wound him to 1 HP.
+    const obj = data.cartesChasse.find((c) => c.id === 'GUE_O06')!;
+    state.heroes[0]!.objects.push(obj);
+    state.heroes[0]!.wounds = [
+      { woundId: 'W1', source: 'menace', sourceCardId: 'X', degats: state.heroes[0]!.vieMax - 1 },
+    ];
+    const bossBefore = state.boss.wounds.reduce((s, w) => s + w.degats, 0);
+    // Lethal damage kills Nawel.
+    runOps(state, mkCtx(0, 'LETHAL', 'menace'), [
+      { op: 'damage', target: 'active_hero', amount: 10 },
+    ]);
+    expect(state.heroes[0]!.dead).toBe(true);
+    const bossAfter = state.boss.wounds.reduce((s, w) => s + w.degats, 0);
+    expect(bossAfter - bossBefore).toBe(3);
+  });
+
+  it('BOSS_003 actif rotates each queue head to the next hero tail', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const heroIds = ['HERO_001', 'HERO_003', 'HERO_005'];
+    const state = createGame(data, {
+      seed: 1,
+      nPlayers: heroIds.length,
+      bossId: 'BOSS_003',
+      heroIds,
+      effects,
+    });
+    // Seed each queue with a distinct monster instance at the head.
+    const make = (id: string, cardId = 'MON_ROC'): {
+      instanceId: string; cardId: string; wounds: [];
+    } => ({ instanceId: id, cardId, wounds: [] });
+    state.heroes[0]!.queue = [make('A')];
+    state.heroes[1]!.queue = [make('B')];
+    state.heroes[2]!.queue = [make('C')];
+
+    const entry = state.effects[state.boss.bossId];
+    runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry!.actif_ops!);
+
+    expect(state.heroes[0]!.queue.map((m) => m.instanceId)).toEqual(['C']);
+    expect(state.heroes[1]!.queue.map((m) => m.instanceId)).toEqual(['A']);
+    expect(state.heroes[2]!.queue.map((m) => m.instanceId)).toEqual(['B']);
+  });
 });

@@ -21,6 +21,13 @@ export function bossName(design: DesignData, id: string): string {
   return design.boss.find((b) => b.id === id)?.nom ?? id;
 }
 
+/** Boss name with difficulty suffix, e.g. "Hobab (facile)". */
+export function bossLabel(design: DesignData, id: string): string {
+  const b = design.boss.find((x) => x.id === id);
+  if (!b) return id;
+  return `${b.nom} (${b.difficulte})`;
+}
+
 export function menaceName(design: DesignData, id: string): string {
   return design.menaces.find((m) => m.id === id)?.nom ?? id;
 }

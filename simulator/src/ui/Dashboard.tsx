@@ -199,7 +199,12 @@ export function Dashboard() {
                     >
                       {r.result}
                     </td>
-                    <td className="px-2 py-1 text-right">{r.turns}</td>
+                    <td
+                      className="px-2 py-1 text-right"
+                      title={`~${((r.turns * 30) / 60).toFixed(1)} min (30 s/tour)`}
+                    >
+                      {r.turns}
+                    </td>
                     <td className="px-2 py-1 text-right">{r.bossHpRemaining}</td>
                     <td className="px-2 py-1 text-right">{r.events}</td>
                     <td className="px-2 py-1">

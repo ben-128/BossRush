@@ -138,7 +138,7 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
 }
 
 /** Trigger boss actif (⚡). Uses DSL if present, otherwise logs. */
-function triggerBossActif(state: GameState): void {
+export function triggerBossActif(state: GameState): void {
   const entry = state.effects[state.boss.bossId];
   if (entry?.actif_ops && entry.actif_ops.length > 0) {
     emit(state, { kind: 'BOSS_ACTIF_TRIGGERED', bossId: state.boss.bossId, implemented: true });

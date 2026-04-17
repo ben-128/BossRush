@@ -55,6 +55,10 @@ export function runTurn(state: GameState, policies: Policy[]): void {
 
   state.turn += 1;
   resetPerTurnFlags(state);
+  // Reset per-turn counters on the active hero only (scoped to whose turn it is).
+  hero.actionsPlayedThisTurn = 0;
+  hero.drawsThisTurn = 0;
+  state.healedThisTurn = false;
   // Install boss passif modifiers for this turn (thisTurn-scoped; they auto
   // re-install at the start of every turn).
   const bossEntry = state.effects[state.boss.bossId];
@@ -105,6 +109,11 @@ export function runTurn(state: GameState, policies: Policy[]): void {
   hookHandCapAtEndOfTurn(state);
   // Clear modifiers with 'thisTurn' scope at turn end.
   clearScope(state, 'thisTurn');
+  // One-shot per-turn flags on heroes.
+  for (const hh of state.heroes) {
+    if (hh.extraPoseAvailable) hh.extraPoseAvailable = false;
+    if (hh.onlyDrawThisTurn) hh.onlyDrawThisTurn = false;
+  }
   emit(state, { kind: 'TURN_END', turn: state.turn, seat });
 }
 

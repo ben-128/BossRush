@@ -34,6 +34,7 @@ export type ActionReason = string | undefined;
 export type PlayerAction =
   | { kind: 'draw'; reason?: ActionReason }
   | { kind: 'useCapacite'; reason?: ActionReason }
+  | { kind: 'useObject'; objectIdx: number; reason?: ActionReason }
   | {
       kind: 'play';
       placeObject?: number;
@@ -83,9 +84,10 @@ export const isObjetPlayableRenfortJ2 = (c: CarteChasse): boolean =>
 
 /** Hero has competence that matches a card's prerequis? */
 export function meetsPrerequisite(h: HeroRuntime, c: CarteChasse, state: GameState): boolean {
+  // One-shot bypass from MAG_O02 Braise errante.
+  if (h.nextActionIgnoresPrereq) return true;
   const hero = state.catalog.heroesById.get(h.heroId);
   if (!hero) return false;
-  // Prerequis on the card is the hero name (e.g. "Nawel", "Daraa").
   return hero.nom === c.prerequis;
 }
 
@@ -107,6 +109,7 @@ function doDraw(state: GameState, seat: number, reason?: string): void {
     emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: seat });
   }
   h.hand.push(...drew);
+  h.drawsThisTurn = (h.drawsThisTurn ?? 0) + drew.length;
   emit(state, { kind: 'ACTION_DRAW', seat, drew: drew.map((c) => c.id), ...(reason ? { reason } : {}) });
 }
 
@@ -142,6 +145,9 @@ function playAction(
   if (!card) return;
 
   h.hand.splice(handIdx, 1);
+  // Consume the one-shot prereq bypass (MAG_O02) as soon as an action plays.
+  if (h.nextActionIgnoresPrereq) h.nextActionIgnoresPrereq = false;
+  h.actionsPlayedThisTurn = (h.actionsPlayedThisTurn ?? 0) + 1;
 
   const renforts = renfortObjectIndices
     .slice()
@@ -202,9 +208,17 @@ function playAction(
     }
   }
 
-  // Consume renfort objects: they leave the board after the action.
+  // Consume renfort objects: run their DSL side-effects (if any), then
+  // discard. bonus_degats is already factored into the attack above.
   for (const r of renforts) {
     h.objects.splice(r.idx, 1);
+    const rEntry = state.effects[r.card.id];
+    const rTag = rEntry?.tag;
+    // Skip pure damage-boost objects (ops are stubs / dead-code by design).
+    const skipOps = rTag === 'boost_attack';
+    if (rEntry && !skipOps) {
+      runOps(state, mkCtx(seat, r.card.id, 'chasse'), rEntry.ops ?? []);
+    }
     discard(state.piles.chasse, r.card);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: r.card.id, fromSeat: seat });
   }
@@ -307,21 +321,49 @@ function doUseCapacite(state: GameState, seat: number): void {
     return;
   }
   h.capaciteUsed = true;
-  emit(state, {
-    kind: 'WARN',
-    message: `capacite_used seat=${seat} hero=${h.heroId}`,
-  });
+  emit(state, { kind: 'CAPACITE_USED', seat, heroId: h.heroId });
   runOps(state, mkCtx(seat, h.heroId, 'chasse'), entry.ops);
+}
+
+/** Active use of a posed object: run its DSL ops, then discard. */
+function doUseObject(state: GameState, seat: number, objectIdx: number, reason?: string): void {
+  const h = state.heroes[seat];
+  if (!h) return;
+  const card = h.objects[objectIdx];
+  if (!card) return;
+  const entry = state.effects[card.id];
+  if (!entry || !entry.ops || entry.ops.length === 0) {
+    emit(state, { kind: 'ACTION_NONE', seat, reason: `object_not_usable:${card.id}` });
+    return;
+  }
+  h.objects.splice(objectIdx, 1);
+  emit(state, { kind: 'OBJECT_USED', seat, card: card.id, ...(reason ? { reason } : {}) });
+  runOps(state, mkCtx(seat, card.id, 'chasse'), entry.ops);
+  discard(state.piles.chasse, card);
+  emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: card.id, fromSeat: seat });
 }
 
 export function applyPlayerAction(state: GameState, action: PlayerAction): void {
   const seat = state.activeSeat;
+  // BOSS_007 Azhda actif: force the active hero to draw only this turn.
+  const activeHero = state.heroes[seat];
+  if (activeHero?.onlyDrawThisTurn && action.kind !== 'draw' && action.kind !== 'none') {
+    emit(state, {
+      kind: 'ACTION_NONE',
+      seat,
+      reason: `restrict_to_draw (Azhda) — ${action.kind} remplacé par draw`,
+    });
+    action = { kind: 'draw', reason: 'forcé par Azhda' };
+  }
   switch (action.kind) {
     case 'draw':
       doDraw(state, seat, action.reason);
       return;
     case 'useCapacite':
       doUseCapacite(state, seat);
+      return;
+    case 'useObject':
+      doUseObject(state, seat, action.objectIdx, action.reason);
       return;
     case 'play': {
       if (action.placeObject !== undefined) {

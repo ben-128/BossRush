@@ -17,6 +17,7 @@ import { emit } from './logger.js';
 import { discard } from './piles.js';
 import { onDamageResolved, shouldCancelDamage } from './modifiers.js';
 import { hookBossDamageAllowed, hookInvuncheDrawDestinOnDamage } from './bossPassifs.js';
+import { runOps, mkCtx } from './effects.js';
 
 function nextWoundId(state: GameState): string {
   state.counters.wound += 1;
@@ -217,6 +218,20 @@ function findNextLivingHero(state: GameState, fromSeat: number): HeroRuntime | u
 /** Mark a hero as dead, cascade queue to next living hero, check defeat. */
 function killHero(state: GameState, seat: number): true {
   const h = state.heroes[seat]!;
+
+  // Death-triggered objects (tag `death_burst`, e.g. GUE_O06 Dernier rempart)
+  // fire one last time before the hero is marked dead.
+  for (let i = h.objects.length - 1; i >= 0; i--) {
+    const obj = h.objects[i]!;
+    const entry = state.effects[obj.id];
+    if (entry?.tag !== 'death_burst' || !entry.ops || entry.ops.length === 0) continue;
+    h.objects.splice(i, 1);
+    emit(state, { kind: 'OBJECT_USED', seat, card: obj.id, reason: `dernier souffle avant mort` });
+    runOps(state, mkCtx(seat, obj.id, 'chasse'), entry.ops);
+    discard(state.piles.chasse, obj);
+    emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: seat });
+  }
+
   h.dead = true;
   emit(state, { kind: 'HERO_DEATH', seat });
 

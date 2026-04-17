@@ -259,6 +259,175 @@ export interface OpOpenFreeExchange {
   maxSwaps?: number;
 }
 
+/** Trigger the boss's actif (⚡ capacité) outside of its normal sequence slot. */
+export interface OpBossActif {
+  op: 'bossActif';
+}
+
+/** Resolve N attack orders on a hero's queue (self = active hero, each_hero = all). */
+export interface OpAttackOrder {
+  op: 'attackOrder';
+  target: 'self' | 'each_hero';
+}
+
+/** One-shot: next Action played by self ignores its prerequis (MAG_O02). */
+export interface OpIgnorePrereqNext {
+  op: 'ignorePrereqNext';
+}
+
+/** Draw N cards where N = total wounds on self (GUE_O03). */
+export interface OpDrawPerSelfWound {
+  op: 'drawPerSelfWound';
+}
+
+/** Move all monsters of every *other* living hero's queue to self's tail (DIP_A12). */
+export interface OpRallyToSelf {
+  op: 'rallyToSelf';
+}
+
+/** Each living ally transfers 1 Chasse card of their hand to self (DIP_O01). */
+export interface OpGiveCardsFromAllies {
+  op: 'giveCardsFromAllies';
+}
+
+/** Self transfers 1 Chasse card from hand to each living ally (DIP_O02). */
+export interface OpGiveCardsToAllies {
+  op: 'giveCardsToAllies';
+}
+
+/** Grant self one extra Objet pose slot this turn (ROD_A04). */
+export interface OpGrantExtraPose {
+  op: 'grantExtraPose';
+}
+
+/** Swap 1 Action card with a chosen ally — mutually beneficial picks (DIP_A02). */
+export interface OpSwapHandWithAlly {
+  op: 'swapHandWithAlly';
+}
+
+/** Swap all posed Objets with a chosen ally (DIP_A04, DIP_A08). */
+export interface OpSwapObjectsWithAlly {
+  op: 'swapObjectsWithAlly';
+}
+
+/** Gift up to N cards from hand to an ally; heal self by number transferred (DIP_A09). */
+export interface OpGiftCardsToAlly {
+  op: 'giftCardsToAlly';
+  n: number;
+  healPerCard?: number;
+}
+
+/** Scry N from Chasse pile, keep K on top, discard rest (ROD_A07). */
+export interface OpScryChasse {
+  op: 'scryChasse';
+  look: number;
+  keep: number;
+}
+
+/** Attack queue head; if killed, cascade same damage to new head (ROD_O02). */
+export interface OpAttackChain {
+  op: 'attackChain';
+  amount: number;
+}
+
+/** Heal self = number of actions played this turn (ROD_O03). */
+export interface OpHealEqualsActionsThisTurn {
+  op: 'healEqualsActionsThisTurn';
+}
+
+/** Heal self = number of cards drawn this turn (ROD_O06). */
+export interface OpHealEqualsDrawsThisTurn {
+  op: 'healEqualsDrawsThisTurn';
+}
+
+/** Eliminate a monster only if hero played ≥ N Actions this turn (ROD_O04). */
+export interface OpEliminateIfActionsThisTurn {
+  op: 'eliminateIfActionsThisTurn';
+  minActions: number;
+  from: 'monster_in_self_queue' | 'monster_in_any_queue';
+}
+
+/** Move 1 wound from any ally to queue head (SOI_A03). */
+export interface OpDrawFromDiscard {
+  op: 'drawFromDiscard';
+  target: 'self' | 'any_ally';
+  n: number;
+}
+
+/** Redistribute wounds across living heroes toward the mean (SOI_A11). */
+export interface OpRedistributeWounds {
+  op: 'redistributeWounds';
+}
+
+/** Discard one posed Objet on target (BOSS_005 actif). */
+export interface OpDiscardObject {
+  op: 'discardObject';
+  target: 'active_hero' | 'self';
+  n: number;
+}
+
+/** Force active hero to only be able to draw this turn (BOSS_007 actif). */
+export interface OpRestrictToDraw {
+  op: 'restrictToDraw';
+  target: 'active_hero';
+}
+
+/** Active hero discards full hand and draws the same count (BOSS_008 actif). */
+export interface OpDiscardHandDrawSame {
+  op: 'discardHandDrawSame';
+  target: 'active_hero';
+}
+
+/** Scout solo (DEN_018): discard 2 Actions → draw 2, else take 1 damage. */
+export interface OpScoutSolo {
+  op: 'scoutSolo';
+}
+
+/** Take up to `max` queue heads from other living heroes, push to source's tail (GUE_A07). */
+export interface OpRallyHeadsToSelf {
+  op: 'rallyHeadsToSelf';
+  max: number;
+}
+
+/** Draw until hand has at least `n` cards (ROD_O05). */
+export interface OpDrawUpTo {
+  op: 'drawUpTo';
+  target: 'self';
+  n: number;
+}
+
+/** Eliminate the queue head of a chosen living ally (DIP_A07). */
+export interface OpEliminateAllyHead {
+  op: 'eliminateAllyHead';
+}
+
+/** A chosen queue head's monster deals its vie in damage to boss (DIP_A10). */
+export interface OpReassignHeadToBoss {
+  op: 'reassignHeadToBoss';
+}
+
+/** Heal an ally by amount = self's total wounds (SOI_O03). */
+export interface OpHealAllyEqualsSelfWounds {
+  op: 'healAllyEqualsSelfWounds';
+}
+
+/** Draw 1; if it was an Objet, draw 1 extra (DEN_006). */
+export interface OpDrawWithObjetBonus {
+  op: 'drawWithObjetBonus';
+  target: 'self';
+}
+
+/** Run one more action via active hero's ally policy (DIP_A05). */
+export interface OpAllyPlaysAction {
+  op: 'allyPlaysAction';
+}
+
+/** Deal `amount` damage to queue head only if a hero was healed this turn (SOI_O05). */
+export interface OpDamageIfHealed {
+  op: 'damageIfHealed';
+  amount: number;
+}
+
 export interface OpModifier {
   op: 'modifier';
   effect: ModifierEffect;
@@ -301,7 +470,37 @@ export type EffectOp =
   | OpCancelMenace
   | OpMoveSelfMonsterToHead
   | OpPlayMoreActions
-  | OpOpenFreeExchange;
+  | OpOpenFreeExchange
+  | OpBossActif
+  | OpAttackOrder
+  | OpIgnorePrereqNext
+  | OpDrawPerSelfWound
+  | OpRallyToSelf
+  | OpGiveCardsFromAllies
+  | OpGiveCardsToAllies
+  | OpGrantExtraPose
+  | OpSwapHandWithAlly
+  | OpSwapObjectsWithAlly
+  | OpGiftCardsToAlly
+  | OpScryChasse
+  | OpAttackChain
+  | OpHealEqualsActionsThisTurn
+  | OpHealEqualsDrawsThisTurn
+  | OpEliminateIfActionsThisTurn
+  | OpDrawFromDiscard
+  | OpRedistributeWounds
+  | OpDiscardObject
+  | OpRestrictToDraw
+  | OpDiscardHandDrawSame
+  | OpScoutSolo
+  | OpRallyHeadsToSelf
+  | OpDrawUpTo
+  | OpEliminateAllyHead
+  | OpReassignHeadToBoss
+  | OpHealAllyEqualsSelfWounds
+  | OpDrawWithObjetBonus
+  | OpAllyPlaysAction
+  | OpDamageIfHealed;
 
 /** One entry per card id in effects.json. */
 export interface CardEffectEntry {

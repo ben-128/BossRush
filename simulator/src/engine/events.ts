@@ -52,6 +52,12 @@ export type GameEvent =
   | { t: number; kind: 'DRAW_CARD'; pile: PileName; card: string; toSeat?: number }
   | { t: number; kind: 'DISCARD_CARD'; pile: PileName; card: string; fromSeat?: number }
 
+  // Choice op resolution (visible in the log)
+  | { t: number; kind: 'CHOICE_MADE'; sourceCardId: string; seat: number; label: string }
+  | { t: number; kind: 'MONSTER_MOVED'; instanceId: string; cardId: string; fromSeat: number; toSeat: number; position: 'head' | 'tail'; sourceCardId: string }
+  | { t: number; kind: 'CAPACITE_USED'; seat: number; heroId: string }
+  | { t: number; kind: 'OBJECT_USED'; seat: number; card: string; reason?: string }
+
   // Catch-all for things not yet coded in current jalon
   | { t: number; kind: 'WARN'; message: string }
   | { t: number; kind: 'NOT_IMPLEMENTED'; feature: string; detail?: string }

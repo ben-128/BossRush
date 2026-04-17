@@ -194,7 +194,10 @@ export function describeEvent(ev: GameEvent, state?: GameState | null): string {
   const chName = (id: string) => state?.catalog.chasseById.get(id)?.nom ?? id;
   const monName = (id: string) => state?.catalog.monstreById.get(id)?.nom ?? id;
   const heroName = (id: string) => state?.catalog.heroesById.get(id)?.nom ?? id;
-  const bossNameOf = (id: string) => state?.catalog.bossById.get(id)?.nom ?? id;
+  const bossNameOf = (id: string) => {
+    const b = state?.catalog.bossById.get(id);
+    return b ? `${b.nom} (${b.difficulte})` : id;
+  };
   const menName = (id: string) => state?.catalog.menaceById.get(id)?.nom ?? id;
   const desName = (id: string) => state?.catalog.destinById.get(id)?.titre ?? id;
   void design;
@@ -250,6 +253,20 @@ export function describeEvent(ev: GameEvent, state?: GameState | null): string {
       return `    ${ev.pile} → « ${ev.pile === 'chasse' ? chName(ev.card) : ev.pile === 'monstre' ? monName(ev.card) : ev.pile === 'menace' ? menName(ev.card) : desName(ev.card)} »${ev.toSeat !== undefined ? ` (seat ${ev.toSeat})` : ''}`;
     case 'DISCARD_CARD':
       return `    ↳ défausse ${ev.pile}: « ${ev.pile === 'chasse' ? chName(ev.card) : ev.pile === 'monstre' ? monName(ev.card) : ev.pile === 'menace' ? menName(ev.card) : desName(ev.card)} »`;
+    case 'CHOICE_MADE':
+      return `  ↳ choix : ${ev.label} (seat ${ev.seat})`;
+    case 'CAPACITE_USED':
+      return `  ⚡ Capacité de ${heroName(ev.heroId)} (seat ${ev.seat})`;
+    case 'OBJECT_USED':
+      return `  🛠 Seat ${ev.seat} utilise « ${chName(ev.card)} »${ev.reason ? ` — ${ev.reason}` : ''}`;
+    case 'MONSTER_MOVED': {
+      const name = state?.catalog.monstreById.get(ev.cardId)?.nom ?? ev.cardId;
+      const src = chName(ev.sourceCardId) || monName(ev.sourceCardId) || menName(ev.sourceCardId) || desName(ev.sourceCardId) || bossNameOf(ev.sourceCardId) || ev.sourceCardId;
+      if (ev.fromSeat === ev.toSeat) {
+        return `  ➤ « ${name} » déplacé en ${ev.position === 'head' ? 'tête' : 'fond'} de sa file (via ${src})`;
+      }
+      return `  ➤ « ${name} » : seat ${ev.fromSeat} → seat ${ev.toSeat} (${ev.position === 'head' ? 'tête' : 'fond'}) via ${src}`;
+    }
     case 'WARN':
       return `⚠ ${ev.message}`;
     case 'NOT_IMPLEMENTED':

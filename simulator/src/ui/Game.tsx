@@ -3,7 +3,6 @@ import { BossCard } from './components/BossCard.js';
 import { HeroPanel } from './components/HeroPanel.js';
 import { Log } from './components/Log.js';
 import { Controls } from './components/Controls.js';
-import { CardInspector } from './components/CardInspector.js';
 
 export function Game() {
   const state = useStore((s) => s.state)!;
@@ -22,7 +21,6 @@ export function Game() {
         </div>
         <Log />
       </div>
-      <CardInspector />
     </>
   );
 }

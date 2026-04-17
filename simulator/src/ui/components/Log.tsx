@@ -60,6 +60,12 @@ function renderEventContent(
           Seat {ev.seat} pose « {ch(ev.card)} »{ev.reason && <> — {ev.reason}</>}
         </>
       );
+    case 'OBJECT_USED':
+      return (
+        <>
+          &nbsp;&nbsp;🛠 Seat {ev.seat} utilise « {ch(ev.card)} »{ev.reason && <> — {ev.reason}</>}
+        </>
+      );
     case 'ACTION_DRAW':
       return (
         <>
@@ -82,6 +88,19 @@ function renderEventContent(
       return <>  🐾 Invocation de « {mo(ev.cardId)} » (seat {ev.seat})</>;
     case 'ELIMINATE_MONSTER':
       return <>✸ « {mo(ev.cardId)} » éliminé (seat {ev.seat})</>;
+    case 'MONSTER_MOVED':
+      if (ev.fromSeat === ev.toSeat) {
+        return (
+          <>
+            &nbsp;&nbsp;➤ « {mo(ev.cardId)} » → {ev.position === 'head' ? 'tête' : 'fond'} de sa file
+          </>
+        );
+      }
+      return (
+        <>
+          &nbsp;&nbsp;➤ « {mo(ev.cardId)} » : seat {ev.fromSeat} → seat {ev.toSeat} ({ev.position === 'head' ? 'tête' : 'fond'})
+        </>
+      );
     case 'INITIAL_HAND':
       return <>Seat {ev.seat}: main initiale [{join(ev.cards.map(ch), ', ')}]</>;
     case 'DRAW_CARD':
@@ -122,6 +141,10 @@ const KIND_COLORS: Record<string, string> = {
   SUMMON_MONSTER: 'text-purple-300',
   DRAW_MENACE: 'text-amber-300',
   RESOLVE_MENACE: 'text-amber-200',
+  CHOICE_MADE: 'text-amber-100',
+  MONSTER_MOVED: 'text-purple-200',
+  CAPACITE_USED: 'text-yellow-300',
+  OBJECT_USED: 'text-amber-300',
   BOSS_SEQ_ICON: 'text-amber-500',
   ATTACK_ORDER: 'text-red-400',
 };
@@ -147,9 +170,14 @@ function eventCategory(ev: GameEvent): FilterKind | 'other' {
     case 'BOSS_SEQ_ICON':
     case 'DRAW_MENACE':
     case 'RESOLVE_MENACE':
+    case 'CHOICE_MADE':
     case 'SUMMON_MONSTER':
+    case 'MONSTER_MOVED':
     case 'BOSS_ACTIF_TRIGGERED':
       return 'boss';
+    case 'CAPACITE_USED':
+    case 'OBJECT_USED':
+      return 'actions';
     case 'DRAW_CARD':
     case 'DISCARD_CARD':
     case 'PILE_RESHUFFLE':

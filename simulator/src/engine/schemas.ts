@@ -131,6 +131,7 @@ export const SousTypeAssautSchema = z.enum([
   'ordre_attaque_special',
   'attaque_speciale',
   'invocation_speciale',
+  'capacite_boss',
 ]);
 
 export const MenaceSchema = z.object({

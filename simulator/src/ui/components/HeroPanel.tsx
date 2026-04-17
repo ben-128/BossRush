@@ -32,6 +32,42 @@ export function HeroPanel({ seat }: Props) {
         isActive ? 'border-emerald-500 shadow-[0_0_0_1px_rgba(16,185,129,0.3)]' : 'border-stone-700'
       } ${h.dead ? 'opacity-50' : ''}`}
     >
+      {/* Monster queue above the hero: head (attacks first) at top, tail at bottom. */}
+      <div className="flex flex-col items-center mb-2 min-h-[1.5rem]">
+        {h.queue.length === 0 ? (
+          <span className="text-[10px] text-stone-600 italic">file vide</span>
+        ) : (
+          <>
+            <span className="text-[9px] text-red-400 uppercase tracking-wider mb-0.5">
+              ▼ tête (attaque)
+            </span>
+            <div className="flex flex-col space-y-0.5 w-full">
+              {h.queue.map((m, i) => {
+                const name = monstreName(design, m.cardId);
+                const wounds = totalWoundsOf(m.wounds);
+                return (
+                  <button
+                    key={m.instanceId}
+                    onClick={() => inspect({ kind: 'monstre', id: m.cardId, instanceId: m.instanceId })}
+                    className={`w-full text-xs px-2 py-0.5 rounded text-left hover:ring-1 hover:ring-sky-400 ${
+                      i === 0 ? 'bg-red-900/70 text-red-100' : 'bg-stone-800'
+                    }`}
+                    title={`${name} — ${wounds} dégât${wounds > 1 ? 's' : ''} · clic pour détails`}
+                  >
+                    <span className="text-stone-500 mr-1">{i + 1}.</span>
+                    {name}
+                    {wounds > 0 && <span className="text-red-300 ml-1">({wounds})</span>}
+                  </button>
+                );
+              })}
+            </div>
+            <span className="text-[9px] text-stone-500 uppercase tracking-wider mt-0.5">
+              ▲ fond
+            </span>
+          </>
+        )}
+      </div>
+
       <div className="flex justify-between items-baseline mb-1">
         <div>
           <button
@@ -65,30 +101,6 @@ export function HeroPanel({ seat }: Props) {
 
       <div className="text-xs space-y-1">
         <div>
-          <span className="text-stone-400">File ({h.queue.length})</span>:{' '}
-          {h.queue.length === 0 ? (
-            <span className="text-stone-600">vide</span>
-          ) : (
-            h.queue.map((m, i) => {
-              const name = monstreName(design, m.cardId);
-              const wounds = totalWoundsOf(m.wounds);
-              return (
-                <button
-                  key={m.instanceId}
-                  onClick={() => inspect({ kind: 'monstre', id: m.cardId, instanceId: m.instanceId })}
-                  className={`inline-block px-1 mx-0.5 rounded hover:ring-1 hover:ring-sky-400 ${
-                    i === 0 ? 'bg-red-900/70 text-red-100' : 'bg-stone-800'
-                  }`}
-                  title={`${name} — ${wounds} dégât${wounds > 1 ? 's' : ''} · clic pour détails`}
-                >
-                  {name}
-                  {wounds > 0 && <span className="text-red-300 ml-1">({wounds})</span>}
-                </button>
-              );
-            })
-          )}
-        </div>
-        <div>
           <span className="text-stone-400">Main ({h.hand.length})</span>:{' '}
           {h.hand.length === 0 ? (
             <span className="text-stone-600">vide</span>
@@ -110,21 +122,23 @@ export function HeroPanel({ seat }: Props) {
             })
           )}
         </div>
-        {h.objects.length > 0 && (
-          <div>
-            <span className="text-stone-400">Objets posés</span>:{' '}
-            {h.objects.map((c, i) => (
+        <div>
+          <span className="text-stone-400">Objets posés ({h.objects.length})</span>:{' '}
+          {h.objects.length === 0 ? (
+            <span className="text-stone-600">aucun</span>
+          ) : (
+            h.objects.map((c, i) => (
               <button
                 key={i}
                 onClick={() => inspect({ kind: 'chasse', id: c.id })}
                 className="inline-block px-1 mx-0.5 rounded bg-amber-900/40 hover:bg-amber-800 hover:ring-1 hover:ring-amber-400"
-                title="Objet · clic pour détails"
+                title={`${c.id}${c.bonus_degats !== undefined ? ' · +' + c.bonus_degats + ' dmg renfort' : ''}${c.effet ? ' · ' + c.effet : ''} · clic pour détails`}
               >
                 {chasseName(design, c.id)}
               </button>
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
         <div>
           <span className="text-stone-400">Capacité</span>:{' '}
           <span className={h.capaciteUsed ? 'text-stone-600' : 'text-emerald-400'}>

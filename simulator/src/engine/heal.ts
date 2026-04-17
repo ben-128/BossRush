@@ -43,6 +43,7 @@ export function healHero(state: GameState, seat: number, amount: number, source:
   if (!h || h.dead) return 0;
   const cappedBudget = capHealBudget(state, amount);
   const { removed, healed } = healStack(h.wounds, cappedBudget);
+  if (healed > 0) state.healedThisTurn = true;
   emit(state, {
     kind: 'WARN',
     message: `heal seat=${seat} budget=${amount} healed=${healed} removedIds=${removed.map((w) => w.woundId).join(',')} source=${source}`,

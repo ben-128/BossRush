@@ -30,7 +30,7 @@ export function Controls() {
         Nouvelle partie
       </button>
       <span className="text-xs text-stone-400 ml-auto">
-        Tour {state.turn} · Seat actif {state.activeSeat} · {state.events.length} events
+        Tour {state.turn} (~{((state.turn * 30) / 60).toFixed(1)} min) · Seat actif {state.activeSeat} · {state.events.length} events
       </span>
     </div>
   );

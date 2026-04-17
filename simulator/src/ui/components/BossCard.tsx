@@ -57,7 +57,8 @@ export function BossCard() {
               : 'bg-red-900 text-red-100'
           }`}
         >
-          {state.result === 'victory' ? '🏆 VICTOIRE' : '✝ DÉFAITE'} — {state.turn} tours
+          {state.result === 'victory' ? '🏆 VICTOIRE' : '✝ DÉFAITE'} — {state.turn} tours (~
+          {((state.turn * 30) / 60).toFixed(1)} min)
         </div>
       )}
     </div>

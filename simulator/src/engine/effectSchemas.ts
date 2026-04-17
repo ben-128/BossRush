@@ -119,6 +119,115 @@ const OpRequire = z.object({
   cond: Condition,
 });
 
+const OpBossActif = z.object({
+  op: z.literal('bossActif'),
+});
+
+const OpAttackOrder = z.object({
+  op: z.literal('attackOrder'),
+  target: z.enum(['self', 'each_hero']),
+});
+
+const OpIgnorePrereqNext = z.object({
+  op: z.literal('ignorePrereqNext'),
+});
+
+const OpDrawPerSelfWound = z.object({
+  op: z.literal('drawPerSelfWound'),
+});
+
+const OpRallyToSelf = z.object({
+  op: z.literal('rallyToSelf'),
+});
+
+const OpGiveCardsFromAllies = z.object({
+  op: z.literal('giveCardsFromAllies'),
+});
+
+const OpGiveCardsToAllies = z.object({
+  op: z.literal('giveCardsToAllies'),
+});
+
+const OpGrantExtraPose = z.object({
+  op: z.literal('grantExtraPose'),
+});
+
+const OpSwapHandWithAlly = z.object({
+  op: z.literal('swapHandWithAlly'),
+});
+
+const OpSwapObjectsWithAlly = z.object({
+  op: z.literal('swapObjectsWithAlly'),
+});
+
+const OpGiftCardsToAlly = z.object({
+  op: z.literal('giftCardsToAlly'),
+  n: z.number().int().positive(),
+  healPerCard: z.number().int().nonnegative().optional(),
+});
+
+const OpScryChasse = z.object({
+  op: z.literal('scryChasse'),
+  look: z.number().int().positive(),
+  keep: z.number().int().nonnegative(),
+});
+
+const OpAttackChain = z.object({
+  op: z.literal('attackChain'),
+  amount: z.number().int().positive(),
+});
+
+const OpHealEqualsActionsThisTurn = z.object({ op: z.literal('healEqualsActionsThisTurn') });
+const OpHealEqualsDrawsThisTurn = z.object({ op: z.literal('healEqualsDrawsThisTurn') });
+const OpEliminateIfActionsThisTurn = z.object({
+  op: z.literal('eliminateIfActionsThisTurn'),
+  minActions: z.number().int().positive(),
+  from: z.enum(['monster_in_self_queue', 'monster_in_any_queue']),
+});
+const OpDrawFromDiscard = z.object({
+  op: z.literal('drawFromDiscard'),
+  target: z.enum(['self', 'any_ally']),
+  n: z.number().int().positive(),
+});
+const OpRedistributeWounds = z.object({ op: z.literal('redistributeWounds') });
+const OpDiscardObject = z.object({
+  op: z.literal('discardObject'),
+  target: z.enum(['active_hero', 'self']),
+  n: z.number().int().positive(),
+});
+const OpRestrictToDraw = z.object({
+  op: z.literal('restrictToDraw'),
+  target: z.literal('active_hero'),
+});
+const OpDiscardHandDrawSame = z.object({
+  op: z.literal('discardHandDrawSame'),
+  target: z.literal('active_hero'),
+});
+
+const OpScoutSolo = z.object({ op: z.literal('scoutSolo') });
+
+const OpRallyHeadsToSelf = z.object({
+  op: z.literal('rallyHeadsToSelf'),
+  max: z.number().int().positive(),
+});
+const OpDrawUpTo = z.object({
+  op: z.literal('drawUpTo'),
+  target: z.literal('self'),
+  n: z.number().int().positive(),
+});
+const OpEliminateAllyHead = z.object({ op: z.literal('eliminateAllyHead') });
+const OpReassignHeadToBoss = z.object({ op: z.literal('reassignHeadToBoss') });
+const OpHealAllyEqualsSelfWounds = z.object({ op: z.literal('healAllyEqualsSelfWounds') });
+const OpDrawWithObjetBonus = z.object({
+  op: z.literal('drawWithObjetBonus'),
+  target: z.literal('self'),
+});
+const OpAllyPlaysAction = z.object({ op: z.literal('allyPlaysAction') });
+const OpDamageIfHealed = z.object({
+  op: z.literal('damageIfHealed'),
+  amount: z.number().int().positive(),
+});
+
 const OpEliminateWhere = z.object({
   op: z.literal('eliminateWhere'),
   from: z.enum(['monster_in_self_queue', 'monster_in_any_queue']),
@@ -154,6 +263,36 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpMoveSelfMonsterToHead,
     OpPlayMoreActions,
     OpOpenFreeExchange,
+    OpBossActif,
+    OpAttackOrder,
+    OpIgnorePrereqNext,
+    OpDrawPerSelfWound,
+    OpRallyToSelf,
+    OpGiveCardsFromAllies,
+    OpGiveCardsToAllies,
+    OpGrantExtraPose,
+    OpSwapHandWithAlly,
+    OpSwapObjectsWithAlly,
+    OpGiftCardsToAlly,
+    OpScryChasse,
+    OpAttackChain,
+    OpHealEqualsActionsThisTurn,
+    OpHealEqualsDrawsThisTurn,
+    OpEliminateIfActionsThisTurn,
+    OpDrawFromDiscard,
+    OpRedistributeWounds,
+    OpDiscardObject,
+    OpRestrictToDraw,
+    OpDiscardHandDrawSame,
+    OpScoutSolo,
+    OpRallyHeadsToSelf,
+    OpDrawUpTo,
+    OpEliminateAllyHead,
+    OpReassignHeadToBoss,
+    OpHealAllyEqualsSelfWounds,
+    OpDrawWithObjetBonus,
+    OpAllyPlaysAction,
+    OpDamageIfHealed,
   ]),
 );
 
