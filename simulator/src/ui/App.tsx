@@ -3,6 +3,7 @@ import { useStore } from './store.js';
 import { Setup } from './Setup.js';
 import { Game } from './Game.js';
 import { Dashboard } from './Dashboard.js';
+import { Batch } from './Batch.js';
 
 export function App() {
   const loading = useStore((s) => s.loading);
@@ -33,9 +34,11 @@ export function App() {
   const body =
     view === 'dashboard'
       ? <Dashboard />
-      : view === 'game' && state
-        ? <Game />
-        : <Setup />;
+      : view === 'batch'
+        ? <Batch />
+        : view === 'game' && state
+          ? <Game />
+          : <Setup />;
 
   return (
     <div className="min-h-screen">
@@ -51,6 +54,7 @@ export function App() {
             >
               Partie
             </TabBtn>
+            <TabBtn active={view === 'batch'} onClick={() => setView('batch')}>Batch</TabBtn>
             <TabBtn active={view === 'dashboard'} onClick={() => setView('dashboard')}>Dashboard</TabBtn>
           </nav>
         </div>

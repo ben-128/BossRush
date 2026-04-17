@@ -8,7 +8,7 @@ import { runTurn, runGame } from '../engine/engine.js';
 import { randomPolicy } from '../ai/random.js';
 import { loadAllData } from './browserLoader.js';
 
-export type View = 'setup' | 'game' | 'dashboard';
+export type View = 'setup' | 'game' | 'batch' | 'dashboard';
 
 interface Store {
   loading: boolean;
