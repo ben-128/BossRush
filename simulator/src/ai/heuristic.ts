@@ -151,7 +151,13 @@ export const heuristicPolicy: Policy = {
     if (!h) return { kind: 'none', reason: 'no hero' };
 
     // 1. Fire capacité if situation warrants.
-    if (shouldUseCapacite(state, h)) return { kind: 'useCapacite' };
+    if (shouldUseCapacite(state, h)) {
+      const entry = state.effects[h.heroId];
+      return {
+        kind: 'useCapacite',
+        reason: `capacité "${entry?.tag ?? 'spéciale'}" contextuellement utile`,
+      };
+    }
 
     // 2. Evaluate playable actions.
     const playable = playableActions(state, h);
@@ -160,17 +166,40 @@ export const heuristicPolicy: Policy = {
         .map((i) => ({ i, card: h.hand[i]!, s: scoreAction(state, h, h.hand[i]!) }))
         .sort((a, b) => b.s - a.s);
       const best = scored[0]!;
-      // Attach renforts if this is an attack and renforts exist (one at most).
       const renforts = renfortIndices(state, h);
       const attaches: number[] = [];
       if (best.card.degats !== undefined && renforts.length > 0 && renforts[0] !== undefined) {
         attaches.push(renforts[0]);
       }
-      return { kind: 'play', playAction: best.i, renforts: attaches };
+      const entry = state.effects[best.card.id];
+      const tag = entry?.tag ?? (best.card.degats !== undefined ? 'attack' : 'utility');
+      const parts = [
+        `${best.card.nom}`,
+        `score=${best.s}`,
+        tag ? `tag=${tag}` : null,
+        best.card.degats !== undefined ? `${best.card.degats} dmg` : null,
+        attaches.length > 0 ? 'avec renfort' : null,
+      ].filter(Boolean);
+      return {
+        kind: 'play',
+        playAction: best.i,
+        renforts: attaches,
+        reason: `joue ${parts.join(' · ')}`,
+      };
     }
 
     // 3. No action playable → draw.
-    return { kind: 'draw' };
+    const reasons: string[] = [];
+    if (h.hand.length === 0) reasons.push('main vide');
+    else if (h.hand.every((c) => !state.effects[c.id] && (!c.degats || c.effet))) {
+      reasons.push('aucune carte jouable dans la main');
+    } else {
+      reasons.push('aucune cible/condition remplie');
+    }
+    return {
+      kind: 'draw',
+      reason: `pioche (${reasons.join(', ')})`,
+    };
   },
 
   pickChoice(state, sourceSeat, _sourceCardId, options) {

@@ -59,11 +59,11 @@ export const randomPolicy: Policy = {
     // Small chance to fire the capacité spéciale if available and coded.
     if (!h.capaciteUsed && state.effects[h.heroId]) {
       const roll = withRng(state, (rng) => rng.nextFloat());
-      if (roll < 0.1) return { kind: 'useCapacite' };
+      if (roll < 0.1) return { kind: 'useCapacite', reason: 'aléa 10%' };
     }
 
     if (playable.length === 0) {
-      return { kind: 'draw' };
+      return { kind: 'draw', reason: 'rien de jouable' };
     }
 
     return withRng(state, (rng) => {
@@ -82,6 +82,7 @@ export const randomPolicy: Policy = {
         kind: 'play',
         playAction: handIdx,
         renforts: chosenRenforts,
+        reason: `random pick (${chosenRenforts.length} renforts)`,
       };
     });
   },

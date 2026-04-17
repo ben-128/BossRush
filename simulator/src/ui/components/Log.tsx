@@ -113,7 +113,7 @@ export function Log() {
         {visible.map((ev) => (
           <div key={ev.t} className={`${KIND_COLORS[ev.kind] ?? 'text-stone-300'}`}>
             <span className="text-stone-600 mr-1">{ev.t.toString().padStart(4)}</span>
-            {describeEvent(ev)}
+            {describeEvent(ev, state)}
           </div>
         ))}
       </div>

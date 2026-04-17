@@ -28,29 +28,25 @@ import { hookDiscardTopOnAction, hookDrawAllowed } from './bossPassifs.js';
 // Action types exchanged with the AI policy
 // ---------------------------------------------------------------------------
 
+/** Optional explanation of why the AI picked this action. Shown in the log. */
+export type ActionReason = string | undefined;
+
 export type PlayerAction =
-  | { kind: 'draw' }
-  | { kind: 'useCapacite' }
+  | { kind: 'draw'; reason?: ActionReason }
+  | { kind: 'useCapacite'; reason?: ActionReason }
   | {
       kind: 'play';
-      /** Index of an Objet to place this turn, or null. */
       placeObject?: number;
-      /** Index of an Action to play, or null. */
       playAction?: number;
-      /**
-       * Indices of Objets posés used as renforts together with the Action.
-       * Must be objets already placed (indices into HeroRuntime.objects).
-       */
       renforts?: number[];
+      reason?: ActionReason;
     }
   | {
       kind: 'exchange';
-      /** Seat to exchange with (must be a different, living hero). */
       withSeat: number;
-      /** Indices into the active hero's hand, given away. */
       give: number[];
-      /** Indices into the partner's hand, taken. */
       take: number[];
+      reason?: ActionReason;
     }
   | { kind: 'none'; reason: string };
 

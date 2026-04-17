@@ -75,6 +75,12 @@ export function runTurn(state: GameState, policies: Policy[]): void {
       emit(state, { kind: 'SKIP_TURN', seat, reason: 'no_policy' });
     } else {
       const action = policy.pickAction(state);
+      if (action.kind !== 'none' && action.reason) {
+        emit(state, {
+          kind: 'WARN',
+          message: `[${policy.name} seat=${seat}] ${action.kind} — ${action.reason}`,
+        });
+      }
       applyPlayerAction(state, action);
     }
   };

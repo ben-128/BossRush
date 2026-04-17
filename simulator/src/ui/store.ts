@@ -10,6 +10,14 @@ import { loadAllData } from './browserLoader.js';
 
 export type View = 'setup' | 'game' | 'batch' | 'dashboard';
 
+export type CardRef =
+  | { kind: 'chasse'; id: string }
+  | { kind: 'monstre'; id: string; instanceId?: string }
+  | { kind: 'boss'; id: string }
+  | { kind: 'hero'; id: string }
+  | { kind: 'menace'; id: string }
+  | { kind: 'destin'; id: string };
+
 interface Store {
   loading: boolean;
   error: string | null;
@@ -21,6 +29,10 @@ interface Store {
 
   view: View;
   setView: (v: View) => void;
+
+  /** Currently inspected card (modal). */
+  inspected: CardRef | null;
+  inspect: (c: CardRef | null) => void;
 
   // Setup form
   form: {
@@ -58,6 +70,8 @@ export const useStore = create<Store>((set, get) => ({
   running: false,
   view: 'setup',
   setView: (v) => set({ view: v }),
+  inspected: null,
+  inspect: (c) => set({ inspected: c }),
   form: { ...DEFAULT_FORM },
 
   setBoss: (id) => set((s) => ({ form: { ...s.form, boss: id } })),
@@ -165,76 +179,110 @@ export function totalWoundsOf(wounds: readonly { degats: number }[]): number {
   return wounds.reduce((s, w) => s + w.degats, 0);
 }
 
-export function describeEvent(ev: GameEvent): string {
+export function describeEvent(ev: GameEvent, state?: GameState | null): string {
+  const design = state?.catalog ? null : null;
+  // Helper closures that resolve an id to a name via the state's catalog.
+  const chName = (id: string) => state?.catalog.chasseById.get(id)?.nom ?? id;
+  const monName = (id: string) => state?.catalog.monstreById.get(id)?.nom ?? id;
+  const heroName = (id: string) => state?.catalog.heroesById.get(id)?.nom ?? id;
+  const bossNameOf = (id: string) => state?.catalog.bossById.get(id)?.nom ?? id;
+  const menName = (id: string) => state?.catalog.menaceById.get(id)?.nom ?? id;
+  const desName = (id: string) => state?.catalog.destinById.get(id)?.titre ?? id;
+  void design;
+
   switch (ev.kind) {
     case 'SETUP':
-      return `Setup boss=${ev.bossId} heroes=${ev.heroes.join(',')} hp=${ev.bossHp}`;
+      return `Setup boss=${bossNameOf(ev.bossId)} heroes=[${ev.heroes.map(heroName).join(', ')}] hp=${ev.bossHp}`;
     case 'SHUFFLE_PILE':
       return `Shuffle ${ev.pile} (${ev.size})`;
     case 'INITIAL_HAND':
-      return `Seat ${ev.seat} draws initial hand: ${ev.cards.join(', ')}`;
+      return `Seat ${ev.seat}: main initiale [${ev.cards.map(chName).join(', ')}]`;
     case 'TURN_START':
-      return `— Turn ${ev.turn}, seat ${ev.seat} —`;
+      return `— Tour ${ev.turn}, seat ${ev.seat} —`;
     case 'TURN_END':
-      return `End turn ${ev.turn} (seat ${ev.seat})`;
+      return `Fin tour ${ev.turn} (seat ${ev.seat})`;
     case 'PHASE':
       return `Phase: ${ev.phase}`;
     case 'ACTION_DRAW':
-      return `Seat ${ev.seat} draws: ${ev.drew.join(', ')}`;
+      return `Seat ${ev.seat} pioche [${ev.drew.map(chName).join(', ')}]`;
     case 'ACTION_PLAY_ACTION':
-      return `Seat ${ev.seat} plays ${ev.card}${ev.renforts.length ? ` + [${ev.renforts.join(',')}]` : ''}`;
+      return `Seat ${ev.seat} joue « ${chName(ev.card)} »${ev.renforts.length ? ` + [${ev.renforts.map(chName).join(', ')}]` : ''}`;
     case 'ACTION_PLAY_OBJECT':
-      return `Seat ${ev.seat} places object ${ev.card}`;
+      return `Seat ${ev.seat} pose « ${chName(ev.card)} »`;
     case 'ACTION_EXCHANGE':
-      return `Seat ${ev.seat} ⇄ ${ev.withSeat}: gives [${ev.given.join(',')}] takes [${ev.received.join(',')}]`;
+      return `Seat ${ev.seat} ⇄ seat ${ev.withSeat}: donne [${ev.given.map(chName).join(', ')}] reçoit [${ev.received.map(chName).join(', ')}]`;
     case 'ACTION_NONE':
-      return `Seat ${ev.seat}: no action (${ev.reason})`;
+      return `Seat ${ev.seat}: pas d'action (${ev.reason})`;
     case 'SKIP_TURN':
-      return `Seat ${ev.seat}: skip (${ev.reason})`;
+      return `Seat ${ev.seat}: tour passé (${ev.reason})`;
     case 'ATTACK':
-      return `Attack → ${describeTgt(ev.tgt)} for ${ev.degats}`;
+      return `⚔ Attaque → ${describeTgt(ev.tgt, state)} (${ev.degats} 🩸)`;
     case 'DAMAGE':
-      return `Damage ${ev.amount} on ${ev.targetKind}:${ev.targetId} (from ${ev.sourceCardId})`;
+      return `🩸 ${ev.amount} sur ${describeDamageTarget(ev, state)} (via « ${chName(ev.sourceCardId) || monName(ev.sourceCardId) || menName(ev.sourceCardId) || desName(ev.sourceCardId) || ev.sourceCardId} »)`;
     case 'ELIMINATE_MONSTER':
-      return `✸ Monster ${ev.cardId} (${ev.instanceId}) eliminated (seat ${ev.seat})`;
+      return `✸ « ${monName(ev.cardId)} » éliminé (seat ${ev.seat})`;
     case 'HERO_DEATH':
-      return `✝ Hero at seat ${ev.seat} dies`;
+      return `✝ ${state?.heroes[ev.seat] ? heroName(state.heroes[ev.seat]!.heroId) : `seat ${ev.seat}`} meurt`;
     case 'BOSS_DEFEATED':
-      return `🏆 Boss ${ev.bossId} defeated`;
+      return `🏆 ${bossNameOf(ev.bossId)} vaincu !`;
     case 'BOSS_SEQ_ICON':
-      return `  Boss seq: ${ev.icon}`;
+      return `  Séquence boss : ${ev.icon}`;
     case 'DRAW_MENACE':
-      return `  Menace drawn: ${ev.card} ${ev.name}`;
+      return `  Menace piochée : « ${menName(ev.card)} »`;
     case 'RESOLVE_MENACE':
-      return `  Menace ${ev.card} → ${ev.outcome}`;
+      return `  Menace « ${menName(ev.card)} » → ${ev.outcome}`;
     case 'SUMMON_MONSTER':
-      return `  🐾 Summon ${ev.cardName} (${ev.instanceId}) to seat ${ev.seat}`;
+      return `  🐾 Invocation de « ${ev.cardName} » (seat ${ev.seat})`;
     case 'ATTACK_ORDER':
-      return `  ⚔ Attack order (seat ${ev.seat}) → ${ev.instanceId ?? 'empty queue'}`;
+      return `  ⚔ Ordre d'attaque (seat ${ev.seat})${ev.instanceId ? '' : ' — file vide'}`;
     case 'BOSS_ACTIF_TRIGGERED':
-      return `  ⚡ Boss actif (${ev.bossId}) ${ev.implemented ? '' : '[not coded]'}`;
+      return `  ⚡ Actif de « ${bossNameOf(ev.bossId)} »${ev.implemented ? '' : ' [non codé]'}`;
     case 'DRAW_CARD':
-      return `    ${ev.pile} → ${ev.card}${ev.toSeat !== undefined ? ` (seat ${ev.toSeat})` : ''}`;
+      return `    ${ev.pile} → « ${ev.pile === 'chasse' ? chName(ev.card) : ev.pile === 'monstre' ? monName(ev.card) : ev.pile === 'menace' ? menName(ev.card) : desName(ev.card)} »${ev.toSeat !== undefined ? ` (seat ${ev.toSeat})` : ''}`;
     case 'DISCARD_CARD':
-      return `    ↳ discard ${ev.pile}:${ev.card}`;
+      return `    ↳ défausse ${ev.pile}: « ${ev.pile === 'chasse' ? chName(ev.card) : ev.pile === 'monstre' ? monName(ev.card) : ev.pile === 'menace' ? menName(ev.card) : desName(ev.card)} »`;
     case 'WARN':
       return `⚠ ${ev.message}`;
     case 'NOT_IMPLEMENTED':
-      return `✗ not coded: ${ev.feature}${ev.detail ? ' (' + ev.detail + ')' : ''}`;
+      return `✗ pas codé : ${ev.feature}${ev.detail ? ' (' + ev.detail + ')' : ''}`;
     case 'GAME_END':
-      return `=== GAME ${ev.result.toUpperCase()} in ${ev.turns} turns, boss hp=${ev.bossHpRemaining}, dead heroes=[${ev.deadHeroes.join(',')}] ===`;
+      return `=== ${ev.result === 'victory' ? 'VICTOIRE' : 'DÉFAITE'} en ${ev.turns} tours · boss hp=${ev.bossHpRemaining} · morts=[${ev.deadHeroes.join(',')}] ===`;
     case 'PILE_RESHUFFLE':
       return `Reshuffle ${ev.pile} (${ev.size})`;
   }
-  // TS exhaustiveness safety net
   return JSON.stringify(ev);
 }
 
+function describeDamageTarget(ev: { targetKind: string; targetId: string }, state?: GameState | null): string {
+  if (ev.targetKind === 'boss') return 'le Colosse';
+  if (ev.targetKind === 'hero') {
+    const hero = state?.heroes.find((h) => h.heroId === ev.targetId);
+    return hero ? state!.catalog.heroesById.get(hero.heroId)?.nom ?? ev.targetId : ev.targetId;
+  }
+  // Monster: targetId is the instance id — look up cardId.
+  if (state) {
+    for (const h of state.heroes) {
+      const m = h.queue.find((mm) => mm.instanceId === ev.targetId);
+      if (m) return state.catalog.monstreById.get(m.cardId)?.nom ?? ev.targetId;
+    }
+  }
+  return ev.targetId;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function describeTgt(t: any): string {
+function describeTgt(t: any, state?: GameState | null): string {
   if (!t) return '?';
-  if (t.kind === 'boss') return 'BOSS';
-  if (t.kind === 'hero') return `hero seat${t.seat}`;
-  if (t.kind === 'monster') return `mon ${t.instanceId}(seat${t.seat})`;
+  if (t.kind === 'boss') return 'le Colosse';
+  if (t.kind === 'hero') {
+    const h = state?.heroes[t.seat];
+    const name = h && state ? state.catalog.heroesById.get(h.heroId)?.nom : undefined;
+    return name ?? `seat ${t.seat}`;
+  }
+  if (t.kind === 'monster' && state) {
+    for (const h of state.heroes) {
+      const m = h.queue.find((mm) => mm.instanceId === t.instanceId);
+      if (m) return state.catalog.monstreById.get(m.cardId)?.nom ?? t.instanceId;
+    }
+  }
   return '?';
 }

@@ -1,4 +1,5 @@
 import { useStore, totalWoundsOf } from '../store.js';
+import { chasseName, monstreName } from '../naming.js';
 
 interface Props {
   seat: number;
@@ -7,6 +8,7 @@ interface Props {
 export function HeroPanel({ seat }: Props) {
   const state = useStore((s) => s.state)!;
   const design = useStore((s) => s.design)!;
+  const inspect = useStore((s) => s.inspect);
   const h = state.heroes[seat];
   if (!h) return null;
   const heroCard = design.heroes.find((x) => x.id === h.heroId);
@@ -22,8 +24,16 @@ export function HeroPanel({ seat }: Props) {
     >
       <div className="flex justify-between items-baseline mb-1">
         <div>
-          <span className="font-semibold">{heroCard.nom}</span>
-          <span className="text-xs text-stone-400 ml-2">seat {seat}</span>
+          <button
+            onClick={() => inspect({ kind: 'hero', id: h.heroId })}
+            className="font-semibold hover:text-sky-300 transition-colors"
+            title="Cliquer pour voir les détails"
+          >
+            {heroCard.nom}
+          </button>
+          <span className="text-xs text-stone-400 ml-2">
+            {heroCard.titre} · seat {seat}
+          </span>
           {h.dead && <span className="ml-2 text-red-400 text-xs">✝</span>}
           {isActive && <span className="ml-2 text-emerald-400 text-xs">◉ actif</span>}
         </div>
@@ -49,29 +59,55 @@ export function HeroPanel({ seat }: Props) {
           {h.queue.length === 0 ? (
             <span className="text-stone-600">vide</span>
           ) : (
-            h.queue.map((m, i) => (
-              <span
-                key={m.instanceId}
-                className={`inline-block px-1 mx-0.5 rounded ${
-                  i === 0 ? 'bg-red-900/70 text-red-100' : 'bg-stone-800'
-                }`}
-                title={`${m.cardId} — ${totalWoundsOf(m.wounds)} dégâts`}
-              >
-                {m.cardId.slice(4)}
-              </span>
-            ))
+            h.queue.map((m, i) => {
+              const name = monstreName(design, m.cardId);
+              const wounds = totalWoundsOf(m.wounds);
+              return (
+                <button
+                  key={m.instanceId}
+                  onClick={() => inspect({ kind: 'monstre', id: m.cardId, instanceId: m.instanceId })}
+                  className={`inline-block px-1 mx-0.5 rounded hover:ring-1 hover:ring-sky-400 ${
+                    i === 0 ? 'bg-red-900/70 text-red-100' : 'bg-stone-800'
+                  }`}
+                  title={`${name} — ${wounds} dégât${wounds > 1 ? 's' : ''} · clic pour détails`}
+                >
+                  {name}
+                  {wounds > 0 && <span className="text-red-300 ml-1">({wounds})</span>}
+                </button>
+              );
+            })
           )}
         </div>
         <div>
           <span className="text-stone-400">Main ({h.hand.length})</span>:{' '}
-          <span className="text-stone-300">
-            {h.hand.map((c) => c.id).join(', ') || '—'}
-          </span>
+          {h.hand.length === 0 ? (
+            <span className="text-stone-600">vide</span>
+          ) : (
+            h.hand.map((c, i) => (
+              <button
+                key={i}
+                onClick={() => inspect({ kind: 'chasse', id: c.id })}
+                className="inline-block px-1 mx-0.5 rounded bg-sky-900/50 hover:bg-sky-800 hover:ring-1 hover:ring-sky-400"
+                title={`${c.id} · ${c.categorie}${c.degats !== undefined ? ' · ' + c.degats + ' dmg' : ''} · clic pour détails`}
+              >
+                {chasseName(design, c.id)}
+              </button>
+            ))
+          )}
         </div>
         {h.objects.length > 0 && (
           <div>
             <span className="text-stone-400">Objets posés</span>:{' '}
-            {h.objects.map((c) => c.id).join(', ')}
+            {h.objects.map((c, i) => (
+              <button
+                key={i}
+                onClick={() => inspect({ kind: 'chasse', id: c.id })}
+                className="inline-block px-1 mx-0.5 rounded bg-amber-900/40 hover:bg-amber-800 hover:ring-1 hover:ring-amber-400"
+                title="Objet · clic pour détails"
+              >
+                {chasseName(design, c.id)}
+              </button>
+            ))}
           </div>
         )}
         <div>
@@ -80,6 +116,33 @@ export function HeroPanel({ seat }: Props) {
             {h.capaciteUsed ? 'utilisée' : 'prête'}
           </span>
         </div>
+        {h.wounds.length > 0 && (
+          <div>
+            <span className="text-stone-400">Blessures ({dmg})</span>:{' '}
+            {h.wounds.map((w, i) => (
+              <button
+                key={w.woundId}
+                onClick={() => {
+                  // Click a wound → inspect the source card if we can identify it.
+                  const id = w.sourceCardId;
+                  const isChasse = design.cartesChasse.some((c) => c.id === id);
+                  const isMonster = design.monstres.some((m) => m.id === id);
+                  const isMenace = design.menaces.some((m) => m.id === id);
+                  const isDestin = design.destins.some((d) => d.id === id);
+                  if (isChasse) inspect({ kind: 'chasse', id });
+                  else if (isMonster) inspect({ kind: 'monstre', id });
+                  else if (isMenace) inspect({ kind: 'menace', id });
+                  else if (isDestin) inspect({ kind: 'destin', id });
+                }}
+                className="inline-block px-1 mx-0.5 text-[10px] bg-red-950 text-red-200 rounded hover:bg-red-900 hover:ring-1 hover:ring-red-500"
+                title={`${w.source}:${w.sourceCardId} · ${w.degats} 🩸 · clic pour voir la source`}
+              >
+                {w.degats}🩸
+                {i < h.wounds.length - 1 && ''}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

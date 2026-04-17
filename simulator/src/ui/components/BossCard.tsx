@@ -3,6 +3,7 @@ import { useStore, totalWoundsOf } from '../store.js';
 export function BossCard() {
   const state = useStore((s) => s.state)!;
   const design = useStore((s) => s.design)!;
+  const inspect = useStore((s) => s.inspect);
   const boss = design.boss.find((b) => b.id === state.boss.bossId);
   const dmg = totalWoundsOf(state.boss.wounds);
   const hp = state.boss.vieMax - dmg;
@@ -14,7 +15,13 @@ export function BossCard() {
     <div className="border-2 border-boss/80 rounded-lg p-4 bg-stone-950/50">
       <div className="flex items-baseline justify-between mb-2">
         <h2 className="text-xl font-bold text-red-200">
-          {boss.nom}{' '}
+          <button
+            onClick={() => inspect({ kind: 'boss', id: boss.id })}
+            className="hover:text-red-100 transition-colors"
+            title="Cliquer pour voir les détails"
+          >
+            {boss.nom}
+          </button>{' '}
           <span className="text-xs uppercase text-stone-400 font-normal">
             {boss.difficulte}
           </span>
