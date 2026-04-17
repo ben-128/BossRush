@@ -122,6 +122,9 @@ export interface GameState {
   /** Active persistent modifiers. See engine/modifiers.ts. */
   modifiers: ModifierRec[];
 
+  /** Flag set during Menace resolution; op cancelMenace reads this. */
+  menaceCancelled?: boolean;
+
   /**
    * Per-seat policy references. Set by runGame()/runTurn() so effect
    * handlers can consult them (pickChoice, pickHeroTarget, ...). Empty by

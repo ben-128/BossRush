@@ -14,6 +14,8 @@ import type {
   EffectOp,
   HeroTargetTok,
   OpAttack,
+  OpBossDamage,
+  OpBossHeal,
   OpChoice,
   OpDamage,
   OpDiscard,
@@ -26,6 +28,9 @@ import type {
   OpModifier,
   OpMoveMonster,
   OpRegenCapacite,
+  OpRemoveAllWounds,
+  OpRevive,
+  OpShiftDamage,
   OpSummon,
 } from './effectTypes.js';
 import {
@@ -101,6 +106,20 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       return applyChoiceOp(state, ctx, op);
     case 'modifier':
       return applyModifierOp(state, ctx, op);
+    case 'bossDamage':
+      return applyBossDamageOp(state, ctx, op);
+    case 'bossHeal':
+      return applyBossHealOp(state, ctx, op);
+    case 'shiftDamage':
+      return applyShiftDamageOp(state, ctx, op);
+    case 'removeAllWounds':
+      return applyRemoveAllWoundsOp(state, ctx, op);
+    case 'revive':
+      return applyReviveOp(state, ctx, op);
+    case 'cancelMenace':
+      state.menaceCancelled = true;
+      emit(state, { kind: 'WARN', message: `menace cancelled by ${ctx.sourceCardId}` });
+      return;
     default: {
       const _exhaust: never = op;
       return _exhaust;
@@ -180,6 +199,137 @@ function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice): void
     message: `choice source=${ctx.sourceCardId} picked=${chosen.label} by=${policy?.name ?? 'rng'}`,
   });
   runOps(state, ctx, chosen.ops);
+}
+
+function applyBossDamageOp(state: GameState, ctx: EffectContext, op: OpBossDamage): void {
+  damageBoss(state, { amount: op.amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+}
+
+function applyBossHealOp(state: GameState, _ctx: EffectContext, op: OpBossHeal): void {
+  // Remove up to N total damage from the boss, bottom-up (most recent first).
+  let budget = op.amount;
+  const stack = state.boss.wounds;
+  for (let i = stack.length - 1; i >= 0 && budget > 0; ) {
+    const w = stack[i]!;
+    if (w.degats <= budget) {
+      stack.splice(i, 1);
+      budget -= w.degats;
+      i--;
+    } else {
+      i--;
+    }
+  }
+  emit(state, { kind: 'WARN', message: `boss healed for up to ${op.amount}` });
+}
+
+function applyShiftDamageOp(state: GameState, ctx: EffectContext, op: OpShiftDamage): void {
+  // Pick a source hero (most wounded among 'from' token semantics).
+  let fromSeat: number | undefined;
+  if (op.from === 'self') fromSeat = ctx.sourceSeat;
+  else {
+    const pool = state.heroes.filter(
+      (h) =>
+        !h.dead && (op.from === 'any_hero' ? true : h.seatIdx !== ctx.sourceSeat),
+    );
+    // Pick most wounded.
+    pool.sort(
+      (a, b) =>
+        b.wounds.reduce((s, w) => s + w.degats, 0) - a.wounds.reduce((s, w) => s + w.degats, 0),
+    );
+    fromSeat = pool[0]?.seatIdx;
+  }
+  if (fromSeat === undefined) return;
+  const source = state.heroes[fromSeat];
+  if (!source) return;
+
+  // Pull up to `amount` worth of wound cards from newest to oldest.
+  const moved: typeof source.wounds = [];
+  let remaining = op.amount;
+  for (let i = source.wounds.length - 1; i >= 0 && remaining > 0; ) {
+    const w = source.wounds[i]!;
+    if (w.degats <= remaining) {
+      moved.push(w);
+      source.wounds.splice(i, 1);
+      remaining -= w.degats;
+      i--;
+    } else {
+      i--;
+    }
+  }
+  if (moved.length === 0) return;
+
+  // Resolve destination and re-apply damage events.
+  const replaySpec = (targetKind: 'hero' | 'boss' | 'monster', targetSeat?: number, instanceId?: string) => {
+    for (const w of moved) {
+      if (targetKind === 'boss') {
+        damageBoss(state, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+      } else if (targetKind === 'hero' && targetSeat !== undefined) {
+        damageHero(state, targetSeat, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+      } else if (targetKind === 'monster' && targetSeat !== undefined && instanceId) {
+        // Guard: if the monster was eliminated by a previous iteration, stop.
+        const th = state.heroes[targetSeat];
+        const stillAlive = !!th?.queue.find((m) => m.instanceId === instanceId);
+        if (!stillAlive) {
+          // Redirect remaining damage to the boss as a sensible fallback.
+          damageBoss(state, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+        } else {
+          damageMonster(state, targetSeat, instanceId, {
+            amount: w.degats,
+            source: ctx.sourceKind,
+            sourceCardId: ctx.sourceCardId,
+          });
+        }
+      }
+    }
+  };
+
+  if (op.to === 'self') replaySpec('hero', ctx.sourceSeat);
+  else if (op.to === 'boss') replaySpec('boss');
+  else if (op.to === 'any_hero' || op.to === 'any_ally') {
+    const candidates = state.heroes.filter(
+      (h) => !h.dead && (op.to === 'any_hero' || h.seatIdx !== ctx.sourceSeat),
+    );
+    candidates.sort(
+      (a, b) =>
+        a.wounds.reduce((s, w) => s + w.degats, 0) - b.wounds.reduce((s, w) => s + w.degats, 0),
+    );
+    const pick = candidates[0];
+    if (pick) replaySpec('hero', pick.seatIdx);
+  } else if (op.to === 'queue_head') {
+    const h = state.heroes[ctx.sourceSeat];
+    const head = h?.queue[0];
+    if (head) replaySpec('monster', ctx.sourceSeat, head.instanceId);
+    else replaySpec('boss');
+  } else {
+    // MonsterPick
+    const mp = resolveMonsterPick(state, ctx.sourceSeat, op.to);
+    if (mp) replaySpec('monster', mp.seat, mp.instanceId);
+  }
+}
+
+function applyRemoveAllWoundsOp(state: GameState, _ctx: EffectContext, op: OpRemoveAllWounds): void {
+  const seats = resolveHeroTarget(state, _ctx.sourceSeat, op.target);
+  for (const s of seats) {
+    const h = state.heroes[s];
+    if (!h) continue;
+    const before = h.wounds.length;
+    h.wounds = [];
+    emit(state, { kind: 'WARN', message: `removeAllWounds seat=${s} cleared=${before}` });
+  }
+}
+
+function applyReviveOp(state: GameState, ctx: EffectContext, op: OpRevive): void {
+  const dead = state.heroes.filter((h) => h.dead);
+  if (dead.length === 0) return;
+  // Pick first dead (deterministic). Could route via policy later.
+  const h = dead[0]!;
+  h.dead = false;
+  h.wounds = [];
+  emit(state, { kind: 'WARN', message: `revive seat=${h.seatIdx} by ${ctx.sourceCardId}` });
+  if (op.heal && op.heal > 0) {
+    // Since we just cleared wounds, heal adds nothing, but we log intent.
+    emit(state, { kind: 'WARN', message: `revive-heal seat=${h.seatIdx} amount=${op.heal}` });
+  }
 }
 
 function applyModifierOp(state: GameState, ctx: EffectContext, op: OpModifier): void {

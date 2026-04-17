@@ -145,6 +145,12 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpForEach,
     OpChoice,
     OpModifier,
+    OpBossDamage,
+    OpBossHeal,
+    OpShiftDamage,
+    OpRemoveAllWounds,
+    OpRevive,
+    OpCancelMenace,
   ]),
 );
 
@@ -184,6 +190,36 @@ const OpModifier = z.object({
   effect: ModifierEffect,
   scope: z.enum(['thisTurn', 'nextDamageToSelf', 'nextAttackByActive']),
   target: z.literal('self').optional(),
+});
+
+const OpBossDamage = z.object({
+  op: z.literal('bossDamage'),
+  amount: z.number().int().positive(),
+});
+const OpBossHeal = z.object({
+  op: z.literal('bossHeal'),
+  amount: z.number().int().positive(),
+});
+const OpShiftDamage = z.object({
+  op: z.literal('shiftDamage'),
+  from: z.enum(['self', 'any_hero', 'any_ally']),
+  to: z.union([
+    z.enum(['self', 'any_hero', 'any_ally', 'queue_head', 'boss']),
+    MonsterPick,
+  ]),
+  amount: z.number().int().positive(),
+});
+const OpRemoveAllWounds = z.object({
+  op: z.literal('removeAllWounds'),
+  target: HeroTargetTok,
+});
+const OpRevive = z.object({
+  op: z.literal('revive'),
+  target: z.literal('any_dead_hero'),
+  heal: z.number().int().nonnegative().optional(),
+});
+const OpCancelMenace = z.object({
+  op: z.literal('cancelMenace'),
 });
 
 export const CardEffectEntrySchema = z.object({

@@ -1,268 +1,298 @@
 {
   "_meta": {
-    "description": "DSL d'effets pour le simulateur. Une entrée par id (carte ou héros). Présence = comportement remplacé par le DSL. Absence = fallback 'raw degats' (J2).",
-    "version": "0.1"
+    "description": "DSL d'effets pour le simulateur. Indexé par id (carte, capacité héros, monstre, boss). Absence = fallback raw-damage (J2).",
+    "version": "0.6"
   },
   "cards": {
+
+    "GUE_A01": {
+      "effet": "1 dmg + le monstre cible va en fond de file du prochain héros",
+      "tag": "attack_displace",
+      "ops": [
+        { "op": "attack" },
+        { "op": "moveMonster", "from": { "pick": "queue_head_self" }, "to": { "to": "next_hero_queue_tail" } }
+      ]
+    },
+    "GUE_A02": {
+      "effet": "1 dmg + bascule le monstre cible en fond de file",
+      "tag": "attack_displace",
+      "ops": [
+        { "op": "attack" },
+        { "op": "moveMonster", "from": { "pick": "queue_head_self" }, "to": { "to": "self_queue_tail" } }
+      ]
+    },
+    "GUE_A03": {
+      "effet": "1 dmg + un monstre d'une autre file rejoint la nôtre",
+      "tag": "attack_pull",
+      "ops": [
+        { "op": "attack" },
+        { "op": "moveMonster", "from": { "pick": "monster_in_any_queue" }, "to": { "to": "self_queue_tail" } }
+      ]
+    },
     "GUE_A04": {
-      "effet": "1 dégât + soigne ce héros de 1",
+      "effet": "1 dmg + soigne self 1",
       "tag": "attack_sustain",
       "ops": [
         { "op": "attack" },
         { "op": "heal", "target": "self", "amount": 1 }
       ]
     },
-    "GUE_O04": {
-      "effet": "Soigne ce héros de 2",
+    "GUE_A05": {
+      "effet": "Soigne 3",
       "tag": "reactive_heal",
+      "ops": [{ "op": "heal", "target": "self", "amount": 3 }]
+    },
+    "GUE_A06": {
+      "effet": "Elimine un monstre de ma file si self a ≥4 dégâts",
+      "tag": "utility_condition",
       "ops": [
-        { "op": "heal", "target": "self", "amount": 2 }
+        { "op": "require", "cond": { "self_damage": { "op": ">=", "value": 4 } } },
+        { "op": "eliminate", "target": { "pick": "monster_in_self_queue" } }
+      ]
+    },
+    "GUE_A07": {
+      "effet": "Provocation : 3 têtes d'autres files → fond de ma file (approx : 1 via moveMonster)",
+      "tag": "utility_pull",
+      "ops": [
+        { "op": "moveMonster", "from": { "pick": "monster_in_any_queue" }, "to": { "to": "self_queue_tail" } }
+      ]
+    },
+    "GUE_A08": {
+      "effet": "Déplace jusqu'à 4 dégâts d'autres héros vers self",
+      "tag": "shift_damage",
+      "ops": [
+        { "op": "shiftDamage", "from": "any_ally", "to": "self", "amount": 4 }
       ]
     },
 
+    "GUE_O01": { "effet": "Renfort +2", "tag": "boost_attack", "ops": [{ "op": "heal", "target": "self", "amount": 1 }] },
+    "GUE_O02": {
+      "effet": "Annule la prochaine source de dégâts (modifier)",
+      "tag": "prevent_lethal",
+      "ops": [
+        { "op": "modifier", "target": "self", "scope": "nextDamageToSelf", "effect": { "kind": "no_damage", "seat": 0 } }
+      ]
+    },
+    "GUE_O03": {
+      "effet": "Pioche 1 par dégât sur self (approx : 2 pioches)",
+      "tag": "draw_if_wounded",
+      "ops": [{ "op": "draw", "target": "self", "n": 2 }]
+    },
+    "GUE_O04": { "effet": "Heal 2", "tag": "reactive_heal", "ops": [{ "op": "heal", "target": "self", "amount": 2 }] },
+    "GUE_O05": {
+      "effet": "Annule la Menace en cours",
+      "tag": "cancel_menace",
+      "ops": [{ "op": "cancelMenace" }]
+    },
+
+    "MAG_A01": { "effet": "2 dmg", "tag": "attack_basic", "ops": [{ "op": "attack" }] },
     "MAG_A02": {
-      "effet": "1 dégât ciblage libre",
+      "effet": "1 dmg ciblage libre",
       "tag": "attack_free_target",
-      "ops": [
-        { "op": "attack", "target": { "pick": "monster_in_any_queue" } }
-      ]
+      "ops": [{ "op": "attack", "target": { "pick": "monster_in_any_queue" } }]
     },
-    "MAG_A07": {
-      "effet": "Pioche 4",
-      "tag": "draw_engine",
-      "ops": [
-        { "op": "draw", "target": "self", "n": 4 }
-      ]
-    },
-    "MAG_A08": {
-      "effet": "Régénère capacité de ce héros",
-      "tag": "regen_capacity",
-      "ops": [
-        { "op": "regenCapacite", "target": "self" }
-      ]
-    },
-    "MAG_O01": {
-      "effet": "Recharge la capacité de ce héros",
-      "tag": "regen_capacity",
-      "ops": [
-        { "op": "regenCapacite", "target": "self" }
-      ]
-    },
-    "MAG_O05": {
-      "effet": "Soigne 1 + pioche 2",
-      "tag": "sustain_draw",
-      "ops": [
-        { "op": "heal", "target": "self", "amount": 1 },
-        { "op": "draw", "target": "self", "n": 2 }
-      ]
-    },
-
-    "SOI_A02": {
-      "effet": "3 dégâts si aucun allié n'a de blessures",
-      "tag": "attack_conditional",
-      "ops": [
-        { "op": "require", "cond": { "no_ally_has_damage": true } },
-        { "op": "attack" }
-      ]
-    },
-    "SOI_A05": {
-      "effet": "Soigne 3 d'un héros au choix",
-      "tag": "burst_heal",
-      "ops": [
-        { "op": "heal", "target": "any_hero", "amount": 3 }
-      ]
-    },
-    "SOI_A07": {
-      "effet": "Soigne 1 de chaque héros",
-      "tag": "aoe_heal",
-      "ops": [
-        { "op": "heal", "target": "each_hero", "amount": 1 }
-      ]
-    },
-    "SOI_A08": {
-      "effet": "Un autre héros régénère sa capacité",
-      "tag": "regen_capacity_ally",
-      "ops": [
-        { "op": "regenCapacite", "target": "any_ally" }
-      ]
-    },
-    "SOI_O01": {
-      "effet": "Soigne 2 d'un héros au choix",
-      "tag": "reactive_heal",
-      "ops": [
-        { "op": "heal", "target": "any_hero", "amount": 2 }
-      ]
-    },
-    "SOI_O04": {
-      "effet": "Régénère la capacité d'un héros au choix",
-      "tag": "regen_capacity",
-      "ops": [
-        { "op": "regenCapacite", "target": "any_hero" }
-      ]
-    },
-
-    "ROD_A01": {
-      "effet": "1 dégât ciblage libre",
-      "tag": "attack_free_target",
-      "ops": [
-        { "op": "attack", "target": { "pick": "monster_in_any_queue" } }
-      ]
-    },
-    "ROD_A02": {
-      "effet": "1 dégât + pioche 1",
-      "tag": "attack_cantrip",
+    "MAG_A03": {
+      "effet": "1 dmg + élimine monstre suivant si vie=1 (approx)",
+      "tag": "attack_chain",
       "ops": [
         { "op": "attack" },
-        { "op": "draw", "target": "self", "n": 1 }
+        { "op": "eliminateWhere", "from": "monster_in_self_queue", "where": "vie_eq_1" }
       ]
     },
-    "ROD_A06": {
-      "effet": "Pioche 4",
-      "tag": "draw_engine",
+    "MAG_A04": { "effet": "3 dmg", "tag": "attack_heavy", "ops": [{ "op": "attack" }] },
+    "MAG_A05": {
+      "effet": "1 dmg + si cible éliminée, dégâts au suivant (approx : +1 au suivant)",
+      "tag": "attack_chain",
       "ops": [
-        { "op": "draw", "target": "self", "n": 4 }
+        { "op": "attack" },
+        { "op": "damage", "target": "queue_head", "amount": 1 }
       ]
     },
+    "MAG_A06": {
+      "effet": "Déplace 1 dégât de self vers un monstre ou le Colosse",
+      "tag": "shift_damage",
+      "ops": [{ "op": "shiftDamage", "from": "self", "to": "boss", "amount": 1 }]
+    },
+    "MAG_A07": { "effet": "Pioche 4", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "self", "n": 4 }] },
+    "MAG_A08": { "effet": "Régénère capacité self", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "self" }] },
 
-    "DIP_A01": {
-      "effet": "1 dégât + un allié pioche 1",
-      "tag": "attack_support",
-      "ops": [
-        { "op": "attack" },
-        { "op": "draw", "target": "any_ally", "n": 1 }
-      ]
+    "MAG_O01": { "effet": "Recharge capacité self", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "self" }] },
+    "MAG_O02": { "effet": "Prochaine Action ignore prérequis (stub : +2 pioches)", "tag": "utility", "ops": [{ "op": "draw", "target": "self", "n": 2 }] },
+    "MAG_O03": { "effet": "Renfort +2 et 2 dmg secondaire", "tag": "boost_attack_aoe", "ops": [{ "op": "damage", "target": "boss", "amount": 2 }] },
+    "MAG_O04": {
+      "effet": "Elimine un monstre attaquant ≤2 PV",
+      "tag": "reactive_eliminate",
+      "ops": [{ "op": "eliminate", "target": { "pick": "monster_in_self_queue", "where": "at_most_life_N", "N": 2 } }]
     },
-    "DIP_A03": {
-      "effet": "1 dégât + chaque héros pioche 1",
-      "tag": "attack_support_aoe",
-      "ops": [
-        { "op": "attack" },
-        { "op": "draw", "target": "each_hero", "n": 1 }
-      ]
+    "MAG_O05": { "effet": "Heal 1 + draw 2", "tag": "sustain_draw", "ops": [{ "op": "heal", "target": "self", "amount": 1 }, { "op": "draw", "target": "self", "n": 2 }] },
+
+    "SOI_A01": { "effet": "1 dmg + si cible survit heal 1 allié", "tag": "attack_sustain_aoe", "ops": [{ "op": "attack" }, { "op": "heal", "target": "any_hero", "amount": 1 }] },
+    "SOI_A02": { "effet": "3 dmg si aucun allié blessé", "tag": "attack_conditional", "ops": [{ "op": "require", "cond": { "no_ally_has_damage": true } }, { "op": "attack" }] },
+    "SOI_A03": { "effet": "Transfère carte blessant un autre héros vers un monstre (approx : shift 2 ally→monster head)", "tag": "shift_damage", "ops": [{ "op": "shiftDamage", "from": "any_ally", "to": "queue_head", "amount": 2 }] },
+    "SOI_A04": { "effet": "2 dmg + si cible éliminée, heal self 2", "tag": "attack_sustain", "ops": [{ "op": "attack" }, { "op": "heal", "target": "self", "amount": 2 }] },
+    "SOI_A05": { "effet": "Heal 3 un héros", "tag": "burst_heal", "ops": [{ "op": "heal", "target": "any_hero", "amount": 3 }] },
+    "SOI_A06": { "effet": "Ressuscite un héros mort + heal 1", "tag": "revive", "ops": [{ "op": "revive", "target": "any_dead_hero", "heal": 1 }] },
+    "SOI_A07": { "effet": "Heal 1 chaque héros", "tag": "aoe_heal", "ops": [{ "op": "heal", "target": "each_hero", "amount": 1 }] },
+    "SOI_A08": { "effet": "Régénère capacité d'un allié", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "any_ally" }] },
+    "SOI_A09": { "effet": "Un autre héros pioche 4 (dans défausse — approx)", "tag": "draw_support", "ops": [{ "op": "draw", "target": "any_ally", "n": 4 }] },
+    "SOI_A10": { "effet": "Heal all d'un héros, 2 dmg à un autre", "tag": "sacrifice", "ops": [{ "op": "removeAllWounds", "target": "any_hero" }, { "op": "damage", "target": "any_hero_not_self", "amount": 2 }] },
+    "SOI_A11": { "effet": "Redistribue blessures (approx : heal 2 chaque héros)", "tag": "aoe_heal", "ops": [{ "op": "heal", "target": "each_hero", "amount": 2 }] },
+    "SOI_A12": { "effet": "Pioche 1 Destin + choix héros (approx : drawDestin self)", "tag": "destin_pull", "ops": [{ "op": "drawDestin", "target": "self" }] },
+
+    "SOI_O01": { "effet": "Heal 2 un héros", "tag": "reactive_heal", "ops": [{ "op": "heal", "target": "any_hero", "amount": 2 }] },
+    "SOI_O02": {
+      "effet": "Annule dégât mortel + tous dégâts fin du tour (modifier thisTurn)",
+      "tag": "prevent_lethal",
+      "ops": [{ "op": "modifier", "target": "self", "scope": "thisTurn", "effect": { "kind": "no_damage", "seat": 0 } }]
     },
-    "DIP_A06": {
-      "effet": "Chaque héros pioche 2",
-      "tag": "draw_aoe",
-      "ops": [
-        { "op": "draw", "target": "each_hero", "n": 2 }
-      ]
-    },
-    "DIP_A11": {
-      "effet": "3 dégâts cible uniquement le Colosse (bypass file)",
-      "tag": "boss_only_burst",
-      "ops": [
-        { "op": "attack", "target": "boss" }
-      ]
-    },
+    "SOI_O03": { "effet": "Heal un allié = dégâts de self (approx : heal 2 ally)", "tag": "reactive_heal", "ops": [{ "op": "heal", "target": "any_ally", "amount": 2 }] },
+    "SOI_O04": { "effet": "Régénère capacité d'un héros", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "any_hero" }] },
+    "SOI_O05": { "effet": "2 dmg si un héros a été soigné ce tour (approx : inconditionnel)", "tag": "attack_conditional", "ops": [{ "op": "damage", "target": "queue_head", "amount": 2 }] },
+
+    "ROD_A01": { "effet": "1 dmg ciblage libre", "tag": "attack_free_target", "ops": [{ "op": "attack", "target": { "pick": "monster_in_any_queue" } }] },
+    "ROD_A02": { "effet": "1 dmg + pioche 1", "tag": "attack_cantrip", "ops": [{ "op": "attack" }, { "op": "draw", "target": "self", "n": 1 }] },
+    "ROD_A03": { "effet": "2 dmg", "tag": "attack_basic", "ops": [{ "op": "attack" }] },
+    "ROD_A04": { "effet": "1 dmg + peut poser 1 objet sup (stub : draw 1)", "tag": "attack_cantrip", "ops": [{ "op": "attack" }, { "op": "draw", "target": "self", "n": 1 }] },
+    "ROD_A05": { "effet": "1 dmg + action sup (stub : draw 2)", "tag": "attack_cantrip", "ops": [{ "op": "attack" }, { "op": "draw", "target": "self", "n": 2 }] },
+    "ROD_A06": { "effet": "Pioche 4", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "self", "n": 4 }] },
+    "ROD_A07": { "effet": "Regarde 5 garde 2 (stub : draw 2)", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "self", "n": 2 }] },
+
+    "ROD_O01": { "effet": "Renfort +2 (stub : heal 1)", "tag": "boost_attack", "ops": [{ "op": "heal", "target": "self", "amount": 1 }] },
+    "ROD_O02": { "effet": "Améliore attaque chaîne (stub : damage 2 queue)", "tag": "attack_chain", "ops": [{ "op": "damage", "target": "queue_head", "amount": 2 }] },
+    "ROD_O03": { "effet": "Heal 1 par Action jouée (stub : heal 2)", "tag": "reactive_heal", "ops": [{ "op": "heal", "target": "self", "amount": 2 }] },
+    "ROD_O04": { "effet": "Elimine un monstre si ≥2 cartes jouées (stub : eliminate)", "tag": "utility_eliminate", "ops": [{ "op": "eliminate", "target": { "pick": "monster_in_any_queue" } }] },
+    "ROD_O05": { "effet": "Pioche jusqu'à 5 (stub : draw 3)", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "self", "n": 3 }] },
+    "ROD_O06": { "effet": "Heal = nb de pioches ce tour (stub : heal 2)", "tag": "reactive_heal", "ops": [{ "op": "heal", "target": "self", "amount": 2 }] },
+
+    "DIP_A01": { "effet": "1 dmg + allié pioche 1", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "draw", "target": "any_ally", "n": 1 }] },
+    "DIP_A02": { "effet": "1 dmg + 2 héros échangent (stub : 1 dmg)", "tag": "attack_basic", "ops": [{ "op": "attack" }] },
+    "DIP_A03": { "effet": "1 dmg + chaque héros pioche 1", "tag": "attack_support_aoe", "ops": [{ "op": "attack" }, { "op": "draw", "target": "each_hero", "n": 1 }] },
+    "DIP_A04": { "effet": "1 dmg + échange d'objets (stub : 1 dmg)", "tag": "attack_basic", "ops": [{ "op": "attack" }] },
+    "DIP_A05": { "effet": "1 dmg + allié joue 1 action (stub : allié pioche 2)", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "draw", "target": "any_ally", "n": 2 }] },
+    "DIP_A06": { "effet": "Chaque héros pioche 2", "tag": "draw_aoe", "ops": [{ "op": "draw", "target": "each_hero", "n": 2 }] },
+    "DIP_A07": { "effet": "Elimine un monstre en tête d'allié (stub : eliminate any)", "tag": "utility_eliminate", "ops": [{ "op": "eliminate", "target": { "pick": "monster_in_any_queue" } }] },
+    "DIP_A08": { "effet": "Echange d'objets posés (stub : no-op)", "tag": "utility", "ops": [{ "op": "draw", "target": "self", "n": 1 }] },
+    "DIP_A09": { "effet": "Donne 3 cartes + heal (stub : heal ally 2)", "tag": "reactive_heal", "ops": [{ "op": "heal", "target": "any_ally", "amount": 2 }] },
+    "DIP_A10": { "effet": "Monstre en tête d'un héros attaque le Colosse (stub : 1 dmg boss)", "tag": "reassign_attack", "ops": [{ "op": "bossDamage", "amount": 1 }] },
+    "DIP_A11": { "effet": "3 dmg cible uniquement le Colosse", "tag": "boss_only_burst", "ops": [{ "op": "attack", "target": "boss" }] },
+    "DIP_A12": { "effet": "Tous monstres → 1 héros (stub : no-op utility)", "tag": "utility", "ops": [{ "op": "draw", "target": "self", "n": 1 }] },
+
+    "DIP_O01": { "effet": "Alliés donnent 1 carte (stub : draw 2)", "tag": "draw_support", "ops": [{ "op": "draw", "target": "self", "n": 2 }] },
+    "DIP_O02": { "effet": "Ce héros donne 1 carte à chaque allié (stub : each ally draw 1)", "tag": "draw_support_aoe", "ops": [{ "op": "draw", "target": "each_ally", "n": 1 }] },
+    "DIP_O03": { "effet": "N'importe qui pioche 3 (stub : any_hero draw 3)", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "any_hero", "n": 3 }] },
+    "DIP_O04": { "effet": "2 cartes à un allié + pioche Destin", "tag": "draw_support", "ops": [{ "op": "draw", "target": "any_ally", "n": 2 }, { "op": "drawDestin", "target": "self" }] },
+    "DIP_O05": { "effet": "Annule la Menace", "tag": "cancel_menace", "ops": [{ "op": "cancelMenace" }] },
 
     "HERO_001": {
       "effet": "Daraa — Élimine tous les monstres blessés",
       "tag": "elim_on_demand",
-      "ops": [
-        { "op": "eliminateWhere", "from": "monster_in_any_queue", "where": "has_damage" }
-      ]
+      "ops": [{ "op": "eliminateWhere", "from": "monster_in_any_queue", "where": "has_damage" }]
     },
     "HERO_002": {
       "effet": "Gao — Retire toutes les blessures d'un héros",
       "tag": "reactive_heal",
-      "ops": [
-        { "op": "heal", "target": "any_hero", "amount": 99 }
-      ]
+      "ops": [{ "op": "removeAllWounds", "target": "any_hero" }]
     },
     "HERO_003": {
-      "effet": "Nawel — Aucun dégât jusqu'à la fin du tour",
+      "effet": "Nawel — Aucun dégât ce tour (modifier)",
       "tag": "prevent_lethal",
-      "ops": [
-        {
-          "op": "modifier",
-          "target": "self",
-          "scope": "thisTurn",
-          "effect": { "kind": "no_damage", "seat": 0 }
-        }
-      ]
+      "ops": [{ "op": "modifier", "target": "self", "scope": "thisTurn", "effect": { "kind": "no_damage", "seat": 0 } }]
     },
-
-    "EPR_017": {
-      "effet": "Terrain instable — choix",
-      "tag": "menace_event",
-      "ops": [
-        {
-          "op": "choice",
-          "options": [
-            { "label": "allie_defausse_objet", "ops": [{ "op": "discard", "target": "any_ally", "n": 1 }] },
-            { "label": "encaisser", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }] }
-          ]
-        }
-      ]
+    "HERO_004": {
+      "effet": "Isonash — Joue 2 Actions (stub : pioche 4)",
+      "tag": "draw_engine",
+      "ops": [{ "op": "draw", "target": "self", "n": 4 }]
     },
-    "EPR_020": {
-      "effet": "Œil du cyclone — souffler OU rester concentré",
-      "tag": "menace_event",
-      "ops": [
-        {
-          "op": "choice",
-          "options": [
-            {
-              "label": "souffler",
-              "ops": [
-                { "op": "regenCapacite", "target": "self" },
-                { "op": "summon", "target": "self", "n": 1 }
-              ]
-            },
-            { "label": "rester_concentre", "ops": [{ "op": "drawDestin", "target": "self" }] }
-          ]
-        }
-      ]
-    },
-    "EPR_022": {
-      "effet": "Brume apaisante — soigner OU piocher",
-      "tag": "menace_event",
-      "ops": [
-        {
-          "op": "choice",
-          "options": [
-            { "label": "soigner", "ops": [{ "op": "heal", "target": "self", "amount": 1 }] },
-            { "label": "piocher", "ops": [{ "op": "draw", "target": "self", "n": 2 }] }
-          ]
-        }
-      ]
-    },
-    "EPR_030": {
-      "effet": "Moment de vérité — tout donner OU tenir bon",
-      "tag": "menace_event",
-      "ops": [
-        {
-          "op": "choice",
-          "options": [
-            {
-              "label": "tout_donner",
-              "ops": [
-                { "op": "discard", "target": "self", "n": 99 },
-                { "op": "heal", "target": "self", "amount": 2 }
-              ]
-            },
-            { "label": "tenir_bon", "ops": [{ "op": "draw", "target": "self", "n": 1 }] }
-          ]
-        }
-      ]
-    },
-
-    "DEN_001": {
-      "effet": "L'oiseau-guide — chaque héros pioche 1",
-      "tag": "destin_pos",
+    "HERO_005": {
+      "effet": "Aslan — Échanges libres (stub : chaque héros pioche 1)",
+      "tag": "draw_aoe",
       "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }]
     },
-    "DEN_002": {
-      "effet": "Source cachée — soigne 2",
-      "tag": "destin_pos",
-      "ops": [{ "op": "heal", "target": "self", "amount": 2 }]
+
+    "EPR_016": {
+      "effet": "Ouverture — destin OU chasse",
+      "tag": "menace_event",
+      "ops": [{ "op": "choice", "options": [
+        { "label": "frapper_fort", "ops": [{ "op": "drawDestin", "target": "self" }] },
+        { "label": "jouer_prudent", "ops": [{ "op": "draw", "target": "self", "n": 1 }] }
+      ]}]
     },
-    "DEN_007": {
-      "effet": "Averse de cendres — chaque héros défausse 1 au hasard",
-      "tag": "destin_neg",
-      "ops": [
-        { "op": "forEach", "over": "each_hero", "do": [{ "op": "discard", "target": "self", "n": 1, "random": true }] }
-      ]
-    }
+    "EPR_017": { "effet": "Terrain instable", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "allie_defausse", "ops": [{ "op": "discard", "target": "any_ally", "n": 1 }] },
+      { "label": "encaisser", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }] }
+    ]}] },
+    "EPR_018": { "effet": "Éclats — foncer (pioche 2 + 1 dmg) OU couvert", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "foncer", "ops": [{ "op": "draw", "target": "self", "n": 2 }, { "op": "damage", "target": "active_hero", "amount": 1 }] },
+      { "label": "couvert", "ops": [{ "op": "require", "cond": { "hand_size": { "op": ">=", "value": 0 } } }] }
+    ]}] },
+    "EPR_019": { "effet": "Hurlement — allié défausse OU 2 dmg", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "allie_couvre_oreilles", "ops": [{ "op": "discard", "target": "any_ally", "n": 1 }] },
+      { "label": "subir", "ops": [{ "op": "damage", "target": "active_hero", "amount": 2 }] }
+    ]}] },
+    "EPR_020": { "effet": "Œil du cyclone", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "souffler", "ops": [{ "op": "regenCapacite", "target": "self" }, { "op": "summon", "target": "self", "n": 1 }] },
+      { "label": "rester_concentre", "ops": [{ "op": "drawDestin", "target": "self" }] }
+    ]}] },
+    "EPR_021": { "effet": "Garde brisée", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "attaque_coordonnee", "ops": [{ "op": "drawDestin", "target": "each_hero" }] },
+      { "label": "frapper_vite", "ops": [{ "op": "draw", "target": "self", "n": 2 }] }
+    ]}] },
+    "EPR_022": { "effet": "Brume apaisante", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "soigner", "ops": [{ "op": "heal", "target": "self", "amount": 1 }] },
+      { "label": "piocher", "ops": [{ "op": "draw", "target": "self", "n": 2 }] }
+    ]}] },
+    "EPR_023": { "effet": "Pacte funeste", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "accepter", "ops": [{ "op": "discard", "target": "self", "n": 2 }, { "op": "drawDestin", "target": "self", "n": 2 }] },
+      { "label": "refuser", "ops": [{ "op": "require", "cond": { "hand_size": { "op": ">=", "value": 0 } } }] }
+    ]}] },
+    "EPR_024": { "effet": "Débris volants", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "se_proteger", "ops": [{ "op": "discard", "target": "self", "n": 1 }] },
+      { "label": "encaisser", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }] }
+    ]}] },
+    "EPR_025": { "effet": "Onde arcanique", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "canaliser", "ops": [{ "op": "discard", "target": "self", "n": 1 }, { "op": "heal", "target": "self", "amount": 1 }] },
+      { "label": "resister", "ops": [{ "op": "drawDestin", "target": "self" }] }
+    ]}] },
+    "EPR_026": { "effet": "Renfort inattendu", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "defausse_action", "ops": [{ "op": "discard", "target": "self", "n": 1 }, { "op": "draw", "target": "self", "n": 1 }] },
+      { "label": "ignorer", "ops": [{ "op": "summon", "target": "self", "n": 2 }] }
+    ]}] },
+    "EPR_027": { "effet": "Pilier effondré", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "retenir", "ops": [{ "op": "discard", "target": "self", "n": 1 }] },
+      { "label": "esquiver", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }] }
+    ]}] },
+    "EPR_028": { "effet": "Relique instable", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "contenir", "ops": [{ "op": "draw", "target": "self", "n": 1 }] },
+      { "label": "briser", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }, { "op": "damage", "target": "active_hero", "amount": 1 }] }
+    ]}] },
+    "EPR_029": { "effet": "Embuscade", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "esquiver", "ops": [{ "op": "discard", "target": "self", "n": 1 }] },
+      { "label": "subir", "ops": [{ "op": "damage", "target": "active_hero", "amount": 2 }] }
+    ]}] },
+    "EPR_030": { "effet": "Moment de vérité", "tag": "menace_event", "ops": [{ "op": "choice", "options": [
+      { "label": "tout_donner", "ops": [{ "op": "discard", "target": "self", "n": 99 }, { "op": "heal", "target": "self", "amount": 2 }] },
+      { "label": "tenir_bon", "ops": [{ "op": "draw", "target": "self", "n": 1 }] }
+    ]}] },
+
+    "DEN_001": { "effet": "Oiseau-guide : each hero pioche 1", "tag": "destin_pos", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }] },
+    "DEN_002": { "effet": "Source cachée : heal 2", "tag": "destin_pos", "ops": [{ "op": "heal", "target": "self", "amount": 2 }] },
+    "DEN_003": { "effet": "Songe ancestral : régénère capacité", "tag": "destin_pos", "ops": [{ "op": "regenCapacite", "target": "any_hero" }] },
+    "DEN_004": { "effet": "Cache : pioche 2", "tag": "destin_pos", "ops": [{ "op": "draw", "target": "self", "n": 2 }] },
+    "DEN_005": { "effet": "Feu de conseil : each draw 1 (choix simplifié)", "tag": "destin_pos", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }] },
+    "DEN_006": { "effet": "Relique : pioche 1 (approx)", "tag": "destin_pos", "ops": [{ "op": "draw", "target": "self", "n": 1 }] },
+    "DEN_007": { "effet": "Averse : each discard 1 random", "tag": "destin_neg", "ops": [{ "op": "forEach", "over": "each_hero", "do": [{ "op": "discard", "target": "self", "n": 1, "random": true }] }] },
+    "DEN_008": { "effet": "Outil brisé : défausse 1 objet (stub : discard 1 main)", "tag": "destin_neg", "ops": [{ "op": "discard", "target": "self", "n": 1 }] },
+    "DEN_009": { "effet": "Angle mort : 1 dmg", "tag": "destin_neg", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }] },
+    "DEN_010": { "effet": "Bruissement : 1 invocation", "tag": "destin_neg", "ops": [{ "op": "summon", "target": "self", "n": 1 }] },
+    "DEN_011": { "effet": "Meute : 1 invocation self + suivant", "tag": "destin_neg", "ops": [{ "op": "summon", "target": "self", "n": 1 }, { "op": "summon", "target": "next_hero", "n": 1 }] },
+    "DEN_012": { "effet": "Offrande : Boss soigné 2", "tag": "destin_neg", "ops": [{ "op": "bossHeal", "amount": 2 }] },
+    "DEN_013": { "effet": "Cicatrice : 1 dmg + pioche 1", "tag": "destin_amb", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }, { "op": "draw", "target": "self", "n": 1 }] },
+    "DEN_014": { "effet": "Frappe audacieuse : boss 2 dmg + invocation", "tag": "destin_amb", "ops": [{ "op": "bossDamage", "amount": 2 }, { "op": "summon", "target": "self", "n": 1 }] },
+    "DEN_015": { "effet": "Butin mal partagé : pioche 3 + autre héros 1 dmg", "tag": "destin_amb", "ops": [{ "op": "draw", "target": "self", "n": 3 }, { "op": "damage", "target": "any_hero_not_self", "amount": 1 }] },
+    "DEN_016": { "effet": "Gué dangereux : each pioche 1 + self 1 dmg", "tag": "destin_amb", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }, { "op": "damage", "target": "active_hero", "amount": 1 }] },
+    "DEN_017": { "effet": "Troc guérisseur : heal 2 + discard 1", "tag": "destin_amb", "ops": [{ "op": "heal", "target": "self", "amount": 2 }, { "op": "discard", "target": "self", "n": 1 }] },
+    "DEN_018": { "effet": "Eclaireur seul : discard 2 + draw 2 (stub)", "tag": "destin_amb", "ops": [{ "op": "discard", "target": "self", "n": 2 }, { "op": "draw", "target": "self", "n": 2 }] },
+    "DEN_019": { "effet": "Rituel : régénère + invocation", "tag": "destin_amb", "ops": [{ "op": "regenCapacite", "target": "self" }, { "op": "summon", "target": "self", "n": 1 }] },
+    "DEN_020": { "effet": "Palabre : échanges (stub : each draw 1) + invocation", "tag": "destin_amb", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }, { "op": "summon", "target": "self", "n": 1 }] }
   }
 }

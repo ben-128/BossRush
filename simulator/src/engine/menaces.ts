@@ -31,10 +31,19 @@ export function resolveMenace(state: GameState, card: Menace): void {
     menaceType: card.type,
   });
 
+  // Reset the cancel flag for this Menace. Objets like GUE_O05/DIP_O05
+  // could set it via cancelMenace op, but those aren't wired as reactive
+  // triggers yet — the flag remains for future when interrupts land.
+  state.menaceCancelled = false;
+
   // If we have a DSL entry for this Menace (event or otherwise), run it.
   const entry = state.effects[card.id];
   if (entry) {
     runOps(state, mkCtx(state.activeSeat, card.id, 'menace'), entry.ops);
+    if (state.menaceCancelled) {
+      emit(state, { kind: 'RESOLVE_MENACE', card: card.id, outcome: 'cancelled' });
+      return;
+    }
     emit(state, { kind: 'RESOLVE_MENACE', card: card.id, outcome: 'applied_dsl' });
     return;
   }

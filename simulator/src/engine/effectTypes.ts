@@ -191,6 +191,45 @@ export interface OpChoice {
  *   - { heal_cap: number }       : caps heal amount for all heals applied after
  *   - { bonus_damage_next: number } : adds to the next attack by the target seat
  */
+/** Direct damage to the boss (bypasses file targeting). */
+export interface OpBossDamage {
+  op: 'bossDamage';
+  amount: number;
+}
+
+/** Direct heal of the boss (cards like Offrande de peur). */
+export interface OpBossHeal {
+  op: 'bossHeal';
+  amount: number;
+}
+
+/** Move N wound cards from one hero to another (or self→boss, self→monster). */
+export interface OpShiftDamage {
+  op: 'shiftDamage';
+  from: 'self' | 'any_hero' | 'any_ally';
+  to: 'self' | 'any_hero' | 'any_ally' | 'queue_head' | 'boss' | MonsterPick;
+  amount: number;
+}
+
+/** Remove all wounds from a hero (Gao capacity, real version). */
+export interface OpRemoveAllWounds {
+  op: 'removeAllWounds';
+  target: HeroTargetTok;
+}
+
+/** Revive a dead hero at N wounds remaining (SOI_A06). */
+export interface OpRevive {
+  op: 'revive';
+  target: 'any_dead_hero';
+  /** Heal amount applied immediately after revival. Default 0. */
+  heal?: number;
+}
+
+/** Cancel the Menace currently being resolved (GUE_O05, DIP_O05). */
+export interface OpCancelMenace {
+  op: 'cancelMenace';
+}
+
 export interface OpModifier {
   op: 'modifier';
   effect: ModifierEffect;
@@ -224,7 +263,13 @@ export type EffectOp =
   | OpRequire
   | OpForEach
   | OpChoice
-  | OpModifier;
+  | OpModifier
+  | OpBossDamage
+  | OpBossHeal
+  | OpShiftDamage
+  | OpRemoveAllWounds
+  | OpRevive
+  | OpCancelMenace;
 
 /** One entry per card id in effects.json. */
 export interface CardEffectEntry {
