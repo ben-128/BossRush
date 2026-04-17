@@ -107,6 +107,75 @@ describe('effects DSL — hero capacity via PlayerAction', () => {
   });
 });
 
+describe('effects DSL — J3.5 extensions', () => {
+  it('eliminateWhere removes all matching monsters', async () => {
+    const state = await baseState(['HERO_001', 'HERO_003']);
+    // Plant 3 monsters in seat 0's queue, wound 2 of them.
+    for (let i = 0; i < 3; i++) {
+      state.counters.monsterInstance += 1;
+      state.heroes[0]!.queue.push({
+        instanceId: `MX${i}`,
+        cardId: 'MON_001',
+        wounds: [],
+      });
+    }
+    state.heroes[0]!.queue[0]!.wounds.push({ woundId: 'W1', source: 'chasse', sourceCardId: 'T', degats: 1 });
+    state.heroes[0]!.queue[2]!.wounds.push({ woundId: 'W2', source: 'chasse', sourceCardId: 'T', degats: 1 });
+    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+      { op: 'eliminateWhere', from: 'monster_in_any_queue', where: 'has_damage' },
+    ]);
+    // Wait — wounded monsters (vie=1) would have been eliminated already by
+    // their damage. Here we simulate wounds that didn't reach vie (via direct
+    // array push). After eliminateWhere, the 2 wounded should be gone.
+    expect(state.heroes[0]!.queue.length).toBe(1);
+    expect(state.heroes[0]!.queue[0]!.instanceId).toBe('MX1');
+  });
+
+  it('choice op runs exactly one option', async () => {
+    const state = await baseState(['HERO_001', 'HERO_003']);
+    const before = state.heroes[0]!.hand.length;
+    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+      {
+        op: 'choice',
+        options: [
+          { label: 'A', ops: [{ op: 'draw', target: 'self', n: 1 }] },
+          { label: 'B', ops: [{ op: 'draw', target: 'self', n: 5 }] },
+        ],
+      },
+    ]);
+    const delta = state.heroes[0]!.hand.length - before;
+    expect([1, 5]).toContain(delta);
+  });
+
+  it('modifier no_damage cancels incoming damage within scope', async () => {
+    const state = await baseState(['HERO_001', 'HERO_003']);
+    runOps(state, mkCtx(0, 'NAWEL_CAP', 'chasse'), [
+      {
+        op: 'modifier',
+        target: 'self',
+        scope: 'thisTurn',
+        effect: { kind: 'no_damage', seat: 0 },
+      },
+    ]);
+    const woundsBefore = state.heroes[0]!.wounds.length;
+    // Attempt a damage — should be cancelled.
+    runOps(state, mkCtx(0, 'TEST_DMG', 'menace'), [
+      { op: 'damage', target: 'active_hero', amount: 2 },
+    ]);
+    expect(state.heroes[0]!.wounds.length).toBe(woundsBefore);
+  });
+
+  it('forEach iterates heroes and re-binds self', async () => {
+    const state = await baseState(['HERO_001', 'HERO_003']);
+    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+      { op: 'forEach', over: 'each_hero', do: [{ op: 'draw', target: 'self', n: 1 }] },
+    ]);
+    // Both heroes should now have one extra card (relative to initial 3).
+    expect(state.heroes[0]!.hand.length).toBe(4);
+    expect(state.heroes[1]!.hand.length).toBe(4);
+  });
+});
+
 describe('effects DSL — integration: full games run with DSL', () => {
   it('every boss still terminates with DSL enabled', async () => {
     const data = await loadDesignData();

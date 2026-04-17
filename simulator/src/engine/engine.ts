@@ -16,6 +16,7 @@ import type { Policy } from '../ai/random.js';
 import { applyPlayerAction } from './actions.js';
 import { resolveBossSequence } from './bossSequence.js';
 import { emit } from './logger.js';
+import { clearScope } from './modifiers.js';
 
 export interface RunOptions {
   /** One policy per seat. Length must match nPlayers. */
@@ -67,6 +68,8 @@ export function runTurn(state: GameState, policies: Policy[]): void {
   emit(state, { kind: 'PHASE', phase: 'BOSS_SEQUENCE' });
   resolveBossSequence(state);
 
+  // Clear modifiers with 'thisTurn' scope at turn end.
+  clearScope(state, 'thisTurn');
   emit(state, { kind: 'TURN_END', turn: state.turn, seat });
 }
 

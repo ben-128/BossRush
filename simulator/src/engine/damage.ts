@@ -15,6 +15,7 @@ import type { GameState, HeroRuntime, MonsterInstance, Wound } from './gameState
 import type { TargetKind, WoundSource } from './events.js';
 import { emit } from './logger.js';
 import { discard } from './piles.js';
+import { onDamageResolved, shouldCancelDamage } from './modifiers.js';
 
 function nextWoundId(state: GameState): string {
   state.counters.wound += 1;
@@ -54,6 +55,18 @@ export function damageHero(state: GameState, seat: number, spec: DamageSpec): bo
   const h = state.heroes[seat];
   if (!h) throw new Error(`No hero at seat ${seat}`);
   if (h.dead) return false;
+
+  // Check damage-cancelling modifiers (e.g. Nawel capacité).
+  const cancel = shouldCancelDamage(state, seat);
+  if (cancel.cancel) {
+    emit(state, {
+      kind: 'WARN',
+      message: `damage_cancelled seat=${seat} source=${spec.sourceCardId} via=${cancel.via?.sourceCardId}`,
+    });
+    onDamageResolved(state, seat); // still consume nextDamageToSelf scopes
+    return false;
+  }
+
   const woundId = nextWoundId(state);
   const wound: Wound = {
     woundId,
@@ -71,6 +84,7 @@ export function damageHero(state: GameState, seat: number, spec: DamageSpec): bo
     amount: spec.amount,
     woundId,
   });
+  onDamageResolved(state, seat);
   if (totalWoundsOfHero(h) >= h.vieMax) {
     return killHero(state, seat);
   }

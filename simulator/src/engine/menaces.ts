@@ -21,6 +21,7 @@ import type { Menace } from './types.js';
 import { emit, notImplemented } from './logger.js';
 import { damageHero } from './damage.js';
 import { summonMonsterInQueue, resolveAttackOrder } from './bossSequence.js';
+import { runOps, mkCtx } from './effects.js';
 
 export function resolveMenace(state: GameState, card: Menace): void {
   emit(state, {
@@ -30,7 +31,15 @@ export function resolveMenace(state: GameState, card: Menace): void {
     menaceType: card.type,
   });
 
-  // Événements à choix are always skipped in J2.
+  // If we have a DSL entry for this Menace (event or otherwise), run it.
+  const entry = state.effects[card.id];
+  if (entry) {
+    runOps(state, mkCtx(state.activeSeat, card.id, 'menace'), entry.ops);
+    emit(state, { kind: 'RESOLVE_MENACE', card: card.id, outcome: 'applied_dsl' });
+    return;
+  }
+
+  // No DSL : événements are skipped (choice op unavailable for this card).
   if (card.type === 'evenement') {
     notImplemented(state, 'menace_evenement', `${card.id} (${card.nom})`);
     emit(state, { kind: 'RESOLVE_MENACE', card: card.id, outcome: 'skipped_evenement' });

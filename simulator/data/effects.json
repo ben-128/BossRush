@@ -156,17 +156,112 @@
     },
 
     "HERO_001": {
-      "effet": "Daraa — Élimine tous les monstres blessés (J3: un seul via pick any — sera étendu avec forEach)",
+      "effet": "Daraa — Élimine tous les monstres blessés",
       "tag": "elim_on_demand",
       "ops": [
-        { "op": "eliminate", "target": { "pick": "monster_in_any_queue", "where": "has_damage" } }
+        { "op": "eliminateWhere", "from": "monster_in_any_queue", "where": "has_damage" }
       ]
     },
     "HERO_002": {
-      "effet": "Gao — Retire toutes les blessures d'un héros (heal 99 émule le 'toutes')",
+      "effet": "Gao — Retire toutes les blessures d'un héros",
       "tag": "reactive_heal",
       "ops": [
         { "op": "heal", "target": "any_hero", "amount": 99 }
+      ]
+    },
+    "HERO_003": {
+      "effet": "Nawel — Aucun dégât jusqu'à la fin du tour",
+      "tag": "prevent_lethal",
+      "ops": [
+        {
+          "op": "modifier",
+          "target": "self",
+          "scope": "thisTurn",
+          "effect": { "kind": "no_damage", "seat": 0 }
+        }
+      ]
+    },
+
+    "EPR_017": {
+      "effet": "Terrain instable — choix",
+      "tag": "menace_event",
+      "ops": [
+        {
+          "op": "choice",
+          "options": [
+            { "label": "allie_defausse_objet", "ops": [{ "op": "discard", "target": "any_ally", "n": 1 }] },
+            { "label": "encaisser", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }] }
+          ]
+        }
+      ]
+    },
+    "EPR_020": {
+      "effet": "Œil du cyclone — souffler OU rester concentré",
+      "tag": "menace_event",
+      "ops": [
+        {
+          "op": "choice",
+          "options": [
+            {
+              "label": "souffler",
+              "ops": [
+                { "op": "regenCapacite", "target": "self" },
+                { "op": "summon", "target": "self", "n": 1 }
+              ]
+            },
+            { "label": "rester_concentre", "ops": [{ "op": "drawDestin", "target": "self" }] }
+          ]
+        }
+      ]
+    },
+    "EPR_022": {
+      "effet": "Brume apaisante — soigner OU piocher",
+      "tag": "menace_event",
+      "ops": [
+        {
+          "op": "choice",
+          "options": [
+            { "label": "soigner", "ops": [{ "op": "heal", "target": "self", "amount": 1 }] },
+            { "label": "piocher", "ops": [{ "op": "draw", "target": "self", "n": 2 }] }
+          ]
+        }
+      ]
+    },
+    "EPR_030": {
+      "effet": "Moment de vérité — tout donner OU tenir bon",
+      "tag": "menace_event",
+      "ops": [
+        {
+          "op": "choice",
+          "options": [
+            {
+              "label": "tout_donner",
+              "ops": [
+                { "op": "discard", "target": "self", "n": 99 },
+                { "op": "heal", "target": "self", "amount": 2 }
+              ]
+            },
+            { "label": "tenir_bon", "ops": [{ "op": "draw", "target": "self", "n": 1 }] }
+          ]
+        }
+      ]
+    },
+
+    "DEN_001": {
+      "effet": "L'oiseau-guide — chaque héros pioche 1",
+      "tag": "destin_pos",
+      "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }]
+    },
+    "DEN_002": {
+      "effet": "Source cachée — soigne 2",
+      "tag": "destin_pos",
+      "ops": [{ "op": "heal", "target": "self", "amount": 2 }]
+    },
+    "DEN_007": {
+      "effet": "Averse de cendres — chaque héros défausse 1 au hasard",
+      "tag": "destin_neg",
+      "ops": [
+        { "op": "forEach", "over": "each_hero", "do": [{ "op": "discard", "target": "self", "n": 1, "random": true }] }
       ]
     }
   }

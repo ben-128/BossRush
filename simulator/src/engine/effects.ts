@@ -14,12 +14,16 @@ import type {
   EffectOp,
   HeroTargetTok,
   OpAttack,
+  OpChoice,
   OpDamage,
   OpDiscard,
   OpDraw,
   OpDrawDestin,
   OpEliminate,
+  OpEliminateWhere,
+  OpForEach,
   OpHeal,
+  OpModifier,
   OpMoveMonster,
   OpRegenCapacite,
   OpSummon,
@@ -37,6 +41,7 @@ import { drawOne, discard } from './piles.js';
 import { emit } from './logger.js';
 import { Rng } from './rng.js';
 import type { WoundSource } from './events.js';
+import { addModifier } from './modifiers.js';
 
 export interface EffectContext {
   /** Seat that is resolving the effect (plays the card, triggers the ability). */
@@ -82,17 +87,102 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       return applySummonOp(state, ctx, op);
     case 'eliminate':
       return applyEliminateOp(state, ctx, op);
+    case 'eliminateWhere':
+      return applyEliminateWhereOp(state, ctx, op);
     case 'moveMonster':
       return applyMoveMonsterOp(state, ctx, op);
     case 'regenCapacite':
       return applyRegenCapaciteOp(state, ctx, op);
     case 'discard':
       return applyDiscardOp(state, ctx, op);
+    case 'forEach':
+      return applyForEachOp(state, ctx, op);
+    case 'choice':
+      return applyChoiceOp(state, ctx, op);
+    case 'modifier':
+      return applyModifierOp(state, ctx, op);
     default: {
       const _exhaust: never = op;
       return _exhaust;
     }
   }
+}
+
+function applyEliminateWhereOp(
+  state: GameState,
+  ctx: EffectContext,
+  op: OpEliminateWhere,
+): void {
+  // Collect all matching monsters up front (iteration-safe), then eliminate.
+  const matches: { seat: number; instanceId: string }[] = [];
+  const heroesToScan =
+    op.from === 'monster_in_self_queue'
+      ? [state.heroes[ctx.sourceSeat]].filter(Boolean) as NonNullable<typeof state.heroes[number]>[]
+      : state.heroes;
+
+  for (const h of heroesToScan) {
+    for (const m of h.queue) {
+      const card = state.catalog.monstreById.get(m.cardId);
+      const vie = card?.vie ?? 1;
+      const wounded = m.wounds.reduce((s, w) => s + w.degats, 0);
+      const remaining = vie - wounded;
+      let ok = true;
+      if (op.where === 'has_damage') ok = wounded > 0;
+      else if (op.where === 'vie_eq_1') ok = remaining === 1;
+      else if (op.where === 'at_most_life_N') ok = remaining <= (op.N ?? 1);
+      if (ok) matches.push({ seat: h.seatIdx, instanceId: m.instanceId });
+    }
+  }
+  emit(state, {
+    kind: 'WARN',
+    message: `eliminateWhere source=${ctx.sourceCardId} from=${op.from} where=${op.where ?? 'none'} matched=${matches.length}`,
+  });
+  for (const m of matches) eliminateMonster(state, m.seat, m.instanceId);
+}
+
+function applyForEachOp(state: GameState, ctx: EffectContext, op: OpForEach): void {
+  const seats =
+    op.over === 'each_hero'
+      ? state.heroes.filter((h) => !h.dead).map((h) => h.seatIdx)
+      : state.heroes.filter((h) => !h.dead && h.seatIdx !== ctx.sourceSeat).map((h) => h.seatIdx);
+  for (const s of seats) {
+    if (state.result !== 'running') return;
+    const subCtx: EffectContext = { ...ctx, sourceSeat: s };
+    runOps(state, subCtx, op.do);
+  }
+}
+
+function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice): void {
+  // J3.5: choice is resolved by RNG (policy.pickChoice hook comes later).
+  // A heuristic layer can override this by pre-selecting an option before
+  // runOps is called — for now we record the chosen label for the log.
+  const rng = Rng.fromState(state.rngState);
+  const idx = rng.nextInt(0, op.options.length - 1);
+  state.rngState = rng.state;
+  const chosen = op.options[idx];
+  if (!chosen) return;
+  emit(state, {
+    kind: 'WARN',
+    message: `choice source=${ctx.sourceCardId} picked=${chosen.label}`,
+  });
+  runOps(state, ctx, chosen.ops);
+}
+
+function applyModifierOp(state: GameState, ctx: EffectContext, op: OpModifier): void {
+  // If the effect carries a seat field and we want to anchor it to `self`,
+  // rewrite it to the source seat.
+  let eff = op.effect;
+  if (eff.kind === 'no_damage' && op.target === 'self') {
+    eff = { ...eff, seat: ctx.sourceSeat };
+  }
+  if (eff.kind === 'bonus_damage_next' && op.target === 'self') {
+    eff = { ...eff, seat: ctx.sourceSeat };
+  }
+  const rec = addModifier(state, eff, op.scope, ctx.sourceCardId);
+  emit(state, {
+    kind: 'WARN',
+    message: `modifier_added id=${rec.id} kind=${eff.kind} scope=${op.scope} source=${ctx.sourceCardId}`,
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -165,8 +255,17 @@ function applyDrawDestinOp(state: GameState, ctx: EffectContext, op: OpDrawDesti
       const d = drawOne(state, state.piles.destin, 'destin');
       if (!d) break;
       emit(state, { kind: 'DRAW_CARD', pile: 'destin', card: d.id, toSeat: s });
-      // J3: Destin resolution itself is NOT IMPLEMENTED — log and discard.
-      emit(state, { kind: 'NOT_IMPLEMENTED', feature: 'destin_resolve', detail: d.id });
+      const entry = state.effects[d.id];
+      if (entry) {
+        runOps(state, { ...ctx, sourceSeat: s, sourceCardId: d.id, sourceKind: 'destin' }, entry.ops);
+      } else {
+        // Fallback: apply raw degats if present; otherwise log and discard.
+        if (d.degats) {
+          damageHero(state, s, { amount: d.degats, source: 'destin', sourceCardId: d.id });
+        } else {
+          emit(state, { kind: 'NOT_IMPLEMENTED', feature: 'destin_resolve', detail: d.id });
+        }
+      }
       discard(state.piles.destin, d);
     }
   }

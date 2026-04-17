@@ -17,6 +17,7 @@
 import type { Boss, CarteChasse, Destin, Hero, Menace, Monstre } from './types.js';
 import type { GameEvent } from './events.js';
 import type { EffectsCatalog } from './effectTypes.js';
+import type { ModifierRec } from './modifiers.js';
 
 export type Result = 'running' | 'victory' | 'defeat';
 
@@ -117,6 +118,9 @@ export interface GameState {
    * to J2 "raw degats" behaviour. Empty by default (effects.json optional).
    */
   effects: EffectsCatalog;
+
+  /** Active persistent modifiers. See engine/modifiers.ts. */
+  modifiers: ModifierRec[];
 }
 
 // ---------------------------------------------------------------------------

@@ -8,6 +8,7 @@
 
 import type { GameState, HeroRuntime, Wound } from './gameState.js';
 import { emit } from './logger.js';
+import { capHealBudget } from './modifiers.js';
 
 /**
  * Greedy bottom-up heal. Returns the amount actually healed.
@@ -40,7 +41,8 @@ function healStack(wounds: Wound[], budget: number): { removed: Wound[]; healed:
 export function healHero(state: GameState, seat: number, amount: number, source: string): number {
   const h = state.heroes[seat];
   if (!h || h.dead) return 0;
-  const { removed, healed } = healStack(h.wounds, amount);
+  const cappedBudget = capHealBudget(state, amount);
+  const { removed, healed } = healStack(h.wounds, cappedBudget);
   emit(state, {
     kind: 'WARN',
     message: `heal seat=${seat} budget=${amount} healed=${healed} removedIds=${removed.map((w) => w.woundId).join(',')} source=${source}`,

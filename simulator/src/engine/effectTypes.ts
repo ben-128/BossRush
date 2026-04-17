@@ -124,6 +124,14 @@ export interface OpEliminate {
   target: MonsterPick;
 }
 
+/** Eliminate ALL monsters matching a selector (e.g. Daraa "tous les blessés"). */
+export interface OpEliminateWhere {
+  op: 'eliminateWhere';
+  from: 'monster_in_self_queue' | 'monster_in_any_queue';
+  where?: 'has_damage' | 'at_most_life_N' | 'vie_eq_1';
+  N?: number;
+}
+
 export interface OpMoveMonster {
   op: 'moveMonster';
   from: MonsterPick;
@@ -148,6 +156,59 @@ export interface OpRequire {
   cond: Condition;
 }
 
+/**
+ * Iterate over a list of heroes, running `do` with each as the current `self`.
+ * Note: for monster iteration, use `eliminateWhere` (bulk) or individual ops.
+ */
+export interface OpForEach {
+  op: 'forEach';
+  over: 'each_hero' | 'each_ally';
+  do: EffectOp[];
+}
+
+/**
+ * Offer N options to a policy; chosen option's ops are executed. Other
+ * branches discarded.
+ */
+export interface OpChoice {
+  op: 'choice';
+  /** Who decides: defaults to 'active'. `any_hero` picks randomly among
+   *  living heroes. */
+  who?: 'active' | 'any_hero';
+  options: Array<{ label: string; ops: EffectOp[] }>;
+}
+
+/**
+ * Apply a persistent modifier with a scope. Scopes auto-clean at boundary.
+ *
+ * J3.5 scopes:
+ *   - 'thisTurn'         : cleared at END_TURN
+ *   - 'nextDamageToSelf' : cleared after the first damage event on `targetSeat`
+ *   - 'nextAttackByActive' : cleared after the first attack by `targetSeat`
+ *
+ * J3.5 effects:
+ *   - { no_damage_to: seat }     : cancels damage events whose target is `seat`
+ *   - { heal_cap: number }       : caps heal amount for all heals applied after
+ *   - { bonus_damage_next: number } : adds to the next attack by the target seat
+ */
+export interface OpModifier {
+  op: 'modifier';
+  effect: ModifierEffect;
+  scope: ModifierScope;
+  /** Seat that the modifier attaches to (defaults to 'active'). */
+  target?: 'self';
+}
+
+export type ModifierScope =
+  | 'thisTurn'
+  | 'nextDamageToSelf'
+  | 'nextAttackByActive';
+
+export type ModifierEffect =
+  | { kind: 'no_damage'; seat: number }
+  | { kind: 'heal_cap'; max: number }
+  | { kind: 'bonus_damage_next'; seat: number; amount: number };
+
 export type EffectOp =
   | OpAttack
   | OpDamage
@@ -156,10 +217,14 @@ export type EffectOp =
   | OpDrawDestin
   | OpSummon
   | OpEliminate
+  | OpEliminateWhere
   | OpMoveMonster
   | OpRegenCapacite
   | OpDiscard
-  | OpRequire;
+  | OpRequire
+  | OpForEach
+  | OpChoice
+  | OpModifier;
 
 /** One entry per card id in effects.json. */
 export interface CardEffectEntry {

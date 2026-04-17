@@ -141,6 +141,7 @@ export function createGame(data: DesignData, options: SetupOptions): GameState {
     turnCap,
     catalog,
     effects: options.effects ?? {},
+    modifiers: [],
   };
 
   // --- Shuffle all piles (deterministic via seed) ---

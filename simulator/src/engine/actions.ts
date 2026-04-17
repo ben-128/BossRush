@@ -21,6 +21,7 @@ import { emit } from './logger.js';
 import { drawOne, discard } from './piles.js';
 import { damageHero, damageBoss, damageMonster } from './damage.js';
 import { runOps, mkCtx } from './effects.js';
+import { consumeAttackBonus, onAttackResolved } from './modifiers.js';
 
 // ---------------------------------------------------------------------------
 // Action types exchanged with the AI policy
@@ -155,7 +156,9 @@ function playAction(
   });
 
   const entry = state.effects[card.id];
-  const bonusDmg = renforts.reduce((s, r) => s + (r.card.bonus_degats ?? 0), 0);
+  const bonusFromModifiers = consumeAttackBonus(state, seat);
+  const bonusDmg =
+    renforts.reduce((s, r) => s + (r.card.bonus_degats ?? 0), 0) + bonusFromModifiers;
 
   if (entry) {
     // DSL path: run ops. If ops include an `attack` without amount, we
@@ -203,6 +206,8 @@ function playAction(
     discard(state.piles.chasse, r.card);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: r.card.id, fromSeat: seat });
   }
+
+  onAttackResolved(state, seat);
 }
 
 /**

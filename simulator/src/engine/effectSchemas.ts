@@ -119,19 +119,72 @@ const OpRequire = z.object({
   cond: Condition,
 });
 
-const EffectOp = z.discriminatedUnion('op', [
-  OpAttack,
-  OpDamage,
-  OpHeal,
-  OpDraw,
-  OpDrawDestin,
-  OpSummon,
-  OpEliminate,
-  OpMoveMonster,
-  OpRegenCapacite,
-  OpDiscard,
-  OpRequire,
+const OpEliminateWhere = z.object({
+  op: z.literal('eliminateWhere'),
+  from: z.enum(['monster_in_self_queue', 'monster_in_any_queue']),
+  where: z.enum(['has_damage', 'at_most_life_N', 'vie_eq_1']).optional(),
+  N: z.number().int().optional(),
+});
+
+// Recursive — effects inside forEach/choice can reference the full union.
+// Plain union rather than discriminatedUnion because z.lazy breaks the latter.
+const EffectOp: z.ZodType<unknown> = z.lazy(() =>
+  z.union([
+    OpAttack,
+    OpDamage,
+    OpHeal,
+    OpDraw,
+    OpDrawDestin,
+    OpSummon,
+    OpEliminate,
+    OpEliminateWhere,
+    OpMoveMonster,
+    OpRegenCapacite,
+    OpDiscard,
+    OpRequire,
+    OpForEach,
+    OpChoice,
+    OpModifier,
+  ]),
+);
+
+const OpForEach: z.ZodType<unknown> = z.lazy(() =>
+  z.object({
+    op: z.literal('forEach'),
+    over: z.enum(['each_hero', 'each_ally']),
+    do: z.array(EffectOp),
+  }),
+);
+
+const OpChoice: z.ZodType<unknown> = z.lazy(() =>
+  z.object({
+    op: z.literal('choice'),
+    who: z.enum(['active', 'any_hero']).optional(),
+    options: z.array(
+      z.object({
+        label: z.string(),
+        ops: z.array(EffectOp),
+      }),
+    ).min(2),
+  }),
+);
+
+const ModifierEffect = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('no_damage'), seat: z.number().int() }),
+  z.object({ kind: z.literal('heal_cap'), max: z.number().int().nonnegative() }),
+  z.object({
+    kind: z.literal('bonus_damage_next'),
+    seat: z.number().int(),
+    amount: z.number().int().nonnegative(),
+  }),
 ]);
+
+const OpModifier = z.object({
+  op: z.literal('modifier'),
+  effect: ModifierEffect,
+  scope: z.enum(['thisTurn', 'nextDamageToSelf', 'nextAttackByActive']),
+  target: z.literal('self').optional(),
+});
 
 export const CardEffectEntrySchema = z.object({
   effet: z.string().optional(),
