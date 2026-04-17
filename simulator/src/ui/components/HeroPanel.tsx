@@ -5,6 +5,15 @@ interface Props {
   seat: number;
 }
 
+const COMPETENCE_COLOR: Record<string, { text: string; handBg: string; handRing: string; shadow: string }> = {
+  magie:      { text: 'text-orange-300',  handBg: 'bg-orange-900/40',  handRing: 'hover:ring-orange-400',  shadow: 'shadow-[0_0_8px_rgba(251,146,60,0.5)]' },
+  soin:       { text: 'text-emerald-300', handBg: 'bg-emerald-900/40', handRing: 'hover:ring-emerald-400', shadow: 'shadow-[0_0_8px_rgba(52,211,153,0.5)]' },
+  armure:     { text: 'text-slate-300',   handBg: 'bg-slate-700/40',   handRing: 'hover:ring-slate-300',   shadow: 'shadow-[0_0_8px_rgba(203,213,225,0.4)]' },
+  distance:   { text: 'text-sky-300',     handBg: 'bg-sky-900/40',     handRing: 'hover:ring-sky-400',     shadow: 'shadow-[0_0_8px_rgba(56,189,248,0.5)]' },
+  diplomatie: { text: 'text-fuchsia-300', handBg: 'bg-fuchsia-900/40', handRing: 'hover:ring-fuchsia-400', shadow: 'shadow-[0_0_8px_rgba(232,121,249,0.5)]' },
+};
+const DEFAULT_COLOR = { text: 'text-stone-200', handBg: 'bg-sky-900/50', handRing: 'hover:ring-sky-400', shadow: '' };
+
 export function HeroPanel({ seat }: Props) {
   const state = useStore((s) => s.state)!;
   const design = useStore((s) => s.design)!;
@@ -15,6 +24,7 @@ export function HeroPanel({ seat }: Props) {
   if (!heroCard) return null;
   const dmg = totalWoundsOf(h.wounds);
   const isActive = state.activeSeat === seat && state.result === 'running';
+  const color = COMPETENCE_COLOR[heroCard.competences[0] ?? ''] ?? DEFAULT_COLOR;
 
   return (
     <div
@@ -26,7 +36,7 @@ export function HeroPanel({ seat }: Props) {
         <div>
           <button
             onClick={() => inspect({ kind: 'hero', id: h.heroId })}
-            className="font-semibold hover:text-sky-300 transition-colors"
+            className={`font-semibold ${color.text} hover:brightness-125 transition`}
             title="Cliquer pour voir les détails"
           >
             {heroCard.nom}
@@ -83,16 +93,21 @@ export function HeroPanel({ seat }: Props) {
           {h.hand.length === 0 ? (
             <span className="text-stone-600">vide</span>
           ) : (
-            h.hand.map((c, i) => (
-              <button
-                key={i}
-                onClick={() => inspect({ kind: 'chasse', id: c.id })}
-                className="inline-block px-1 mx-0.5 rounded bg-sky-900/50 hover:bg-sky-800 hover:ring-1 hover:ring-sky-400"
-                title={`${c.id} · ${c.categorie}${c.degats !== undefined ? ' · ' + c.degats + ' dmg' : ''} · clic pour détails`}
-              >
-                {chasseName(design, c.id)}
-              </button>
-            ))
+            h.hand.map((c, i) => {
+              const reqHero = design.heroes.find((x) => x.nom === c.prerequis);
+              const reqColor =
+                COMPETENCE_COLOR[reqHero?.competences[0] ?? ''] ?? DEFAULT_COLOR;
+              return (
+                <button
+                  key={i}
+                  onClick={() => inspect({ kind: 'chasse', id: c.id })}
+                  className={`inline-block px-1 mx-0.5 rounded ${reqColor.handBg} ${reqColor.shadow} hover:brightness-125 hover:ring-1 ${reqColor.handRing}`}
+                  title={`${c.id} · ${c.categorie}${c.degats !== undefined ? ' · ' + c.degats + ' dmg' : ''} · requiert ${c.prerequis} · clic pour détails`}
+                >
+                  {chasseName(design, c.id)}
+                </button>
+              );
+            })
           )}
         </div>
         {h.objects.length > 0 && (

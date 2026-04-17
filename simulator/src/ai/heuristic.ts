@@ -108,6 +108,11 @@ function scoreAction(state: GameState, h: HeroRuntime, c: CarteChasse): number {
         );
         score += anyAllyHurt ? -5 : 8;
         break;
+      case 'shift_damage':
+        // MAG_A06 « Transfert de cendres »: only useful if the hero is
+        // actually wounded (otherwise it's a no-op).
+        score += totalWounds(h) > 0 ? 6 : -20;
+        break;
     }
   }
   return score;
@@ -142,30 +147,86 @@ function shouldUseCapacite(state: GameState, h: HeroRuntime): boolean {
   }
 }
 
+/**
+ * Look for a beneficial exchange with an ally.
+ *
+ * Mutual fit: I give cards whose `prerequis` matches the ally's name (they
+ * can use them) and take cards whose `prerequis` matches mine. Only suggest
+ * an exchange when BOTH sides place at least one card in better hands.
+ */
+function tryExchange(
+  state: GameState,
+  h: HeroRuntime,
+): { withSeat: number; give: number[]; take: number[] } | undefined {
+  const myNom = state.catalog.heroesById.get(h.heroId)?.nom;
+  if (!myNom) return undefined;
+
+  let best: { withSeat: number; give: number[]; take: number[]; gain: number } | undefined;
+  for (const ally of state.heroes) {
+    if (ally.dead || ally.seatIdx === h.seatIdx) continue;
+    const allyNom = state.catalog.heroesById.get(ally.heroId)?.nom;
+    if (!allyNom) continue;
+
+    const give: number[] = [];
+    h.hand.forEach((c, i) => {
+      if (c.prerequis === allyNom && c.prerequis !== myNom) give.push(i);
+    });
+    const take: number[] = [];
+    ally.hand.forEach((c, i) => {
+      if (c.prerequis === myNom && c.prerequis !== allyNom) take.push(i);
+    });
+    if (give.length === 0 || take.length === 0) continue;
+
+    // Keep sizes equal so hand sizes stay stable; cap at 3 to avoid huge swaps.
+    const n = Math.min(give.length, take.length, 3);
+    const pair = { withSeat: ally.seatIdx, give: give.slice(0, n), take: take.slice(0, n), gain: n };
+    if (!best || pair.gain > best.gain) best = pair;
+  }
+  if (!best) return undefined;
+  return { withSeat: best.withSeat, give: best.give, take: best.take };
+}
+
 export const heuristicPolicy: Policy = {
   name: 'heuristic',
+
+  /** Reactive trigger: use capacité spéciale when situationally valuable. */
+  pickReaction(state: GameState): PlayerAction | null {
+    const h = state.heroes[state.activeSeat];
+    if (!h || h.capaciteUsed || !shouldUseCapacite(state, h)) return null;
+    const entry = state.effects[h.heroId];
+    return {
+      kind: 'useCapacite',
+      reason: `capacité "${entry?.tag ?? 'spéciale'}" contextuellement utile`,
+    };
+  },
 
   pickAction(state: GameState): PlayerAction {
     const seat = state.activeSeat;
     const h = state.heroes[seat];
     if (!h) return { kind: 'none', reason: 'no hero' };
 
-    // 1. Fire capacité if situation warrants.
-    if (shouldUseCapacite(state, h)) {
-      const entry = state.effects[h.heroId];
-      return {
-        kind: 'useCapacite',
-        reason: `capacité "${entry?.tag ?? 'spéciale'}" contextuellement utile`,
-      };
-    }
-
-    // 2. Evaluate playable actions.
+    // Evaluate playable actions.
     const playable = playableActions(state, h);
     if (playable.length > 0) {
       const scored = playable
         .map((i) => ({ i, card: h.hand[i]!, s: scoreAction(state, h, h.hand[i]!) }))
         .sort((a, b) => b.s - a.s);
       const best = scored[0]!;
+      // If the best option actively scores negative, it's worse than doing
+      // nothing — try exchange, else draw.
+      if (best.s < 0) {
+        const ex = tryExchange(state, h);
+        if (ex) {
+          return {
+            kind: 'exchange',
+            withSeat: ex.withSeat,
+            give: ex.give,
+            take: ex.take,
+            reason: `échange avec seat ${ex.withSeat} (${ex.give.length}↔${ex.take.length} cartes mieux placées)`,
+          };
+        }
+        return { kind: 'draw', reason: `aucune carte utile (best score=${best.s})` };
+      }
       const renforts = renfortIndices(state, h);
       const attaches: number[] = [];
       if (best.card.degats !== undefined && renforts.length > 0 && renforts[0] !== undefined) {
@@ -188,7 +249,17 @@ export const heuristicPolicy: Policy = {
       };
     }
 
-    // 3. No action playable → draw.
+    // No action playable → prefer a useful exchange, else draw.
+    const ex = tryExchange(state, h);
+    if (ex) {
+      return {
+        kind: 'exchange',
+        withSeat: ex.withSeat,
+        give: ex.give,
+        take: ex.take,
+        reason: `échange avec seat ${ex.withSeat} (${ex.give.length}↔${ex.take.length} cartes mieux placées)`,
+      };
+    }
     const reasons: string[] = [];
     if (h.hand.length === 0) reasons.push('main vide');
     else if (h.hand.every((c) => !state.effects[c.id] && (!c.degats || c.effet))) {

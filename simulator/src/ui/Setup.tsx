@@ -9,6 +9,7 @@ export function Setup() {
   const removeHero = useStore((s) => s.removeHero);
   const setSeed = useStore((s) => s.setSeed);
   const start = useStore((s) => s.start);
+  const selectedBoss = design.boss.find((b) => b.id === form.boss);
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-6">
@@ -25,6 +26,33 @@ export function Setup() {
             </option>
           ))}
         </select>
+        {selectedBoss && (
+          <div className="mt-3 border-2 border-red-900/60 rounded-lg p-3 bg-stone-950/50 text-xs space-y-1">
+            <div className="flex items-baseline justify-between mb-1">
+              <span className="text-lg font-bold text-red-200">{selectedBoss.nom}</span>
+              <span className="text-stone-400">
+                <span className="uppercase">{selectedBoss.difficulte}</span> · PV ×
+                {selectedBoss.vie_multiplicateur} (={selectedBoss.vie_multiplicateur * form.heroIds.length})
+              </span>
+            </div>
+            <div>
+              <span className="text-stone-400">Séquence :</span>{' '}
+              <span className="font-mono">{selectedBoss.stats.sequence.join(' → ')}</span>
+            </div>
+            <div>
+              <span className="text-stone-400">Passif :</span> {selectedBoss.stats.passif}
+            </div>
+            <div>
+              <span className="text-stone-400">⚡ Actif :</span> {selectedBoss.stats.actif}
+            </div>
+            {selectedBoss.monstres_ids && selectedBoss.monstres_ids.length > 0 && (
+              <div>
+                <span className="text-stone-400">Monstres :</span>{' '}
+                {selectedBoss.monstres_ids.join(', ')}
+              </div>
+            )}
+          </div>
+        )}
       </section>
 
       <section>
@@ -71,12 +99,22 @@ export function Setup() {
 
       <section>
         <h2 className="text-sm uppercase tracking-wider text-stone-400 mb-2">Seed</h2>
-        <input
-          value={form.seed}
-          onChange={(e) => setSeed(e.target.value)}
-          placeholder="nombre ou chaîne (ex : 42)"
-          className="w-full bg-stone-800 border border-stone-700 rounded px-3 py-2"
-        />
+        <div className="flex items-center space-x-2">
+          <input
+            value={form.seed}
+            onChange={(e) => setSeed(e.target.value)}
+            placeholder="nombre ou chaîne (ex : 42)"
+            className="flex-1 bg-stone-800 border border-stone-700 rounded px-3 py-2"
+          />
+          <button
+            type="button"
+            onClick={() => setSeed(String(Math.floor(Math.random() * 1_000_000)))}
+            title="Générer une seed aléatoire"
+            className="px-3 py-2 bg-stone-800 border border-stone-700 rounded hover:bg-stone-700"
+          >
+            🎲 Random
+          </button>
+        </div>
       </section>
 
       <button

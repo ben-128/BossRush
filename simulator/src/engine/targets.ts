@@ -204,7 +204,7 @@ export function resolveDamageTarget(
 ): ResolvedDmgTarget | undefined {
   if (typeof tok !== 'string') {
     const m = resolveMonsterPick(state, sourceSeat, tok);
-    if (!m) return undefined;
+    if (!m) return { kind: 'boss' };
     return { kind: 'monster', seat: m.seat, instanceId: m.instanceId };
   }
   switch (tok) {

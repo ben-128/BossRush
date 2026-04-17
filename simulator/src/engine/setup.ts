@@ -174,19 +174,39 @@ export function createGame(data: DesignData, options: SetupOptions): GameState {
   });
   state.counters.event = state.events.length;
 
-  // --- Deal initial hands: each player draws 3 Chasse cards ---
+  // --- Deal initial hands: draw 3 per player then simulate the free
+  // pre-game exchange phase by greedily assigning each card to the hero
+  // whose `nom` matches the card's `prerequis` (capped at 3 per hero).
+  const pool: CarteChasse[] = [];
+  for (let i = 0; i < 3 * state.heroes.length; i++) {
+    const c = state.piles.chasse.draw.shift();
+    if (!c) break;
+    pool.push(c);
+  }
+
+  const HAND_SIZE = 3;
+  // Pass 1: matching cards to their prerequis hero.
   for (const h of state.heroes) {
-    const drawn: CarteChasse[] = [];
-    for (let i = 0; i < 3; i++) {
-      const c = state.piles.chasse.draw.shift();
-      if (!c) break;
-      drawn.push(c);
+    const heroNom = state.catalog.heroesById.get(h.heroId)?.nom;
+    if (!heroNom) continue;
+    for (let i = pool.length - 1; i >= 0 && h.hand.length < HAND_SIZE; i--) {
+      if (pool[i]!.prerequis === heroNom) {
+        h.hand.push(pool[i]!);
+        pool.splice(i, 1);
+      }
     }
-    h.hand.push(...drawn);
+  }
+  // Pass 2: fill remaining slots with leftover cards.
+  for (const h of state.heroes) {
+    while (h.hand.length < HAND_SIZE && pool.length > 0) {
+      h.hand.push(pool.shift()!);
+    }
+  }
+  for (const h of state.heroes) {
     emit(state, {
       kind: 'INITIAL_HAND',
       seat: h.seatIdx,
-      cards: drawn.map((c) => c.id),
+      cards: h.hand.map((c) => c.id),
     });
   }
 

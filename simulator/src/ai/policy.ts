@@ -20,6 +20,12 @@ import type { PlayerAction } from '../engine/actions.js';
 
 export interface Policy {
   name: string;
+  /**
+   * Optional reaction slot: fires useCapacite (or similar) opportunistically
+   * outside the main action. The engine calls it both before and after the
+   * main action so the policy can react to post-play state.
+   */
+  pickReaction?(state: GameState): PlayerAction | null;
   pickAction(state: GameState): PlayerAction;
   pickChoice?(
     state: GameState,

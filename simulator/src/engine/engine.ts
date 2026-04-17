@@ -74,14 +74,16 @@ export function runTurn(state: GameState, policies: Policy[]): void {
     if (!policy) {
       emit(state, { kind: 'SKIP_TURN', seat, reason: 'no_policy' });
     } else {
-      const action = policy.pickAction(state);
-      if (action.kind !== 'none' && action.reason) {
-        emit(state, {
-          kind: 'WARN',
-          message: `[${policy.name} seat=${seat}] ${action.kind} — ${action.reason}`,
-        });
+      if (policy.pickReaction) {
+        const pre = policy.pickReaction(state);
+        if (pre) applyPlayerAction(state, pre);
       }
+      const action = policy.pickAction(state);
       applyPlayerAction(state, action);
+      if (policy.pickReaction && state.result === 'running') {
+        const post = policy.pickReaction(state);
+        if (post) applyPlayerAction(state, post);
+      }
     }
   };
   const bossPhase = () => {

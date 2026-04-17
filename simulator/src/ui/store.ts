@@ -5,7 +5,7 @@ import type { GameState } from '../engine/gameState.js';
 import type { GameEvent } from '../engine/events.js';
 import { createGame } from '../engine/setup.js';
 import { runTurn, runGame } from '../engine/engine.js';
-import { randomPolicy } from '../ai/random.js';
+import { heuristicPolicy } from '../ai/heuristic.js';
 import { loadAllData } from './browserLoader.js';
 
 export type View = 'setup' | 'game' | 'batch' | 'dashboard';
@@ -58,7 +58,7 @@ interface Store {
 const DEFAULT_FORM = {
   boss: 'BOSS_001',
   heroIds: ['HERO_001', 'HERO_003', 'HERO_005'],
-  seed: '42',
+  seed: String(Math.floor(Math.random() * 1_000_000)),
 };
 
 export const useStore = create<Store>((set, get) => ({
@@ -145,7 +145,7 @@ export const useStore = create<Store>((set, get) => ({
   nextTurn: () => {
     const { state } = get();
     if (!state || state.result !== 'running') return;
-    const policies = state.heroes.map(() => randomPolicy);
+    const policies = state.heroes.map(() => heuristicPolicy);
     runTurn(state, policies);
     // Advance to next seat (mirrors runGame's loop)
     if (state.result === 'running') {
@@ -158,14 +158,23 @@ export const useStore = create<Store>((set, get) => ({
         }
       }
     }
-    // Force React update by producing a shallow clone reference.
-    set({ state: { ...state } });
+    // Force React update. Clone nested arrays that HeroPanel reads so any
+    // memo/shallow-compare downstream sees new references.
+    set({
+      state: {
+        ...state,
+        heroes: state.heroes.map((h) =>
+          h ? { ...h, hand: [...h.hand], objects: [...h.objects], queue: [...h.queue], wounds: [...h.wounds] } : h,
+        ),
+        events: [...state.events],
+      },
+    });
   },
 
   runToEnd: () => {
     const { state } = get();
     if (!state || state.result !== 'running') return;
-    const policies = state.heroes.map(() => randomPolicy);
+    const policies = state.heroes.map(() => heuristicPolicy);
     runGame(state, { policies });
     set({ state: { ...state } });
   },
@@ -204,13 +213,13 @@ export function describeEvent(ev: GameEvent, state?: GameState | null): string {
     case 'PHASE':
       return `Phase: ${ev.phase}`;
     case 'ACTION_DRAW':
-      return `Seat ${ev.seat} pioche [${ev.drew.map(chName).join(', ')}]`;
+      return `Seat ${ev.seat} pioche [${ev.drew.map(chName).join(', ')}]${ev.reason ? ` — ${ev.reason}` : ''}`;
     case 'ACTION_PLAY_ACTION':
-      return `Seat ${ev.seat} joue « ${chName(ev.card)} »${ev.renforts.length ? ` + [${ev.renforts.map(chName).join(', ')}]` : ''}`;
+      return `Seat ${ev.seat} joue « ${chName(ev.card)} »${ev.renforts.length ? ` + [${ev.renforts.map(chName).join(', ')}]` : ''}${ev.reason ? ` — ${ev.reason}` : ''}`;
     case 'ACTION_PLAY_OBJECT':
-      return `Seat ${ev.seat} pose « ${chName(ev.card)} »`;
+      return `Seat ${ev.seat} pose « ${chName(ev.card)} »${ev.reason ? ` — ${ev.reason}` : ''}`;
     case 'ACTION_EXCHANGE':
-      return `Seat ${ev.seat} ⇄ seat ${ev.withSeat}: donne [${ev.given.map(chName).join(', ')}] reçoit [${ev.received.map(chName).join(', ')}]`;
+      return `Seat ${ev.seat} ⇄ seat ${ev.withSeat}: donne [${ev.given.map(chName).join(', ')}] reçoit [${ev.received.map(chName).join(', ')}]${ev.reason ? ` — ${ev.reason}` : ''}`;
     case 'ACTION_NONE':
       return `Seat ${ev.seat}: pas d'action (${ev.reason})`;
     case 'SKIP_TURN':

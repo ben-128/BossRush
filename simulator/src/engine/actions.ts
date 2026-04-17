@@ -93,7 +93,7 @@ export function meetsPrerequisite(h: HeroRuntime, c: CarteChasse, state: GameSta
 // Action resolvers
 // ---------------------------------------------------------------------------
 
-function doDraw(state: GameState, seat: number): void {
+function doDraw(state: GameState, seat: number, reason?: string): void {
   const h = state.heroes[seat];
   if (!h) return;
   const drew: CarteChasse[] = [];
@@ -107,7 +107,7 @@ function doDraw(state: GameState, seat: number): void {
     emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: seat });
   }
   h.hand.push(...drew);
-  emit(state, { kind: 'ACTION_DRAW', seat, drew: drew.map((c) => c.id) });
+  emit(state, { kind: 'ACTION_DRAW', seat, drew: drew.map((c) => c.id), ...(reason ? { reason } : {}) });
 }
 
 /**
@@ -134,6 +134,7 @@ function playAction(
   seat: number,
   handIdx: number,
   renfortObjectIndices: number[],
+  reason?: string,
 ): void {
   const h = state.heroes[seat];
   if (!h) return;
@@ -153,6 +154,7 @@ function playAction(
     seat,
     card: card.id,
     renforts: renforts.map((r) => r.card.id),
+    ...(reason ? { reason } : {}),
   });
 
   const entry = state.effects[card.id];
@@ -228,6 +230,7 @@ function doExchange(
   withSeat: number,
   give: number[],
   take: number[],
+  reason?: string,
 ): void {
   const a = state.heroes[seat];
   const b = state.heroes[withSeat];
@@ -273,17 +276,18 @@ function doExchange(
     withSeat,
     given: given.map((c) => c.id),
     received: received.map((c) => c.id),
+    ...(reason ? { reason } : {}),
   });
 }
 
-function placeObject(state: GameState, seat: number, handIdx: number): void {
+function placeObject(state: GameState, seat: number, handIdx: number, reason?: string): void {
   const h = state.heroes[seat];
   if (!h) return;
   const card = h.hand[handIdx];
   if (!card || card.categorie !== 'objet') return;
   h.hand.splice(handIdx, 1);
   h.objects.push(card);
-  emit(state, { kind: 'ACTION_PLAY_OBJECT', seat, card: card.id });
+  emit(state, { kind: 'ACTION_PLAY_OBJECT', seat, card: card.id, ...(reason ? { reason } : {}) });
 }
 
 // ---------------------------------------------------------------------------
@@ -314,22 +318,22 @@ export function applyPlayerAction(state: GameState, action: PlayerAction): void 
   const seat = state.activeSeat;
   switch (action.kind) {
     case 'draw':
-      doDraw(state, seat);
+      doDraw(state, seat, action.reason);
       return;
     case 'useCapacite':
       doUseCapacite(state, seat);
       return;
     case 'play': {
       if (action.placeObject !== undefined) {
-        placeObject(state, seat, action.placeObject);
+        placeObject(state, seat, action.placeObject, action.reason);
       }
       if (action.playAction !== undefined) {
-        playAction(state, seat, action.playAction, action.renforts ?? []);
+        playAction(state, seat, action.playAction, action.renforts ?? [], action.reason);
       }
       return;
     }
     case 'exchange':
-      doExchange(state, seat, action.withSeat, action.give, action.take);
+      doExchange(state, seat, action.withSeat, action.give, action.take, action.reason);
       return;
     case 'none':
       emit(state, { kind: 'ACTION_NONE', seat, reason: action.reason });

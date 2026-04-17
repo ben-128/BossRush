@@ -26,10 +26,10 @@ export type GameEvent =
   | { t: number; kind: 'PHASE'; phase: string }
 
   // Hero actions
-  | { t: number; kind: 'ACTION_DRAW'; seat: number; drew: string[] }
-  | { t: number; kind: 'ACTION_EXCHANGE'; seat: number; withSeat: number; given: string[]; received: string[] }
-  | { t: number; kind: 'ACTION_PLAY_OBJECT'; seat: number; card: string }
-  | { t: number; kind: 'ACTION_PLAY_ACTION'; seat: number; card: string; renforts: string[] }
+  | { t: number; kind: 'ACTION_DRAW'; seat: number; drew: string[]; reason?: string }
+  | { t: number; kind: 'ACTION_EXCHANGE'; seat: number; withSeat: number; given: string[]; received: string[]; reason?: string }
+  | { t: number; kind: 'ACTION_PLAY_OBJECT'; seat: number; card: string; reason?: string }
+  | { t: number; kind: 'ACTION_PLAY_ACTION'; seat: number; card: string; renforts: string[]; reason?: string }
   | { t: number; kind: 'ACTION_NONE'; seat: number; reason: string }
   | { t: number; kind: 'SKIP_TURN'; seat: number; reason: string }
 
