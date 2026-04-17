@@ -139,7 +139,7 @@
       "id": "EPR_019",
       "type": "evenement",
       "nom": "Hurlement du Colosse",
-      "description": "Un cri glaçant galvanise le boss !\n\n• Tenir bon (le Colosse soigne 1 <ico:degat>)\n\nOU\n\n• Le héros subit <ico:degat><ico:degat>"
+      "description": "Un cri glaçant fait vibrer les murs !\n\n• Un allié défausse 1 Objet pour couvrir ses oreilles (aucun effet)\n\nOU\n\n• Le héros subit <ico:degat><ico:degat>"
     },
     {
       "id": "EPR_020",
@@ -169,13 +169,13 @@
       "id": "EPR_024",
       "type": "evenement",
       "nom": "Débris volants",
-      "description": "Le combat fait voler des débris !\n\n• Dévier le coup (le 1er monstre de votre file passe dans la file d'un allié)\n\nOU\n\n• Encaisser (le héros subit <ico:degat>)"
+      "description": "Le combat fait voler des débris !\n\n• Se protéger (un héros défausse 1 Objet, aucun effet)\n\nOU\n\n• Encaisser (le héros subit <ico:degat>)"
     },
     {
       "id": "EPR_025",
       "type": "evenement",
       "nom": "Onde arcanique",
-      "description": "Une vague d'énergie sauvage déferle sur tous !\n\n• Canaliser (soigner 1 <ico:degat>, mais le 1er monstre de votre file soigne 1 <ico:degat>)\n\nOU\n\n• Résister (piocher 1 Destin)"
+      "description": "Une vague d'énergie sauvage déferle !\n\n• Canaliser (défausser 1 Objet, soigner 1 <ico:degat>)\n\nOU\n\n• Résister (piocher 1 Destin)"
     },
     {
       "id": "EPR_026",
@@ -187,7 +187,7 @@
       "id": "EPR_027",
       "type": "evenement",
       "nom": "Pilier qui s'effondre",
-      "description": "La structure s'écroule et repousse les combattants !\n\n• Se mettre dos à dos (le 1er monstre de la file d'un allié passe dans la vôtre)\n\nOU\n\n• Esquiver seul (le héros subit <ico:degat>)"
+      "description": "La structure menace de s'écrouler !\n\n• Un héros défausse 1 Objet pour le retenir (aucun effet)\n\nOU\n\n• Esquiver (le héros subit <ico:degat>)"
     },
     {
       "id": "EPR_028",
