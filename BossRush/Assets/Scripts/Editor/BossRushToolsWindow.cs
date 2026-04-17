@@ -55,6 +55,9 @@ public class BossRushToolsWindow : EditorWindow
 
             EditorGUILayout.Space(4);
 
+            if (GUILayout.Button("0. Creer/completer config icones par defaut"))
+                DefaultIconConfigCreator.CreateOrUpdate();
+
             if (GUILayout.Button("1. Composer les icones (merge cadre + symbole)"))
                 IconCompositor.Compose();
 
