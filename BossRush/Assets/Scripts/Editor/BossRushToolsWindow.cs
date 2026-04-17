@@ -22,6 +22,8 @@ public class BossRushToolsWindow : EditorWindow
 
     private Vector2 scroll;
 
+    private const string PrefShowHelp = "RaidParty.Tools.ShowHelp";
+
     private void OnGUI()
     {
         using (var scope = new EditorGUILayout.ScrollViewScope(scroll))
@@ -32,11 +34,94 @@ public class BossRushToolsWindow : EditorWindow
             EditorGUILayout.LabelField("Raid Party — Outils projet", EditorStyles.boldLabel);
             EditorGUILayout.Space(6);
 
+            DrawHelpSection();
+            EditorGUILayout.Space(10);
             DrawInlineIconsSection();
             EditorGUILayout.Space(10);
             DrawConfigShortcuts();
         }
     }
+
+    // ─── Section Aide (pliable, persiste via EditorPrefs) ─────────────────
+    private void DrawHelpSection()
+    {
+        bool show = EditorPrefs.GetBool(PrefShowHelp, true);
+        var style = new GUIStyle(EditorStyles.foldoutHeader) { fontStyle = FontStyle.Bold };
+        bool newShow = EditorGUILayout.Foldout(show, "📖 Comment utiliser cet outil", true, style);
+        if (newShow != show) EditorPrefs.SetBool(PrefShowHelp, newShow);
+        if (!newShow) return;
+
+        using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+        {
+            EditorGUILayout.LabelField("Première utilisation (setup one-shot)", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(
+                "1. Clique sur « 0. Creer/completer config icones par defaut »\n" +
+                "   → crée Assets/Data/IconCompositionConfig.asset avec 9 entrées\n" +
+                "     (menace, invocation, attaque, actif_boss, degat, action,\n" +
+                "      capacite, destin, chasse).\n\n" +
+                "2. S'il n'existe pas déjà, crée un GameIconsConfig :\n" +
+                "   Assets > Create > Boss Rush > Game Icons Config\n" +
+                "   (les tags sont déjà pré-remplis côté code).\n\n" +
+                "3. Clique sur « ⚡ TOUT FAIRE » : les symboles disponibles\n" +
+                "   dans Sources/ sont composés, assignés au GameIconsConfig,\n" +
+                "   et le TMP_SpriteAsset est régénéré. Fin du setup.",
+                WrapStyle);
+
+            EditorGUILayout.Space(6);
+            EditorGUILayout.LabelField("Ajouter ou regénérer une icône", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(
+                "a. Génère un symbole BLANC sur fond transparent (IA, Photoshop…).\n" +
+                "b. Dépose-le dans Assets/Art/Icons/Inline/Sources/\n" +
+                "   en le nommant exactement comme le tag avec la 1ère lettre\n" +
+                "   en majuscule. Ex : <ico:destin> → Sources/Destin.png\n" +
+                "c. Reclique « 0. Creer/completer… » (auto-link du nouveau PNG).\n" +
+                "d. Clique « ⚡ TOUT FAIRE ».\n\n" +
+                "Les balises <ico:destin> dans les JSON et les textes TMP\n" +
+                "affichent automatiquement la nouvelle icône. Aucun relink\n" +
+                "manuel dans TMP n'est nécessaire.",
+                WrapStyle);
+
+            EditorGUILayout.Space(6);
+            EditorGUILayout.LabelField("Ajuster une icône (couleur, mode, échelle)", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(
+                "• Clique « Ouvrir IconCompositionConfig » en bas.\n" +
+                "• Modifie l'entrée voulue (frameColor, symbolColor,\n" +
+                "  symbolScale, mode Cutout / Overlay / SymbolOnly…).\n" +
+                "• Reclique « ⚡ TOUT FAIRE ». C'est tout.",
+                WrapStyle);
+
+            EditorGUILayout.Space(6);
+            EditorGUILayout.LabelField("Architecture rapide", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(
+                "Sources (templates blancs tintables) :\n" +
+                "  Assets/Art/Icons/Inline/Sources/CadreCarte.png\n" +
+                "  Assets/Art/Icons/Inline/Sources/<Nom>.png  (un par tag)\n\n" +
+                "Composites finaux (assignés au GameIconsConfig) :\n" +
+                "  Assets/Art/Icons/Inline/<Nom>.png  (générés par ce pipeline)\n\n" +
+                "Config de composition :\n" +
+                "  Assets/Data/IconCompositionConfig.asset\n\n" +
+                "TMP Sprite Asset généré (référencé par TMP_Settings) :\n" +
+                "  Assets/TextMesh Pro/Resources/Sprite Assets/GameIcons.asset",
+                WrapStyle);
+
+            EditorGUILayout.Space(6);
+            EditorGUILayout.LabelField("Dépannage", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(
+                "• « Erreur : aucun IconCompositionConfig trouve » →\n" +
+                "  clique « 0. Creer/completer… » d'abord.\n\n" +
+                "• Une icône ne s'affiche pas dans le texte de carte →\n" +
+                "  vérifie que le Sprite Asset TMP est bien référencé\n" +
+                "  (TMP_Settings → Default Sprite Asset = GameIcons),\n" +
+                "  puis reclique « ⚡ TOUT FAIRE ».\n\n" +
+                "• Un PNG existe mais n'est pas assigné → le nom de fichier\n" +
+                "  doit matcher le tag (case-insensitive, sans extension).\n" +
+                "  Ex : tag « actif_boss » ↔ fichier « Actif_boss.png ».",
+                WrapStyle);
+        }
+    }
+
+    private static GUIStyle _wrapStyle;
+    private static GUIStyle WrapStyle => _wrapStyle ??= new GUIStyle(EditorStyles.label) { wordWrap = true, richText = false };
 
     // ─── Section icones inline ────────────────────────────────────────────
     private void DrawInlineIconsSection()
