@@ -34,7 +34,7 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _BgBlend: 0.1
+    - _BgBlend: 0
     - _EdgeNoiseScale: 1
     - _EdgeNoiseStrength: 0
     m_Colors:

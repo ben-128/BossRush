@@ -1,20 +1,19 @@
 Portrait vertical 2:3 format, high resolution PNG.
 
-STYLE: Close-up of a surface painted in a warm parchment-beige
-pigment — a muted tan/ochre that reads unmistakably as "aged hide"
-or "old parchment". The target color sits around #C4A983 — warm and
-earthy, neither bright nor pale, a mid-tone beige with visible warmth.
-Thickly brushed with ochre-mixed paste and allowed to dry. The surface
-is rich and matte, NOT pure digital fill — subtle tonal shifts where
-the paint pooled or thinned, faint brush directions, tiny cracks where
-the pigment dried, occasional darker streaks where the pigment settled
-more. Viewed from directly above, flat lay.
+STYLE: Close-up of a surface painted in a warm muted beige-ochre
+pigment — deeper and more weathered than fresh parchment. The target
+color sits around #AE9570 — a mid-dark tan, clearly warm and earthy
+but NOT bright, NOT cream, NOT pale. Thickly brushed with ochre-mixed
+paste and allowed to dry. The surface is rich and matte, NOT pure
+digital fill — subtle tonal shifts where the paint pooled or thinned,
+faint brush directions, tiny cracks where the pigment dried,
+occasional darker streaks where the pigment settled more. Viewed from
+directly above, flat lay.
 
-A viewer should IMMEDIATELY read this as "painted tan/beige surface"
-— warm, organic, tactile. The color is clearly present; not pale ivory,
-not pure cream, not white. Still MUTED overall — never crosses into
-bright yellow, never looks like fresh paper or polished wood. Aged-
-parchment-beige, not sunlit desert sand.
+A viewer should IMMEDIATELY read this as "painted tan beige surface"
+— warm, organic, tactile. The color is clearly present but MUTED
+overall — never crosses into bright yellow or fresh paper. Aged
+tanned-hide beige, not sunlit desert sand, not parchment kraft.
 
 TEXTURE: Organic, matte, slightly tactile — like painted vellum or
 sized canvas. Occasional darker scuffs (small patches where the pigment
