@@ -137,17 +137,17 @@ Chaque paquet contient **20 cartes** : 15 Actions (dont 10 attaques) + 5 Objets.
 
 Le combat commence immédiatement. Tour par tour (sens horaire) :
 
-### 1. Action du héros (choisir UNE)
+### 1. Action principale (choisir UNE)
 - **Piocher** 2 cartes Chasse
 - **Échanger** des cartes Chasse avec un autre joueur
-- **Jouer** : poser jusqu'à 1 Objet de sa main devant lui ET/OU jouer jusqu'à 1 carte Action
+- **Jouer 1 carte Action** de sa main
 
-> Le héros peut faire les deux dans le choix "Jouer" : poser un Objet et jouer une Action dans le même tour.
-
-### 2. Capacité spéciale (optionnel)
-À tout moment pendant son tour, le héros peut activer sa capacité spéciale (1 fois par combat).
+### 2. Bonus gratuits (optionnels, dans n'importe quel ordre)
+- **Poser 1 Objet** de sa main devant lui (max 1 par tour)
+- **Activer sa capacité spéciale** (1 fois par combat)
 
 ### 3. Séquence du Colosse (fin de tour)
+
 Résoudre les icônes de la séquence indiquée sur la carte du Colosse, **de gauche à droite** :
 - 🃏 = piocher 1 carte Menace et la résoudre (**Assaut** : appliquer l'effet ; **Événement** : le héros actif choisit entre les options)
 - 🐾 = piocher 1 monstre dans la file du héros actif
@@ -332,14 +332,14 @@ Les capacités spéciales des monstres se déclenchent toujours sur un événeme
 ┌─────────────────────────────────────────┐
 │           TOUR D'UN JOUEUR              │
 ├─────────────────────────────────────────┤
-│ 1. ACTION (choisir 1) :                 │
+│ 1. ACTION PRINCIPALE (choisir 1) :      │
 │  • Piocher 2 cartes Chasse             │
 │  • Échanger des cartes Chasse          │
-│  • Jouer : poser 1 Objet ET/OU          │
-│            jouer 1 carte Action         │
+│  • Jouer 1 carte Action                 │
 ├─────────────────────────────────────────┤
-│ 2. CAPACITÉ SPÉCIALE (optionnel, 1 fois │
-│    par combat)                          │
+│ 2. BONUS GRATUITS (optionnels) :        │
+│  • Poser 1 Objet (max 1 par tour)       │
+│  • Activer sa capacité (1×/combat)     │
 ├─────────────────────────────────────────┤
 │ 3. SÉQUENCE DU COLOSSE                  │
 │  → Résoudre les icônes de la carte boss │

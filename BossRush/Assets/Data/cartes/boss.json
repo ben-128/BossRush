@@ -28,11 +28,10 @@
       "vie_multiplicateur": 5,
       "stats": {
         "sequence": [
-          "<ico:attaque>",
           "<ico:menace>"
         ],
-        "passif": "Azhda effectue son tour avant celui des héros.",
-        "actif": "Le héros actif ne peut plus utiliser de carte chasse ou sa capacité pendant son tour."
+        "passif": "Azhda est immunisé tant qu'il a autant ou plus de monstres que de héros vivants.",
+        "actif": "Le héros actif voit sa <ico:capacite> consommée."
       },
       "monstres_ids": [],
       "lore_md": "boss_azhdaha.md",
@@ -58,10 +57,11 @@
       "id": "BOSS_004",
       "nom": "Caicai",
       "difficulte": "moyen",
-      "vie_multiplicateur": 5,
+      "vie_multiplicateur": 6,
       "stats": {
         "sequence": [
-          "<ico:menace>"
+          "<ico:menace>",
+          "<ico:attaque>"
         ],
         "passif": "Les ordres d'attaque se font sur toutes les files.",
         "actif": "Piochez 1 <ico:invocation> sur toutes les files vides."
@@ -111,6 +111,7 @@
       "vie_multiplicateur": 6,
       "stats": {
         "sequence": [
+          "<ico:attaque>",
           "<ico:menace>"
         ],
         "passif": "Les soins des héros soignent au maximum de 1 <ico:degat>.",
@@ -130,7 +131,7 @@
           "<ico:menace>",
           "<ico:actif_boss>"
         ],
-        "passif": "A chaque fois que la pioche <ico:chasse> se termine, Soignez 2 <ico:degat> de Gaww.",
+        "passif": "A chaque fois que la pioche <ico:chasse> se termine, Soignez x <ico:degat> de Gaww, où x est le nombre de héros en vie.",
         "actif": "Le héros actif défausse 2 cartes de sa main, puis pioche autant de cartes <ico:chasse>."
       },
       "monstres_ids": [],
@@ -158,7 +159,7 @@
       "id": "BOSS_010",
       "nom": "Khwa",
       "difficulte": "difficile",
-      "vie_multiplicateur": 8,
+      "vie_multiplicateur": 7,
       "stats": {
         "sequence": [
           "<ico:menace>",
