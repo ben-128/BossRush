@@ -19,6 +19,9 @@ public class CardBackGenerator : MonoBehaviour
     public SpriteRenderer backgroundRenderer;
     public SpriteRenderer iconRenderer;
 
+    [Tooltip("Liste des fonds de dos (1 par entrée, dans le même ordre). Si un slot est vide, le background n'est pas changé.")]
+    public Sprite[] backgrounds;
+
     [Header("Dos de cartes")]
     public CardBackEntry[] entries;
 
@@ -30,6 +33,13 @@ public class CardBackGenerator : MonoBehaviour
     {
         var entry = entries[index];
 
+        // Background
+        if (backgroundRenderer != null && backgrounds != null && index < backgrounds.Length && backgrounds[index] != null)
+        {
+            backgroundRenderer.sprite = backgrounds[index];
+        }
+
+        // Icône
         if (iconRenderer != null)
         {
             iconRenderer.sprite = entry.sprite;

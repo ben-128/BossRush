@@ -50,6 +50,13 @@ export type PendingDecision =
       objectCardId: string;
       trigger: string;
       resolve: (use: boolean) => void;
+    }
+  | {
+      kind: 'discard';
+      seat: number;
+      n: number;
+      reason: string;
+      resolve: (indices: number[]) => void;
     };
 
 /**
@@ -160,6 +167,27 @@ export const humanPolicy: Policy = {
       seat: ownerSeat,
       objectCardId,
       trigger,
+      resolve,
+    }));
+  },
+
+  pickDiscard(
+    state: GameState,
+    targetSeat: number,
+    n: number,
+    reason: string,
+  ): Promise<number[]> {
+    const h = state.heroes[targetSeat];
+    // Auto-resolve trivial cases so we don't interrupt for nothing.
+    if (!h || h.hand.length === 0) return Promise.resolve([]);
+    if (h.hand.length <= n) {
+      return Promise.resolve(h.hand.map((_, i) => i));
+    }
+    return waitFor<number[]>((resolve) => ({
+      kind: 'discard',
+      seat: targetSeat,
+      n,
+      reason,
       resolve,
     }));
   },

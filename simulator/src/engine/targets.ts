@@ -171,6 +171,76 @@ export function resolveMonsterPick(
   return withRng(state, (rng) => rng.pick(candidates));
 }
 
+/**
+ * Async variant: if the active policy exposes `pickMonsterTarget`, route the
+ * choice through it (so a human player sees a target-picker modal); else
+ * fall back to the sync RNG-based resolution above.
+ *
+ * Use this from ops where the player conceptually chooses a target — attack
+ * with `monster_in_any_queue`, eliminate, etc. For 1-candidate scenarios we
+ * short-circuit to avoid an unnecessary prompt.
+ */
+export async function resolveMonsterPickAsync(
+  state: GameState,
+  sourceSeat: number,
+  spec: MonsterPick,
+): Promise<MonsterRef | undefined> {
+  // Build candidates inline so we can decide whether to prompt.
+  const source = state.heroes[sourceSeat];
+  if (!source) return undefined;
+  let candidates: MonsterRef[] = [];
+  switch (spec.pick) {
+    case 'monster_in_self_queue':
+      candidates = source.queue.map((m) => ({
+        seat: sourceSeat,
+        instanceId: m.instanceId,
+        cardId: m.cardId,
+      }));
+      break;
+    case 'monster_in_any_queue':
+      for (const h of state.heroes) {
+        for (const m of h.queue) {
+          candidates.push({ seat: h.seatIdx, instanceId: m.instanceId, cardId: m.cardId });
+        }
+      }
+      break;
+    case 'queue_head_self': {
+      const head = source.queue[0];
+      if (head) candidates.push({ seat: sourceSeat, instanceId: head.instanceId, cardId: head.cardId });
+      break;
+    }
+    case 'queue_second_self': {
+      const second = source.queue[1];
+      if (second) candidates.push({ seat: sourceSeat, instanceId: second.instanceId, cardId: second.cardId });
+      break;
+    }
+  }
+  if (spec.where) {
+    candidates = candidates.filter((c) => {
+      const h = state.heroes[c.seat];
+      if (!h) return false;
+      const m = h.queue.find((mm) => mm.instanceId === c.instanceId);
+      if (!m) return false;
+      const card = state.catalog.monstreById.get(m.cardId);
+      const vie = card?.vie ?? 1;
+      const wounded = totalWounds(m.wounds);
+      const remaining = vie - wounded;
+      if (spec.where === 'has_damage') return wounded > 0;
+      if (spec.where === 'vie_eq_1') return remaining === 1;
+      if (spec.where === 'at_most_life_N') return remaining <= (spec.N ?? 1);
+      return false;
+    });
+  }
+  if (candidates.length === 0) return undefined;
+  if (candidates.length === 1) return candidates[0];
+  const policy = state.policies[sourceSeat];
+  if (policy?.pickMonsterTarget) {
+    const idx = await policy.pickMonsterTarget(state, sourceSeat, candidates);
+    return candidates[idx] ?? candidates[0];
+  }
+  return withRng(state, (rng) => rng.pick(candidates));
+}
+
 // ---------------------------------------------------------------------------
 // Queue destination resolution (where to place a moved monster)
 // ---------------------------------------------------------------------------
@@ -245,6 +315,23 @@ export function resolveDamageTarget(
       return { kind: 'hero', seat: pick };
     }
   }
+}
+
+/**
+ * Async variant — like `resolveDamageTarget` but routes MonsterPick specs
+ * through the policy (so a human player picks interactively).
+ */
+export async function resolveDamageTargetAsync(
+  state: GameState,
+  sourceSeat: number,
+  tok: DamageTargetTok | MonsterPick,
+): Promise<ResolvedDmgTarget | undefined> {
+  if (typeof tok !== 'string') {
+    const m = await resolveMonsterPickAsync(state, sourceSeat, tok);
+    if (!m) return { kind: 'boss' };
+    return { kind: 'monster', seat: m.seat, instanceId: m.instanceId };
+  }
+  return resolveDamageTarget(state, sourceSeat, tok);
 }
 
 // ---------------------------------------------------------------------------

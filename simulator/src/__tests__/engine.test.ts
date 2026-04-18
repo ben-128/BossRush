@@ -80,25 +80,29 @@ describe('engine / full game smoke', () => {
       bossId: 'BOSS_001',
       heroIds: ['HERO_001', 'HERO_003'],
     });
-    // Both heroes have 3 cards initially.
     const heroA = state.heroes[0]!;
     const heroB = state.heroes[1]!;
-    const aBefore = heroA.hand.map((c) => c.id);
-    const bBefore = heroB.hand.map((c) => c.id);
+    const aNom = state.catalog.heroesById.get(heroA.heroId)!.nom;
+    const bNom = state.catalog.heroesById.get(heroB.heroId)!.nom;
 
-    // A gives cards at index 0, takes B's card at index 1.
+    // Force compatible hands so the prereq gate doesn't reject the exchange:
+    // heroA holds a card whose prereq matches heroB, and vice versa.
+    const aCard = data.cartesChasse.find((c) => c.prerequis === bNom)!;
+    const bCard = data.cartesChasse.find((c) => c.prerequis === aNom)!;
+    heroA.hand = [aCard];
+    heroB.hand = [bCard];
+
     await applyPlayerAction(state, {
       kind: 'exchange',
       withSeat: 1,
       give: [0],
-      take: [1],
+      take: [0],
     });
 
-    expect(heroA.hand.length).toBe(aBefore.length); // same size (1 given, 1 received)
-    expect(heroB.hand.length).toBe(bBefore.length);
-    // A should now contain what B had at index 1.
-    expect(heroA.hand.some((c) => c.id === bBefore[1])).toBe(true);
-    expect(heroB.hand.some((c) => c.id === aBefore[0])).toBe(true);
+    expect(heroA.hand.length).toBe(1);
+    expect(heroB.hand.length).toBe(1);
+    expect(heroA.hand[0]!.id).toBe(bCard.id);
+    expect(heroB.hand[0]!.id).toBe(aCard.id);
 
     const last = state.events[state.events.length - 1]!;
     expect(last.kind).toBe('ACTION_EXCHANGE');

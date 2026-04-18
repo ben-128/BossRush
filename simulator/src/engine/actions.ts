@@ -22,6 +22,7 @@ import { drawOne, discard } from './piles.js';
 import { damageHero, damageBoss, damageMonster } from './damage.js';
 import { runOps, mkCtx } from './effects.js';
 import { consumeAttackBonus, onAttackResolved } from './modifiers.js';
+import { evalCondition } from './targets.js';
 import { hookDiscardTopOnAction, hookDrawAllowed } from './bossPassifs.js';
 import {
   fireReactiveObjectTriggers,
@@ -75,6 +76,30 @@ export function isActionPlayable(state: GameState, c: CarteChasse): boolean {
 /** Kept for backward compat with J2 tests. */
 export const isActionPlayableJ2 = (c: CarteChasse): boolean =>
   c.categorie === 'action' && c.degats !== undefined && !c.effet;
+
+/**
+ * Stronger check than `isActionPlayable`: also ensures any top-level `require`
+ * op in the DSL entry currently holds for the active hero. Used by both the
+ * manual-mode UI and the heuristic to avoid wasting cards like GUE_A06 Rage
+ * du blessé (self_damage ≥ 4) when the precondition isn't met.
+ *
+ * Requires nested inside a `choice` / `forEach` branch are NOT inspected —
+ * only top-level ops, which is where conditional unlock gates live today.
+ */
+export function isActionPlayableNow(
+  state: GameState,
+  seat: number,
+  c: CarteChasse,
+): boolean {
+  if (!isActionPlayable(state, c)) return false;
+  const entry = state.effects[c.id];
+  if (!entry?.ops) return true;
+  for (const op of entry.ops) {
+    if (op.op !== 'require') continue;
+    if (!evalCondition(state, seat, op.cond)) return false;
+  }
+  return true;
+}
 
 /** Objets usable as renforts: either pure raw bonus or DSL-coded. */
 export function isObjetPlayableRenfort(state: GameState, c: CarteChasse): boolean {
@@ -155,6 +180,19 @@ async function playAction(
   if (!h) return;
   const card = h.hand[handIdx];
   if (!card) return;
+
+  // Upfront gate: top-level `require` conditions are checked before the card
+  // is announced/committed. This avoids wasting cards like GUE_A06 (self_damage
+  // ≥ 4) when the precondition isn't met — card stays in hand, renforts not
+  // consumed, ACTION_NONE surfaces a visible refusal in the log.
+  if (!isActionPlayableNow(state, seat, card)) {
+    emit(state, {
+      kind: 'ACTION_NONE',
+      seat,
+      reason: `require_failed:${card.id}`,
+    });
+    return;
+  }
 
   const renforts = renfortObjectIndices
     .slice()
@@ -298,6 +336,25 @@ async function doExchange(
   if (give.some((i) => i < 0 || i >= a.hand.length) || take.some((i) => i < 0 || i >= b.hand.length)) {
     emit(state, { kind: 'ACTION_NONE', seat, reason: 'exchange_index_out_of_range' });
     return;
+  }
+  // Prereq gate: you can only give cards your partner can actually use, and
+  // only take cards your own hero can use. Cards without a prereq are
+  // universally legal (rare, but handled).
+  const aNom = state.catalog.heroesById.get(a.heroId)?.nom;
+  const bNom = state.catalog.heroesById.get(b.heroId)?.nom;
+  for (const idx of give) {
+    const c = a.hand[idx]!;
+    if (c.prerequis && c.prerequis !== bNom) {
+      emit(state, { kind: 'ACTION_NONE', seat, reason: `exchange_give_prereq_mismatch:${c.id}` });
+      return;
+    }
+  }
+  for (const idx of take) {
+    const c = b.hand[idx]!;
+    if (c.prerequis && c.prerequis !== aNom) {
+      emit(state, { kind: 'ACTION_NONE', seat, reason: `exchange_take_prereq_mismatch:${c.id}` });
+      return;
+    }
   }
 
   // Collect cards before mutating (mutation by descending index to keep others valid).

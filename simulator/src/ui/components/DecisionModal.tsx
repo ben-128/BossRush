@@ -17,7 +17,7 @@
 import { useState } from 'react';
 import { useStore, type CardRef } from '../store.js';
 import type { PlayerAction } from '../../engine/actions.js';
-import { isActionPlayable, isObjetPlayableRenfort } from '../../engine/actions.js';
+import { isActionPlayableNow, isObjetPlayableRenfort } from '../../engine/actions.js';
 
 /** Small ℹ button that opens the CardInspector without bubbling to the parent. */
 function InfoBtn({ card }: { card: CardRef }) {
@@ -163,6 +163,12 @@ export function DecisionModal() {
         })}
       </div>
     );
+  } else if (decision.kind === 'discard') {
+    body = <DiscardPicker seat={decision.seat} n={decision.n} onPick={(idx) => resolve<number[]>(idx)} />;
+    const heroName = state.heroes[decision.seat]
+      ? state.catalog.heroesById.get(state.heroes[decision.seat]!.heroId)?.nom
+      : `seat ${decision.seat}`;
+    title = `Défausser ${decision.n} carte${decision.n > 1 ? 's' : ''} — ${heroName}`;
   } else if (decision.kind === 'confirmReactive') {
     const card = state.catalog.chasseById.get(decision.objectCardId);
     const heroName = state.heroes[decision.seat]
@@ -264,23 +270,31 @@ function ActionPicker({
   const chName = (id: string) => state.catalog.chasseById.get(id)?.nom ?? id;
 
   if (mode === 'root') {
+    // Une « réaction » n'est PAS une nouvelle action principale : elle sert
+    // uniquement à déclencher la capacité spéciale ou à poser l'objet bonus
+    // (ROD_A04 Tir de couverture). On masque donc les autres options pour
+    // éviter de jouer une seconde action en un tour.
     return (
       <div className="flex flex-col gap-2">
         <HandView hero={hero} />
         <div className="grid grid-cols-2 gap-2 mt-2">
-          <button
-            className="px-3 py-2 bg-sky-700 hover:bg-sky-600 rounded"
-            onClick={() => onPick({ kind: 'draw', reason: 'human' })}
-          >
-            Piocher (2)
-          </button>
-          <button
-            className="px-3 py-2 bg-emerald-700 hover:bg-emerald-600 rounded disabled:opacity-40"
-            onClick={() => setMode('play')}
-            disabled={hero.hand.length === 0}
-          >
-            Jouer…
-          </button>
+          {!isReaction && (
+            <button
+              className="px-3 py-2 bg-sky-700 hover:bg-sky-600 rounded"
+              onClick={() => onPick({ kind: 'draw', reason: 'human' })}
+            >
+              Piocher (2)
+            </button>
+          )}
+          {!isReaction && (
+            <button
+              className="px-3 py-2 bg-emerald-700 hover:bg-emerald-600 rounded disabled:opacity-40"
+              onClick={() => setMode('play')}
+              disabled={hero.hand.length === 0}
+            >
+              Jouer…
+            </button>
+          )}
           <button
             className="px-3 py-2 bg-amber-700 hover:bg-amber-600 rounded disabled:opacity-40"
             onClick={() => onPick({ kind: 'useCapacite', reason: 'human' })}
@@ -288,16 +302,25 @@ function ActionPicker({
           >
             Capacité
           </button>
-          <button
-            className="px-3 py-2 bg-purple-700 hover:bg-purple-600 rounded disabled:opacity-40"
-            onClick={() => setMode('exchange')}
-            disabled={state.heroes.filter((h) => h && !h.dead).length < 2}
-          >
-            Échanger…
-          </button>
-          {/* Les objets posés se déclenchent uniquement en réaction (triggers
-              du moteur) ou comme renforts (amélioration). Plus de bouton
-              "Utiliser objet" en action principale. */}
+          {!isReaction && (
+            <button
+              className="px-3 py-2 bg-purple-700 hover:bg-purple-600 rounded disabled:opacity-40"
+              onClick={() => setMode('exchange')}
+              disabled={state.heroes.filter((h) => h && !h.dead).length < 2}
+            >
+              Échanger…
+            </button>
+          )}
+          {/* Réaction : pose bonus ROD_A04 si disponible. */}
+          {isReaction && hero.extraPoseAvailable && (
+            <button
+              className="px-3 py-2 bg-teal-700 hover:bg-teal-600 rounded disabled:opacity-40"
+              onClick={() => setMode('play')}
+              disabled={hero.hand.length === 0}
+            >
+              Poser un objet bonus…
+            </button>
+          )}
         </div>
         <div className="flex gap-2 mt-3 border-t border-stone-700 pt-3">
           {isReaction && (
@@ -329,13 +352,12 @@ function ActionPicker({
       .filter(({ c }) => c.categorie === 'objet' && (!c.prerequis || c.prerequis === heroNom));
     const actions = hero.hand
       .map((c, i) => ({ c, i }))
-      .filter(({ c }) => isActionPlayable(state, c));
-    const renfortCandidates = hero.hand
+      .filter(({ c }) => isActionPlayableNow(state, seat, c));
+    // Renforts are taken from POSED objects (hero.objects), not hand. The
+    // engine's playAction consumes them from h.objects.
+    const renfortCandidates = hero.objects
       .map((c, i) => ({ c, i }))
-      .filter(
-        ({ c, i }) =>
-          isObjetPlayableRenfort(state, c) && i !== playObject && !renforts.includes(i),
-      );
+      .filter(({ c }) => isObjetPlayableRenfort(state, c));
 
     const toggleRenfort = (i: number) => {
       setRenforts((r) => (r.includes(i) ? r.filter((x) => x !== i) : [...r, i]));
@@ -344,7 +366,9 @@ function ActionPicker({
     return (
       <div className="flex flex-col gap-3">
         <div className="text-xs text-amber-300/80 italic">
-          Règle : 1 seule carte jouée par action Play (action <em>ou</em> objet, pas les deux).
+          {isReaction
+            ? 'Pose bonus (ROD_A04 Tir de couverture) — 1 objet uniquement, sans jouer d\'action.'
+            : 'Règle : 1 seule carte jouée par action Play (action ou objet, pas les deux).'}
         </div>
         <div>
           <div className="text-xs text-stone-400 mb-1">Poser un objet</div>
@@ -362,30 +386,34 @@ function ActionPicker({
             {objects.length === 0 && <span className="text-stone-600 text-xs italic">aucun objet jouable</span>}
           </div>
         </div>
-        <div className="text-center text-stone-500 text-xs">— ou —</div>
-        <div>
-          <div className="text-xs text-stone-400 mb-1">Jouer une action</div>
-          <div className="flex flex-wrap gap-1">
-            {actions.map(({ c, i }) => (
-              <button
-                key={i}
-                className={`px-2 py-1 text-xs rounded ${playAction === i ? 'bg-emerald-700' : 'bg-stone-800 hover:bg-stone-700'}`}
-                onClick={() => { setPlayAction(i); setPlayObject(undefined); }}
-              >
-                {chName(c.id)} {c.degats ? `(${c.degats}🩸)` : ''}
-                <InfoBtn card={{ kind: 'chasse', id: c.id }} />
-              </button>
-            ))}
-            {actions.length === 0 && <span className="text-stone-600 text-xs italic">aucune action jouable</span>}
-          </div>
-        </div>
-        {playAction !== undefined && renfortCandidates.length > 0 && (
+        {!isReaction && (
+          <>
+            <div className="text-center text-stone-500 text-xs">— ou —</div>
+            <div>
+              <div className="text-xs text-stone-400 mb-1">Jouer une action</div>
+              <div className="flex flex-wrap gap-1">
+                {actions.map(({ c, i }) => (
+                  <button
+                    key={i}
+                    className={`px-2 py-1 text-xs rounded ${playAction === i ? 'bg-emerald-700' : 'bg-stone-800 hover:bg-stone-700'}`}
+                    onClick={() => { setPlayAction(i); setPlayObject(undefined); }}
+                  >
+                    {chName(c.id)} {c.degats ? `(${c.degats}🩸)` : ''}
+                    <InfoBtn card={{ kind: 'chasse', id: c.id }} />
+                  </button>
+                ))}
+                {actions.length === 0 && <span className="text-stone-600 text-xs italic">aucune action jouable</span>}
+              </div>
+            </div>
+          </>
+        )}
+        {!isReaction && playAction !== undefined && renfortCandidates.length > 0 && (
           <div>
-            <div className="text-xs text-stone-400 mb-1">Renforts (optionnel)</div>
+            <div className="text-xs text-stone-400 mb-1">
+              Renforts (depuis tes objets <em>posés</em>, optionnel)
+            </div>
             <div className="flex flex-wrap gap-1">
-              {hero.hand.map((c, i) => {
-                if (i === playAction || i === playObject) return null;
-                if (!isObjetPlayableRenfort(state, c)) return null;
+              {renfortCandidates.map(({ c, i }) => {
                 const active = renforts.includes(i);
                 return (
                   <button
@@ -460,40 +488,61 @@ function ActionPicker({
             })}
           </div>
         </div>
-        {other && (
-          <>
-            <div>
-              <div className="text-xs text-stone-400 mb-1">Donner (ta main)</div>
-              <div className="flex flex-wrap gap-1">
-                {hero.hand.map((c, i) => (
-                  <button
-                    key={i}
-                    className={`px-2 py-1 text-xs rounded ${give.includes(i) ? 'bg-red-700' : 'bg-stone-800 hover:bg-stone-700'}`}
-                    onClick={() => toggle(give, setGive, i)}
-                  >
-                    {chName(c.id)}
-                    <InfoBtn card={{ kind: 'chasse', id: c.id }} />
-                  </button>
-                ))}
+        {other && (() => {
+          const myNom = state.catalog.heroesById.get(hero.heroId)?.nom;
+          const otherNom = state.catalog.heroesById.get(other.heroId)?.nom;
+          // Only cards the *partner* can use are legal gives.
+          const giveChoices = hero.hand
+            .map((c, i) => ({ c, i }))
+            .filter(({ c }) => !c.prerequis || c.prerequis === otherNom);
+          // Only cards *we* can use are legal takes.
+          const takeChoices = other.hand
+            .map((c, i) => ({ c, i }))
+            .filter(({ c }) => !c.prerequis || c.prerequis === myNom);
+          return (
+            <>
+              <div className="text-xs text-amber-300/80 italic">
+                Règle : on ne donne que des cartes utilisables par l'autre héros, et on ne reçoit que ce qu'on peut utiliser soi-même.
               </div>
-            </div>
-            <div>
-              <div className="text-xs text-stone-400 mb-1">Recevoir (main de {state.catalog.heroesById.get(other.heroId)?.nom})</div>
-              <div className="flex flex-wrap gap-1">
-                {other.hand.map((c, i) => (
-                  <button
-                    key={i}
-                    className={`px-2 py-1 text-xs rounded ${take.includes(i) ? 'bg-green-700' : 'bg-stone-800 hover:bg-stone-700'}`}
-                    onClick={() => toggle(take, setTake, i)}
-                  >
-                    {chName(c.id)}
-                    <InfoBtn card={{ kind: 'chasse', id: c.id }} />
-                  </button>
-                ))}
+              <div>
+                <div className="text-xs text-stone-400 mb-1">Donner (cartes utilisables par {otherNom})</div>
+                <div className="flex flex-wrap gap-1">
+                  {giveChoices.map(({ c, i }) => (
+                    <button
+                      key={i}
+                      className={`px-2 py-1 text-xs rounded ${give.includes(i) ? 'bg-red-700' : 'bg-stone-800 hover:bg-stone-700'}`}
+                      onClick={() => toggle(give, setGive, i)}
+                    >
+                      {chName(c.id)}
+                      <InfoBtn card={{ kind: 'chasse', id: c.id }} />
+                    </button>
+                  ))}
+                  {giveChoices.length === 0 && (
+                    <span className="text-stone-600 text-xs italic">aucune carte donnable à {otherNom}</span>
+                  )}
+                </div>
               </div>
-            </div>
-          </>
-        )}
+              <div>
+                <div className="text-xs text-stone-400 mb-1">Recevoir (cartes utilisables par toi)</div>
+                <div className="flex flex-wrap gap-1">
+                  {takeChoices.map(({ c, i }) => (
+                    <button
+                      key={i}
+                      className={`px-2 py-1 text-xs rounded ${take.includes(i) ? 'bg-green-700' : 'bg-stone-800 hover:bg-stone-700'}`}
+                      onClick={() => toggle(take, setTake, i)}
+                    >
+                      {chName(c.id)}
+                      <InfoBtn card={{ kind: 'chasse', id: c.id }} />
+                    </button>
+                  ))}
+                  {takeChoices.length === 0 && (
+                    <span className="text-stone-600 text-xs italic">aucune carte utilisable dans sa main</span>
+                  )}
+                </div>
+              </div>
+            </>
+          );
+        })()}
         <div className="flex gap-2 pt-2 border-t border-stone-700">
           <button
             className="px-3 py-2 bg-purple-700 hover:bg-purple-600 rounded disabled:opacity-40"
@@ -517,6 +566,63 @@ function ActionPicker({
   }
 
   return null;
+}
+
+function DiscardPicker({
+  seat,
+  n,
+  onPick,
+}: {
+  seat: number;
+  n: number;
+  onPick: (indices: number[]) => void;
+}) {
+  const state = useStore((s) => s.state)!;
+  const hero = state.heroes[seat];
+  const [selected, setSelected] = useState<number[]>([]);
+  if (!hero) {
+    onPick([]);
+    return null;
+  }
+  const chName = (id: string) => state.catalog.chasseById.get(id)?.nom ?? id;
+  const toggle = (i: number) => {
+    setSelected((sel) => {
+      if (sel.includes(i)) return sel.filter((x) => x !== i);
+      if (sel.length >= n) return sel; // cap at n
+      return [...sel, i];
+    });
+  };
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="text-xs text-stone-400">
+        Choisis <span className="text-amber-300">{n}</span> carte{n > 1 ? 's' : ''} à défausser ({selected.length}/{n} sélectionnée{selected.length > 1 ? 's' : ''}) :
+      </div>
+      <div className="flex flex-wrap gap-1">
+        {hero.hand.map((c, i) => {
+          const active = selected.includes(i);
+          return (
+            <button
+              key={i}
+              className={`px-2 py-1 text-xs rounded ${active ? 'bg-red-700' : 'bg-stone-800 hover:bg-stone-700'}`}
+              onClick={() => toggle(i)}
+            >
+              {chName(c.id)}
+              <InfoBtn card={{ kind: 'chasse', id: c.id }} />
+            </button>
+          );
+        })}
+      </div>
+      <div className="flex gap-2 pt-2 border-t border-stone-700">
+        <button
+          className="px-3 py-2 bg-red-700 hover:bg-red-600 rounded disabled:opacity-40"
+          onClick={() => onPick(selected)}
+          disabled={selected.length !== Math.min(n, hero.hand.length)}
+        >
+          Défausser
+        </button>
+      </div>
+    </div>
+  );
 }
 
 function HandView({ hero }: { hero: { hand: { id: string }[]; objects: { id: string }[] } }) {

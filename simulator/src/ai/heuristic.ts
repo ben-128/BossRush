@@ -28,6 +28,7 @@ import type { CarteChasse } from '../engine/types.js';
 import type { Policy } from './policy.js';
 import {
   isActionPlayable,
+  isActionPlayableNow,
   isObjetPlayableRenfort,
   meetsPrerequisite,
 } from '../engine/actions.js';
@@ -58,7 +59,7 @@ function playableActions(state: GameState, h: HeroRuntime): number[] {
   const out: number[] = [];
   const bypass = ignorePrereqObjectIdx(state, h) !== -1;
   h.hand.forEach((c, i) => {
-    if (!isActionPlayable(state, c)) return;
+    if (!isActionPlayableNow(state, h.seatIdx, c)) return;
     if (bypass) {
       out.push(i);
       return;

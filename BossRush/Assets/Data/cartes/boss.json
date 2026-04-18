@@ -19,7 +19,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_hobab.md",
-      "lore": "**Référence :** Hobab — dragon des terres arides dans la mythologie Afar (Éthiopie/Djibouti), lié à l'eau et au feu, créature des déserts du Danakil.\n\n**Lore :** Corrompu, il est devenu un dragon colossal des terres sèches. Corps serpentin couvert d'écailles craquelées comme la terre desséchée, braises rougeoyantes entre les fissures. Des veines de cristal noir courent entre les écailles.\n\n*« Il était la pluie. Il est devenu la cendre. »*"
+      "lore": "Autrefois gardien des pluies rares du Danakil, il abreuvait les oasis et les peuples des terres arides. La corruption a inversé sa nature : partout où il passe, la pluie tourne à la cendre et les sols se craquèlent. Ses écailles brûlent, des veines de cristal noir pulsent sous sa peau desséchée.\n\nInspiré de Hobab, dragon des terres arides de la mythologie Afar (Éthiopie, Djibouti)."
     },
     {
       "id": "BOSS_002",
@@ -35,7 +35,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_azhdaha.md",
-      "lore": "**Référence :** Azhdaha — dragon du chaos et de la destruction des sagas Narts dans la mythologie circassienne (Caucase), ennemi juré des héros.\n\n**Lore :** Corrompu, c'est un dragon colossal à plusieurs têtes (3 ou 4), corps serpentin couvert d'écailles sombres et de fourrure noire ébouriffée, ailes de chauve-souris déchirées. Chaque tête a son rôle — l'une crache du feu, une rugit, une mord, une murmure. Des veines de cristal noir pulsent entre les écailles.\n\n*« Une tête pour chaque peuple qu'il gardait. »*"
+      "lore": "Dans les sagas des Narts, il gardait les cols sacrés du Caucase, et chacune de ses têtes portait une langue, une mémoire, un peuple. Corrompu, ses têtes ne se parlent plus qu'entre elles : l'une crache, l'une rugit, l'une mord, l'une murmure, chacune dévorant ce qu'elle protégeait. Des veines de cristal noir pulsent entre ses écailles.\n\nInspiré d'Azhdaha, dragon du chaos dans les sagas Narts de la mythologie circassienne (Caucase)."
     },
     {
       "id": "BOSS_003",
@@ -51,7 +51,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_psha_tkho.md",
-      "lore": "**Référence :** Psha-tkho — esprit vengeur de la forêt dans la mythologie circassienne (Adyghe, Caucase), gardien de la nature qui punit les intrus.\n\n**Lore :** Corrompu, il apparaît comme un colosse mi-arbre mi-géant fait de bois noueux, de mousse verte et de racines noires qui percent le sol. La mousse pourrit par endroits — taches noires de corruption.\n\n*« La forêt l'a fait. La forêt le pleure. »*"
+      "lore": "Esprit de la forêt adyghe, il punissait autrefois les braconniers et les intrus qui violaient ses bois sacrés. La corruption a nourri sa colère au-delà de toute mesure : il ne distingue plus l'offense de la simple présence. Tout ce qui entre dans ses bois est avalé par la mousse noire et les racines tordues.\n\nInspiré de Psha-tkho, esprit vengeur de la forêt dans la mythologie circassienne (Adyghe, Caucase)."
     },
     {
       "id": "BOSS_004",
@@ -67,7 +67,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_caicai_vilu.md",
-      "lore": "**Référence :** Caicai Vilu — serpent de mer titanesque dans la mythologie mapuche (Chili/Argentine), qui inonde le monde et provoque tsunamis et tremblements de terre.\n\n**Lore :** Corrompu, c'est un serpent de mer aux écailles bleu-noir luisantes, dos crêté d'épines coralliennes. Des cristaux noirs poussent entre les écailles comme des tumeurs.\n\n*« Les vagues s'écartaient pour lui. Maintenant elles fuient. »*"
+      "lore": "Serpent des abysses, il soulevait autrefois les vagues pour protéger les tribus du rivage et retenir les tempêtes. Corrompu, il ne retient plus rien : il noie les côtes, pousse les vagues jusqu'aux montagnes, et ses spasmes font trembler la terre. Les pêcheurs ne prononcent plus son nom. Des cristaux noirs poussent entre ses écailles comme des tumeurs.\n\nInspiré de Caicai Vilu, serpent de mer titanesque dans la mythologie mapuche (Chili, Argentine)."
     },
     {
       "id": "BOSS_005",
@@ -84,7 +84,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_invunche.md",
-      "lore": "**Référence :** Invunche — créature humanoïde monstrueuse de la mythologie mapuche (Chili/Argentine), déformée par les sorciers kalku, gardienne des grottes secrètes.\n\n**Lore :** Corrompu, c'est un humanoïde géant horriblement déformé : tête retournée à 180°, membres tordus, peau grise marquée de cicatrices rituelles. Des veines noires palpitent sous sa peau translucide.\n\n*« Ce qui reste d'un esprit qu'on a tordu. »*"
+      "lore": "Gardien des grottes secrètes des sorciers kalku, il protégeait les savoirs interdits des profondeurs mapuches. La corruption a tordu son corps et brouillé ses pensées : désormais ses blessures volent l'énergie même des âmes, et les héros qu'il marque perdent leur pouvoir intime. Des veines noires palpitent sous sa peau translucide.\n\nInspiré de l'Invunche, créature humanoïde difforme de la mythologie mapuche (Chili, Argentine)."
     },
     {
       "id": "BOSS_006",
@@ -101,7 +101,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_akkorokamui.md",
-      "lore": "**Référence :** Akkorokamui — démon marin tentaculaire colossal des profondeurs dans la mythologie aïnou (Hokkaido), l'un des kamuy les plus dangereux.\n\n**Lore :** Corrompu, c'est une pieuvre colossale rouge vif, huit tentacules immenses couverts de ventouses qui ressemblent à des bouches béantes. Certaines ventouses ont des dents humaines, des cristaux noirs poussent sur sa peau.\n\n*« Les profondeurs n'avaient pas de nom. Maintenant si. »*"
+      "lore": "Kamuy des profondeurs, il sommeillait dans les fosses au large d'Hokkaido et protégeait les marins des naufrages en échange d'offrandes déposées sur les vagues. Corrompu, ses ventouses sont devenues des gueules affamées : il engloutit tout ce qui le frappe, volant aux héros leurs objets autant que leurs forces. Des cristaux noirs poussent sur sa peau rouge.\n\nInspiré d'Akkorokamui, démon marin tentaculaire de la mythologie aïnou (Hokkaido)."
     },
     {
       "id": "BOSS_007",
@@ -118,7 +118,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_hoyau_kamuy.md",
-      "lore": "**Référence :** Hoyau Kamuy — dragon-requin venimeux ailé dans la mythologie aïnou (Hokkaido), l'un des kamuy les plus dangereux.\n\n**Lore :** Corrompu, il est devenu un hybride dragon-requin volant : corps de requin bleu-vert, mâchoire verticale bordée de dents acérées, ailes membraneuses immenses. Du venin vert suinte de tout son corps, devenu noir où la corruption s'est installée.\n\n*« Il portait le ciel. Il l'empoisonne. »*"
+      "lore": "Il régnait sur le ciel et la mer, portant la pluie fertile et l'air vital sur les villages côtiers. Corrompu, son souffle est devenu venin : il empoisonne l'air lui-même, et les soins perdent leur prise durable sur ceux qu'il a touchés. Du venin vert suinte de son corps de requin ailé, noir aux endroits où la corruption s'est installée.\n\nInspiré de Hoyau Kamuy, dragon-requin venimeux ailé de la mythologie aïnou (Hokkaido)."
     },
     {
       "id": "BOSS_008",
@@ -135,7 +135,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_gaww.md",
-      "lore": "**Référence :** Gaww — esprit puissant de la croyance Afar (Éthiopie/Djibouti) qui prend possession des corps humains et accorde des pouvoirs surnaturels. Les possédés sont appelés « Gawwala ».\n\n**Lore :** Corrompu, il n'a plus de forme fixe : une masse géante d'ombre et de fumée noire, des dizaines de visages humains apparaissent et disparaissent à l'intérieur. Un cœur de cristal noir pulse au centre de la masse.\n\n*« Il habitait les vivants. Maintenant il les vide. »*"
+      "lore": "Esprit nomade, il prenait autrefois possession des Gawwala consentants pour leur accorder des dons surnaturels en échange d'un pacte temporaire. Corrompu, il n'a plus de forme fixe : il glisse de héros en héros, dévore leurs ressources sans jamais demander, et un cœur de cristal noir pulse au centre de sa masse d'ombre et de fumée.\n\nInspiré de Gaww, esprit de possession de la croyance Afar (Éthiopie, Djibouti)."
     },
     {
       "id": "BOSS_009",
@@ -152,7 +152,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_grand_eland.md",
-      "lore": "**Référence :** ǀKaggen — dieu-mante trickster et créateur dans la mythologie San (Kalahari). L'éland est son animal sacré, et son sang contient l'énergie spirituelle. Ici, le boss prend la forme de l'éland colossal de Kaggen, corrompu.\n\n**Lore :** Éland colossal lumineux, pelage doré qui brille d'une lumière intérieure, cornes spiralées hypnotiques. Le pelage est strié de marques noires malades, et son sang qui coule des plaies est un mélange d'or et de noir.\n\n*« Son sang faisait pousser le monde. »*"
+      "lore": "ǀKaggen le trickster, créateur du monde San, avait confié son énergie spirituelle à l'éland sacré dont le sang faisait pousser les herbes du Kalahari. Corrompu, l'éland est devenu un colosse dont la lumière aveugle et dont le sang, désormais mêlé de noir, empoisonne la savane qu'il nourrissait. Son pelage doré est strié de marques malades.\n\nInspiré de ǀKaggen, dieu-mante trickster et créateur dans la mythologie San (Kalahari), dont l'éland est l'animal sacré."
     },
     {
       "id": "BOSS_010",
@@ -169,7 +169,7 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_esprit_rouge.md",
-      "lore": "**Référence :** !Khwa — divinité de l'eau dans la mythologie San (Kalahari), esprit géant à peau rouge ou verte et cheveux blancs, invisible à volonté, traditionnellement gardien des rivières et des sources. Devenu prédateur.\n\n**Lore :** Géant humanoïde immense à la peau rouge luminescente, longs cheveux blancs ondulant comme sous l'eau. Des bandes d'eau s'enroulent autour de lui comme des rubans liquides. Un cristal noir massif bat lentement dans sa poitrine.\n\n*« Il était la source. Il est devenu la soif. »*"
+      "lore": "Gardien invisible des rivières et des points d'eau du Kalahari, il apparaissait autrefois aux villages pour révéler les nappes cachées. Corrompu, il est devenu la soif : il assèche tout ce qu'il touche, et son corps liquide et insaisissable ne peut être blessé qu'une fois par tour. Un cristal noir bat lentement dans sa poitrine rouge.\n\nInspiré de !Khwa, divinité de l'eau de la mythologie San (Kalahari)."
     }
   ]
 }

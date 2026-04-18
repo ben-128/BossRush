@@ -38,6 +38,8 @@ import {
   resolveDamageTarget,
   resolveHeroTarget,
   resolveMonsterPick,
+  resolveMonsterPickAsync,
+  resolveDamageTargetAsync,
   resolveQueueDest,
 } from './targets.js';
 import { healHero } from './heal.js';
@@ -224,9 +226,12 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       for (const ally of state.heroes) {
         if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
         if (ally.hand.length === 0) continue;
-        // Prefer a card whose prereq matches self (mutually beneficial).
-        let idx = selfNom ? ally.hand.findIndex((c) => c.prerequis === selfNom) : -1;
-        if (idx === -1) idx = 0;
+        // Only accept a card whose prereq matches self (or has no prereq).
+        // If the ally has nothing usable by self, skip — no forced bad gift.
+        const idx = ally.hand.findIndex(
+          (c) => !c.prerequis || (selfNom && c.prerequis === selfNom),
+        );
+        if (idx === -1) continue;
         const [card] = ally.hand.splice(idx, 1);
         if (card) {
           self.hand.push(card);
@@ -276,8 +281,9 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       const self = state.heroes[ctx.sourceSeat];
       if (!self) return;
       const selfNom = state.catalog.heroesById.get(self.heroId)?.nom;
-      // Pick the best ally: one whose hand contains a card matching self AND
-      // where self has a card matching them. Fallback: first living ally.
+      // Find an ally where a prereq-compatible swap exists both ways:
+      // a card of mine they can use AND a card of theirs I can use. No
+      // fallback to "swap anything" — that would hand out unusable cards.
       let bestAlly: typeof self | undefined;
       let bestGive = -1;
       let bestTake = -1;
@@ -285,8 +291,8 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
         if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
         const allyNom = state.catalog.heroesById.get(ally.heroId)?.nom;
         if (!allyNom || !selfNom) continue;
-        const giveIdx = self.hand.findIndex((c) => c.prerequis === allyNom);
-        const takeIdx = ally.hand.findIndex((c) => c.prerequis === selfNom);
+        const giveIdx = self.hand.findIndex((c) => !c.prerequis || c.prerequis === allyNom);
+        const takeIdx = ally.hand.findIndex((c) => !c.prerequis || c.prerequis === selfNom);
         if (giveIdx !== -1 && takeIdx !== -1) {
           bestAlly = ally;
           bestGive = giveIdx;
@@ -295,16 +301,9 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
         }
       }
       if (!bestAlly) {
-        for (const ally of state.heroes) {
-          if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
-          if (ally.hand.length === 0 || self.hand.length === 0) continue;
-          bestAlly = ally;
-          bestGive = 0;
-          bestTake = 0;
-          break;
-        }
+        emit(state, { kind: 'WARN', message: `swapHandWithAlly: aucune paire compatible pour ${ctx.sourceCardId}` });
+        return;
       }
-      if (!bestAlly) return;
       const [given] = self.hand.splice(bestGive, 1);
       const [received] = bestAlly.hand.splice(bestTake, 1);
       if (given) bestAlly.hand.push(given);
@@ -406,29 +405,45 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       return;
     }
     case 'attackChain': {
+      // MAG_A05 Combustion: base damage to the queue head; if it dies, forward
+      // the dead monster's own `degats` stat onto the next target (next
+      // monster in self queue, or the Colosse if no more monsters).
       const self = state.heroes[ctx.sourceSeat];
       if (!self) return;
-      let amount = op.amount;
-      // Chain as long as the current queue head dies.
-      while (amount > 0) {
-        const head = self.queue[0];
-        if (!head) {
-          // No monster → boss takes remainder.
-          await damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
-          return;
-        }
-        const before = head.wounds.reduce((s, w) => s + w.degats, 0);
-        await damageMonster(state, self.seatIdx, head.instanceId, {
-          amount,
-          source: ctx.sourceKind,
-          sourceCardId: ctx.sourceCardId,
+      const spec = { amount: op.amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId };
+      const head = self.queue[0];
+      if (!head) {
+        // File vide : la base frappe directement le Colosse.
+        await damageBoss(state, spec);
+        return;
+      }
+      const headCard = state.catalog.monstreById.get(head.cardId);
+      const forwardDmg = headCard?.degats ?? 0;
+      const killed = await damageMonster(state, self.seatIdx, head.instanceId, spec);
+      if (!killed || forwardDmg <= 0) return;
+      // Forward the dead monster's degats onto next target.
+      const forwardSpec = {
+        amount: forwardDmg,
+        source: ctx.sourceKind,
+        sourceCardId: ctx.sourceCardId,
+      };
+      const nextHead = self.queue[0];
+      if (nextHead) {
+        emit(state, {
+          kind: 'ATTACK',
+          src: { kind: 'hero_action', seat: ctx.sourceSeat, card: ctx.sourceCardId },
+          tgt: { kind: 'monster', instanceId: nextHead.instanceId, seat: self.seatIdx },
+          degats: forwardDmg,
         });
-        // Did the monster die? If it's still in queue, no chain.
-        if (self.queue[0]?.instanceId === head.instanceId) return;
-        // Otherwise consume the damage portion already spent and continue.
-        const card = state.catalog.monstreById.get(head.cardId);
-        const spent = (card?.vie ?? 1) - before;
-        amount = Math.max(0, amount - spent);
+        await damageMonster(state, self.seatIdx, nextHead.instanceId, forwardSpec);
+      } else {
+        emit(state, {
+          kind: 'ATTACK',
+          src: { kind: 'hero_action', seat: ctx.sourceSeat, card: ctx.sourceCardId },
+          tgt: { kind: 'boss' },
+          degats: forwardDmg,
+        });
+        await damageBoss(state, forwardSpec);
       }
       return;
     }
@@ -1031,7 +1046,7 @@ async function applyShiftDamageOp(state: GameState, ctx: EffectContext, op: OpSh
     else await replaySpec('boss');
   } else {
     // MonsterPick
-    const mp = resolveMonsterPick(state, ctx.sourceSeat, op.to);
+    const mp = await resolveMonsterPickAsync(state, ctx.sourceSeat, op.to);
     if (mp) await replaySpec('monster', mp.seat, mp.instanceId);
   }
 }
@@ -1093,7 +1108,7 @@ async function applyDamageOp(
   if (dmg <= 0) return;
 
   const targetTok = op.target ?? 'queue_head';
-  const target = resolveDamageTarget(state, ctx.sourceSeat, targetTok);
+  const target = await resolveDamageTargetAsync(state, ctx.sourceSeat, targetTok);
   if (!target) {
     emit(state, { kind: 'WARN', message: `damage: no target resolved for ${ctx.sourceCardId}` });
     return;
@@ -1238,7 +1253,7 @@ async function applySummonOp(state: GameState, ctx: EffectContext, op: OpSummon)
 }
 
 async function applyEliminateOp(state: GameState, ctx: EffectContext, op: OpEliminate): Promise<void> {
-  const ref = resolveMonsterPick(state, ctx.sourceSeat, op.target);
+  const ref = await resolveMonsterPickAsync(state, ctx.sourceSeat, op.target);
   if (!ref) return;
   await eliminateMonster(state, ref.seat, ref.instanceId);
 }
@@ -1248,7 +1263,7 @@ async function applyMoveMonsterOp(
   ctx: EffectContext,
   op: OpMoveMonster,
 ): Promise<void> {
-  const src = resolveMonsterPick(state, ctx.sourceSeat, op.from);
+  const src = await resolveMonsterPickAsync(state, ctx.sourceSeat, op.from);
   if (!src) return;
   const dst = resolveQueueDest(state, ctx.sourceSeat, op.to);
   if (!dst) return;
@@ -1294,16 +1309,47 @@ async function applyDiscardOp(state: GameState, ctx: EffectContext, op: OpDiscar
     const h = state.heroes[s];
     if (!h) continue;
     const n = Math.min(op.n, h.hand.length);
-    for (let i = 0; i < n; i++) {
-      const idx = op.random ? rng.nextInt(0, h.hand.length - 1) : 0;
+    if (n <= 0) continue;
+    // If the target hero's policy exposes pickDiscard, let it choose (human
+    // picks interactively; AI can implement strategic discards). Otherwise
+    // fall back to random / first-N per the op flag.
+    const targetPolicy = state.policies[s];
+    let indices: number[] | null = null;
+    if (targetPolicy?.pickDiscard) {
+      const picked = await targetPolicy.pickDiscard(state, s, n, ctx.sourceCardId);
+      // Sanitize: keep unique in-range indices, cap at n, fall back if empty.
+      const seen = new Set<number>();
+      const clean: number[] = [];
+      for (const idx of picked) {
+        if (idx < 0 || idx >= h.hand.length) continue;
+        if (seen.has(idx)) continue;
+        seen.add(idx);
+        clean.push(idx);
+        if (clean.length >= n) break;
+      }
+      if (clean.length > 0) indices = clean;
+    }
+    if (indices === null) {
+      indices = [];
+      // Legacy behavior: pick random or first-N (from the CURRENT hand, which
+      // shrinks each iteration, so we simulate by picking progressively).
+      const tmpHand = h.hand.map((_, i) => i);
+      for (let i = 0; i < n && tmpHand.length > 0; i++) {
+        const pickPos = op.random ? rng.nextInt(0, tmpHand.length - 1) : 0;
+        indices.push(tmpHand[pickPos]!);
+        tmpHand.splice(pickPos, 1);
+      }
+    }
+    // Remove from hand in descending index order so splicing stays valid.
+    const sorted = [...indices].sort((a, b) => b - a);
+    for (const idx of sorted) {
       const [card] = h.hand.splice(idx, 1);
-      if (!card) break;
+      if (!card) continue;
       discard(state.piles.chasse, card);
       emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: card.id, fromSeat: s });
     }
   }
   state.rngState = rng.state;
-  // Consume sourceCardId to satisfy strict-unused-params lint in simple impls.
   void ctx.sourceCardId;
 }
 

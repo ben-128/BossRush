@@ -168,6 +168,13 @@ MonoBehaviour:
   outputFolder: Dos
   backgroundRenderer: {fileID: 200003}
   iconRenderer: {fileID: 300003}
+  backgrounds:
+  - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
+  - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
+  - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
+  - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
+  - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
+  - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
   entries:
   - nom: monstre
     sprite: {fileID: 455830391073488181, guid: 71d1ac013c13b0049a3e19ae2241291a, type: 3}
@@ -175,6 +182,10 @@ MonoBehaviour:
     scale: 0.5
   - nom: Menace
     sprite: {fileID: 4908052538538369606, guid: 62768cb55facb5544914ccd49b4fac6a, type: 3}
+    offset: {x: 0, y: 0}
+    scale: 0.5
+  - nom: Heros
+    sprite: {fileID: -6605179963774313510, guid: 44678da855062d643bfa0bd8571f3fac, type: 3}
     offset: {x: 0, y: 0}
     scale: 0.5
 --- !u!1 &200001
@@ -274,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 300002}
   - component: {fileID: 300003}
+  - component: {fileID: 300004}
   m_Layer: 0
   m_Name: Icon
   m_TagString: Untagged
@@ -319,7 +331,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0894f1bf0b876f145b27d76ff801f145, type: 2}
+  - {fileID: 2100000, guid: 0710848add2b63b41a60d5ef83fbf474, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -339,8 +351,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 4908052538538369606, guid: 62768cb55facb5544914ccd49b4fac6a, type: 3}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: -6605179963774313510, guid: 44678da855062d643bfa0bd8571f3fac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -351,6 +363,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &300004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c469ecf3f73bdd47a7ce69112629090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowColor: {r: 0.1, g: 0.06, b: 0.03, a: 0.6117647}
+  offsetX: 0.015
+  offsetY: -0.015
+  shadowScale: 1.02
+  sortingOrderOffset: -1
+  centerOnAlphaCentroid: 0
+  debugLog: 0
 --- !u!1 &400001
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,6 +57,18 @@ export interface Policy {
     objectCardId: string,
     trigger: string,
   ): Awaitable<boolean>;
+  /**
+   * Choose up to n cards from a hero's hand to discard. Returns hand indices
+   * in the order they should be removed (descending so splicing stays valid
+   * is the engine's job). If omitted, the discard op falls back to random or
+   * first-N as specified by the op itself.
+   */
+  pickDiscard?(
+    state: GameState,
+    targetSeat: number,
+    n: number,
+    reason: string,
+  ): Awaitable<number[]>;
 }
 
 /** Look up the policy for a seat, or undefined if none. */
