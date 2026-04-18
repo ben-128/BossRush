@@ -189,6 +189,11 @@ export function damageMonster(
     return false;
   }
   if (totalWoundsOfMonster(monster) >= vie) {
+    // Track "action kill" per turn for potential future reactive triggers.
+    if (spec.source === 'chasse') {
+      const active = state.heroes[state.activeSeat];
+      if (active) active.actionKillsThisTurn = (active.actionKillsThisTurn ?? 0) + 1;
+    }
     eliminateMonster(state, seat, instanceId);
     return true;
   }
@@ -220,6 +225,9 @@ export function eliminateMonster(state: GameState, seat: number, instanceId: str
   hookKaggenElimDrawsChasse(state, seat);
   // Reactive posed objects for the eliminator.
   fireReactiveObjectTriggers(state, 'on_self_eliminates_monster', seat);
+  if (h.queue.length === 0) {
+    fireReactiveObjectTriggers(state, 'on_self_clears_own_queue', seat);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -255,6 +263,8 @@ function killHero(state: GameState, seat: number): true {
 
   h.dead = true;
   emit(state, { kind: 'HERO_DEATH', seat });
+  // Reactive trigger for allies' posed objects (MAG_O01 Cendres du Danakil).
+  fireReactiveForAllies(state, 'on_ally_dies', seat);
 
   // Redistribute monsters of his queue to next living hero.
   if (h.queue.length > 0) {

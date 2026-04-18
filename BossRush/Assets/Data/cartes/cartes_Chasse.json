@@ -59,10 +59,10 @@
     },
     {
       "id": "GUE_A07",
-      "nom": "Provocation",
+      "nom": "Vigueur du combat",
       "categorie": "action",
       "prerequis": "Nawel",
-      "effet": "Choisissez jusqu'à 3 monstres en tête d'autres files. Déplacez-les au fond de votre file.",
+      "effet": "Soignez autant de <ico:degat> de ce héros que de monstres dans la file.",
       "quantite": 1
     },
     {
@@ -195,7 +195,7 @@
       "nom": "Cendres du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Réaction : quand ce héros dépense sa <ico:capacite>\nrechargez-la immédiatement.",
+      "effet": "Réaction : un héros allié meurt\nrechargez-la la capacité de ce héros.",
       "quantite": 1
     },
     {
@@ -228,7 +228,7 @@
       "nom": "Lave du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Réaction : quand ce héros élimine un monstre\nsoignez-le de 1 <ico:degat> et piochez 1 <ico:chasse>.",
+      "effet": "Réaction : quand ce héros élimine un monstre\nsoignez-le de 1 <ico:degat> et piochez 2 <ico:chasse>.",
       "quantite": 1
     },
     {

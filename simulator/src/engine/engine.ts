@@ -63,6 +63,7 @@ export function runTurn(state: GameState, policies: Policy[]): void {
   // Reset per-turn counters on the active hero only (scoped to whose turn it is).
   hero.actionsPlayedThisTurn = 0;
   hero.drawsThisTurn = 0;
+  hero.actionKillsThisTurn = 0;
   state.healedThisTurn = false;
   // Install boss passif modifiers for this turn (thisTurn-scoped; they auto
   // re-install at the start of every turn).

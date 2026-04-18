@@ -131,7 +131,10 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       for (let i = 0; i < op.n; i++) {
         if (state.result !== 'running') break;
         const action = policy.pickAction(state);
-        if (op.restrictTo === 'play_action_only' && action.kind !== 'play') continue;
+        if (op.restrictTo === 'play_action_only' && action.kind !== 'play') {
+          // Nothing more to play — stop rather than burning iterations.
+          break;
+        }
         applyPlayerAction(state, action);
       }
       return;
@@ -436,6 +439,13 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       if (n > 0) runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
       return;
     }
+    case 'healEqualsSelfQueueSize': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const n = h.queue.length;
+      if (n > 0) runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
+      return;
+    }
     case 'healEqualsDrawsThisTurn': {
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
@@ -611,6 +621,17 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
     case 'cancelDestin':
       state.destinCancelled = true;
       return;
+    case 'eliminateAllInHeroQueue': {
+      const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
+      for (const s of seats) {
+        const h = state.heroes[s];
+        if (!h) continue;
+        // Iterate a snapshot — eliminateMonster mutates h.queue.
+        const ids = h.queue.map((m) => m.instanceId);
+        for (const id of ids) eliminateMonster(state, s, id);
+      }
+      return;
+    }
     case 'removeLastWound': {
       const h = state.heroes[ctx.sourceSeat];
       if (!h || h.wounds.length === 0) return;

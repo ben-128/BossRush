@@ -13,7 +13,7 @@
       "competences": [
         "magie"
       ],
-      "capacite_speciale": "Éliminez tous les monstres blessés.",
+      "capacite_speciale": "Éliminez tous les <ico:invocation> de la file d'un héros ciblé.",
       "citation": "« Le feu est patient. Elle ne l'est pas. »"
     },
     {
@@ -35,7 +35,7 @@
       "competences": [
         "armure"
       ],
-      "capacite_speciale": "Ce héros ne subit aucune <ico:degat> jusqu'à la fin du tour.",
+      "capacite_speciale": "Tous les <ico:invocation> se deplacent dans la file de ce héros.",
       "citation": "« Il encaisse. Encore. Et encore. »"
     },
     {
@@ -46,7 +46,7 @@
       "competences": [
         "distance"
       ],
-      "capacite_speciale": "Jouez immédiatement 2 <ico:action> de votre main.",
+      "capacite_speciale": "Vous pouvez jouez autant de <ico:action> que vous le souhaitez ce tour ci.",
       "citation": "« On voit la première flèche. Jamais les suivantes. »"
     },
     {

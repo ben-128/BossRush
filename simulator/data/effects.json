@@ -51,9 +51,9 @@
       ]
     },
     "GUE_A07": {
-      "effet": "Provocation : jusqu'à 3 têtes d'autres files → fond de ma file",
-      "tag": "utility_pull",
-      "ops": [{ "op": "rallyHeadsToSelf", "max": 3 }]
+      "effet": "Vigueur du combat : heal self = nombre de monstres dans sa file",
+      "tag": "heal_by_queue",
+      "ops": [{ "op": "healEqualsSelfQueueSize" }]
     },
     "GUE_A08": {
       "effet": "Déplace jusqu'à 4 dégâts d'autres héros vers self",
@@ -131,10 +131,10 @@
     "MAG_A08": { "effet": "Régénère capacité self", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "self" }] },
 
     "MAG_O01": {
-      "effet": "Réaction : quand ce héros dépense sa capacité, rechargez-la",
+      "effet": "Réaction : quand un héros allié meurt, recharge la capacité de ce héros",
       "tag": "reactive_object",
       "reactive": {
-        "trigger": "on_self_capacite_used",
+        "trigger": "on_ally_dies",
         "ops": [{ "op": "regenCapacite", "target": "self" }]
       }
     },
@@ -149,13 +149,13 @@
       }
     },
     "MAG_O05": {
-      "effet": "Réaction : quand ce héros élimine un monstre, heal 1 + pioche 1",
+      "effet": "Réaction : quand ce héros élimine un monstre, heal 1 + pioche 2",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_eliminates_monster",
         "ops": [
           { "op": "heal", "target": "self", "amount": 1 },
-          { "op": "draw", "target": "self", "n": 1 }
+          { "op": "draw", "target": "self", "n": 2 }
         ]
       }
     },
@@ -315,9 +315,9 @@
     },
 
     "HERO_001": {
-      "effet": "Daraa — Élimine tous les monstres blessés",
+      "effet": "Daraa — Élimine tous les monstres de la file d'un héros ciblé",
       "tag": "elim_on_demand",
-      "ops": [{ "op": "eliminateWhere", "from": "monster_in_any_queue", "where": "has_damage" }]
+      "ops": [{ "op": "eliminateAllInHeroQueue", "target": "any_hero" }]
     },
     "HERO_002": {
       "effet": "Gao — Retire toutes les blessures d'un héros",
@@ -325,14 +325,14 @@
       "ops": [{ "op": "removeAllWounds", "target": "any_hero" }]
     },
     "HERO_003": {
-      "effet": "Nawel — Aucun dégât ce tour (modifier)",
-      "tag": "prevent_lethal",
-      "ops": [{ "op": "modifier", "target": "self", "scope": "thisTurn", "effect": { "kind": "no_damage", "seat": 0 } }]
+      "effet": "Nawel — Tous les monstres en jeu rejoignent la file de ce héros",
+      "tag": "rally_to_self",
+      "ops": [{ "op": "rallyToSelf" }]
     },
     "HERO_004": {
-      "effet": "Isonash — Joue 2 Actions immédiatement",
+      "effet": "Isonash — Joue autant d'Actions que souhaité ce tour",
       "tag": "play_more_actions",
-      "ops": [{ "op": "playMoreActions", "n": 2, "restrictTo": "play_action_only" }]
+      "ops": [{ "op": "playMoreActions", "n": 20, "restrictTo": "play_action_only" }]
     },
     "HERO_005": {
       "effet": "Aslan — Échanges libres (stand-in simplifié)",

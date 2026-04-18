@@ -140,6 +140,13 @@ function scoreAction(state: GameState, h: HeroRuntime, c: CarteChasse): number {
         // actually wounded (otherwise it's a no-op).
         score += totalWounds(h) > 0 ? 6 : -20;
         break;
+      case 'heal_by_queue': {
+        // GUE_A07 « Vigueur du combat »: heal = own queue size. Useful only
+        // if both wounded AND queue has at least 1 monster.
+        const canHeal = Math.min(totalWounds(h), h.queue.length);
+        score += canHeal >= 2 ? 8 : canHeal === 1 ? 3 : -20;
+        break;
+      }
       case 'rally_monsters': {
         // DIP_A12 « Ralliement tactique »: useless if no monster in play.
         const anyMonster = state.heroes.some((hh) => hh.queue.length > 0);
@@ -189,26 +196,30 @@ function shouldUseCapacite(state: GameState, h: HeroRuntime): boolean {
       // Gao: heal all wounds of most wounded. Fire if someone has 2+ wounds.
       return state.heroes.some((hh) => !hh.dead && totalWounds(hh) >= 2);
     case 'elim_on_demand': {
-      // Daraa: eliminate all wounded monsters. Fire as soon as at least one
-      // wounded monster is in play (free removal — no point hoarding).
-      for (const hh of state.heroes) {
-        for (const m of hh.queue) {
-          if (m.wounds.length > 0) return true;
-        }
-      }
-      return false;
+      // Daraa: eliminate every monster in a chosen hero's queue. Fire as
+      // soon as some hero has 2+ monsters (wipe is worth the one-shot slot).
+      return state.heroes.some((hh) => !hh.dead && hh.queue.length >= 2);
     }
     case 'prevent_lethal': {
-      // Nawel: cancel all damage this turn. Fire if self is seriously at
-      // risk (≤ 2 HP left) OR already wounded with a monster in our queue
-      // ready to hit.
+      // Legacy (was Nawel before the rally rewrite).
       if (totalWounds(h) >= h.vieMax - 2) return true;
       if (totalWounds(h) >= 2 && h.queue.length > 0) return true;
       return false;
     }
+    case 'rally_to_self': {
+      // Nawel: pull every monster from other queues into her own. Fire when
+      // there are ≥ 2 monsters in other queues AND she still has the HP to
+      // tank them (≥ half vie).
+      const othersCount = state.heroes.reduce(
+        (s, hh) => s + (hh.dead || hh.seatIdx === h.seatIdx ? 0 : hh.queue.length),
+        0,
+      );
+      const hp = h.vieMax - totalWounds(h);
+      return othersCount >= 2 && hp >= Math.ceil(h.vieMax / 2);
+    }
     case 'play_more_actions': {
-      // Isonash: play 2 extra actions immediately. Fire with ≥ 2 plays in
-      // hand — the capacité slot stays mostly used.
+      // Isonash: play as many Actions as desired this turn. Fire whenever
+      // there are ≥ 2 playable cards in hand — the loop will drain them.
       return playableActions(state, h).length >= 2;
     }
     case 'global_buff': {

@@ -178,6 +178,7 @@ const OpAttackChain = z.object({
 });
 
 const OpHealEqualsActionsThisTurn = z.object({ op: z.literal('healEqualsActionsThisTurn') });
+const OpHealEqualsSelfQueueSize = z.object({ op: z.literal('healEqualsSelfQueueSize') });
 const OpHealEqualsDrawsThisTurn = z.object({ op: z.literal('healEqualsDrawsThisTurn') });
 const OpEliminateIfActionsThisTurn = z.object({
   op: z.literal('eliminateIfActionsThisTurn'),
@@ -236,6 +237,10 @@ const OpRemoveLastWound = z.object({
   op: z.literal('removeLastWound'),
   target: z.literal('self'),
 });
+const OpEliminateAllInHeroQueue = z.object({
+  op: z.literal('eliminateAllInHeroQueue'),
+  target: z.literal('any_hero'),
+});
 
 const OpEliminateWhere = z.object({
   op: z.literal('eliminateWhere'),
@@ -286,6 +291,7 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpScryChasse,
     OpAttackChain,
     OpHealEqualsActionsThisTurn,
+    OpHealEqualsSelfQueueSize,
     OpHealEqualsDrawsThisTurn,
     OpEliminateIfActionsThisTurn,
     OpDrawFromDiscard,
@@ -307,6 +313,7 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpSummonOnEmptyQueues,
     OpCancelDestin,
     OpRemoveLastWound,
+    OpEliminateAllInHeroQueue,
   ]),
 );
 
@@ -424,7 +431,10 @@ const ReactiveTriggerEnum = z.enum([
   'on_self_damage',
   'on_ally_damage',
   'on_self_lethal_damage',
+  'on_ally_dies',
   'on_self_eliminates_monster',
+  'on_self_clears_own_queue',
+  'on_self_second_action_kill',
   'on_self_capacite_used',
   'on_ally_capacite_used',
   'on_destin_drawn_any',

@@ -64,6 +64,9 @@ export interface HeroRuntime {
   actionsPlayedThisTurn?: number;
   /** Chasse cards drawn by this hero this turn. */
   drawsThisTurn?: number;
+  /** Monsters eliminated via this hero's Action cards this turn (capacity
+   *  kills don't count). */
+  actionKillsThisTurn?: number;
   /** Boss Azhda (BOSS_007) actif : this hero can only draw this turn. */
   onlyDrawThisTurn?: boolean;
   /** One-shot flag (set by ROD_O02 renfort) : next attack that kills its

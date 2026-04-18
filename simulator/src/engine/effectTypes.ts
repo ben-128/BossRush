@@ -335,6 +335,11 @@ export interface OpHealEqualsActionsThisTurn {
   op: 'healEqualsActionsThisTurn';
 }
 
+/** Heal self = number of monsters in self's queue (GUE_A07 Vigueur du combat). */
+export interface OpHealEqualsSelfQueueSize {
+  op: 'healEqualsSelfQueueSize';
+}
+
 /** Heal self = number of cards drawn this turn (ROD_O06). */
 export interface OpHealEqualsDrawsThisTurn {
   op: 'healEqualsDrawsThisTurn';
@@ -443,6 +448,12 @@ export interface OpCancelDestin {
   op: 'cancelDestin';
 }
 
+/** Eliminate every monster in a chosen hero's queue (Daraa capacité). */
+export interface OpEliminateAllInHeroQueue {
+  op: 'eliminateAllInHeroQueue';
+  target: 'any_hero';
+}
+
 /** Remove the most recently added wound from self (SOI_O02 Totem de transe). */
 export interface OpRemoveLastWound {
   op: 'removeLastWound';
@@ -511,6 +522,7 @@ export type EffectOp =
   | OpScryChasse
   | OpAttackChain
   | OpHealEqualsActionsThisTurn
+  | OpHealEqualsSelfQueueSize
   | OpHealEqualsDrawsThisTurn
   | OpEliminateIfActionsThisTurn
   | OpDrawFromDiscard
@@ -531,7 +543,8 @@ export type EffectOp =
   | OpRotateHeadsToNext
   | OpSummonOnEmptyQueues
   | OpCancelDestin
-  | OpRemoveLastWound;
+  | OpRemoveLastWound
+  | OpEliminateAllInHeroQueue;
 
 /**
  * Reactive triggers for posed Objet cards. When the matching game event is
@@ -542,7 +555,10 @@ export type ReactiveTrigger =
   | 'on_self_damage'
   | 'on_ally_damage'
   | 'on_self_lethal_damage'
+  | 'on_ally_dies'
   | 'on_self_eliminates_monster'
+  | 'on_self_clears_own_queue'
+  | 'on_self_second_action_kill'
   | 'on_self_capacite_used'
   | 'on_ally_capacite_used'
   | 'on_destin_drawn_any'

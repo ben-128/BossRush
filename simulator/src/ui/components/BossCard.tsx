@@ -77,7 +77,9 @@ export function BossCard() {
       ev.kind === 'DRAW_MENACE' ||
       ev.kind === 'BOSS_ACTIF_TRIGGERED' ||
       ev.kind === 'RESOLVE_DESTIN' ||
-      (ev.kind === 'CHOICE_MADE' && design.menaces.some((m) => m.id === ev.sourceCardId)),
+      (ev.kind === 'CHOICE_MADE' &&
+        (design.menaces.some((m) => m.id === ev.sourceCardId) ||
+          design.destins.some((d) => d.id === ev.sourceCardId))),
     [design],
   );
   const spotlight = useSpotlight<BossEvent>(predicate);
@@ -100,19 +102,21 @@ export function BossCard() {
       };
     }
     if (spotlight.kind === 'CHOICE_MADE') {
+      // Source can be either a menace or a destin (DEN_005 Feu de conseil).
       const m = design.menaces.find((x) => x.id === spotlight.sourceCardId);
-      const title = m?.nom ?? spotlight.sourceCardId;
-      // Pull all bullets from the menace description and highlight the one
-      // matching the chosen label.
-      const bullets = extractBullets(m?.description ?? '');
+      const d = design.destins.find((x) => x.id === spotlight.sourceCardId);
+      const title = m?.nom ?? d?.titre ?? spotlight.sourceCardId;
+      const description = m?.description ?? d?.effet ?? '';
+      const bullets = extractBullets(description);
       const chosen = bullets.find((b) =>
         b.toLowerCase().startsWith(spotlight.label.replace(/_/g, ' ').toLowerCase()),
       );
+      const kickerPrefix = d ? 'Choix Destin' : 'Choix Menace';
       return {
-        kicker: `Choix · seat ${spotlight.seat}`,
+        kicker: `${kickerPrefix} · seat ${spotlight.seat}`,
         title,
-        bullets,
-        chosen: chosen ?? null,
+        bullets: bullets.length > 0 ? bullets : [spotlight.label.replace(/_/g, ' ')],
+        chosen: chosen ?? (bullets.length === 0 ? spotlight.label.replace(/_/g, ' ') : null),
         variant: 'choice' as const,
       };
     }

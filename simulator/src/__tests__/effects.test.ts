@@ -364,6 +364,45 @@ describe('effects DSL — integration: full games run with DSL', () => {
     expect(h.objects.some((c) => c.id === 'GUE_O02')).toBe(false);
   });
 
+  it('BOSS_010 Khwa actif summons exactly 1 monster per living hero', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const heroIds = ['HERO_001', 'HERO_003', 'HERO_005'];
+    const state = createGame(data, {
+      seed: 11,
+      nPlayers: heroIds.length,
+      bossId: 'BOSS_010',
+      heroIds,
+      effects,
+    });
+    state.heroes.forEach((h) => (h.queue = []));
+    const entry = state.effects[state.boss.bossId]!;
+    runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry.actif_ops!);
+    expect(state.heroes[0]!.queue.length).toBe(1);
+    expect(state.heroes[1]!.queue.length).toBe(1);
+    expect(state.heroes[2]!.queue.length).toBe(1);
+  });
+
+  it('BOSS_010 Khwa actif skips dead heroes', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const heroIds = ['HERO_001', 'HERO_003', 'HERO_005'];
+    const state = createGame(data, {
+      seed: 12,
+      nPlayers: heroIds.length,
+      bossId: 'BOSS_010',
+      heroIds,
+      effects,
+    });
+    state.heroes.forEach((h) => (h.queue = []));
+    state.heroes[1]!.dead = true;
+    const entry = state.effects[state.boss.bossId]!;
+    runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry.actif_ops!);
+    expect(state.heroes[0]!.queue.length).toBe(1);
+    expect(state.heroes[1]!.queue.length).toBe(0); // dead, skipped
+    expect(state.heroes[2]!.queue.length).toBe(1);
+  });
+
   it('rotateHeadsToNext op with only one monster moves it ONE step, not full cycle', async () => {
     const data = await loadDesignData();
     const effects = await loadEffectsCatalog();
