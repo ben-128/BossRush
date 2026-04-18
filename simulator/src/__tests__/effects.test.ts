@@ -316,6 +316,54 @@ describe('effects DSL — integration: full games run with DSL', () => {
     expect(state.heroes[0]!.hand.length).toBe(handBefore);
   });
 
+  it('reactive object GUE_O03 fires on self damage (draw 4)', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const state = createGame(data, {
+      seed: 42,
+      nPlayers: 2,
+      bossId: 'BOSS_001',
+      heroIds: ['HERO_003', 'HERO_001'],
+      effects,
+    });
+    const h = state.heroes[0]!;
+    // Pose GUE_O03 in front of the hero.
+    const obj = data.cartesChasse.find((c) => c.id === 'GUE_O03')!;
+    h.objects.push(obj);
+    const handBefore = h.hand.length;
+    // Inflict 1 damage from a chasse source — should trigger the reactive.
+    runOps(state, mkCtx(0, 'TEST', 'menace'), [
+      { op: 'damage', target: 'active_hero', amount: 1 },
+    ]);
+    // 4 cards drawn (or until pile empty).
+    expect(h.hand.length).toBeGreaterThanOrEqual(handBefore + 1);
+    // GUE_O03 was consumed.
+    expect(h.objects.some((c) => c.id === 'GUE_O03')).toBe(false);
+  });
+
+  it('reactive object GUE_O02 cancels damage via removeLastWound', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const state = createGame(data, {
+      seed: 43,
+      nPlayers: 2,
+      bossId: 'BOSS_001',
+      heroIds: ['HERO_003', 'HERO_001'],
+      effects,
+    });
+    const h = state.heroes[0]!;
+    const obj = data.cartesChasse.find((c) => c.id === 'GUE_O02')!;
+    h.objects.push(obj);
+    expect(h.wounds.length).toBe(0);
+    runOps(state, mkCtx(0, 'TEST', 'menace'), [
+      { op: 'damage', target: 'active_hero', amount: 2 },
+    ]);
+    // Wound landed briefly then was removed by GUE_O02.
+    expect(h.wounds.length).toBe(0);
+    // GUE_O02 consumed.
+    expect(h.objects.some((c) => c.id === 'GUE_O02')).toBe(false);
+  });
+
   it('rotateHeadsToNext op with only one monster moves it ONE step, not full cycle', async () => {
     const data = await loadDesignData();
     const effects = await loadEffectsCatalog();

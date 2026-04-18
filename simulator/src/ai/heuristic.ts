@@ -56,17 +56,23 @@ function mostWoundedSeat(state: GameState): number | undefined {
 
 function playableActions(state: GameState, h: HeroRuntime): number[] {
   const out: number[] = [];
+  const bypass = ignorePrereqObjectIdx(state, h) !== -1;
   h.hand.forEach((c, i) => {
-    if (isActionPlayable(state, c) && meetsPrerequisite(h, c, state)) out.push(i);
+    if (!isActionPlayable(state, c)) return;
+    if (bypass) {
+      out.push(i);
+      return;
+    }
+    if (meetsPrerequisite(h, c, state)) out.push(i);
   });
   return out;
 }
 
 function renfortIndices(state: GameState, h: HeroRuntime): number[] {
-  // Only attach objects that actually add damage when used as renfort.
-  // Healing/utility/regen objets are NOT run as renforts (the engine only
-  // adds their `bonus_degats` and drops their ops), so attaching them is
-  // pure waste — keep them for active use via pickReaction.
+  // Only attach objects that actually do something when used as renfort.
+  // These run their DSL ops BEFORE the main attack (via playAction's renfort
+  // loop) — either via `bonus_degats` directly or by setting modifiers /
+  // flags (chain-on-kill, ignore prereq) that the attack then reads.
   const out: number[] = [];
   h.objects.forEach((c, i) => {
     if (!isObjetPlayableRenfort(state, c)) return;
@@ -75,10 +81,16 @@ function renfortIndices(state: GameState, h: HeroRuntime): number[] {
       (c.bonus_degats ?? 0) > 0 ||
       tag === 'boost_attack' ||
       tag === 'boost_attack_aoe' ||
-      tag === 'attack_chain';
+      tag === 'attack_chain' ||
+      tag === 'ignore_prereq';
     if (isBoost) out.push(i);
   });
   return out;
+}
+
+/** Index (in `h.objects`) of a posed `ignore_prereq` objet, if any. */
+function ignorePrereqObjectIdx(state: GameState, h: HeroRuntime): number {
+  return h.objects.findIndex((c) => state.effects[c.id]?.tag === 'ignore_prereq');
 }
 
 /** Score an action card: prioritise damage + situational bonuses. */
@@ -299,45 +311,8 @@ export const heuristicPolicy: Policy = {
       };
     }
 
-    // Priority 2: active object use. Look for a posed object whose DSL is
-    // contextually useful right now.
-    const partyWounds = state.heroes.reduce((s, hh) => s + (hh.dead ? 0 : totalWounds(hh)), 0);
-    const anyMonster = state.heroes.some((hh) => hh.queue.length > 0);
-    const selfMonster = h.queue.length > 0;
-    const shortestHand = Math.min(
-      ...state.heroes.filter((hh) => !hh.dead).map((hh) => hh.hand.length),
-    );
-    const myNom = state.catalog.heroesById.get(h.heroId)?.nom;
-    const mismatchedInHand = myNom
-      ? h.hand.some((c) => c.categorie === 'action' && c.prerequis !== myNom)
-      : false;
-    for (let i = 0; i < h.objects.length; i++) {
-      const card = h.objects[i]!;
-      const entry = state.effects[card.id];
-      if (!entry) continue;
-      const tag = entry.tag;
-      const useful =
-        (tag === 'reactive_heal' && totalWounds(h) > 0) ||
-        (tag === 'regen_capacity' && h.capaciteUsed) ||
-        (tag === 'burst_heal' && state.heroes.some((hh) => !hh.dead && totalWounds(hh) >= 2)) ||
-        (tag === 'aoe_heal' && partyWounds >= 3) ||
-        ((tag === 'utility_eliminate' || tag === 'reactive_eliminate') && anyMonster) ||
-        (tag === 'draw_engine' && h.hand.length <= 1) ||
-        (tag === 'sustain_draw' && (totalWounds(h) > 0 || h.hand.length <= 2)) ||
-        (tag === 'draw_if_wounded' && totalWounds(h) > 0) ||
-        (tag === 'ignore_prereq' && mismatchedInHand) ||
-        ((tag === 'draw_support' || tag === 'draw_support_aoe') && shortestHand <= 1) ||
-        (tag === 'prevent_lethal' &&
-          (totalWounds(h) >= h.vieMax - 2 || (totalWounds(h) >= 2 && selfMonster))) ||
-        ((tag === 'attack_chain' || tag === 'attack_conditional') && selfMonster);
-      if (useful) {
-        return {
-          kind: 'useObject',
-          objectIdx: i,
-          reason: `objet « ${card.nom} » (tag=${tag ?? '—'}) utile`,
-        };
-      }
-    }
+    // Posed objects are purely reactive now — they fire on engine events
+    // (see src/engine/reactiveObjects.ts). No active "use" decision here.
     return null;
   },
 
@@ -370,8 +345,26 @@ export const heuristicPolicy: Policy = {
       }
       const renforts = renfortIndices(state, h);
       const attaches: number[] = [];
-      if (best.card.degats !== undefined && renforts.length > 0 && renforts[0] !== undefined) {
-        attaches.push(renforts[0]);
+      // 1) If the chosen card has the wrong prereq, MAG_O02 (ignore_prereq)
+      //    is what enables us to play it — must attach.
+      const needsBypass = !meetsPrerequisite(h, best.card, state);
+      const ignoreIdx = needsBypass ? ignorePrereqObjectIdx(state, h) : -1;
+      if (ignoreIdx !== -1) attaches.push(ignoreIdx);
+      // 2) On attacks, attach a damage-boost renfort if we have one.
+      if (best.card.degats !== undefined) {
+        const boostRenfort = renforts.find(
+          (idx) => !attaches.includes(idx) && (h.objects[idx]?.bonus_degats ?? 0) > 0,
+        );
+        if (boostRenfort !== undefined) attaches.push(boostRenfort);
+      }
+      // 3) On attacks, also attach an attack_chain renfort (ROD_O02) — its
+      //    chain-on-kill flag costs nothing if the attack doesn't kill.
+      if (best.card.degats !== undefined) {
+        const chainRenfort = renforts.find(
+          (idx) =>
+            !attaches.includes(idx) && state.effects[h.objects[idx]!.id]?.tag === 'attack_chain',
+        );
+        if (chainRenfort !== undefined) attaches.push(chainRenfort);
       }
       // Also look for an objet in hand to pose this turn (free alongside
       // play). Only pose objets this hero can actually use — the `prerequis`

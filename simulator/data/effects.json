@@ -65,22 +65,36 @@
 
     "GUE_O01": { "effet": "Renfort pur +2 dégâts (bonus_degats sur la carte)", "tag": "boost_attack", "ops": [{ "op": "require", "cond": { "self_damage": { "op": ">=", "value": 0 } } }] },
     "GUE_O02": {
-      "effet": "Annule la prochaine source de dégâts (modifier)",
-      "tag": "prevent_lethal",
-      "ops": [
-        { "op": "modifier", "target": "self", "scope": "nextDamageToSelf", "effect": { "kind": "no_damage", "seat": 0 } }
-      ]
+      "effet": "Réaction : annule la prochaine blessure subie",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_damage",
+        "ops": [{ "op": "removeLastWound", "target": "self" }]
+      }
     },
     "GUE_O03": {
-      "effet": "Pioche 1 par dégât sur self",
-      "tag": "draw_if_wounded",
-      "ops": [{ "op": "drawPerSelfWound" }]
+      "effet": "Réaction : quand ce héros subit une dégât, pioche 4 Chasse",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_damage",
+        "ops": [{ "op": "draw", "target": "self", "n": 4 }]
+      }
     },
-    "GUE_O04": { "effet": "Heal 2", "tag": "reactive_heal", "ops": [{ "op": "heal", "target": "self", "amount": 2 }] },
+    "GUE_O04": {
+      "effet": "Réaction : quand un 3e monstre rejoint la file, l'élimine",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_third_monster_arrives_self",
+        "ops": [{ "op": "eliminate", "target": { "pick": "monster_in_self_queue" } }]
+      }
+    },
     "GUE_O05": {
-      "effet": "Annule la Menace en cours",
-      "tag": "cancel_menace",
-      "ops": [{ "op": "cancelMenace" }]
+      "effet": "Réaction : annule l'effet d'une Menace révélée",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_menace_revealed",
+        "ops": [{ "op": "cancelMenace" }]
+      }
     },
     "GUE_O06": {
       "effet": "Dernier rempart — 3 dégâts au Colosse quand le héros meurt",
@@ -116,15 +130,35 @@
     "MAG_A07": { "effet": "Pioche 4", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "self", "n": 4 }] },
     "MAG_A08": { "effet": "Régénère capacité self", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "self" }] },
 
-    "MAG_O01": { "effet": "Recharge capacité self", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "self" }] },
-    "MAG_O02": { "effet": "Prochaine Action ignore prérequis", "tag": "ignore_prereq", "ops": [{ "op": "ignorePrereqNext" }] },
-    "MAG_O03": { "effet": "Renfort +2 dégâts ET 2 dmg secondaires au Colosse", "tag": "boost_attack_aoe", "ops": [{ "op": "damage", "target": "boss", "amount": 2 }] },
-    "MAG_O04": {
-      "effet": "Elimine un monstre attaquant ≤2 PV",
-      "tag": "reactive_eliminate",
-      "ops": [{ "op": "eliminate", "target": { "pick": "monster_in_self_queue", "where": "at_most_life_N", "N": 2 } }]
+    "MAG_O01": {
+      "effet": "Réaction : quand ce héros dépense sa capacité, rechargez-la",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_capacite_used",
+        "ops": [{ "op": "regenCapacite", "target": "self" }]
+      }
     },
-    "MAG_O05": { "effet": "Heal 1 + draw 2", "tag": "sustain_draw", "ops": [{ "op": "heal", "target": "self", "amount": 1 }, { "op": "draw", "target": "self", "n": 2 }] },
+    "MAG_O02": { "effet": "Amélioration : prochaine Action ignore son prérequis", "tag": "ignore_prereq", "ops": [{ "op": "ignorePrereqNext" }] },
+    "MAG_O03": { "effet": "Amélioration : +2 dégâts ET 2 dmg secondaires au Colosse", "tag": "boost_attack_aoe", "ops": [{ "op": "damage", "target": "boss", "amount": 2 }] },
+    "MAG_O04": {
+      "effet": "Réaction : quand un monstre attaque, élimine-le",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_monster_attacks_self",
+        "ops": [{ "op": "eliminate", "target": { "pick": "queue_head_self" } }]
+      }
+    },
+    "MAG_O05": {
+      "effet": "Réaction : quand ce héros élimine un monstre, heal 1 + pioche 1",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_eliminates_monster",
+        "ops": [
+          { "op": "heal", "target": "self", "amount": 1 },
+          { "op": "draw", "target": "self", "n": 1 }
+        ]
+      }
+    },
 
     "SOI_A01": { "effet": "1 dmg + si cible survit heal 1 allié", "tag": "attack_sustain_aoe", "ops": [{ "op": "attack" }, { "op": "heal", "target": "any_hero", "amount": 1 }] },
     "SOI_A02": { "effet": "3 dmg si aucun allié blessé", "tag": "attack_conditional", "ops": [{ "op": "require", "cond": { "no_ally_has_damage": true } }, { "op": "attack" }] },
@@ -139,15 +173,49 @@
     "SOI_A11": { "effet": "Redistribue les blessures également entre héros vivants", "tag": "aoe_heal", "ops": [{ "op": "redistributeWounds" }] },
     "SOI_A12": { "effet": "Pioche 1 Destin; choisit à quel héros l'appliquer", "tag": "destin_pull", "ops": [{ "op": "drawDestin", "target": "any_hero" }] },
 
-    "SOI_O01": { "effet": "Heal 2 un héros", "tag": "reactive_heal", "ops": [{ "op": "heal", "target": "any_hero", "amount": 2 }] },
-    "SOI_O02": {
-      "effet": "Annule dégât mortel + tous dégâts fin du tour (modifier thisTurn)",
-      "tag": "prevent_lethal",
-      "ops": [{ "op": "modifier", "target": "self", "scope": "thisTurn", "effect": { "kind": "no_damage", "seat": 0 } }]
+    "SOI_O01": {
+      "effet": "Réaction : quand un héros allié subit des dégâts, soigne-le de 2",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_ally_damage",
+        "ops": [{ "op": "heal", "target": "any_ally", "amount": 2 }]
+      }
     },
-    "SOI_O03": { "effet": "Soigne un allié = nombre de blessures de self", "tag": "reactive_heal", "ops": [{ "op": "healAllyEqualsSelfWounds" }] },
-    "SOI_O04": { "effet": "Régénère capacité d'un héros", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "any_hero" }] },
-    "SOI_O05": { "effet": "2 dmg sur la tête de file si un héros a été soigné ce tour", "tag": "attack_conditional", "ops": [{ "op": "damageIfHealed", "amount": 2 }] },
+    "SOI_O02": {
+      "effet": "Réaction : quand ce héros subit une dégât mortelle, annule-la + bouclier ce tour",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_lethal_damage",
+        "ops": [
+          { "op": "removeLastWound", "target": "self" },
+          { "op": "modifier", "target": "self", "scope": "thisTurn", "effect": { "kind": "no_damage", "seat": 0 } }
+        ]
+      }
+    },
+    "SOI_O03": {
+      "effet": "Réaction : quand un héros pioche un Destin, annule son effet",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_destin_drawn_any",
+        "ops": [{ "op": "cancelDestin" }]
+      }
+    },
+    "SOI_O04": {
+      "effet": "Réaction : quand un héros allié dépense sa capacité, recharge-la",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_ally_capacite_used",
+        "ops": [{ "op": "regenCapacite", "target": "any_ally" }]
+      }
+    },
+    "SOI_O05": {
+      "effet": "Réaction : quand ce héros soigne un allié, 2 dégâts à la tête de file",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_heals_ally",
+        "ops": [{ "op": "damage", "target": "queue_head", "amount": 2 }]
+      }
+    },
 
     "ROD_A01": { "effet": "1 dmg ciblage libre", "tag": "attack_free_target", "ops": [{ "op": "attack", "target": { "pick": "monster_in_any_queue" } }] },
     "ROD_A02": { "effet": "1 dmg + pioche 1", "tag": "attack_cantrip", "ops": [{ "op": "attack" }, { "op": "draw", "target": "self", "n": 1 }] },
@@ -159,10 +227,38 @@
 
     "ROD_O01": { "effet": "Renfort pur +2 dégâts (bonus_degats sur la carte)", "tag": "boost_attack", "ops": [{ "op": "require", "cond": { "self_damage": { "op": ">=", "value": 0 } } }] },
     "ROD_O02": { "effet": "Renfort : si l'attaque tue la cible, elle enchaîne sur le monstre suivant (ou le Colosse si la file est vide)", "tag": "attack_chain", "ops": [{ "op": "setChainOnKill" }] },
-    "ROD_O03": { "effet": "Heal 1 par Action jouée ce tour", "tag": "reactive_heal", "ops": [{ "op": "healEqualsActionsThisTurn" }] },
-    "ROD_O04": { "effet": "Elimine un monstre attaquant si ≥2 cartes jouées ce tour", "tag": "utility_eliminate", "ops": [{ "op": "eliminateIfActionsThisTurn", "minActions": 2, "from": "monster_in_self_queue" }] },
-    "ROD_O05": { "effet": "Pioche jusqu'à avoir 5 cartes en main", "tag": "draw_engine", "ops": [{ "op": "drawUpTo", "target": "self", "n": 5 }] },
-    "ROD_O06": { "effet": "Heal = nb de cartes piochées ce tour", "tag": "reactive_heal", "ops": [{ "op": "healEqualsDrawsThisTurn" }] },
+    "ROD_O03": {
+      "effet": "Réaction : après 2 Actions jouées ce tour, heal 2",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_played_2_actions",
+        "ops": [{ "op": "heal", "target": "self", "amount": 2 }]
+      }
+    },
+    "ROD_O04": {
+      "effet": "Réaction : après 2 Actions jouées ce tour, élimine un monstre",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_played_2_actions",
+        "ops": [{ "op": "eliminate", "target": { "pick": "monster_in_any_queue" } }]
+      }
+    },
+    "ROD_O05": {
+      "effet": "Réaction : quand la main tombe à 1 carte, pioche jusqu'à 5",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_low_hand",
+        "ops": [{ "op": "drawUpTo", "target": "self", "n": 5 }]
+      }
+    },
+    "ROD_O06": {
+      "effet": "Réaction : quand ce héros pioche avec 7+ cartes en main, heal 2",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_high_hand_draw",
+        "ops": [{ "op": "heal", "target": "self", "amount": 2 }]
+      }
+    },
 
     "DIP_A01": { "effet": "1 dmg + allié pioche 1", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "draw", "target": "any_ally", "n": 1 }] },
     "DIP_A02": { "effet": "1 dmg + 2 héros échangent 1 Action", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "swapHandWithAlly" }] },
@@ -177,11 +273,46 @@
     "DIP_A11": { "effet": "3 dmg cible uniquement le Colosse", "tag": "boss_only_burst", "ops": [{ "op": "attack", "target": "boss" }] },
     "DIP_A12": { "effet": "Tous les monstres des autres files déplacés vers la file du héros actif", "tag": "rally_monsters", "ops": [{ "op": "rallyToSelf" }] },
 
-    "DIP_O01": { "effet": "Chaque allié donne 1 carte de sa main", "tag": "draw_support", "ops": [{ "op": "giveCardsFromAllies" }] },
-    "DIP_O02": { "effet": "Ce héros donne 1 carte à chaque allié", "tag": "draw_support_aoe", "ops": [{ "op": "giveCardsToAllies" }] },
-    "DIP_O03": { "effet": "Un héros au choix pioche 3 cartes", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "any_hero", "n": 3 }] },
-    "DIP_O04": { "effet": "2 cartes à un allié + pioche Destin", "tag": "draw_support", "ops": [{ "op": "draw", "target": "any_ally", "n": 2 }, { "op": "drawDestin", "target": "self" }] },
-    "DIP_O05": { "effet": "Annule la Menace", "tag": "cancel_menace", "ops": [{ "op": "cancelMenace" }] },
+    "DIP_O01": {
+      "effet": "Réaction : quand ce héros élimine un monstre, chaque allié peut lui donner 1 carte",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_eliminates_monster",
+        "ops": [{ "op": "giveCardsFromAllies" }]
+      }
+    },
+    "DIP_O02": {
+      "effet": "Réaction : quand ce héros subit une dégât, chaque héros pioche 1",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_damage",
+        "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }]
+      }
+    },
+    "DIP_O03": {
+      "effet": "Réaction : quand un héros effectue un échange avec ce héros, les deux piochent 2",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_exchange",
+        "ops": [{ "op": "draw", "target": "self", "n": 2 }]
+      }
+    },
+    "DIP_O04": {
+      "effet": "Réaction : quand un héros effectue un échange avec ce héros, les deux piochent 1 Destin",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_self_exchange",
+        "ops": [{ "op": "drawDestin", "target": "self" }]
+      }
+    },
+    "DIP_O05": {
+      "effet": "Réaction : annule l'effet d'une Menace révélée (n'importe quel héros peut déclencher)",
+      "tag": "reactive_object",
+      "reactive": {
+        "trigger": "on_menace_revealed",
+        "ops": [{ "op": "cancelMenace" }]
+      }
+    },
 
     "HERO_001": {
       "effet": "Daraa — Élimine tous les monstres blessés",

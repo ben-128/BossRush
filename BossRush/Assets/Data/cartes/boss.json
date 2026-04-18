@@ -60,11 +60,10 @@
       "vie_multiplicateur": 6,
       "stats": {
         "sequence": [
-          "<ico:menace>",
-          "<ico:attaque>"
+          "<ico:menace>"
         ],
         "passif": "Les ordres d'attaque se font sur toutes les files.",
-        "actif": "Piochez 1 <ico:invocation> sur toutes les files vides."
+        "actif": "Piochez <ico:invocation> sur toutes les files vides."
       },
       "monstres_ids": [],
       "lore_md": "boss_caicai_vilu.md",

@@ -23,6 +23,10 @@ import { damageHero, damageBoss, damageMonster } from './damage.js';
 import { runOps, mkCtx } from './effects.js';
 import { consumeAttackBonus, onAttackResolved } from './modifiers.js';
 import { hookDiscardTopOnAction, hookDrawAllowed } from './bossPassifs.js';
+import {
+  fireReactiveObjectTriggers,
+  fireReactiveForAllies,
+} from './reactiveObjects.js';
 
 // ---------------------------------------------------------------------------
 // Action types exchanged with the AI policy
@@ -110,6 +114,14 @@ function doDraw(state: GameState, seat: number, reason?: string): void {
   }
   h.hand.push(...drew);
   h.drawsThisTurn = (h.drawsThisTurn ?? 0) + drew.length;
+  // Reactive triggers for hand-size thresholds.
+  // ROD_O06 Sève de tamo : quand ce héros pioche avec 7+ cartes en main.
+  if (h.hand.length >= 7) {
+    fireReactiveObjectTriggers(state, 'on_self_high_hand_draw', seat);
+  }
+  if (h.hand.length === 1) {
+    fireReactiveObjectTriggers(state, 'on_self_low_hand', seat);
+  }
   emit(state, { kind: 'ACTION_DRAW', seat, drew: drew.map((c) => c.id), ...(reason ? { reason } : {}) });
 }
 
@@ -144,11 +156,6 @@ function playAction(
   const card = h.hand[handIdx];
   if (!card) return;
 
-  h.hand.splice(handIdx, 1);
-  // Consume the one-shot prereq bypass (MAG_O02) as soon as an action plays.
-  if (h.nextActionIgnoresPrereq) h.nextActionIgnoresPrereq = false;
-  h.actionsPlayedThisTurn = (h.actionsPlayedThisTurn ?? 0) + 1;
-
   const renforts = renfortObjectIndices
     .slice()
     .sort((a, b) => b - a)
@@ -168,9 +175,10 @@ function playAction(
   const bonusDmg =
     renforts.reduce((s, r) => s + (r.card.bonus_degats ?? 0), 0) + bonusFromModifiers;
 
-  // Renfort objects fire their DSL ops BEFORE the main attack, so they can
-  // set up modifiers (e.g. ROD_O02 chain-on-kill flag). `bonus_degats` is
-  // already factored into `bonusDmg`. Each renfort is then discarded.
+  // Renfort objects fire their DSL ops BEFORE the main attack / prereq check,
+  // so flags like `nextActionIgnoresPrereq` (MAG_O02) and `chainAttackOnKill`
+  // (ROD_O02) are in effect by the time the action resolves. `bonus_degats`
+  // is factored into `bonusDmg`. Each renfort is then discarded.
   for (const r of renforts) {
     h.objects.splice(r.idx, 1);
     const rEntry = state.effects[r.card.id];
@@ -180,6 +188,26 @@ function playAction(
     }
     discard(state.piles.chasse, r.card);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: r.card.id, fromSeat: seat });
+  }
+
+  // Validate prerequisite AFTER renforts have fired — MAG_O02 can now have
+  // set `nextActionIgnoresPrereq` above.
+  if (!meetsPrerequisite(h, card, state) && !h.nextActionIgnoresPrereq) {
+    emit(state, {
+      kind: 'ACTION_NONE',
+      seat,
+      reason: `prereq_mismatch:${card.id}`,
+    });
+    return;
+  }
+  h.hand.splice(handIdx, 1);
+  if (h.nextActionIgnoresPrereq) h.nextActionIgnoresPrereq = false;
+  h.actionsPlayedThisTurn = (h.actionsPlayedThisTurn ?? 0) + 1;
+  if (h.actionsPlayedThisTurn === 2) {
+    fireReactiveObjectTriggers(state, 'on_self_played_2_actions', seat);
+  }
+  if (h.hand.length === 1) {
+    fireReactiveObjectTriggers(state, 'on_self_low_hand', seat);
   }
 
   if (entry) {
@@ -295,6 +323,9 @@ function doExchange(
     received: received.map((c) => c.id),
     ...(reason ? { reason } : {}),
   });
+  // Reactive triggers: both participants see an exchange happen.
+  fireReactiveObjectTriggers(state, 'on_self_exchange', seat);
+  fireReactiveObjectTriggers(state, 'on_self_exchange', withSeat);
 }
 
 function placeObject(state: GameState, seat: number, handIdx: number, reason?: string): void {
@@ -326,6 +357,9 @@ function doUseCapacite(state: GameState, seat: number): void {
   h.capaciteUsed = true;
   emit(state, { kind: 'CAPACITE_USED', seat, heroId: h.heroId });
   runOps(state, mkCtx(seat, h.heroId, 'chasse'), entry.ops);
+  // Reactive triggers around capacité usage.
+  fireReactiveObjectTriggers(state, 'on_self_capacite_used', seat);
+  fireReactiveForAllies(state, 'on_ally_capacite_used', seat);
 }
 
 /** Active use of a posed object: run its DSL ops, then discard. */

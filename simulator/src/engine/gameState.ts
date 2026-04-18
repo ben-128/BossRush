@@ -137,6 +137,8 @@ export interface GameState {
 
   /** Flag set during Menace resolution; op cancelMenace reads this. */
   menaceCancelled?: boolean;
+  /** Flag set during Destin resolution; SOI_O03 reactive can set it. */
+  destinCancelled?: boolean;
   /** Set true when any hero was healed this turn (read by SOI_O05). */
   healedThisTurn?: boolean;
 

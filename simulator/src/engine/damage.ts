@@ -22,6 +22,10 @@ import {
   hookInvuncheDamageMarksCapaciteUsed,
   hookKaggenElimDrawsChasse,
 } from './bossPassifs.js';
+import {
+  fireReactiveObjectTriggers,
+  fireReactiveForAllies,
+} from './reactiveObjects.js';
 import { runOps, mkCtx } from './effects.js';
 
 function nextWoundId(state: GameState): string {
@@ -96,6 +100,14 @@ export function damageHero(state: GameState, seat: number, spec: DamageSpec): bo
   if (spec.source === 'menace' || spec.source === 'boss') {
     hookInvuncheDrawDestinOnDamage(state, seat);
     hookInvuncheDamageMarksCapaciteUsed(state, seat);
+  }
+  // Reactive posed objects: post-damage triggers fire here.
+  fireReactiveObjectTriggers(state, 'on_self_damage', seat);
+  fireReactiveForAllies(state, 'on_ally_damage', seat);
+  // Lethal threshold → fire on_self_lethal_damage; reactions may heal so
+  // re-check before killing.
+  if (totalWoundsOfHero(h) >= h.vieMax) {
+    fireReactiveObjectTriggers(state, 'on_self_lethal_damage', seat);
   }
   if (totalWoundsOfHero(h) >= h.vieMax) {
     return killHero(state, seat);
@@ -206,6 +218,8 @@ export function eliminateMonster(state: GameState, seat: number, instanceId: str
   }
   // Kaggen passif: the hero who eliminated the monster draws 1 Chasse.
   hookKaggenElimDrawsChasse(state, seat);
+  // Reactive posed objects for the eliminator.
+  fireReactiveObjectTriggers(state, 'on_self_eliminates_monster', seat);
 }
 
 // ---------------------------------------------------------------------------

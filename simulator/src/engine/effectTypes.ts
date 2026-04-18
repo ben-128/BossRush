@@ -438,6 +438,17 @@ export interface OpRotateHeadsToNext {
   op: 'rotateHeadsToNext';
 }
 
+/** Cancel the in-flight Destin resolution (SOI_O03 Gemme de communion). */
+export interface OpCancelDestin {
+  op: 'cancelDestin';
+}
+
+/** Remove the most recently added wound from self (SOI_O02 Totem de transe). */
+export interface OpRemoveLastWound {
+  op: 'removeLastWound';
+  target: 'self';
+}
+
 /** Summon 1 monster in every hero queue that is currently empty (BOSS_003 actif). */
 export interface OpSummonOnEmptyQueues {
   op: 'summonOnEmptyQueues';
@@ -518,7 +529,31 @@ export type EffectOp =
   | OpDamageIfHealed
   | OpSetChainOnKill
   | OpRotateHeadsToNext
-  | OpSummonOnEmptyQueues;
+  | OpSummonOnEmptyQueues
+  | OpCancelDestin
+  | OpRemoveLastWound;
+
+/**
+ * Reactive triggers for posed Objet cards. When the matching game event is
+ * emitted in the engine, the first posed object owned by the relevant hero
+ * whose `reactive.trigger` matches fires its ops and is discarded.
+ */
+export type ReactiveTrigger =
+  | 'on_self_damage'
+  | 'on_ally_damage'
+  | 'on_self_lethal_damage'
+  | 'on_self_eliminates_monster'
+  | 'on_self_capacite_used'
+  | 'on_ally_capacite_used'
+  | 'on_destin_drawn_any'
+  | 'on_menace_revealed'
+  | 'on_monster_attacks_self'
+  | 'on_third_monster_arrives_self'
+  | 'on_self_played_2_actions'
+  | 'on_self_low_hand'
+  | 'on_self_high_hand_draw'
+  | 'on_self_exchange'
+  | 'on_self_heals_ally';
 
 /** One entry per card id in effects.json. */
 export interface CardEffectEntry {
@@ -535,6 +570,13 @@ export interface CardEffectEntry {
     onAttack?: EffectOp[];
     onDamage?: EffectOp[];
     onEliminate?: EffectOp[];
+  };
+
+  /** Reactive object trigger — fires once on matching engine event, then the
+   *  object is discarded. Only meaningful on posed Objet cards. */
+  reactive?: {
+    trigger: ReactiveTrigger;
+    ops: EffectOp[];
   };
 
   /** Boss — only meaningful on BOSS_xxx entries. */

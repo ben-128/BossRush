@@ -22,6 +22,7 @@ import { damageHero, eliminateMonster } from './damage.js';
 import { resolveMenace } from './menaces.js';
 import { runOps, mkCtx } from './effects.js';
 import { hookExtraAttackOrderQueues } from './bossPassifs.js';
+import { fireReactiveObjectTriggers, fireReactiveForAll } from './reactiveObjects.js';
 
 function nextInstanceId(state: GameState): string {
   state.counters.monsterInstance += 1;
@@ -75,6 +76,10 @@ export function summonMonsterInQueue(state: GameState, seat: number): void {
   if (trig && trig.length > 0) {
     runOps(state, mkCtx(targetSeat, m.id, 'monstre'), trig);
   }
+  // Reactive: 3rd monster landing in this hero's queue fires GUE_O04.
+  if (target.queue.length === 3) {
+    fireReactiveObjectTriggers(state, 'on_third_monster_arrives_self', targetSeat);
+  }
 }
 
 /**
@@ -122,6 +127,13 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
     tgt: { kind: 'hero', seat },
     degats: dmg,
   });
+  // Reactive: targeted hero can consume an object to eliminate the attacker
+  // before damage lands (MAG_O04 Cristal explosif).
+  fireReactiveObjectTriggers(state, 'on_monster_attacks_self', seat);
+  // If the reactive eliminated the head, bail out of the attack.
+  if (state.heroes[seat]?.queue[0]?.instanceId !== head.instanceId) {
+    return;
+  }
 
   damageHero(state, seat, {
     amount: dmg,

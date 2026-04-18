@@ -445,7 +445,7 @@
       "nom": "Sève de tamo",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Réaction : quand ce héros pioche<ico:chasse> une carte  avec au moins 10 cartes dans sa main\nSoignez-le de 2 <ico:degat>.",
+      "effet": "Réaction : quand ce héros pioche <ico:chasse> avec au moins 7 cartes dans sa main\nSoignez-le de 2 <ico:degat>.",
       "quantite": 1
     },
     {

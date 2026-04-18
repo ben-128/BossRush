@@ -23,6 +23,7 @@ import { damageHero } from './damage.js';
 import { summonMonsterInQueue, resolveAttackOrder, triggerBossActif } from './bossSequence.js';
 import { runOps, mkCtx } from './effects.js';
 import { discard } from './piles.js';
+import { fireReactiveForAll } from './reactiveObjects.js';
 
 export function resolveMenace(state: GameState, card: Menace): void {
   emit(state, {
@@ -34,10 +35,15 @@ export function resolveMenace(state: GameState, card: Menace): void {
 
   state.menaceCancelled = false;
 
-  // Reactive interrupt: if the active hero has a posed object with tag
-  // `cancel_menace` (GUE_O05 Heaume du toqui, DIP_O05 Traité de paix) AND
-  // the incoming menace is an assault that clearly hurts them, consume the
-  // object before resolution.
+  // Reactive posed objects: any hero with on_menace_revealed can fire.
+  fireReactiveForAll(state, 'on_menace_revealed');
+  if (state.menaceCancelled) {
+    emit(state, { kind: 'RESOLVE_MENACE', card: card.id, outcome: 'cancelled' });
+    return;
+  }
+
+  // Legacy tag-based interrupt (kept for backward compat; new rules use
+  // reactive.trigger='on_menace_revealed' instead).
   const h = state.heroes[state.activeSeat];
   if (h && card.type === 'assaut') {
     const sub = card.sous_type;

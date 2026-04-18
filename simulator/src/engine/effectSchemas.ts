@@ -231,6 +231,11 @@ const OpDamageIfHealed = z.object({
 const OpSetChainOnKill = z.object({ op: z.literal('setChainOnKill') });
 const OpRotateHeadsToNext = z.object({ op: z.literal('rotateHeadsToNext') });
 const OpSummonOnEmptyQueues = z.object({ op: z.literal('summonOnEmptyQueues') });
+const OpCancelDestin = z.object({ op: z.literal('cancelDestin') });
+const OpRemoveLastWound = z.object({
+  op: z.literal('removeLastWound'),
+  target: z.literal('self'),
+});
 
 const OpEliminateWhere = z.object({
   op: z.literal('eliminateWhere'),
@@ -300,6 +305,8 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpSetChainOnKill,
     OpRotateHeadsToNext,
     OpSummonOnEmptyQueues,
+    OpCancelDestin,
+    OpRemoveLastWound,
   ]),
 );
 
@@ -413,18 +420,42 @@ const PassifHook = z.enum([
   'kaggen_elim_draws_chasse',
 ]);
 
+const ReactiveTriggerEnum = z.enum([
+  'on_self_damage',
+  'on_ally_damage',
+  'on_self_lethal_damage',
+  'on_self_eliminates_monster',
+  'on_self_capacite_used',
+  'on_ally_capacite_used',
+  'on_destin_drawn_any',
+  'on_menace_revealed',
+  'on_monster_attacks_self',
+  'on_third_monster_arrives_self',
+  'on_self_played_2_actions',
+  'on_self_low_hand',
+  'on_self_high_hand_draw',
+  'on_self_exchange',
+  'on_self_heals_ally',
+]);
+
+const ReactiveEntry = z.object({
+  trigger: ReactiveTriggerEnum,
+  ops: z.array(EffectOp).min(1),
+});
+
 export const CardEffectEntrySchema = z.object({
   effet: z.string().optional(),
   ops: z.array(EffectOp).min(1).optional(),
   tag: z.string().optional(),
   triggers: TriggerOps.optional(),
+  reactive: ReactiveEntry.optional(),
   actif_ops: z.array(EffectOp).optional(),
   passif_modifiers: z.array(PassifModifierEntry).optional(),
   passif_hooks: z.array(PassifHook).optional(),
 }).refine(
   (v) =>
-    v.ops || v.triggers || v.actif_ops || v.passif_modifiers || v.passif_hooks,
-  { message: 'entry must have at least one of: ops, triggers, actif_ops, passif_modifiers, passif_hooks' },
+    v.ops || v.triggers || v.reactive || v.actif_ops || v.passif_modifiers || v.passif_hooks,
+  { message: 'entry must have at least one of: ops, triggers, reactive, actif_ops, passif_modifiers, passif_hooks' },
 );
 
 export const EffectsCatalogSchema = z.record(z.string(), CardEffectEntrySchema);

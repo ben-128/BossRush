@@ -49,6 +49,7 @@ import type { WoundSource } from './events.js';
 import { addModifier } from './modifiers.js';
 import { triggerBossActif, resolveAttackOrder } from './bossSequence.js';
 import { applyPlayerAction } from './actions.js';
+import { fireReactiveForAll, fireReactiveObjectTriggers } from './reactiveObjects.js';
 
 export interface EffectContext {
   /** Seat that is resolving the effect (plays the card, triggers the ability). */
@@ -607,6 +608,16 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       if (h) h.chainAttackOnKill = true;
       return;
     }
+    case 'cancelDestin':
+      state.destinCancelled = true;
+      return;
+    case 'removeLastWound': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h || h.wounds.length === 0) return;
+      h.wounds.pop();
+      emit(state, { kind: 'WARN', message: `removeLastWound seat=${ctx.sourceSeat} via ${ctx.sourceCardId}` });
+      return;
+    }
     case 'summonOnEmptyQueues': {
       for (const hh of state.heroes) {
         if (hh.dead || hh.queue.length > 0) continue;
@@ -1089,8 +1100,14 @@ function applyDamageOp(
 
 function applyHealOp(state: GameState, ctx: EffectContext, op: OpHeal): void {
   const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
+  let healedAnyAlly = false;
   for (const s of seats) {
-    healHero(state, s, op.amount, ctx.sourceCardId);
+    const healed = healHero(state, s, op.amount, ctx.sourceCardId);
+    if (healed > 0 && s !== ctx.sourceSeat) healedAnyAlly = true;
+  }
+  // Reactive: if this hero healed at least one ally, fire on_self_heals_ally.
+  if (healedAnyAlly) {
+    fireReactiveObjectTriggers(state, 'on_self_heals_ally', ctx.sourceSeat);
   }
 }
 
@@ -1119,6 +1136,13 @@ function applyDrawDestinOp(state: GameState, ctx: EffectContext, op: OpDrawDesti
       if (!d) break;
       emit(state, { kind: 'DRAW_CARD', pile: 'destin', card: d.id, toSeat: s });
       emit(state, { kind: 'RESOLVE_DESTIN', card: d.id, toSeat: s });
+      // Reactive posed objects (SOI_O03 Gemme de communion) can interrupt.
+      state.destinCancelled = false;
+      fireReactiveForAll(state, 'on_destin_drawn_any');
+      if (state.destinCancelled) {
+        discard(state.piles.destin, d);
+        continue;
+      }
       const entry = state.effects[d.id];
       if (entry) {
         runOps(state, { ...ctx, sourceSeat: s, sourceCardId: d.id, sourceKind: 'destin' }, entry.ops);
