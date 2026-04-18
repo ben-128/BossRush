@@ -22,7 +22,7 @@ interface Stats {
   meanTurnsVictory: number | null;
   meanTurnsDefeat: number | null;
   byBoss: Record<string, { wins: number; defeats: number; winrate: number }>;
-  byHero: Record<string, { games: number; deaths: number; deathRate: number }>;
+  byHero: Record<string, { games: number; wins: number; winrate: number }>;
   topPlayedCards: Array<[string, number]>;
 }
 
@@ -285,19 +285,19 @@ function StatsPanel({ stats }: { stats: Stats }) {
               <tr className="text-stone-400">
                 <th className="text-left">Héros</th>
                 <th className="text-right">Parties</th>
-                <th className="text-right">Morts</th>
+                <th className="text-right">Victoires</th>
                 <th className="text-right">%</th>
               </tr>
             </thead>
             <tbody>
               {Object.entries(stats.byHero)
-                .sort((a, b) => a[1].deathRate - b[1].deathRate)
+                .sort((a, b) => b[1].winrate - a[1].winrate)
                 .map(([h, v]) => (
                   <tr key={h}>
                     <td>{h}</td>
                     <td className="text-right">{v.games}</td>
-                    <td className="text-right">{v.deaths}</td>
-                    <td className="text-right">{(v.deathRate * 100).toFixed(1)}%</td>
+                    <td className="text-right">{v.wins}</td>
+                    <td className="text-right">{(v.winrate * 100).toFixed(1)}%</td>
                   </tr>
                 ))}
             </tbody>

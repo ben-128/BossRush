@@ -377,15 +377,9 @@ export const heuristicPolicy: Policy = {
         );
         if (chainRenfort !== undefined) attaches.push(chainRenfort);
       }
-      // Also look for an objet in hand to pose this turn (free alongside
-      // play). Only pose objets this hero can actually use — the `prerequis`
-      // must match the hero's name, else the objet sits idle.
-      // The engine applies placeObject BEFORE playAction — if the posed objet
-      // sits before the played action, the action index shifts down by one.
-      const poseIdx = h.hand.findIndex(
-        (c, i) => i !== best.i && c.categorie === 'objet' && meetsPrerequisite(h, c, state),
-      );
-      const playIdx = poseIdx !== -1 && poseIdx < best.i ? best.i - 1 : best.i;
+      // New rule (2026-04): a Play action = 1 card only. We cannot pose an
+      // objet alongside the played action — that must be a separate turn (or
+      // the free extra-pose granted by ROD_A04, handled in pickReaction).
       const entry = state.effects[best.card.id];
       const tag = entry?.tag ?? (best.card.degats !== undefined ? 'attack' : 'utility');
       const parts = [
@@ -394,14 +388,25 @@ export const heuristicPolicy: Policy = {
         tag ? `tag=${tag}` : null,
         best.card.degats !== undefined ? `${best.card.degats} dmg` : null,
         attaches.length > 0 ? 'avec renfort' : null,
-        poseIdx !== -1 ? `+ pose ${h.hand[poseIdx]!.nom}` : null,
       ].filter(Boolean);
       return {
         kind: 'play',
-        playAction: playIdx,
+        playAction: best.i,
         renforts: attaches,
-        ...(poseIdx !== -1 ? { placeObject: poseIdx } : {}),
         reason: `joue ${parts.join(' · ')}`,
+      };
+    }
+
+    // No Action playable. Before drawing/exchanging, consider posing an
+    // Objet as the main action (since Play = 1 card now).
+    const poseIdx = h.hand.findIndex(
+      (c) => c.categorie === 'objet' && meetsPrerequisite(h, c, state),
+    );
+    if (poseIdx !== -1) {
+      return {
+        kind: 'play',
+        placeObject: poseIdx,
+        reason: `pose ${h.hand[poseIdx]!.nom} (aucune action jouable)`,
       };
     }
 

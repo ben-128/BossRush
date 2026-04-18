@@ -169,8 +169,8 @@ TextureImporter:
       name: actif_boss
       rect:
         serializedVersion: 2
-        x: 384
-        y: 256
+        x: 0
+        y: 128
         width: 128
         height: 128
       alignment: 0
@@ -191,7 +191,7 @@ TextureImporter:
       name: degat
       rect:
         serializedVersion: 2
-        x: 0
+        x: 128
         y: 128
         width: 128
         height: 128
@@ -213,7 +213,7 @@ TextureImporter:
       name: action
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 128
         width: 128
         height: 128
@@ -235,8 +235,8 @@ TextureImporter:
       name: capacite
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
+        x: 0
+        y: 0
         width: 128
         height: 128
       alignment: 0
@@ -257,8 +257,8 @@ TextureImporter:
       name: destin
       rect:
         serializedVersion: 2
-        x: 384
-        y: 128
+        x: 128
+        y: 0
         width: 128
         height: 128
       alignment: 0
@@ -279,29 +279,7 @@ TextureImporter:
       name: chasse
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ord_monstre
-      rect:
-        serializedVersion: 2
-        x: 128
+        x: 256
         y: 0
         width: 128
         height: 128

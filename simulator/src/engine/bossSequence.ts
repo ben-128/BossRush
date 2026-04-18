@@ -22,7 +22,7 @@ import { damageHero, eliminateMonster } from './damage.js';
 import { resolveMenace } from './menaces.js';
 import { runOps, mkCtx } from './effects.js';
 import { hookExtraAttackOrderQueues } from './bossPassifs.js';
-import { fireReactiveObjectTriggers, fireReactiveForAll } from './reactiveObjects.js';
+import { fireReactiveObjectTriggers } from './reactiveObjects.js';
 
 function nextInstanceId(state: GameState): string {
   state.counters.monsterInstance += 1;
@@ -33,7 +33,7 @@ function nextInstanceId(state: GameState): string {
  * Draw one monster from the monstre pile and append to the given seat's queue.
  * If the queue belongs to a dead hero, forward to the next living one.
  */
-export function summonMonsterInQueue(state: GameState, seat: number): void {
+export async function summonMonsterInQueue(state: GameState, seat: number): Promise<void> {
   const m = drawOne(state, state.piles.monstre, 'monstre');
   if (!m) {
     emit(state, { kind: 'WARN', message: 'Monstre pile exhausted — cannot summon' });
@@ -74,11 +74,11 @@ export function summonMonsterInQueue(state: GameState, seat: number): void {
   // onArrive trigger (e.g. Bond goes to head).
   const trig = state.effects[m.id]?.triggers?.onArrive;
   if (trig && trig.length > 0) {
-    runOps(state, mkCtx(targetSeat, m.id, 'monstre'), trig);
+    await runOps(state, mkCtx(targetSeat, m.id, 'monstre'), trig);
   }
   // Reactive: 3rd monster landing in this hero's queue fires GUE_O04.
   if (target.queue.length === 3) {
-    fireReactiveObjectTriggers(state, 'on_third_monster_arrives_self', targetSeat);
+    await fireReactiveObjectTriggers(state, 'on_third_monster_arrives_self', targetSeat);
   }
 }
 
@@ -89,7 +89,7 @@ export function summonMonsterInQueue(state: GameState, seat: number): void {
  * The attacking monster card moves from the queue to the hero's wound pile
  * (sa carte passe "sous le héros"). This is NOT an elimination.
  */
-export function resolveAttackOrder(state: GameState, seat: number): void {
+export async function resolveAttackOrder(state: GameState, seat: number): Promise<void> {
   const h = state.heroes[seat];
   if (!h) return;
   if (h.dead) {
@@ -110,7 +110,7 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
     const skip = { cancelled: false };
     // Convention: if the trigger moves this monster away, the attack is
     // considered cancelled for this call.
-    runOps(state, mkCtx(seat, head.cardId, 'monstre'), atkTrig);
+    await runOps(state, mkCtx(seat, head.cardId, 'monstre'), atkTrig);
     // If head changed, the trigger redirected; emit an ATTACK_ORDER log and
     // return — the next queue head (if any) can be tapped by a later call.
     if (h.queue[0]?.instanceId !== head.instanceId) {
@@ -129,13 +129,13 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
   });
   // Reactive: targeted hero can consume an object to eliminate the attacker
   // before damage lands (MAG_O04 Cristal explosif).
-  fireReactiveObjectTriggers(state, 'on_monster_attacks_self', seat);
+  await fireReactiveObjectTriggers(state, 'on_monster_attacks_self', seat);
   // If the reactive eliminated the head, bail out of the attack.
   if (state.heroes[seat]?.queue[0]?.instanceId !== head.instanceId) {
     return;
   }
 
-  damageHero(state, seat, {
+  await damageHero(state, seat, {
     amount: dmg,
     source: 'monstre',
     sourceCardId: head.cardId,
@@ -144,19 +144,19 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
   // onDamage trigger (e.g. Brume défausse, Sangsue soigne boss).
   const dmgTrig = state.effects[head.cardId]?.triggers?.onDamage;
   if (dmgTrig && dmgTrig.length > 0) {
-    runOps(state, mkCtx(seat, head.cardId, 'monstre'), dmgTrig);
+    await runOps(state, mkCtx(seat, head.cardId, 'monstre'), dmgTrig);
   }
 
   // The monster dies after executing its attack order.
-  eliminateMonster(state, seat, head.instanceId);
+  await eliminateMonster(state, seat, head.instanceId);
 }
 
 /** Trigger boss actif (⚡). Uses DSL if present, otherwise logs. */
-export function triggerBossActif(state: GameState): void {
+export async function triggerBossActif(state: GameState): Promise<void> {
   const entry = state.effects[state.boss.bossId];
   if (entry?.actif_ops && entry.actif_ops.length > 0) {
     emit(state, { kind: 'BOSS_ACTIF_TRIGGERED', bossId: state.boss.bossId, implemented: true });
-    runOps(state, mkCtx(state.activeSeat, state.boss.bossId, 'boss'), entry.actif_ops);
+    await runOps(state, mkCtx(state.activeSeat, state.boss.bossId, 'boss'), entry.actif_ops);
     return;
   }
   emit(state, { kind: 'BOSS_ACTIF_TRIGGERED', bossId: state.boss.bossId, implemented: false });
@@ -164,7 +164,7 @@ export function triggerBossActif(state: GameState): void {
 }
 
 /** Resolve one icon of the boss sequence. */
-function resolveIcon(state: GameState, icon: BossIcon): void {
+async function resolveIcon(state: GameState, icon: BossIcon): Promise<void> {
   emit(state, { kind: 'BOSS_SEQ_ICON', icon });
   switch (icon) {
     case 'menace': {
@@ -173,23 +173,23 @@ function resolveIcon(state: GameState, icon: BossIcon): void {
         emit(state, { kind: 'WARN', message: 'Menace pile exhausted' });
         return;
       }
-      resolveMenace(state, m);
+      await resolveMenace(state, m);
       // Menaces are discarded after resolution per standard card game flow.
       discard(state.piles.menace, m);
       return;
     }
     case 'invocation':
-      summonMonsterInQueue(state, state.activeSeat);
+      await summonMonsterInQueue(state, state.activeSeat);
       return;
     case 'attaque': {
-      resolveAttackOrder(state, state.activeSeat);
+      await resolveAttackOrder(state, state.activeSeat);
       for (const extra of hookExtraAttackOrderQueues(state)) {
-        resolveAttackOrder(state, extra);
+        await resolveAttackOrder(state, extra);
       }
       return;
     }
     case 'actif_boss':
-      triggerBossActif(state);
+      await triggerBossActif(state);
       return;
     case 'destin':
       notImplemented(state, 'boss_sequence_destin_icon', state.boss.bossId);
@@ -202,13 +202,13 @@ function resolveIcon(state: GameState, icon: BossIcon): void {
 }
 
 /** Resolve the full end-of-turn sequence of the current boss. */
-export function resolveBossSequence(state: GameState): void {
+export async function resolveBossSequence(state: GameState): Promise<void> {
   if (state.result !== 'running') return;
   const bossCard = state.catalog.bossById.get(state.boss.bossId);
   if (!bossCard) throw new Error(`Unknown boss id at runtime: ${state.boss.bossId}`);
   const seq = parseBossSequence(bossCard.stats.sequence);
   for (const icon of seq) {
     if (state.result !== 'running') break;
-    resolveIcon(state, icon);
+    await resolveIcon(state, icon);
   }
 }

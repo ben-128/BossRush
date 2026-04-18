@@ -29,11 +29,13 @@ public static class DefaultIconConfigCreator
     private const string FramePath = "Assets/Art/Icons/Inline/Sources/CadreCarte.png";
     private const string SymbolsFolder = "Assets/Art/Icons/Inline/Sources";
 
-    // Couleurs par famille
-    private static readonly Color ColorBoss   = new Color(0x6B/255f, 0x15/255f, 0x15/255f); // #6B1515
-    private static readonly Color ColorBrun   = new Color(0x3A/255f, 0x2E/255f, 0x22/255f); // #3A2E22
-    private static readonly Color ColorHeros  = new Color(0xD4/255f, 0xA8/255f, 0x30/255f); // #D4A830
-    private static readonly Color ColorDegat  = new Color(0x8B/255f, 0x20/255f, 0x20/255f); // #8B2020
+    // Couleurs finales (monochrome noir + 2 exceptions)
+    // Voir Docs/icones_inline.md section "Philosophie"
+    private static readonly Color ColorNoir   = new Color(0x1A/255f, 0x1A/255f, 0x1A/255f); // #1A1A1A
+    private static readonly Color ColorHeros  = new Color(0xD4/255f, 0xA8/255f, 0x30/255f); // #D4A830 (exception : capacite heros)
+    private static readonly Color ColorDegat  = new Color(0x8B/255f, 0x20/255f, 0x20/255f); // #8B2020 (exception : sang)
+
+    // Invocation : SymbolOnly (creature trapue), plus de cadre Cutout — voir icones_inline.md
 
     // Definition des 9 entrees
     private struct Preset
@@ -47,16 +49,16 @@ public static class DefaultIconConfigCreator
 
     private static readonly Preset[] Presets = new[]
     {
-        // Types de carte (Cutout)
-        new Preset { tag = "menace",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorBoss,  symbolColor = Color.white, scale = 0.6f },
-        new Preset { tag = "invocation", mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorBoss,  symbolColor = Color.white, scale = 0.6f },
-        new Preset { tag = "action",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorBrun,  symbolColor = Color.white, scale = 0.6f },
-        new Preset { tag = "destin",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorBrun,  symbolColor = Color.white, scale = 0.6f },
-        new Preset { tag = "chasse",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorBrun,  symbolColor = Color.white, scale = 0.6f },
+        // Types de carte (Cutout) — tous en noir
+        new Preset { tag = "menace",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorNoir,  symbolColor = Color.white, scale = 0.6f },
+        new Preset { tag = "action",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorNoir,  symbolColor = Color.white, scale = 0.6f },
+        new Preset { tag = "destin",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorNoir,  symbolColor = Color.white, scale = 0.6f },
+        new Preset { tag = "chasse",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorNoir,  symbolColor = Color.white, scale = 0.6f },
 
-        // Actions pures (SymbolOnly)
-        new Preset { tag = "attaque",    mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorBoss,   scale = 1f   },
-        new Preset { tag = "actif_boss", mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorBoss,   scale = 1f   },
+        // Actions pures (SymbolOnly) — tous en noir sauf 2 exceptions
+        new Preset { tag = "invocation", mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorNoir,   scale = 1f   },
+        new Preset { tag = "attaque",    mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorNoir,   scale = 1f   },
+        new Preset { tag = "actif_boss", mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorNoir,   scale = 1f   },
         new Preset { tag = "capacite",   mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorHeros,  scale = 1f   },
         new Preset { tag = "degat",      mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorDegat,  scale = 1f   },
     };

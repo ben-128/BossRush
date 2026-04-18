@@ -80,6 +80,14 @@ export function resolveHeroTarget(
       }
       return [];
     }
+    case 'exchange_partner': {
+      // Set by actions.ts around on_self_exchange reactive fires. Falls back
+      // to [] if no exchange in flight.
+      if (state.exchangePartner === undefined) return [];
+      const h = state.heroes[state.exchangePartner];
+      if (!h || h.dead) return [];
+      return [state.exchangePartner];
+    }
     default: {
       const _exhaust: never = tok;
       return _exhaust;
@@ -126,6 +134,16 @@ export function resolveMonsterPick(
       const head = source.queue[0];
       if (head) {
         candidates.push({ seat: sourceSeat, instanceId: head.instanceId, cardId: head.cardId });
+      }
+      break;
+    }
+    case 'queue_second_self': {
+      // Index 1 of self queue — used by MAG_O03 Catalyseur (secondary target
+      // in the file). If no 2nd monster, resolveMonsterPick returns undefined
+      // and the caller should fall back to the Boss.
+      const second = source.queue[1];
+      if (second) {
+        candidates.push({ seat: sourceSeat, instanceId: second.instanceId, cardId: second.cardId });
       }
       break;
     }

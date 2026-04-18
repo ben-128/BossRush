@@ -36,6 +36,7 @@ const HeroTargetTok = z.enum([
   'each_hero',
   'each_ally',
   'next_hero',
+  'exchange_partner',
 ]);
 
 const DamageTargetTok = z.enum([
@@ -46,7 +47,7 @@ const DamageTargetTok = z.enum([
 ]);
 
 const MonsterPick = z.object({
-  pick: z.enum(['monster_in_self_queue', 'monster_in_any_queue', 'queue_head_self']),
+  pick: z.enum(['monster_in_self_queue', 'monster_in_any_queue', 'queue_head_self', 'queue_second_self']),
   where: z.enum(['has_damage', 'at_most_life_N', 'vie_eq_1']).optional(),
   N: z.number().int().optional(),
 });
@@ -233,6 +234,7 @@ const OpSetChainOnKill = z.object({ op: z.literal('setChainOnKill') });
 const OpRotateHeadsToNext = z.object({ op: z.literal('rotateHeadsToNext') });
 const OpSummonOnEmptyQueues = z.object({ op: z.literal('summonOnEmptyQueues') });
 const OpCancelDestin = z.object({ op: z.literal('cancelDestin') });
+const OpReassignDestin = z.object({ op: z.literal('reassignDestin'), target: HeroTargetTok });
 const OpRemoveLastWound = z.object({
   op: z.literal('removeLastWound'),
   target: z.literal('self'),
@@ -240,6 +242,10 @@ const OpRemoveLastWound = z.object({
 const OpEliminateAllInHeroQueue = z.object({
   op: z.literal('eliminateAllInHeroQueue'),
   target: z.literal('any_hero'),
+});
+const OpMarkCapaciteUsed = z.object({
+  op: z.literal('markCapaciteUsed'),
+  target: z.literal('active_hero'),
 });
 
 const OpEliminateWhere = z.object({
@@ -312,8 +318,10 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpRotateHeadsToNext,
     OpSummonOnEmptyQueues,
     OpCancelDestin,
+    OpReassignDestin,
     OpRemoveLastWound,
     OpEliminateAllInHeroQueue,
+    OpMarkCapaciteUsed,
   ]),
 );
 
@@ -418,6 +426,8 @@ const PassifHook = z.enum([
   'reshuffle_heals_boss_2',
   'active_discards_top_chasse_on_action',
   'akkoro_damage_discards_chasse',
+  'azhda_immune_if_monsters_gte_heroes',
+  'gaww_reshuffle_heals_per_alive_hero',
   'invunche_draw_destin_on_damage',
   'invunche_damage_marks_capacite_used',
   'heal_cap_1',

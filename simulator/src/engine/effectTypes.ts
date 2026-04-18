@@ -27,7 +27,8 @@ export type HeroTargetTok =
   | 'any_ally'     // choix parmi tous les alliés vivants (exclut self)
   | 'each_hero'    // itération : tous les héros vivants
   | 'each_ally'    // itération : tous les alliés vivants
-  | 'next_hero';   // prochain héros vivant (horaire)
+  | 'next_hero'    // prochain héros vivant (horaire)
+  | 'exchange_partner'; // partenaire d'un échange en cours (DIP_O03, DIP_O04)
 
 export type DamageTargetTok =
   | 'queue_head'   // tête de file du héros actif (cible par défaut)
@@ -39,7 +40,8 @@ export interface MonsterPick {
   pick:
     | 'monster_in_self_queue'
     | 'monster_in_any_queue'
-    | 'queue_head_self';
+    | 'queue_head_self'
+    | 'queue_second_self';
   /** Optional filter predicate tokens (J3 has only these). */
   where?: 'has_damage' | 'at_most_life_N' | 'vie_eq_1';
   /** Param when where = at_most_life_N. */
@@ -448,10 +450,22 @@ export interface OpCancelDestin {
   op: 'cancelDestin';
 }
 
+/** SOI_O03 Gemme de communion: redirect destin to a chosen hero. */
+export interface OpReassignDestin {
+  op: 'reassignDestin';
+  target: HeroTargetTok;
+}
+
 /** Eliminate every monster in a chosen hero's queue (Daraa capacité). */
 export interface OpEliminateAllInHeroQueue {
   op: 'eliminateAllInHeroQueue';
   target: 'any_hero';
+}
+
+/** Mark a hero's capacité as already used (BOSS_002 Azhda actif). */
+export interface OpMarkCapaciteUsed {
+  op: 'markCapaciteUsed';
+  target: 'active_hero';
 }
 
 /** Remove the most recently added wound from self (SOI_O02 Totem de transe). */
@@ -543,8 +557,10 @@ export type EffectOp =
   | OpRotateHeadsToNext
   | OpSummonOnEmptyQueues
   | OpCancelDestin
+  | OpReassignDestin
   | OpRemoveLastWound
-  | OpEliminateAllInHeroQueue;
+  | OpEliminateAllInHeroQueue
+  | OpMarkCapaciteUsed;
 
 /**
  * Reactive triggers for posed Objet cards. When the matching game event is
@@ -617,6 +633,8 @@ export interface CardEffectEntry {
     | 'reshuffle_heals_boss_2'
     | 'active_discards_top_chasse_on_action'
     | 'akkoro_damage_discards_chasse'
+    | 'azhda_immune_if_monsters_gte_heroes'
+    | 'gaww_reshuffle_heals_per_alive_hero'
     | 'invunche_draw_destin_on_damage'
     | 'invunche_damage_marks_capacite_used'
     | 'heal_cap_1'

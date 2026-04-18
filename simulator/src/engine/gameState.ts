@@ -142,6 +142,12 @@ export interface GameState {
   menaceCancelled?: boolean;
   /** Flag set during Destin resolution; SOI_O03 reactive can set it. */
   destinCancelled?: boolean;
+  /** If set during Destin resolution (SOI_O03 reassign option), the Destin
+   *  effect is applied to this seat instead of the original draw seat. */
+  destinReassignTo?: number;
+  /** The "other" seat during an in-flight on_self_exchange reactive — used by
+   *  DIP_O03/O04 to draw for the exchange partner. Cleared after firing. */
+  exchangePartner?: number;
   /** Set true when any hero was healed this turn (read by SOI_O05). */
   healedThisTurn?: boolean;
 

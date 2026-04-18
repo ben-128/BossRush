@@ -17,11 +17,11 @@ import { runOps, mkCtx } from './effects.js';
  * Scan a single hero's posed objects for the given trigger and fire the first
  * match. Multiple objects with the same trigger fire in order, each once.
  */
-export function fireReactiveObjectTriggers(
+export async function fireReactiveObjectTriggers(
   state: GameState,
   trigger: ReactiveTrigger,
   ownerSeat: number,
-): void {
+): Promise<void> {
   const h = state.heroes[ownerSeat];
   if (!h) return;
   // Copy to avoid splice-during-iterate issues when the ops chain mutates.
@@ -31,6 +31,14 @@ export function fireReactiveObjectTriggers(
     if (entry?.reactive?.trigger !== trigger) continue;
     const idx = h.objects.indexOf(obj);
     if (idx < 0) continue; // already consumed by a prior ops chain
+    // Ask the owner's policy whether to consume this object. AI policies
+    // without the hook default to "yes" (backward compatible). Human policy
+    // opens a "Utiliser objet X ?" confirm modal.
+    const policy = state.policies[ownerSeat];
+    if (policy?.confirmReactiveObject) {
+      const ok = await policy.confirmReactiveObject(state, ownerSeat, obj.id, trigger);
+      if (!ok) continue;
+    }
     h.objects.splice(idx, 1);
     emit(state, {
       kind: 'OBJECT_USED',
@@ -38,33 +46,33 @@ export function fireReactiveObjectTriggers(
       card: obj.id,
       reason: `réaction ${trigger}`,
     });
-    runOps(state, mkCtx(ownerSeat, obj.id, 'chasse'), entry.reactive.ops);
+    await runOps(state, mkCtx(ownerSeat, obj.id, 'chasse'), entry.reactive.ops);
     discard(state.piles.chasse, obj);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: ownerSeat });
   }
 }
 
 /** Convenience: fire on the active seat. */
-export function fireReactiveActive(state: GameState, trigger: ReactiveTrigger): void {
-  fireReactiveObjectTriggers(state, trigger, state.activeSeat);
+export async function fireReactiveActive(state: GameState, trigger: ReactiveTrigger): Promise<void> {
+  await fireReactiveObjectTriggers(state, trigger, state.activeSeat);
 }
 
 /** Fire on every hero EXCEPT the given seat (used for "on_ally_damage"). */
-export function fireReactiveForAllies(
+export async function fireReactiveForAllies(
   state: GameState,
   trigger: ReactiveTrigger,
   exceptSeat: number,
-): void {
+): Promise<void> {
   for (const h of state.heroes) {
     if (h.dead || h.seatIdx === exceptSeat) continue;
-    fireReactiveObjectTriggers(state, trigger, h.seatIdx);
+    await fireReactiveObjectTriggers(state, trigger, h.seatIdx);
   }
 }
 
 /** Fire on every living hero (used for "on_destin_drawn_any", "on_menace_revealed"). */
-export function fireReactiveForAll(state: GameState, trigger: ReactiveTrigger): void {
+export async function fireReactiveForAll(state: GameState, trigger: ReactiveTrigger): Promise<void> {
   for (const h of state.heroes) {
     if (h.dead) continue;
-    fireReactiveObjectTriggers(state, trigger, h.seatIdx);
+    await fireReactiveObjectTriggers(state, trigger, h.seatIdx);
   }
 }

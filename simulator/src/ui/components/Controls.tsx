@@ -9,6 +9,8 @@ export function Controls() {
   const setAnimationsEnabled = useStore((s) => s.setAnimationsEnabled);
   const animSpeedMs = useStore((s) => s.animSpeedMs);
   const setAnimSpeedMs = useStore((s) => s.setAnimSpeedMs);
+  const manualMode = useStore((s) => s.manualMode);
+  const setManualMode = useStore((s) => s.setManualMode);
   const ended = state.result !== 'running';
 
   return (
@@ -22,7 +24,8 @@ export function Controls() {
       </button>
       <button
         onClick={runToEnd}
-        disabled={ended}
+        disabled={ended || manualMode}
+        title={manualMode ? 'Indisponible en mode manuel' : undefined}
         className="px-5 py-2.5 bg-gradient-to-b from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed shadow-md transition-all font-medium"
       >
         Simuler jusqu'à la fin
@@ -33,6 +36,18 @@ export function Controls() {
       >
         Nouvelle partie
       </button>
+      <label
+        className="flex items-center gap-2 text-xs text-stone-300 select-none cursor-pointer px-3 py-1.5 rounded-lg border border-stone-700 hover:bg-stone-800/60 transition-colors"
+        title="Tour par tour : l'utilisateur fait tous les choix à la place de l'IA."
+      >
+        <input
+          type="checkbox"
+          checked={manualMode}
+          onChange={(e) => setManualMode(e.target.checked)}
+          className="accent-amber-500"
+        />
+        <span>Mode manuel</span>
+      </label>
       <label
         className="flex items-center gap-2 text-xs text-stone-300 select-none cursor-pointer px-3 py-1.5 rounded-lg border border-stone-700 hover:bg-stone-800/60 transition-colors"
         title="Active les animations et la mise en scène des événements"

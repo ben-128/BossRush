@@ -99,7 +99,7 @@ export function meetsPrerequisite(h: HeroRuntime, c: CarteChasse, state: GameSta
 // Action resolvers
 // ---------------------------------------------------------------------------
 
-function doDraw(state: GameState, seat: number, reason?: string): void {
+async function doDraw(state: GameState, seat: number, reason?: string): Promise<void> {
   const h = state.heroes[seat];
   if (!h) return;
   const drew: CarteChasse[] = [];
@@ -117,10 +117,10 @@ function doDraw(state: GameState, seat: number, reason?: string): void {
   // Reactive triggers for hand-size thresholds.
   // ROD_O06 Sève de tamo : quand ce héros pioche avec 7+ cartes en main.
   if (h.hand.length >= 7) {
-    fireReactiveObjectTriggers(state, 'on_self_high_hand_draw', seat);
+    await fireReactiveObjectTriggers(state, 'on_self_high_hand_draw', seat);
   }
   if (h.hand.length === 1) {
-    fireReactiveObjectTriggers(state, 'on_self_low_hand', seat);
+    await fireReactiveObjectTriggers(state, 'on_self_low_hand', seat);
   }
   emit(state, { kind: 'ACTION_DRAW', seat, drew: drew.map((c) => c.id), ...(reason ? { reason } : {}) });
 }
@@ -144,13 +144,13 @@ function chooseDefaultTarget(
   return { kind: 'boss' };
 }
 
-function playAction(
+async function playAction(
   state: GameState,
   seat: number,
   handIdx: number,
   renfortObjectIndices: number[],
   reason?: string,
-): void {
+): Promise<void> {
   const h = state.heroes[seat];
   if (!h) return;
   const card = h.hand[handIdx];
@@ -184,7 +184,7 @@ function playAction(
     const rEntry = state.effects[r.card.id];
     const skipOps = rEntry?.tag === 'boost_attack';
     if (rEntry && !skipOps) {
-      runOps(state, mkCtx(seat, r.card.id, 'chasse'), rEntry.ops ?? []);
+      await runOps(state, mkCtx(seat, r.card.id, 'chasse'), rEntry.ops ?? []);
     }
     discard(state.piles.chasse, r.card);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: r.card.id, fromSeat: seat });
@@ -204,10 +204,10 @@ function playAction(
   if (h.nextActionIgnoresPrereq) h.nextActionIgnoresPrereq = false;
   h.actionsPlayedThisTurn = (h.actionsPlayedThisTurn ?? 0) + 1;
   if (h.actionsPlayedThisTurn === 2) {
-    fireReactiveObjectTriggers(state, 'on_self_played_2_actions', seat);
+    await fireReactiveObjectTriggers(state, 'on_self_played_2_actions', seat);
   }
   if (h.hand.length === 1) {
-    fireReactiveObjectTriggers(state, 'on_self_low_hand', seat);
+    await fireReactiveObjectTriggers(state, 'on_self_low_hand', seat);
   }
 
   if (entry) {
@@ -222,7 +222,7 @@ function playAction(
       }
       return op;
     });
-    runOps(state, mkCtx(seat, card.id, 'chasse'), ops);
+    await runOps(state, mkCtx(seat, card.id, 'chasse'), ops);
   } else {
     // J2 fallback: raw degats against default target.
     const baseDmg = card.degats ?? 0;
@@ -236,9 +236,9 @@ function playAction(
         degats: totalDmg,
       });
       if (target.kind === 'boss') {
-        damageBoss(state, { amount: totalDmg, source: 'chasse', sourceCardId: card.id });
+        await damageBoss(state, { amount: totalDmg, source: 'chasse', sourceCardId: card.id });
       } else {
-        damageMonster(state, target.seat, target.instanceId, {
+        await damageMonster(state, target.seat, target.instanceId, {
           amount: totalDmg,
           source: 'chasse',
           sourceCardId: card.id,
@@ -269,14 +269,14 @@ function playAction(
  * Validation is strict: indices must be in range, give/take are distinct sets,
  * partner must be alive and different from active.
  */
-function doExchange(
+async function doExchange(
   state: GameState,
   seat: number,
   withSeat: number,
   give: number[],
   take: number[],
   reason?: string,
-): void {
+): Promise<void> {
   const a = state.heroes[seat];
   const b = state.heroes[withSeat];
   if (!a) return;
@@ -323,9 +323,14 @@ function doExchange(
     received: received.map((c) => c.id),
     ...(reason ? { reason } : {}),
   });
-  // Reactive triggers: both participants see an exchange happen.
-  fireReactiveObjectTriggers(state, 'on_self_exchange', seat);
-  fireReactiveObjectTriggers(state, 'on_self_exchange', withSeat);
+  // Reactive triggers: both participants see an exchange happen. We stash
+  // the "other" seat in state.exchangePartner so ops can target it via the
+  // `exchange_partner` hero-target token (used by DIP_O03/O04).
+  state.exchangePartner = withSeat;
+  await fireReactiveObjectTriggers(state, 'on_self_exchange', seat);
+  state.exchangePartner = seat;
+  await fireReactiveObjectTriggers(state, 'on_self_exchange', withSeat);
+  delete state.exchangePartner;
 }
 
 function placeObject(state: GameState, seat: number, handIdx: number, reason?: string): void {
@@ -333,6 +338,18 @@ function placeObject(state: GameState, seat: number, handIdx: number, reason?: s
   if (!h) return;
   const card = h.hand[handIdx];
   if (!card || card.categorie !== 'objet') return;
+  // Gate: the objet's prerequis must match this hero's name. MAG_O02's
+  // "ignore prereq" only applies to Actions, not to posing Objets — objets
+  // belong to a specific hero by design.
+  const heroNom = state.catalog.heroesById.get(h.heroId)?.nom;
+  if (card.prerequis && heroNom && card.prerequis !== heroNom) {
+    emit(state, {
+      kind: 'ACTION_NONE',
+      seat,
+      reason: `prereq_mismatch_objet:${card.id}`,
+    });
+    return;
+  }
   h.hand.splice(handIdx, 1);
   h.objects.push(card);
   emit(state, { kind: 'ACTION_PLAY_OBJECT', seat, card: card.id, ...(reason ? { reason } : {}) });
@@ -342,7 +359,7 @@ function placeObject(state: GameState, seat: number, handIdx: number, reason?: s
 // Public entrypoint: apply one PlayerAction
 // ---------------------------------------------------------------------------
 
-function doUseCapacite(state: GameState, seat: number): void {
+async function doUseCapacite(state: GameState, seat: number): Promise<void> {
   const h = state.heroes[seat];
   if (!h) return;
   if (h.capaciteUsed) {
@@ -356,14 +373,14 @@ function doUseCapacite(state: GameState, seat: number): void {
   }
   h.capaciteUsed = true;
   emit(state, { kind: 'CAPACITE_USED', seat, heroId: h.heroId });
-  runOps(state, mkCtx(seat, h.heroId, 'chasse'), entry.ops);
+  await runOps(state, mkCtx(seat, h.heroId, 'chasse'), entry.ops);
   // Reactive triggers around capacité usage.
-  fireReactiveObjectTriggers(state, 'on_self_capacite_used', seat);
-  fireReactiveForAllies(state, 'on_ally_capacite_used', seat);
+  await fireReactiveObjectTriggers(state, 'on_self_capacite_used', seat);
+  await fireReactiveForAllies(state, 'on_ally_capacite_used', seat);
 }
 
 /** Active use of a posed object: run its DSL ops, then discard. */
-function doUseObject(state: GameState, seat: number, objectIdx: number, reason?: string): void {
+async function doUseObject(state: GameState, seat: number, objectIdx: number, reason?: string): Promise<void> {
   const h = state.heroes[seat];
   if (!h) return;
   const card = h.objects[objectIdx];
@@ -375,12 +392,12 @@ function doUseObject(state: GameState, seat: number, objectIdx: number, reason?:
   }
   h.objects.splice(objectIdx, 1);
   emit(state, { kind: 'OBJECT_USED', seat, card: card.id, ...(reason ? { reason } : {}) });
-  runOps(state, mkCtx(seat, card.id, 'chasse'), entry.ops);
+  await runOps(state, mkCtx(seat, card.id, 'chasse'), entry.ops);
   discard(state.piles.chasse, card);
   emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: card.id, fromSeat: seat });
 }
 
-export function applyPlayerAction(state: GameState, action: PlayerAction): void {
+export async function applyPlayerAction(state: GameState, action: PlayerAction): Promise<void> {
   const seat = state.activeSeat;
   // BOSS_007 Azhda actif: the active hero can only draw or exchange this turn.
   const activeHero = state.heroes[seat];
@@ -399,25 +416,33 @@ export function applyPlayerAction(state: GameState, action: PlayerAction): void 
   }
   switch (action.kind) {
     case 'draw':
-      doDraw(state, seat, action.reason);
+      await doDraw(state, seat, action.reason);
       return;
     case 'useCapacite':
-      doUseCapacite(state, seat);
+      await doUseCapacite(state, seat);
       return;
     case 'useObject':
-      doUseObject(state, seat, action.objectIdx, action.reason);
+      await doUseObject(state, seat, action.objectIdx, action.reason);
       return;
     case 'play': {
-      if (action.placeObject !== undefined) {
-        placeObject(state, seat, action.placeObject, action.reason);
-      }
+      // New rule (2026-04): one Play action = exactly 1 card — either an
+      // Action OR an Objet. If both are set (legacy callers), we prefer the
+      // Action and emit a warning so bad policies are visible.
       if (action.playAction !== undefined) {
-        playAction(state, seat, action.playAction, action.renforts ?? [], action.reason);
+        if (action.placeObject !== undefined) {
+          emit(state, {
+            kind: 'WARN',
+            message: `seat ${seat}: play action posée+jouée simultanément — pose ignorée (nouvelle règle 1 carte)`,
+          });
+        }
+        await playAction(state, seat, action.playAction, action.renforts ?? [], action.reason);
+      } else if (action.placeObject !== undefined) {
+        placeObject(state, seat, action.placeObject, action.reason);
       }
       return;
     }
     case 'exchange':
-      doExchange(state, seat, action.withSeat, action.give, action.take, action.reason);
+      await doExchange(state, seat, action.withSeat, action.give, action.take, action.reason);
       return;
     case 'none':
       emit(state, { kind: 'ACTION_NONE', seat, reason: action.reason });

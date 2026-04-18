@@ -78,8 +78,8 @@
       "nom": "Pierre de Wallmapu",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "bonus_degats": 2,
-      "effet": "Amélioration : carte <ico:action>\nAjoutez 2 <ico:degat> à une attaque jouée en même temps.",
+      "bonus_degats": 3,
+      "effet": "Amélioration : carte <ico:action>\nAjoutez 3 <ico:degat> à l'attaque.",
       "quantite": 1
     },
     {
@@ -87,7 +87,7 @@
       "nom": "Bouclier tawan",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Réaction : quand ce héros subirait une <ico:degat>\nannulez-la.",
+      "effet": "Réaction : quand ce héros subirait une <ico:degat>\nannulez-la et piochez 1 <ico:chasse>.",
       "quantite": 1
     },
     {
@@ -103,7 +103,7 @@
       "nom": "Couperet du toqui",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Réaction : quand un 3e monstre rejoint la file de ce héros\néliminez-le aussitôt.",
+      "effet": "Réaction : quand un 3e monstre rejoint la file de ce héros\néliminez-le.",
       "quantite": 1
     },
     {
@@ -118,9 +118,9 @@
       "id": "GUE_O06",
       "nom": "Dernier rempart",
       "categorie": "objet",
-      "degats": 3,
+      "degats": 4,
       "prerequis": "Nawel",
-      "effet": "Réaction : quand ce héros meurt\ninfligez 3 <ico:degat> au Colosse.",
+      "effet": "Réaction : quand ce héros meurt\ninfligez 4 <ico:degat> au Colosse.",
       "quantite": 1
     },
     {
@@ -163,7 +163,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Daraa",
-      "effet": "Si la cible est éliminée, infligez les <ico:degat> du monstre au monstre suivant dans votre file.",
+      "effet": "Si la cible est éliminée, infligez les <ico:degat> du monstre au monstre ou Colosse suivant dans votre file.",
       "quantite": 2
     },
     {
@@ -179,7 +179,7 @@
       "nom": "Brasier intérieur",
       "categorie": "action",
       "prerequis": "Daraa",
-      "effet": "Piochez 4 <ico:chasse>.",
+      "effet": "Piochez 3 <ico:chasse>. Soignez 1 <ico:degat>.",
       "quantite": 2
     },
     {
@@ -187,7 +187,7 @@
       "nom": "Chant de Daraartu",
       "categorie": "action",
       "prerequis": "Daraa",
-      "effet": "Régénérez la <ico:capacite> de ce héros.",
+      "effet": "Régénérez la <ico:capacite> de ce héros. \nUniquement utilisable si la file du héros a 2 <ico:invocation> ou plus.",
       "quantite": 1
     },
     {
@@ -195,7 +195,7 @@
       "nom": "Cendres du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Réaction : un héros allié meurt\nrechargez-la la capacité de ce héros.",
+      "effet": "Réaction : un héros allié meurt\nrechargez la capacité de ce héros et piochez 2 <ico:chasse>.",
       "quantite": 1
     },
     {
@@ -203,7 +203,7 @@
       "nom": "Braise errante",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Amélioration : carte <ico:action>\nIgnore son prérequisde héros.",
+      "effet": "Amélioration : carte <ico:action>\nIgnore son prérequis de héros.",
       "quantite": 1
     },
     {
@@ -211,8 +211,8 @@
       "nom": "Catalyseur",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "bonus_degats": 2,
-      "effet": "Amélioration : carte <ico:action>\nInfligez les blessures à un autre monstre ou Colosse de la file.",
+      "bonus_degats": 3,
+      "effet": "Amélioration : carte <ico:action>\nInfligez 3 <ico:degat> à une seconde cible (monstre ou Colosse) dans la file.",
       "quantite": 1
     },
     {
@@ -228,7 +228,7 @@
       "nom": "Lave du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Réaction : quand ce héros élimine un monstre\nsoignez-le de 1 <ico:degat> et piochez 2 <ico:chasse>.",
+      "effet": "Réaction : quand ce héros élimine un monstre\nsoignez-le de 2 <ico:degat> et piochez 2 <ico:chasse>.",
       "quantite": 1
     },
     {
@@ -335,7 +335,7 @@
       "nom": "Élixir de sève-mère",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Réaction : quand un héros allié subit une <ico:degat>\nsoignez-le de 2 <ico:degat>.",
+      "effet": "Réaction : quand un héros allié subit une <ico:degat>\nsoignez-le de 3 <ico:degat>.",
       "quantite": 1
     },
     {
@@ -367,8 +367,8 @@
       "nom": "Dard de sève",
       "categorie": "objet",
       "prerequis": "Gao",
-      "degats": 2,
-      "effet": "Réaction : quand un autre héros est soigné par ce héros\ninfligez les blessures à un monstre ou Colosse de la file.",
+      "degats": 3,
+      "effet": "Réaction : quand un autre héros est soigné par ce héros\ninfligez 3 <ico:degat> à un monstre ou au Colosse.",
       "quantite": 1
     },
     {
@@ -403,7 +403,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Isonash",
-      "effet": "Ce héros peut poser 1 carte Objet supplémentaire ce tour.",
+      "effet": "Ce héros peut jouer 1 <ico:chasse> supplémentaire ce tour.",
       "quantite": 1
     },
     {
@@ -412,7 +412,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Isonash",
-      "effet": "Ce héros peut jouer 1 <ico:action> supplémentaire ce tour.",
+      "effet": "Ce héros peut jouer 1 <ico:chasse> supplémentaire ce tour.",
       "quantite": 3
     },
     {
@@ -436,8 +436,8 @@
       "nom": "Carquois d'os",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "bonus_degats": 2,
-      "effet": "Amélioration : carte <ico:action>\nAjoutez 2 <ico:degat>.",
+      "bonus_degats": 3,
+      "effet": "Amélioration : carte <ico:action>\nAjoutez 3 <ico:degat>.",
       "quantite": 1
     },
     {
@@ -445,7 +445,7 @@
       "nom": "Sève de tamo",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Réaction : quand ce héros pioche <ico:chasse> avec au moins 7 cartes dans sa main\nSoignez-le de 2 <ico:degat>.",
+      "effet": "Réaction : quand ce héros pioche <ico:chasse> avec au moins 7 cartes dans sa main\nSoignez-le de 3 <ico:degat>.",
       "quantite": 1
     },
     {
@@ -453,7 +453,7 @@
       "nom": "Flèches transperçantes",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Amélioration : carte <ico:action>\nSi la cible de l'attaque est éliminée, l'attaque continue sur le monstre suivant dans votre file, ou le Colosse si votre file est vide.",
+      "effet": "Amélioration : carte <ico:action>\nSi la cible de l'attaque est éliminée, l'attaque continue sur le monstre suivant dans votre file, et ainsi de suite tant que chaque cible est éliminée. Si votre file est vidée, l'attaque continue sur le Colosse.",
       "quantite": 1
     },
     {
@@ -461,7 +461,7 @@
       "nom": "Amulette kamuy",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Réaction : quand ce héros joue 2 <ico:action> dans le même tour\nsoignez-le de 2 <ico:degat>.",
+      "effet": "Réaction : quand ce héros joue 2 <ico:action> dans le même tour\nsoignez-le de 3 <ico:degat>.",
       "quantite": 1
     },
     {
@@ -477,7 +477,7 @@
       "nom": "Carquois infini",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Réaction : quand ce héros n'a plus qu'1 <ico:chasse> en main\nil pioche jusqu'à en avoir 5.",
+      "effet": "Réaction : quand ce héros n'a plus qu'1 <ico:chasse> en main\nil pioche jusqu'à en avoir 6.",
       "quantite": 1
     },
     {
@@ -595,7 +595,7 @@
       "nom": "Crinière d'or",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Réaction : quand ce héros subit des <ico:degat>\nchaque héro pioche 1 <ico:chasse>.",
+      "effet": "Réaction : quand ce héros subit des <ico:degat>\nchaque héros pioche 2 <ico:chasse>.",
       "quantite": 1
     },
     {
@@ -603,7 +603,7 @@
       "nom": "Coffre du Gué",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Réaction : quand un héros effectue un échange avec ce héros\nles deux piochent 2 <ico:chasse>.",
+      "effet": "Réaction : quand un héros effectue un échange avec ce héros\nles deux piochent 3 <ico:chasse>.",
       "quantite": 1
     },
     {

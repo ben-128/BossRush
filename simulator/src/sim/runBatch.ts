@@ -56,7 +56,7 @@ export interface BatchStats {
   meanTurnsVictory: number | null;
   meanTurnsDefeat: number | null;
   byBoss: Record<string, { wins: number; defeats: number; winrate: number }>;
-  byHero: Record<string, { games: number; deaths: number; deathRate: number }>;
+  byHero: Record<string, { games: number; wins: number; winrate: number }>;
   byPlayerCount: Record<number, { runs: number; wins: number; defeats: number; winrate: number }>;
   actionMix: {
     total: number;
@@ -106,13 +106,13 @@ function buildPolicies(opts: BatchOptions, nSeats: number): Policy[] {
   return policies;
 }
 
-/** Run a batch synchronously. Returns rows + aggregated stats. */
-export function runBatch(
+/** Run a batch. Returns rows + aggregated stats. Async because the engine is async. */
+export async function runBatch(
   data: DesignData,
   effects: EffectsCatalog,
   opts: BatchOptions,
   onProgress?: (done: number, total: number) => void,
-): BatchResult {
+): Promise<BatchResult> {
   const startedAt = Date.now();
   const rows: BatchRow[] = [];
   let wins = 0;
@@ -128,7 +128,7 @@ export function runBatch(
     b[kind]++;
   };
   const bossAgg: Record<string, { wins: number; defeats: number }> = {};
-  const heroAgg: Record<string, { games: number; deaths: number }> = {};
+  const heroAgg: Record<string, { games: number; wins: number }> = {};
   const playerCountAgg: Record<number, { runs: number; wins: number; defeats: number }> = {};
 
   const playerCounts: number[] = opts.players === 'all' ? [2, 3, 4, 5] : [opts.players];
@@ -154,7 +154,7 @@ export function runBatch(
       heroIds,
       effects,
     });
-    runGame(state, { policies: policies.slice(0, heroIds.length) });
+    await runGame(state, { policies: policies.slice(0, heroIds.length) });
 
     const bossHp =
       state.boss.vieMax - state.boss.wounds.reduce((s, w) => s + w.degats, 0);
@@ -211,9 +211,9 @@ export function runBatch(
     else pk.defeats++;
 
     for (const hid of heroIds) {
-      const hk = heroAgg[hid] ?? (heroAgg[hid] = { games: 0, deaths: 0 });
+      const hk = heroAgg[hid] ?? (heroAgg[hid] = { games: 0, wins: 0 });
       hk.games++;
-      if (state.heroes.find((x) => x.heroId === hid)?.dead) hk.deaths++;
+      if (result === 'victory') hk.wins++;
     }
 
     const row: BatchRow = {
@@ -261,7 +261,7 @@ export function runBatch(
     byHero: Object.fromEntries(
       Object.entries(heroAgg).map(([k, v]) => [
         k,
-        { ...v, deathRate: v.deaths / Math.max(1, v.games) },
+        { ...v, winrate: v.wins / Math.max(1, v.games) },
       ]),
     ),
     byPlayerCount: Object.fromEntries(

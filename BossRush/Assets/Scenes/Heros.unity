@@ -213,8 +213,8 @@ Transform:
   m_GameObject: {fileID: 27444593}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.82, y: 5.23, z: 1}
-  m_LocalScale: {x: 1e+11, y: 10, z: 1}
+  m_LocalPosition: {x: 3.82, y: 5.23, z: -1}
+  m_LocalScale: {x: 1000, y: 10, z: 1e+9}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 166872524}
@@ -262,7 +262,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: c0cc01f608753c24f8dc883390a548c2, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Le Porte-Voix
+  m_text: La Flamme
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1588330614}
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Aslan
+  m_text: Daraa
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: 1248990885}
@@ -1689,7 +1689,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0c686d7bfc0c36341bd5fa9cd8ab8c6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f24a78e92668f0647b399e991ae57b70, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1709,8 +1709,8 @@ Transform:
   m_GameObject: {fileID: 1171038901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26, y: 0, z: -1}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 1}
+  m_LocalPosition: {x: -0.26, y: -0.08, z: -1}
+  m_LocalScale: {x: 0.09, y: 0.09, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1621819922}
@@ -1727,7 +1727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c469ecf3f73bdd47a7ce69112629090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowColor: {r: 0.478, g: 0.357, b: 0.227, a: 1}
+  shadowColor: {r: 0.545, g: 0.125, b: 0.125, a: 1}
   offsetX: 0
   offsetY: 0
   shadowScale: 1.15
@@ -2216,8 +2216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tous les h\xE9ros peuvent s'\xE9changer autant de cartes qu'ils le souhaitent
-    jusqu'\xE0 la fin du tour."
+  m_text: "\xC9liminez tous les monstres bless\xE9s."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 294818322}
@@ -2362,8 +2361,8 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0.01}
-  m_LocalScale: {x: 0.69, y: 0.69, z: 1}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0.01}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -2412,7 +2411,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6cfb26ce14e7462459b2b4e549a16a46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2772,7 +2771,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Cinq tribus parlent par sa bouche. \xBB</i>"
+  m_text: "<i>\xAB Le feu est patient. Elle ne l'est pas. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -2929,7 +2928,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1692387759}

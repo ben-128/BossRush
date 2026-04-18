@@ -88,9 +88,9 @@ export function Batch() {
     setResult(null);
     setProgress({ done: 0, total: runs });
     // Defer to next tick so spinner shows.
-    setTimeout(() => {
+    setTimeout(async () => {
       try {
-        const res = runBatch(design, effects, opts, (done, total) => {
+        const res = await runBatch(design, effects, opts, (done, total) => {
           setProgress({ done, total });
         });
         setResult(res);
@@ -296,14 +296,14 @@ export function Batch() {
             </Panel>
             <Panel title="Par héros">
               <MiniTable
-                cols={['Héros', 'Parties', 'Morts', '%']}
+                cols={['Héros', 'Parties', 'Victoires', '%']}
                 rows={Object.entries(result.stats.byHero)
-                  .sort((a, b) => a[1].deathRate - b[1].deathRate)
+                  .sort((a, b) => b[1].winrate - a[1].winrate)
                   .map(([h, v]) => [
                     <InspectLink key={h} kind="hero" id={h}>{`${h} — ${heroName(design, h)}`}</InspectLink>,
                     v.games,
-                    v.deaths,
-                    `${(v.deathRate * 100).toFixed(1)}%`,
+                    v.wins,
+                    `${(v.winrate * 100).toFixed(1)}%`,
                   ])}
               />
             </Panel>

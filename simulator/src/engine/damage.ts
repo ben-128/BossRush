@@ -62,7 +62,7 @@ export interface DamageSpec {
 }
 
 /** Inflict damage on a hero. Returns true if the hero died as a result. */
-export function damageHero(state: GameState, seat: number, spec: DamageSpec): boolean {
+export async function damageHero(state: GameState, seat: number, spec: DamageSpec): Promise<boolean> {
   const h = state.heroes[seat];
   if (!h) throw new Error(`No hero at seat ${seat}`);
   if (h.dead) return false;
@@ -98,25 +98,25 @@ export function damageHero(state: GameState, seat: number, spec: DamageSpec): bo
   onDamageResolved(state, seat);
   // Invunche passif variants.
   if (spec.source === 'menace' || spec.source === 'boss') {
-    hookInvuncheDrawDestinOnDamage(state, seat);
+    await hookInvuncheDrawDestinOnDamage(state, seat);
     hookInvuncheDamageMarksCapaciteUsed(state, seat);
   }
   // Reactive posed objects: post-damage triggers fire here.
-  fireReactiveObjectTriggers(state, 'on_self_damage', seat);
-  fireReactiveForAllies(state, 'on_ally_damage', seat);
+  await fireReactiveObjectTriggers(state, 'on_self_damage', seat);
+  await fireReactiveForAllies(state, 'on_ally_damage', seat);
   // Lethal threshold → fire on_self_lethal_damage; reactions may heal so
   // re-check before killing.
   if (totalWoundsOfHero(h) >= h.vieMax) {
-    fireReactiveObjectTriggers(state, 'on_self_lethal_damage', seat);
+    await fireReactiveObjectTriggers(state, 'on_self_lethal_damage', seat);
   }
   if (totalWoundsOfHero(h) >= h.vieMax) {
-    return killHero(state, seat);
+    return await killHero(state, seat);
   }
   return false;
 }
 
 /** Inflict damage on the boss. Returns true if the boss is now defeated. */
-export function damageBoss(state: GameState, spec: DamageSpec): boolean {
+export async function damageBoss(state: GameState, spec: DamageSpec): Promise<boolean> {
   if (state.boss.defeated) return false;
   if (!hookBossDamageAllowed(state)) return false;
   const woundId = nextWoundId(state);
@@ -152,12 +152,12 @@ export function damageBoss(state: GameState, spec: DamageSpec): boolean {
  * Inflict damage on a monster instance. Returns true if eliminated.
  * `seat` is the seat whose queue currently holds the monster.
  */
-export function damageMonster(
+export async function damageMonster(
   state: GameState,
   seat: number,
   instanceId: string,
   spec: DamageSpec,
-): boolean {
+): Promise<boolean> {
   const h = state.heroes[seat];
   if (!h) throw new Error(`No hero at seat ${seat}`);
   const idx = h.queue.findIndex((m) => m.instanceId === instanceId);
@@ -194,14 +194,14 @@ export function damageMonster(
       const active = state.heroes[state.activeSeat];
       if (active) active.actionKillsThisTurn = (active.actionKillsThisTurn ?? 0) + 1;
     }
-    eliminateMonster(state, seat, instanceId);
+    await eliminateMonster(state, seat, instanceId);
     return true;
   }
   return false;
 }
 
 /** Remove a monster from a queue and send the card to the discard. */
-export function eliminateMonster(state: GameState, seat: number, instanceId: string): void {
+export async function eliminateMonster(state: GameState, seat: number, instanceId: string): Promise<void> {
   const h = state.heroes[seat];
   if (!h) throw new Error(`No hero at seat ${seat}`);
   const idx = h.queue.findIndex((m) => m.instanceId === instanceId);
@@ -219,14 +219,14 @@ export function eliminateMonster(state: GameState, seat: number, instanceId: str
   // onEliminate trigger — synchronous to preserve ordering.
   const trig = state.effects[removed.cardId]?.triggers?.onEliminate;
   if (trig && trig.length > 0) {
-    runOps(state, mkCtx(seat, removed.cardId, 'monstre'), trig);
+    await runOps(state, mkCtx(seat, removed.cardId, 'monstre'), trig);
   }
   // Kaggen passif: the hero who eliminated the monster draws 1 Chasse.
   hookKaggenElimDrawsChasse(state, seat);
   // Reactive posed objects for the eliminator.
-  fireReactiveObjectTriggers(state, 'on_self_eliminates_monster', seat);
+  await fireReactiveObjectTriggers(state, 'on_self_eliminates_monster', seat);
   if (h.queue.length === 0) {
-    fireReactiveObjectTriggers(state, 'on_self_clears_own_queue', seat);
+    await fireReactiveObjectTriggers(state, 'on_self_clears_own_queue', seat);
   }
 }
 
@@ -245,7 +245,7 @@ function findNextLivingHero(state: GameState, fromSeat: number): HeroRuntime | u
 }
 
 /** Mark a hero as dead, cascade queue to next living hero, check defeat. */
-function killHero(state: GameState, seat: number): true {
+async function killHero(state: GameState, seat: number): Promise<true> {
   const h = state.heroes[seat]!;
 
   // Death-triggered objects (tag `death_burst`, e.g. GUE_O06 Dernier rempart)
@@ -256,7 +256,7 @@ function killHero(state: GameState, seat: number): true {
     if (entry?.tag !== 'death_burst' || !entry.ops || entry.ops.length === 0) continue;
     h.objects.splice(i, 1);
     emit(state, { kind: 'OBJECT_USED', seat, card: obj.id, reason: `dernier souffle avant mort` });
-    runOps(state, mkCtx(seat, obj.id, 'chasse'), entry.ops);
+    await runOps(state, mkCtx(seat, obj.id, 'chasse'), entry.ops);
     discard(state.piles.chasse, obj);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: seat });
   }
@@ -264,7 +264,7 @@ function killHero(state: GameState, seat: number): true {
   h.dead = true;
   emit(state, { kind: 'HERO_DEATH', seat });
   // Reactive trigger for allies' posed objects (MAG_O01 Cendres du Danakil).
-  fireReactiveForAllies(state, 'on_ally_dies', seat);
+  await fireReactiveForAllies(state, 'on_ally_dies', seat);
 
   // Redistribute monsters of his queue to next living hero.
   if (h.queue.length > 0) {
@@ -284,3 +284,4 @@ function killHero(state: GameState, seat: number): true {
   }
   return true;
 }
+

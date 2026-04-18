@@ -14,7 +14,7 @@ export function CardInspector() {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+      className="fixed inset-0 z-[60] bg-black/70 flex items-center justify-center p-4"
       onClick={() => close(null)}
       onKeyDown={(e) => e.key === 'Escape' && close(null)}
       role="dialog"

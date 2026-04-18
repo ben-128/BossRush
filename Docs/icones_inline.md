@@ -6,34 +6,34 @@
 
 ---
 
-## Pourquoi un doc separe
+## Philosophie — monochrome + 2 exceptions
 
-Les icones decrites dans [icon_design.md](icon_design.md) sont pensees pour les **emplacements fixes** (bas-gauche = degats, bas-droite = PV, haut-gauche = type, etc.). Quand la meme icone est incrustee au milieu d'une phrase, les contraintes changent :
+Raid Party suit la norme des jeux adultes sobres (**Frosthaven**, **Marvel Champions**, **Gloomhaven**) : les icones inline de type de carte et d'actions sont **monochromes**. La differenciation se fait par **la forme**, pas par la couleur.
 
-- **Taille** : doit tenir sur une hauteur de capitale (~14-18 pt sur carte 63×88 mm)
-- **Silhouette first** : l'icone doit rester lisible en monochrome, sans relief, sans gradient
-- **Poids visuel** : meme "densite" que les lettres autour, sinon ca accroche l'oeil a contretemps
-- **Pas de detail interne** : a 16 px de haut, tout trait fin est noye
+Cela colle aussi avec le dos de carte (noir peinture + silhouette blanche) — voir [card_backs.md](card_backs.md). Le meme signe graphique apparait sur le dos et dans le texte, avec juste une inversion de couleur (blanc sur noir → noir sur blanc).
 
-Certaines icones (degat, capacite) sont deja OK telles quelles. D'autres (chasse, destin) n'existent pas encore ou doivent etre simplifiees pour l'inline.
+**Deux exceptions justifiees** :
+- `<ico:degat>` = **cramoisi** (le rouge sang est un code universel accepte — cf. goutte de sang de Slay the Spire, Hearthstone, etc.)
+- `<ico:capacite>` = **or** (marqueur "action heros unique", contraste fort avec le reste)
+
+Le reste (menace, invocation, attaque, actif_boss, action, destin, chasse) est en **noir texture** `#1A1A1A` — pas pitch black digital, un noir qui respire sur papier blanc.
 
 ---
 
 ## Conventions observees dans d'autres jeux (reference)
 
-| Jeu | Usage | Leçon |
+| Jeu | Traitement inline | Lecon |
 |---|---|---|
-| **Frosthaven / Gloomhaven** | "Move <ico:move>, attack <ico:attack>" | Icone = **pure silhouette monochrome**, pas de couleur. Lisibilite max. |
-| **Sleeping Gods** | Competences et objets inline | Sepia/brun, **chaque icone = 1 forme iconique**, aucun detail interne |
-| **Magic: The Gathering** | Symboles de mana | **Cercle + une seule forme au centre**. Gabarit reutilisable. |
-| **Root** | Factions, biens | **1 couleur plate, contour un peu plus epais** que le texte |
-| **Arkham Horror LCG** | Degats, horreur, actions | **Monochrome sombre**, forme simple, lisible en N&B |
-| **Slay the Spire** | Effets (strength, block) | **Icone = metaphore directe** (bouclier, poing) ; jamais de mot redondant |
+| **Frosthaven / Gloomhaven** | Silhouettes monochromes, forme seule | **Norme du jeu sobre moderne** |
+| **Marvel Champions** | Types de carte (Ally/Event/Support) en monochrome, shape only | Meme approche |
+| **Arkham Horror LCG** | Pas d'icones de type (references textuelles) | Alternative plus radicale |
+| **MTG** | Mana colore, mais ce n'est pas un type de carte | Cas particulier |
+| **Slay the Spire** | Degats = rouge sang, tout le reste neutre | Inspiration directe pour nos exceptions |
 
-**Trois regles qui en ressortent :**
+**Regles qui en ressortent :**
 1. Une icone inline, c'est **une silhouette**, pas un mini-tableau.
-2. Quand l'icone represente **un type de carte**, on dessine **une carte (rectangle) avec UN signe dedans**. Ca distingue l'icone du signe seul (ex: "carte Action" vs "Actif boss" qui sont tous les deux des eclairs si on fait pas gaffe).
-3. La couleur sert a **trier les familles** (boss vs heros vs neutre), pas a decorer.
+2. Les types de carte partagent un gabarit (rectangle carte + signe dedans) — **la forme** differencie, pas la couleur.
+3. Les exceptions colorees doivent etre **rares et justifiees universellement** (sang = rouge).
 
 ---
 
@@ -41,12 +41,24 @@ Certaines icones (degat, capacite) sont deja OK telles quelles. D'autres (chasse
 
 | Famille | Couleur | Usage |
 |---|---|---|
-| **Action/gameplay neutre** (chasse, action, destin, pioche...) | Brun fonce `#3A2E22` | Type de carte, action generique |
-| **Danger / boss** (menace, invocation, attaque, actif_boss) | Rouge sombre `#6B1515` | Tout ce qui vient du Colosse |
-| **Heros** (capacite) | Or `#D4A830` | Capacite speciale heros |
+| **Neutre (defaut)** | Noir chaud `#1A1A1A` | Tout sauf les 2 exceptions |
 | **Degats** | Cramoisi `#8B2020` | Goutte de sang |
+| **Capacite heros** | Or `#D4A830` | Etoile 4 branches |
 
-Logique : un lecteur doit **voir la couleur avant la forme** et savoir si c'est "moi qui fais", "le boss qui fait", ou "info neutre". Le rouge sombre groupe tout ce que le colosse declenche.
+---
+
+## Coherence dos / inline — meme signe, couleurs inversees
+
+Pour les 4 tags qui referencent un **type de paquet**, la silhouette inline reprend exactement la silhouette du dos correspondant :
+
+| Dos (blanc sur noir) | Inline (noir sur blanc) | Forme partagee |
+|---|---|---|
+| Dos Menace | `<ico:menace>` | Gueule de bete a crocs |
+| Dos Chasse | `<ico:chasse>` | Silex taille |
+| Dos Destin | `<ico:destin>` | Spirale |
+| Dos Monstre | `<ico:invocation>` | Creature trapue |
+
+Le joueur apprend la forme une fois, la reconnait dans les deux contextes.
 
 ---
 
@@ -67,22 +79,32 @@ PNG, transparent background, 256x256px, 1:1 ratio.
 
 ---
 
+## Pipeline de composition
+
+Les inlines sont generees en deux etapes via `IconCompositor` (voir [IconCompositionConfig.cs](../BossRush/Assets/Scripts/IconCompositionConfig.cs) et [DefaultIconConfigCreator.cs](../BossRush/Assets/Scripts/Editor/DefaultIconConfigCreator.cs)) :
+
+1. **Sources blanches** generees via IA : chaque symbole en pur blanc sur transparent, 512×512
+2. **Composition** : le compositor applique la couleur de famille et, pour les types de carte, decoupe le symbole dans un cadre carte (mode Cutout)
+
+Les symboles sont donc generes UNE fois en blanc. La couleur est appliquee au moment de la composition, pilotee par la config.
+
+---
+
 ## Inventaire des 9 balises
 
 ### 1. `<ico:degat>` — Degat / blessure 🩸
 
 - **Represente** : 1 point de degat, ou 1 blessure existante
-- **Forme** : **Goutte de sang arrondie, compacte** (presque circulaire, petite pointe en haut)
-- **Couleur** : Cramoisi `#8B2020`
-- **Alternative** : Deja definie dans `icon_design.md` section A — version inline = meme forme, aplat pur sans gradient
-- **Note** : le chiffre **n'est PAS** dans la goutte en inline (contrairement au bas-droite de carte). On repete la goutte : `<ico:degat><ico:degat>` = 2 degats.
+- **Forme** : goutte de sang arrondie compacte (presque circulaire, petite pointe en haut)
+- **Couleur** : **Cramoisi `#8B2020` (exception)**
+- **Mode compo** : SymbolOnly
+- **Note** : on repete la goutte : `<ico:degat><ico:degat>` = 2 degats.
 
 ```
 Pure silhouette of a fat rounded blood drop, almost circular
-with a tiny pointed tip at the top. Solid crimson red #8B2020,
-transparent background. NO gradient, NO highlight, NO outline.
+with a tiny pointed tip at the top. Solid pure white #FFFFFF
+on transparent background. NO gradient, NO highlight, NO outline.
 Chunky and compact — NOT elongated, NOT thin, NOT elegant.
-Think: a round dot with a tiny peak on top.
 ```
 
 ---
@@ -90,13 +112,13 @@ Think: a round dot with a tiny peak on top.
 ### 2. `<ico:capacite>` — Capacite speciale heros 💠
 
 - **Represente** : "activez votre capacite speciale"
-- **Forme** : **Etoile a 4 branches (compass rose)**, branches triangulaires epaisses
-- **Couleur** : Or `#D4A830`
-- **Note** : meme forme que dans `icon_design.md`, version inline = aplat pur
+- **Forme** : etoile a 4 branches, compass-rose, branches triangulaires epaisses
+- **Couleur** : **Or `#D4A830` (exception)**
+- **Mode compo** : SymbolOnly
 
 ```
 Pure silhouette of a 4-pointed star burst, compass-rose style.
-Solid warm golden yellow #D4A830, transparent background.
+Solid pure white #FFFFFF on transparent background.
 NO gradient, NO outline. Each point is wide triangular, NOT thin,
 NOT spiky. Symmetrical, chunky, slightly taller than wide.
 ```
@@ -106,14 +128,14 @@ NOT spiky. Symmetrical, chunky, slightly taller than wide.
 ### 3. `<ico:actif_boss>` — Actif du boss ⚡
 
 - **Represente** : "declenchez l'actif du Colosse (voir fiche)"
-- **Forme** : **Eclair zigzag a 3 segments**, angulaire
-- **Couleur** : Rouge sombre `#6B1515`
-- **Pourquoi eclair et pas etoile** : on veut marquer la differenciation visuelle avec `<ico:capacite>` (etoile or heros) — le boss frappe vite et brutalement, l'eclair lit mieux que l'etoile pour "le Colosse agit".
-- **Alternative** : 4-pointed star rouge sombre (comme actuellement dans icon_design.md). Choisir l'UN des deux pour tout le jeu — ma reco est l'**eclair** pour eviter la confusion heros/boss quand un joueur debute.
+- **Forme** : eclair zigzag a 3 segments, angulaire
+- **Couleur** : **Noir `#1A1A1A`**
+- **Mode compo** : SymbolOnly
+- **Collision evitee** : `<ico:action>` est aussi un eclair, mais il est **dans un cadre carte** (Cutout). L'actif_boss est **seul** (SymbolOnly). Contexte different, shape identique — ok.
 
 ```
 Pure silhouette of a bold zigzag lightning bolt, 3 segments,
-angular. Solid dark red #6B1515, transparent background.
+angular. Solid pure white #FFFFFF on transparent background.
 NO gradient, NO outline. Aggressive and taller than wide.
 Top segment slightly larger than bottom.
 ```
@@ -123,43 +145,39 @@ Top segment slightly larger than bottom.
 ### 4. `<ico:menace>` — Piocher carte Menace 🃏
 
 - **Represente** : "piochez 1 carte Menace et resolvez-la"
-- **Forme** : **Rectangle de carte (vertical) avec une griffure diagonale**
-- **Couleur** : Rouge sombre `#6B1515` (famille boss)
-- **Pourquoi** : la carte Menace = quelque chose que **le boss envoie au joueur**. Le motif "carte griffee" dit immediatement "mauvaise nouvelle que tu vas devoir subir". Lisible en 1 coup d'oeil meme a 16 px.
-- **Alternatives testables** :
-  - Carte + oeil corrompu au centre (plus narratif, moins lisible)
-  - Crane seul (trop violent, redondant avec iconographie boss)
-  - Carte + rune cassee (trop abstrait)
+- **Forme** : **gueule de bete a crocs** dans un cadre carte
+- **Couleur** : **Noir `#1A1A1A`**
+- **Mode compo** : Cutout (la gueule est decoupee dans le cadre carte)
+- **Coherence dos** : meme gueule que le dos Menace (blanc sur noir pour le dos, noir pour l'inline).
+- **Fallback** : si la gueule se lit mal a 16 px sur carte imprimee (trop de crocs = bouillie), fallback sur **une seule dent/croc courbe au centre**. Tester avant de valider.
 
 ```
-Pure silhouette of a small vertical playing card with a single
-bold diagonal claw scratch crossing it from upper-left to
-lower-right. Solid dark red #6B1515, transparent background.
-The scratch is cut OUT of the card shape (negative space),
-so the card has 3 parallel gashes showing transparency through it.
-NO gradient, NO outline. Chunky card proportions (taller than wide).
+Pure silhouette of a small vertical playing card with a bold
+frontal beast maw (upper and lower rows of fangs meeting in the
+middle) cut out of its center — the maw is negative space
+revealing transparent background through the card.
+Solid pure white #FFFFFF on transparent background.
+NO gradient, NO outline. Card proportions: taller than wide.
+Maw fills ~60% of the card height, centered.
 ```
 
 ---
 
-### 5. `<ico:invocation>` — Piocher un monstre 🐾
+### 5. `<ico:invocation>` — Placer un monstre 🐾
 
 - **Represente** : "placez 1 monstre dans la file du heros actif"
-- **Forme** : **Empreinte de patte stylisee** (1 coussin principal + 3-4 orteils)
-- **Couleur** : Rouge sombre `#6B1515`
-- **Pourquoi** : universellement compris, deja utilise par l'emoji 🐾 dans la doc. Zero friction cognitive.
-- **Alternatives** :
-  - Oeuf fissure (narratif : "la corruption eclot") — joli mais moins immediat
-  - Portail brise (deja reserve a "invocation boss" dans icon_design.md pour la fiche boss — **collision** a eviter ici)
-  - Oeil ouvert (trop generique)
-- **Reco** : garder l'empreinte pour l'inline (plus lisible), reserver le portail brise a la fiche boss (grand format).
+- **Forme** : **petite creature trapue quadrupede de profil** (dos bossu, cornes/oreilles courtes)
+- **Couleur** : **Noir `#1A1A1A`**
+- **Mode compo** : SymbolOnly (pas de cadre carte — l'invocation est une action, pas un type de carte)
+- **Coherence dos** : meme silhouette que le dos Monstre, meme silhouette que la creature trapue pour l'inline. Un signe, trois usages.
 
 ```
-Pure silhouette of a single animal paw print — one large rounded
-heel pad at the bottom, three smaller oval toe pads above.
-Solid dark red #6B1515, transparent background.
-NO gradient, NO outline, NO claw marks. Bold simple shape.
-Compact and nearly square.
+Pure silhouette of a small hunched monster creature viewed from
+the side: compact quadrupedal body, arched spine, four short legs,
+two small pointed horns/ears on the head. Chunky and beastly,
+roughly square proportions. Solid pure white #FFFFFF on transparent
+background. NO gradient, NO outline, NO eyes, NO teeth.
+Just a bold readable silhouette that instantly reads as "monster".
 ```
 
 ---
@@ -167,19 +185,17 @@ Compact and nearly square.
 ### 6. `<ico:attaque>` — Ordre d'attaque ⚔
 
 - **Represente** : "le monstre en tete de file attaque le heros actif"
-- **Forme** : **Deux epees croisees en X**, lames simples + pommeaux ronds
-- **Couleur** : Rouge sombre `#6B1515`
-- **Pourquoi** : lecture instantanee "combat". L'emoji ⚔ utilise deja ce code.
-- **Alternative** : griffe unique avec traînee de mouvement (plus coherent avec le theme bete corrompue) — mais moins immediat que l'epee croisee pour "attaque" dans un contexte de jeu.
-- **Reco** : epees croisees. Thematiquement ca marche aussi (les heros affrontent la creature → l'icone represente l'action "combat" generique).
+- **Forme** : deux epees croisees en X, lames simples + pommeaux ronds
+- **Couleur** : **Noir `#1A1A1A`**
+- **Mode compo** : SymbolOnly
 
 ```
 Pure silhouette of two short crossed swords forming an X.
-Solid dark red #6B1515, transparent background.
+Solid pure white #FFFFFF on transparent background.
 Simple blade shapes meeting at the center, small round pommels
 at the handle ends. Slightly taller than wide (swords point
 upper-left and upper-right, handles down). NO gradient, NO
-outline, NO ornate detail, NO crossguard decoration.
+outline, NO ornate detail.
 ```
 
 ---
@@ -187,15 +203,15 @@ outline, NO ornate detail, NO crossguard decoration.
 ### 7. `<ico:action>` — Carte Action 🎴
 
 - **Represente** : "defaussez 1 Action de votre main", "jouez 1 <ico:action>"
-- **Forme** : **Rectangle de carte (vertical) avec un eclair au centre**
-- **Couleur** : Brun fonce `#3A2E22` (famille gameplay neutre)
-- **Pourquoi PAS l'eclair seul** : `<ico:actif_boss>` est deja un eclair. Si `<ico:action>` est aussi un eclair seul, ils deviennent indiscernables malgre la couleur. On englobe donc l'eclair dans une silhouette de carte — meme logique pour `<ico:destin>` et `<ico:chasse>`. Les trois types de carte partagent le gabarit "rectangle + signe interieur".
+- **Forme** : rectangle de carte avec un **eclair** au centre (Cutout)
+- **Couleur** : **Noir `#1A1A1A`**
+- **Mode compo** : Cutout
 
 ```
 Pure silhouette of a small vertical playing card with a bold
 zigzag lightning bolt cut out of its center (the bolt shape is
 negative space revealing the transparent background through the card).
-Solid dark brown #3A2E22 on transparent background.
+Solid pure white #FFFFFF on transparent background.
 NO gradient, NO outline. Card proportions: taller than wide.
 Bolt occupies ~60% of the card height, centered.
 ```
@@ -205,61 +221,56 @@ Bolt occupies ~60% of the card height, centered.
 ### 8. `<ico:destin>` — Carte Destin 🔮
 
 - **Represente** : "piochez 1 carte Destin"
-- **Forme** : **Rectangle de carte (vertical) avec une etoile a 4 branches au centre**
-- **Couleur** : Brun fonce `#3A2E22`
-- **Pourquoi etoile et pas oeil/spirale/sablier** :
-  - **Oeil** → connote la surveillance (plus proche de menace)
-  - **Sablier** → connote le temps, pas le hasard
-  - **Spirale** → trop complique a 16 px
-  - **Etoile** → le "destin stellaire" + forme simple en aplat
-- **Attention collision** : `<ico:capacite>` est aussi une etoile 4 branches, mais elle est **sans carte autour** + **or**. Ici l'etoile est **dans une carte** + **brun**. Les deux signes sont distinguables.
+- **Forme** : rectangle de carte avec une **spirale** au centre (Cutout)
+- **Couleur** : **Noir `#1A1A1A`**
+- **Mode compo** : Cutout
+- **Coherence dos** : meme spirale que le dos Destin.
+- **Collision evitee** : precedemment une etoile 4 branches, qui entrait en collision avec `<ico:capacite>`. La spirale resout le probleme et colle au dos.
 
 ```
 Pure silhouette of a small vertical playing card with a bold
-4-pointed star cut out of its center (the star is negative space
-revealing transparent background through the card).
-Solid dark brown #3A2E22, transparent background.
+spiral (2-3 rotations, curving inward, thickening toward the
+center) cut out of its center — negative space revealing
+transparent background through the card.
+Solid pure white #FFFFFF on transparent background.
 NO gradient, NO outline. Card proportions: taller than wide.
-Star points are wide triangles, not thin spikes. Star fills ~60%
-of the card height, centered.
+Spiral fills ~60% of the card height, centered.
 ```
 
 ---
 
 ### 9. `<ico:chasse>` — Carte Chasse 🏹
 
-- **Represente** : "defaussez 1 <ico:chasse> de votre main"
-- **Forme** : **Rectangle de carte (vertical) avec une pointe de fleche au centre**
-- **Couleur** : Brun fonce `#3A2E22`
-- **Pourquoi pointe de fleche** :
-  - Cor de chasse → trop de detail a 16 px
-  - Fleche complete (tige + pointe + empennage) → trop longue, se tasse dans la carte
-  - Pointe seule (triangle + petit trait) → lisible, evoque la chasse, coherent avec le motif fleche d'Isonash
-- **Collision avec Isonash (distance)** : Isonash a une fleche **en vol diagonale** vert emeraude. Ici on a une pointe **frontale** dans une carte, en brun. Pas de confusion a l'oeil.
+- **Represente** : "defaussez 1 <ico:chasse> de votre main", "piochez <ico:chasse>"
+- **Forme** : rectangle de carte avec un **silex taille** au centre (Cutout)
+- **Couleur** : **Noir `#1A1A1A`**
+- **Mode compo** : Cutout
+- **Coherence dos** : meme silex que le dos Chasse.
+- **Precedent** : etait une pointe de fleche. Le silex est plus distinctif et evite toute confusion avec l'icone de competence Distance d'Isonash.
 
 ```
 Pure silhouette of a small vertical playing card with a bold
-upward-pointing arrowhead cut out of its center (arrowhead is
-negative space revealing transparent background).
-Solid dark brown #3A2E22, transparent background.
+knapped flint arrowhead (rough triangular shape with chipped
+edges, primitive and asymmetrical, point at the top) cut out of
+its center — negative space revealing transparent background
+through the card.
+Solid pure white #FFFFFF on transparent background.
 NO gradient, NO outline. Card proportions: taller than wide.
-The arrowhead is a simple triangle with a short shaft stub below,
-fills ~60% of the card height, centered.
+Flint fills ~60% of the card height, centered.
 ```
 
 ---
 
 ## Recapitulatif gabarit "carte + signe"
 
-Les 3 types de cartes jouables (`action`, `destin`, `chasse`) partagent le **meme gabarit** : rectangle vertical brun `#3A2E22`, signe en negatif au centre.
+Les 3 types de cartes jouables (`action`, `destin`, `chasse`) + `menace` partagent le **meme gabarit Cutout** : rectangle vertical noir, signe en negatif au centre.
 
-| Balise | Signe interieur | Rappel visuel |
+| Balise | Signe interieur | Coherence dos |
 |---|---|---|
-| `<ico:action>` | Eclair zigzag | Action rapide/decisive |
-| `<ico:destin>` | Etoile 4 branches | Hasard narratif |
-| `<ico:chasse>` | Pointe de fleche | Paquet d'outils du heros |
-
-Avantage : **coherence** (le lecteur apprend "rectangle = carte"), et **scalabilite** (si un type de carte est ajoute plus tard, on reutilise le gabarit avec un autre signe).
+| `<ico:menace>` | Gueule de bete | ✅ Dos Menace |
+| `<ico:action>` | Eclair zigzag | — (pas de dos Action independant) |
+| `<ico:destin>` | Spirale | ✅ Dos Destin |
+| `<ico:chasse>` | Silex taille | ✅ Dos Chasse |
 
 ---
 
@@ -268,24 +279,38 @@ Avantage : **coherence** (le lecteur apprend "rectangle = carte"), et **scalabil
 Avant de valider une icone generee :
 
 - [ ] Rendu **aplat pur** : pas de gradient, pas de highlight, pas d'outline
-- [ ] **Silhouette seule** lisible en noir sur fond blanc (desaturer pour verifier)
+- [ ] **Silhouette seule** lisible en noir sur fond blanc
 - [ ] **A 16 px de haut** sur ecran : la forme reste reconnaissable
 - [ ] **Fond transparent** : l'icone s'insere proprement dans une ligne de texte
-- [ ] **Hauteur = hauteur de capitale du texte** + 10% max (plus grand = perturbe le flux de lecture)
+- [ ] **Hauteur = hauteur de capitale du texte** + 10% max
 - [ ] **Pas de confusion** avec une autre icone du jeu (verifier contre les 8 autres)
+- [ ] **Pour les 4 tags "type de paquet"** : la silhouette correspond au dos
 
 ---
 
 ## Mapping de production
 
-| Tag | Generation | Fichier cible | Utilise dans |
-|---|---|---|---|
-| `<ico:degat>` | Cramoisi | `Icons/inline/degat.png` | Chasse (attaques), Menaces, Monstres |
-| `<ico:capacite>` | Or | `Icons/inline/capacite.png` | Heros, Chasse (regenerer) |
-| `<ico:actif_boss>` | Rouge sombre | `Icons/inline/actif_boss.png` | Boss, Menaces |
-| `<ico:menace>` | Rouge sombre | `Icons/inline/menace.png` | Boss, Chasse (effets sur pioche Menace) |
-| `<ico:invocation>` | Rouge sombre | `Icons/inline/invocation.png` | Boss, Menaces |
-| `<ico:attaque>` | Rouge sombre | `Icons/inline/attaque.png` | Boss, Menaces |
-| `<ico:action>` | Brun | `Icons/inline/action.png` | Menaces (rare), Destins |
-| `<ico:destin>` | Brun | `Icons/inline/destin.png` | Boss (Invunche), Menaces, Chasse |
-| `<ico:chasse>` | Brun | `Icons/inline/chasse.png` | Menaces (defausser une Chasse), Destins |
+| Tag | Couleur compo | Mode | Fichier source (blanc) | Fichier cible |
+|---|---|---|---|---|
+| `<ico:degat>` | Cramoisi `#8B2020` | SymbolOnly | `Sources/Degat.png` | `Icons/Inline/Degat.png` |
+| `<ico:capacite>` | Or `#D4A830` | SymbolOnly | `Sources/Capacite.png` | `Icons/Inline/Capacite.png` |
+| `<ico:actif_boss>` | Noir `#1A1A1A` | SymbolOnly | `Sources/Actif_boss.png` (copie de Action) | `Icons/Inline/Actif_boss.png` |
+| `<ico:menace>` | Noir `#1A1A1A` | Cutout | `Sources/Menace.png` | `Icons/Inline/Menace.png` |
+| `<ico:invocation>` | Noir `#1A1A1A` | SymbolOnly | `Sources/Invocation.png` | `Icons/Inline/Invocation.png` |
+| `<ico:attaque>` | Noir `#1A1A1A` | SymbolOnly | `Sources/Attaque.png` | `Icons/Inline/Attaque.png` |
+| `<ico:action>` | Noir `#1A1A1A` | Cutout | `Sources/Action.png` | `Icons/Inline/Action.png` |
+| `<ico:destin>` | Noir `#1A1A1A` | Cutout | `Sources/Destin.png` | `Icons/Inline/Destin.png` |
+| `<ico:chasse>` | Noir `#1A1A1A` | Cutout | `Sources/Chasse.png` | `Icons/Inline/Chasse.png` |
+
+---
+
+## Changements vs version precedente
+
+- Suppression de la famille "rouge sombre" (boss) : fusionnee dans le noir, differenciation par forme
+- Suppression de la famille "brun" (gameplay) : fusionnee dans le noir
+- **2 exceptions gardees** : degat cramoisi, capacite or
+- **Shape changes** (coherence avec dos) :
+  - `<ico:menace>` griffure → **gueule a crocs**
+  - `<ico:destin>` etoile 4 branches → **spirale** (resout aussi la collision avec capacite)
+  - `<ico:chasse>` pointe de fleche → **silex taille**
+  - `<ico:invocation>` patte → **creature trapue** (partage shape avec dos Monstre)

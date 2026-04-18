@@ -18,7 +18,7 @@ async function runOneGame(opts: {
     heroIds: opts.heroIds,
   });
   const policies = opts.heroIds.map(() => randomPolicy);
-  runGame(state, { policies });
+  await runGame(state, { policies });
   return state;
 }
 
@@ -87,7 +87,7 @@ describe('engine / full game smoke', () => {
     const bBefore = heroB.hand.map((c) => c.id);
 
     // A gives cards at index 0, takes B's card at index 1.
-    applyPlayerAction(state, {
+    await applyPlayerAction(state, {
       kind: 'exchange',
       withSeat: 1,
       give: [0],
@@ -114,12 +114,12 @@ describe('engine / full game smoke', () => {
     });
     // Kill partner manually.
     state.heroes[1]!.dead = true;
-    applyPlayerAction(state, { kind: 'exchange', withSeat: 1, give: [0], take: [0] });
+    await applyPlayerAction(state, { kind: 'exchange', withSeat: 1, give: [0], take: [0] });
     let last = state.events[state.events.length - 1]!;
     expect(last.kind).toBe('ACTION_NONE');
 
     state.heroes[1]!.dead = false;
-    applyPlayerAction(state, { kind: 'exchange', withSeat: 0, give: [0], take: [0] });
+    await applyPlayerAction(state, { kind: 'exchange', withSeat: 0, give: [0], take: [0] });
     last = state.events[state.events.length - 1]!;
     expect(last.kind).toBe('ACTION_NONE');
   });
@@ -135,7 +135,7 @@ describe('engine / full game smoke', () => {
         heroIds,
       });
       const policies = heroIds.map(() => randomPolicy);
-      runGame(state, { policies });
+      await runGame(state, { policies });
       expect(state.result).not.toBe('running');
     }
   });

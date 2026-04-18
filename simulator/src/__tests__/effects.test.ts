@@ -29,7 +29,7 @@ describe('effects DSL — individual ops', () => {
       { woundId: 'W2', source: 'menace', sourceCardId: 'X', degats: 1 },
       { woundId: 'W3', source: 'menace', sourceCardId: 'X', degats: 2 },
     ];
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       { op: 'heal', target: 'self', amount: 3 },
     ]);
     // Bottom (most recent) = 2 → removed (budget 1 left), then 1 → removed, then 3 → too big.
@@ -39,7 +39,7 @@ describe('effects DSL — individual ops', () => {
   it('draw op adds cards to hand', async () => {
     const state = await baseState(['HERO_001', 'HERO_003']);
     const before = state.heroes[0]!.hand.length;
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       { op: 'draw', target: 'self', n: 2 },
     ]);
     expect(state.heroes[0]!.hand.length).toBe(before + 2);
@@ -48,7 +48,7 @@ describe('effects DSL — individual ops', () => {
   it('regenCapacite resets capaciteUsed', async () => {
     const state = await baseState(['HERO_001', 'HERO_003']);
     state.heroes[0]!.capaciteUsed = true;
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       { op: 'regenCapacite', target: 'self' },
     ]);
     expect(state.heroes[0]!.capaciteUsed).toBe(false);
@@ -57,7 +57,7 @@ describe('effects DSL — individual ops', () => {
   it('require aborts the op chain when false', async () => {
     const state = await baseState(['HERO_001', 'HERO_003']);
     const handBefore = state.heroes[0]!.hand.length;
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       { op: 'require', cond: { self_damage: { op: '>=', value: 99 } } },
       { op: 'draw', target: 'self', n: 3 },
     ]);
@@ -71,7 +71,7 @@ describe('effects DSL — individual ops', () => {
       { woundId: 'W1', source: 'menace', sourceCardId: 'X', degats: 4 },
     ];
     const before = state.heroes[0]!.hand.length;
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       { op: 'require', cond: { self_damage: { op: '>=', value: 4 } } },
       { op: 'draw', target: 'self', n: 1 },
     ]);
@@ -84,7 +84,7 @@ describe('effects DSL — individual ops', () => {
     state.counters.monsterInstance += 1;
     const inst = { instanceId: 'Mtest', cardId: 'MON_001', wounds: [] as never[] };
     state.heroes[0]!.queue.push(inst);
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       { op: 'eliminate', target: { pick: 'monster_in_self_queue' } },
     ]);
     expect(state.heroes[0]!.queue.length).toBe(0);
@@ -95,10 +95,10 @@ describe('effects DSL — hero capacity via PlayerAction', () => {
   it('firing Daraa capacity via useCapacite consumes it once', async () => {
     const state = await baseState(['HERO_001', 'HERO_003']);
     expect(state.heroes[0]!.capaciteUsed).toBe(false);
-    applyPlayerAction(state, { kind: 'useCapacite' });
+    await applyPlayerAction(state, { kind: 'useCapacite' });
     expect(state.heroes[0]!.capaciteUsed).toBe(true);
     // Second attempt is a no-op.
-    applyPlayerAction(state, { kind: 'useCapacite' });
+    await applyPlayerAction(state, { kind: 'useCapacite' });
     // Still used, and we expect an ACTION_NONE somewhere late in the log.
     const hasAlreadyUsed = state.events.some(
       (e) => e.kind === 'ACTION_NONE' && e.reason === 'capacite_already_used',
@@ -121,7 +121,7 @@ describe('effects DSL — J3.5 extensions', () => {
     }
     state.heroes[0]!.queue[0]!.wounds.push({ woundId: 'W1', source: 'chasse', sourceCardId: 'T', degats: 1 });
     state.heroes[0]!.queue[2]!.wounds.push({ woundId: 'W2', source: 'chasse', sourceCardId: 'T', degats: 1 });
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       { op: 'eliminateWhere', from: 'monster_in_any_queue', where: 'has_damage' },
     ]);
     // Wait — wounded monsters (vie=1) would have been eliminated already by
@@ -134,7 +134,7 @@ describe('effects DSL — J3.5 extensions', () => {
   it('choice op runs exactly one option', async () => {
     const state = await baseState(['HERO_001', 'HERO_003']);
     const before = state.heroes[0]!.hand.length;
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       {
         op: 'choice',
         options: [
@@ -149,7 +149,7 @@ describe('effects DSL — J3.5 extensions', () => {
 
   it('modifier no_damage cancels incoming damage within scope', async () => {
     const state = await baseState(['HERO_001', 'HERO_003']);
-    runOps(state, mkCtx(0, 'NAWEL_CAP', 'chasse'), [
+    await runOps(state, mkCtx(0, 'NAWEL_CAP', 'chasse'), [
       {
         op: 'modifier',
         target: 'self',
@@ -159,7 +159,7 @@ describe('effects DSL — J3.5 extensions', () => {
     ]);
     const woundsBefore = state.heroes[0]!.wounds.length;
     // Attempt a damage — should be cancelled.
-    runOps(state, mkCtx(0, 'TEST_DMG', 'menace'), [
+    await runOps(state, mkCtx(0, 'TEST_DMG', 'menace'), [
       { op: 'damage', target: 'active_hero', amount: 2 },
     ]);
     expect(state.heroes[0]!.wounds.length).toBe(woundsBefore);
@@ -167,7 +167,7 @@ describe('effects DSL — J3.5 extensions', () => {
 
   it('forEach iterates heroes and re-binds self', async () => {
     const state = await baseState(['HERO_001', 'HERO_003']);
-    runOps(state, mkCtx(0, 'TEST', 'chasse'), [
+    await runOps(state, mkCtx(0, 'TEST', 'chasse'), [
       { op: 'forEach', over: 'each_hero', do: [{ op: 'draw', target: 'self', n: 1 }] },
     ]);
     // Both heroes should now have one extra card (relative to initial 3).
@@ -189,7 +189,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
         heroIds,
         effects,
       });
-      runGame(state, { policies: heroIds.map(() => randomPolicy) });
+      await runGame(state, { policies: heroIds.map(() => randomPolicy) });
       expect(state.result).not.toBe('running');
     }
   });
@@ -207,7 +207,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
         bossId: 'BOSS_001',
         heroIds,
       });
-      runGame(sNo, { policies: heroIds.map(() => randomPolicy) });
+      await runGame(sNo, { policies: heroIds.map(() => randomPolicy) });
       if (sNo.result === 'victory') winsNo++;
 
       const sYes = createGame(data, {
@@ -217,7 +217,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
         heroIds,
         effects,
       });
-      runGame(sYes, { policies: heroIds.map(() => randomPolicy) });
+      await runGame(sYes, { policies: heroIds.map(() => randomPolicy) });
       if (sYes.result === 'victory') winsYes++;
     }
     // We only check that DSL play doesn't strictly degrade winrate — that
@@ -244,12 +244,12 @@ describe('effects DSL — integration: full games run with DSL', () => {
     ];
     const bossBefore = state.boss.wounds.reduce((s, w) => s + w.degats, 0);
     // Lethal damage kills Nawel.
-    runOps(state, mkCtx(0, 'LETHAL', 'menace'), [
+    await runOps(state, mkCtx(0, 'LETHAL', 'menace'), [
       { op: 'damage', target: 'active_hero', amount: 10 },
     ]);
     expect(state.heroes[0]!.dead).toBe(true);
     const bossAfter = state.boss.wounds.reduce((s, w) => s + w.degats, 0);
-    expect(bossAfter - bossBefore).toBe(3);
+    expect(bossAfter - bossBefore).toBe(4);
   });
 
   it('BOSS_004 Caicai actif summons in every empty queue', async () => {
@@ -271,7 +271,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
     state.heroes[2]!.queue = [];
 
     const entry = state.effects[state.boss.bossId];
-    runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry!.actif_ops!);
+    await runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry!.actif_ops!);
 
     expect(state.heroes[0]!.queue.length).toBe(1); // unchanged
     expect(state.heroes[0]!.queue[0]!.instanceId).toBe('EXISTING');
@@ -292,7 +292,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
     const h = state.heroes[0]!;
     const handBefore = h.hand.length;
     // Simulate a Chasse-sourced hit on the boss.
-    runOps(state, mkCtx(0, 'TEST_CHASSE', 'chasse'), [{ op: 'bossDamage', amount: 1 }]);
+    await runOps(state, mkCtx(0, 'TEST_CHASSE', 'chasse'), [{ op: 'bossDamage', amount: 1 }]);
     expect(state.activeDamagedBossThisTurn).toBe(true);
     // End-of-turn hook consumes 1 Chasse from the active hero's hand.
     const { hookAkkoroDamageDiscardsChasse } = await import('../engine/bossPassifs.js');
@@ -332,7 +332,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
     h.objects.push(obj);
     const handBefore = h.hand.length;
     // Inflict 1 damage from a chasse source — should trigger the reactive.
-    runOps(state, mkCtx(0, 'TEST', 'menace'), [
+    await runOps(state, mkCtx(0, 'TEST', 'menace'), [
       { op: 'damage', target: 'active_hero', amount: 1 },
     ]);
     // 4 cards drawn (or until pile empty).
@@ -355,7 +355,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
     const obj = data.cartesChasse.find((c) => c.id === 'GUE_O02')!;
     h.objects.push(obj);
     expect(h.wounds.length).toBe(0);
-    runOps(state, mkCtx(0, 'TEST', 'menace'), [
+    await runOps(state, mkCtx(0, 'TEST', 'menace'), [
       { op: 'damage', target: 'active_hero', amount: 2 },
     ]);
     // Wound landed briefly then was removed by GUE_O02.
@@ -377,7 +377,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
     });
     state.heroes.forEach((h) => (h.queue = []));
     const entry = state.effects[state.boss.bossId]!;
-    runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry.actif_ops!);
+    await runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry.actif_ops!);
     expect(state.heroes[0]!.queue.length).toBe(1);
     expect(state.heroes[1]!.queue.length).toBe(1);
     expect(state.heroes[2]!.queue.length).toBe(1);
@@ -397,7 +397,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
     state.heroes.forEach((h) => (h.queue = []));
     state.heroes[1]!.dead = true;
     const entry = state.effects[state.boss.bossId]!;
-    runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry.actif_ops!);
+    await runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry.actif_ops!);
     expect(state.heroes[0]!.queue.length).toBe(1);
     expect(state.heroes[1]!.queue.length).toBe(0); // dead, skipped
     expect(state.heroes[2]!.queue.length).toBe(1);
@@ -418,7 +418,7 @@ describe('effects DSL — integration: full games run with DSL', () => {
     state.heroes[1]!.queue = [];
     state.heroes[2]!.queue = [];
 
-    runOps(state, mkCtx(0, 'TEST', 'boss'), [{ op: 'rotateHeadsToNext' }]);
+    await runOps(state, mkCtx(0, 'TEST', 'boss'), [{ op: 'rotateHeadsToNext' }]);
 
     expect(state.heroes[0]!.queue.length).toBe(0);
     expect(state.heroes[1]!.queue.map((m) => m.instanceId)).toEqual(['A']);

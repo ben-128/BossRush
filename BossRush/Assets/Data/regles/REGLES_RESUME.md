@@ -140,11 +140,10 @@ Le combat commence immédiatement. Tour par tour (sens horaire) :
 ### 1. Action principale (choisir UNE)
 - **Piocher** 2 cartes Chasse
 - **Échanger** des cartes Chasse avec un autre joueur
-- **Jouer 1 carte Action** de sa main
+- **Jouer 1 carte Chasse** de sa main — Action OU Objet
 
-### 2. Bonus gratuits (optionnels, dans n'importe quel ordre)
-- **Poser 1 Objet** de sa main devant lui (max 1 par tour)
-- **Activer sa capacité spéciale** (1 fois par combat)
+### 2. Capacité spéciale (optionnel, gratuit)
+Le héros peut activer sa capacité spéciale une fois par combat, à n'importe quel moment de son tour.
 
 ### 3. Séquence du Colosse (fin de tour)
 
@@ -335,11 +334,10 @@ Les capacités spéciales des monstres se déclenchent toujours sur un événeme
 │ 1. ACTION PRINCIPALE (choisir 1) :      │
 │  • Piocher 2 cartes Chasse             │
 │  • Échanger des cartes Chasse          │
-│  • Jouer 1 carte Action                 │
+│  • Jouer 1 carte Chasse (Action|Objet)  │
 ├─────────────────────────────────────────┤
-│ 2. BONUS GRATUITS (optionnels) :        │
-│  • Poser 1 Objet (max 1 par tour)       │
-│  • Activer sa capacité (1×/combat)     │
+│ 2. CAPACITÉ (optionnel, gratuit,        │
+│    1×/combat, à tout moment)            │
 ├─────────────────────────────────────────┤
 │ 3. SÉQUENCE DU COLOSSE                  │
 │  → Résoudre les icônes de la carte boss │

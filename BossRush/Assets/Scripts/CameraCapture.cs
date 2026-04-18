@@ -49,13 +49,24 @@ public class CameraCapture : MonoBehaviour
         hiRes.Apply();
         RenderTexture.active = activeRenderTexture;
 
-        // Downscale vers la résolution d'export si le rendu est plus grand
+        // Downscale vers la résolution d'export si le rendu est plus grand.
+        // Pour un downscale 2x-3x, un seul Blit bilinéaire produit du moiré/aliasing
+        // sur les bords fins. On fait 2 passes successives (cascade) :
+        //   hiRes -> intermédiaire ~1.5x la taille d'export -> taille finale.
+        // Équivalent d'un filtre box 2-pass, bien plus propre qu'un blit unique.
         Texture2D image;
         if (hiRes.width != exportWidth || hiRes.height != exportHeight)
         {
+            int midWidth = Mathf.Max(exportWidth, exportWidth * 3 / 2);
+            int midHeight = Mathf.Max(exportHeight, exportHeight * 3 / 2);
+
+            RenderTexture rtMid = RenderTexture.GetTemporary(midWidth, midHeight, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default);
+            rtMid.filterMode = FilterMode.Bilinear;
+            Graphics.Blit(hiRes, rtMid);
+
             RenderTexture rt = RenderTexture.GetTemporary(exportWidth, exportHeight, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default);
             rt.filterMode = FilterMode.Bilinear;
-            Graphics.Blit(hiRes, rt);
+            Graphics.Blit(rtMid, rt);
             RenderTexture.active = rt;
 
             image = new Texture2D(exportWidth, exportHeight);
@@ -64,6 +75,7 @@ public class CameraCapture : MonoBehaviour
 
             RenderTexture.active = null;
             RenderTexture.ReleaseTemporary(rt);
+            RenderTexture.ReleaseTemporary(rtMid);
             DestroyImmediate(hiRes);
         }
         else

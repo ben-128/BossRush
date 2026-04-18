@@ -25,7 +25,7 @@ import { runOps, mkCtx } from './effects.js';
 import { discard } from './piles.js';
 import { fireReactiveForAll } from './reactiveObjects.js';
 
-export function resolveMenace(state: GameState, card: Menace): void {
+export async function resolveMenace(state: GameState, card: Menace): Promise<void> {
   emit(state, {
     kind: 'DRAW_MENACE',
     card: card.id,
@@ -36,7 +36,7 @@ export function resolveMenace(state: GameState, card: Menace): void {
   state.menaceCancelled = false;
 
   // Reactive posed objects: any hero with on_menace_revealed can fire.
-  fireReactiveForAll(state, 'on_menace_revealed');
+  await fireReactiveForAll(state, 'on_menace_revealed');
   if (state.menaceCancelled) {
     emit(state, { kind: 'RESOLVE_MENACE', card: card.id, outcome: 'cancelled' });
     return;
@@ -74,7 +74,7 @@ export function resolveMenace(state: GameState, card: Menace): void {
   // If we have a DSL entry for this Menace (event or otherwise), run it.
   const entry = state.effects[card.id];
   if (entry) {
-    runOps(state, mkCtx(state.activeSeat, card.id, 'menace'), entry.ops);
+    await runOps(state, mkCtx(state.activeSeat, card.id, 'menace'), entry.ops);
     if (state.menaceCancelled) {
       emit(state, { kind: 'RESOLVE_MENACE', card: card.id, outcome: 'cancelled' });
       return;
@@ -95,16 +95,16 @@ export function resolveMenace(state: GameState, card: Menace): void {
 
   switch (sub) {
     case 'ordre_attaque':
-      resolveAttackOrder(state, activeSeat);
+      await resolveAttackOrder(state, activeSeat);
       break;
     case 'ordre_attaque_special':
-      resolveAttackOrder(state, activeSeat);
-      resolveAttackOrder(state, activeSeat);
+      await resolveAttackOrder(state, activeSeat);
+      await resolveAttackOrder(state, activeSeat);
       break;
     case 'attaque':
     case 'attaque_speciale': {
       const dmg = card.degats ?? 1;
-      damageHero(state, activeSeat, {
+      await damageHero(state, activeSeat, {
         amount: dmg,
         source: 'menace',
         sourceCardId: card.id,
@@ -112,14 +112,14 @@ export function resolveMenace(state: GameState, card: Menace): void {
       break;
     }
     case 'invocation':
-      summonMonsterInQueue(state, activeSeat);
+      await summonMonsterInQueue(state, activeSeat);
       break;
     case 'invocation_speciale':
-      summonMonsterInQueue(state, activeSeat);
-      summonMonsterInQueue(state, activeSeat);
+      await summonMonsterInQueue(state, activeSeat);
+      await summonMonsterInQueue(state, activeSeat);
       break;
     case 'capacite_boss':
-      triggerBossActif(state);
+      await triggerBossActif(state);
       break;
     default:
       // Assaut without a recognized sous_type (e.g. EPR_016 "Ouverture !").

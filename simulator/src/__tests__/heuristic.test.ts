@@ -20,7 +20,7 @@ async function winrate(policyName: 'random' | 'heuristic', seeds: number[]): Pro
       heroIds,
       effects,
     });
-    runGame(state, { policies: heroIds.map(() => policy) });
+    await runGame(state, { policies: heroIds.map(() => policy) });
     if (state.result === 'victory') wins++;
   }
   return wins / seeds.length;
@@ -38,7 +38,7 @@ describe('heuristicPolicy', () => {
       heroIds,
       effects,
     });
-    runGame(state, { policies: heroIds.map(() => heuristicPolicy) });
+    await runGame(state, { policies: heroIds.map(() => heuristicPolicy) });
     expect(state.result).not.toBe('running');
     expect(state.events[state.events.length - 1]?.kind).toBe('GAME_END');
   });
@@ -57,7 +57,7 @@ describe('heuristicPolicy', () => {
         heroIds,
         effects,
       });
-      runGame(sR, { policies: heroIds.map(() => randomPolicy) });
+      await runGame(sR, { policies: heroIds.map(() => randomPolicy) });
       randomPlays += sR.events.filter((e) => e.kind === 'ACTION_PLAY_ACTION').length;
 
       const sH = createGame(data, {
@@ -67,7 +67,7 @@ describe('heuristicPolicy', () => {
         heroIds,
         effects,
       });
-      runGame(sH, { policies: heroIds.map(() => heuristicPolicy) });
+      await runGame(sH, { policies: heroIds.map(() => heuristicPolicy) });
       heuristicPlays += sH.events.filter((e) => e.kind === 'ACTION_PLAY_ACTION').length;
     }
     // The heuristic should stay engaged, but it may play slightly less

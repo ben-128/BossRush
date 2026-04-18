@@ -65,11 +65,14 @@
 
     "GUE_O01": { "effet": "Renfort pur +2 dégâts (bonus_degats sur la carte)", "tag": "boost_attack", "ops": [{ "op": "require", "cond": { "self_damage": { "op": ">=", "value": 0 } } }] },
     "GUE_O02": {
-      "effet": "Réaction : annule la prochaine blessure subie",
+      "effet": "Réaction : annule la prochaine blessure subie et pioche 1 Chasse",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_damage",
-        "ops": [{ "op": "removeLastWound", "target": "self" }]
+        "ops": [
+          { "op": "removeLastWound", "target": "self" },
+          { "op": "draw", "target": "self", "n": 1 }
+        ]
       }
     },
     "GUE_O03": {
@@ -97,9 +100,9 @@
       }
     },
     "GUE_O06": {
-      "effet": "Dernier rempart — 3 dégâts au Colosse quand le héros meurt",
+      "effet": "Dernier rempart — 4 dégâts au Colosse quand le héros meurt",
       "tag": "death_burst",
-      "ops": [{ "op": "bossDamage", "amount": 3 }]
+      "ops": [{ "op": "bossDamage", "amount": 4 }]
     },
 
     "MAG_A01": { "effet": "2 dmg", "tag": "attack_basic", "ops": [{ "op": "attack" }] },
@@ -131,15 +134,18 @@
     "MAG_A08": { "effet": "Régénère capacité self", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "self" }] },
 
     "MAG_O01": {
-      "effet": "Réaction : quand un héros allié meurt, recharge la capacité de ce héros",
+      "effet": "Réaction : quand un héros allié meurt, recharge la capacité de ce héros et pioche 2 Chasse",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_ally_dies",
-        "ops": [{ "op": "regenCapacite", "target": "self" }]
+        "ops": [
+          { "op": "regenCapacite", "target": "self" },
+          { "op": "draw", "target": "self", "n": 2 }
+        ]
       }
     },
     "MAG_O02": { "effet": "Amélioration : prochaine Action ignore son prérequis", "tag": "ignore_prereq", "ops": [{ "op": "ignorePrereqNext" }] },
-    "MAG_O03": { "effet": "Amélioration : +2 dégâts ET 2 dmg secondaires au Colosse", "tag": "boost_attack_aoe", "ops": [{ "op": "damage", "target": "boss", "amount": 2 }] },
+    "MAG_O03": { "effet": "Amélioration : +3 dégâts sur une seconde cible (monstre #2 de ma file ou Colosse)", "tag": "boost_attack_aoe", "ops": [{ "op": "damage", "target": { "pick": "queue_second_self" }, "amount": 3 }] },
     "MAG_O04": {
       "effet": "Réaction : quand un monstre attaque, élimine-le",
       "tag": "reactive_object",
@@ -149,12 +155,12 @@
       }
     },
     "MAG_O05": {
-      "effet": "Réaction : quand ce héros élimine un monstre, heal 1 + pioche 2",
+      "effet": "Réaction : quand ce héros élimine un monstre, heal 2 + pioche 2",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_eliminates_monster",
         "ops": [
-          { "op": "heal", "target": "self", "amount": 1 },
+          { "op": "heal", "target": "self", "amount": 2 },
           { "op": "draw", "target": "self", "n": 2 }
         ]
       }
@@ -174,11 +180,11 @@
     "SOI_A12": { "effet": "Pioche 1 Destin; choisit à quel héros l'appliquer", "tag": "destin_pull", "ops": [{ "op": "drawDestin", "target": "any_hero" }] },
 
     "SOI_O01": {
-      "effet": "Réaction : quand un héros allié subit des dégâts, soigne-le de 2",
+      "effet": "Réaction : quand un héros allié subit des dégâts, soigne-le de 3",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_ally_damage",
-        "ops": [{ "op": "heal", "target": "any_ally", "amount": 2 }]
+        "ops": [{ "op": "heal", "target": "any_ally", "amount": 3 }]
       }
     },
     "SOI_O02": {
@@ -193,11 +199,16 @@
       }
     },
     "SOI_O03": {
-      "effet": "Réaction : quand un héros pioche un Destin, annule son effet",
+      "effet": "Réaction : quand un héros pioche un Destin, annule-le OU applique-le à un héros de ton choix",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_destin_drawn_any",
-        "ops": [{ "op": "cancelDestin" }]
+        "ops": [
+          { "op": "choice", "options": [
+            { "label": "annuler_destin", "ops": [{ "op": "cancelDestin" }] },
+            { "label": "reassigner_destin", "ops": [{ "op": "reassignDestin", "target": "any_hero" }] }
+          ] }
+        ]
       }
     },
     "SOI_O04": {
@@ -209,11 +220,11 @@
       }
     },
     "SOI_O05": {
-      "effet": "Réaction : quand ce héros soigne un allié, 2 dégâts à la tête de file",
+      "effet": "Réaction : quand ce héros soigne un allié, 3 dégâts à un monstre (file) ou au Colosse",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_heals_ally",
-        "ops": [{ "op": "damage", "target": "queue_head", "amount": 2 }]
+        "ops": [{ "op": "damage", "target": { "pick": "monster_in_any_queue" }, "amount": 3 }]
       }
     },
 
@@ -228,11 +239,11 @@
     "ROD_O01": { "effet": "Renfort pur +2 dégâts (bonus_degats sur la carte)", "tag": "boost_attack", "ops": [{ "op": "require", "cond": { "self_damage": { "op": ">=", "value": 0 } } }] },
     "ROD_O02": { "effet": "Renfort : si l'attaque tue la cible, elle enchaîne sur le monstre suivant (ou le Colosse si la file est vide)", "tag": "attack_chain", "ops": [{ "op": "setChainOnKill" }] },
     "ROD_O03": {
-      "effet": "Réaction : après 2 Actions jouées ce tour, heal 2",
+      "effet": "Réaction : après 2 Actions jouées ce tour, heal 3",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_played_2_actions",
-        "ops": [{ "op": "heal", "target": "self", "amount": 2 }]
+        "ops": [{ "op": "heal", "target": "self", "amount": 3 }]
       }
     },
     "ROD_O04": {
@@ -244,19 +255,19 @@
       }
     },
     "ROD_O05": {
-      "effet": "Réaction : quand la main tombe à 1 carte, pioche jusqu'à 5",
+      "effet": "Réaction : quand la main tombe à 1 carte, pioche jusqu'à 6",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_low_hand",
-        "ops": [{ "op": "drawUpTo", "target": "self", "n": 5 }]
+        "ops": [{ "op": "drawUpTo", "target": "self", "n": 6 }]
       }
     },
     "ROD_O06": {
-      "effet": "Réaction : quand ce héros pioche avec 7+ cartes en main, heal 2",
+      "effet": "Réaction : quand ce héros pioche avec 7+ cartes en main, heal 3",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_high_hand_draw",
-        "ops": [{ "op": "heal", "target": "self", "amount": 2 }]
+        "ops": [{ "op": "heal", "target": "self", "amount": 3 }]
       }
     },
 
@@ -282,19 +293,22 @@
       }
     },
     "DIP_O02": {
-      "effet": "Réaction : quand ce héros subit une dégât, chaque héros pioche 1",
+      "effet": "Réaction : quand ce héros subit une dégât, chaque héros pioche 2",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_damage",
-        "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }]
+        "ops": [{ "op": "draw", "target": "each_hero", "n": 2 }]
       }
     },
     "DIP_O03": {
-      "effet": "Réaction : quand un héros effectue un échange avec ce héros, les deux piochent 2",
+      "effet": "Réaction : quand un héros effectue un échange avec ce héros, les deux piochent 3",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_exchange",
-        "ops": [{ "op": "draw", "target": "self", "n": 2 }]
+        "ops": [
+          { "op": "draw", "target": "self", "n": 3 },
+          { "op": "draw", "target": "exchange_partner", "n": 3 }
+        ]
       }
     },
     "DIP_O04": {
@@ -302,7 +316,10 @@
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_exchange",
-        "ops": [{ "op": "drawDestin", "target": "self" }]
+        "ops": [
+          { "op": "drawDestin", "target": "self" },
+          { "op": "drawDestin", "target": "exchange_partner" }
+        ]
       }
     },
     "DIP_O05": {
@@ -440,9 +457,9 @@
       "passif_hooks": ["damage_unhealable_from_menace"]
     },
     "BOSS_002": {
-      "effet": "Azhda — actif : héros actif ne peut ni jouer de Chasse ni sa capacité ce tour ; passif : boss avant héros",
-      "actif_ops": [{ "op": "restrictToDraw", "target": "active_hero" }],
-      "passif_hooks": ["boss_before_heroes"]
+      "effet": "Azhda — actif : capacité du héros actif consommée ; passif : immune tant que monstres ≥ héros vivants",
+      "actif_ops": [{ "op": "markCapaciteUsed", "target": "active_hero" }],
+      "passif_hooks": ["azhda_immune_if_monsters_gte_heroes"]
     },
     "BOSS_003": {
       "effet": "Pshato — actif : soigne boss 2 ; passif : fin de tour, main cap à 5",
@@ -473,12 +490,12 @@
       ]
     },
     "BOSS_008": {
-      "effet": "Gaww — actif : héros actif défausse 2 cartes puis pioche 2 ; passif : reshuffle Chasse → boss heal 2",
+      "effet": "Gaww — actif : héros actif défausse 2 cartes puis pioche 2 ; passif : reshuffle Chasse → boss heal = nb héros vivants",
       "actif_ops": [
         { "op": "discard", "target": "self", "n": 2 },
         { "op": "draw", "target": "self", "n": 2 }
       ],
-      "passif_hooks": ["reshuffle_heals_boss_2"]
+      "passif_hooks": ["gaww_reshuffle_heals_per_alive_hero"]
     },
     "BOSS_009": {
       "effet": "Kaggen — actif : ordre d'attaque sur toutes les files ; passif : éliminer un monstre fait piocher 1 Chasse",

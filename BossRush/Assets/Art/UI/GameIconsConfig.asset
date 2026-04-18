@@ -15,11 +15,11 @@ MonoBehaviour:
   icons:
   - tag: menace
     label: Menace (carte Menace)
-    sprite: {fileID: -8681381666243341882, guid: 727e8f26dbc7fff448209a65bce61742, type: 3}
+    sprite: {fileID: 4908052538538369606, guid: c045be6180eb32e47bce7abf0462517a, type: 3}
     scale: 1
   - tag: invocation
     label: Invocation (monstre)
-    sprite: {fileID: -8814364830522597233, guid: 727e8f26dbc7fff448209a65bce61742, type: 3}
+    sprite: {fileID: 5206284699280582039, guid: 14d941b8ddd63b24e8925368b84f030c, type: 3}
     scale: 1
   - tag: attaque
     label: Ordre d'attaque monstre
@@ -31,7 +31,7 @@ MonoBehaviour:
     scale: 1
   - tag: degat
     label: Degat / blessure
-    sprite: {fileID: -6571263161904583363, guid: 727e8f26dbc7fff448209a65bce61742, type: 3}
+    sprite: {fileID: 1359792679689215960, guid: 27cb81738897ed7418cc2dfe289da397, type: 3}
     scale: 1
   - tag: action
     label: Carte Action

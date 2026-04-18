@@ -49,7 +49,7 @@ async function main(): Promise<void> {
   await mkdir(outDir, { recursive: true });
   if (args.keepLogs !== 'none') await mkdir(gamesDir, { recursive: true });
 
-  const { rows, stats } = runBatch(data, effects, args, (done, total) => {
+  const { rows, stats } = await runBatch(data, effects, args, (done, total) => {
     if (args.verbose) process.stderr.write(`[batch] ${done}/${total}\n`);
   });
 

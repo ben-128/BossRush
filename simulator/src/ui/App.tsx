@@ -5,6 +5,8 @@ import { Game } from './Game.js';
 import { Dashboard } from './Dashboard.js';
 import { Batch } from './Batch.js';
 import { CardInspector } from './components/CardInspector.js';
+import { DecisionModal } from './components/DecisionModal.js';
+import { setPendingDecisionSink } from '../ai/human.js';
 
 export function App() {
   const loading = useStore((s) => s.loading);
@@ -27,6 +29,11 @@ export function App() {
   useEffect(() => {
     if (!design && !loading && !error) void load();
   }, [design, loading, error, load]);
+
+  // Wire human-policy decision sink once.
+  useEffect(() => {
+    setPendingDecisionSink((d) => useStore.getState().setPendingDecision(d));
+  }, []);
 
   if (error) {
     return (
@@ -84,6 +91,7 @@ export function App() {
       </header>
       {body}
       <CardInspector />
+      <DecisionModal />
     </div>
   );
 }

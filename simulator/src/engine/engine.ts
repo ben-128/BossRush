@@ -45,7 +45,7 @@ function advanceSeat(state: GameState): void {
   // No living hero — defeat should already be set.
 }
 
-export function runTurn(state: GameState, policies: Policy[]): void {
+export async function runTurn(state: GameState, policies: Policy[]): Promise<void> {
   if (state.result !== 'running') return;
   // Stash policies on state so effect handlers can consult them (choice op,
   // target picks). Overwritten at each turn to reflect caller choice.
@@ -77,7 +77,7 @@ export function runTurn(state: GameState, policies: Policy[]): void {
 
   const bossFirst = hookBossBeforeHeroes(state);
 
-  const heroPhase = () => {
+  const heroPhase = async () => {
     state.phase = 'HERO_ACTION';
     emit(state, { kind: 'PHASE', phase: 'HERO_ACTION' });
     const policy = policies[seat];
@@ -85,31 +85,31 @@ export function runTurn(state: GameState, policies: Policy[]): void {
       emit(state, { kind: 'SKIP_TURN', seat, reason: 'no_policy' });
     } else {
       if (policy.pickReaction) {
-        const pre = policy.pickReaction(state);
-        if (pre) applyPlayerAction(state, pre);
+        const pre = await policy.pickReaction(state);
+        if (pre) await applyPlayerAction(state, pre);
       }
-      const action = policy.pickAction(state);
-      applyPlayerAction(state, action);
+      const action = await policy.pickAction(state);
+      await applyPlayerAction(state, action);
       if (policy.pickReaction && state.result === 'running') {
-        const post = policy.pickReaction(state);
-        if (post) applyPlayerAction(state, post);
+        const post = await policy.pickReaction(state);
+        if (post) await applyPlayerAction(state, post);
       }
     }
   };
-  const bossPhase = () => {
+  const bossPhase = async () => {
     state.phase = 'BOSS_SEQUENCE';
     emit(state, { kind: 'PHASE', phase: 'BOSS_SEQUENCE' });
-    resolveBossSequence(state);
+    await resolveBossSequence(state);
   };
 
   if (bossFirst) {
-    bossPhase();
+    await bossPhase();
     if (state.result !== 'running') return;
-    heroPhase();
+    await heroPhase();
   } else {
-    heroPhase();
+    await heroPhase();
     if (state.result !== 'running') return;
-    bossPhase();
+    await bossPhase();
   }
 
   hookAkkoroDamageDiscardsChasse(state);
@@ -125,7 +125,7 @@ export function runTurn(state: GameState, policies: Policy[]): void {
 }
 
 /** Run until victory, defeat, or turnCap reached. */
-export function runGame(state: GameState, options: RunOptions): void {
+export async function runGame(state: GameState, options: RunOptions): Promise<void> {
   while (state.result === 'running') {
     if (state.turn >= state.turnCap) {
       emit(state, {
@@ -136,7 +136,7 @@ export function runGame(state: GameState, options: RunOptions): void {
       state.phase = 'GAME_END';
       break;
     }
-    runTurn(state, options.policies);
+    await runTurn(state, options.policies);
     if (state.result !== 'running') break;
     advanceSeat(state);
   }

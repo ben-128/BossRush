@@ -6,6 +6,7 @@ import type { GameEvent } from '../engine/events.js';
 import { createGame } from '../engine/setup.js';
 import { runTurn, runGame } from '../engine/engine.js';
 import { heuristicPolicy } from '../ai/heuristic.js';
+import { humanPolicy, type PendingDecision } from '../ai/human.js';
 import { loadAllData } from './browserLoader.js';
 
 export type View = 'setup' | 'game' | 'batch' | 'dashboard';
@@ -50,8 +51,8 @@ interface Store {
   load: () => Promise<void>;
   start: () => void;
   replayFromRow: (row: { seed: string; boss: string; heroes: string[] }) => void;
-  nextTurn: () => void;
-  runToEnd: () => void;
+  nextTurn: () => Promise<void>;
+  runToEnd: () => Promise<void>;
   reset: () => void;
 
   /** Animation/VFX controls. */
@@ -64,6 +65,13 @@ interface Store {
   /** Number of events the UI has revealed (progressive playback). */
   visibleEventCount: number;
   setVisibleEventCount: (n: number) => void;
+
+  /** Manual mode: human makes all decisions instead of the AI. */
+  manualMode: boolean;
+  setManualMode: (v: boolean) => void;
+  /** Pending decision awaiting UI resolution (human mode). */
+  pendingDecision: PendingDecision | null;
+  setPendingDecision: (d: PendingDecision | null) => void;
 }
 
 const DEFAULT_FORM = {
@@ -127,6 +135,15 @@ export const useStore = create<Store>((set, get) => ({
   visibleEventCount: 0,
   setVisibleEventCount: (n) => set({ visibleEventCount: n }),
 
+  manualMode:
+    typeof localStorage !== 'undefined' && localStorage.getItem('manualMode') === '1' ? true : false,
+  setManualMode: (v) => {
+    if (typeof localStorage !== 'undefined') localStorage.setItem('manualMode', v ? '1' : '0');
+    set({ manualMode: v });
+  },
+  pendingDecision: null,
+  setPendingDecision: (d) => set({ pendingDecision: d }),
+
   load: async () => {
     set({ loading: true, error: null });
     try {
@@ -180,11 +197,11 @@ export const useStore = create<Store>((set, get) => ({
     });
   },
 
-  nextTurn: () => {
-    const { state } = get();
+  nextTurn: async () => {
+    const { state, manualMode } = get();
     if (!state || state.result !== 'running') return;
-    const policies = state.heroes.map(() => heuristicPolicy);
-    runTurn(state, policies);
+    const policies = state.heroes.map(() => (manualMode ? humanPolicy : heuristicPolicy));
+    await runTurn(state, policies);
     // Advance to next seat (mirrors runGame's loop)
     if (state.result === 'running') {
       for (let offset = 1; offset <= state.nPlayers; offset++) {
@@ -211,11 +228,13 @@ export const useStore = create<Store>((set, get) => ({
     });
   },
 
-  runToEnd: () => {
-    const { state } = get();
+  runToEnd: async () => {
+    const { state, manualMode } = get();
     if (!state || state.result !== 'running') return;
+    // runToEnd is inherently auto-play: in manual mode we refuse to skip decisions.
+    if (manualMode) return;
     const policies = state.heroes.map(() => heuristicPolicy);
-    runGame(state, { policies });
+    await runGame(state, { policies });
     // Skip straight to the end — user explicitly asked to fast-forward.
     set({ state: { ...state }, visibleEventCount: state.events.length });
   },

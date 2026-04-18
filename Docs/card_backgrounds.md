@@ -44,11 +44,13 @@ busy, cluttered, illustration, scene
 
 | Hero | Couleur prompt | Fichier |
 |---|---|---|
-| Guerrier | `deep muted crimson red` | `bg_guerrier.png` |
-| Mage | `deep muted sapphire blue` | `bg_mage.png` |
-| Diplomate | `warm muted sienna brown` | `bg_diplomate.png` |
-| Rodeur | `deep muted forest green` | `bg_rodeur.png` |
-| Soigneur | `warm muted amber gold` | `bg_soigneur.png` |
+| Guerrier (Nawel) | `deep muted steel blue` | `bg_guerrier.png` |
+| Mage (Daraa) | `deep muted crimson red` | `bg_mage.png` |
+| Diplomate (Aslan) | `warm muted sienna brown` | `bg_diplomate.png` |
+| Rodeur (Isonash) | `deep muted forest green` | `bg_rodeur.png` |
+| Soigneur (Gao) | `warm muted amber gold` | `bg_soigneur.png` |
+
+> Couleurs alignées sur les illustrations finales (`BossRush/Assets/Art/Final/Heros/*[face,1].png`) et `Docs/art_direction.md`. La dominante de chaque carte reprend la couleur dominante de son héros.
 
 ## Palette de reference (extraite du Guerrier)
 

@@ -62,11 +62,11 @@ export interface EffectContext {
 
 export class EffectAborted extends Error {}
 
-export function runOps(state: GameState, ctx: EffectContext, ops: readonly EffectOp[]): void {
+export async function runOps(state: GameState, ctx: EffectContext, ops: readonly EffectOp[]): Promise<void> {
   for (const op of ops) {
     if (state.result !== 'running') return;
     try {
-      runOne(state, ctx, op);
+      await runOne(state, ctx, op);
     } catch (e) {
       if (e instanceof EffectAborted) return;
       throw e;
@@ -74,7 +74,7 @@ export function runOps(state: GameState, ctx: EffectContext, ops: readonly Effec
   }
 }
 
-function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
+async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promise<void> {
   switch (op.op) {
     case 'require':
       if (!evalCondition(state, ctx.sourceSeat, op.cond)) {
@@ -124,18 +124,18 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       emit(state, { kind: 'WARN', message: `menace cancelled by ${ctx.sourceCardId}` });
       return;
     case 'playMoreActions': {
-      // Re-invoke the active hero's policy for N extra decisions — synchronous
+      // Re-invoke the active hero's policy for N extra decisions — awaited
       // so the extra actions resolve BEFORE the rest of the current op chain.
       const policy = state.policies[ctx.sourceSeat];
       if (!policy) return;
       for (let i = 0; i < op.n; i++) {
         if (state.result !== 'running') break;
-        const action = policy.pickAction(state);
+        const action = await policy.pickAction(state);
         if (op.restrictTo === 'play_action_only' && action.kind !== 'play') {
           // Nothing more to play — stop rather than burning iterations.
           break;
         }
-        applyPlayerAction(state, action);
+        await applyPlayerAction(state, action);
       }
       return;
     }
@@ -170,7 +170,7 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       return;
     }
     case 'bossActif':
-      triggerBossActif(state);
+      await triggerBossActif(state);
       return;
     case 'ignorePrereqNext': {
       const h = state.heroes[ctx.sourceSeat];
@@ -414,11 +414,11 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
         const head = self.queue[0];
         if (!head) {
           // No monster → boss takes remainder.
-          damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+          await damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
           return;
         }
         const before = head.wounds.reduce((s, w) => s + w.degats, 0);
-        damageMonster(state, self.seatIdx, head.instanceId, {
+        await damageMonster(state, self.seatIdx, head.instanceId, {
           amount,
           source: ctx.sourceKind,
           sourceCardId: ctx.sourceCardId,
@@ -436,28 +436,28 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
       const n = h.actionsPlayedThisTurn ?? 0;
-      if (n > 0) runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
+      if (n > 0) await runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
       return;
     }
     case 'healEqualsSelfQueueSize': {
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
       const n = h.queue.length;
-      if (n > 0) runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
+      if (n > 0) await runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
       return;
     }
     case 'healEqualsDrawsThisTurn': {
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
       const n = h.drawsThisTurn ?? 0;
-      if (n > 0) runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
+      if (n > 0) await runOps(state, ctx, [{ op: 'heal', target: 'self', amount: n }]);
       return;
     }
     case 'eliminateIfActionsThisTurn': {
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
       if ((h.actionsPlayedThisTurn ?? 0) < op.minActions) return;
-      runOps(state, ctx, [{ op: 'eliminate', target: { pick: op.from } }]);
+      await runOps(state, ctx, [{ op: 'eliminate', target: { pick: op.from } }]);
       return;
     }
     case 'drawFromDiscard': {
@@ -561,7 +561,7 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       }
       if (!bestAlly) return;
       const head = bestAlly.queue[0]!;
-      eliminateMonster(state, bestAlly.seatIdx, head.instanceId);
+      await eliminateMonster(state, bestAlly.seatIdx, head.instanceId);
       return;
     }
     case 'reassignHeadToBoss': {
@@ -578,8 +578,8 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
           tgt: { kind: 'boss' },
           degats: amount,
         });
-        damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
-        eliminateMonster(state, h.seatIdx, head.instanceId);
+        await damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+        await eliminateMonster(state, h.seatIdx, head.instanceId);
         return;
       }
       return;
@@ -589,7 +589,7 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       if (!self) return;
       const n = self.wounds.reduce((s, w) => s + w.degats, 0);
       if (n === 0) return;
-      runOps(state, ctx, [{ op: 'heal', target: 'any_ally', amount: n }]);
+      await runOps(state, ctx, [{ op: 'heal', target: 'any_ally', amount: n }]);
       return;
     }
     case 'drawWithObjetBonus': {
@@ -610,7 +610,7 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
     }
     case 'damageIfHealed': {
       if (!state.healedThisTurn) return;
-      runOps(state, ctx, [{ op: 'damage', target: 'queue_head', amount: op.amount }]);
+      await runOps(state, ctx, [{ op: 'damage', target: 'queue_head', amount: op.amount }]);
       return;
     }
     case 'setChainOnKill': {
@@ -621,6 +621,31 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
     case 'cancelDestin':
       state.destinCancelled = true;
       return;
+    case 'reassignDestin': {
+      // SOI_O03 Gemme de communion: redirect the just-drawn Destin card to a
+      // hero of choice. Resolved targets are 0 or 1 seats; the first is used.
+      const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
+      const target = seats[0];
+      if (target !== undefined) {
+        state.destinReassignTo = target;
+        emit(state, {
+          kind: 'WARN',
+          message: `destin réassigné vers seat ${target} par ${ctx.sourceCardId}`,
+        });
+      }
+      return;
+    }
+    case 'markCapaciteUsed': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (h && !h.capaciteUsed) {
+        h.capaciteUsed = true;
+        emit(state, {
+          kind: 'WARN',
+          message: `capacité de seat ${ctx.sourceSeat} consommée via ${ctx.sourceCardId}`,
+        });
+      }
+      return;
+    }
     case 'eliminateAllInHeroQueue': {
       const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
       for (const s of seats) {
@@ -628,7 +653,7 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
         if (!h) continue;
         // Iterate a snapshot — eliminateMonster mutates h.queue.
         const ids = h.queue.map((m) => m.instanceId);
-        for (const id of ids) eliminateMonster(state, s, id);
+        for (const id of ids) await eliminateMonster(state, s, id);
       }
       return;
     }
@@ -709,8 +734,8 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
         if (!policy) continue;
         const saved = state.activeSeat;
         state.activeSeat = ally.seatIdx;
-        const act = policy.pickAction(state);
-        if (act.kind === 'play') applyPlayerAction(state, act);
+        const act = await policy.pickAction(state);
+        if (act.kind === 'play') await applyPlayerAction(state, act);
         state.activeSeat = saved;
         return;
       }
@@ -738,7 +763,7 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
           emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
         }
       } else {
-        runOps(state, ctx, [{ op: 'damage', target: 'active_hero', amount: 1 }]);
+        await runOps(state, ctx, [{ op: 'damage', target: 'active_hero', amount: 1 }]);
       }
       return;
     }
@@ -788,11 +813,11 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
     }
     case 'attackOrder': {
       if (op.target === 'self') {
-        resolveAttackOrder(state, ctx.sourceSeat);
+        await resolveAttackOrder(state, ctx.sourceSeat);
       } else {
         for (const h of state.heroes) {
           if (h.dead) continue;
-          resolveAttackOrder(state, h.seatIdx);
+          await resolveAttackOrder(state, h.seatIdx);
         }
       }
       return;
@@ -829,11 +854,11 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
   }
 }
 
-function applyEliminateWhereOp(
+async function applyEliminateWhereOp(
   state: GameState,
   ctx: EffectContext,
   op: OpEliminateWhere,
-): void {
+): Promise<void> {
   // Collect all matching monsters up front (iteration-safe), then eliminate.
   const matches: { seat: number; instanceId: string }[] = [];
   const heroesToScan =
@@ -858,10 +883,10 @@ function applyEliminateWhereOp(
     kind: 'WARN',
     message: `eliminateWhere source=${ctx.sourceCardId} from=${op.from} where=${op.where ?? 'none'} matched=${matches.length}`,
   });
-  for (const m of matches) eliminateMonster(state, m.seat, m.instanceId);
+  for (const m of matches) await eliminateMonster(state, m.seat, m.instanceId);
 }
 
-function applyForEachOp(state: GameState, ctx: EffectContext, op: OpForEach): void {
+async function applyForEachOp(state: GameState, ctx: EffectContext, op: OpForEach): Promise<void> {
   const seats =
     op.over === 'each_hero'
       ? state.heroes.filter((h) => !h.dead).map((h) => h.seatIdx)
@@ -869,11 +894,11 @@ function applyForEachOp(state: GameState, ctx: EffectContext, op: OpForEach): vo
   for (const s of seats) {
     if (state.result !== 'running') return;
     const subCtx: EffectContext = { ...ctx, sourceSeat: s };
-    runOps(state, subCtx, op.do);
+    await runOps(state, subCtx, op.do);
   }
 }
 
-function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice): void {
+async function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice): Promise<void> {
   const who = op.who ?? 'active';
   const decidingSeat =
     who === 'active'
@@ -885,7 +910,7 @@ function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice): void
   const policy = state.policies[decidingSeat] as any;
   let idx: number;
   if (policy && typeof policy.pickChoice === 'function') {
-    idx = policy.pickChoice(state, decidingSeat, ctx.sourceCardId, op.options);
+    idx = await policy.pickChoice(state, decidingSeat, ctx.sourceCardId, op.options);
     if (!Number.isInteger(idx) || idx < 0 || idx >= op.options.length) {
       idx = 0;
     }
@@ -902,14 +927,14 @@ function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice): void
     seat: decidingSeat,
     label: chosen.label,
   });
-  runOps(state, ctx, chosen.ops);
+  await runOps(state, ctx, chosen.ops);
 }
 
-function applyBossDamageOp(state: GameState, ctx: EffectContext, op: OpBossDamage): void {
-  damageBoss(state, { amount: op.amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+async function applyBossDamageOp(state: GameState, ctx: EffectContext, op: OpBossDamage): Promise<void> {
+  await damageBoss(state, { amount: op.amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
 }
 
-function applyBossHealOp(state: GameState, _ctx: EffectContext, op: OpBossHeal): void {
+async function applyBossHealOp(state: GameState, _ctx: EffectContext, op: OpBossHeal): Promise<void> {
   // Remove up to N total damage from the boss, bottom-up (most recent first).
   let budget = op.amount;
   const stack = state.boss.wounds;
@@ -926,7 +951,7 @@ function applyBossHealOp(state: GameState, _ctx: EffectContext, op: OpBossHeal):
   emit(state, { kind: 'WARN', message: `boss healed for up to ${op.amount}` });
 }
 
-function applyShiftDamageOp(state: GameState, ctx: EffectContext, op: OpShiftDamage): void {
+async function applyShiftDamageOp(state: GameState, ctx: EffectContext, op: OpShiftDamage): Promise<void> {
   // Pick a source hero (most wounded among 'from' token semantics).
   let fromSeat: number | undefined;
   if (op.from === 'self') fromSeat = ctx.sourceSeat;
@@ -963,21 +988,21 @@ function applyShiftDamageOp(state: GameState, ctx: EffectContext, op: OpShiftDam
   if (moved.length === 0) return;
 
   // Resolve destination and re-apply damage events.
-  const replaySpec = (targetKind: 'hero' | 'boss' | 'monster', targetSeat?: number, instanceId?: string) => {
+  const replaySpec = async (targetKind: 'hero' | 'boss' | 'monster', targetSeat?: number, instanceId?: string) => {
     for (const w of moved) {
       if (targetKind === 'boss') {
-        damageBoss(state, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+        await damageBoss(state, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
       } else if (targetKind === 'hero' && targetSeat !== undefined) {
-        damageHero(state, targetSeat, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+        await damageHero(state, targetSeat, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
       } else if (targetKind === 'monster' && targetSeat !== undefined && instanceId) {
         // Guard: if the monster was eliminated by a previous iteration, stop.
         const th = state.heroes[targetSeat];
         const stillAlive = !!th?.queue.find((m) => m.instanceId === instanceId);
         if (!stillAlive) {
           // Redirect remaining damage to the boss as a sensible fallback.
-          damageBoss(state, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+          await damageBoss(state, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
         } else {
-          damageMonster(state, targetSeat, instanceId, {
+          await damageMonster(state, targetSeat, instanceId, {
             amount: w.degats,
             source: ctx.sourceKind,
             sourceCardId: ctx.sourceCardId,
@@ -987,8 +1012,8 @@ function applyShiftDamageOp(state: GameState, ctx: EffectContext, op: OpShiftDam
     }
   };
 
-  if (op.to === 'self') replaySpec('hero', ctx.sourceSeat);
-  else if (op.to === 'boss') replaySpec('boss');
+  if (op.to === 'self') await replaySpec('hero', ctx.sourceSeat);
+  else if (op.to === 'boss') await replaySpec('boss');
   else if (op.to === 'any_hero' || op.to === 'any_ally') {
     const candidates = state.heroes.filter(
       (h) => !h.dead && (op.to === 'any_hero' || h.seatIdx !== ctx.sourceSeat),
@@ -998,20 +1023,20 @@ function applyShiftDamageOp(state: GameState, ctx: EffectContext, op: OpShiftDam
         a.wounds.reduce((s, w) => s + w.degats, 0) - b.wounds.reduce((s, w) => s + w.degats, 0),
     );
     const pick = candidates[0];
-    if (pick) replaySpec('hero', pick.seatIdx);
+    if (pick) await replaySpec('hero', pick.seatIdx);
   } else if (op.to === 'queue_head') {
     const h = state.heroes[ctx.sourceSeat];
     const head = h?.queue[0];
-    if (head) replaySpec('monster', ctx.sourceSeat, head.instanceId);
-    else replaySpec('boss');
+    if (head) await replaySpec('monster', ctx.sourceSeat, head.instanceId);
+    else await replaySpec('boss');
   } else {
     // MonsterPick
     const mp = resolveMonsterPick(state, ctx.sourceSeat, op.to);
-    if (mp) replaySpec('monster', mp.seat, mp.instanceId);
+    if (mp) await replaySpec('monster', mp.seat, mp.instanceId);
   }
 }
 
-function applyRemoveAllWoundsOp(state: GameState, _ctx: EffectContext, op: OpRemoveAllWounds): void {
+async function applyRemoveAllWoundsOp(state: GameState, _ctx: EffectContext, op: OpRemoveAllWounds): Promise<void> {
   const seats = resolveHeroTarget(state, _ctx.sourceSeat, op.target);
   for (const s of seats) {
     const h = state.heroes[s];
@@ -1022,7 +1047,7 @@ function applyRemoveAllWoundsOp(state: GameState, _ctx: EffectContext, op: OpRem
   }
 }
 
-function applyReviveOp(state: GameState, ctx: EffectContext, op: OpRevive): void {
+async function applyReviveOp(state: GameState, ctx: EffectContext, op: OpRevive): Promise<void> {
   const dead = state.heroes.filter((h) => h.dead);
   if (dead.length === 0) return;
   // Pick first dead (deterministic). Could route via policy later.
@@ -1036,7 +1061,7 @@ function applyReviveOp(state: GameState, ctx: EffectContext, op: OpRevive): void
   }
 }
 
-function applyModifierOp(state: GameState, ctx: EffectContext, op: OpModifier): void {
+async function applyModifierOp(state: GameState, ctx: EffectContext, op: OpModifier): Promise<void> {
   // If the effect carries a seat field and we want to anchor it to `self`,
   // rewrite it to the source seat.
   let eff = op.effect;
@@ -1057,11 +1082,11 @@ function applyModifierOp(state: GameState, ctx: EffectContext, op: OpModifier): 
 // Individual op handlers
 // ---------------------------------------------------------------------------
 
-function applyDamageOp(
+async function applyDamageOp(
   state: GameState,
   ctx: EffectContext,
   op: OpAttack | OpDamage,
-): void {
+): Promise<void> {
   const amount = op.amount;
   if (op.op === 'damage' && amount === undefined) return;
   const dmg = amount ?? 0;
@@ -1087,10 +1112,10 @@ function applyDamageOp(
   });
 
   const spec = { amount: dmg, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId };
-  if (target.kind === 'boss') damageBoss(state, spec);
-  else if (target.kind === 'hero') damageHero(state, target.seat, spec);
+  if (target.kind === 'boss') await damageBoss(state, spec);
+  else if (target.kind === 'hero') await damageHero(state, target.seat, spec);
   else {
-    const killed = damageMonster(state, target.seat, target.instanceId, spec);
+    const killed = await damageMonster(state, target.seat, target.instanceId, spec);
     // ROD_O02 chain-on-kill: if renfort flag is set and the attack killed a
     // monster in the source's own queue, continue the attack onto the new
     // head (or boss if queue empty). One-shot.
@@ -1105,7 +1130,7 @@ function applyDamageOp(
           tgt: { kind: 'monster', instanceId: nextHead.instanceId, seat: ctx.sourceSeat },
           degats: dmg,
         });
-        damageMonster(state, ctx.sourceSeat, nextHead.instanceId, spec);
+        await damageMonster(state, ctx.sourceSeat, nextHead.instanceId, spec);
       } else {
         emit(state, {
           kind: 'ATTACK',
@@ -1113,13 +1138,13 @@ function applyDamageOp(
           tgt: { kind: 'boss' },
           degats: dmg,
         });
-        damageBoss(state, spec);
+        await damageBoss(state, spec);
       }
     }
   }
 }
 
-function applyHealOp(state: GameState, ctx: EffectContext, op: OpHeal): void {
+async function applyHealOp(state: GameState, ctx: EffectContext, op: OpHeal): Promise<void> {
   const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
   let healedAnyAlly = false;
   for (const s of seats) {
@@ -1128,11 +1153,11 @@ function applyHealOp(state: GameState, ctx: EffectContext, op: OpHeal): void {
   }
   // Reactive: if this hero healed at least one ally, fire on_self_heals_ally.
   if (healedAnyAlly) {
-    fireReactiveObjectTriggers(state, 'on_self_heals_ally', ctx.sourceSeat);
+    await fireReactiveObjectTriggers(state, 'on_self_heals_ally', ctx.sourceSeat);
   }
 }
 
-function applyDrawOp(state: GameState, ctx: EffectContext, op: OpDraw): void {
+async function applyDrawOp(state: GameState, ctx: EffectContext, op: OpDraw): Promise<void> {
   const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
   for (const s of seats) {
     const h = state.heroes[s];
@@ -1148,7 +1173,7 @@ function applyDrawOp(state: GameState, ctx: EffectContext, op: OpDraw): void {
   }
 }
 
-function applyDrawDestinOp(state: GameState, ctx: EffectContext, op: OpDrawDestin): void {
+async function applyDrawDestinOp(state: GameState, ctx: EffectContext, op: OpDrawDestin): Promise<void> {
   const n = op.n ?? 1;
   const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
   for (const s of seats) {
@@ -1159,18 +1184,22 @@ function applyDrawDestinOp(state: GameState, ctx: EffectContext, op: OpDrawDesti
       emit(state, { kind: 'RESOLVE_DESTIN', card: d.id, toSeat: s });
       // Reactive posed objects (SOI_O03 Gemme de communion) can interrupt.
       state.destinCancelled = false;
-      fireReactiveForAll(state, 'on_destin_drawn_any');
+      delete state.destinReassignTo;
+      await fireReactiveForAll(state, 'on_destin_drawn_any');
       if (state.destinCancelled) {
         discard(state.piles.destin, d);
         continue;
       }
+      // SOI_O03 can redirect the Destin to a different hero.
+      const applySeat = state.destinReassignTo ?? s;
+      delete state.destinReassignTo;
       const entry = state.effects[d.id];
       if (entry) {
-        runOps(state, { ...ctx, sourceSeat: s, sourceCardId: d.id, sourceKind: 'destin' }, entry.ops);
+        await runOps(state, { ...ctx, sourceSeat: applySeat, sourceCardId: d.id, sourceKind: 'destin' }, entry.ops);
       } else {
         // Fallback: apply raw degats if present; otherwise log and discard.
         if (d.degats) {
-          damageHero(state, s, { amount: d.degats, source: 'destin', sourceCardId: d.id });
+          await damageHero(state, applySeat, { amount: d.degats, source: 'destin', sourceCardId: d.id });
         } else {
           emit(state, { kind: 'NOT_IMPLEMENTED', feature: 'destin_resolve', detail: d.id });
         }
@@ -1180,7 +1209,7 @@ function applyDrawDestinOp(state: GameState, ctx: EffectContext, op: OpDrawDesti
   }
 }
 
-function applySummonOp(state: GameState, ctx: EffectContext, op: OpSummon): void {
+async function applySummonOp(state: GameState, ctx: EffectContext, op: OpSummon): Promise<void> {
   const n = op.n ?? 1;
   const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
   for (const s of seats) {
@@ -1208,17 +1237,17 @@ function applySummonOp(state: GameState, ctx: EffectContext, op: OpSummon): void
   }
 }
 
-function applyEliminateOp(state: GameState, ctx: EffectContext, op: OpEliminate): void {
+async function applyEliminateOp(state: GameState, ctx: EffectContext, op: OpEliminate): Promise<void> {
   const ref = resolveMonsterPick(state, ctx.sourceSeat, op.target);
   if (!ref) return;
-  eliminateMonster(state, ref.seat, ref.instanceId);
+  await eliminateMonster(state, ref.seat, ref.instanceId);
 }
 
-function applyMoveMonsterOp(
+async function applyMoveMonsterOp(
   state: GameState,
   ctx: EffectContext,
   op: OpMoveMonster,
-): void {
+): Promise<void> {
   const src = resolveMonsterPick(state, ctx.sourceSeat, op.from);
   if (!src) return;
   const dst = resolveQueueDest(state, ctx.sourceSeat, op.to);
@@ -1244,11 +1273,11 @@ function applyMoveMonsterOp(
   });
 }
 
-function applyRegenCapaciteOp(
+async function applyRegenCapaciteOp(
   state: GameState,
   ctx: EffectContext,
   op: OpRegenCapacite,
-): void {
+): Promise<void> {
   const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
   for (const s of seats) {
     const h = state.heroes[s];
@@ -1258,7 +1287,7 @@ function applyRegenCapaciteOp(
   }
 }
 
-function applyDiscardOp(state: GameState, ctx: EffectContext, op: OpDiscard): void {
+async function applyDiscardOp(state: GameState, ctx: EffectContext, op: OpDiscard): Promise<void> {
   const seats = resolveHeroTarget(state, ctx.sourceSeat, op.target);
   const rng = Rng.fromState(state.rngState);
   for (const s of seats) {

@@ -18,6 +18,9 @@
 import type { GameState } from '../engine/gameState.js';
 import type { PlayerAction } from '../engine/actions.js';
 
+/** Policy methods may return values synchronously (AI) or asynchronously (human UI). */
+export type Awaitable<T> = T | PromiseLike<T>;
+
 export interface Policy {
   name: string;
   /**
@@ -25,20 +28,35 @@ export interface Policy {
    * outside the main action. The engine calls it both before and after the
    * main action so the policy can react to post-play state.
    */
-  pickReaction?(state: GameState): PlayerAction | null;
-  pickAction(state: GameState): PlayerAction;
+  pickReaction?(state: GameState): Awaitable<PlayerAction | null>;
+  pickAction(state: GameState): Awaitable<PlayerAction>;
   pickChoice?(
     state: GameState,
     sourceSeat: number,
     sourceCardId: string,
     options: ReadonlyArray<{ label: string }>,
-  ): number;
-  pickHeroTarget?(state: GameState, sourceSeat: number, candidates: number[]): number;
+  ): Awaitable<number>;
+  pickHeroTarget?(
+    state: GameState,
+    sourceSeat: number,
+    candidates: number[],
+  ): Awaitable<number>;
   pickMonsterTarget?(
     state: GameState,
     sourceSeat: number,
     candidates: ReadonlyArray<{ seat: number; instanceId: string; cardId: string }>,
-  ): number;
+  ): Awaitable<number>;
+  /**
+   * Called before firing a posed reactive object (GUE_O02, MAG_O04, …) so
+   * the policy can veto its consumption. Default: consume (true). Human
+   * policy shows a modal "Utiliser objet X ?" with yes/no.
+   */
+  confirmReactiveObject?(
+    state: GameState,
+    ownerSeat: number,
+    objectCardId: string,
+    trigger: string,
+  ): Awaitable<boolean>;
 }
 
 /** Look up the policy for a seat, or undefined if none. */

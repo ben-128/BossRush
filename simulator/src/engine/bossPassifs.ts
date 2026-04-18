@@ -10,7 +10,6 @@
 import type { GameState } from './gameState.js';
 import { emit } from './logger.js';
 import { drawOne, discard } from './piles.js';
-import { damageBoss } from './damage.js';
 import { runOps, mkCtx } from './effects.js';
 
 function hooks(state: GameState): readonly string[] {
@@ -70,11 +69,18 @@ export function hookHandCapAtEndOfTurn(state: GameState): void {
   }
 }
 
-/** Gaww : reshuffle Chasse → boss heal 2. Called from piles.ensureDrawable. */
+/** Gaww : reshuffle Chasse → boss heal X. X = 2 (legacy) ou = nb héros vivants. */
 export function hookReshuffleHealsBoss(state: GameState, pileName: string): void {
   if (pileName !== 'chasse') return;
-  if (!hooks(state).includes('reshuffle_heals_boss_2')) return;
-  let budget = 2;
+  const hs = hooks(state);
+  let budget = 0;
+  if (hs.includes('gaww_reshuffle_heals_per_alive_hero')) {
+    budget = state.heroes.filter((h) => !h.dead).length;
+  } else if (hs.includes('reshuffle_heals_boss_2')) {
+    budget = 2;
+  }
+  if (budget <= 0) return;
+  const heal = budget;
   for (let i = state.boss.wounds.length - 1; i >= 0 && budget > 0; ) {
     const w = state.boss.wounds[i]!;
     if (w.degats <= budget) {
@@ -85,7 +91,15 @@ export function hookReshuffleHealsBoss(state: GameState, pileName: string): void
       i--;
     }
   }
-  emit(state, { kind: 'WARN', message: 'gaww: boss healed 2 on chasse reshuffle' });
+  emit(state, { kind: 'WARN', message: `gaww: boss healed ${heal} on chasse reshuffle` });
+}
+
+/** Azhda : immunisé tant que monstres >= héros vivants. */
+export function hookAzhdaImmune(state: GameState): boolean {
+  if (!hooks(state).includes('azhda_immune_if_monsters_gte_heroes')) return false;
+  const living = state.heroes.filter((h) => !h.dead);
+  const monsters = living.reduce((s, h) => s + h.queue.length, 0);
+  return monsters >= living.length;
 }
 
 /** Akkoro (legacy) : chaque carte Action jouée défausse le top de la pile Chasse. */
@@ -110,7 +124,7 @@ export function hookAkkoroDamageDiscardsChasse(state: GameState): void {
 }
 
 /** Invunche (legacy passif) : quand un héros est blessé, il pioche un Destin. */
-export function hookInvuncheDrawDestinOnDamage(state: GameState, seat: number): void {
+export async function hookInvuncheDrawDestinOnDamage(state: GameState, seat: number): Promise<void> {
   if (!hooks(state).includes('invunche_draw_destin_on_damage')) return;
   const d = drawOne(state, state.piles.destin, 'destin');
   if (!d) return;
@@ -118,7 +132,7 @@ export function hookInvuncheDrawDestinOnDamage(state: GameState, seat: number): 
   emit(state, { kind: 'RESOLVE_DESTIN', card: d.id, toSeat: seat });
   const entry = state.effects[d.id];
   if (entry?.ops) {
-    runOps(state, mkCtx(seat, d.id, 'destin'), entry.ops);
+    await runOps(state, mkCtx(seat, d.id, 'destin'), entry.ops);
   }
   discard(state.piles.destin, d);
 }
@@ -143,8 +157,13 @@ export function hookKaggenElimDrawsChasse(state: GameState, seat: number): void 
   emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: seat });
 }
 
-/** Khwa : le boss ne peut recevoir des dégâts qu'une fois par tour. */
+/** Khwa + Azhda : contrôle si le boss peut recevoir des dégâts en ce moment. */
 export function hookBossDamageAllowed(state: GameState): boolean {
+  // Azhda : immunité conditionnée par nb monstres >= nb héros vivants.
+  if (hookAzhdaImmune(state)) {
+    emit(state, { kind: 'WARN', message: 'azhda: immune (monstres >= héros vivants)' });
+    return false;
+  }
   if (!hooks(state).includes('boss_receives_max_1_damage_per_turn')) return true;
   if (state.bossDamagedThisTurn) {
     emit(state, { kind: 'WARN', message: 'khwa: boss already damaged this turn, blocking' });
