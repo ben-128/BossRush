@@ -1,8 +1,8 @@
 {
   "meta": {
-    "description": "Liste des 10 colosses du jeu. Chaque colosse a une carte avec 3 éléments : séquence de fin de tour, passif et actif. Le champ lore regroupe la référence mythologique et le lore en jeu ; il est synchronisé avec Docs/<lore_md> (section ## Lore).",
-    "version": "4.0",
-    "notes": "PV = multiplicateur × nombre de joueurs. La séquence de fin de tour utilise les icônes unifiées : <ico:menace> (Menace), <ico:invocation> (Invocation), <ico:attaque> (Ordre d'attaque), <ico:actif_boss> (Actif boss)."
+    "description": "Liste des 10 colosses du jeu. IDs classés par difficulté (facile → moyen → difficile). Chaque colosse a une carte avec 3 éléments : séquence de fin de tour, passif et actif. Le champ lore regroupe la référence mythologique et le lore en jeu ; il est synchronisé avec Docs/<lore_md>.",
+    "version": "4.1",
+    "notes": "PV = multiplicateur × nombre de joueurs. Séquence de fin de tour : <ico:menace>, <ico:invocation>, <ico:attaque>, <ico:actif_boss>."
   },
   "boss": [
     {
@@ -23,14 +23,31 @@
     },
     {
       "id": "BOSS_002",
-      "nom": "Pshato",
+      "nom": "Azhda",
       "difficulte": "facile",
+      "vie_multiplicateur": 5,
+      "stats": {
+        "sequence": [
+          "<ico:attaque>",
+          "<ico:menace>"
+        ],
+        "passif": "Azhda effectue son tour avant celui des héros.",
+        "actif": "Le héros actif ne peut plus utiliser de carte chasse ou sa capacité pendant son tour."
+      },
+      "monstres_ids": [],
+      "lore_md": "boss_azhdaha.md",
+      "lore": "**Référence :** Azhdaha — dragon du chaos et de la destruction des sagas Narts dans la mythologie circassienne (Caucase), ennemi juré des héros.\n\n**Lore :** Corrompu, c'est un dragon colossal à plusieurs têtes (3 ou 4), corps serpentin couvert d'écailles sombres et de fourrure noire ébouriffée, ailes de chauve-souris déchirées. Chaque tête a son rôle — l'une crache du feu, une rugit, une mord, une murmure. Des veines de cristal noir pulsent entre les écailles.\n\n*« Une tête pour chaque peuple qu'il gardait. »*"
+    },
+    {
+      "id": "BOSS_003",
+      "nom": "Pshato",
+      "difficulte": "moyen",
       "vie_multiplicateur": 5,
       "stats": {
         "sequence": [
           "<ico:menace>"
         ],
-        "passif": "À la fin de chaque tour, le héros actif défausse des cartes jusqu’à n’en avoir plus que 6 maximum en main.",
+        "passif": "À la fin de chaque tour, le héros actif défausse des cartes jusqu’à n’en avoir plus que 5 maximum en main.",
         "actif": "Soignez Pshato de 2 <ico:degat>."
       },
       "monstres_ids": [],
@@ -38,50 +55,49 @@
       "lore": "**Référence :** Psha-tkho — esprit vengeur de la forêt dans la mythologie circassienne (Adyghe, Caucase), gardien de la nature qui punit les intrus.\n\n**Lore :** Corrompu, il apparaît comme un colosse mi-arbre mi-géant fait de bois noueux, de mousse verte et de racines noires qui percent le sol. La mousse pourrit par endroits — taches noires de corruption.\n\n*« La forêt l'a fait. La forêt le pleure. »*"
     },
     {
-      "id": "BOSS_003",
+      "id": "BOSS_004",
       "nom": "Caicai",
       "difficulte": "moyen",
-      "vie_multiplicateur": 6,
+      "vie_multiplicateur": 5,
       "stats": {
         "sequence": [
-          "<ico:menace>",
-          "<ico:invocation>"
+          "<ico:menace>"
         ],
-        "passif": "Les ordres d'attaque se font sur la file du héros suivant en plus de celle du héros actif.",
-        "actif": "Déplacez le monstre en tête de chaque file au fond de la file du héros suivant."
+        "passif": "Les ordres d'attaque se font sur toutes les files.",
+        "actif": "Piochez 1 <ico:invocation> sur toutes les files vides."
       },
       "monstres_ids": [],
       "lore_md": "boss_caicai_vilu.md",
       "lore": "**Référence :** Caicai Vilu — serpent de mer titanesque dans la mythologie mapuche (Chili/Argentine), qui inonde le monde et provoque tsunamis et tremblements de terre.\n\n**Lore :** Corrompu, c'est un serpent de mer aux écailles bleu-noir luisantes, dos crêté d'épines coralliennes. Des cristaux noirs poussent entre les écailles comme des tumeurs.\n\n*« Les vagues s'écartaient pour lui. Maintenant elles fuient. »*"
     },
     {
-      "id": "BOSS_004",
+      "id": "BOSS_005",
       "nom": "Invunche",
       "difficulte": "moyen",
-      "vie_multiplicateur": 7,
+      "vie_multiplicateur": 6,
       "stats": {
         "sequence": [
           "<ico:menace>",
           "<ico:destin>"
         ],
-        "passif": "Quand Invunche inflige des blessures à un héros, ce héros pioche <ico:destin> .",
-        "actif": "Piochez <ico:destin>."
+        "passif": "Quand Invunche inflige des blessures à un héros, ce héros perd sa capacité active comme s'il l'avait utilisé.",
+        "actif": "Chaque héros pioche une carte destin."
       },
       "monstres_ids": [],
       "lore_md": "boss_invunche.md",
       "lore": "**Référence :** Invunche — créature humanoïde monstrueuse de la mythologie mapuche (Chili/Argentine), déformée par les sorciers kalku, gardienne des grottes secrètes.\n\n**Lore :** Corrompu, c'est un humanoïde géant horriblement déformé : tête retournée à 180°, membres tordus, peau grise marquée de cicatrices rituelles. Des veines noires palpitent sous sa peau translucide.\n\n*« Ce qui reste d'un esprit qu'on a tordu. »*"
     },
     {
-      "id": "BOSS_005",
+      "id": "BOSS_006",
       "nom": "Akkoro",
-      "difficulte": "moyen",
+      "difficulte": "facile",
       "vie_multiplicateur": 6,
       "stats": {
         "sequence": [
-          "<ico:menace>",
-          "<ico:attaque>"
+          "<ico:attaque>",
+          "<ico:menace>"
         ],
-        "passif": "Quand un héros joue une <ico:action>, il défausse la carte du dessus de la pile Chasse.",
+        "passif": "A la fin de son tour, si un héros a infligé des blessures à Akkoro, il se défausse d'une <ico:chasse>.",
         "actif": "Le héros actif défausse 1 Objet posé devant lui."
       },
       "monstres_ids": [],
@@ -89,14 +105,13 @@
       "lore": "**Référence :** Akkorokamui — démon marin tentaculaire colossal des profondeurs dans la mythologie aïnou (Hokkaido), l'un des kamuy les plus dangereux.\n\n**Lore :** Corrompu, c'est une pieuvre colossale rouge vif, huit tentacules immenses couverts de ventouses qui ressemblent à des bouches béantes. Certaines ventouses ont des dents humaines, des cristaux noirs poussent sur sa peau.\n\n*« Les profondeurs n'avaient pas de nom. Maintenant si. »*"
     },
     {
-      "id": "BOSS_006",
+      "id": "BOSS_007",
       "nom": "Hoyau",
       "difficulte": "moyen",
-      "vie_multiplicateur": 7,
+      "vie_multiplicateur": 6,
       "stats": {
         "sequence": [
-          "<ico:menace>",
-          "<ico:invocation>"
+          "<ico:menace>"
         ],
         "passif": "Les soins des héros soignent au maximum de 1 <ico:degat>.",
         "actif": "Transferrez 1 <ico:degat> de Hoyau au héros actif."
@@ -106,35 +121,17 @@
       "lore": "**Référence :** Hoyau Kamuy — dragon-requin venimeux ailé dans la mythologie aïnou (Hokkaido), l'un des kamuy les plus dangereux.\n\n**Lore :** Corrompu, il est devenu un hybride dragon-requin volant : corps de requin bleu-vert, mâchoire verticale bordée de dents acérées, ailes membraneuses immenses. Du venin vert suinte de tout son corps, devenu noir où la corruption s'est installée.\n\n*« Il portait le ciel. Il l'empoisonne. »*"
     },
     {
-      "id": "BOSS_007",
-      "nom": "Azhda",
-      "difficulte": "difficile",
-      "vie_multiplicateur": 7,
-      "stats": {
-        "sequence": [
-          "<ico:menace>",
-          "<ico:attaque>",
-          "<ico:attaque>"
-        ],
-        "passif": "Azhda effectue son tour avant celui des héros.",
-        "actif": "Le héros actif peut uniquement piocher ou faire des échanges pendant son tour."
-      },
-      "monstres_ids": [],
-      "lore_md": "boss_azhdaha.md",
-      "lore": "**Référence :** Azhdaha — dragon du chaos et de la destruction des sagas Narts dans la mythologie circassienne (Caucase), ennemi juré des héros.\n\n**Lore :** Corrompu, c'est un dragon colossal à plusieurs têtes (3 ou 4), corps serpentin couvert d'écailles sombres et de fourrure noire ébouriffée, ailes de chauve-souris déchirées. Chaque tête a son rôle — l'une crache du feu, une rugit, une mord, une murmure. Des veines de cristal noir pulsent entre les écailles.\n\n*« Une tête pour chaque peuple qu'il gardait. »*"
-    },
-    {
       "id": "BOSS_008",
       "nom": "Gaww",
       "difficulte": "difficile",
-      "vie_multiplicateur": 8,
+      "vie_multiplicateur": 7,
       "stats": {
         "sequence": [
           "<ico:menace>",
           "<ico:actif_boss>"
         ],
         "passif": "A chaque fois que la pioche <ico:chasse> se termine, Soignez 2 <ico:degat> de Gaww.",
-        "actif": "Le héros actif défausse sa main, puis pioche autant de cartes <ico:chasse>."
+        "actif": "Le héros actif défausse 2 cartes de sa main, puis pioche autant de cartes <ico:chasse>."
       },
       "monstres_ids": [],
       "lore_md": "boss_gaww.md",
@@ -144,14 +141,14 @@
       "id": "BOSS_009",
       "nom": "Kaggen",
       "difficulte": "difficile",
-      "vie_multiplicateur": 8,
+      "vie_multiplicateur": 7,
       "stats": {
         "sequence": [
           "<ico:menace>",
           "<ico:invocation>"
         ],
-        "passif": "Chaque héros peut piocher au maximum 1 <ico:chasse> par tour.",
-        "actif": "Tous les héros défaussent 1 carte au hasard de leur main."
+        "passif": "Chaque fois qu'un héros élimine un monstre, il pioche <ico:chasse>.",
+        "actif": "<ico:attaque> de toutes les files."
       },
       "monstres_ids": [],
       "lore_md": "boss_grand_eland.md",
@@ -160,11 +157,10 @@
     {
       "id": "BOSS_010",
       "nom": "Khwa",
-      "difficulte": "très difficile",
-      "vie_multiplicateur": 9,
+      "difficulte": "difficile",
+      "vie_multiplicateur": 8,
       "stats": {
         "sequence": [
-          "<ico:menace>",
           "<ico:menace>",
           "<ico:menace>"
         ],

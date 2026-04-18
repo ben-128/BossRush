@@ -18,10 +18,10 @@ import type { BossIcon } from './events.js';
 import { parseBossSequence } from './icons.js';
 import { emit, notImplemented } from './logger.js';
 import { drawOne, discard } from './piles.js';
-import { damageHero } from './damage.js';
+import { damageHero, eliminateMonster } from './damage.js';
 import { resolveMenace } from './menaces.js';
 import { runOps, mkCtx } from './effects.js';
-import { hookExtraAttackOrderQueue } from './bossPassifs.js';
+import { hookExtraAttackOrderQueues } from './bossPassifs.js';
 
 function nextInstanceId(state: GameState): string {
   state.counters.monsterInstance += 1;
@@ -123,7 +123,6 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
     degats: dmg,
   });
 
-  h.queue.shift();
   damageHero(state, seat, {
     amount: dmg,
     source: 'monstre',
@@ -135,6 +134,9 @@ export function resolveAttackOrder(state: GameState, seat: number): void {
   if (dmgTrig && dmgTrig.length > 0) {
     runOps(state, mkCtx(seat, head.cardId, 'monstre'), dmgTrig);
   }
+
+  // The monster dies after executing its attack order.
+  eliminateMonster(state, seat, head.instanceId);
 }
 
 /** Trigger boss actif (⚡). Uses DSL if present, otherwise logs. */
@@ -169,8 +171,9 @@ function resolveIcon(state: GameState, icon: BossIcon): void {
       return;
     case 'attaque': {
       resolveAttackOrder(state, state.activeSeat);
-      const extra = hookExtraAttackOrderQueue(state);
-      if (extra !== undefined) resolveAttackOrder(state, extra);
+      for (const extra of hookExtraAttackOrderQueues(state)) {
+        resolveAttackOrder(state, extra);
+      }
       return;
     }
     case 'actif_boss':

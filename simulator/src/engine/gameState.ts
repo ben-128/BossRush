@@ -66,6 +66,9 @@ export interface HeroRuntime {
   drawsThisTurn?: number;
   /** Boss Azhda (BOSS_007) actif : this hero can only draw this turn. */
   onlyDrawThisTurn?: boolean;
+  /** One-shot flag (set by ROD_O02 renfort) : next attack that kills its
+   *  monster target continues onto the new queue head. */
+  chainAttackOnKill?: boolean;
 }
 
 export interface BossRuntime {
@@ -139,6 +142,8 @@ export interface GameState {
 
   /** Per-turn bookkeeping for boss passifs. */
   perTurnDraws?: Record<number, number>;
+  /** Set when the active hero damages the boss this turn (Akkoro passif). */
+  activeDamagedBossThisTurn?: boolean;
   bossDamagedThisTurn?: boolean;
 
   /**

@@ -51,6 +51,16 @@ async function main() {
     console.log(`  ${rel} -> simulator/${src.to}  (${n} files)`);
     total += n;
   }
+  // Also expose simulator/data/effects.json under /data/ so the browser loader
+  // can fetch it (prod builds — dev uses the Vite live middleware).
+  const effectsSrc = join(simulatorRoot, 'data/effects.json');
+  const effectsDst = join(simulatorRoot, 'public/data/effects.json');
+  if (existsSync(effectsSrc)) {
+    await mkdir(dirname(effectsDst), { recursive: true });
+    await copyFile(effectsSrc, effectsDst);
+    console.log('  data/effects.json -> simulator/public/data/effects.json');
+    total++;
+  }
   console.log(`[sync-data] Done. ${total} files copied.`);
 }
 

@@ -168,6 +168,20 @@ function playAction(
   const bonusDmg =
     renforts.reduce((s, r) => s + (r.card.bonus_degats ?? 0), 0) + bonusFromModifiers;
 
+  // Renfort objects fire their DSL ops BEFORE the main attack, so they can
+  // set up modifiers (e.g. ROD_O02 chain-on-kill flag). `bonus_degats` is
+  // already factored into `bonusDmg`. Each renfort is then discarded.
+  for (const r of renforts) {
+    h.objects.splice(r.idx, 1);
+    const rEntry = state.effects[r.card.id];
+    const skipOps = rEntry?.tag === 'boost_attack';
+    if (rEntry && !skipOps) {
+      runOps(state, mkCtx(seat, r.card.id, 'chasse'), rEntry.ops ?? []);
+    }
+    discard(state.piles.chasse, r.card);
+    emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: r.card.id, fromSeat: seat });
+  }
+
   if (entry) {
     // DSL path: run ops. If ops include an `attack` without amount, we
     // synthesise its amount from card.degats + bonus at attack time —
@@ -208,20 +222,9 @@ function playAction(
     }
   }
 
-  // Consume renfort objects: run their DSL side-effects (if any), then
-  // discard. bonus_degats is already factored into the attack above.
-  for (const r of renforts) {
-    h.objects.splice(r.idx, 1);
-    const rEntry = state.effects[r.card.id];
-    const rTag = rEntry?.tag;
-    // Skip pure damage-boost objects (ops are stubs / dead-code by design).
-    const skipOps = rTag === 'boost_attack';
-    if (rEntry && !skipOps) {
-      runOps(state, mkCtx(seat, r.card.id, 'chasse'), rEntry.ops ?? []);
-    }
-    discard(state.piles.chasse, r.card);
-    emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: r.card.id, fromSeat: seat });
-  }
+  // Clear chain-on-kill if a renfort set it but the card didn't actually
+  // attack (or no kill happened).
+  if (h.chainAttackOnKill) h.chainAttackOnKill = false;
 
   onAttackResolved(state, seat);
   hookDiscardTopOnAction(state);
@@ -345,13 +348,18 @@ function doUseObject(state: GameState, seat: number, objectIdx: number, reason?:
 
 export function applyPlayerAction(state: GameState, action: PlayerAction): void {
   const seat = state.activeSeat;
-  // BOSS_007 Azhda actif: force the active hero to draw only this turn.
+  // BOSS_007 Azhda actif: the active hero can only draw or exchange this turn.
   const activeHero = state.heroes[seat];
-  if (activeHero?.onlyDrawThisTurn && action.kind !== 'draw' && action.kind !== 'none') {
+  if (
+    activeHero?.onlyDrawThisTurn &&
+    action.kind !== 'draw' &&
+    action.kind !== 'exchange' &&
+    action.kind !== 'none'
+  ) {
     emit(state, {
       kind: 'ACTION_NONE',
       seat,
-      reason: `restrict_to_draw (Azhda) — ${action.kind} remplacé par draw`,
+      reason: `restrict_to_draw_or_exchange (Azhda) — ${action.kind} bloqué`,
     });
     action = { kind: 'draw', reason: 'forcé par Azhda' };
   }

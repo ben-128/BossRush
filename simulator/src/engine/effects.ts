@@ -123,19 +123,16 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       emit(state, { kind: 'WARN', message: `menace cancelled by ${ctx.sourceCardId}` });
       return;
     case 'playMoreActions': {
-      // Re-invoke the active hero's policy for N extra decisions.
-      // Dynamic import for applyPlayerAction to avoid circular dep.
+      // Re-invoke the active hero's policy for N extra decisions — synchronous
+      // so the extra actions resolve BEFORE the rest of the current op chain.
       const policy = state.policies[ctx.sourceSeat];
       if (!policy) return;
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      import('./actions.js').then(({ applyPlayerAction }) => {
-        for (let i = 0; i < op.n; i++) {
-          if (state.result !== 'running') break;
-          const action = policy.pickAction(state);
-          if (op.restrictTo === 'play_action_only' && action.kind !== 'play') continue;
-          applyPlayerAction(state, action);
-        }
-      });
+      for (let i = 0; i < op.n; i++) {
+        if (state.result !== 'running') break;
+        const action = policy.pickAction(state);
+        if (op.restrictTo === 'play_action_only' && action.kind !== 'play') continue;
+        applyPlayerAction(state, action);
+      }
       return;
     }
     case 'openFreeExchange': {
@@ -557,19 +554,21 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
       return;
     }
     case 'reassignHeadToBoss': {
-      // Pick any queue head; use that monster's vie as boss damage.
+      // Pick any queue head; use that monster's degats as boss damage, then
+      // the monster dies (attacking consumes it).
       for (const h of state.heroes) {
         if (h.dead || h.queue.length === 0) continue;
         const head = h.queue[0]!;
         const card = state.catalog.monstreById.get(head.cardId);
-        const amount = card?.vie ?? 1;
-        damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
-        // The head attacks the boss — it doesn't die but its queue position
-        // remains. We emit a WARN log entry for clarity.
+        const amount = card?.degats ?? card?.vie ?? 1;
         emit(state, {
-          kind: 'WARN',
-          message: `reassignHeadToBoss: ${head.cardId} (seat ${h.seatIdx}) deals ${amount} to boss`,
+          kind: 'ATTACK',
+          src: { kind: 'monster', instanceId: head.instanceId, cardId: head.cardId, seat: h.seatIdx },
+          tgt: { kind: 'boss' },
+          degats: amount,
         });
+        damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+        eliminateMonster(state, h.seatIdx, head.instanceId);
         return;
       }
       return;
@@ -601,6 +600,73 @@ function runOne(state: GameState, ctx: EffectContext, op: EffectOp): void {
     case 'damageIfHealed': {
       if (!state.healedThisTurn) return;
       runOps(state, ctx, [{ op: 'damage', target: 'queue_head', amount: op.amount }]);
+      return;
+    }
+    case 'setChainOnKill': {
+      const h = state.heroes[ctx.sourceSeat];
+      if (h) h.chainAttackOnKill = true;
+      return;
+    }
+    case 'summonOnEmptyQueues': {
+      for (const hh of state.heroes) {
+        if (hh.dead || hh.queue.length > 0) continue;
+        const m = drawOne(state, state.piles.monstre, 'monstre');
+        if (!m) break;
+        state.counters.monsterInstance += 1;
+        const inst = {
+          instanceId: `M${state.counters.monsterInstance}`,
+          cardId: m.id,
+          wounds: [] as never[],
+        };
+        hh.queue.push(inst);
+        emit(state, {
+          kind: 'SUMMON_MONSTER',
+          instanceId: inst.instanceId,
+          cardId: m.id,
+          cardName: m.nom,
+          seat: hh.seatIdx,
+        });
+      }
+      return;
+    }
+    case 'rotateHeadsToNext': {
+      // Snapshot each living hero's head first, then apply all moves so
+      // monsters that "land" during the rotation don't get re-moved.
+      const plan: Array<{ fromSeat: number; toSeat: number; head: { instanceId: string; cardId: string } }> = [];
+      for (const hh of state.heroes) {
+        if (hh.dead || hh.queue.length === 0) continue;
+        const head = hh.queue[0]!;
+        // Find the next living hero clockwise.
+        let toSeat = -1;
+        for (let offset = 1; offset <= state.nPlayers; offset++) {
+          const idx = (hh.seatIdx + offset) % state.nPlayers;
+          const other = state.heroes[idx];
+          if (other && !other.dead) {
+            toSeat = idx;
+            break;
+          }
+        }
+        if (toSeat === -1 || toSeat === hh.seatIdx) continue;
+        plan.push({ fromSeat: hh.seatIdx, toSeat, head: { instanceId: head.instanceId, cardId: head.cardId } });
+      }
+      for (const p of plan) {
+        const src = state.heroes[p.fromSeat]!;
+        const dst = state.heroes[p.toSeat]!;
+        const idx = src.queue.findIndex((m) => m.instanceId === p.head.instanceId);
+        if (idx < 0) continue;
+        const [moved] = src.queue.splice(idx, 1);
+        if (!moved) continue;
+        dst.queue.push(moved);
+        emit(state, {
+          kind: 'MONSTER_MOVED',
+          instanceId: moved.instanceId,
+          cardId: moved.cardId,
+          fromSeat: p.fromSeat,
+          toSeat: p.toSeat,
+          position: 'tail',
+          sourceCardId: ctx.sourceCardId,
+        });
+      }
       return;
     }
     case 'allyPlaysAction': {
@@ -991,7 +1057,34 @@ function applyDamageOp(
   const spec = { amount: dmg, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId };
   if (target.kind === 'boss') damageBoss(state, spec);
   else if (target.kind === 'hero') damageHero(state, target.seat, spec);
-  else damageMonster(state, target.seat, target.instanceId, spec);
+  else {
+    const killed = damageMonster(state, target.seat, target.instanceId, spec);
+    // ROD_O02 chain-on-kill: if renfort flag is set and the attack killed a
+    // monster in the source's own queue, continue the attack onto the new
+    // head (or boss if queue empty). One-shot.
+    const src = state.heroes[ctx.sourceSeat];
+    if (killed && src?.chainAttackOnKill && target.seat === ctx.sourceSeat) {
+      src.chainAttackOnKill = false;
+      const nextHead = src.queue[0];
+      if (nextHead) {
+        emit(state, {
+          kind: 'ATTACK',
+          src: { kind: 'hero_action', seat: ctx.sourceSeat, card: ctx.sourceCardId },
+          tgt: { kind: 'monster', instanceId: nextHead.instanceId, seat: ctx.sourceSeat },
+          degats: dmg,
+        });
+        damageMonster(state, ctx.sourceSeat, nextHead.instanceId, spec);
+      } else {
+        emit(state, {
+          kind: 'ATTACK',
+          src: { kind: 'hero_action', seat: ctx.sourceSeat, card: ctx.sourceCardId },
+          tgt: { kind: 'boss' },
+          degats: dmg,
+        });
+        damageBoss(state, spec);
+      }
+    }
+  }
 }
 
 function applyHealOp(state: GameState, ctx: EffectContext, op: OpHeal): void {
@@ -1025,6 +1118,7 @@ function applyDrawDestinOp(state: GameState, ctx: EffectContext, op: OpDrawDesti
       const d = drawOne(state, state.piles.destin, 'destin');
       if (!d) break;
       emit(state, { kind: 'DRAW_CARD', pile: 'destin', card: d.id, toSeat: s });
+      emit(state, { kind: 'RESOLVE_DESTIN', card: d.id, toSeat: s });
       const entry = state.effects[d.id];
       if (entry) {
         runOps(state, { ...ctx, sourceSeat: s, sourceCardId: d.id, sourceKind: 'destin' }, entry.ops);

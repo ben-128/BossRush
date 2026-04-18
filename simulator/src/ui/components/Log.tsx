@@ -42,6 +42,7 @@ function renderEventContent(
   const ch = (id: string) => <CardRef id={id} kind="chasse" state={state} inspect={inspect} />;
   const mo = (id: string) => <CardRef id={id} kind="monstre" state={state} inspect={inspect} />;
   const me = (id: string) => <CardRef id={id} kind="menace" state={state} inspect={inspect} />;
+  const de = (id: string) => <CardRef id={id} kind="destin" state={state} inspect={inspect} />;
   const join = (nodes: ReactNode[], sep: string): ReactNode[] =>
     nodes.flatMap((n, i) => (i === 0 ? [n] : [sep, n]));
 
@@ -84,6 +85,21 @@ function renderEventContent(
       return <>  Menace piochée : « {me(ev.card)} »</>;
     case 'RESOLVE_MENACE':
       return <>  Menace « {me(ev.card)} » → {ev.outcome}</>;
+    case 'RESOLVE_DESTIN':
+      return (
+        <>
+          &nbsp;&nbsp;☲ Destin piochée : « {de(ev.card)} » → seat {ev.toSeat}
+        </>
+      );
+    case 'CHOICE_MADE': {
+      const isMenace = state.catalog.menaceById.has(ev.sourceCardId);
+      return (
+        <>
+          &nbsp;&nbsp;↳ choix : <span className="font-semibold">{ev.label}</span>
+          {isMenace && <> sur « {me(ev.sourceCardId)} »</>} (seat {ev.seat})
+        </>
+      );
+    }
     case 'SUMMON_MONSTER':
       return <>  🐾 Invocation de « {mo(ev.cardId)} » (seat {ev.seat})</>;
     case 'ELIMINATE_MONSTER':
@@ -142,6 +158,7 @@ const KIND_COLORS: Record<string, string> = {
   DRAW_MENACE: 'text-amber-300',
   RESOLVE_MENACE: 'text-amber-200',
   CHOICE_MADE: 'text-amber-100',
+  RESOLVE_DESTIN: 'text-violet-300',
   MONSTER_MOVED: 'text-purple-200',
   CAPACITE_USED: 'text-yellow-300',
   OBJECT_USED: 'text-amber-300',
@@ -166,6 +183,7 @@ function eventCategory(ev: GameEvent): FilterKind | 'other' {
     case 'ACTION_PLAY_OBJECT':
     case 'ACTION_EXCHANGE':
     case 'ACTION_NONE':
+    case 'HEAL_APPLIED':
       return 'actions';
     case 'BOSS_SEQ_ICON':
     case 'DRAW_MENACE':
@@ -174,6 +192,7 @@ function eventCategory(ev: GameEvent): FilterKind | 'other' {
     case 'SUMMON_MONSTER':
     case 'MONSTER_MOVED':
     case 'BOSS_ACTIF_TRIGGERED':
+    case 'RESOLVE_DESTIN':
       return 'boss';
     case 'CAPACITE_USED':
     case 'OBJECT_USED':
@@ -197,20 +216,26 @@ function eventCategory(ev: GameEvent): FilterKind | 'other' {
 export function Log() {
   const state = useStore((s) => s.state)!;
   const inspect = useStore((s) => s.inspect);
+  const visibleCount = useStore((s) => s.visibleEventCount);
   const [filters, setFilters] = useState<Set<FilterKind>>(
     new Set(ALL_FILTERS.filter((f) => f !== 'debug' && f !== 'draws')),
   );
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [state.events.length]);
+    // Newest-on-top: auto-scroll to the top when new events are revealed.
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [visibleCount]);
 
-  const visible = state.events.filter((ev) => {
-    const cat = eventCategory(ev);
-    if (cat === 'other') return true;
-    return filters.has(cat as FilterKind);
-  });
+  const visible = state.events
+    .slice(0, visibleCount)
+    .filter((ev) => {
+      const cat = eventCategory(ev);
+      if (cat === 'other') return true;
+      return filters.has(cat as FilterKind);
+    })
+    .slice()
+    .reverse();
 
   const toggle = (f: FilterKind) =>
     setFilters((prev) => {
@@ -221,18 +246,23 @@ export function Log() {
     });
 
   return (
-    <div className="border border-stone-700 rounded-lg bg-stone-950/70 flex flex-col overflow-hidden">
-      <div className="px-3 py-2 border-b border-stone-800 flex items-center justify-between">
-        <span className="text-sm font-semibold">Log ({visible.length}/{state.events.length})</span>
+    <div className="border border-stone-700 rounded-xl bg-stone-950/80 backdrop-blur-sm flex flex-col overflow-hidden shadow-xl">
+      <div className="px-4 py-3 border-b border-stone-800 flex items-center justify-between bg-stone-900/50">
+        <span className="text-sm font-semibold text-stone-200 tracking-wide">
+          Log
+          <span className="ml-2 text-xs font-normal text-stone-500">
+            {visible.length}/{state.events.length}
+          </span>
+        </span>
         <div className="flex space-x-1">
           {ALL_FILTERS.map((f) => (
             <button
               key={f}
               onClick={() => toggle(f)}
-              className={`px-2 py-0.5 text-xs rounded border ${
+              className={`px-2 py-0.5 text-[10px] uppercase tracking-wider rounded-md border transition-colors ${
                 filters.has(f)
-                  ? 'bg-stone-700 border-stone-600'
-                  : 'bg-stone-900 border-stone-800 text-stone-500'
+                  ? 'bg-stone-700 border-stone-600 text-stone-100'
+                  : 'bg-stone-900 border-stone-800 text-stone-500 hover:text-stone-300'
               }`}
             >
               {f}
@@ -240,13 +270,27 @@ export function Log() {
           ))}
         </div>
       </div>
-      <div ref={scrollRef} className="flex-1 overflow-auto font-mono text-xs p-2 space-y-0.5">
-        {visible.map((ev) => (
-          <div key={ev.t} className={`${KIND_COLORS[ev.kind] ?? 'text-stone-300'}`}>
-            <span className="text-stone-600 mr-1">{ev.t.toString().padStart(4)}</span>
-            {renderEventContent(ev, state, inspect)}
-          </div>
-        ))}
+      <div
+        ref={scrollRef}
+        className="flex-1 overflow-auto font-mono text-xs px-3 py-2 space-y-0.5 scroll-smooth"
+      >
+        {visible.map((ev, i) => {
+          // With newest-on-top ordering, the top 3 rows are the freshest.
+          const isRecent = i < 3;
+          return (
+            <div
+              key={ev.t}
+              className={`${KIND_COLORS[ev.kind] ?? 'text-stone-300'} ${
+                isRecent ? 'animate-fade-in' : ''
+              } py-0.5`}
+            >
+              <span className="text-stone-600 mr-2 select-none">
+                {ev.t.toString().padStart(4)}
+              </span>
+              {renderEventContent(ev, state, inspect)}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

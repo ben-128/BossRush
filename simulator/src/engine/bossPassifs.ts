@@ -11,21 +11,33 @@ import type { GameState } from './gameState.js';
 import { emit } from './logger.js';
 import { drawOne, discard } from './piles.js';
 import { damageBoss } from './damage.js';
+import { runOps, mkCtx } from './effects.js';
 
 function hooks(state: GameState): readonly string[] {
   const entry = state.effects[state.boss.bossId];
   return entry?.passif_hooks ?? [];
 }
 
-/** Caicai : ordres d'attaque touchent aussi la file du héros suivant. */
-export function hookExtraAttackOrderQueue(state: GameState): number | undefined {
-  if (!hooks(state).includes('attack_order_next_queue_too')) return undefined;
-  for (let offset = 1; offset <= state.nPlayers; offset++) {
-    const idx = (state.activeSeat + offset) % state.nPlayers;
-    const h = state.heroes[idx];
-    if (h && !h.dead) return idx;
+/** Caicai : ordres d'attaque additionnels sur toutes les files (ou sur la file du héros suivant selon le hook). */
+export function hookExtraAttackOrderQueues(state: GameState): number[] {
+  const hs = hooks(state);
+  if (hs.includes('attack_order_all_queues')) {
+    const out: number[] = [];
+    for (let offset = 1; offset <= state.nPlayers; offset++) {
+      const idx = (state.activeSeat + offset) % state.nPlayers;
+      const h = state.heroes[idx];
+      if (h && !h.dead) out.push(idx);
+    }
+    return out;
   }
-  return undefined;
+  if (hs.includes('attack_order_next_queue_too')) {
+    for (let offset = 1; offset <= state.nPlayers; offset++) {
+      const idx = (state.activeSeat + offset) % state.nPlayers;
+      const h = state.heroes[idx];
+      if (h && !h.dead) return [idx];
+    }
+  }
+  return [];
 }
 
 /** Kaggen : maximum 1 pioche par tour et par héros. Incrémente puis check. */
@@ -41,12 +53,16 @@ export function hookDrawAllowed(state: GameState, seat: number): boolean {
   return true;
 }
 
-/** Pshato : fin de tour, main cap à 6. */
+/** Pshato (et variantes) : fin de tour, main cappée à N. */
 export function hookHandCapAtEndOfTurn(state: GameState): void {
-  if (!hooks(state).includes('hand_cap_6_end_of_turn')) return;
+  const hs = hooks(state);
+  let cap: number | null = null;
+  if (hs.includes('hand_cap_5_end_of_turn')) cap = 5;
+  else if (hs.includes('hand_cap_6_end_of_turn')) cap = 6;
+  if (cap === null) return;
   const h = state.heroes[state.activeSeat];
   if (!h) return;
-  while (h.hand.length > 6) {
+  while (h.hand.length > cap) {
     const c = h.hand.shift();
     if (!c) break;
     discard(state.piles.chasse, c);
@@ -72,7 +88,7 @@ export function hookReshuffleHealsBoss(state: GameState, pileName: string): void
   emit(state, { kind: 'WARN', message: 'gaww: boss healed 2 on chasse reshuffle' });
 }
 
-/** Akkoro : chaque carte Action jouée défausse le top de la pile Chasse. */
+/** Akkoro (legacy) : chaque carte Action jouée défausse le top de la pile Chasse. */
 export function hookDiscardTopOnAction(state: GameState): void {
   if (!hooks(state).includes('active_discards_top_chasse_on_action')) return;
   const c = drawOne(state, state.piles.chasse, 'chasse');
@@ -81,21 +97,50 @@ export function hookDiscardTopOnAction(state: GameState): void {
   emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id });
 }
 
-/** Invunche : quand un héros est blessé par le boss, il pioche un Destin. */
+/** Akkoro : fin de tour, si le héros actif a blessé Akkoro → défausse 1 Chasse. */
+export function hookAkkoroDamageDiscardsChasse(state: GameState): void {
+  if (!hooks(state).includes('akkoro_damage_discards_chasse')) return;
+  if (!state.activeDamagedBossThisTurn) return;
+  const h = state.heroes[state.activeSeat];
+  if (!h || h.hand.length === 0) return;
+  const c = h.hand.shift()!;
+  discard(state.piles.chasse, c);
+  emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: state.activeSeat });
+  emit(state, { kind: 'WARN', message: `akkoro passif: seat ${state.activeSeat} défausse 1 Chasse` });
+}
+
+/** Invunche (legacy passif) : quand un héros est blessé, il pioche un Destin. */
 export function hookInvuncheDrawDestinOnDamage(state: GameState, seat: number): void {
   if (!hooks(state).includes('invunche_draw_destin_on_damage')) return;
   const d = drawOne(state, state.piles.destin, 'destin');
   if (!d) return;
   emit(state, { kind: 'DRAW_CARD', pile: 'destin', card: d.id, toSeat: seat });
-  // For simplicity: apply DSL ops for the destin if present, then discard.
+  emit(state, { kind: 'RESOLVE_DESTIN', card: d.id, toSeat: seat });
   const entry = state.effects[d.id];
   if (entry?.ops) {
-    // runOps import would create a cycle; defer via dynamic import.
-    import('./effects.js').then(({ runOps, mkCtx }) => {
-      runOps(state, mkCtx(seat, d.id, 'destin'), entry.ops!);
-    });
+    runOps(state, mkCtx(seat, d.id, 'destin'), entry.ops);
   }
   discard(state.piles.destin, d);
+}
+
+/** Invunche (nouveau) : quand blessé par Invunche, le héros perd sa capacité. */
+export function hookInvuncheDamageMarksCapaciteUsed(state: GameState, seat: number): void {
+  if (!hooks(state).includes('invunche_damage_marks_capacite_used')) return;
+  const h = state.heroes[seat];
+  if (!h || h.capaciteUsed) return;
+  h.capaciteUsed = true;
+  emit(state, { kind: 'WARN', message: `invunche passif: seat ${seat} perd sa capacité` });
+}
+
+/** Kaggen : quand un héros élimine un monstre, il pioche 1 Chasse. */
+export function hookKaggenElimDrawsChasse(state: GameState, seat: number): void {
+  if (!hooks(state).includes('kaggen_elim_draws_chasse')) return;
+  const h = state.heroes[seat];
+  if (!h) return;
+  const c = drawOne(state, state.piles.chasse, 'chasse');
+  if (!c) return;
+  h.hand.push(c);
+  emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: seat });
 }
 
 /** Khwa : le boss ne peut recevoir des dégâts qu'une fois par tour. */
@@ -113,6 +158,7 @@ export function hookBossDamageAllowed(state: GameState): boolean {
 export function resetPerTurnFlags(state: GameState): void {
   state.perTurnDraws = {};
   state.bossDamagedThisTurn = false;
+  state.activeDamagedBossThisTurn = false;
 }
 
 /** Azhda : true iff the boss acts before the hero this turn. */

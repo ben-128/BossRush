@@ -47,12 +47,7 @@ export const HeroesFileSchema = z.object({
 // Boss
 // ---------------------------------------------------------------------------
 
-export const DifficulteSchema = z.enum([
-  'facile',
-  'moyen',
-  'difficile',
-  'très difficile',
-]);
+export const DifficulteSchema = z.enum(['facile', 'moyen', 'difficile']);
 
 export const BossStatsSchema = z.object({
   sequence: z.array(z.string()).min(1), // icons as <ico:menace>, <ico:invocation>, etc.

@@ -173,6 +173,9 @@ public class HeroCardGenerator : CardGenerator
     [Tooltip("Disque de fond derrière l'icône compétence (sprite whiteCircle teinté)")]
     public SpriteRenderer competenceDiscRenderer;
 
+    [Tooltip("Shadow drop (composant SpriteDropShadow) teinté avec la couleur de compétence")]
+    public SpriteDropShadow shadowDrop;
+
     [Header("Données des héros (charger depuis JSON)")]
     public HeroVisualData[] allHeroes;
 
@@ -251,10 +254,18 @@ public class HeroCardGenerator : CardGenerator
 
         if (competences == null) return;
 
-        // Teinter le disque de fond avec la couleur de la compétence principale
-        if (competenceDiscRenderer != null && competences.Length > 0 && competenceColors != null)
+        // Teinter le disque de fond et le shadow drop avec la couleur de la compétence principale
+        if (competences.Length > 0 && competenceColors != null)
         {
-            competenceDiscRenderer.color = competenceColors.GetColor(competences[0]);
+            var tint = competenceColors.GetColor(competences[0]);
+            if (competenceDiscRenderer != null) competenceDiscRenderer.color = tint;
+            if (shadowDrop != null)
+            {
+                var c = tint;
+                c.a = shadowDrop.shadowColor.a;
+                shadowDrop.shadowColor = c;
+                shadowDrop.ForceUpdate();
+            }
         }
 
         for (int i = 0; i < competences.Length && i < competenceSlots.Length; i++)

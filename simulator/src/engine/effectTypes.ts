@@ -428,6 +428,21 @@ export interface OpDamageIfHealed {
   amount: number;
 }
 
+/** Set the one-shot chain-on-kill flag for the current attack (ROD_O02 renfort). */
+export interface OpSetChainOnKill {
+  op: 'setChainOnKill';
+}
+
+/** Snapshot each queue head then move all to the next hero's tail simultaneously (legacy). */
+export interface OpRotateHeadsToNext {
+  op: 'rotateHeadsToNext';
+}
+
+/** Summon 1 monster in every hero queue that is currently empty (BOSS_003 actif). */
+export interface OpSummonOnEmptyQueues {
+  op: 'summonOnEmptyQueues';
+}
+
 export interface OpModifier {
   op: 'modifier';
   effect: ModifierEffect;
@@ -500,7 +515,10 @@ export type EffectOp =
   | OpHealAllyEqualsSelfWounds
   | OpDrawWithObjetBonus
   | OpAllyPlaysAction
-  | OpDamageIfHealed;
+  | OpDamageIfHealed
+  | OpSetChainOnKill
+  | OpRotateHeadsToNext
+  | OpSummonOnEmptyQueues;
 
 /** One entry per card id in effects.json. */
 export interface CardEffectEntry {
@@ -533,15 +551,20 @@ export interface CardEffectEntry {
    */
   passif_hooks?: Array<
     | 'attack_order_next_queue_too'
+    | 'attack_order_all_queues'
     | 'max_draws_per_turn_1'
     | 'hand_cap_6_end_of_turn'
+    | 'hand_cap_5_end_of_turn'
     | 'damage_unhealable_from_menace'
     | 'reshuffle_heals_boss_2'
     | 'active_discards_top_chasse_on_action'
+    | 'akkoro_damage_discards_chasse'
     | 'invunche_draw_destin_on_damage'
+    | 'invunche_damage_marks_capacite_used'
     | 'heal_cap_1'
     | 'boss_receives_max_1_damage_per_turn'
     | 'boss_before_heroes'
+    | 'kaggen_elim_draws_chasse'
   >;
 }
 

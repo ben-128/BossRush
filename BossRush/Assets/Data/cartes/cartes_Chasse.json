@@ -87,7 +87,7 @@
       "nom": "Bouclier tawan",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Annulez la prochaine source de <ico:degat> infligées à ce héros.",
+      "effet": "Réaction : annulez la prochaine source de <ico:degat> infligée à ce héros.",
       "quantite": 1
     },
     {
@@ -95,15 +95,15 @@
       "nom": "Sang du jaguar",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Piochez 1 <ico:chasse> par <ico:degat> sur ce héros.",
+      "effet": "Réaction : quand ce héros subit une <ico:degat>, piochez 4 <ico:chasse>.",
       "quantite": 1
     },
     {
       "id": "GUE_O04",
-      "nom": "Peau de fer",
+      "nom": "Carapace ferreuse",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Soignez ce héros de 2 <ico:degat>.",
+      "effet": "Réaction : quand un monstre frappe ce héros, il subit 1 <ico:degat> en retour.",
       "quantite": 1
     },
     {
@@ -111,7 +111,7 @@
       "nom": "Heaume du toqui",
       "categorie": "objet",
       "prerequis": "Nawel",
-      "effet": "Annulez l'effet de la <ico:menace> en cours.",
+      "effet": "Réaction : annulez l'effet de la <ico:menace> en cours.",
       "quantite": 1
     },
     {
@@ -120,7 +120,7 @@
       "categorie": "objet",
       "degats": 3,
       "prerequis": "Nawel",
-      "effet": "Uniquement déclenchable quand ce héros meurt.",
+      "effet": "Réaction : quand ce héros meurt, infligez 3 <ico:degat> au Colosse.",
       "quantite": 1
     },
     {
@@ -195,7 +195,7 @@
       "nom": "Cendres du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Ce héros recharge sa <ico:capacite>.",
+      "effet": "Réaction : quand ce héros dépense sa <ico:capacite>, rechargez-la immédiatement.",
       "quantite": 1
     },
     {
@@ -203,7 +203,7 @@
       "nom": "Braise errante",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Ce héros joue sa prochaine <ico:action> en ignorant le prérequis.",
+      "effet": "Amélioration : la <ico:action> jouée par ce héros ignore son prérequis.",
       "quantite": 1
     },
     {
@@ -212,7 +212,7 @@
       "categorie": "objet",
       "prerequis": "Daraa",
       "bonus_degats": 2,
-      "effet": "Renforcez une attaque et infligez 2 <ico:degat> à un Monstre ou Colosse différent de la cible.",
+      "effet": "Amélioration : ajoutez 2 <ico:degat> à une attaque, répartis sur 2 cibles au choix.",
       "quantite": 1
     },
     {
@@ -220,7 +220,7 @@
       "nom": "Cristal explosif",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Éliminez un monstre attaquant ayant 2 points de vie ou moins.",
+      "effet": "Réaction : quand un monstre attaque, éliminez-le.",
       "quantite": 1
     },
     {
@@ -228,7 +228,7 @@
       "nom": "Lave du Danakil",
       "categorie": "objet",
       "prerequis": "Daraa",
-      "effet": "Soignez 1 <ico:degat> et piochez 2 <ico:chasse>.",
+      "effet": "Réaction : quand ce héros élimine un monstre, soignez-le de 1 <ico:degat> et piochez 1 <ico:chasse>.",
       "quantite": 1
     },
     {
@@ -335,7 +335,7 @@
       "nom": "Élixir de sève-mère",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Soignez de 2 <ico:degat> un héros au choix.",
+      "effet": "Réaction : quand un héros allié subit une <ico:degat>, soignez-le de 2 <ico:degat>.",
       "quantite": 1
     },
     {
@@ -343,15 +343,15 @@
       "nom": "Totem de transe",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Si ce héros devait recevoir une <ico:degat> mortelle ce tour-ci, annulez-la ainsi que toutes les <ico:degat> suivantes jusqu'à la fin du tour.",
+      "effet": "Réaction : si ce héros devait recevoir une <ico:degat> mortelle, annulez-la ainsi que toutes les <ico:degat> suivantes jusqu'à la fin du tour.",
       "quantite": 1
     },
     {
       "id": "SOI_O03",
-      "nom": "Gemme du sacrifice",
+      "nom": "Gemme de communion",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Soignez un autre héros allié d'autant de <ico:degat> que ce héros en a.",
+      "effet": "Réaction : quand un héros pioche une <ico:destin>, ce héros la consulte avec lui et choisit ensemble qui en applique l'effet.",
       "quantite": 1
     },
     {
@@ -359,7 +359,7 @@
       "nom": "Masque des ancêtres",
       "categorie": "objet",
       "prerequis": "Gao",
-      "effet": "Régénérez la <ico:capacite> d'un héros au choix.",
+      "effet": "Réaction : quand un héros allié dépense sa <ico:capacite>, rechargez-la immédiatement.",
       "quantite": 1
     },
     {
@@ -368,7 +368,7 @@
       "categorie": "objet",
       "prerequis": "Gao",
       "degats": 2,
-      "effet": "Uniquement utilisable si un héros a été soigné ce tour-ci.",
+      "effet": "Réaction : quand un héros est soigné, infligez 2 <ico:degat> à un monstre au choix.",
       "quantite": 1
     },
     {
@@ -437,15 +437,15 @@
       "categorie": "objet",
       "prerequis": "Isonash",
       "bonus_degats": 2,
-      "effet": "Ajoutez 2 <ico:degat> à une attaque jouée en même temps.",
+      "effet": "Amélioration : ajoutez 2 <ico:degat> à une attaque jouée en même temps.",
       "quantite": 1
     },
     {
       "id": "ROD_O06",
-      "nom": "Sève de tamo ",
+      "nom": "Sève de tamo",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Soignez ce héros d'un montant de <ico:degat> égal au nombre de cartes piochées ce tour ci.",
+      "effet": "Réaction : quand ce héros pioche une carte pendant son tour, soignez-le de 1 <ico:degat>.",
       "quantite": 1
     },
     {
@@ -453,7 +453,7 @@
       "nom": "Flèches transperçantes",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Améliore une attaque : si la cible est éliminée, l'attaque cible le monstre suivant dans votre file, ou le Colosse si votre file est vide.",
+      "effet": "Amélioration : si la cible de l'attaque est éliminée, l'attaque continue sur le monstre suivant dans votre file, ou le Colosse si votre file est vide.",
       "quantite": 1
     },
     {
@@ -461,7 +461,7 @@
       "nom": "Amulette kamuy",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Soignez 1 <ico:degat> pour chaque <ico:action> jouée et chaque Objet utilisé ce tour-ci, celui-ci compris.",
+      "effet": "Réaction : quand ce héros joue une <ico:action>, soignez-le de 1 <ico:degat>.",
       "quantite": 1
     },
     {
@@ -469,7 +469,7 @@
       "nom": "Griffe de kamuy",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Éliminez n'importe quel monstre dans n'importe quelle file. Uniquement utilisable si au moins 2 <ico:chasse> ont été jouées ce tour-ci.",
+      "effet": "Réaction : quand ce héros a joué 2 <ico:action> dans le tour, éliminez n'importe quel monstre dans n'importe quelle file.",
       "quantite": 1
     },
     {
@@ -477,7 +477,7 @@
       "nom": "Carquois infini",
       "categorie": "objet",
       "prerequis": "Isonash",
-      "effet": "Ce héros pioche jusqu'à avoir 5 <ico:chasse> en main.",
+      "effet": "Réaction : quand ce héros n'a plus qu'1 <ico:chasse> en main, il pioche jusqu'à en avoir 5.",
       "quantite": 1
     },
     {
@@ -587,7 +587,7 @@
       "nom": "Corne de ralliement",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Les héros alliés peuvent donner à ce héros 1 <ico:chasse> chacun.",
+      "effet": "Réaction : quand un héros allié pioche une <ico:chasse>, il peut la donner à ce héros.",
       "quantite": 1
     },
     {
@@ -595,7 +595,7 @@
       "nom": "Crinière d'or",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Ce héros peut donner 1 <ico:chasse> à chaque héros allié.",
+      "effet": "Réaction : quand ce héros subit des <ico:degat>, il donne 1 <ico:chasse> à chaque héros allié.",
       "quantite": 1
     },
     {
@@ -603,15 +603,15 @@
       "nom": "Coffre du Gué",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "N'importe quel héros peut utiliser cet Objet pendant son tour et piocher 3 <ico:chasse>.",
+      "effet": "Réaction : quand un héros effectue un échange avec ce héros, les deux piochent 2 <ico:chasse>.",
       "quantite": 1
     },
     {
       "id": "DIP_O04",
-      "nom": "Offrande du destin",
+      "nom": "Pacte du Gué",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Donnez 2 <ico:chasse> à un allié. Piochez 1 <ico:destin>.",
+      "effet": "Réaction : quand un héros effectue un échange avec ce héros, les deux piochent 1 <ico:destin>.",
       "quantite": 1
     },
     {
@@ -619,7 +619,7 @@
       "nom": "Traité de paix",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "N'importe quel héros peut utiliser cet Objet pendant son tour. Annulez l'effet de la <ico:menace>.",
+      "effet": "Réaction : annulez l'effet de la <ico:menace> en cours. N'importe quel héros peut déclencher cet Objet.",
       "quantite": 1
     }
   ]

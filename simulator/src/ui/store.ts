@@ -53,6 +53,17 @@ interface Store {
   nextTurn: () => void;
   runToEnd: () => void;
   reset: () => void;
+
+  /** Animation/VFX controls. */
+  animationsEnabled: boolean;
+  setAnimationsEnabled: (v: boolean) => void;
+  /** Base duration (ms) for "full-weight" events (play/menace/choice/etc.).
+   *  Lighter events scale proportionally. */
+  animSpeedMs: number;
+  setAnimSpeedMs: (n: number) => void;
+  /** Number of events the UI has revealed (progressive playback). */
+  visibleEventCount: number;
+  setVisibleEventCount: (n: number) => void;
 }
 
 const DEFAULT_FORM = {
@@ -96,6 +107,26 @@ export const useStore = create<Store>((set, get) => ({
     }),
   setSeed: (seed) => set((s) => ({ form: { ...s.form, seed } })),
 
+  animationsEnabled:
+    typeof localStorage !== 'undefined' && localStorage.getItem('anims') === '0' ? false : true,
+  setAnimationsEnabled: (v) => {
+    if (typeof localStorage !== 'undefined') localStorage.setItem('anims', v ? '1' : '0');
+    // When turning animations off, snap to the end of the event stream.
+    const st = get().state;
+    set({ animationsEnabled: v, ...(v ? {} : { visibleEventCount: st?.events.length ?? 0 }) });
+  },
+  animSpeedMs:
+    typeof localStorage !== 'undefined'
+      ? Math.max(200, Math.min(10000, parseInt(localStorage.getItem('animSpeedMs') ?? '2000', 10)))
+      : 2000,
+  setAnimSpeedMs: (n) => {
+    const clamped = Math.max(200, Math.min(10000, n));
+    if (typeof localStorage !== 'undefined') localStorage.setItem('animSpeedMs', String(clamped));
+    set({ animSpeedMs: clamped });
+  },
+  visibleEventCount: 0,
+  setVisibleEventCount: (n) => set({ visibleEventCount: n }),
+
   load: async () => {
     set({ loading: true, error: null });
     try {
@@ -107,7 +138,7 @@ export const useStore = create<Store>((set, get) => ({
   },
 
   start: () => {
-    const { design, effects, form } = get();
+    const { design, effects, form, animationsEnabled } = get();
     if (!design) return;
     const seedNum = Number(form.seed);
     const seed = Number.isFinite(seedNum) && form.seed.trim() !== '' ? seedNum : form.seed;
@@ -118,7 +149,12 @@ export const useStore = create<Store>((set, get) => ({
       heroIds: form.heroIds,
       effects,
     });
-    set({ state, running: true, view: 'game' });
+    set({
+      state,
+      running: true,
+      view: 'game',
+      visibleEventCount: animationsEnabled ? 0 : state.events.length,
+    });
   },
 
   /** Replay from batch summary: fill form, run, switch to game view. */
@@ -134,11 +170,13 @@ export const useStore = create<Store>((set, get) => ({
       heroIds: row.heroes,
       effects,
     });
+    const animOn = get().animationsEnabled;
     set({
       state,
       running: true,
       view: 'game',
       form: { boss: row.boss, heroIds: row.heroes, seed: String(seed) },
+      visibleEventCount: animOn ? 0 : state.events.length,
     });
   },
 
@@ -160,6 +198,7 @@ export const useStore = create<Store>((set, get) => ({
     }
     // Force React update. Clone nested arrays that HeroPanel reads so any
     // memo/shallow-compare downstream sees new references.
+    const animOn = get().animationsEnabled;
     set({
       state: {
         ...state,
@@ -168,6 +207,7 @@ export const useStore = create<Store>((set, get) => ({
         ),
         events: [...state.events],
       },
+      ...(animOn ? {} : { visibleEventCount: state.events.length }),
     });
   },
 
@@ -176,11 +216,12 @@ export const useStore = create<Store>((set, get) => ({
     if (!state || state.result !== 'running') return;
     const policies = state.heroes.map(() => heuristicPolicy);
     runGame(state, { policies });
-    set({ state: { ...state } });
+    // Skip straight to the end — user explicitly asked to fast-forward.
+    set({ state: { ...state }, visibleEventCount: state.events.length });
   },
 
   reset: () => {
-    set({ state: null, running: false, view: 'setup' });
+    set({ state: null, running: false, view: 'setup', visibleEventCount: 0 });
   },
 }));
 
@@ -257,6 +298,10 @@ export function describeEvent(ev: GameEvent, state?: GameState | null): string {
       return `  ↳ choix : ${ev.label} (seat ${ev.seat})`;
     case 'CAPACITE_USED':
       return `  ⚡ Capacité de ${heroName(ev.heroId)} (seat ${ev.seat})`;
+    case 'HEAL_APPLIED':
+      return `  ✚ ${ev.healed} PV restauré${ev.healed > 1 ? 's' : ''} (seat ${ev.seat})`;
+    case 'RESOLVE_DESTIN':
+      return `  ☲ Destin piochée : « ${desName(ev.card)} » → seat ${ev.toSeat}`;
     case 'OBJECT_USED':
       return `  🛠 Seat ${ev.seat} utilise « ${chName(ev.card)} »${ev.reason ? ` — ${ev.reason}` : ''}`;
     case 'MONSTER_MOVED': {

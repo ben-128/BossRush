@@ -16,7 +16,12 @@ import type { TargetKind, WoundSource } from './events.js';
 import { emit } from './logger.js';
 import { discard } from './piles.js';
 import { onDamageResolved, shouldCancelDamage } from './modifiers.js';
-import { hookBossDamageAllowed, hookInvuncheDrawDestinOnDamage } from './bossPassifs.js';
+import {
+  hookBossDamageAllowed,
+  hookInvuncheDrawDestinOnDamage,
+  hookInvuncheDamageMarksCapaciteUsed,
+  hookKaggenElimDrawsChasse,
+} from './bossPassifs.js';
 import { runOps, mkCtx } from './effects.js';
 
 function nextWoundId(state: GameState): string {
@@ -87,9 +92,10 @@ export function damageHero(state: GameState, seat: number, spec: DamageSpec): bo
     woundId,
   });
   onDamageResolved(state, seat);
-  // Invunche passif: when boss damages a hero, that hero draws a Destin.
+  // Invunche passif variants.
   if (spec.source === 'menace' || spec.source === 'boss') {
     hookInvuncheDrawDestinOnDamage(state, seat);
+    hookInvuncheDamageMarksCapaciteUsed(state, seat);
   }
   if (totalWoundsOfHero(h) >= h.vieMax) {
     return killHero(state, seat);
@@ -118,6 +124,8 @@ export function damageBoss(state: GameState, spec: DamageSpec): boolean {
     amount: spec.amount,
     woundId,
   });
+  // Akkoro passif bookkeeping: active hero damaged the boss this turn.
+  if (spec.source === 'chasse') state.activeDamagedBossThisTurn = true;
   if (totalWoundsOfBoss(state) >= state.boss.vieMax) {
     state.boss.defeated = true;
     emit(state, { kind: 'BOSS_DEFEATED', bossId: state.boss.bossId });
@@ -191,14 +199,13 @@ export function eliminateMonster(state: GameState, seat: number, instanceId: str
     cardId: removed.cardId,
     seat,
   });
-  // onEliminate trigger.
+  // onEliminate trigger — synchronous to preserve ordering.
   const trig = state.effects[removed.cardId]?.triggers?.onEliminate;
   if (trig && trig.length > 0) {
-    // Dynamic import to avoid circular dependency with effects.ts.
-    import('./effects.js').then(({ runOps, mkCtx }) => {
-      runOps(state, mkCtx(seat, removed.cardId, 'monstre'), trig);
-    });
+    runOps(state, mkCtx(seat, removed.cardId, 'monstre'), trig);
   }
+  // Kaggen passif: the hero who eliminated the monster draws 1 Chasse.
+  hookKaggenElimDrawsChasse(state, seat);
 }
 
 // ---------------------------------------------------------------------------

@@ -17,7 +17,12 @@ import { applyPlayerAction } from './actions.js';
 import { resolveBossSequence } from './bossSequence.js';
 import { emit } from './logger.js';
 import { clearScope } from './modifiers.js';
-import { hookBossBeforeHeroes, hookHandCapAtEndOfTurn, resetPerTurnFlags } from './bossPassifs.js';
+import {
+  hookBossBeforeHeroes,
+  hookHandCapAtEndOfTurn,
+  resetPerTurnFlags,
+  hookAkkoroDamageDiscardsChasse,
+} from './bossPassifs.js';
 import { addModifier } from './modifiers.js';
 
 export interface RunOptions {
@@ -106,6 +111,7 @@ export function runTurn(state: GameState, policies: Policy[]): void {
     bossPhase();
   }
 
+  hookAkkoroDamageDiscardsChasse(state);
   hookHandCapAtEndOfTurn(state);
   // Clear modifiers with 'thisTurn' scope at turn end.
   clearScope(state, 'thisTurn');

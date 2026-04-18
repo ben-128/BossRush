@@ -228,6 +228,10 @@ const OpDamageIfHealed = z.object({
   amount: z.number().int().positive(),
 });
 
+const OpSetChainOnKill = z.object({ op: z.literal('setChainOnKill') });
+const OpRotateHeadsToNext = z.object({ op: z.literal('rotateHeadsToNext') });
+const OpSummonOnEmptyQueues = z.object({ op: z.literal('summonOnEmptyQueues') });
+
 const OpEliminateWhere = z.object({
   op: z.literal('eliminateWhere'),
   from: z.enum(['monster_in_self_queue', 'monster_in_any_queue']),
@@ -293,6 +297,9 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpDrawWithObjetBonus,
     OpAllyPlaysAction,
     OpDamageIfHealed,
+    OpSetChainOnKill,
+    OpRotateHeadsToNext,
+    OpSummonOnEmptyQueues,
   ]),
 );
 
@@ -392,13 +399,18 @@ const PassifHook = z.enum([
   'attack_order_next_queue_too',
   'max_draws_per_turn_1',
   'hand_cap_6_end_of_turn',
+  'hand_cap_5_end_of_turn',
   'damage_unhealable_from_menace',
   'reshuffle_heals_boss_2',
   'active_discards_top_chasse_on_action',
+  'akkoro_damage_discards_chasse',
   'invunche_draw_destin_on_damage',
+  'invunche_damage_marks_capacite_used',
   'heal_cap_1',
   'boss_receives_max_1_damage_per_turn',
   'boss_before_heroes',
+  'attack_order_all_queues',
+  'kaggen_elim_draws_chasse',
 ]);
 
 export const CardEffectEntrySchema = z.object({

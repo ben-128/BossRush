@@ -5,6 +5,7 @@
 Critères : 1-2 mots, bilingue ou compréhensible EN/FR, évoque un groupe co-op qui affronte des boss.
 
 ### Favoris
+- **Rite of the Hunt** / **Le Rite de la Chasse** — capte combat (*hunt*) + cérémoniel (*rite* = iyomante aïnou, transe san, ngillatún mapuche) + réunion des 5 tribus. Bilingue lisible, aucune des 5 cultures privilégiée, résonne avec le ton "primitif, viscéral, respect de la bête".
 - **Tyrannicide** — "Tueur de tyran". Même structure que Regicide. Vrai mot EN + FR.
 - **Overthrow** — "Renverser". Verbe d'action, même énergie que Regicide.
 - **Takedown** — "Abattre". Ultra-gaming, universel, compris partout.

@@ -252,30 +252,89 @@ describe('effects DSL — integration: full games run with DSL', () => {
     expect(bossAfter - bossBefore).toBe(3);
   });
 
-  it('BOSS_003 actif rotates each queue head to the next hero tail', async () => {
+  it('BOSS_004 Caicai actif summons in every empty queue', async () => {
     const data = await loadDesignData();
     const effects = await loadEffectsCatalog();
     const heroIds = ['HERO_001', 'HERO_003', 'HERO_005'];
     const state = createGame(data, {
       seed: 1,
       nPlayers: heroIds.length,
-      bossId: 'BOSS_003',
+      bossId: 'BOSS_004',
       heroIds,
       effects,
     });
-    // Seed each queue with a distinct monster instance at the head.
-    const make = (id: string, cardId = 'MON_ROC'): {
-      instanceId: string; cardId: string; wounds: [];
-    } => ({ instanceId: id, cardId, wounds: [] });
-    state.heroes[0]!.queue = [make('A')];
-    state.heroes[1]!.queue = [make('B')];
-    state.heroes[2]!.queue = [make('C')];
+    // Pre-fill seat 0 so only seats 1 and 2 summon.
+    state.heroes[0]!.queue = [
+      { instanceId: 'EXISTING', cardId: 'MON_ROC', wounds: [] },
+    ];
+    state.heroes[1]!.queue = [];
+    state.heroes[2]!.queue = [];
 
     const entry = state.effects[state.boss.bossId];
     runOps(state, mkCtx(0, state.boss.bossId, 'boss'), entry!.actif_ops!);
 
-    expect(state.heroes[0]!.queue.map((m) => m.instanceId)).toEqual(['C']);
+    expect(state.heroes[0]!.queue.length).toBe(1); // unchanged
+    expect(state.heroes[0]!.queue[0]!.instanceId).toBe('EXISTING');
+    expect(state.heroes[1]!.queue.length).toBe(1); // summoned
+    expect(state.heroes[2]!.queue.length).toBe(1); // summoned
+  });
+
+  it('BOSS_006 Akkoro passif: hero discards 1 Chasse at end of turn after damaging boss', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const state = createGame(data, {
+      seed: 7,
+      nPlayers: 2,
+      bossId: 'BOSS_006',
+      heroIds: ['HERO_001', 'HERO_003'],
+      effects,
+    });
+    const h = state.heroes[0]!;
+    const handBefore = h.hand.length;
+    // Simulate a Chasse-sourced hit on the boss.
+    runOps(state, mkCtx(0, 'TEST_CHASSE', 'chasse'), [{ op: 'bossDamage', amount: 1 }]);
+    expect(state.activeDamagedBossThisTurn).toBe(true);
+    // End-of-turn hook consumes 1 Chasse from the active hero's hand.
+    const { hookAkkoroDamageDiscardsChasse } = await import('../engine/bossPassifs.js');
+    hookAkkoroDamageDiscardsChasse(state);
+    expect(h.hand.length).toBe(handBefore - 1);
+  });
+
+  it('BOSS_006 Akkoro passif: no discard if no damage dealt to boss', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const state = createGame(data, {
+      seed: 8,
+      nPlayers: 2,
+      bossId: 'BOSS_006',
+      heroIds: ['HERO_001', 'HERO_003'],
+      effects,
+    });
+    const handBefore = state.heroes[0]!.hand.length;
+    const { hookAkkoroDamageDiscardsChasse } = await import('../engine/bossPassifs.js');
+    hookAkkoroDamageDiscardsChasse(state);
+    expect(state.heroes[0]!.hand.length).toBe(handBefore);
+  });
+
+  it('rotateHeadsToNext op with only one monster moves it ONE step, not full cycle', async () => {
+    const data = await loadDesignData();
+    const effects = await loadEffectsCatalog();
+    const heroIds = ['HERO_001', 'HERO_003', 'HERO_005'];
+    const state = createGame(data, {
+      seed: 2,
+      nPlayers: heroIds.length,
+      bossId: 'BOSS_001',
+      heroIds,
+      effects,
+    });
+    state.heroes[0]!.queue = [{ instanceId: 'A', cardId: 'MON_ROC', wounds: [] }];
+    state.heroes[1]!.queue = [];
+    state.heroes[2]!.queue = [];
+
+    runOps(state, mkCtx(0, 'TEST', 'boss'), [{ op: 'rotateHeadsToNext' }]);
+
+    expect(state.heroes[0]!.queue.length).toBe(0);
     expect(state.heroes[1]!.queue.map((m) => m.instanceId)).toEqual(['A']);
-    expect(state.heroes[2]!.queue.map((m) => m.instanceId)).toEqual(['B']);
+    expect(state.heroes[2]!.queue.length).toBe(0);
   });
 });

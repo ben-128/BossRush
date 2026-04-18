@@ -5,5 +5,186 @@
 @layer base {
   body {
     font-family: ui-sans-serif, system-ui, sans-serif;
+    background: radial-gradient(ellipse at top, #1c1917 0%, #0c0a09 70%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  /* Slow fade-in for new log entries and newly-appearing panels. */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 400ms ease-out;
+  }
+
+  /* Gentle pulse to signal "acting now". */
+  @keyframes soft-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.0);
+    }
+    50% {
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.35);
+    }
+  }
+  .animate-soft-pulse {
+    animation: soft-pulse 2s ease-in-out infinite;
+  }
+
+  /* Wound/damage shake on the targeted panel. */
+  @keyframes damage-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-3px); }
+    40%, 80% { transform: translateX(3px); }
+  }
+  .animate-damage-shake {
+    animation: damage-shake 350ms ease-in-out;
+  }
+
+  /* Slide-in from the side for queued monsters. */
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .animate-slide-in-right {
+    animation: slide-in-right 500ms ease-out;
+  }
+
+  @keyframes slide-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  .animate-slide-in-top {
+    animation: slide-in-top 500ms ease-out;
+  }
+
+  /* Slow heal glow. */
+  @keyframes heal-glow {
+    0% { background-color: rgba(16, 185, 129, 0); }
+    30% { background-color: rgba(16, 185, 129, 0.25); }
+    100% { background-color: rgba(16, 185, 129, 0); }
+  }
+  .animate-heal-glow {
+    animation: heal-glow 1.2s ease-in-out;
+  }
+
+  /* Death fade (for a hero). */
+  @keyframes death-fade {
+    from { opacity: 1; filter: saturate(1); }
+    to { opacity: 0.4; filter: saturate(0.3) blur(0.5px); }
+  }
+  .animate-death {
+    animation: death-fade 800ms ease-in forwards;
+  }
+
+  /* Boss damage flash. */
+  @keyframes boss-flash {
+    0%, 100% { background-color: transparent; }
+    30% { background-color: rgba(239, 68, 68, 0.2); }
+  }
+  .animate-boss-flash {
+    animation: boss-flash 600ms ease-out;
+  }
+
+  /* Card spotlight — grows, glows then fades. Used in situ (in the hand,
+     in the object row, or near the boss for menaces). Duration 2s. */
+  @keyframes card-spotlight {
+    0% {
+      opacity: 0;
+      transform: scale(0.85);
+      filter: brightness(1);
+    }
+    15% {
+      opacity: 1;
+      transform: scale(1.08);
+      filter: brightness(1.4) drop-shadow(0 0 10px currentColor);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(1.04);
+      filter: brightness(1.2) drop-shadow(0 0 6px currentColor);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.9);
+      filter: brightness(1);
+    }
+  }
+  .animate-spotlight {
+    animation: card-spotlight 2000ms ease-in-out forwards;
+  }
+
+  @keyframes menace-reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px) rotateX(-25deg) scale(0.9);
+    }
+    15% {
+      opacity: 1;
+      transform: translateY(0) rotateX(0) scale(1.03);
+    }
+    85% {
+      opacity: 1;
+      transform: translateY(0) rotateX(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-12px) scale(0.95);
+    }
+  }
+  .animate-menace-reveal {
+    animation: menace-reveal 2000ms ease-out forwards;
+  }
+
+  @keyframes monster-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+    }
+    40% {
+      box-shadow: 0 0 0 6px rgba(168, 85, 247, 0.5);
+    }
+  }
+  .animate-monster-pulse {
+    animation: monster-pulse 2000ms ease-out;
+  }
+
+  /* Row highlight — used for capacity / object / actif rows when fired. */
+  @keyframes row-highlight {
+    0% {
+      background-color: transparent;
+      box-shadow: 0 0 0 0 rgba(250, 204, 21, 0);
+    }
+    25% {
+      background-color: rgba(250, 204, 21, 0.18);
+      box-shadow: 0 0 14px 2px rgba(250, 204, 21, 0.35);
+    }
+    100% {
+      background-color: transparent;
+      box-shadow: 0 0 0 0 rgba(250, 204, 21, 0);
+    }
+  }
+  .animate-row-highlight {
+    animation: row-highlight 2000ms ease-out;
+    border-radius: 6px;
   }
 }

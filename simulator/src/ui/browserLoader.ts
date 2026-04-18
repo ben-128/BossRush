@@ -1,39 +1,42 @@
 /**
  * Browser-side data loader.
  *
- * Fetches the 6 Unity JSONs from /data/cartes/ (served via public/data/ by Vite)
- * and bundles simulator/data/effects.json via a plain import (Vite treats JSON
- * as a module).
+ * In dev, reads the 6 Unity JSONs straight from BossRush/Assets/Data/ via the
+ * Vite `liveUnityJson` middleware, and effects.json from simulator/data/ the
+ * same way. That means editing any of these files + hitting "Recharger JSONs"
+ * (or calling load() again) picks up the changes without a sync step.
+ *
+ * In production, the same URLs are served from public/ (populated at build).
  */
 
 import { parseDesignData } from '../engine/parseDesignData.js';
 import { EffectsFileSchema } from '../engine/effectSchemas.js';
 import type { EffectsCatalog } from '../engine/effectTypes.js';
 
-// Bundled at build time. Runtime validation still applies in loadEffects().
-import effectsRaw from '../../data/effects.json';
-
 async function fetchJson(url: string): Promise<unknown> {
-  const res = await fetch(url);
+  // Cache-bust so repeated loads always pull fresh copies after edits.
+  const bust = `?t=${Date.now()}`;
+  const res = await fetch(url + bust, { cache: 'no-store' });
   if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
   return res.json();
 }
 
 export async function loadAllData() {
   const base = '/data/cartes';
-  const [heroes, boss, cartesChasse, monstres, menaces, destins] = await Promise.all([
+  const [heroes, boss, cartesChasse, monstres, menaces, destins, effectsRaw] = await Promise.all([
     fetchJson(`${base}/heroes.json`),
     fetchJson(`${base}/boss.json`),
     fetchJson(`${base}/cartes_Chasse.json`),
     fetchJson(`${base}/monstres.json`),
     fetchJson(`${base}/Menaces.json`),
     fetchJson(`${base}/destins.json`),
+    fetchJson(`/data/effects.json`),
   ]);
   const design = parseDesignData({ heroes, boss, cartesChasse, monstres, menaces, destins });
   const effectsParsed = EffectsFileSchema.safeParse(effectsRaw);
   if (!effectsParsed.success) {
     throw new Error(
-      'Invalid bundled effects.json: ' +
+      'Invalid effects.json: ' +
         effectsParsed.error.issues.map((i) => `${i.path.join('.')} ${i.message}`).join('; '),
     );
   }

@@ -70,11 +70,12 @@ function renfortIndices(state: GameState, h: HeroRuntime): number[] {
   const out: number[] = [];
   h.objects.forEach((c, i) => {
     if (!isObjetPlayableRenfort(state, c)) return;
-    const boostTag = state.effects[c.id]?.tag;
+    const tag = state.effects[c.id]?.tag;
     const isBoost =
       (c.bonus_degats ?? 0) > 0 ||
-      boostTag === 'boost_attack' ||
-      boostTag === 'boost_attack_aoe';
+      tag === 'boost_attack' ||
+      tag === 'boost_attack_aoe' ||
+      tag === 'attack_chain';
     if (isBoost) out.push(i);
   });
   return out;
@@ -107,10 +108,14 @@ function scoreAction(state: GameState, h: HeroRuntime, c: CarteChasse): number {
         score += h.hand.length < 3 ? 8 : 2;
         break;
       case 'aoe_heal':
-      case 'burst_heal':
-        // Value scales with total injuries on party.
-        for (const hh of state.heroes) if (!hh.dead) score += totalWounds(hh) * 2;
+      case 'burst_heal': {
+        // Value scales with total injuries on party. Actively penalise when
+        // nobody is wounded so the AI never wastes a heal.
+        let partyW = 0;
+        for (const hh of state.heroes) if (!hh.dead) partyW += totalWounds(hh);
+        score += partyW === 0 ? -20 : partyW * 2;
         break;
+      }
       case 'attack_conditional':
         // SOI_A02: only if no ally wounded — big value when the require holds.
         const anyAllyHurt = state.heroes.some(

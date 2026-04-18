@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from './store.js';
 import { Setup } from './Setup.js';
 import { Game } from './Game.js';
@@ -14,6 +14,15 @@ export function App() {
   const view = useStore((s) => s.view);
   const setView = useStore((s) => s.setView);
   const load = useStore((s) => s.load);
+  const [reloading, setReloading] = useState(false);
+  const reloadJsons = async () => {
+    setReloading(true);
+    try {
+      await load();
+    } finally {
+      setReloading(false);
+    }
+  };
 
   useEffect(() => {
     if (!design && !loading && !error) void load();
@@ -59,9 +68,19 @@ export function App() {
             <TabBtn active={view === 'dashboard'} onClick={() => setView('dashboard')}>Dashboard</TabBtn>
           </nav>
         </div>
-        <span className="text-xs text-stone-400">
-          {state ? `Tour ${state.turn} / seed ${state.seed} / ${state.result}` : 'Setup'}
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-stone-400">
+            {state ? `Tour ${state.turn} / seed ${state.seed} / ${state.result}` : 'Setup'}
+          </span>
+          <button
+            onClick={reloadJsons}
+            disabled={reloading}
+            title="Re-fetch les JSON depuis le disque (boss, cartes, menaces, destins, effects). Les modifs Unity sont lues à chaud en dev."
+            className="px-3 py-1 text-xs bg-stone-800 hover:bg-stone-700 border border-stone-700 rounded-md transition-colors disabled:opacity-50"
+          >
+            {reloading ? '⏳ Chargement…' : '↻ Recharger JSONs'}
+          </button>
+        </div>
       </header>
       {body}
       <CardInspector />

@@ -57,6 +57,14 @@ export type GameEvent =
   | { t: number; kind: 'MONSTER_MOVED'; instanceId: string; cardId: string; fromSeat: number; toSeat: number; position: 'head' | 'tail'; sourceCardId: string }
   | { t: number; kind: 'CAPACITE_USED'; seat: number; heroId: string }
   | { t: number; kind: 'OBJECT_USED'; seat: number; card: string; reason?: string }
+  | {
+      t: number;
+      kind: 'HEAL_APPLIED';
+      seat: number;
+      healed: number;
+      removed: Array<{ woundId: string; degats: number; source: string; sourceCardId: string }>;
+    }
+  | { t: number; kind: 'RESOLVE_DESTIN'; card: string; toSeat: number }
 
   // Catch-all for things not yet coded in current jalon
   | { t: number; kind: 'WARN'; message: string }

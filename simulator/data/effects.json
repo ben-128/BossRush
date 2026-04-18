@@ -158,7 +158,7 @@
     "ROD_A07": { "effet": "Regarde 5 cartes Chasse, garde 2, défausse le reste", "tag": "draw_engine", "ops": [{ "op": "scryChasse", "look": 5, "keep": 2 }] },
 
     "ROD_O01": { "effet": "Renfort pur +2 dégâts (bonus_degats sur la carte)", "tag": "boost_attack", "ops": [{ "op": "require", "cond": { "self_damage": { "op": ">=", "value": 0 } } }] },
-    "ROD_O02": { "effet": "Attaque chaîne : 2 dmg sur la tête, cascade si elle meurt", "tag": "attack_chain", "ops": [{ "op": "attackChain", "amount": 2 }] },
+    "ROD_O02": { "effet": "Renfort : si l'attaque tue la cible, elle enchaîne sur le monstre suivant (ou le Colosse si la file est vide)", "tag": "attack_chain", "ops": [{ "op": "setChainOnKill" }] },
     "ROD_O03": { "effet": "Heal 1 par Action jouée ce tour", "tag": "reactive_heal", "ops": [{ "op": "healEqualsActionsThisTurn" }] },
     "ROD_O04": { "effet": "Elimine un monstre attaquant si ≥2 cartes jouées ce tour", "tag": "utility_eliminate", "ops": [{ "op": "eliminateIfActionsThisTurn", "minActions": 2, "from": "monster_in_self_queue" }] },
     "ROD_O05": { "effet": "Pioche jusqu'à avoir 5 cartes en main", "tag": "draw_engine", "ops": [{ "op": "drawUpTo", "target": "self", "n": 5 }] },
@@ -278,7 +278,10 @@
     "DEN_002": { "effet": "Source cachée : heal 2", "tag": "destin_pos", "ops": [{ "op": "heal", "target": "self", "amount": 2 }] },
     "DEN_003": { "effet": "Songe ancestral : régénère capacité", "tag": "destin_pos", "ops": [{ "op": "regenCapacite", "target": "any_hero" }] },
     "DEN_004": { "effet": "Cache : pioche 2", "tag": "destin_pos", "ops": [{ "op": "draw", "target": "self", "n": 2 }] },
-    "DEN_005": { "effet": "Feu de conseil : each draw 1 (choix simplifié)", "tag": "destin_pos", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }] },
+    "DEN_005": { "effet": "Feu de conseil : choix entre chaque héros pioche 1 OU chaque héros heal 2", "tag": "destin_pos", "ops": [{ "op": "choice", "options": [
+      { "label": "piocher", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }] },
+      { "label": "soigner", "ops": [{ "op": "heal", "target": "each_hero", "amount": 2 }] }
+    ]}] },
     "DEN_006": { "effet": "Relique : pioche 1, si c'est un Objet pioche 1 extra", "tag": "destin_pos", "ops": [{ "op": "drawWithObjetBonus", "target": "self" }] },
     "DEN_007": { "effet": "Averse : each discard 1 random", "tag": "destin_neg", "ops": [{ "op": "forEach", "over": "each_hero", "do": [{ "op": "discard", "target": "self", "n": 1, "random": true }] }] },
     "DEN_008": { "effet": "Outil brisé : défausse 1 Objet posé", "tag": "destin_neg", "ops": [{ "op": "discardObject", "target": "self", "n": 1 }] },
@@ -306,55 +309,50 @@
       "passif_hooks": ["damage_unhealable_from_menace"]
     },
     "BOSS_002": {
-      "effet": "Pshato — actif : soigne boss 2 ; passif : main cap 6 fin de tour",
-      "actif_ops": [{ "op": "bossHeal", "amount": 2 }],
-      "passif_hooks": ["hand_cap_6_end_of_turn"]
+      "effet": "Azhda — actif : héros actif ne peut ni jouer de Chasse ni sa capacité ce tour ; passif : boss avant héros",
+      "actif_ops": [{ "op": "restrictToDraw", "target": "active_hero" }],
+      "passif_hooks": ["boss_before_heroes"]
     },
     "BOSS_003": {
-      "effet": "Caicai — actif : déplace chaque tête de file au fond de la file du héros suivant ; passif : ordres d'attaque sur 2 files",
-      "actif_ops": [{
-        "op": "forEach",
-        "over": "each_hero",
-        "do": [{
-          "op": "moveMonster",
-          "from": { "pick": "queue_head_self" },
-          "to": { "to": "next_hero_queue_tail" }
-        }]
-      }],
-      "passif_hooks": ["attack_order_next_queue_too"]
+      "effet": "Pshato — actif : soigne boss 2 ; passif : fin de tour, main cap à 5",
+      "actif_ops": [{ "op": "bossHeal", "amount": 2 }],
+      "passif_hooks": ["hand_cap_5_end_of_turn"]
     },
     "BOSS_004": {
-      "effet": "Invunche — actif : pioche Destin ; passif : damage héros → pioche Destin",
-      "actif_ops": [{ "op": "drawDestin", "target": "active" }],
-      "passif_hooks": ["invunche_draw_destin_on_damage"]
+      "effet": "Caicai — actif : invoque 1 monstre dans chaque file vide ; passif : les ordres d'attaque touchent toutes les files",
+      "actif_ops": [{ "op": "summonOnEmptyQueues" }],
+      "passif_hooks": ["attack_order_all_queues"]
     },
     "BOSS_005": {
-      "effet": "Akkoro — actif : héros actif défausse 1 Objet posé ; passif : chaque Action → défausse top Chasse",
-      "actif_ops": [{ "op": "discardObject", "target": "active_hero", "n": 1 }],
-      "passif_hooks": ["active_discards_top_chasse_on_action"]
+      "effet": "Invunche — actif : chaque héros pioche 1 Destin ; passif : héros blessé perd sa capacité",
+      "actif_ops": [{ "op": "drawDestin", "target": "each_hero" }],
+      "passif_hooks": ["invunche_damage_marks_capacite_used"]
     },
     "BOSS_006": {
-      "effet": "Hoyau — actif : transfère 1 dégât boss → héros actif ; passif : soins cap 1",
-      "actif_ops": [{ "op": "shiftDamage", "from": "self", "to": "boss", "amount": 1 }],
+      "effet": "Akkoro — actif : héros actif défausse 1 Objet posé ; passif : en fin de tour, si Akkoro a été blessé → défausse 1 Chasse",
+      "actif_ops": [{ "op": "discardObject", "target": "active_hero", "n": 1 }],
+      "passif_hooks": ["akkoro_damage_discards_chasse"]
+    },
+    "BOSS_007": {
+      "effet": "Hoyau — actif : transfère 1 dégât de Hoyau au héros actif ; passif : soins des héros cap à 1",
+      "actif_ops": [{ "op": "bossHeal", "amount": 1 }, { "op": "damage", "target": "active_hero", "amount": 1 }],
       "passif_hooks": ["heal_cap_1"],
       "passif_modifiers": [
         { "effect": { "kind": "heal_cap", "max": 1 }, "scope": "thisTurn" }
       ]
     },
-    "BOSS_007": {
-      "effet": "Azhda — actif : héros actif ne peut que piocher ce tour ; passif : boss avant héros",
-      "actif_ops": [{ "op": "restrictToDraw", "target": "active_hero" }],
-      "passif_hooks": ["boss_before_heroes"]
-    },
     "BOSS_008": {
-      "effet": "Gaww — actif : héros actif défausse main + pioche autant ; passif : reshuffle Chasse → boss heal 2",
-      "actif_ops": [{ "op": "discardHandDrawSame", "target": "active_hero" }],
+      "effet": "Gaww — actif : héros actif défausse 2 cartes puis pioche 2 ; passif : reshuffle Chasse → boss heal 2",
+      "actif_ops": [
+        { "op": "discard", "target": "self", "n": 2 },
+        { "op": "draw", "target": "self", "n": 2 }
+      ],
       "passif_hooks": ["reshuffle_heals_boss_2"]
     },
     "BOSS_009": {
-      "effet": "Kaggen — actif : chaque héros défausse 1 au hasard ; passif : max 1 pioche/tour",
-      "actif_ops": [{ "op": "forEach", "over": "each_hero", "do": [{ "op": "discard", "target": "self", "n": 1, "random": true }] }],
-      "passif_hooks": ["max_draws_per_turn_1"]
+      "effet": "Kaggen — actif : ordre d'attaque sur toutes les files ; passif : éliminer un monstre fait piocher 1 Chasse",
+      "actif_ops": [{ "op": "attackOrder", "target": "each_hero" }],
+      "passif_hooks": ["kaggen_elim_draws_chasse"]
     },
     "BOSS_010": {
       "effet": "Khwa — actif : invocation dans chaque file ; passif : 1 dmg max reçu/tour",
