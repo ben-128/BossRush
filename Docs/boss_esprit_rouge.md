@@ -10,11 +10,9 @@
 
 ## Lore
 
-**Référence :** !Khwa — divinité de l'eau dans la mythologie San (Kalahari), esprit géant à peau rouge ou verte et cheveux blancs, invisible à volonté, traditionnellement gardien des rivières et des sources. Devenu prédateur.
+Gardien invisible des rivières et des points d'eau du Kalahari, il apparaissait autrefois aux villages pour révéler les nappes cachées. Corrompu, il est devenu la soif : il assèche tout ce qu'il touche, et son corps liquide et insaisissable ne peut être blessé qu'une fois par tour. Un cristal noir bat lentement dans sa poitrine rouge.
 
-**Lore :** Géant humanoïde immense à la peau rouge luminescente, longs cheveux blancs ondulant comme sous l'eau. Des bandes d'eau s'enroulent autour de lui comme des rubans liquides. Un cristal noir massif bat lentement dans sa poitrine.
-
-*« Il était la source. Il est devenu la soif. »*
+Inspiré de !Khwa, divinité de l'eau de la mythologie San (Kalahari).
 
 ## Description visuelle
 

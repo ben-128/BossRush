@@ -83,7 +83,7 @@
           "<ico:menace>",
           "<ico:destin>"
         ],
-        "passif": "Quand Invunche inflige des blessures à un héros, ce héros perd sa capacité active comme s'il l'avait utilisé.",
+        "passif": "Quand Invunche inflige des blessures à un héros<ico:menace> via , ce héros consomme sa capacité.",
         "actif": "Chaque héros pioche une carte destin."
       },
       "monstres_ids": [],
@@ -137,8 +137,8 @@
           "<ico:menace>",
           "<ico:actif_boss>"
         ],
-        "passif": "A chaque fois que la pioche <ico:chasse> se termine, Soignez x <ico:degat> de Gaww, où x est le nombre de héros en vie.",
-        "actif": "Le héros actif défausse 2 cartes de sa main, puis pioche autant de cartes <ico:chasse>."
+        "passif": "A chaque fois que la pioche <ico:chasse> d'un héro se termine, Soignez 2 <ico:degat> de Gaww.",
+        "actif": "Le héros actif défausse d'une carte de sa main."
       },
       "monstres_ids": [],
       "lore_md": "boss_gaww.md",

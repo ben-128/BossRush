@@ -10,11 +10,9 @@
 
 ## Lore
 
-**Référence :** Gaww — esprit puissant de la croyance Afar (Éthiopie/Djibouti) qui prend possession des corps humains et accorde des pouvoirs surnaturels. Les possédés sont appelés « Gawwala ».
+Esprit nomade, il prenait autrefois possession des Gawwala consentants pour leur accorder des dons surnaturels en échange d'un pacte temporaire. Corrompu, il n'a plus de forme fixe : il glisse de héros en héros, dévore leurs ressources sans jamais demander, et un cœur de cristal noir pulse au centre de sa masse d'ombre et de fumée.
 
-**Lore :** Corrompu, il n'a plus de forme fixe : une masse géante d'ombre et de fumée noire, des dizaines de visages humains apparaissent et disparaissent à l'intérieur. Un cœur de cristal noir pulse au centre de la masse.
-
-*« Il habitait les vivants. Maintenant il les vide. »*
+Inspiré de Gaww, esprit de possession de la croyance Afar (Éthiopie, Djibouti).
 
 ## Description visuelle
 

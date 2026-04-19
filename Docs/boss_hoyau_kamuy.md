@@ -10,11 +10,9 @@
 
 ## Lore
 
-**Référence :** Hoyau Kamuy — dragon-requin venimeux ailé dans la mythologie aïnou (Hokkaido), l'un des kamuy les plus dangereux.
+Il régnait sur le ciel et la mer, portant la pluie fertile et l'air vital sur les villages côtiers. Corrompu, son souffle est devenu venin : il empoisonne l'air lui-même, et les soins perdent leur prise durable sur ceux qu'il a touchés. Du venin vert suinte de son corps de requin ailé, noir aux endroits où la corruption s'est installée.
 
-**Lore :** Corrompu, il est devenu un hybride dragon-requin volant : corps de requin bleu-vert, mâchoire verticale bordée de dents acérées, ailes membraneuses immenses. Du venin vert suinte de tout son corps, devenu noir où la corruption s'est installée.
-
-*« Il portait le ciel. Il l'empoisonne. »*
+Inspiré de Hoyau Kamuy, dragon-requin venimeux ailé de la mythologie aïnou (Hokkaido).
 
 ## Description visuelle
 

@@ -10,11 +10,9 @@
 
 ## Lore
 
-**Référence :** Caicai Vilu — serpent de mer titanesque dans la mythologie mapuche (Chili/Argentine), qui inonde le monde et provoque tsunamis et tremblements de terre.
+Serpent des abysses, il soulevait autrefois les vagues pour protéger les tribus du rivage et retenir les tempêtes. Corrompu, il ne retient plus rien : il noie les côtes, pousse les vagues jusqu'aux montagnes, et ses spasmes font trembler la terre. Les pêcheurs ne prononcent plus son nom. Des cristaux noirs poussent entre ses écailles comme des tumeurs.
 
-**Lore :** Corrompu, c'est un serpent de mer aux écailles bleu-noir luisantes, dos crêté d'épines coralliennes. Des cristaux noirs poussent entre les écailles comme des tumeurs.
-
-*« Les vagues s'écartaient pour lui. Maintenant elles fuient. »*
+Inspiré de Caicai Vilu, serpent de mer titanesque dans la mythologie mapuche (Chili, Argentine).
 
 ## Description visuelle
 

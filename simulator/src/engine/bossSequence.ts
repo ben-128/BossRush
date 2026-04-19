@@ -191,9 +191,21 @@ async function resolveIcon(state: GameState, icon: BossIcon): Promise<void> {
     case 'actif_boss':
       await triggerBossActif(state);
       return;
-    case 'destin':
-      notImplemented(state, 'boss_sequence_destin_icon', state.boss.bossId);
+    case 'destin': {
+      // Invunche uses this icon: draw 1 Destin for the active hero and resolve.
+      const policy = state.policies[state.activeSeat];
+      await runOps(
+        state,
+        {
+          sourceSeat: state.activeSeat,
+          sourceCardId: state.boss.bossId,
+          sourceKind: 'boss',
+        },
+        [{ op: 'drawDestin', target: 'self' }],
+      );
+      void policy;
       return;
+    }
     default: {
       const _exhaust: never = icon;
       return _exhaust;

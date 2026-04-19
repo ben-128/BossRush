@@ -7,13 +7,13 @@
   "cartes_arsenal": [
     {
       "id": "GUE_A02",
-      "nom": "Charge du Rempart",
+      "nom": "Bousculade",
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Transférez 1 <ico:degat> d'un héros allié vers ce héros.",
+      "effet": "Les monstres survivants de votre file attaquent ce héros.",
       "quantite": 3,
-      "proto_illu_desc": "Nawel charge épaule en avant, absorbant un coup destiné à un allié derrière lui."
+      "proto_illu_desc": "Nawel épaule baissée bouscule un monstre."
     },
     {
       "id": "GUE_A03",

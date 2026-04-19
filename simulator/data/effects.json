@@ -5,20 +5,12 @@
   },
   "cards": {
 
-    "GUE_A01": {
-      "effet": "1 dmg + le monstre cible va en fond de file du prochain héros",
-      "tag": "attack_displace",
-      "ops": [
-        { "op": "attack" },
-        { "op": "moveMonster", "from": { "pick": "queue_head_self" }, "to": { "to": "next_hero_queue_tail" } }
-      ]
-    },
     "GUE_A02": {
-      "effet": "1 dmg + déplace un monstre de ma file vers la file d'un allié",
-      "tag": "attack_displace",
+      "effet": "1 dmg + transfère 1 dégât d'un héros allié vers ce héros",
+      "tag": "shift_damage_in",
       "ops": [
         { "op": "attack" },
-        { "op": "moveMonster", "from": { "pick": "monster_in_self_queue" }, "to": { "to": "ally_queue_tail" } }
+        { "op": "shiftDamage", "from": "any_ally", "to": "self", "amount": 1 }
       ]
     },
     "GUE_A03": {
@@ -296,7 +288,7 @@
       "tag": "utility_eliminate",
       "ops": [{ "op": "ultimatumEliminateOrDraw", "drawN": 3 }]
     },
-    "DIP_A08": { "effet": "Défausse jusqu'à 3 cartes de ta main, un allié pioche le double", "tag": "utility", "ops": [{ "op": "discardAndAllyDraws", "n": 3, "multiplier": 2 }] },
+    "DIP_A08": { "effet": "Défausse jusqu'à 3 cartes de ta main, un allié pioche le triple", "tag": "utility", "ops": [{ "op": "discardAndAllyDraws", "n": 3, "multiplier": 3 }] },
     "DIP_A09": { "effet": "Un allié pioche 2 et se soigne de 2", "tag": "draw_support", "ops": [{ "op": "draw", "target": "any_ally", "n": 2 }, { "op": "heal", "target": "any_ally", "amount": 2 }] },
     "DIP_A10": { "effet": "Le monstre en fond de file d'un héros attaque le Colosse", "tag": "reassign_attack", "ops": [{ "op": "tailMonsterAttacksBoss" }] },
     "DIP_A11": { "effet": "3 dmg cible uniquement le Colosse", "tag": "boss_only_burst", "ops": [{ "op": "attack", "target": "boss" }] },
@@ -505,12 +497,11 @@
       ]
     },
     "BOSS_008": {
-      "effet": "Gaww — actif : héros actif défausse 2 cartes puis pioche 2 ; passif : reshuffle Chasse → boss heal = nb héros vivants",
+      "effet": "Gaww — actif : héros actif défausse 1 carte ; passif : reshuffle Chasse d'un héros → boss heal 2",
       "actif_ops": [
-        { "op": "discard", "target": "self", "n": 2 },
-        { "op": "draw", "target": "self", "n": 2 }
+        { "op": "discard", "target": "self", "n": 1 }
       ],
-      "passif_hooks": ["gaww_reshuffle_heals_per_alive_hero"]
+      "passif_hooks": ["gaww_reshuffle_heals_2"]
     },
     "BOSS_009": {
       "effet": "Kaggen — actif : ordre d'attaque sur toutes les files ; passif : éliminer un monstre fait piocher 1 Chasse",

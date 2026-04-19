@@ -10,11 +10,9 @@
 
 ## Lore
 
-**Référence :** Akkorokamui — démon marin tentaculaire colossal des profondeurs dans la mythologie aïnou (Hokkaido), l'un des kamuy les plus dangereux.
+Kamuy des profondeurs, il sommeillait dans les fosses au large d'Hokkaido et protégeait les marins des naufrages en échange d'offrandes déposées sur les vagues. Corrompu, ses ventouses sont devenues des gueules affamées : il engloutit tout ce qui le frappe, volant aux héros leurs objets autant que leurs forces. Des cristaux noirs poussent sur sa peau rouge.
 
-**Lore :** Corrompu, c'est une pieuvre colossale rouge vif, huit tentacules immenses couverts de ventouses qui ressemblent à des bouches béantes. Certaines ventouses ont des dents humaines, des cristaux noirs poussent sur sa peau.
-
-*« Les profondeurs n'avaient pas de nom. Maintenant si. »*
+Inspiré d'Akkorokamui, démon marin tentaculaire de la mythologie aïnou (Hokkaido).
 
 ## Description visuelle
 

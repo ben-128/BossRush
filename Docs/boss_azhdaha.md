@@ -10,11 +10,9 @@
 
 ## Lore
 
-**Référence :** Azhdaha — dragon du chaos et de la destruction des sagas Narts dans la mythologie circassienne (Caucase), ennemi juré des héros.
+Dans les sagas des Narts, il gardait les cols sacrés du Caucase, et chacune de ses têtes portait une langue, une mémoire, un peuple. Corrompu, ses têtes ne se parlent plus qu'entre elles : l'une crache, l'une rugit, l'une mord, l'une murmure, chacune dévorant ce qu'elle protégeait. Des veines de cristal noir pulsent entre ses écailles.
 
-**Lore :** Corrompu, c'est un dragon colossal à plusieurs têtes (3 ou 4), corps serpentin couvert d'écailles sombres et de fourrure noire ébouriffée, ailes de chauve-souris déchirées. Chaque tête a son rôle — l'une crache du feu, une rugit, une mord, une murmure. Des veines de cristal noir pulsent entre les écailles.
-
-*« Une tête pour chaque peuple qu'il gardait. »*
+Inspiré d'Azhdaha, dragon du chaos dans les sagas Narts de la mythologie circassienne (Caucase).
 
 ## Description visuelle
 

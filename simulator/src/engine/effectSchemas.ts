@@ -467,6 +467,7 @@ const PassifHook = z.enum([
   'akkoro_damage_discards_chasse',
   'azhda_immune_if_monsters_gte_heroes',
   'gaww_reshuffle_heals_per_alive_hero',
+  'gaww_reshuffle_heals_2',
   'invunche_draw_destin_on_damage',
   'invunche_damage_marks_capacite_used',
   'heal_cap_1',

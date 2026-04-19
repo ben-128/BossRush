@@ -10,11 +10,9 @@
 
 ## Lore
 
-**Référence :** ǀKaggen — dieu-mante trickster et créateur dans la mythologie San (Kalahari). L'éland est son animal sacré, et son sang contient l'énergie spirituelle. Ici, le boss prend la forme de l'éland colossal de Kaggen, corrompu.
+ǀKaggen le trickster, créateur du monde San, avait confié son énergie spirituelle à l'éland sacré dont le sang faisait pousser les herbes du Kalahari. Corrompu, l'éland est devenu un colosse dont la lumière aveugle et dont le sang, désormais mêlé de noir, empoisonne la savane qu'il nourrissait. Son pelage doré est strié de marques malades.
 
-**Lore :** Éland colossal lumineux, pelage doré qui brille d'une lumière intérieure, cornes spiralées hypnotiques. Le pelage est strié de marques noires malades, et son sang qui coule des plaies est un mélange d'or et de noir.
-
-*« Son sang faisait pousser le monde. »*
+Inspiré de ǀKaggen, dieu-mante trickster et créateur dans la mythologie San (Kalahari), dont l'éland est l'animal sacré.
 
 ## Description visuelle
 

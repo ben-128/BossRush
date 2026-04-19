@@ -69,15 +69,18 @@ export function hookHandCapAtEndOfTurn(state: GameState): void {
   }
 }
 
-/** Gaww : reshuffle Chasse → boss heal X. X = 2 (legacy) ou = nb héros vivants. */
+/** Gaww : reshuffle Chasse d'un héros → boss heal X.
+ *  - `gaww_reshuffle_heals_2` (actuel) : soin fixe de 2 🩸
+ *  - `gaww_reshuffle_heals_per_alive_hero` (legacy) : soin = nb héros vivants
+ *  - `reshuffle_heals_boss_2` (legacy) : soin fixe de 2 🩸 */
 export function hookReshuffleHealsBoss(state: GameState, pileName: string): void {
   if (pileName !== 'chasse') return;
   const hs = hooks(state);
   let budget = 0;
-  if (hs.includes('gaww_reshuffle_heals_per_alive_hero')) {
-    budget = state.heroes.filter((h) => !h.dead).length;
-  } else if (hs.includes('reshuffle_heals_boss_2')) {
+  if (hs.includes('gaww_reshuffle_heals_2') || hs.includes('reshuffle_heals_boss_2')) {
     budget = 2;
+  } else if (hs.includes('gaww_reshuffle_heals_per_alive_hero')) {
+    budget = state.heroes.filter((h) => !h.dead).length;
   }
   if (budget <= 0) return;
   const heal = budget;

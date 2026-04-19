@@ -10,11 +10,9 @@
 
 ## Lore
 
-**Référence :** Hobab — dragon des terres arides dans la mythologie Afar (Éthiopie/Djibouti), lié à l'eau et au feu, créature des déserts du Danakil.
+Autrefois gardien des pluies rares du Danakil, il abreuvait les oasis et les peuples des terres arides. La corruption a inversé sa nature : partout où il passe, la pluie tourne à la cendre et les sols se craquèlent. Ses écailles brûlent, des veines de cristal noir pulsent sous sa peau desséchée.
 
-**Lore :** Corrompu, il est devenu un dragon colossal des terres sèches. Corps serpentin couvert d'écailles craquelées comme la terre desséchée, braises rougeoyantes entre les fissures. Des veines de cristal noir courent entre les écailles.
-
-*« Il était la pluie. Il est devenu la cendre. »*
+Inspiré de Hobab, dragon des terres arides de la mythologie Afar (Éthiopie, Djibouti).
 
 ## Description visuelle
 
