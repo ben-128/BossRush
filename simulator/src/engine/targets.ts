@@ -81,12 +81,22 @@ export function resolveHeroTarget(
       return [];
     }
     case 'exchange_partner': {
-      // Set by actions.ts around on_self_exchange reactive fires. Falls back
-      // to [] if no exchange in flight.
       if (state.exchangePartner === undefined) return [];
       const h = state.heroes[state.exchangePartner];
       if (!h || h.dead) return [];
       return [state.exchangePartner];
+    }
+    case 'boss_attacker': {
+      if (state.bossAttackerSeat === undefined) return [];
+      const h = state.heroes[state.bossAttackerSeat];
+      if (!h || h.dead) return [];
+      return [state.bossAttackerSeat];
+    }
+    case 'capacite_user': {
+      if (state.capaciteUserSeat === undefined) return [];
+      const h = state.heroes[state.capaciteUserSeat];
+      if (!h || h.dead) return [];
+      return [state.capaciteUserSeat];
     }
     default: {
       const _exhaust: never = tok;
@@ -144,6 +154,17 @@ export function resolveMonsterPick(
       const second = source.queue[1];
       if (second) {
         candidates.push({ seat: sourceSeat, instanceId: second.instanceId, cardId: second.cardId });
+      }
+      break;
+    }
+    case 'queue_head_ally': {
+      // Head of any OTHER living hero's queue — used by GUE_A03 Cri du toqui.
+      for (const h of state.heroes) {
+        if (h.dead || h.seatIdx === sourceSeat) continue;
+        const head = h.queue[0];
+        if (head) {
+          candidates.push({ seat: h.seatIdx, instanceId: head.instanceId, cardId: head.cardId });
+        }
       }
       break;
     }
@@ -212,6 +233,14 @@ export async function resolveMonsterPickAsync(
     case 'queue_second_self': {
       const second = source.queue[1];
       if (second) candidates.push({ seat: sourceSeat, instanceId: second.instanceId, cardId: second.cardId });
+      break;
+    }
+    case 'queue_head_ally': {
+      for (const h of state.heroes) {
+        if (h.dead || h.seatIdx === sourceSeat) continue;
+        const head = h.queue[0];
+        if (head) candidates.push({ seat: h.seatIdx, instanceId: head.instanceId, cardId: head.cardId });
+      }
       break;
     }
   }
@@ -378,6 +407,11 @@ export function evalCondition(
     return state.heroes
       .filter((h) => !h.dead && h.seatIdx !== sourceSeat)
       .every((h) => totalWounds(h.wounds) === 0);
+  }
+  if ('self_queue_size' in cond) {
+    const h = state.heroes[sourceSeat];
+    if (!h) return false;
+    return compare(h.queue.length, cond.self_queue_size);
   }
   return false;
 }

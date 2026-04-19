@@ -14,7 +14,7 @@
 import type { GameState, HeroRuntime, MonsterInstance, Wound } from './gameState.js';
 import type { TargetKind, WoundSource } from './events.js';
 import { emit } from './logger.js';
-import { discard } from './piles.js';
+import { discard, discardChasse } from './piles.js';
 import { onDamageResolved, shouldCancelDamage } from './modifiers.js';
 import {
   hookBossDamageAllowed,
@@ -25,6 +25,7 @@ import {
 import {
   fireReactiveObjectTriggers,
   fireReactiveForAllies,
+  fireReactiveForAll,
 } from './reactiveObjects.js';
 import { runOps, mkCtx } from './effects.js';
 
@@ -145,6 +146,13 @@ export async function damageBoss(state: GameState, spec: DamageSpec): Promise<bo
     state.phase = 'GAME_END';
     return true;
   }
+  // Fire on_boss_damaged reactive (DIP_O03 Coffre du Gué). Attribute the
+  // "attacker" to the active seat when the damage came from a hero action.
+  if (spec.source === 'chasse') {
+    state.bossAttackerSeat = state.activeSeat;
+    await fireReactiveForAll(state, 'on_boss_damaged');
+    delete state.bossAttackerSeat;
+  }
   return false;
 }
 
@@ -257,7 +265,7 @@ async function killHero(state: GameState, seat: number): Promise<true> {
     h.objects.splice(i, 1);
     emit(state, { kind: 'OBJECT_USED', seat, card: obj.id, reason: `dernier souffle avant mort` });
     await runOps(state, mkCtx(seat, obj.id, 'chasse'), entry.ops);
-    discard(state.piles.chasse, obj);
+    discardChasse(state, obj, seat);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: seat });
   }
 

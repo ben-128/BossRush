@@ -184,14 +184,33 @@ public class BossRushToolsWindow : EditorWindow
 
             var bg = GUI.backgroundColor;
             GUI.backgroundColor = new Color(0.55f, 0.95f, 0.55f);
-            if (GUILayout.Button("⚡ TOUT FAIRE (1 + 2 + 3)", GUILayout.Height(36)))
+            if (GUILayout.Button("⚡ TOUT FAIRE (1 + 2 + 3 + recentrage)", GUILayout.Height(36)))
             {
                 IconCompositor.Compose();
                 AutoAssignIcons(verbose: false);
                 GameIconsSpriteAssetCreator.CreateAsset();
+                RecenterGameIconsSpriteAsset();
             }
             GUI.backgroundColor = bg;
         }
+    }
+
+    /// <summary>
+    /// Recharge le TMP_SpriteAsset fraîchement généré par CreateAsset()
+    /// et appelle le recentrage avec l'offset Y courant (persisté dans
+    /// EditorPrefs, identique au slider de la section Atlas TMP).
+    /// </summary>
+    private static void RecenterGameIconsSpriteAsset()
+    {
+        const string AssetPath = "Assets/TextMesh Pro/Resources/Sprite Assets/GameIcons.asset";
+        var asset = AssetDatabase.LoadAssetAtPath<TMPro.TMP_SpriteAsset>(AssetPath);
+        if (asset == null)
+        {
+            Debug.LogWarning("[BossRushTools] GameIcons TMP_SpriteAsset introuvable pour le recentrage.");
+            return;
+        }
+        float yOffset = EditorPrefs.GetFloat(PrefYOffset, 0f);
+        TMPSpriteRecenter.Recenter(asset, yOffset, showDialog: false);
     }
 
     // ─── Raccourcis vers les ScriptableObject de config ───────────────────

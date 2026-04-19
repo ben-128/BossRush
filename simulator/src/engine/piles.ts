@@ -11,6 +11,7 @@
  */
 
 import type { GameState, Pile } from './gameState.js';
+import type { CarteChasse } from './types.js';
 import type { PileName } from './events.js';
 import { Rng } from './rng.js';
 import { emit } from './logger.js';
@@ -59,4 +60,49 @@ export function discard<T>(pile: Pile<T>, card: T): void {
 export function shufflePile<T>(state: GameState, pile: Pile<T>): void {
   const shuffled = withRng(state, (rng) => rng.shuffle(pile.draw));
   pile.draw = shuffled;
+}
+
+// ---------------------------------------------------------------------------
+// Per-hero Chasse helpers (rules refactor 2026-04)
+// ---------------------------------------------------------------------------
+// Per the official rules, each hero has their own 20-card Chasse deck and
+// their own discard. All draws route to the seat doing the drawing; all
+// discards route to the card's original owner (identified by its `prerequis`
+// matching a hero's `nom`). Cards with no prereq fall back to the active
+// seat's discard.
+
+/** Return the Chasse deck/discard pile owned by a given seat. */
+export function heroChasseDeck(state: GameState, seat: number): Pile<CarteChasse> | undefined {
+  return state.heroes[seat]?.deck;
+}
+
+/** Draw one Chasse card from the owner's personal deck. */
+export function drawChasseFor(state: GameState, seat: number): CarteChasse | undefined {
+  const deck = heroChasseDeck(state, seat);
+  if (!deck) return undefined;
+  return drawOne(state, deck, 'chasse');
+}
+
+/**
+ * Route a chasse card to its owning hero's discard (owner = hero whose `nom`
+ * matches the card's `prerequis`). Falls back to the provided `fallbackSeat`'s
+ * discard if the owner can't be resolved (card has no prereq, or owning hero
+ * isn't in this game).
+ */
+export function discardChasse(
+  state: GameState,
+  card: CarteChasse,
+  fallbackSeat: number,
+): void {
+  if (card.prerequis) {
+    for (const h of state.heroes) {
+      const nom = state.catalog.heroesById.get(h.heroId)?.nom;
+      if (nom === card.prerequis) {
+        h.deck.discard.push(card);
+        return;
+      }
+    }
+  }
+  const fb = state.heroes[fallbackSeat];
+  if (fb) fb.deck.discard.push(card);
 }

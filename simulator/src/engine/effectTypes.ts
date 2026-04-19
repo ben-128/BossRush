@@ -28,7 +28,9 @@ export type HeroTargetTok =
   | 'each_hero'    // itération : tous les héros vivants
   | 'each_ally'    // itération : tous les alliés vivants
   | 'next_hero'    // prochain héros vivant (horaire)
-  | 'exchange_partner'; // partenaire d'un échange en cours (DIP_O03, DIP_O04)
+  | 'exchange_partner' // partenaire d'un échange en cours (DIP_O03, DIP_O04)
+  | 'boss_attacker'    // héros qui vient d'infliger une dégât au Colosse (DIP_O03)
+  | 'capacite_user';   // héros qui vient de dépenser sa capacité (DIP_O04)
 
 export type DamageTargetTok =
   | 'queue_head'   // tête de file du héros actif (cible par défaut)
@@ -41,7 +43,8 @@ export interface MonsterPick {
     | 'monster_in_self_queue'
     | 'monster_in_any_queue'
     | 'queue_head_self'
-    | 'queue_second_self';
+    | 'queue_second_self'
+    | 'queue_head_ally';
   /** Optional filter predicate tokens (J3 has only these). */
   where?: 'has_damage' | 'at_most_life_N' | 'vie_eq_1';
   /** Param when where = at_most_life_N. */
@@ -70,6 +73,7 @@ export type Comparator =
 export type Condition =
   | { self_damage: Comparator }
   | { hand_size: Comparator }
+  | { self_queue_size: Comparator }
   | { no_ally_has_damage: true }
   | { and: Condition[] }
   | { or: Condition[] }
@@ -205,12 +209,18 @@ export interface OpBossHeal {
   amount: number;
 }
 
-/** Move N wound cards from one hero to another (or self→boss, self→monster). */
+/** Move N wound cards from one hero to another (or self→boss, self→monster).
+ *  - amount = damage budget (moves wound cards until ≤ budget),
+ *  - moveOneCard = SOI_A03 Transfert de traumas : move exactly 1 wound card
+ *    regardless of its 🩸 value (budget ignored),
+ *  - drainAll = GUE_A08 Endosser : drain all allies in parallel until the
+ *    total damage budget is reached. */
 export interface OpShiftDamage {
   op: 'shiftDamage';
-  from: 'self' | 'any_hero' | 'any_ally';
+  from: 'self' | 'any_hero' | 'any_ally' | 'each_ally';
   to: 'self' | 'any_hero' | 'any_ally' | 'queue_head' | 'boss' | MonsterPick;
   amount: number;
+  moveOneCard?: boolean;
 }
 
 /** Remove all wounds from a hero (Gao capacity, real version). */
@@ -424,9 +434,63 @@ export interface OpDrawWithObjetBonus {
   target: 'self';
 }
 
-/** Run one more action via active hero's ally policy (DIP_A05). */
+/** Run one more action via active hero's ally policy (ROD_A04, DIP_A02). */
 export interface OpAllyPlaysAction {
   op: 'allyPlaysAction';
+}
+
+/** DIP_A04 : un héros allié joue immédiatement 1 Objet de sa main. */
+export interface OpAllyPlaysObject {
+  op: 'allyPlaysObject';
+}
+
+/** DIP_A10 : le monstre en fond de file d'un héros attaque le Colosse. */
+export interface OpTailMonsterAttacksBoss {
+  op: 'tailMonsterAttacksBoss';
+}
+
+/** DIP_A12 : chaque héros peut déplacer 1 monstre de sa file vers une file cible. */
+export interface OpEachHeroMoveMonster {
+  op: 'eachHeroMoveMonster';
+}
+
+/** DIP_A08 : défausse jusqu'à n cartes ; un allié pioche n*multiplier. */
+export interface OpDiscardAndAllyDraws {
+  op: 'discardAndAllyDraws';
+  n: number;
+  multiplier: number;
+}
+
+/** DIP_A05 / ROD_A07 : regarde les n premières cartes du deck du héros actif,
+ *  les remet sur le dessus dans un ordre choisi. Si `keep` est défini, garde
+ *  ces n cartes en main et remet le reste en ordre. */
+export interface OpReorderDeckTop {
+  op: 'reorderDeckTop';
+  n: number;
+  keep?: number;
+}
+
+/** DIP_A07 Ultimatum : choisit un monstre, puis choisit d'éliminer le monstre
+ *  ou de faire piocher `drawN` cartes à son propriétaire. */
+export interface OpUltimatumEliminateOrDraw {
+  op: 'ultimatumEliminateOrDraw';
+  drawN: number;
+}
+
+/** SOI_A01 Épine nourricière : soigne un allié si le dernier monstre attaqué
+ *  a SURVÉCU (i.e. lastAttackKilled === false). */
+export interface OpHealIfLastSurvived {
+  op: 'healIfLastSurvived';
+  target: HeroTargetTok;
+  amount: number;
+}
+
+/** SOI_A04 Drain de vie : soigne self si le dernier monstre attaqué a été
+ *  ÉLIMINÉ (lastAttackKilled === true). */
+export interface OpHealIfLastKilled {
+  op: 'healIfLastKilled';
+  target: HeroTargetTok;
+  amount: number;
 }
 
 /** Deal `amount` damage to queue head only if a hero was healed this turn (SOI_O05). */
@@ -552,6 +616,14 @@ export type EffectOp =
   | OpHealAllyEqualsSelfWounds
   | OpDrawWithObjetBonus
   | OpAllyPlaysAction
+  | OpAllyPlaysObject
+  | OpTailMonsterAttacksBoss
+  | OpEachHeroMoveMonster
+  | OpDiscardAndAllyDraws
+  | OpReorderDeckTop
+  | OpUltimatumEliminateOrDraw
+  | OpHealIfLastSurvived
+  | OpHealIfLastKilled
   | OpDamageIfHealed
   | OpSetChainOnKill
   | OpRotateHeadsToNext
@@ -585,7 +657,8 @@ export type ReactiveTrigger =
   | 'on_self_low_hand'
   | 'on_self_high_hand_draw'
   | 'on_self_exchange'
-  | 'on_self_heals_ally';
+  | 'on_self_heals_ally'
+  | 'on_boss_damaged';
 
 /** One entry per card id in effects.json. */
 export interface CardEffectEntry {

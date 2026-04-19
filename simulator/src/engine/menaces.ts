@@ -22,7 +22,7 @@ import { emit, notImplemented } from './logger.js';
 import { damageHero } from './damage.js';
 import { summonMonsterInQueue, resolveAttackOrder, triggerBossActif } from './bossSequence.js';
 import { runOps, mkCtx } from './effects.js';
-import { discard } from './piles.js';
+import { discard, discardChasse } from './piles.js';
 import { fireReactiveForAll } from './reactiveObjects.js';
 
 export async function resolveMenace(state: GameState, card: Menace): Promise<void> {
@@ -63,7 +63,7 @@ export async function resolveMenace(state: GameState, card: Menace): Promise<voi
         const obj = h.objects[cancelIdx]!;
         h.objects.splice(cancelIdx, 1);
         emit(state, { kind: 'OBJECT_USED', seat: state.activeSeat, card: obj.id, reason: `annule ${card.nom}` });
-        discard(state.piles.chasse, obj);
+        discardChasse(state, obj, state.activeSeat);
         emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: state.activeSeat });
         emit(state, { kind: 'RESOLVE_MENACE', card: card.id, outcome: 'cancelled_by_object' });
         return;

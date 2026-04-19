@@ -51,6 +51,14 @@ public class ObjetCardGenerator : CardGenerator
     public TMPro.TextMeshPro effetText;
     public TMPro.TextMeshPro bonusDegatsText;
 
+    [Header("Prérequis")]
+    [Tooltip("Palette partagée (SO) — icône + couleur par héros.")]
+    public CompetenceColorPalette competencePalette;
+    public SpriteRenderer prerequisIcon;
+
+    [Tooltip("Shadow drop du prérequis, teinté avec la couleur de compétence.")]
+    public SpriteDropShadow prerequisShadow;
+
     [Header("Données des objets (charger depuis JSON)")]
     public ObjetVisualData[] allObjets;
 
@@ -110,5 +118,41 @@ public class ObjetCardGenerator : CardGenerator
         ApplyTextStyle(prerequisText);
         ApplyTextStyle(effetText);
         ApplyTextStyle(bonusDegatsText);
+
+        // Icône prérequis — lookup par nom de héros dans la palette
+        if (prerequisIcon != null)
+        {
+            CompetenceColorPalette.HeroColor entry = null;
+            if (competencePalette != null && !string.IsNullOrEmpty(objet.prerequis))
+            {
+                entry = competencePalette.GetByCompetence(objet.prerequis);
+                if (entry == null)
+                {
+                    foreach (var h in competencePalette.heroes ?? System.Array.Empty<CompetenceColorPalette.HeroColor>())
+                    {
+                        if (string.Equals(h.heroName, objet.prerequis, System.StringComparison.OrdinalIgnoreCase))
+                        { entry = h; break; }
+                    }
+                }
+            }
+
+            if (entry != null && entry.icon != null)
+            {
+                prerequisIcon.gameObject.SetActive(true);
+                prerequisIcon.sprite = entry.icon;
+
+                if (prerequisShadow != null)
+                {
+                    var tint = entry.color;
+                    tint.a = prerequisShadow.shadowColor.a;
+                    prerequisShadow.shadowColor = tint;
+                    prerequisShadow.ForceUpdate();
+                }
+            }
+            else
+            {
+                prerequisIcon.gameObject.SetActive(false);
+            }
+        }
     }
 }

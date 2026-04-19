@@ -44,7 +44,8 @@ import {
 } from './targets.js';
 import { healHero } from './heal.js';
 import { damageBoss, damageHero, damageMonster, eliminateMonster } from './damage.js';
-import { drawOne, discard } from './piles.js';
+import { drawOne, discard, drawChasseFor, discardChasse } from './piles.js';
+import type { CarteChasse } from './types.js';
 import { emit } from './logger.js';
 import { Rng } from './rng.js';
 import type { WoundSource } from './events.js';
@@ -191,7 +192,7 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       const n = h.wounds.reduce((s, w) => s + w.degats, 0);
       if (n === 0) return;
       for (let i = 0; i < n; i++) {
-        const c = drawOne(state, state.piles.chasse, 'chasse');
+        const c = drawChasseFor(state, ctx.sourceSeat);
         if (!c) break;
         h.hand.push(c);
         emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
@@ -481,9 +482,9 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
         const h = state.heroes[s];
         if (!h || h.dead) continue;
         for (let i = 0; i < op.n; i++) {
-          // Pull from the discard pile; if empty, fall back to regular draw.
-          let c = state.piles.chasse.discard.pop();
-          if (!c) c = drawOne(state, state.piles.chasse, 'chasse');
+          // Pull from the hero's own discard; if empty, fall back to their deck.
+          let c = h.deck.discard.pop();
+          if (!c) c = drawChasseFor(state, s);
           if (!c) break;
           h.hand.push(c);
           emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: s });
@@ -521,7 +522,7 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       if (!h) return;
       for (let i = 0; i < op.n && h.objects.length > 0; i++) {
         const obj = h.objects.shift()!;
-        discard(state.piles.chasse, obj);
+        discardChasse(state, obj, ctx.sourceSeat);
         emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: ctx.sourceSeat });
       }
       return;
@@ -558,7 +559,7 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
       while (h.hand.length < op.n) {
-        const c = drawOne(state, state.piles.chasse, 'chasse');
+        const c = drawChasseFor(state, ctx.sourceSeat);
         if (!c) break;
         h.hand.push(c);
         emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
@@ -610,12 +611,12 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
     case 'drawWithObjetBonus': {
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
-      const first = drawOne(state, state.piles.chasse, 'chasse');
+      const first = drawChasseFor(state, ctx.sourceSeat);
       if (!first) return;
       h.hand.push(first);
       emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: first.id, toSeat: ctx.sourceSeat });
       if (first.categorie === 'objet') {
-        const extra = drawOne(state, state.piles.chasse, 'chasse');
+        const extra = drawChasseFor(state, ctx.sourceSeat);
         if (extra) {
           h.hand.push(extra);
           emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: extra.id, toSeat: ctx.sourceSeat });
@@ -750,10 +751,187 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
         const saved = state.activeSeat;
         state.activeSeat = ally.seatIdx;
         const act = await policy.pickAction(state);
-        if (act.kind === 'play') await applyPlayerAction(state, act);
+        if (act.kind === 'play' && act.playAction !== undefined) {
+          await applyPlayerAction(state, act);
+        }
         state.activeSeat = saved;
         return;
       }
+      return;
+    }
+    case 'allyPlaysObject': {
+      // DIP_A04 : même mécanisme que allyPlaysAction, mais on n'accepte que
+      // la pose d'un Objet.
+      for (const ally of state.heroes) {
+        if (ally.dead || ally.seatIdx === ctx.sourceSeat) continue;
+        const policy = state.policies[ally.seatIdx];
+        if (!policy) continue;
+        const hasObject = ally.hand.some((c) => c.categorie === 'objet' && c.prerequis === state.catalog.heroesById.get(ally.heroId)?.nom);
+        if (!hasObject) continue;
+        const saved = state.activeSeat;
+        state.activeSeat = ally.seatIdx;
+        const act = await policy.pickAction(state);
+        if (act.kind === 'play' && act.placeObject !== undefined && act.playAction === undefined) {
+          await applyPlayerAction(state, act);
+        }
+        state.activeSeat = saved;
+        return;
+      }
+      return;
+    }
+    case 'tailMonsterAttacksBoss': {
+      // DIP_A10 : le monstre en FOND de file d'un héros attaque le Colosse
+      // (la cible n'est pas le head mais le dernier de la file).
+      // On choisit la file qui a le plus de monstres (plus de value).
+      let bestHero: typeof state.heroes[number] | undefined;
+      for (const h of state.heroes) {
+        if (h.dead || h.queue.length === 0) continue;
+        if (!bestHero || h.queue.length > bestHero.queue.length) bestHero = h;
+      }
+      if (!bestHero) return;
+      const tail = bestHero.queue[bestHero.queue.length - 1]!;
+      const card = state.catalog.monstreById.get(tail.cardId);
+      const amount = card?.degats ?? 1;
+      emit(state, {
+        kind: 'ATTACK',
+        src: { kind: 'monster', instanceId: tail.instanceId, cardId: tail.cardId, seat: bestHero.seatIdx },
+        tgt: { kind: 'boss' },
+        degats: amount,
+      });
+      await damageBoss(state, { amount, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
+      await eliminateMonster(state, bestHero.seatIdx, tail.instanceId);
+      return;
+    }
+    case 'eachHeroMoveMonster': {
+      // DIP_A12 : chaque héros (vivant avec ≥1 monstre) déplace la tête de
+      // sa file vers la file d'un allié choisi. Heuristique simple : on
+      // envoie vers le prochain héros horaire avec la file la plus vide.
+      for (const h of state.heroes) {
+        if (h.dead || h.queue.length === 0) continue;
+        // Find the living ally with the shortest queue.
+        let bestTarget: typeof state.heroes[number] | undefined;
+        for (const t of state.heroes) {
+          if (t.dead || t.seatIdx === h.seatIdx) continue;
+          if (!bestTarget || t.queue.length < bestTarget.queue.length) bestTarget = t;
+        }
+        if (!bestTarget) continue;
+        const moved = h.queue.shift()!;
+        bestTarget.queue.push(moved);
+        emit(state, {
+          kind: 'MONSTER_MOVED',
+          instanceId: moved.instanceId,
+          cardId: moved.cardId,
+          fromSeat: h.seatIdx,
+          toSeat: bestTarget.seatIdx,
+          position: 'tail',
+          sourceCardId: ctx.sourceCardId,
+        });
+      }
+      return;
+    }
+    case 'discardAndAllyDraws': {
+      // DIP_A08 : défausse jusqu'à n cartes de sa main, un allié pioche n*multiplier.
+      const self = state.heroes[ctx.sourceSeat];
+      if (!self) return;
+      const policy = state.policies[ctx.sourceSeat];
+      // Ask policy how many to discard (manual mode picks; AI discards as many
+      // as possible up to n).
+      const maxDiscard = Math.min(op.n, self.hand.length);
+      let indices: number[];
+      if (policy?.pickDiscard) {
+        const picked: number[] = await policy.pickDiscard(state, ctx.sourceSeat, maxDiscard, ctx.sourceCardId);
+        indices = picked.filter((i: number) => i >= 0 && i < self.hand.length).slice(0, maxDiscard);
+      } else {
+        // Default: discard the first n.
+        indices = Array.from({ length: maxDiscard }, (_, i) => i);
+      }
+      const sorted = [...new Set(indices)].sort((a, b) => b - a);
+      let discarded = 0;
+      for (const idx of sorted) {
+        const [c] = self.hand.splice(idx, 1);
+        if (!c) continue;
+        discardChasse(state, c, ctx.sourceSeat);
+        emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: ctx.sourceSeat });
+        discarded++;
+      }
+      // Then an ally draws discarded * multiplier.
+      const drawAmount = discarded * op.multiplier;
+      if (drawAmount > 0) {
+        await runOps(state, ctx, [{ op: 'draw', target: 'any_ally', n: drawAmount }]);
+      }
+      return;
+    }
+    case 'healIfLastSurvived': {
+      if (state.lastAttackKilled === false) {
+        await runOps(state, ctx, [{ op: 'heal', target: op.target, amount: op.amount }]);
+      }
+      return;
+    }
+    case 'healIfLastKilled': {
+      if (state.lastAttackKilled === true) {
+        await runOps(state, ctx, [{ op: 'heal', target: op.target, amount: op.amount }]);
+      }
+      return;
+    }
+    case 'ultimatumEliminateOrDraw': {
+      // DIP_A07 : picks a monster via policy, then offers a 2-branch choice.
+      //  branch A = eliminate the monster
+      //  branch B = the monster's OWNER draws N cards
+      const ref = await resolveMonsterPickAsync(state, ctx.sourceSeat, {
+        pick: 'monster_in_any_queue',
+      });
+      if (!ref) return; // no monster anywhere — card fizzles
+      const policy = state.policies[ctx.sourceSeat];
+      let idx = 0;
+      if (policy?.pickChoice) {
+        idx = await policy.pickChoice(state, ctx.sourceSeat, ctx.sourceCardId, [
+          { label: 'eliminer_monstre' },
+          { label: 'forcer_a_piocher' },
+        ]);
+      }
+      if (idx === 0) {
+        await eliminateMonster(state, ref.seat, ref.instanceId);
+      } else {
+        // The monster's owner draws drawN.
+        await runOps(
+          state,
+          { ...ctx, sourceSeat: ref.seat },
+          [{ op: 'draw', target: 'self', n: op.drawN }],
+        );
+      }
+      return;
+    }
+    case 'reorderDeckTop': {
+      // DIP_A05 / ROD_A07 : peek n cards, optionally keep `keep` into hand,
+      // the rest go back on top of the deck in a heuristically useful order
+      // (prereq-match + degats first — so the player draws "good" cards soon).
+      const h = state.heroes[ctx.sourceSeat];
+      if (!h) return;
+      const looked: CarteChasse[] = [];
+      for (let i = 0; i < op.n; i++) {
+        const c = h.deck.draw.shift();
+        if (!c) break;
+        looked.push(c);
+      }
+      const selfNom = state.catalog.heroesById.get(h.heroId)?.nom;
+      const score = (c: CarteChasse): number =>
+        (c.prerequis === selfNom ? 10 : 0) + (c.degats ?? 0) + (c.bonus_degats ?? 0);
+      const sorted = [...looked].sort((a, b) => score(b) - score(a));
+      const keepN = op.keep ?? 0;
+      const kept = sorted.slice(0, keepN);
+      const rest = sorted.slice(keepN);
+      for (const c of kept) {
+        h.hand.push(c);
+        emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
+      }
+      // Put the rest back on TOP of the deck, best-first.
+      for (let i = rest.length - 1; i >= 0; i--) {
+        h.deck.draw.unshift(rest[i]!);
+      }
+      emit(state, {
+        kind: 'WARN',
+        message: `reorderDeckTop seat=${ctx.sourceSeat} look=${op.n} keep=${keepN} reorder=${rest.length}`,
+      });
       return;
     }
     case 'scoutSolo': {
@@ -767,12 +945,12 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
         for (const i of actionIdx.slice(0, 2).sort((a, b) => b - a)) {
           const [c] = h.hand.splice(i, 1);
           if (c) {
-            discard(state.piles.chasse, c);
+            discardChasse(state, c, ctx.sourceSeat);
             emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: ctx.sourceSeat });
           }
         }
         for (let k = 0; k < 2; k++) {
-          const c = drawOne(state, state.piles.chasse, 'chasse');
+          const c = drawChasseFor(state, ctx.sourceSeat);
           if (!c) break;
           h.hand.push(c);
           emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
@@ -788,11 +966,11 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       const n = h.hand.length;
       while (h.hand.length > 0) {
         const c = h.hand.shift()!;
-        discard(state.piles.chasse, c);
+        discardChasse(state, c, ctx.sourceSeat);
         emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: ctx.sourceSeat });
       }
       for (let i = 0; i < n; i++) {
-        const c = drawOne(state, state.piles.chasse, 'chasse');
+        const c = drawChasseFor(state, ctx.sourceSeat);
         if (!c) break;
         h.hand.push(c);
         emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
@@ -802,9 +980,10 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
     case 'scryChasse': {
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
-      const looked: typeof state.piles.chasse.draw = [];
+      // Look into OWN deck — per-hero decks.
+      const looked: CarteChasse[] = [];
       for (let i = 0; i < op.look; i++) {
-        const c = state.piles.chasse.draw.shift();
+        const c = h.deck.draw.shift();
         if (!c) break;
         looked.push(c);
       }
@@ -815,13 +994,13 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
         .sort((a, b) => b.score - a.score);
       const kept = scored.slice(0, op.keep).map((x) => x.c);
       const rest = scored.slice(op.keep).map((x) => x.c);
-      // Kept cards go into hand; rest goes to discard.
+      // Kept cards go into hand; rest goes to own discard.
       for (const c of kept) {
         h.hand.push(c);
         emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: ctx.sourceSeat });
       }
       for (const c of rest) {
-        state.piles.chasse.discard.push(c);
+        h.deck.discard.push(c);
         emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id });
       }
       return;
@@ -967,44 +1146,64 @@ async function applyBossHealOp(state: GameState, _ctx: EffectContext, op: OpBoss
 }
 
 async function applyShiftDamageOp(state: GameState, ctx: EffectContext, op: OpShiftDamage): Promise<void> {
-  // Pick a source hero (most wounded among 'from' token semantics).
-  let fromSeat: number | undefined;
-  if (op.from === 'self') fromSeat = ctx.sourceSeat;
-  else {
+  // Build source seat(s). `each_ally` = drain all living allies in parallel;
+  // others pick a single source (most wounded if not `self`).
+  const sourceSeats: number[] = [];
+  if (op.from === 'self') sourceSeats.push(ctx.sourceSeat);
+  else if (op.from === 'each_ally') {
+    for (const h of state.heroes) {
+      if (h.dead || h.seatIdx === ctx.sourceSeat) continue;
+      sourceSeats.push(h.seatIdx);
+    }
+  } else {
     const pool = state.heroes.filter(
-      (h) =>
-        !h.dead && (op.from === 'any_hero' ? true : h.seatIdx !== ctx.sourceSeat),
+      (h) => !h.dead && (op.from === 'any_hero' ? true : h.seatIdx !== ctx.sourceSeat),
     );
-    // Pick most wounded.
     pool.sort(
       (a, b) =>
         b.wounds.reduce((s, w) => s + w.degats, 0) - a.wounds.reduce((s, w) => s + w.degats, 0),
     );
-    fromSeat = pool[0]?.seatIdx;
+    if (pool[0]) sourceSeats.push(pool[0].seatIdx);
   }
-  if (fromSeat === undefined) return;
-  const source = state.heroes[fromSeat];
-  if (!source) return;
+  if (sourceSeats.length === 0) return;
 
-  // Pull up to `amount` worth of wound cards from newest to oldest.
-  const moved: typeof source.wounds = [];
-  let remaining = op.amount;
-  for (let i = source.wounds.length - 1; i >= 0 && remaining > 0; ) {
-    const w = source.wounds[i]!;
-    if (w.degats <= remaining) {
-      moved.push(w);
-      source.wounds.splice(i, 1);
-      remaining -= w.degats;
-      i--;
-    } else {
-      i--;
+  // Collect wound cards to move. Two modes:
+  //  - moveOneCard: pop ONE wound from the first source regardless of 🩸 value;
+  //  - default: drain each source newest-first until the global amount budget
+  //    is exhausted (budget shared when multiple sources).
+  const moved: { w: typeof state.heroes[number]['wounds'][number]; fromSeat: number }[] = [];
+  if (op.moveOneCard) {
+    for (const s of sourceSeats) {
+      const src = state.heroes[s];
+      if (!src || src.wounds.length === 0) continue;
+      const w = src.wounds.pop()!;
+      moved.push({ w, fromSeat: s });
+      break; // only ONE wound card total
+    }
+  } else {
+    let remaining = op.amount;
+    for (const s of sourceSeats) {
+      if (remaining <= 0) break;
+      const src = state.heroes[s];
+      if (!src) continue;
+      for (let i = src.wounds.length - 1; i >= 0 && remaining > 0; ) {
+        const w = src.wounds[i]!;
+        if (w.degats <= remaining) {
+          moved.push({ w, fromSeat: s });
+          src.wounds.splice(i, 1);
+          remaining -= w.degats;
+          i--;
+        } else {
+          i--;
+        }
+      }
     }
   }
   if (moved.length === 0) return;
 
   // Resolve destination and re-apply damage events.
   const replaySpec = async (targetKind: 'hero' | 'boss' | 'monster', targetSeat?: number, instanceId?: string) => {
-    for (const w of moved) {
+    for (const { w } of moved) {
       if (targetKind === 'boss') {
         await damageBoss(state, { amount: w.degats, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId });
       } else if (targetKind === 'hero' && targetSeat !== undefined) {
@@ -1127,10 +1326,16 @@ async function applyDamageOp(
   });
 
   const spec = { amount: dmg, source: ctx.sourceKind, sourceCardId: ctx.sourceCardId };
-  if (target.kind === 'boss') await damageBoss(state, spec);
-  else if (target.kind === 'hero') await damageHero(state, target.seat, spec);
-  else {
+  if (target.kind === 'boss') {
+    await damageBoss(state, spec);
+    state.lastAttackKilled = false;
+  } else if (target.kind === 'hero') {
+    await damageHero(state, target.seat, spec);
+    state.lastAttackKilled = false;
+  } else {
     const killed = await damageMonster(state, target.seat, target.instanceId, spec);
+    // Track the outcome of this attack for conditional ops (SOI_A01 / SOI_A04).
+    state.lastAttackKilled = killed;
     // ROD_O02 chain-on-kill: if renfort flag is set and the attack killed a
     // monster in the source's own queue, continue the attack onto the new
     // head (or boss if queue empty). One-shot.
@@ -1179,7 +1384,7 @@ async function applyDrawOp(state: GameState, ctx: EffectContext, op: OpDraw): Pr
     if (!h) continue;
     const drew: string[] = [];
     for (let i = 0; i < op.n; i++) {
-      const c = drawOne(state, state.piles.chasse, 'chasse');
+      const c = drawChasseFor(state, s);
       if (!c) break;
       h.hand.push(c);
       drew.push(c.id);
@@ -1345,7 +1550,7 @@ async function applyDiscardOp(state: GameState, ctx: EffectContext, op: OpDiscar
     for (const idx of sorted) {
       const [card] = h.hand.splice(idx, 1);
       if (!card) continue;
-      discard(state.piles.chasse, card);
+      discardChasse(state, card, s);
       emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: card.id, fromSeat: s });
     }
   }

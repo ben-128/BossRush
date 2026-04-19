@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using static CameraCapture;
@@ -11,7 +13,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
 
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector();
+        DrawGroupedInspector();
 
         T generator = (T)target;
 
@@ -95,6 +97,80 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
             EditorApplication.delayCall += () => ExportAll(generator);
         }
         GUI.backgroundColor = Color.white;
+    }
+
+    // ─── Foldouts par [Header] — état persisté dans EditorPrefs ───────────
+    /// <summary>
+    /// Remplace DrawDefaultInspector par un rendu qui groupe les champs par
+    /// attribut [Header("...")] en foldouts pliables. L'état ouvert/fermé
+    /// est persisté par type de générateur et nom de groupe.
+    /// </summary>
+    private void DrawGroupedInspector()
+    {
+        serializedObject.Update();
+
+        // Collecte des champs dans l'ordre de déclaration (base → derived)
+        var allFields = new List<FieldInfo>();
+        var types = new Stack<System.Type>();
+        var tt = target.GetType();
+        while (tt != null && tt != typeof(MonoBehaviour) && tt != typeof(object))
+        {
+            types.Push(tt);
+            tt = tt.BaseType;
+        }
+        foreach (var t in types)
+        {
+            allFields.AddRange(t.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly));
+        }
+
+        // Groupe les champs par [Header], en respectant l'ordre de déclaration
+        var groups = new List<(string name, List<FieldInfo> fields)>();
+        string currentGroup = "Général";
+        List<FieldInfo> currentList = new List<FieldInfo>();
+        groups.Add((currentGroup, currentList));
+
+        foreach (var f in allFields)
+        {
+            // Saute les champs non sérialisés
+            bool isSerialized = f.IsPublic
+                ? !f.IsDefined(typeof(System.NonSerializedAttribute), false)
+                : f.IsDefined(typeof(SerializeField), false);
+            if (!isSerialized) continue;
+
+            var header = f.GetCustomAttribute<HeaderAttribute>();
+            if (header != null)
+            {
+                currentGroup = header.header;
+                currentList = new List<FieldInfo>();
+                groups.Add((currentGroup, currentList));
+            }
+            currentList.Add(f);
+        }
+
+        // Drop groupes vides
+        groups.RemoveAll(g => g.fields.Count == 0);
+
+        var typeName = target.GetType().Name;
+        foreach (var group in groups)
+        {
+            string key = $"RaidParty.Fold.{typeName}.{group.name}";
+            bool open = EditorPrefs.GetBool(key, true);
+            bool newOpen = EditorGUILayout.Foldout(open, group.name, true, EditorStyles.foldoutHeader);
+            if (newOpen != open) EditorPrefs.SetBool(key, newOpen);
+            if (!newOpen) continue;
+
+            EditorGUI.indentLevel++;
+            foreach (var f in group.fields)
+            {
+                var prop = serializedObject.FindProperty(f.Name);
+                if (prop != null)
+                    EditorGUILayout.PropertyField(prop, true);
+            }
+            EditorGUI.indentLevel--;
+            EditorGUILayout.Space(4);
+        }
+
+        serializedObject.ApplyModifiedProperties();
     }
 
     private static GameObject FindBorders()

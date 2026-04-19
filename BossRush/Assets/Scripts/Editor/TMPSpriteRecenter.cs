@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TextCore;
@@ -37,7 +38,7 @@ public static class TMPSpriteRecenter
         Recenter(asset, yOffsetPx);
     }
 
-    public static void Recenter(TMP_SpriteAsset asset, float yOffsetPx = 0f)
+    public static void Recenter(TMP_SpriteAsset asset, float yOffsetPx = 0f, bool showDialog = true)
     {
         var tex = asset.spriteSheet as Texture2D;
         if (tex == null)
@@ -54,6 +55,9 @@ public static class TMPSpriteRecenter
 
         int recentered = 0;
         int skipped = 0;
+
+        // Construit un lookup glyphIndex → widthRatio (depuis GameIconsConfig, via tag).
+        var ratioByGlyph = BuildWidthRatioLookup(asset);
 
         // Passe 1 : calculer le max content width/height pour un advance uniforme
         int maxContentW = 0;
@@ -96,14 +100,18 @@ public static class TMPSpriteRecenter
                 contentH
             );
 
-            // Métriques : advance uniforme = max content width, content centré dedans
+            // Ratio de largeur par icône (défaut 1, lu depuis GameIconsConfig).
+            float widthRatio = ratioByGlyph.TryGetValue(glyph.index, out var r) ? r : 1f;
+            float advance = maxContentW * widthRatio;
+
+            // Métriques : advance uniforme × ratio, contenu centré dedans.
             var m = glyph.metrics;
             m.width = contentW;
             m.height = contentH;
-            m.horizontalBearingX = (maxContentW - contentW) / 2f;
+            m.horizontalBearingX = (advance - contentW) / 2f;
             // + yOffsetPx remonte l'icône (bearing vers le haut), - la descend
             m.horizontalBearingY = contentH + (maxContentH - contentH) / 2f + yOffsetPx;
-            m.horizontalAdvance = maxContentW;
+            m.horizontalAdvance = advance;
             glyph.metrics = m;
 
             recentered++;
@@ -116,14 +124,55 @@ public static class TMPSpriteRecenter
                   $"{skipped} vides ignorés. Advance uniforme = {maxContentW}px, " +
                   $"hauteur max = {maxContentH}px.");
 
-        EditorUtility.DisplayDialog(
-            "Recentrage terminé",
-            $"{recentered} sprites recentrés dans {asset.name}.\n\n" +
-            $"Advance uniforme : {maxContentW} px\n" +
-            $"Hauteur max : {maxContentH} px\n\n" +
-            (skipped > 0 ? $"{skipped} sprites vides ignorés.\n\n" : "") +
-            "Vérifie le rendu en jeu. Si une icône déborde, règle Scale dans l'atlas.",
-            "OK");
+        if (showDialog)
+        {
+            EditorUtility.DisplayDialog(
+                "Recentrage terminé",
+                $"{recentered} sprites recentrés dans {asset.name}.\n\n" +
+                $"Advance uniforme : {maxContentW} px\n" +
+                $"Hauteur max : {maxContentH} px\n\n" +
+                (skipped > 0 ? $"{skipped} sprites vides ignorés.\n\n" : "") +
+                "Vérifie le rendu en jeu. Si une icône déborde, règle Scale dans l'atlas.",
+                "OK");
+        }
+    }
+
+    /// <summary>
+    /// Construit un lookup glyphIndex → widthRatio en croisant la character
+    /// table du SpriteAsset (pour avoir le tag) et les entrées du
+    /// GameIconsConfig (pour avoir le ratio configuré par l'utilisateur).
+    /// Tags non présents dans la config gardent un ratio de 1.
+    /// </summary>
+    private static Dictionary<uint, float> BuildWidthRatioLookup(TMP_SpriteAsset asset)
+    {
+        var result = new Dictionary<uint, float>();
+
+        // 1) tag → ratio depuis GameIconsConfig (unique dans le projet)
+        var ratioByTag = new Dictionary<string, float>(System.StringComparer.OrdinalIgnoreCase);
+        var guids = AssetDatabase.FindAssets("t:GameIconsConfig");
+        if (guids.Length > 0)
+        {
+            var config = AssetDatabase.LoadAssetAtPath<GameIconsConfig>(AssetDatabase.GUIDToAssetPath(guids[0]));
+            if (config != null && config.icons != null)
+            {
+                foreach (var entry in config.icons)
+                {
+                    if (entry == null || string.IsNullOrWhiteSpace(entry.tag)) continue;
+                    float r = entry.widthRatio > 0f ? entry.widthRatio : 1f;
+                    ratioByTag[entry.tag] = r;
+                }
+            }
+        }
+
+        // 2) glyphIndex → tag via character table, puis → ratio
+        foreach (var character in asset.spriteCharacterTable)
+        {
+            if (character == null || string.IsNullOrEmpty(character.name)) continue;
+            float ratio = 1f;
+            if (ratioByTag.TryGetValue(character.name, out var r)) ratio = r;
+            result[character.glyphIndex] = ratio;
+        }
+        return result;
     }
 
     /// <summary>

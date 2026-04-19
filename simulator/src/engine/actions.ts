@@ -18,7 +18,7 @@
 import type { GameState, HeroRuntime } from './gameState.js';
 import type { CarteChasse } from './types.js';
 import { emit } from './logger.js';
-import { drawOne, discard } from './piles.js';
+import { drawOne, discard, drawChasseFor, discardChasse } from './piles.js';
 import { damageHero, damageBoss, damageMonster } from './damage.js';
 import { runOps, mkCtx } from './effects.js';
 import { consumeAttackBonus, onAttackResolved } from './modifiers.js';
@@ -45,13 +45,6 @@ export type PlayerAction =
       placeObject?: number;
       playAction?: number;
       renforts?: number[];
-      reason?: ActionReason;
-    }
-  | {
-      kind: 'exchange';
-      withSeat: number;
-      give: number[];
-      take: number[];
       reason?: ActionReason;
     }
   | { kind: 'none'; reason: string };
@@ -132,7 +125,7 @@ async function doDraw(state: GameState, seat: number, reason?: string): Promise<
   // with fewer cards.
   const allowed = hookDrawAllowed(state, seat) ? 2 : 0;
   for (let i = 0; i < allowed; i++) {
-    const c = drawOne(state, state.piles.chasse, 'chasse');
+    const c = drawChasseFor(state, seat);
     if (!c) break;
     drew.push(c);
     emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: seat });
@@ -224,7 +217,7 @@ async function playAction(
     if (rEntry && !skipOps) {
       await runOps(state, mkCtx(seat, r.card.id, 'chasse'), rEntry.ops ?? []);
     }
-    discard(state.piles.chasse, r.card);
+    discardChasse(state, r.card, seat);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: r.card.id, fromSeat: seat });
   }
 
@@ -283,7 +276,7 @@ async function playAction(
         });
       }
     } else {
-      discard(state.piles.chasse, card);
+      discardChasse(state, card, seat);
       emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: card.id, fromSeat: seat });
     }
   }
@@ -296,99 +289,10 @@ async function playAction(
   hookDiscardTopOnAction(state);
 }
 
-/**
- * Exchange: move cards between the active hero and a partner's hand.
- *
- * The rules say "Échanger des cartes Chasse avec un autre joueur". This is a
- * single whole-turn action (not combined with draw/play), and both sides
- * must agree. In this engine the active player drives; we assume the partner
- * consents (no veto system — the AI policy builds the exchange it wants).
- *
- * Validation is strict: indices must be in range, give/take are distinct sets,
- * partner must be alive and different from active.
- */
-async function doExchange(
-  state: GameState,
-  seat: number,
-  withSeat: number,
-  give: number[],
-  take: number[],
-  reason?: string,
-): Promise<void> {
-  const a = state.heroes[seat];
-  const b = state.heroes[withSeat];
-  if (!a) return;
-  if (!b || b.dead) {
-    emit(state, { kind: 'ACTION_NONE', seat, reason: 'exchange_partner_unavailable' });
-    return;
-  }
-  if (seat === withSeat) {
-    emit(state, { kind: 'ACTION_NONE', seat, reason: 'exchange_self' });
-    return;
-  }
-  // Deduplicate and validate ranges.
-  const giveSet = new Set(give);
-  const takeSet = new Set(take);
-  if (giveSet.size !== give.length || takeSet.size !== take.length) {
-    emit(state, { kind: 'ACTION_NONE', seat, reason: 'exchange_duplicate_indices' });
-    return;
-  }
-  if (give.some((i) => i < 0 || i >= a.hand.length) || take.some((i) => i < 0 || i >= b.hand.length)) {
-    emit(state, { kind: 'ACTION_NONE', seat, reason: 'exchange_index_out_of_range' });
-    return;
-  }
-  // Prereq gate: you can only give cards your partner can actually use, and
-  // only take cards your own hero can use. Cards without a prereq are
-  // universally legal (rare, but handled).
-  const aNom = state.catalog.heroesById.get(a.heroId)?.nom;
-  const bNom = state.catalog.heroesById.get(b.heroId)?.nom;
-  for (const idx of give) {
-    const c = a.hand[idx]!;
-    if (c.prerequis && c.prerequis !== bNom) {
-      emit(state, { kind: 'ACTION_NONE', seat, reason: `exchange_give_prereq_mismatch:${c.id}` });
-      return;
-    }
-  }
-  for (const idx of take) {
-    const c = b.hand[idx]!;
-    if (c.prerequis && c.prerequis !== aNom) {
-      emit(state, { kind: 'ACTION_NONE', seat, reason: `exchange_take_prereq_mismatch:${c.id}` });
-      return;
-    }
-  }
-
-  // Collect cards before mutating (mutation by descending index to keep others valid).
-  const given = give.map((i) => a.hand[i]!).map((c) => c);
-  const received = take.map((i) => b.hand[i]!).map((c) => c);
-
-  // Remove from each side (descending order).
-  const removeDesc = (arr: CarteChasse[], indices: number[]): void => {
-    indices.slice().sort((x, y) => y - x).forEach((i) => arr.splice(i, 1));
-  };
-  removeDesc(a.hand, give);
-  removeDesc(b.hand, take);
-
-  // Swap.
-  a.hand.push(...received);
-  b.hand.push(...given);
-
-  emit(state, {
-    kind: 'ACTION_EXCHANGE',
-    seat,
-    withSeat,
-    given: given.map((c) => c.id),
-    received: received.map((c) => c.id),
-    ...(reason ? { reason } : {}),
-  });
-  // Reactive triggers: both participants see an exchange happen. We stash
-  // the "other" seat in state.exchangePartner so ops can target it via the
-  // `exchange_partner` hero-target token (used by DIP_O03/O04).
-  state.exchangePartner = withSeat;
-  await fireReactiveObjectTriggers(state, 'on_self_exchange', seat);
-  state.exchangePartner = seat;
-  await fireReactiveObjectTriggers(state, 'on_self_exchange', withSeat);
-  delete state.exchangePartner;
-}
+// NOTE: "Exchange" is no longer a main action per the updated rules (each
+// hero has their own personal Chasse deck and discard, so there's nothing to
+// exchange at the table level). Card-induced swaps — DIP_A02 `swapHandWithAlly`
+// and similar ops — are still supported and live in effects.ts.
 
 function placeObject(state: GameState, seat: number, handIdx: number, reason?: string): void {
   const h = state.heroes[seat];
@@ -431,9 +335,12 @@ async function doUseCapacite(state: GameState, seat: number): Promise<void> {
   h.capaciteUsed = true;
   emit(state, { kind: 'CAPACITE_USED', seat, heroId: h.heroId });
   await runOps(state, mkCtx(seat, h.heroId, 'chasse'), entry.ops);
-  // Reactive triggers around capacité usage.
+  // Reactive triggers around capacité usage. Stash the user's seat so ops
+  // firing on `on_ally_capacite_used` can target `capacite_user` (DIP_O04).
+  state.capaciteUserSeat = seat;
   await fireReactiveObjectTriggers(state, 'on_self_capacite_used', seat);
   await fireReactiveForAllies(state, 'on_ally_capacite_used', seat);
+  delete state.capaciteUserSeat;
 }
 
 /** Active use of a posed object: run its DSL ops, then discard. */
@@ -450,24 +357,23 @@ async function doUseObject(state: GameState, seat: number, objectIdx: number, re
   h.objects.splice(objectIdx, 1);
   emit(state, { kind: 'OBJECT_USED', seat, card: card.id, ...(reason ? { reason } : {}) });
   await runOps(state, mkCtx(seat, card.id, 'chasse'), entry.ops);
-  discard(state.piles.chasse, card);
+  discardChasse(state, card, seat);
   emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: card.id, fromSeat: seat });
 }
 
 export async function applyPlayerAction(state: GameState, action: PlayerAction): Promise<void> {
   const seat = state.activeSeat;
-  // BOSS_007 Azhda actif: the active hero can only draw or exchange this turn.
+  // BOSS_007 Azhda actif: the active hero can only draw this turn.
   const activeHero = state.heroes[seat];
   if (
     activeHero?.onlyDrawThisTurn &&
     action.kind !== 'draw' &&
-    action.kind !== 'exchange' &&
     action.kind !== 'none'
   ) {
     emit(state, {
       kind: 'ACTION_NONE',
       seat,
-      reason: `restrict_to_draw_or_exchange (Azhda) — ${action.kind} bloqué`,
+      reason: `restrict_to_draw (Azhda) — ${action.kind} bloqué`,
     });
     action = { kind: 'draw', reason: 'forcé par Azhda' };
   }
@@ -498,9 +404,6 @@ export async function applyPlayerAction(state: GameState, action: PlayerAction):
       }
       return;
     }
-    case 'exchange':
-      await doExchange(state, seat, action.withSeat, action.give, action.take, action.reason);
-      return;
     case 'none':
       emit(state, { kind: 'ACTION_NONE', seat, reason: action.reason });
       return;

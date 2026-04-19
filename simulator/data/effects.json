@@ -14,19 +14,19 @@
       ]
     },
     "GUE_A02": {
-      "effet": "1 dmg + bascule le monstre cible en fond de file",
+      "effet": "1 dmg + déplace un monstre de ma file vers la file d'un allié",
       "tag": "attack_displace",
       "ops": [
         { "op": "attack" },
-        { "op": "moveMonster", "from": { "pick": "queue_head_self" }, "to": { "to": "self_queue_tail" } }
+        { "op": "moveMonster", "from": { "pick": "monster_in_self_queue" }, "to": { "to": "ally_queue_tail" } }
       ]
     },
     "GUE_A03": {
-      "effet": "1 dmg + un monstre d'une autre file rejoint la nôtre",
+      "effet": "1 dmg + tête de file d'un autre héros rejoint notre file",
       "tag": "attack_pull",
       "ops": [
         { "op": "attack" },
-        { "op": "moveMonster", "from": { "pick": "monster_in_any_queue" }, "to": { "to": "self_queue_tail" } }
+        { "op": "moveMonster", "from": { "pick": "queue_head_ally" }, "to": { "to": "self_queue_tail" } }
       ]
     },
     "GUE_A04": {
@@ -56,10 +56,10 @@
       "ops": [{ "op": "healEqualsSelfQueueSize" }]
     },
     "GUE_A08": {
-      "effet": "Déplace jusqu'à 4 dégâts d'autres héros vers self",
+      "effet": "Déplace jusqu'à 4 dégâts d'autres héros (pluriel) vers self",
       "tag": "shift_damage",
       "ops": [
-        { "op": "shiftDamage", "from": "any_ally", "to": "self", "amount": 4 }
+        { "op": "shiftDamage", "from": "each_ally", "to": "self", "amount": 4 }
       ]
     },
 
@@ -112,11 +112,11 @@
       "ops": [{ "op": "attack", "target": { "pick": "monster_in_any_queue" } }]
     },
     "MAG_A03": {
-      "effet": "1 dmg + élimine un monstre de sa file à 1 PV",
+      "effet": "1 dmg + si le monstre suivant de ma file a 1 PV restant, l'éliminer",
       "tag": "attack_chain",
       "ops": [
         { "op": "attack" },
-        { "op": "eliminateWhere", "from": "monster_in_self_queue", "where": "vie_eq_1" }
+        { "op": "eliminate", "target": { "pick": "queue_second_self", "where": "vie_eq_1" } }
       ]
     },
     "MAG_A04": { "effet": "3 dmg", "tag": "attack_heavy", "ops": [{ "op": "attack" }] },
@@ -126,12 +126,26 @@
       "ops": [{ "op": "attackChain", "amount": 1 }]
     },
     "MAG_A06": {
-      "effet": "Déplace 1 dégât de self vers un monstre ou le Colosse",
+      "effet": "Déplace 1 dégât d'un héros au choix vers un monstre ou le Colosse",
       "tag": "shift_damage",
-      "ops": [{ "op": "shiftDamage", "from": "self", "to": "boss", "amount": 1 }]
+      "ops": [{ "op": "shiftDamage", "from": "any_hero", "to": { "pick": "monster_in_any_queue" }, "amount": 1 }]
     },
-    "MAG_A07": { "effet": "Pioche 4", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "self", "n": 4 }] },
-    "MAG_A08": { "effet": "Régénère capacité self", "tag": "regen_capacity", "ops": [{ "op": "regenCapacite", "target": "self" }] },
+    "MAG_A07": {
+      "effet": "Pioche 3, heal 1",
+      "tag": "draw_engine",
+      "ops": [
+        { "op": "draw", "target": "self", "n": 3 },
+        { "op": "heal", "target": "self", "amount": 1 }
+      ]
+    },
+    "MAG_A08": {
+      "effet": "Régénère capacité self — uniquement si file ≥ 2 monstres",
+      "tag": "regen_capacity",
+      "ops": [
+        { "op": "require", "cond": { "self_queue_size": { "op": ">=", "value": 2 } } },
+        { "op": "regenCapacite", "target": "self" }
+      ]
+    },
 
     "MAG_O01": {
       "effet": "Réaction : quand un héros allié meurt, recharge la capacité de ce héros et pioche 2 Chasse",
@@ -166,10 +180,10 @@
       }
     },
 
-    "SOI_A01": { "effet": "1 dmg + si cible survit heal 1 allié", "tag": "attack_sustain_aoe", "ops": [{ "op": "attack" }, { "op": "heal", "target": "any_hero", "amount": 1 }] },
+    "SOI_A01": { "effet": "1 dmg + si la cible survit, heal 1 allié au choix", "tag": "attack_sustain_aoe", "ops": [{ "op": "attack" }, { "op": "healIfLastSurvived", "target": "any_hero", "amount": 1 }] },
     "SOI_A02": { "effet": "3 dmg si aucun allié blessé", "tag": "attack_conditional", "ops": [{ "op": "require", "cond": { "no_ally_has_damage": true } }, { "op": "attack" }] },
-    "SOI_A03": { "effet": "Transfère 1 blessure d'un allié vers un monstre", "tag": "shift_damage", "ops": [{ "op": "shiftDamage", "from": "any_ally", "to": "queue_head", "amount": 1 }] },
-    "SOI_A04": { "effet": "2 dmg + si cible éliminée, heal self 2", "tag": "attack_sustain", "ops": [{ "op": "attack" }, { "op": "heal", "target": "self", "amount": 2 }] },
+    "SOI_A03": { "effet": "Transfère 1 carte blessante d'un autre héros vers le monstre ciblé, quel que soit son 🩸", "tag": "shift_damage", "ops": [{ "op": "shiftDamage", "from": "any_ally", "to": { "pick": "monster_in_any_queue" }, "amount": 1, "moveOneCard": true }] },
+    "SOI_A04": { "effet": "2 dmg + si la cible est éliminée, heal self 2", "tag": "attack_sustain", "ops": [{ "op": "attack" }, { "op": "healIfLastKilled", "target": "self", "amount": 2 }] },
     "SOI_A05": { "effet": "Heal 3 un héros", "tag": "burst_heal", "ops": [{ "op": "heal", "target": "any_hero", "amount": 3 }] },
     "SOI_A06": { "effet": "Ressuscite un héros mort + heal 1", "tag": "revive", "ops": [{ "op": "revive", "target": "any_dead_hero", "heal": 1 }] },
     "SOI_A07": { "effet": "Heal 1 chaque héros", "tag": "aoe_heal", "ops": [{ "op": "heal", "target": "each_hero", "amount": 1 }] },
@@ -231,10 +245,10 @@
     "ROD_A01": { "effet": "1 dmg ciblage libre", "tag": "attack_free_target", "ops": [{ "op": "attack", "target": { "pick": "monster_in_any_queue" } }] },
     "ROD_A02": { "effet": "1 dmg + pioche 1", "tag": "attack_cantrip", "ops": [{ "op": "attack" }, { "op": "draw", "target": "self", "n": 1 }] },
     "ROD_A03": { "effet": "2 dmg", "tag": "attack_basic", "ops": [{ "op": "attack" }] },
-    "ROD_A04": { "effet": "1 dmg + peut poser 1 Objet supplémentaire ce tour", "tag": "attack_cantrip", "ops": [{ "op": "attack" }, { "op": "grantExtraPose" }] },
-    "ROD_A05": { "effet": "1 dmg + 1 action supplémentaire", "tag": "play_more_actions", "ops": [{ "op": "attack" }, { "op": "playMoreActions", "n": 1, "restrictTo": "play_action_only" }] },
-    "ROD_A06": { "effet": "Pioche 4", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "self", "n": 4 }] },
-    "ROD_A07": { "effet": "Regarde 5 cartes Chasse, garde 2, défausse le reste", "tag": "draw_engine", "ops": [{ "op": "scryChasse", "look": 5, "keep": 2 }] },
+    "ROD_A04": { "effet": "1 dmg + un héros allié joue immédiatement 1 Action de sa main", "tag": "attack_cantrip", "ops": [{ "op": "attack" }, { "op": "allyPlaysAction" }] },
+    "ROD_A05": { "effet": "1 dmg + peut jouer 1 carte Chasse supplémentaire ce tour", "tag": "play_more_actions", "ops": [{ "op": "attack" }, { "op": "playMoreActions", "n": 1, "restrictTo": "play_action_only" }] },
+    "ROD_A06": { "effet": "Pioche 2 + un allié pioche 2", "tag": "draw_engine", "ops": [{ "op": "draw", "target": "self", "n": 2 }, { "op": "draw", "target": "any_ally", "n": 2 }] },
+    "ROD_A07": { "effet": "Regarde les 5 premières cartes Chasse, garde 2, remet le reste sur le dessus dans l'ordre souhaité", "tag": "draw_engine", "ops": [{ "op": "reorderDeckTop", "n": 5, "keep": 2 }] },
 
     "ROD_O01": { "effet": "Renfort pur +2 dégâts (bonus_degats sur la carte)", "tag": "boost_attack", "ops": [{ "op": "require", "cond": { "self_damage": { "op": ">=", "value": 0 } } }] },
     "ROD_O02": { "effet": "Renfort : si l'attaque tue la cible, elle enchaîne sur le monstre suivant (ou le Colosse si la file est vide)", "tag": "attack_chain", "ops": [{ "op": "setChainOnKill" }] },
@@ -271,25 +285,29 @@
       }
     },
 
-    "DIP_A01": { "effet": "1 dmg + allié pioche 1", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "draw", "target": "any_ally", "n": 1 }] },
-    "DIP_A02": { "effet": "1 dmg + 2 héros échangent 1 Action", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "swapHandWithAlly" }] },
+    "DIP_A01": { "effet": "1 dmg + un allié pioche 1", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "draw", "target": "any_ally", "n": 1 }] },
+    "DIP_A02": { "effet": "1 dmg + un allié joue immédiatement 1 Action de sa main", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "allyPlaysAction" }] },
     "DIP_A03": { "effet": "1 dmg + chaque héros pioche 1", "tag": "attack_support_aoe", "ops": [{ "op": "attack" }, { "op": "draw", "target": "each_hero", "n": 1 }] },
-    "DIP_A04": { "effet": "1 dmg + 2 héros échangent leurs Objets posés", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "swapObjectsWithAlly" }] },
-    "DIP_A05": { "effet": "1 dmg + un allié joue 1 Action immédiatement", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "allyPlaysAction" }] },
+    "DIP_A04": { "effet": "1 dmg + un allié joue immédiatement 1 Objet de sa main", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "allyPlaysObject" }] },
+    "DIP_A05": { "effet": "1 dmg + regarde les 3 premières cartes Chasse et les remet dans l'ordre souhaité", "tag": "attack_support", "ops": [{ "op": "attack" }, { "op": "reorderDeckTop", "n": 3 }] },
     "DIP_A06": { "effet": "Chaque héros pioche 2", "tag": "draw_aoe", "ops": [{ "op": "draw", "target": "each_hero", "n": 2 }] },
-    "DIP_A07": { "effet": "Élimine le monstre en tête de la file d'un héros allié", "tag": "utility_eliminate", "ops": [{ "op": "eliminateAllyHead" }] },
-    "DIP_A08": { "effet": "2 héros échangent leurs Objets posés", "tag": "utility", "ops": [{ "op": "swapObjectsWithAlly" }] },
-    "DIP_A09": { "effet": "Donne jusqu'à 3 cartes à un allié + heal 1 par carte transférée", "tag": "draw_support", "ops": [{ "op": "giftCardsToAlly", "n": 3, "healPerCard": 1 }] },
-    "DIP_A10": { "effet": "Un monstre en tête de file attaque le Colosse (dmg = sa vie)", "tag": "reassign_attack", "ops": [{ "op": "reassignHeadToBoss" }] },
+    "DIP_A07": {
+      "effet": "Choisir un monstre n'importe où : l'éliminer OU son propriétaire pioche 3",
+      "tag": "utility_eliminate",
+      "ops": [{ "op": "ultimatumEliminateOrDraw", "drawN": 3 }]
+    },
+    "DIP_A08": { "effet": "Défausse jusqu'à 3 cartes de ta main, un allié pioche le double", "tag": "utility", "ops": [{ "op": "discardAndAllyDraws", "n": 3, "multiplier": 2 }] },
+    "DIP_A09": { "effet": "Un allié pioche 2 et se soigne de 2", "tag": "draw_support", "ops": [{ "op": "draw", "target": "any_ally", "n": 2 }, { "op": "heal", "target": "any_ally", "amount": 2 }] },
+    "DIP_A10": { "effet": "Le monstre en fond de file d'un héros attaque le Colosse", "tag": "reassign_attack", "ops": [{ "op": "tailMonsterAttacksBoss" }] },
     "DIP_A11": { "effet": "3 dmg cible uniquement le Colosse", "tag": "boss_only_burst", "ops": [{ "op": "attack", "target": "boss" }] },
-    "DIP_A12": { "effet": "Tous les monstres des autres files déplacés vers la file du héros actif", "tag": "rally_monsters", "ops": [{ "op": "rallyToSelf" }] },
+    "DIP_A12": { "effet": "Chaque héros peut déplacer 1 monstre de sa file vers la file d'un héros cible", "tag": "rally_monsters", "ops": [{ "op": "eachHeroMoveMonster" }] },
 
     "DIP_O01": {
-      "effet": "Réaction : quand ce héros élimine un monstre, chaque allié peut lui donner 1 carte",
+      "effet": "Réaction : quand ce héros élimine un monstre, chaque allié pioche 2",
       "tag": "reactive_object",
       "reactive": {
         "trigger": "on_self_eliminates_monster",
-        "ops": [{ "op": "giveCardsFromAllies" }]
+        "ops": [{ "op": "draw", "target": "each_ally", "n": 2 }]
       }
     },
     "DIP_O02": {
@@ -301,24 +319,21 @@
       }
     },
     "DIP_O03": {
-      "effet": "Réaction : quand un héros effectue un échange avec ce héros, les deux piochent 3",
+      "effet": "Réaction : quand le Colosse subit une dégât, le héros attaquant pioche 4",
       "tag": "reactive_object",
       "reactive": {
-        "trigger": "on_self_exchange",
-        "ops": [
-          { "op": "draw", "target": "self", "n": 3 },
-          { "op": "draw", "target": "exchange_partner", "n": 3 }
-        ]
+        "trigger": "on_boss_damaged",
+        "ops": [{ "op": "draw", "target": "boss_attacker", "n": 4 }]
       }
     },
     "DIP_O04": {
-      "effet": "Réaction : quand un héros effectue un échange avec ce héros, les deux piochent 1 Destin",
+      "effet": "Réaction : quand un allié utilise sa capacité, ce héros et cet allié piochent 1",
       "tag": "reactive_object",
       "reactive": {
-        "trigger": "on_self_exchange",
+        "trigger": "on_ally_capacite_used",
         "ops": [
-          { "op": "drawDestin", "target": "self" },
-          { "op": "drawDestin", "target": "exchange_partner" }
+          { "op": "draw", "target": "self", "n": 1 },
+          { "op": "draw", "target": "capacite_user", "n": 1 }
         ]
       }
     },

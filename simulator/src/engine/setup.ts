@@ -88,10 +88,14 @@ export function createGame(data: DesignData, options: SetupOptions): GameState {
     defeated: false,
   };
 
-  // --- Hero runtimes (no hand yet, filled below) ---
+  // --- Hero runtimes (no hand yet, filled below). Per rules, each hero owns
+  //     their own 20-card Chasse deck (filtered by prerequis = hero's nom). ---
   const heroes: HeroRuntime[] = heroIds.map((hid, seat) => {
     const h = catalog.heroesById.get(hid);
     if (!h) throw new SetupError(`Unknown hero: ${hid}`);
+    const own: CarteChasse[] = expandByQuantity(
+      data.cartesChasse.filter((c) => c.prerequis === h.nom),
+    );
     return {
       seatIdx: seat,
       heroId: hid,
@@ -99,19 +103,16 @@ export function createGame(data: DesignData, options: SetupOptions): GameState {
       wounds: [],
       hand: [],
       objects: [],
+      deck: { draw: own, discard: [] },
       capaciteUsed: false,
       dead: false,
       queue: [],
     };
   });
 
-  // --- Chasse pile: sum of selected heroes' packets (by prerequis) ---
-  const selectedHeroNames = new Set(
-    heroIds.map((hid) => catalog.heroesById.get(hid)!.nom),
-  );
-  const chassePacket: CarteChasse[] = expandByQuantity(
-    data.cartesChasse.filter((c) => selectedHeroNames.has(c.prerequis)),
-  );
+  // --- Shared Chasse pile kept as empty stub for compatibility. In the new
+  //     rules, nothing goes here — all chasse cards live in per-hero decks. ---
+  const chassePacket: CarteChasse[] = [];
 
   // --- Monstre / Destin / Menace piles from catalog (no selection filter) ---
   const monstrePacket: Monstre[] = expandByQuantity(data.monstres);
@@ -146,8 +147,11 @@ export function createGame(data: DesignData, options: SetupOptions): GameState {
   };
 
   // --- Shuffle all piles (deterministic via seed) ---
-  shufflePile(state, state.piles.chasse);
-  emit(state, { kind: 'SHUFFLE_PILE', pile: 'chasse', size: state.piles.chasse.draw.length });
+  //     Per-hero decks shuffle individually; the shared chasse pile is empty.
+  for (const h of state.heroes) {
+    shufflePile(state, h.deck);
+    emit(state, { kind: 'SHUFFLE_PILE', pile: 'chasse', size: h.deck.draw.length });
+  }
   shufflePile(state, state.piles.menace);
   emit(state, { kind: 'SHUFFLE_PILE', pile: 'menace', size: state.piles.menace.draw.length });
   shufflePile(state, state.piles.monstre);
@@ -174,35 +178,14 @@ export function createGame(data: DesignData, options: SetupOptions): GameState {
   });
   state.counters.event = state.events.length;
 
-  // --- Deal initial hands: draw 3 per player then simulate the free
-  // pre-game exchange phase by greedily assigning each card to the hero
-  // whose `nom` matches the card's `prerequis` (capped at 3 per hero).
-  const pool: CarteChasse[] = [];
-  for (let i = 0; i < 3 * state.heroes.length; i++) {
-    const c = state.piles.chasse.draw.shift();
-    if (!c) break;
-    pool.push(c);
-  }
-
+  // --- Deal initial hands: each hero draws 3 cards from their OWN deck. ---
   const HAND_SIZE = 3;
-  // Pass 1: matching cards to their prerequis hero.
   for (const h of state.heroes) {
-    const heroNom = state.catalog.heroesById.get(h.heroId)?.nom;
-    if (!heroNom) continue;
-    for (let i = pool.length - 1; i >= 0 && h.hand.length < HAND_SIZE; i--) {
-      if (pool[i]!.prerequis === heroNom) {
-        h.hand.push(pool[i]!);
-        pool.splice(i, 1);
-      }
+    for (let i = 0; i < HAND_SIZE; i++) {
+      const c = h.deck.draw.shift();
+      if (!c) break;
+      h.hand.push(c);
     }
-  }
-  // Pass 2: fill remaining slots with leftover cards.
-  for (const h of state.heroes) {
-    while (h.hand.length < HAND_SIZE && pool.length > 0) {
-      h.hand.push(pool.shift()!);
-    }
-  }
-  for (const h of state.heroes) {
     emit(state, {
       kind: 'INITIAL_HAND',
       seat: h.seatIdx,

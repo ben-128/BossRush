@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_PaintedIconOnCanvas
-  m_Shader: {fileID: 4800000, guid: 77ab636f1fb72ea43b001b95d1107157, type: 3}
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,6 +23,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EdgeNoiseTex:
         m_Texture: {fileID: 2800000, guid: 82494a4122134db45919b1c228aa2dcd, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -37,8 +41,11 @@ Material:
     - _BgBlend: 0
     - _EdgeNoiseScale: 1
     - _EdgeNoiseStrength: 0
+    - _EnableExternalAlpha: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _PaintTint: {r: 0.949, g: 0.918, b: 0.875, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

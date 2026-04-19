@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Le Rempart
+  m_text: Le Porte-Voix
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1588330614}
@@ -460,6 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 152006105}
   - component: {fileID: 152006104}
+  - component: {fileID: 152006106}
   m_Layer: 0
   m_Name: bottom_background
   m_TagString: Untagged
@@ -537,6 +538,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 247666407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &152006106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152006103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c469ecf3f73bdd47a7ce69112629090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowColor: {r: 0.478, g: 0.357, b: 0.227, a: 0.78431374}
+  offsetX: 0
+  offsetY: 0
+  shadowScale: 1.05
+  sortingOrderOffset: -1
+  centerOnAlphaCentroid: 1
+  debugLog: 0
 --- !u!1 &166872523
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jsonSource: {fileID: 4900000, guid: f45d7c3ba971e60449007594353764ae, type: 3}
   outputFolder: Heros
-  renderMode: 1
+  renderMode: 0
   protoObjects:
   - {fileID: 296349308}
   - {fileID: 1142580314}
@@ -754,33 +774,10 @@ MonoBehaviour:
   titreText: {fileID: 88074488}
   pvText: {fileID: 2090081213}
   capaciteText: {fileID: 1602578963}
-  competenceSprites:
-    armure: {fileID: 21300000, guid: 0926747be6f8db840bd08797a3e6e1cb, type: 3}
-    distance: {fileID: 21300000, guid: 5b9014a589c978a49b1bc410fb3d6827, type: 3}
-    soin: {fileID: 21300000, guid: 91f982a4bd826b744945ac8af3d42553, type: 3}
-    magie: {fileID: 21300000, guid: f24a78e92668f0647b399e991ae57b70, type: 3}
-    diplomatie: {fileID: 21300000, guid: 0c686d7bfc0c36341bd5fa9cd8ab8c6e, type: 3}
-    scaleArmure: 0.1
-    scaleDistance: 0.07
-    scaleSoin: 0.1
-    scaleMagie: 0.09
-    scaleDiplomatie: 0.07
-    offsetArmure: {x: -0.26, y: 0}
-    offsetDistance: {x: -0.26, y: -0.14}
-    offsetSoin: {x: -0.26, y: -0.04}
-    offsetMagie: {x: -0.26, y: -0.08}
-    offsetDiplomatie: {x: -0.26, y: 0}
-  competenceColors:
-    armure: {r: 0.169, g: 0.31, b: 0.431, a: 1}
-    magie: {r: 0.545, g: 0.125, b: 0.125, a: 1}
-    diplomatie: {r: 0.478, g: 0.357, b: 0.227, a: 1}
-    distance: {r: 0.165, g: 0.369, b: 0.227, a: 1}
-    soin: {r: 0.608, g: 0.482, b: 0.184, a: 1}
-    neutre: {r: 0.227, g: 0.18, b: 0.133, a: 1}
+  competencePalette: {fileID: 11400000, guid: 50cd86edcde15e74798559bd275afe4a, type: 2}
   competenceSlots:
   - {fileID: 1171038902}
-  competenceDiscRenderer: {fileID: 0}
-  shadowDrop: {fileID: 1171038904}
+  shadowDrop: {fileID: 152006106}
   allHeroes:
   - nom: Daraa
     proto_illu_desc: "Hy\xE8ne anthropomorphe femelle en habits afars, lance un arc
@@ -978,7 +975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &296349309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1018,10 +1015,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Illustration :</b>
-
-    Jaguar anthropomorphe en armure mapuche, tient
-    un bouclier solaire imposant.'
+  m_text: "<b>Illustration :</b>\nTur du Caucase anthropomorphe en cherkeska circassienne,
+    bras lev\xE9 tenant un parchemin scell\xE9."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -1708,7 +1703,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nawel
+  m_text: Aslan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: 1248990885}
@@ -1843,7 +1838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1142580315
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1976,7 +1971,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0926747be6f8db840bd08797a3e6e1cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c686d7bfc0c36341bd5fa9cd8ab8c6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1996,8 +1991,8 @@ Transform:
   m_GameObject: {fileID: 1171038901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26, y: 0, z: -1}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1621819922}
@@ -2014,7 +2009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c469ecf3f73bdd47a7ce69112629090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowColor: {r: 0.169, g: 0.31, b: 0.431, a: 1}
+  shadowColor: {r: 0.545, g: 0.125, b: 0.125, a: 1}
   offsetX: 0
   offsetY: 0
   shadowScale: 1.15
@@ -2503,7 +2498,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tous les <sprite name=\"invocation\">se deplacent dans la file de ce h\xE9ros."
+  m_text: "Chaque h\xE9ros joue imm\xE9diatement 1 carte <sprite name=\"chasse\">
+    de sa main."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 294818322}
@@ -2522,7 +2518,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 11400000, guid: d48c661b3a0935a46b9c95a2510e6870, type: 2}
+  m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -2638,7 +2634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1603593782
 Transform:
   m_ObjectHideFlags: 0
@@ -2648,8 +2644,8 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.01}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.01}
+  m_LocalScale: {x: 0.69, y: 0.69, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 247666407}
@@ -2698,7 +2694,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3058,7 +3054,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Il encaisse. Encore. Et encore. \xBB</i>"
+  m_text: "<i>\xAB Cinq tribus parlent par sa bouche. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -3077,7 +3073,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 11400000, guid: d48c661b3a0935a46b9c95a2510e6870, type: 2}
+  m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -3215,7 +3211,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1692387759}

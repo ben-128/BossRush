@@ -72,7 +72,7 @@ describe('engine / full game smoke', () => {
     expect(uniq.size).toBeGreaterThan(1);
   });
 
-  it('exchange action swaps cards between two hero hands', async () => {
+  it('each hero has their own personal Chasse deck', async () => {
     const data = await loadDesignData();
     const state = createGame(data, {
       seed: 1,
@@ -80,52 +80,16 @@ describe('engine / full game smoke', () => {
       bossId: 'BOSS_001',
       heroIds: ['HERO_001', 'HERO_003'],
     });
-    const heroA = state.heroes[0]!;
-    const heroB = state.heroes[1]!;
-    const aNom = state.catalog.heroesById.get(heroA.heroId)!.nom;
-    const bNom = state.catalog.heroesById.get(heroB.heroId)!.nom;
-
-    // Force compatible hands so the prereq gate doesn't reject the exchange:
-    // heroA holds a card whose prereq matches heroB, and vice versa.
-    const aCard = data.cartesChasse.find((c) => c.prerequis === bNom)!;
-    const bCard = data.cartesChasse.find((c) => c.prerequis === aNom)!;
-    heroA.hand = [aCard];
-    heroB.hand = [bCard];
-
-    await applyPlayerAction(state, {
-      kind: 'exchange',
-      withSeat: 1,
-      give: [0],
-      take: [0],
-    });
-
-    expect(heroA.hand.length).toBe(1);
-    expect(heroB.hand.length).toBe(1);
-    expect(heroA.hand[0]!.id).toBe(bCard.id);
-    expect(heroB.hand[0]!.id).toBe(aCard.id);
-
-    const last = state.events[state.events.length - 1]!;
-    expect(last.kind).toBe('ACTION_EXCHANGE');
-  });
-
-  it('exchange is rejected if partner is dead or same seat', async () => {
-    const data = await loadDesignData();
-    const state = createGame(data, {
-      seed: 1,
-      nPlayers: 2,
-      bossId: 'BOSS_001',
-      heroIds: ['HERO_001', 'HERO_003'],
-    });
-    // Kill partner manually.
-    state.heroes[1]!.dead = true;
-    await applyPlayerAction(state, { kind: 'exchange', withSeat: 1, give: [0], take: [0] });
-    let last = state.events[state.events.length - 1]!;
-    expect(last.kind).toBe('ACTION_NONE');
-
-    state.heroes[1]!.dead = false;
-    await applyPlayerAction(state, { kind: 'exchange', withSeat: 0, give: [0], take: [0] });
-    last = state.events[state.events.length - 1]!;
-    expect(last.kind).toBe('ACTION_NONE');
+    const a = state.heroes[0]!;
+    const b = state.heroes[1]!;
+    const aNom = state.catalog.heroesById.get(a.heroId)!.nom;
+    const bNom = state.catalog.heroesById.get(b.heroId)!.nom;
+    // Every card in A's deck/hand must have A's prereq; same for B.
+    for (const c of [...a.deck.draw, ...a.hand]) expect(c.prerequis).toBe(aNom);
+    for (const c of [...b.deck.draw, ...b.hand]) expect(c.prerequis).toBe(bNom);
+    // Shared chasse pile should be empty in the new rules.
+    expect(state.piles.chasse.draw.length).toBe(0);
+    expect(state.piles.chasse.discard.length).toBe(0);
   });
 
   it('smoke-runs against every boss with random heroes', async () => {

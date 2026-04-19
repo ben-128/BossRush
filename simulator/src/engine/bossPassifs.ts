@@ -9,7 +9,7 @@
 
 import type { GameState } from './gameState.js';
 import { emit } from './logger.js';
-import { drawOne, discard } from './piles.js';
+import { drawOne, discard, discardChasse } from './piles.js';
 import { runOps, mkCtx } from './effects.js';
 
 function hooks(state: GameState): readonly string[] {
@@ -64,7 +64,7 @@ export function hookHandCapAtEndOfTurn(state: GameState): void {
   while (h.hand.length > cap) {
     const c = h.hand.shift();
     if (!c) break;
-    discard(state.piles.chasse, c);
+    discardChasse(state, c, state.activeSeat);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: state.activeSeat });
   }
 }
@@ -102,12 +102,15 @@ export function hookAzhdaImmune(state: GameState): boolean {
   return monsters >= living.length;
 }
 
-/** Akkoro (legacy) : chaque carte Action jouée défausse le top de la pile Chasse. */
+/** Akkoro (legacy) : chaque carte Action jouée défausse le top de la pile
+ *  Chasse du héros actif. Rôle mineur depuis que les decks sont per-hero. */
 export function hookDiscardTopOnAction(state: GameState): void {
   if (!hooks(state).includes('active_discards_top_chasse_on_action')) return;
-  const c = drawOne(state, state.piles.chasse, 'chasse');
+  const h = state.heroes[state.activeSeat];
+  if (!h) return;
+  const c = drawOne(state, h.deck, 'chasse');
   if (!c) return;
-  discard(state.piles.chasse, c);
+  h.deck.discard.push(c);
   emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id });
 }
 
@@ -118,7 +121,7 @@ export function hookAkkoroDamageDiscardsChasse(state: GameState): void {
   const h = state.heroes[state.activeSeat];
   if (!h || h.hand.length === 0) return;
   const c = h.hand.shift()!;
-  discard(state.piles.chasse, c);
+  discardChasse(state, c, state.activeSeat);
   emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: state.activeSeat });
   emit(state, { kind: 'WARN', message: `akkoro passif: seat ${state.activeSeat} défausse 1 Chasse` });
 }
@@ -151,7 +154,7 @@ export function hookKaggenElimDrawsChasse(state: GameState, seat: number): void 
   if (!hooks(state).includes('kaggen_elim_draws_chasse')) return;
   const h = state.heroes[seat];
   if (!h) return;
-  const c = drawOne(state, state.piles.chasse, 'chasse');
+  const c = drawOne(state, h.deck, 'chasse');
   if (!c) return;
   h.hand.push(c);
   emit(state, { kind: 'DRAW_CARD', pile: 'chasse', card: c.id, toSeat: seat });

@@ -45,36 +45,6 @@ public class ActionCardGenerator : CardGenerator
     }
     #endregion
 
-    #region Prerequis Icons
-    [Serializable]
-    public class PrerequisSprites
-    {
-        public Sprite armure;
-        public Sprite distance;
-        public Sprite soin;
-        public Sprite magie;
-        public Sprite diplomatie;
-        public Sprite elementaire;
-
-        public Sprite GetSprite(string prerequis)
-        {
-            if (string.IsNullOrEmpty(prerequis)) return null;
-            switch (prerequis.ToLower())
-            {
-                case "armure": return armure;
-                case "distance": return distance;
-                case "soin": return soin;
-                case "magie": return magie;
-                case "diplomatie": return diplomatie;
-                case "élémentaire": return elementaire;
-                default:
-                    Debug.LogWarning($"Prérequis inconnu : {prerequis}");
-                    return null;
-            }
-        }
-    }
-    #endregion
-
     [Header("Dégâts")]
     public SpriteRenderer[] degatsSlots;
     public float degatsSpacing = 0.5f;
@@ -83,8 +53,12 @@ public class ActionCardGenerator : CardGenerator
     public SpriteRenderer porteeDistanceIcon;
 
     [Header("Prérequis")]
-    public PrerequisSprites prerequisSprites;
+    [Tooltip("Palette partagée (SO) — lookup par nom de héros (Nawel, Daraa, …) pour récupérer icône + couleur du prérequis.")]
+    public CompetenceColorPalette competencePalette;
     public SpriteRenderer prerequisIcon;
+
+    [Tooltip("Shadow drop du prérequis, teinté avec la couleur de compétence du héros.")]
+    public SpriteDropShadow prerequisShadow;
 
     [Header("Données des actions (charger depuis JSON)")]
     public ActionVisualData[] allActions;
@@ -138,20 +112,37 @@ public class ActionCardGenerator : CardGenerator
         if (porteeDistanceIcon != null)
             porteeDistanceIcon.gameObject.SetActive(action.portee == "distance");
 
-        // Icône prérequis
+        // Icône prérequis — lookup par nom de héros dans la palette partagée
         if (prerequisIcon != null)
         {
-            var sprite = prerequisSprites.GetSprite(action.prerequis);
-            if (sprite != null)
+            var entry = competencePalette != null ? competencePalette.GetByCompetence(action.prerequis) : null;
+            // Fallback : lookup par hero name si prerequis est "Nawel" plutôt que "armure"
+            if (entry == null && competencePalette != null)
+            {
+                foreach (var h in competencePalette.heroes ?? System.Array.Empty<CompetenceColorPalette.HeroColor>())
+                {
+                    if (string.Equals(h.heroName, action.prerequis, System.StringComparison.OrdinalIgnoreCase))
+                    { entry = h; break; }
+                }
+            }
+
+            if (entry != null && entry.icon != null)
             {
                 prerequisIcon.gameObject.SetActive(true);
-                prerequisIcon.sprite = sprite;
+                prerequisIcon.sprite = entry.icon;
+
+                if (prerequisShadow != null)
+                {
+                    var tint = entry.color;
+                    tint.a = prerequisShadow.shadowColor.a;
+                    prerequisShadow.shadowColor = tint;
+                    prerequisShadow.ForceUpdate();
+                }
             }
             else
             {
                 prerequisIcon.gameObject.SetActive(false);
             }
         }
-
     }
 }

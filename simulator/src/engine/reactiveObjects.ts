@@ -10,7 +10,7 @@
 import type { GameState } from './gameState.js';
 import type { ReactiveTrigger } from './effectTypes.js';
 import { emit } from './logger.js';
-import { discard } from './piles.js';
+import { discardChasse } from './piles.js';
 import { runOps, mkCtx } from './effects.js';
 
 /**
@@ -47,7 +47,7 @@ export async function fireReactiveObjectTriggers(
       reason: `réaction ${trigger}`,
     });
     await runOps(state, mkCtx(ownerSeat, obj.id, 'chasse'), entry.reactive.ops);
-    discard(state.piles.chasse, obj);
+    discardChasse(state, obj, ownerSeat);
     emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: ownerSeat });
   }
 }

@@ -26,6 +26,13 @@ public class GameIconsConfig : ScriptableObject
 
         [Tooltip("Echelle du sprite inline dans le texte (1 = taille normale)")]
         public float scale = 1f;
+
+        [Tooltip("Ratio de la place horizontale prise par cette icône dans le texte.\n" +
+                 "1 = largeur monospace par défaut.\n" +
+                 "< 1 = icône plus serrée (les mots adjacents se rapprochent).\n" +
+                 "> 1 = plus d'espace autour de l'icône.")]
+        [Range(0.3f, 2f)]
+        public float widthRatio = 1f;
     }
 
     [Header("Icones du jeu")]

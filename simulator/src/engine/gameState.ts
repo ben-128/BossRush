@@ -53,6 +53,9 @@ export interface HeroRuntime {
   wounds: Wound[];
   hand: CarteChasse[];
   objects: CarteChasse[]; // objets posés devant
+  /** Personal Chasse deck (draw + discard) — per rules, each hero has
+   *  their own 20-card paquet + associated discard. Reshuffles on empty. */
+  deck: Pile<CarteChasse>;
   capaciteUsed: boolean;
   dead: boolean;
   queue: MonsterInstance[]; // files de monstres, head first
@@ -148,6 +151,16 @@ export interface GameState {
   /** The "other" seat during an in-flight on_self_exchange reactive — used by
    *  DIP_O03/O04 to draw for the exchange partner. Cleared after firing. */
   exchangePartner?: number;
+  /** Seat of the hero whose attack triggered an on_boss_damaged reactive. */
+  bossAttackerSeat?: number;
+  /** Seat of the hero who just used their capacité (for on_ally_capacite_used
+   *  with the `capacite_user` target — DIP_O04 Pacte du Gué). */
+  capaciteUserSeat?: number;
+  /** Set by applyDamageOp after every hero-action damage resolution:
+   *  true iff the attacked monster was killed by this attack (false for
+   *  non-monster targets, unresolved damage, or survivors). Consumed by
+   *  SOI_A01 / SOI_A04 via healIfLastSurvived / healIfLastKilled. */
+  lastAttackKilled?: boolean;
   /** Set true when any hero was healed this turn (read by SOI_O05). */
   healedThisTurn?: boolean;
 

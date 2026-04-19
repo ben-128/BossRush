@@ -254,13 +254,10 @@ function ActionPicker({
 }) {
   const state = useStore((s) => s.state)!;
   const hero = state.heroes[seat];
-  const [mode, setMode] = useState<'root' | 'play' | 'exchange'>('root');
+  const [mode, setMode] = useState<'root' | 'play'>('root');
   const [playObject, setPlayObject] = useState<number | undefined>(undefined);
   const [playAction, setPlayAction] = useState<number | undefined>(undefined);
   const [renforts, setRenforts] = useState<number[]>([]);
-  const [exchSeat, setExchSeat] = useState<number | null>(null);
-  const [give, setGive] = useState<number[]>([]);
-  const [take, setTake] = useState<number[]>([]);
 
   if (!hero) {
     onPick({ kind: 'none', reason: 'no hero' });
@@ -302,15 +299,6 @@ function ActionPicker({
           >
             Capacité
           </button>
-          {!isReaction && (
-            <button
-              className="px-3 py-2 bg-purple-700 hover:bg-purple-600 rounded disabled:opacity-40"
-              onClick={() => setMode('exchange')}
-              disabled={state.heroes.filter((h) => h && !h.dead).length < 2}
-            >
-              Échanger…
-            </button>
-          )}
           {/* Réaction : pose bonus ROD_A04 si disponible. */}
           {isReaction && hero.extraPoseAvailable && (
             <button
@@ -451,112 +439,6 @@ function ActionPicker({
               setPlayAction(undefined);
               setRenforts([]);
             }}
-          >
-            Retour
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (mode === 'exchange') {
-    const otherSeats = state.heroes
-      .map((h, i) => (h && !h.dead && i !== seat ? i : -1))
-      .filter((i) => i >= 0);
-    const other = exchSeat != null ? state.heroes[exchSeat] : null;
-    const toggle = (arr: number[], set: (n: number[]) => void, i: number) =>
-      set(arr.includes(i) ? arr.filter((x) => x !== i) : [...arr, i]);
-
-    return (
-      <div className="flex flex-col gap-3">
-        <div>
-          <div className="text-xs text-stone-400 mb-1">Avec quel héros ?</div>
-          <div className="flex flex-wrap gap-1">
-            {otherSeats.map((s) => {
-              const h = state.heroes[s]!;
-              const name = state.catalog.heroesById.get(h.heroId)?.nom ?? h.heroId;
-              return (
-                <button
-                  key={s}
-                  className={`px-2 py-1 text-xs rounded ${exchSeat === s ? 'bg-purple-700' : 'bg-stone-800 hover:bg-stone-700'}`}
-                  onClick={() => { setExchSeat(s); setGive([]); setTake([]); }}
-                >
-                  {name} (seat {s})
-                  <InfoBtn card={{ kind: 'hero', id: h.heroId }} />
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        {other && (() => {
-          const myNom = state.catalog.heroesById.get(hero.heroId)?.nom;
-          const otherNom = state.catalog.heroesById.get(other.heroId)?.nom;
-          // Only cards the *partner* can use are legal gives.
-          const giveChoices = hero.hand
-            .map((c, i) => ({ c, i }))
-            .filter(({ c }) => !c.prerequis || c.prerequis === otherNom);
-          // Only cards *we* can use are legal takes.
-          const takeChoices = other.hand
-            .map((c, i) => ({ c, i }))
-            .filter(({ c }) => !c.prerequis || c.prerequis === myNom);
-          return (
-            <>
-              <div className="text-xs text-amber-300/80 italic">
-                Règle : on ne donne que des cartes utilisables par l'autre héros, et on ne reçoit que ce qu'on peut utiliser soi-même.
-              </div>
-              <div>
-                <div className="text-xs text-stone-400 mb-1">Donner (cartes utilisables par {otherNom})</div>
-                <div className="flex flex-wrap gap-1">
-                  {giveChoices.map(({ c, i }) => (
-                    <button
-                      key={i}
-                      className={`px-2 py-1 text-xs rounded ${give.includes(i) ? 'bg-red-700' : 'bg-stone-800 hover:bg-stone-700'}`}
-                      onClick={() => toggle(give, setGive, i)}
-                    >
-                      {chName(c.id)}
-                      <InfoBtn card={{ kind: 'chasse', id: c.id }} />
-                    </button>
-                  ))}
-                  {giveChoices.length === 0 && (
-                    <span className="text-stone-600 text-xs italic">aucune carte donnable à {otherNom}</span>
-                  )}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs text-stone-400 mb-1">Recevoir (cartes utilisables par toi)</div>
-                <div className="flex flex-wrap gap-1">
-                  {takeChoices.map(({ c, i }) => (
-                    <button
-                      key={i}
-                      className={`px-2 py-1 text-xs rounded ${take.includes(i) ? 'bg-green-700' : 'bg-stone-800 hover:bg-stone-700'}`}
-                      onClick={() => toggle(take, setTake, i)}
-                    >
-                      {chName(c.id)}
-                      <InfoBtn card={{ kind: 'chasse', id: c.id }} />
-                    </button>
-                  ))}
-                  {takeChoices.length === 0 && (
-                    <span className="text-stone-600 text-xs italic">aucune carte utilisable dans sa main</span>
-                  )}
-                </div>
-              </div>
-            </>
-          );
-        })()}
-        <div className="flex gap-2 pt-2 border-t border-stone-700">
-          <button
-            className="px-3 py-2 bg-purple-700 hover:bg-purple-600 rounded disabled:opacity-40"
-            onClick={() =>
-              exchSeat != null &&
-              onPick({ kind: 'exchange', withSeat: exchSeat, give, take, reason: 'human' })
-            }
-            disabled={exchSeat == null || (give.length === 0 && take.length === 0)}
-          >
-            Valider l'échange
-          </button>
-          <button
-            className="px-3 py-2 bg-stone-700 hover:bg-stone-600 rounded"
-            onClick={() => { setMode('root'); setExchSeat(null); setGive([]); setTake([]); }}
           >
             Retour
           </button>

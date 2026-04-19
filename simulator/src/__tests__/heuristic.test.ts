@@ -72,8 +72,10 @@ describe('heuristicPolicy', () => {
     }
     // The heuristic should stay engaged, but it may play slightly less
     // than random because it now filters out useless plays (negative score
-    // → draw/exchange instead). Allow a modest 25% margin below random.
-    expect(heuristicPlays).toBeGreaterThanOrEqual(Math.floor(randomPlays * 0.75));
+    // → draw instead). Allow a modest 35% margin below random, which
+    // accommodates both the filter and per-hero decks (which reduces bad
+    // card access compared to the old shared-pile model).
+    expect(heuristicPlays).toBeGreaterThanOrEqual(Math.floor(randomPlays * 0.65));
   });
 
   it('pickChoice avoids damage when critical', async () => {

@@ -15,6 +15,7 @@ const Comparator = z.object({
 const BaseCondition = z.union([
   z.object({ self_damage: Comparator }),
   z.object({ hand_size: Comparator }),
+  z.object({ self_queue_size: Comparator }),
   z.object({ no_ally_has_damage: z.literal(true) }),
 ]);
 
@@ -37,6 +38,8 @@ const HeroTargetTok = z.enum([
   'each_ally',
   'next_hero',
   'exchange_partner',
+  'boss_attacker',
+  'capacite_user',
 ]);
 
 const DamageTargetTok = z.enum([
@@ -47,7 +50,7 @@ const DamageTargetTok = z.enum([
 ]);
 
 const MonsterPick = z.object({
-  pick: z.enum(['monster_in_self_queue', 'monster_in_any_queue', 'queue_head_self', 'queue_second_self']),
+  pick: z.enum(['monster_in_self_queue', 'monster_in_any_queue', 'queue_head_self', 'queue_second_self', 'queue_head_ally']),
   where: z.enum(['has_damage', 'at_most_life_N', 'vie_eq_1']).optional(),
   N: z.number().int().optional(),
 });
@@ -225,6 +228,33 @@ const OpDrawWithObjetBonus = z.object({
   target: z.literal('self'),
 });
 const OpAllyPlaysAction = z.object({ op: z.literal('allyPlaysAction') });
+const OpAllyPlaysObject = z.object({ op: z.literal('allyPlaysObject') });
+const OpTailMonsterAttacksBoss = z.object({ op: z.literal('tailMonsterAttacksBoss') });
+const OpEachHeroMoveMonster = z.object({ op: z.literal('eachHeroMoveMonster') });
+const OpDiscardAndAllyDraws = z.object({
+  op: z.literal('discardAndAllyDraws'),
+  n: z.number().int().positive(),
+  multiplier: z.number().int().positive().default(2),
+});
+const OpReorderDeckTop = z.object({
+  op: z.literal('reorderDeckTop'),
+  n: z.number().int().positive(),
+  keep: z.number().int().nonnegative().optional(),
+});
+const OpUltimatumEliminateOrDraw = z.object({
+  op: z.literal('ultimatumEliminateOrDraw'),
+  drawN: z.number().int().positive(),
+});
+const OpHealIfLastSurvived = z.object({
+  op: z.literal('healIfLastSurvived'),
+  target: HeroTargetTok,
+  amount: z.number().int().positive(),
+});
+const OpHealIfLastKilled = z.object({
+  op: z.literal('healIfLastKilled'),
+  target: HeroTargetTok,
+  amount: z.number().int().positive(),
+});
 const OpDamageIfHealed = z.object({
   op: z.literal('damageIfHealed'),
   amount: z.number().int().positive(),
@@ -313,6 +343,14 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpHealAllyEqualsSelfWounds,
     OpDrawWithObjetBonus,
     OpAllyPlaysAction,
+    OpAllyPlaysObject,
+    OpTailMonsterAttacksBoss,
+    OpEachHeroMoveMonster,
+    OpDiscardAndAllyDraws,
+    OpReorderDeckTop,
+    OpUltimatumEliminateOrDraw,
+    OpHealIfLastSurvived,
+    OpHealIfLastKilled,
     OpDamageIfHealed,
     OpSetChainOnKill,
     OpRotateHeadsToNext,
@@ -373,12 +411,13 @@ const OpBossHeal = z.object({
 });
 const OpShiftDamage = z.object({
   op: z.literal('shiftDamage'),
-  from: z.enum(['self', 'any_hero', 'any_ally']),
+  from: z.enum(['self', 'any_hero', 'any_ally', 'each_ally']),
   to: z.union([
     z.enum(['self', 'any_hero', 'any_ally', 'queue_head', 'boss']),
     MonsterPick,
   ]),
   amount: z.number().int().positive(),
+  moveOneCard: z.boolean().optional(),
 });
 const OpRemoveAllWounds = z.object({
   op: z.literal('removeAllWounds'),
@@ -456,6 +495,7 @@ const ReactiveTriggerEnum = z.enum([
   'on_self_high_hand_draw',
   'on_self_exchange',
   'on_self_heals_ally',
+  'on_boss_damaged',
 ]);
 
 const ReactiveEntry = z.object({
