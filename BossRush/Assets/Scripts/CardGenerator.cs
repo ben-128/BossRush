@@ -8,11 +8,45 @@ public abstract class CardGenerator : MonoBehaviour
     public TextAsset jsonSource;
     public string outputFolder;
 
+    public enum RenderMode { Final, Proto }
+
+    [Header("Mode de rendu (Proto / Final)")]
+    [Tooltip("Mode courant. Final = export publication. Proto = preview avec éléments temporaires visibles (placeholders, marges, annotations).")]
+    public RenderMode renderMode = RenderMode.Final;
+
+    [Tooltip("GameObjects activés UNIQUEMENT en mode Proto (masqués en Final). Ex: placeholders, marges, annotations.")]
+    public GameObject[] protoObjects;
+
+    [Tooltip("GameObjects activés UNIQUEMENT en mode Final (masqués en Proto). Ex: cadres finaux, effets stylisés.")]
+    public GameObject[] finalObjects;
+
+    /// <summary>
+    /// Applique l'état d'activation des GameObjects selon le mode courant.
+    /// Appelé automatiquement avant chaque preview/export depuis l'inspecteur.
+    /// </summary>
+    public void ApplyRenderMode()
+    {
+        bool isProto = renderMode == RenderMode.Proto;
+        if (protoObjects != null)
+        {
+            foreach (var go in protoObjects)
+                if (go != null) go.SetActive(isProto);
+        }
+        if (finalObjects != null)
+        {
+            foreach (var go in finalObjects)
+                if (go != null) go.SetActive(!isProto);
+        }
+    }
+
     [Header("Visuels de la carte")]
     public TextMeshPro nomText;
     public TextMeshPro descriptionText;
     public TextMeshPro citationText;
     public SpriteRenderer portraitRenderer;
+
+    [Tooltip("TextMeshPro utilisé en mode Proto pour afficher la description d'illustration attendue. À mettre dans protoObjects pour n'être visible qu'en Proto.")]
+    public TextMeshPro protoIlluDescText;
 
     [Header("Style texte global")]
     [Tooltip("Couleur du texte principal (brun foncé recommandé au lieu de noir pur)")]
@@ -246,6 +280,18 @@ public abstract class CardGenerator : MonoBehaviour
         var defaultAsset = TMP_Settings.defaultSpriteAsset;
         if (defaultAsset != null)
             tmp.spriteAsset = defaultAsset;
+    }
+
+    /// <summary>
+    /// Remplit le champ texte de description d'illustration affiché en mode Proto.
+    /// Préfixe automatiquement par "Illustration :\n".
+    /// Le text object doit être dans protoObjects pour n'être visible qu'en Proto.
+    /// </summary>
+    protected void SetProtoIlluDesc(string desc)
+    {
+        if (protoIlluDescText == null) return;
+        string body = string.IsNullOrWhiteSpace(desc) ? "(aucune description)" : desc.Trim();
+        protoIlluDescText.text = "<b>Illustration :</b>\n" + body;
     }
 
     protected void SetBaseTexts(string nom, string description)

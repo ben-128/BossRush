@@ -20,6 +20,7 @@ public class EpreuveCardGenerator : CardGenerator
         public int degats;
         public string type_degats;
         public string description;
+        public string proto_illu_desc;
     }
     #endregion
 
@@ -61,6 +62,7 @@ public class EpreuveCardGenerator : CardGenerator
                 degats = json.degats,
                 type_degats = json.type_degats,
                 description = json.description,
+                proto_illu_desc = json.proto_illu_desc,
             };
         }
         PreserveSprites(old, allEpreuves);
@@ -75,6 +77,7 @@ public class EpreuveCardGenerator : CardGenerator
         var epreuve = allEpreuves[index];
         SetBaseTexts(epreuve.nom, epreuve.description);
         SetPortrait(epreuve.sprite, epreuve.offset, epreuve.scale);
+        SetProtoIlluDesc(epreuve.proto_illu_desc);
 
         // Icônes de dégâts (optionnel)
         SetDamageIcons(degatsSlots, epreuve.degats, degatsSpacing);

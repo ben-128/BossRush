@@ -38,7 +38,35 @@ public class BossRushToolsWindow : EditorWindow
             EditorGUILayout.Space(10);
             DrawInlineIconsSection();
             EditorGUILayout.Space(10);
+            DrawAtlasSection();
+            EditorGUILayout.Space(10);
             DrawConfigShortcuts();
+        }
+    }
+
+    private const string PrefYOffset = "RaidParty.Tools.TMPSpriteYOffset";
+
+    // ─── Atlas TMP (recentrage + offset Y) ────────────────────────────────
+    private void DrawAtlasSection()
+    {
+        using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+        {
+            EditorGUILayout.LabelField("Atlas TMP", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox(
+                "Recentre tous les sprites d'un TMP_SpriteAsset via leur\n" +
+                "bounding box alpha. Décalage Y : + = les icônes montent,\n" +
+                "- = elles descendent. Utile si elles apparaissent trop\n" +
+                "hautes ou trop basses par rapport à la ligne de texte.\n" +
+                "Prérequis : l'atlas doit être Read/Write.",
+                MessageType.None);
+
+            float yOffset = EditorPrefs.GetFloat(PrefYOffset, 0f);
+            float newY = EditorGUILayout.Slider("Décalage Y (px)", yOffset, -50f, 50f);
+            if (!Mathf.Approximately(newY, yOffset))
+                EditorPrefs.SetFloat(PrefYOffset, newY);
+
+            if (GUILayout.Button("Recentrer sprites TMP (atlas sélectionné)"))
+                TMPSpriteRecenter.RecenterSelectedAsset(newY);
         }
     }
 

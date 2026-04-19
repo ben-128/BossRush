@@ -15,6 +15,38 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
 
         T generator = (T)target;
 
+        // ── Mode de rendu : 2 boutons à bascule
+        EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Mode de rendu", EditorStyles.boldLabel);
+        using (new EditorGUILayout.HorizontalScope())
+        {
+            var orig = GUI.backgroundColor;
+
+            GUI.backgroundColor = generator.renderMode == CardGenerator.RenderMode.Proto
+                ? new Color(1f, 0.85f, 0.3f) : orig;
+            if (GUILayout.Button("Proto", GUILayout.Height(24)))
+            {
+                Undo.RecordObject(generator, "Set Proto Mode");
+                generator.renderMode = CardGenerator.RenderMode.Proto;
+                generator.ApplyRenderMode();
+                EditorUtility.SetDirty(generator);
+                SceneView.RepaintAll();
+            }
+
+            GUI.backgroundColor = generator.renderMode == CardGenerator.RenderMode.Final
+                ? new Color(0.4f, 0.9f, 0.5f) : orig;
+            if (GUILayout.Button("Final", GUILayout.Height(24)))
+            {
+                Undo.RecordObject(generator, "Set Final Mode");
+                generator.renderMode = CardGenerator.RenderMode.Final;
+                generator.ApplyRenderMode();
+                EditorUtility.SetDirty(generator);
+                SceneView.RepaintAll();
+            }
+
+            GUI.backgroundColor = orig;
+        }
+
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Génération", EditorStyles.boldLabel);
 
@@ -29,7 +61,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         if (count <= 0) return;
 
         EditorGUILayout.Space(5);
-        EditorGUILayout.LabelField($"{count} cartes chargées", EditorStyles.helpBox);
+        EditorGUILayout.LabelField($"{count} cartes chargées — mode {generator.renderMode}", EditorStyles.helpBox);
 
         previewIndex = EditorGUILayout.IntSlider("Prévisualiser", previewIndex, 0, count - 1);
 
@@ -43,6 +75,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
 
         if (GUILayout.Button($"Prévisualiser : {cardName}"))
         {
+            generator.ApplyRenderMode();
             generator.GenerateCard(previewIndex);
             SceneView.RepaintAll();
         }
@@ -82,6 +115,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         bool hideBorders = !capture.keepBorders && borders != null;
         if (hideBorders) borders.SetActive(false);
 
+        generator.ApplyRenderMode();
         generator.GenerateCard(index);
         ForceUpdateVisualComponents();
         capture.Capture(new ToExport
@@ -93,7 +127,7 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         if (hideBorders) borders.SetActive(true);
 
         AssetDatabase.Refresh();
-        Debug.Log($"Carte exportée : {generator.GetCardName(index)}");
+        Debug.Log($"Carte exportée ({generator.renderMode}) : {generator.GetCardName(index)}");
     }
 
     private static void ForceUpdateVisualComponents()
@@ -117,6 +151,8 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         bool hideBorders = !capture.keepBorders && borders != null;
         if (hideBorders) borders.SetActive(false);
 
+        generator.ApplyRenderMode();
+
         int count = GetCardCount(generator);
         for (int i = 0; i < count; i++)
         {
@@ -132,6 +168,6 @@ public abstract class CardGeneratorInspector<T> : Editor where T : CardGenerator
         if (hideBorders) borders.SetActive(true);
 
         AssetDatabase.Refresh();
-        Debug.Log($"{count} cartes exportées dans Art/Final/{generator.outputFolder}/");
+        Debug.Log($"{count} cartes exportées ({generator.renderMode}) dans Art/Final/{generator.outputFolder}/");
     }
 }

@@ -31,6 +31,7 @@ public class MonsterCardGenerator : CardGenerator
         public string description;
         public string citation;
         public int quantite;
+        public string proto_illu_desc;
     }
     #endregion
 
@@ -115,6 +116,7 @@ public class MonsterCardGenerator : CardGenerator
                 description = json.description,
                 citation = json.citation,
                 quantite = json.quantite,
+                proto_illu_desc = json.proto_illu_desc,
             };
         }
 
@@ -136,6 +138,7 @@ public class MonsterCardGenerator : CardGenerator
         if (pvText != null) pvText.text = monster.pv.ToString();
         SetPortrait(monster.sprite, monster.offset, monster.scale);
         SetCitation(monster.citation);
+        SetProtoIlluDesc(monster.proto_illu_desc);
 
         // Icônes de dégâts
         var dmgSprite = typeDegatsSprites.GetSprite(monster.type_degats);

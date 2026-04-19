@@ -63,7 +63,7 @@ public static class DefaultIconConfigCreator
         new Preset { tag = "degat",      mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorDegat,  scale = 1f   },
     };
 
-    [MenuItem("Tools/Raid Party/Creer ou completer config icones par defaut")]
+    // Ancien MenuItem retiré — accessible via Tools > Raid Party > Fenetre Outils
     public static void CreateOrUpdate()
     {
         // Localise ou cree le config

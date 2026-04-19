@@ -86,20 +86,18 @@ Ces icônes apparaissent sur la carte du Colosse (séquence de fin de tour) et d
 3. **Piles communes** : former les piles Monstres, Destins. Mélanger.
 4. **Défausses** : prévoir à côté de chaque pile sa défausse associée (Chasse, Menace, Monstres, Destins).
 5. **Héros** : chaque joueur pioche 1 héros aléatoire.
-6. **Pile Chasse** :
-   - Chaque héros possède un paquet de 20 cartes Chasse (identifié par l'icône prérequis en haut à droite).
-   - Prendre les paquets des héros choisis. Remettre les autres dans la boîte.
-   - Mélanger tous les paquets choisis ensemble pour former la pile Chasse.
-   - *(Exemple : 3 joueurs = 3 paquets × 20 = 60 cartes Chasse.)*
-7. **Pioche initiale** : chaque joueur pioche 3 cartes Chasse (Actions et Objets restent en main).
-8. **Échanges libres** entre joueurs avant de commencer.
-9. **Choisir** qui commence.
+6. **Paquet Chasse personnel** :
+   - Chaque joueur récupère le paquet de 20 cartes Chasse de son héros (identifié par la couleur du dos et l'icône prérequis en haut à droite).
+   - Chaque joueur mélange son propre paquet et le pose face cachée devant lui, avec sa défausse associée à côté.
+   - *(Les paquets des héros non choisis restent dans la boîte.)*
+7. **Pioche initiale** : chaque joueur pioche 3 cartes Chasse de son paquet (Actions et Objets restent en main).
+8. **Choisir** qui commence.
 
 ---
 
 ## Cartes Chasse
 
-Pile unique. Deux types identifiés par une icône en haut à gauche :
+Chaque joueur possède son propre paquet Chasse de 20 cartes (et sa propre défausse). Deux types identifiés par une icône en haut à gauche :
 
 ### Type Action (en main)
 - **Effet immédiat** (soin, pioche…) → appliquer puis défausser.
@@ -112,7 +110,7 @@ Pile unique. Deux types identifiés par une icône en haut à gauche :
 - **Renfort** → objet joué en même temps qu'une carte Action d'attaque. Déclenche son effet (dégâts bonus, ou effet divers). Si l'effet ajoute des dégâts à la cible, les deux cartes vont sous la cible ; sinon, défaussez l'objet après résolution.
 
 ### Prérequis
-Icône en haut à droite. Le héros doit posséder la compétence correspondante. Sinon, la carte ne peut pas être jouée (mais peut être échangée avec un allié qui possède la compétence).
+Icône en haut à droite. Le héros doit posséder la compétence correspondante. Comme chaque joueur ne pioche que dans le paquet de son héros, le prérequis est toujours rempli par défaut — sauf pour les rares effets qui font jouer la carte d'un autre héros (capacité Aslan, certaines cartes Action d'Aslan).
 
 ### Défausses et recyclage
 Chaque type de carte possède sa propre défausse à côté de sa pile : Chasse, Menace, Monstres, Destins. Chaque fois qu'un effet vous demande de piocher dans une pile vide, mélangez immédiatement sa défausse associée pour former une nouvelle pioche, puis poursuivez l'effet normalement.
@@ -127,7 +125,7 @@ Chaque type de carte possède sa propre défausse à côté de sa pile : Chasse,
 | Mage | Élémentaire | Gros dégâts, effets explosifs, attaques de percée |
 | Soigneur | Soin | Peu de dégâts, mais soigne beaucoup les alliés |
 | Rôdeur | Distance | Ciblage précis, rapide (joue plusieurs cartes par tour) |
-| Diplomate | Diplomatie | Fait piocher et échanger des cartes, coordonne les alliés |
+| Diplomate | Diplomatie | Commande les alliés, déclenche leurs actions et les fait piocher |
 
 Chaque paquet contient **20 cartes** : 15 Actions (dont 10 attaques) + 5 Objets.
 
@@ -138,8 +136,7 @@ Chaque paquet contient **20 cartes** : 15 Actions (dont 10 attaques) + 5 Objets.
 Le combat commence immédiatement. Tour par tour (sens horaire) :
 
 ### 1. Action principale (choisir UNE)
-- **Piocher** 2 cartes Chasse
-- **Échanger** des cartes Chasse avec un autre joueur
+- **Piocher** 2 cartes Chasse dans son paquet
 - **Jouer 1 carte Chasse** de sa main — Action OU Objet
 
 ### 2. Capacité spéciale (optionnel, gratuit)
@@ -282,7 +279,7 @@ Quand un héros meurt (blessures ≥ vie), tous les monstres de sa file rejoigne
 | Soigneur | 4 | Soin | Retire toutes les blessures d'un héros |
 | Mage | 4 | Élémentaire | Défausse tous les monstres à 1 point de vie |
 | Rôdeur | 6 | Distance | Joue 3 cartes Action immédiatement |
-| Diplomate | 5 | Diplomatie | Tous les héros échangent librement |
+| Diplomate | 5 | Diplomatie | Chaque héros joue immédiatement 1 carte Chasse de sa main |
 
 ---
 
@@ -333,7 +330,6 @@ Les capacités spéciales des monstres se déclenchent toujours sur un événeme
 ├─────────────────────────────────────────┤
 │ 1. ACTION PRINCIPALE (choisir 1) :      │
 │  • Piocher 2 cartes Chasse             │
-│  • Échanger des cartes Chasse          │
 │  • Jouer 1 carte Chasse (Action|Objet)  │
 ├─────────────────────────────────────────┤
 │ 2. CAPACITÉ (optionnel, gratuit,        │

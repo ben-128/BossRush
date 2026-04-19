@@ -23,7 +23,7 @@ using UnityEngine;
 /// </summary>
 public static class IconCompositor
 {
-    [MenuItem("Tools/Composer Icones Inline")]
+    // Ancien MenuItem retiré — accessible via Tools > Raid Party > Fenetre Outils
     public static void Compose()
     {
         var guids = AssetDatabase.FindAssets("t:IconCompositionConfig");

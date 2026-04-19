@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardVisualData
 {
     [HideInInspector] public string nom;
+    [HideInInspector] public string proto_illu_desc;
 
     [Header("Visuel")]
     public Sprite sprite;

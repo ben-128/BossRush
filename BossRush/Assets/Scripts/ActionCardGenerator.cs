@@ -29,6 +29,7 @@ public class ActionCardGenerator : CardGenerator
         public int degats;
         public string prerequis;
         public string effet;
+        public string proto_illu_desc;
     }
     #endregion
 
@@ -108,6 +109,7 @@ public class ActionCardGenerator : CardGenerator
                 degats = json.degats,
                 prerequis = json.prerequis,
                 effet = json.effet,
+                proto_illu_desc = json.proto_illu_desc,
             };
         }
         PreserveSprites(old, allActions);
@@ -124,6 +126,7 @@ public class ActionCardGenerator : CardGenerator
         SetBaseTexts(action.nom, action.effet ?? "");
         SetPortrait(action.sprite, action.offset, action.scale);
         SetBackground(action.prerequis);
+        SetProtoIlluDesc(action.proto_illu_desc);
 
         // Icônes de dégâts pour les attaques
         if (action.type == "attaque")

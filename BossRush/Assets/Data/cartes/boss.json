@@ -19,7 +19,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_hobab.md",
-      "lore": "Autrefois gardien des pluies rares du Danakil, il abreuvait les oasis et les peuples des terres arides. La corruption a inversé sa nature : partout où il passe, la pluie tourne à la cendre et les sols se craquèlent. Ses écailles brûlent, des veines de cristal noir pulsent sous sa peau desséchée.\n\nInspiré de Hobab, dragon des terres arides de la mythologie Afar (Éthiopie, Djibouti)."
+      "lore": "Autrefois gardien des pluies rares du Danakil, il abreuvait les oasis et les peuples des terres arides. La corruption a inversé sa nature : partout où il passe, la pluie tourne à la cendre et les sols se craquèlent. Ses écailles brûlent, des veines de cristal noir pulsent sous sa peau desséchée.\n\nInspiré de Hobab, dragon des terres arides de la mythologie Afar (Éthiopie, Djibouti).",
+      "proto_illu_desc": "Dragon des terres arides, écailles craquelées, braises entre les fissures."
     },
     {
       "id": "BOSS_002",
@@ -35,7 +36,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_azhdaha.md",
-      "lore": "Dans les sagas des Narts, il gardait les cols sacrés du Caucase, et chacune de ses têtes portait une langue, une mémoire, un peuple. Corrompu, ses têtes ne se parlent plus qu'entre elles : l'une crache, l'une rugit, l'une mord, l'une murmure, chacune dévorant ce qu'elle protégeait. Des veines de cristal noir pulsent entre ses écailles.\n\nInspiré d'Azhdaha, dragon du chaos dans les sagas Narts de la mythologie circassienne (Caucase)."
+      "lore": "Dans les sagas des Narts, il gardait les cols sacrés du Caucase, et chacune de ses têtes portait une langue, une mémoire, un peuple. Corrompu, ses têtes ne se parlent plus qu'entre elles : l'une crache, l'une rugit, l'une mord, l'une murmure, chacune dévorant ce qu'elle protégeait. Des veines de cristal noir pulsent entre ses écailles.\n\nInspiré d'Azhdaha, dragon du chaos dans les sagas Narts de la mythologie circassienne (Caucase).",
+      "proto_illu_desc": "Dragon à plusieurs têtes, corps serpentin sombre, ailes de chauve-souris déchirées."
     },
     {
       "id": "BOSS_003",
@@ -51,7 +53,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_psha_tkho.md",
-      "lore": "Esprit de la forêt adyghe, il punissait autrefois les braconniers et les intrus qui violaient ses bois sacrés. La corruption a nourri sa colère au-delà de toute mesure : il ne distingue plus l'offense de la simple présence. Tout ce qui entre dans ses bois est avalé par la mousse noire et les racines tordues.\n\nInspiré de Psha-tkho, esprit vengeur de la forêt dans la mythologie circassienne (Adyghe, Caucase)."
+      "lore": "Esprit de la forêt adyghe, il punissait autrefois les braconniers et les intrus qui violaient ses bois sacrés. La corruption a nourri sa colère au-delà de toute mesure : il ne distingue plus l'offense de la simple présence. Tout ce qui entre dans ses bois est avalé par la mousse noire et les racines tordues.\n\nInspiré de Psha-tkho, esprit vengeur de la forêt dans la mythologie circassienne (Adyghe, Caucase).",
+      "proto_illu_desc": "Colosse mi-arbre mi-géant, bois noueux et mousse, racines noires perçant le sol."
     },
     {
       "id": "BOSS_004",
@@ -67,7 +70,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_caicai_vilu.md",
-      "lore": "Serpent des abysses, il soulevait autrefois les vagues pour protéger les tribus du rivage et retenir les tempêtes. Corrompu, il ne retient plus rien : il noie les côtes, pousse les vagues jusqu'aux montagnes, et ses spasmes font trembler la terre. Les pêcheurs ne prononcent plus son nom. Des cristaux noirs poussent entre ses écailles comme des tumeurs.\n\nInspiré de Caicai Vilu, serpent de mer titanesque dans la mythologie mapuche (Chili, Argentine)."
+      "lore": "Serpent des abysses, il soulevait autrefois les vagues pour protéger les tribus du rivage et retenir les tempêtes. Corrompu, il ne retient plus rien : il noie les côtes, pousse les vagues jusqu'aux montagnes, et ses spasmes font trembler la terre. Les pêcheurs ne prononcent plus son nom. Des cristaux noirs poussent entre ses écailles comme des tumeurs.\n\nInspiré de Caicai Vilu, serpent de mer titanesque dans la mythologie mapuche (Chili, Argentine).",
+      "proto_illu_desc": "Serpent de mer aux écailles bleu-noir, dos crêté d'épines coralliennes."
     },
     {
       "id": "BOSS_005",
@@ -84,7 +88,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_invunche.md",
-      "lore": "Gardien des grottes secrètes des sorciers kalku, il protégeait les savoirs interdits des profondeurs mapuches. La corruption a tordu son corps et brouillé ses pensées : désormais ses blessures volent l'énergie même des âmes, et les héros qu'il marque perdent leur pouvoir intime. Des veines noires palpitent sous sa peau translucide.\n\nInspiré de l'Invunche, créature humanoïde difforme de la mythologie mapuche (Chili, Argentine)."
+      "lore": "Gardien des grottes secrètes des sorciers kalku, il protégeait les savoirs interdits des profondeurs mapuches. La corruption a tordu son corps et brouillé ses pensées : désormais ses blessures volent l'énergie même des âmes, et les héros qu'il marque perdent leur pouvoir intime. Des veines noires palpitent sous sa peau translucide.\n\nInspiré de l'Invunche, créature humanoïde difforme de la mythologie mapuche (Chili, Argentine).",
+      "proto_illu_desc": "Humanoïde géant difforme, tête retournée, membres tordus, peau grise veinée de noir."
     },
     {
       "id": "BOSS_006",
@@ -101,7 +106,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_akkorokamui.md",
-      "lore": "Kamuy des profondeurs, il sommeillait dans les fosses au large d'Hokkaido et protégeait les marins des naufrages en échange d'offrandes déposées sur les vagues. Corrompu, ses ventouses sont devenues des gueules affamées : il engloutit tout ce qui le frappe, volant aux héros leurs objets autant que leurs forces. Des cristaux noirs poussent sur sa peau rouge.\n\nInspiré d'Akkorokamui, démon marin tentaculaire de la mythologie aïnou (Hokkaido)."
+      "lore": "Kamuy des profondeurs, il sommeillait dans les fosses au large d'Hokkaido et protégeait les marins des naufrages en échange d'offrandes déposées sur les vagues. Corrompu, ses ventouses sont devenues des gueules affamées : il engloutit tout ce qui le frappe, volant aux héros leurs objets autant que leurs forces. Des cristaux noirs poussent sur sa peau rouge.\n\nInspiré d'Akkorokamui, démon marin tentaculaire de la mythologie aïnou (Hokkaido).",
+      "proto_illu_desc": "Pieuvre colossale rouge vif, huit tentacules aux ventouses dentées."
     },
     {
       "id": "BOSS_007",
@@ -118,7 +124,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_hoyau_kamuy.md",
-      "lore": "Il régnait sur le ciel et la mer, portant la pluie fertile et l'air vital sur les villages côtiers. Corrompu, son souffle est devenu venin : il empoisonne l'air lui-même, et les soins perdent leur prise durable sur ceux qu'il a touchés. Du venin vert suinte de son corps de requin ailé, noir aux endroits où la corruption s'est installée.\n\nInspiré de Hoyau Kamuy, dragon-requin venimeux ailé de la mythologie aïnou (Hokkaido)."
+      "lore": "Il régnait sur le ciel et la mer, portant la pluie fertile et l'air vital sur les villages côtiers. Corrompu, son souffle est devenu venin : il empoisonne l'air lui-même, et les soins perdent leur prise durable sur ceux qu'il a touchés. Du venin vert suinte de son corps de requin ailé, noir aux endroits où la corruption s'est installée.\n\nInspiré de Hoyau Kamuy, dragon-requin venimeux ailé de la mythologie aïnou (Hokkaido).",
+      "proto_illu_desc": "Dragon-requin volant, mâchoire verticale, ailes membraneuses, venin vert suintant."
     },
     {
       "id": "BOSS_008",
@@ -135,7 +142,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_gaww.md",
-      "lore": "Esprit nomade, il prenait autrefois possession des Gawwala consentants pour leur accorder des dons surnaturels en échange d'un pacte temporaire. Corrompu, il n'a plus de forme fixe : il glisse de héros en héros, dévore leurs ressources sans jamais demander, et un cœur de cristal noir pulse au centre de sa masse d'ombre et de fumée.\n\nInspiré de Gaww, esprit de possession de la croyance Afar (Éthiopie, Djibouti)."
+      "lore": "Esprit nomade, il prenait autrefois possession des Gawwala consentants pour leur accorder des dons surnaturels en échange d'un pacte temporaire. Corrompu, il n'a plus de forme fixe : il glisse de héros en héros, dévore leurs ressources sans jamais demander, et un cœur de cristal noir pulse au centre de sa masse d'ombre et de fumée.\n\nInspiré de Gaww, esprit de possession de la croyance Afar (Éthiopie, Djibouti).",
+      "proto_illu_desc": "Masse d'ombre et de fumée noire, visages humains affleurant à l'intérieur."
     },
     {
       "id": "BOSS_009",
@@ -152,7 +160,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_grand_eland.md",
-      "lore": "ǀKaggen le trickster, créateur du monde San, avait confié son énergie spirituelle à l'éland sacré dont le sang faisait pousser les herbes du Kalahari. Corrompu, l'éland est devenu un colosse dont la lumière aveugle et dont le sang, désormais mêlé de noir, empoisonne la savane qu'il nourrissait. Son pelage doré est strié de marques malades.\n\nInspiré de ǀKaggen, dieu-mante trickster et créateur dans la mythologie San (Kalahari), dont l'éland est l'animal sacré."
+      "lore": "ǀKaggen le trickster, créateur du monde San, avait confié son énergie spirituelle à l'éland sacré dont le sang faisait pousser les herbes du Kalahari. Corrompu, l'éland est devenu un colosse dont la lumière aveugle et dont le sang, désormais mêlé de noir, empoisonne la savane qu'il nourrissait. Son pelage doré est strié de marques malades.\n\nInspiré de ǀKaggen, dieu-mante trickster et créateur dans la mythologie San (Kalahari), dont l'éland est l'animal sacré.",
+      "proto_illu_desc": "Mante religieuse colossale, pattes avant hérissées de dents, yeux composés."
     },
     {
       "id": "BOSS_010",
@@ -169,7 +178,8 @@
       },
       "monstres_ids": [],
       "lore_md": "boss_esprit_rouge.md",
-      "lore": "Gardien invisible des rivières et des points d'eau du Kalahari, il apparaissait autrefois aux villages pour révéler les nappes cachées. Corrompu, il est devenu la soif : il assèche tout ce qu'il touche, et son corps liquide et insaisissable ne peut être blessé qu'une fois par tour. Un cristal noir bat lentement dans sa poitrine rouge.\n\nInspiré de !Khwa, divinité de l'eau de la mythologie San (Kalahari)."
+      "lore": "Gardien invisible des rivières et des points d'eau du Kalahari, il apparaissait autrefois aux villages pour révéler les nappes cachées. Corrompu, il est devenu la soif : il assèche tout ce qu'il touche, et son corps liquide et insaisissable ne peut être blessé qu'une fois par tour. Un cristal noir bat lentement dans sa poitrine rouge.\n\nInspiré de !Khwa, divinité de l'eau de la mythologie San (Kalahari).",
+      "proto_illu_desc": "Géant humanoïde à peau rouge, longs cheveux blancs, rubans liquides l'enroulant."
     }
   ]
 }

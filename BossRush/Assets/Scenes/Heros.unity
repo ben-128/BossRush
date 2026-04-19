@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: La Flamme
+  m_text: Le Rempart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1588330614}
@@ -690,11 +690,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1603593782}
+  - {fileID: 1142580316}
   - {fileID: 1000190559}
   - {fileID: 88074490}
   - {fileID: 2039135534}
   - {fileID: 1602578962}
   - {fileID: 2063036562}
+  - {fileID: 296349309}
   - {fileID: 1203465508}
   - {fileID: 152006105}
   - {fileID: 1621819922}
@@ -714,10 +716,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jsonSource: {fileID: 4900000, guid: f45d7c3ba971e60449007594353764ae, type: 3}
   outputFolder: Heros
+  renderMode: 1
+  protoObjects:
+  - {fileID: 296349308}
+  - {fileID: 1142580314}
+  finalObjects:
+  - {fileID: 1603593781}
   nomText: {fileID: 1000190560}
   descriptionText: {fileID: 2063036563}
   citationText: {fileID: 2063036563}
   portraitRenderer: {fileID: 1603593783}
+  protoIlluDescText: {fileID: 296349310}
   textColor: {r: 0, g: 0, b: 0, a: 1}
   citationColor: {r: 0, g: 0, b: 0, a: 1}
   enableDropShadow: 0
@@ -774,6 +783,8 @@ MonoBehaviour:
   shadowDrop: {fileID: 1171038904}
   allHeroes:
   - nom: Daraa
+    proto_illu_desc: "Hy\xE8ne anthropomorphe femelle en habits afars, lance un arc
+      de flammes entre ses paumes."
     sprite: {fileID: 21300000, guid: 6cfb26ce14e7462459b2b4e549a16a46, type: 3}
     offset: {x: 0, y: 0.15}
     scale: 0.7
@@ -781,10 +792,13 @@ MonoBehaviour:
     pv: 4
     competences:
     - magie
-    capacite_speciale: "\xC9liminez tous les monstres bless\xE9s."
+    capacite_speciale: "\xC9liminez tous les <ico:invocation> de la file d'un h\xE9ros
+      cibl\xE9."
     description: 
     citation: "\xAB Le feu est patient. Elle ne l'est pas. \xBB"
   - nom: Gao
+    proto_illu_desc: "Suricate anthropomorphe en habits san, bondit en tendant la
+      paume vers la lumi\xE8re de l'aube."
     sprite: {fileID: 21300000, guid: 52a6172166028334a98bf92665540e0a, type: 3}
     offset: {x: 0, y: 0.6}
     scale: 0.725
@@ -796,6 +810,8 @@ MonoBehaviour:
     description: 
     citation: "\xAB Tant qu'il respire, personne ne tombe. \xBB"
   - nom: Nawel
+    proto_illu_desc: Jaguar anthropomorphe en armure mapuche, tient un bouclier solaire
+      imposant.
     sprite: {fileID: 21300000, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
     offset: {x: 0, y: 0.5}
     scale: 0.7
@@ -803,11 +819,13 @@ MonoBehaviour:
     pv: 7
     competences:
     - armure
-    capacite_speciale: "Ce h\xE9ros ne subit aucune <ico:degat> jusqu'\xE0 la fin
-      du tour."
+    capacite_speciale: "Tous les <ico:invocation> se deplacent dans la file de ce
+      h\xE9ros."
     description: 
     citation: "\xAB Il encaisse. Encore. Et encore. \xBB"
   - nom: Isonash
+    proto_illu_desc: "Ourse brune anthropomorphe en attush a\xEFnou vert for\xEAt,
+      glisse le long d'un tronc arc sur le dos."
     sprite: {fileID: 21300000, guid: 345ad6f44c425394a8164b1dfdfd9036, type: 3}
     offset: {x: 0, y: -0.2}
     scale: 0.69
@@ -815,10 +833,13 @@ MonoBehaviour:
     pv: 5
     competences:
     - distance
-    capacite_speciale: "Jouez imm\xE9diatement 2 <ico:action> de votre main."
+    capacite_speciale: Vous pouvez jouez autant de <ico:chasse> que vous le souhaitez
+      ce tour ci.
     description: 
     citation: "\xAB On voit la premi\xE8re fl\xE8che. Jamais les suivantes. \xBB"
   - nom: Aslan
+    proto_illu_desc: "Tur du Caucase anthropomorphe en cherkeska circassienne, bras
+      lev\xE9 tenant un parchemin scell\xE9."
     sprite: {fileID: 21300000, guid: 8b873d6cb6039794fb2d4436ca07c8b0, type: 3}
     offset: {x: 0, y: -0.1}
     scale: 0.69
@@ -826,8 +847,8 @@ MonoBehaviour:
     pv: 5
     competences:
     - diplomatie
-    capacite_speciale: "Tous les h\xE9ros peuvent s'\xE9changer autant de cartes
-      qu'ils le souhaitent jusqu'\xE0 la fin du tour."
+    capacite_speciale: "Chaque h\xE9ros joue imm\xE9diatement 1 carte <ico:chasse>
+      de sa main."
     description: 
     citation: "\xAB Cinq tribus parlent par sa bouche. \xBB"
 --- !u!21 &294818322
@@ -940,6 +961,185 @@ Material:
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.4}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!1 &296349308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 296349309}
+  - component: {fileID: 296349311}
+  - component: {fileID: 296349310}
+  m_Layer: 0
+  m_Name: Proto_illu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &296349309
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296349308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 2.83}
+  m_SizeDelta: {x: 12.2061, y: 2.4363}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &296349310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296349308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '<b>Illustration :</b>
+
+    Jaguar anthropomorphe en armure mapuche, tient
+    un bouclier solaire imposant.'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
+  m_sharedMaterial: {fileID: 993725795}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 993725795}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 2
+  m_fontSizeBase: 2
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 2
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 3.8347218, y: 0.9807398, z: 3.7299404, w: 0.1939494}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 296349311}
+  m_maskType: 0
+--- !u!23 &296349311
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296349308}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 993725795}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &442832019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,7 +1708,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Daraa
+  m_text: Nawel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7aa31d5e9b686af48aa38a8927a78a12, type: 2}
   m_sharedMaterial: {fileID: 1248990885}
@@ -1627,6 +1827,93 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1142580314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1142580316}
+  - component: {fileID: 1142580315}
+  m_Layer: 0
+  m_Name: FondProto
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1142580315
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142580314}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 21300000, guid: bb0f1b283d5e21449991bd9ccdda3298, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 10.24, y: 15.36}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1142580316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142580314}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.08, z: 0.01}
+  m_LocalScale: {x: 10, y: 22.5, z: 23.809523}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 247666407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171038901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,7 +1976,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f24a78e92668f0647b399e991ae57b70, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0926747be6f8db840bd08797a3e6e1cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1709,8 +1996,8 @@ Transform:
   m_GameObject: {fileID: 1171038901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26, y: -0.08, z: -1}
-  m_LocalScale: {x: 0.09, y: 0.09, z: 1}
+  m_LocalPosition: {x: -0.26, y: 0, z: -1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1621819922}
@@ -1727,7 +2014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c469ecf3f73bdd47a7ce69112629090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowColor: {r: 0.545, g: 0.125, b: 0.125, a: 1}
+  shadowColor: {r: 0.169, g: 0.31, b: 0.431, a: 1}
   offsetX: 0
   offsetY: 0
   shadowScale: 1.15
@@ -2216,7 +2503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xC9liminez tous les monstres bless\xE9s."
+  m_text: "Tous les <sprite name=\"invocation\">se deplacent dans la file de ce h\xE9ros."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 294818322}
@@ -2351,7 +2638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1603593782
 Transform:
   m_ObjectHideFlags: 0
@@ -2361,7 +2648,7 @@ Transform:
   m_GameObject: {fileID: 1603593781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.01}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2411,7 +2698,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: 6cfb26ce14e7462459b2b4e549a16a46, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2eddd5dff308674eba4cc52fac9e362, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2437,7 +2724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1621819922
 Transform:
   m_ObjectHideFlags: 0
@@ -2771,7 +3058,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<i>\xAB Le feu est patient. Elle ne l'est pas. \xBB</i>"
+  m_text: "<i>\xAB Il encaisse. Encore. Et encore. \xBB</i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2fb7c111368704f8f50402b5e36ca8, type: 2}
   m_sharedMaterial: {fileID: 993725795}
@@ -2928,7 +3215,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa9ac37b3442d846a5a43c516c82b7a, type: 2}
   m_sharedMaterial: {fileID: 1692387759}

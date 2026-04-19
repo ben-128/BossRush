@@ -27,7 +27,7 @@ public static class DosCartesSceneSetup
     private const string MaterialPath     = "Assets/Art/Materials/M_PaintedIconOnCanvas.mat";
     private const string ShaderName       = "Sprites/PaintedIconOnCanvas";
 
-    [MenuItem("Tools/Raid Party/Préparer scène DosCartes (test icônes)")]
+    // Ancien MenuItem retiré — accessible via Tools > Raid Party > Fenetre Outils
     public static void Prepare()
     {
         EnsureDirectories();

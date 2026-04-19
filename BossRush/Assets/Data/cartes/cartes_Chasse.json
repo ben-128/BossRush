@@ -12,7 +12,8 @@
       "degats": 1,
       "prerequis": "Nawel",
       "effet": "Le monstre est envoyé en fond de file du prochain héros.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Nawel frappe un monstre d'un coup de bouclier."
     },
     {
       "id": "GUE_A02",
@@ -20,8 +21,9 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Nawel",
-      "effet": "Le monstre cible est passé au fond de la file.",
-      "quantite": 2
+      "effet": "Déplacez un monstre de votre file vers la file d'un héros allié au choix.",
+      "quantite": 2,
+      "proto_illu_desc": "Nawel épaule baissée bouscule un monstre."
     },
     {
       "id": "GUE_A03",
@@ -30,7 +32,8 @@
       "degats": 1,
       "prerequis": "Nawel",
       "effet": "Un monstre en tête de la file d'un autre héros se place au fond de votre file.",
-      "quantite": 3
+      "quantite": 3,
+      "proto_illu_desc": "Nawel rugit, un monstre se retourne vers lui."
     },
     {
       "id": "GUE_A04",
@@ -39,7 +42,8 @@
       "degats": 1,
       "prerequis": "Nawel",
       "effet": "Soignez ce héros de 1 <ico:degat>.",
-      "quantite": 3
+      "quantite": 3,
+      "proto_illu_desc": "Nawel blessé frappe d'un revers, ses cicatrices se referment."
     },
     {
       "id": "GUE_A05",
@@ -47,7 +51,8 @@
       "categorie": "action",
       "prerequis": "Nawel",
       "effet": "Soignez ce héros de 3 <ico:degat>.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Nawel genou à terre respire profondément, blessures se refermant."
     },
     {
       "id": "GUE_A06",
@@ -55,7 +60,8 @@
       "categorie": "action",
       "prerequis": "Nawel",
       "effet": "Éliminez n'importe quel monstre de votre file. Uniquement utilisable si ce héros a 4 <ico:degat> ou plus.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Nawel ensanglanté décapite un monstre d'un coup brutal."
     },
     {
       "id": "GUE_A07",
@@ -63,7 +69,8 @@
       "categorie": "action",
       "prerequis": "Nawel",
       "effet": "Soignez autant de <ico:degat> de ce héros que de monstres dans la file.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Nawel face à une file de monstres, aura bleue de regain."
     },
     {
       "id": "GUE_A08",
@@ -71,7 +78,8 @@
       "categorie": "action",
       "prerequis": "Nawel",
       "effet": "Déplacez jusqu'à 4 <ico:degat> d'autres héros vers ce héros.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Nawel bras écartés absorbe les blessures des alliés."
     },
     {
       "id": "GUE_O01",
@@ -80,7 +88,8 @@
       "prerequis": "Nawel",
       "bonus_degats": 3,
       "effet": "Amélioration : carte <ico:action>\nAjoutez 3 <ico:degat> à l'attaque.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Pierre mapuche noire polie sertie dans un bouclier."
     },
     {
       "id": "GUE_O02",
@@ -88,7 +97,8 @@
       "categorie": "objet",
       "prerequis": "Nawel",
       "effet": "Réaction : quand ce héros subirait une <ico:degat>\nannulez-la et piochez 1 <ico:chasse>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Bouclier tawan renforcé d'os, glyphes mapuche bleues."
     },
     {
       "id": "GUE_O03",
@@ -96,7 +106,8 @@
       "categorie": "objet",
       "prerequis": "Nawel",
       "effet": "Réaction : quand ce héros subit une <ico:degat>\npiochez 4 <ico:chasse>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Fiole rituelle de sang de jaguar pendue au cou."
     },
     {
       "id": "GUE_O04",
@@ -104,7 +115,8 @@
       "categorie": "objet",
       "prerequis": "Nawel",
       "effet": "Réaction : quand un 3e monstre rejoint la file de ce héros\néliminez-le.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Hache cérémoniale mapuche à lame courbe."
     },
     {
       "id": "GUE_O05",
@@ -112,7 +124,8 @@
       "categorie": "objet",
       "prerequis": "Nawel",
       "effet": "Réaction : quand une <ico:menace> est révélée\nannulez son effet.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Heaume orné de plumes bleues et d'os de jaguar."
     },
     {
       "id": "GUE_O06",
@@ -121,7 +134,8 @@
       "degats": 4,
       "prerequis": "Nawel",
       "effet": "Réaction : quand ce héros meurt\ninfligez 4 <ico:degat> au Colosse.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Nawel mourant porte un dernier coup au Colosse."
     },
     {
       "id": "MAG_A01",
@@ -129,7 +143,8 @@
       "categorie": "action",
       "degats": 2,
       "prerequis": "Daraa",
-      "quantite": 3
+      "quantite": 3,
+      "proto_illu_desc": "Daraa lance un jet de flammes entre ses paumes."
     },
     {
       "id": "MAG_A02",
@@ -138,7 +153,8 @@
       "degats": 1,
       "prerequis": "Daraa",
       "effet": "Ciblez le Colosse ou un monstre au choix dans n'importe quelle file.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Daraa forme une sphère de feu entre ses mains."
     },
     {
       "id": "MAG_A03",
@@ -147,7 +163,8 @@
       "degats": 1,
       "prerequis": "Daraa",
       "effet": "Si le monstre suivant dans votre file n'a qu'1 point de vie restant, éliminez-le.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Daraa dirige un arc de feu qui saute entre plusieurs cibles."
     },
     {
       "id": "MAG_A04",
@@ -155,7 +172,8 @@
       "categorie": "action",
       "degats": 3,
       "prerequis": "Daraa",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Daraa bras levés, vortex de flammes tourbillonnant autour d'elle."
     },
     {
       "id": "MAG_A05",
@@ -164,15 +182,17 @@
       "degats": 1,
       "prerequis": "Daraa",
       "effet": "Si la cible est éliminée, infligez les <ico:degat> du monstre au monstre ou Colosse suivant dans votre file.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Daraa paume ouverte, un monstre s'embrase de l'intérieur."
     },
     {
       "id": "MAG_A06",
       "nom": "Transfert de cendres",
       "categorie": "action",
       "prerequis": "Daraa",
-      "effet": "Déplacez 1 <ico:degat> de ce héros vers un monstre ou le Colosse.",
-      "quantite": 2
+      "effet": "Déplacez 1 <ico:degat> d'un héros au choix vers un monstre ou le Colosse.",
+      "quantite": 2,
+      "proto_illu_desc": "Daraa souffle ses blessures en cendres vers un monstre."
     },
     {
       "id": "MAG_A07",
@@ -180,7 +200,8 @@
       "categorie": "action",
       "prerequis": "Daraa",
       "effet": "Piochez 3 <ico:chasse>. Soignez 1 <ico:degat>.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Daraa en méditation, flammes internes visibles sous la peau."
     },
     {
       "id": "MAG_A08",
@@ -188,7 +209,8 @@
       "categorie": "action",
       "prerequis": "Daraa",
       "effet": "Régénérez la <ico:capacite> de ce héros. \nUniquement utilisable si la file du héros a 2 <ico:invocation> ou plus.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Daraa chante en afar, glyphes de feu sortant de sa gorge."
     },
     {
       "id": "MAG_O01",
@@ -196,7 +218,8 @@
       "categorie": "objet",
       "prerequis": "Daraa",
       "effet": "Réaction : un héros allié meurt\nrechargez la capacité de ce héros et piochez 2 <ico:chasse>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Petit flacon de cendres rouges du Danakil scellé."
     },
     {
       "id": "MAG_O02",
@@ -204,7 +227,8 @@
       "categorie": "objet",
       "prerequis": "Daraa",
       "effet": "Amélioration : carte <ico:action>\nIgnore son prérequis de héros.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Braise rouge-orange flottant librement, étincelles autour."
     },
     {
       "id": "MAG_O03",
@@ -213,7 +237,8 @@
       "prerequis": "Daraa",
       "bonus_degats": 3,
       "effet": "Amélioration : carte <ico:action>\nInfligez 3 <ico:degat> à une seconde cible (monstre ou Colosse) dans la file.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Cristal brun-rouge gravé de runes de feu."
     },
     {
       "id": "MAG_O04",
@@ -221,7 +246,8 @@
       "categorie": "objet",
       "prerequis": "Daraa",
       "effet": "Réaction : quand un monstre attaque\néliminez-le.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Cristal rouge-orange instable, fissures lumineuses."
     },
     {
       "id": "MAG_O05",
@@ -229,7 +255,8 @@
       "categorie": "objet",
       "prerequis": "Daraa",
       "effet": "Réaction : quand ce héros élimine un monstre\nsoignez-le de 2 <ico:degat> et piochez 2 <ico:chasse>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Fiole de lave en fusion scellée, rougeoyante."
     },
     {
       "id": "SOI_A01",
@@ -238,7 +265,8 @@
       "degats": 1,
       "prerequis": "Gao",
       "effet": "Si la cible survit, soignez 1 <ico:degat> d'un héros au choix.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao lance une épine, sève dorée remonte vers un allié."
     },
     {
       "id": "SOI_A02",
@@ -247,7 +275,8 @@
       "degats": 3,
       "prerequis": "Gao",
       "effet": "Uniquement utilisable si aucun allié n'a de <ico:degat>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao tambourine au sol, énergie dorée rayonnante."
     },
     {
       "id": "SOI_A03",
@@ -255,7 +284,8 @@
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Transférez 1 carte blessant un autre héros vers le monstre ciblé, quel que soit son nombre de <ico:degat>.",
-      "quantite": 3
+      "quantite": 3,
+      "proto_illu_desc": "Gao déplace des glyphes de blessure d'un allié vers un monstre."
     },
     {
       "id": "SOI_A04",
@@ -264,7 +294,8 @@
       "degats": 2,
       "prerequis": "Gao",
       "effet": "Si la cible est éliminée, soignez 2 <ico:degat> de ce héros.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Gao plante une épine dans un monstre, sève dorée remontant."
     },
     {
       "id": "SOI_A05",
@@ -272,7 +303,8 @@
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Soignez 3 <ico:degat> d'un héros au choix.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao en transe, aura dorée tourbillonnante."
     },
     {
       "id": "SOI_A06",
@@ -280,7 +312,8 @@
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Ressuscitez un héros mort et soignez-le de 1 <ico:degat>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao souffle de la lumière dorée dans la bouche d'un allié mort."
     },
     {
       "id": "SOI_A07",
@@ -288,7 +321,8 @@
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Soignez 1 <ico:degat> de chaque héros.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao secoue son fagot de sauge, pollen doré en nuage."
     },
     {
       "id": "SOI_A08",
@@ -296,15 +330,17 @@
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Un autre héros au choix régénère sa <ico:capacite>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao trace un cercle rituel san avec des pierres."
     },
     {
       "id": "SOI_A09",
       "nom": "Mémoire des racines",
       "categorie": "action",
       "prerequis": "Gao",
-      "effet": "Un autre héros au choix pioche 4 <ico:chasse> dans la défausse.",
-      "quantite": 1
+      "effet": "Un autre héros au choix pioche 4 <ico:chasse> dans sa défausse.",
+      "quantite": 1,
+      "proto_illu_desc": "Gao, pattes dans la terre, racines dorées remontant des cartes."
     },
     {
       "id": "SOI_A10",
@@ -312,7 +348,8 @@
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Soignez toutes les <ico:degat> d'un héros au choix. Un autre héros au choix subit 2 <ico:degat>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao puise la vie d'un allié pour en guérir un autre."
     },
     {
       "id": "SOI_A11",
@@ -320,7 +357,8 @@
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Redistribuez librement toutes les <ico:degat> entre les héros.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao redistribue une brume dorée entre les alliés."
     },
     {
       "id": "SOI_A12",
@@ -328,7 +366,8 @@
       "categorie": "action",
       "prerequis": "Gao",
       "effet": "Piochez 1 <ico:destin> et consultez-la. Choisissez ensuite quel héros en applique l'effet.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gao en transe, œil de destin flottant devant lui."
     },
     {
       "id": "SOI_O01",
@@ -336,7 +375,8 @@
       "categorie": "objet",
       "prerequis": "Gao",
       "effet": "Réaction : quand un héros allié subit une <ico:degat>\nsoignez-le de 3 <ico:degat>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Fiole d'élixir vert doré, bouchon d'écorce."
     },
     {
       "id": "SOI_O02",
@@ -344,7 +384,8 @@
       "categorie": "objet",
       "prerequis": "Gao",
       "effet": "Réaction : quand ce héros subit une <ico:degat> mortelle\nannulez-la ainsi que toutes les <ico:degat> suivantes jusqu'à la fin du tour.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Petit totem en bois à l'effigie d'un éland."
     },
     {
       "id": "SOI_O03",
@@ -352,7 +393,8 @@
       "categorie": "objet",
       "prerequis": "Gao",
       "effet": "Réaction : quand un héros pioche une <ico:destin>\nVous pouvez choisir d'annuler son effet ou de l'appliquer à un héros de votre choix.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gemme dorée translucide en pendentif."
     },
     {
       "id": "SOI_O04",
@@ -360,7 +402,8 @@
       "categorie": "objet",
       "prerequis": "Gao",
       "effet": "Réaction : quand un héros allié dépense sa <ico:capacite>\nrechargez-la immédiatement.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Masque tribal san en bois sombre, peinture blanche rituelle."
     },
     {
       "id": "SOI_O05",
@@ -369,7 +412,8 @@
       "prerequis": "Gao",
       "degats": 3,
       "effet": "Réaction : quand un autre héros est soigné par ce héros\ninfligez 3 <ico:degat> à un monstre ou au Colosse.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Dard végétal vert à pointe courbe, sève suintante."
     },
     {
       "id": "ROD_A01",
@@ -378,7 +422,8 @@
       "degats": 1,
       "prerequis": "Isonash",
       "effet": "Ciblez le Colosse ou un monstre au choix dans n'importe quelle file.",
-      "quantite": 3
+      "quantite": 3,
+      "proto_illu_desc": "Isonash arc tendu, pointe cristal alignée sur une cible lointaine."
     },
     {
       "id": "ROD_A02",
@@ -387,7 +432,8 @@
       "degats": 1,
       "prerequis": "Isonash",
       "effet": "Piochez 1 <ico:chasse>.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Isonash tire à la hanche, autre flèche déjà en main."
     },
     {
       "id": "ROD_A03",
@@ -395,7 +441,8 @@
       "categorie": "action",
       "degats": 2,
       "prerequis": "Isonash",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Isonash tire une flèche empoisonnée verdâtre."
     },
     {
       "id": "ROD_A04",
@@ -403,8 +450,9 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Isonash",
-      "effet": "Ce héros peut jouer 1 <ico:chasse> supplémentaire ce tour.",
-      "quantite": 1
+      "effet": "Un héros allié joue immédiatement 1 <ico:chasse> de sa main.",
+      "quantite": 1,
+      "proto_illu_desc": "Isonash tire en continu pour couvrir un allié."
     },
     {
       "id": "ROD_A05",
@@ -413,15 +461,17 @@
       "degats": 1,
       "prerequis": "Isonash",
       "effet": "Ce héros peut jouer 1 <ico:chasse> supplémentaire ce tour.",
-      "quantite": 3
+      "quantite": 3,
+      "proto_illu_desc": "Isonash décoche trois flèches simultanément en éventail."
     },
     {
       "id": "ROD_A06",
       "nom": "Instinct de l'ourse",
       "categorie": "action",
       "prerequis": "Isonash",
-      "effet": "Piochez 4 <ico:chasse>.",
-      "quantite": 2
+      "effet": "Ce héros pioche 2 <ico:chasse>. Un autre héros au choix pioche 2 <ico:chasse>.",
+      "quantite": 2,
+      "proto_illu_desc": "Isonash accroupie, sens en alerte, museau levé."
     },
     {
       "id": "ROD_A07",
@@ -429,7 +479,8 @@
       "categorie": "action",
       "prerequis": "Isonash",
       "effet": "Regardez les 5 premières <ico:chasse>, gardez-en 2, remettez le reste dans l'ordre souhaité.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Isonash examine des traces au sol dans une clairière."
     },
     {
       "id": "ROD_O01",
@@ -438,7 +489,8 @@
       "prerequis": "Isonash",
       "bonus_degats": 3,
       "effet": "Amélioration : carte <ico:action>\nAjoutez 3 <ico:degat>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Carquois en cuir renforcé d'os, flèches à pointes cristal."
     },
     {
       "id": "ROD_O06",
@@ -446,7 +498,8 @@
       "categorie": "objet",
       "prerequis": "Isonash",
       "effet": "Réaction : quand ce héros pioche <ico:chasse> avec au moins 7 cartes dans sa main\nSoignez-le de 3 <ico:degat>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Fiole de sève d'orme aïnou, liquide ambré."
     },
     {
       "id": "ROD_O02",
@@ -454,7 +507,8 @@
       "categorie": "objet",
       "prerequis": "Isonash",
       "effet": "Amélioration : carte <ico:action>\nSi la cible de l'attaque est éliminée, l'attaque continue sur le monstre suivant dans votre file, et ainsi de suite tant que chaque cible est éliminée. Si votre file est vidée, l'attaque continue sur le Colosse.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Flèches aux pointes cristallines gravées de runes aïnoues."
     },
     {
       "id": "ROD_O03",
@@ -462,7 +516,8 @@
       "categorie": "objet",
       "prerequis": "Isonash",
       "effet": "Réaction : quand ce héros joue 2 <ico:action> dans le même tour\nsoignez-le de 3 <ico:degat>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Amulette aïnoue en os, motifs spirales kamuy."
     },
     {
       "id": "ROD_O04",
@@ -470,7 +525,8 @@
       "categorie": "objet",
       "prerequis": "Isonash",
       "effet": "Réaction : quand ce héros a joué 2 <ico:action> dans le tour\néliminez n'importe quel monstre dans n'importe quelle file.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Griffe d'ours sacrée en trophée, perles et plumes."
     },
     {
       "id": "ROD_O05",
@@ -478,7 +534,8 @@
       "categorie": "objet",
       "prerequis": "Isonash",
       "effet": "Réaction : quand ce héros n'a plus qu'1 <ico:chasse> en main\nil pioche jusqu'à en avoir 6.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Carquois magique surdimensionné, flèches régénérant."
     },
     {
       "id": "DIP_A01",
@@ -487,7 +544,8 @@
       "degats": 1,
       "prerequis": "Aslan",
       "effet": "Un héros allié pioche 1 <ico:chasse>.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Aslan rugit tête levée, glyphes sonores circulaires."
     },
     {
       "id": "DIP_A02",
@@ -495,8 +553,9 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Deux héros ciblés peuvent s'échanger des <ico:action>.",
-      "quantite": 3
+      "effet": "Un héros allié joue immédiatement 1 <ico:action> de sa main.",
+      "quantite": 3,
+      "proto_illu_desc": "Aslan désigne un monstre, un allié frappe en synchronisation."
     },
     {
       "id": "DIP_A03",
@@ -505,7 +564,8 @@
       "degats": 1,
       "prerequis": "Aslan",
       "effet": "Tous les héros piochent 1 <ico:chasse>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Aslan attaque, tous les alliés en position derrière lui."
     },
     {
       "id": "DIP_A04",
@@ -513,17 +573,19 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Deux héros ciblés peuvent s'échanger des cartes Objet de leurs mains.",
-      "quantite": 1
+      "effet": "Un héros allié joue immédiatement 1 Objet de sa main.",
+      "quantite": 1,
+      "proto_illu_desc": "Aslan kinjal dégainé, glyphes de pacte reliant les alliés."
     },
     {
       "id": "DIP_A05",
-      "nom": "Ordre d'assaut",
+      "nom": "Guet du Porte-Voix",
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Un héros allié joue 1 <ico:action> immédiatement.",
-      "quantite": 2
+      "effet": "Regardez les 3 premières <ico:menace>. Remettez-les dans l'ordre souhaité.",
+      "quantite": 2,
+      "proto_illu_desc": "Aslan bras tendu donne un ordre, un allié charge."
     },
     {
       "id": "DIP_A06",
@@ -531,64 +593,72 @@
       "categorie": "action",
       "prerequis": "Aslan",
       "effet": "Tous les héros piochent 2 <ico:chasse>.",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Aslan sur un promontoire harangue les alliés, parchemin déployé."
     },
     {
       "id": "DIP_A07",
       "nom": "Ultimatum",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Éliminez le monstre en tête de votre file d'un héros allié.",
-      "quantite": 1
+      "effet": "Choisissez un monstre dans n'importe quelle file, puis choisissez : éliminez-le, OU le héros de cette file pioche 3 <ico:chasse>.",
+      "quantite": 1,
+      "proto_illu_desc": "Aslan désigne péremptoire un monstre, allié le frappe."
     },
     {
       "id": "DIP_A08",
       "nom": "Troc astucieux",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Deux héros au choix échangent autant de cartes Objet posées qu'ils le souhaitent. Ils peuvent les utiliser sans restriction.",
-      "quantite": 1
+      "effet": "Défaussez jusqu'à 3 <ico:chasse> de votre main. Un héros allié pioche le double.",
+      "quantite": 1,
+      "proto_illu_desc": "Aslan désigne deux alliés jouant simultanément."
     },
     {
       "id": "DIP_A09",
       "nom": "Don du Gué",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Donnez jusqu'à 3 <ico:chasse> à un héros allié. Soignez 1 <ico:degat> de ce héros pour chaque carte pouvant être utilisée par le héros cible.",
-      "quantite": 1
+      "effet": "Un héros allié pioche 2 <ico:chasse> et se soigne de 2 <ico:degat>.",
+      "quantite": 1,
+      "proto_illu_desc": "Aslan impose les mains sur un allié, aura dorée."
     },
     {
       "id": "DIP_A10",
       "nom": "Rebellion",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Choisissez le monstre en tête de la file d'un héros. Il attaque le Colosse.",
-      "quantite": 1
+      "effet": "Choisissez le monstre en fin de la file d'un héros. Il attaque le Colosse.",
+      "quantite": 1,
+      "proto_illu_desc": "Aslan négocie, un monstre se retourne contre le Colosse."
     },
     {
       "id": "DIP_A11",
-      "nom": "Frappe au cœur",
+      "nom": "Sentence des cinq",
       "categorie": "action",
       "degats": 3,
       "prerequis": "Aslan",
       "effet": "Cible uniquement le Colosse.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Aslan bondit sur le Colosse, kinjal plongeant vers son cœur."
     },
     {
       "id": "DIP_A12",
       "nom": "Ralliement tactique",
       "categorie": "action",
       "prerequis": "Aslan",
-      "effet": "Choisissez un héros. Tous les monstres de toutes les autres files sont déplacés au fond de sa file.",
-      "quantite": 1
+      "effet": "Chaque héros peut deplacer 1 monstre de sa file dans la file d'un héros cible.",
+      "quantite": 1,
+      "proto_illu_desc": "Aslan désigne une file, tous les monstres attirés vers un seul héros."
     },
     {
       "id": "DIP_O01",
       "nom": "Corne de ralliement",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Réaction : quand ce héros a éliminé un monstre\nchaque héros peut donner des <ico:chasse> à ce héros.",
-      "quantite": 1
+      "effet": "Réaction : quand ce héros élimine un monstre\nchaque allié pioche 2 <ico:chasse>.",
+      "quantite": 1,
+      "proto_illu_desc": "Corne de tur ouvragée, motifs circassiens gravés."
     },
     {
       "id": "DIP_O02",
@@ -596,23 +666,26 @@
       "categorie": "objet",
       "prerequis": "Aslan",
       "effet": "Réaction : quand ce héros subit des <ico:degat>\nchaque héros pioche 2 <ico:chasse>.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Crinière dorée tressée, perles et métal circassien."
     },
     {
       "id": "DIP_O03",
       "nom": "Coffre du Gué",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Réaction : quand un héros effectue un échange avec ce héros\nles deux piochent 3 <ico:chasse>.",
-      "quantite": 1
+      "effet": "Réaction : quand le Colosse subit une <ico:degat>\nle héros ayant effectué l'attaque pioche 4 <ico:chasse>.",
+      "quantite": 1,
+      "proto_illu_desc": "Petit coffre en bois sculpté, sceau circassien."
     },
     {
       "id": "DIP_O04",
       "nom": "Pacte du Gué",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Réaction : quand un héros effectue un échange avec ce héros\nles deux piochent 1 <ico:destin>.",
-      "quantite": 1
+      "effet": "Réaction : quand un allié utilise sa <ico:capacite>\nce héros et cet allié piochent 1 <ico:destin>.",
+      "quantite": 1,
+      "proto_illu_desc": "Parchemin scellé de cire rouge, écritures tribales."
     },
     {
       "id": "DIP_O05",
@@ -620,7 +693,8 @@
       "categorie": "objet",
       "prerequis": "Aslan",
       "effet": "Réaction : quand une <ico:menace> est révélée\nannulez son effet. N'importe quel héros peut déclencher cet Objet.",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Parchemin déployé, signatures en plusieurs langues."
     }
   ]
 }

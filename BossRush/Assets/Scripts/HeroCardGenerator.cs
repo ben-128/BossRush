@@ -30,6 +30,7 @@ public class HeroCardGenerator : CardGenerator
         public string capacite_speciale;
         public string description;
         public string citation;
+        public string proto_illu_desc;
     }
     #endregion
 
@@ -208,6 +209,7 @@ public class HeroCardGenerator : CardGenerator
                 capacite_speciale = json.capacite_speciale,
                 description = json.description,
                 citation = json.citation,
+                proto_illu_desc = json.proto_illu_desc,
             };
         }
 
@@ -234,6 +236,7 @@ public class HeroCardGenerator : CardGenerator
         }
         SetPortrait(hero.sprite, hero.offset, hero.scale);
         SetCitation(hero.citation);
+        SetProtoIlluDesc(hero.proto_illu_desc);
         SetCompetenceIcons(hero.competences);
         SetBackground(mainCompetence);
 

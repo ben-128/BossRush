@@ -23,6 +23,7 @@ public class DestinCardGenerator : CardGenerator
     {
         public string id;
         public string effet;
+        public string proto_illu_desc;
     }
     #endregion
 
@@ -32,6 +33,7 @@ public class DestinCardGenerator : CardGenerator
     {
         [HideInInspector] public string id;
         [HideInInspector] public string effet;
+        [HideInInspector] public string proto_illu_desc;
     }
     #endregion
 
@@ -53,6 +55,7 @@ public class DestinCardGenerator : CardGenerator
             {
                 id = json.id,
                 effet = json.effet,
+                proto_illu_desc = json.proto_illu_desc,
             };
         }
         string typeDestin = file.meta?.type ?? "inconnu";
@@ -74,5 +77,6 @@ public class DestinCardGenerator : CardGenerator
             descriptionText.text = IconTagParser.Parse(destin.effet);
         }
         if (portraitRenderer != null) portraitRenderer.gameObject.SetActive(false);
+        SetProtoIlluDesc(destin.proto_illu_desc);
     }
 }

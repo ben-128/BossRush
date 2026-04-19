@@ -25,7 +25,7 @@ public static class GameIconsSpriteAssetCreator
     private const string AtlasPath = "Assets/Art/UI/GameIcons_Atlas.png";
     private const int SpriteSize = 128; // taille cible par icone dans l'atlas
 
-    [MenuItem("Tools/Generer GameIcons SpriteAsset")]
+    // Ancien MenuItem retiré — accessible via Tools > Raid Party > Fenetre Outils
     public static void CreateAsset()
     {
         // Find config
@@ -183,6 +183,10 @@ public static class GameIconsSpriteAssetCreator
         {
             var (tag, rect, scale) = spriteInfos[i];
 
+            // IMPORTANT : scale est appliqué UNIQUEMENT sur le glyph.
+            // TMP multiplie glyph.scale * character.scale au rendu, donc
+            // mettre les deux à la même valeur fait un double scaling.
+            // character.scale reste à 1 (valeur neutre, override par défaut).
             var glyph = new TMP_SpriteGlyph
             {
                 index = (uint)i,
@@ -199,7 +203,7 @@ public static class GameIconsSpriteAssetCreator
                 name = tag,
                 glyphIndex = (uint)i,
                 glyph = glyph,
-                scale = scale
+                scale = 1f
             };
             characters.Add(character);
         }
@@ -250,14 +254,43 @@ public static class GameIconsSpriteAssetCreator
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log($"GameIcons SpriteAsset OK : {spriteRects.Count} icones → {AssetPath}");
-        EditorUtility.DisplayDialog("Succes",
-            $"{spriteRects.Count} icones packees dans GameIcons SpriteAsset.\n\n" +
-            "N'oubliez pas d'assigner GameIcons dans :\n" +
-            "TMP Settings > Default Sprite Asset\n" +
-            "ou sur chaque TextMeshPro > Sprite Asset",
-            "OK");
+        // Relink automatique dans TMP Settings → Default Sprite Asset
+        bool relinked = RelinkTmpDefaultSpriteAsset(asset);
+
+        Debug.Log($"GameIcons SpriteAsset OK : {spriteRects.Count} icones → {AssetPath}" +
+                  (relinked ? " (TMP Settings relinké)" : ""));
         Selection.activeObject = asset;
+    }
+
+    /// <summary>
+    /// Assigne le TMP_SpriteAsset donné comme Default Sprite Asset dans
+    /// TMP_Settings. Évite au dev de devoir le faire manuellement.
+    /// Retourne true si le relink a été appliqué (ou était déjà correct).
+    /// </summary>
+    private static bool RelinkTmpDefaultSpriteAsset(TMP_SpriteAsset asset)
+    {
+        var settings = TMP_Settings.instance;
+        if (settings == null)
+        {
+            Debug.LogWarning("[GameIcons] TMP_Settings introuvable, relink sauté.");
+            return false;
+        }
+
+        var type = typeof(TMP_Settings);
+        var field = type.GetField("m_defaultSpriteAsset", BindingFlags.Instance | BindingFlags.NonPublic);
+        if (field == null)
+        {
+            Debug.LogWarning("[GameIcons] Champ m_defaultSpriteAsset introuvable (TMP version incompatible ?).");
+            return false;
+        }
+
+        var current = field.GetValue(settings) as TMP_SpriteAsset;
+        if (current == asset) return true;
+
+        field.SetValue(settings, asset);
+        EditorUtility.SetDirty(settings);
+        AssetDatabase.SaveAssets();
+        return true;
     }
 
     // ── Helpers ──────────────────────────────────────────

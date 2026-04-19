@@ -29,6 +29,7 @@ public class ObjetCardGenerator : CardGenerator
         public int bonus_degats;
         public string effet;
         public string description;
+        public string proto_illu_desc;
     }
     #endregion
 
@@ -73,6 +74,7 @@ public class ObjetCardGenerator : CardGenerator
                 bonus_degats = json.bonus_degats,
                 effet = json.effet,
                 description = json.description,
+                proto_illu_desc = json.proto_illu_desc,
             };
         }
         PreserveSprites(old, allObjets);
@@ -88,6 +90,7 @@ public class ObjetCardGenerator : CardGenerator
         SetBaseTexts(objet.nom, objet.effet);
         SetPortrait(objet.sprite, objet.offset, objet.scale);
         SetBackground(objet.prerequis);
+        SetProtoIlluDesc(objet.proto_illu_desc);
 
         if (typeText != null) typeText.text = objet.type;
         if (prerequisText != null) prerequisText.text = objet.prerequis ?? "";

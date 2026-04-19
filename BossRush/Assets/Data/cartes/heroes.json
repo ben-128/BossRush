@@ -14,7 +14,8 @@
         "magie"
       ],
       "capacite_speciale": "Éliminez tous les <ico:invocation> de la file d'un héros ciblé.",
-      "citation": "« Le feu est patient. Elle ne l'est pas. »"
+      "citation": "« Le feu est patient. Elle ne l'est pas. »",
+      "proto_illu_desc": "Hyène anthropomorphe femelle en habits afars, lance un arc de flammes entre ses paumes."
     },
     {
       "id": "HERO_002",
@@ -25,7 +26,8 @@
         "soin"
       ],
       "capacite_speciale": "Retire toutes les <ico:degat> d'un héros au choix.",
-      "citation": "« Tant qu'il respire, personne ne tombe. »"
+      "citation": "« Tant qu'il respire, personne ne tombe. »",
+      "proto_illu_desc": "Suricate anthropomorphe en habits san, bondit en tendant la paume vers la lumière de l'aube."
     },
     {
       "id": "HERO_003",
@@ -36,7 +38,8 @@
         "armure"
       ],
       "capacite_speciale": "Tous les <ico:invocation> se deplacent dans la file de ce héros.",
-      "citation": "« Il encaisse. Encore. Et encore. »"
+      "citation": "« Il encaisse. Encore. Et encore. »",
+      "proto_illu_desc": "Jaguar anthropomorphe en armure mapuche, tient un bouclier solaire imposant."
     },
     {
       "id": "HERO_004",
@@ -47,7 +50,8 @@
         "distance"
       ],
       "capacite_speciale": "Vous pouvez jouez autant de <ico:chasse> que vous le souhaitez ce tour ci.",
-      "citation": "« On voit la première flèche. Jamais les suivantes. »"
+      "citation": "« On voit la première flèche. Jamais les suivantes. »",
+      "proto_illu_desc": "Ourse brune anthropomorphe en attush aïnou vert forêt, glisse le long d'un tronc arc sur le dos."
     },
     {
       "id": "HERO_005",
@@ -57,8 +61,9 @@
       "competences": [
         "diplomatie"
       ],
-      "capacite_speciale": "Tous les héros peuvent s'échanger autant de cartes qu'ils le souhaitent jusqu'à la fin du tour.",
-      "citation": "« Cinq tribus parlent par sa bouche. »"
+      "capacite_speciale": "Chaque héros joue immédiatement 1 carte <ico:chasse> de sa main.",
+      "citation": "« Cinq tribus parlent par sa bouche. »",
+      "proto_illu_desc": "Tur du Caucase anthropomorphe en cherkeska circassienne, bras levé tenant un parchemin scellé."
     }
   ]
 }

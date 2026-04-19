@@ -30,6 +30,7 @@ public class BossCardGenerator : CardGenerator
         public string effet_special;
         public string[] monstres_ids;
         public string description;
+        public string proto_illu_desc;
     }
     #endregion
 
@@ -71,6 +72,7 @@ public class BossCardGenerator : CardGenerator
                 pv_formule = json.pv_formule,
                 effet_special = json.effet_special,
                 description = json.description,
+                proto_illu_desc = json.proto_illu_desc,
             };
         }
         PreserveSprites(old, allBoss);
@@ -85,6 +87,7 @@ public class BossCardGenerator : CardGenerator
         var boss = allBoss[index];
         SetBaseTexts(boss.nom, boss.description);
         SetPortrait(boss.sprite, boss.offset, boss.scale);
+        SetProtoIlluDesc(boss.proto_illu_desc);
 
         if (difficulteText != null) difficulteText.text = boss.difficulte;
         if (pvFormuleText != null) pvFormuleText.text = boss.pv_formule;

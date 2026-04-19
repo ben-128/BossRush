@@ -24,6 +24,7 @@ public class AttaqueCardGenerator : CardGenerator
         public int soin;
         public string description;
         public int quantite;
+        public string proto_illu_desc;
     }
     #endregion
 
@@ -77,6 +78,7 @@ public class AttaqueCardGenerator : CardGenerator
                 soin = json.soin,
                 description = json.description,
                 quantite = json.quantite,
+                proto_illu_desc = json.proto_illu_desc,
             };
         }
         PreserveSprites(old, allAttaques);
@@ -91,6 +93,7 @@ public class AttaqueCardGenerator : CardGenerator
         var atk = allAttaques[index];
         SetBaseTexts(atk.nom, atk.description);
         SetPortrait(atk.sprite, atk.offset, atk.scale);
+        SetProtoIlluDesc(atk.proto_illu_desc);
 
         // Icônes de dégâts pour les attaques de type "degats"
         Sprite dmgIcon = atk.type_degats == "physique" ? physiqueSprite

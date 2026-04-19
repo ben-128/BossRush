@@ -13,7 +13,8 @@
       "capacite_speciale": null,
       "description": "Ce qui sort de la terre quand la corruption éclôt.",
       "citation": "« Ce qui sort de la terre quand la corruption éclôt. »",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Larve blanchâtre gluante sortant de la terre, mandibules rongeuses."
     },
     {
       "id": "MON_002",
@@ -23,7 +24,8 @@
       "capacite_speciale": "Quand ce monstre est éliminé, piochez et placez-le en fond de file.",
       "description": "Mille bouches pour une seule faim.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Nuée d'insectes et de chauves-souris noires tourbillonnant."
     },
     {
       "id": "MON_003",
@@ -33,7 +35,8 @@
       "capacite_speciale": null,
       "description": "Là où elle s'enracine, le sol meurt.",
       "citation": "« Là où elle s'enracine, le sol meurt. »",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Champignon pulsant libérant des spores noires."
     },
     {
       "id": "MON_004",
@@ -43,7 +46,8 @@
       "capacite_speciale": null,
       "description": "Il accroche, il tire, il dévore.",
       "citation": "« Il accroche, il tire, il dévore. »",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Créature basse à long crochet osseux courbe, gueule dessous."
     },
     {
       "id": "MON_005",
@@ -53,7 +57,8 @@
       "capacite_speciale": null,
       "description": "Il n'a gardé que sa morsure.",
       "citation": "« Il n'a gardé que sa morsure. »",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Gueule autonome flottante, mâchoire hérissée de crocs."
     },
     {
       "id": "MON_006",
@@ -63,7 +68,8 @@
       "capacite_speciale": null,
       "description": "Une piqûre suffit à pourrir le sang.",
       "citation": "« Une piqûre suffit à pourrir le sang. »",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Insecte noir à dard courbe suintant un venin verdâtre."
     },
     {
       "id": "MON_007",
@@ -73,7 +79,8 @@
       "capacite_speciale": null,
       "description": "Elle traîne sa faim sur la terre.",
       "citation": "« Elle traîne sa faim sur la terre. »",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Créature rampante, mâchoire énorme traînant sur le sol."
     },
     {
       "id": "MON_008",
@@ -83,7 +90,8 @@
       "capacite_speciale": null,
       "description": "Les os des morts marchent encore.",
       "citation": "« Les os des morts marchent encore. »",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Squelette de bête relevé, os fendus veinés de corruption noire."
     },
     {
       "id": "MON_009",
@@ -93,7 +101,8 @@
       "capacite_speciale": "Quand ce monstre est éliminé, le héros qui l'a tué pioche une <ico:chasse>.",
       "description": "Sous la coque, plus rien qu'un nid de corruption.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Créature à carapace épaisse bombée, corruption dans les fissures."
     },
     {
       "id": "MON_010",
@@ -103,7 +112,8 @@
       "capacite_speciale": "Tant que ce monstre n'est pas en tête de file, il ignore les <ico:degat> reçues ce tour.",
       "description": "Elle a perdu son corps, mais pas sa rage.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Silhouette de bête faite d'ombre liquide, yeux rouges flottants."
     },
     {
       "id": "MON_011",
@@ -113,7 +123,8 @@
       "capacite_speciale": "Quand ce monstre inflige des <ico:degat> à un héros, ce héros défausse une carte de sa main.",
       "description": "Elle entre par la bouche et s'installe.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Nuage de brume noire en forme de bête, yeux jaunes."
     },
     {
       "id": "MON_012",
@@ -123,7 +134,8 @@
       "capacite_speciale": "Quand ce monstre est éliminé, le héros qui l'a tué pioche une <ico:destin>.",
       "description": "Les voix dans ta tête ne sont pas les tiennes.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Créature fantomatique au visage partiel, glyphes sortant de la bouche."
     },
     {
       "id": "MON_013",
@@ -133,7 +145,8 @@
       "capacite_speciale": null,
       "description": "Là où elle pousse, plus rien ne marche.",
       "citation": "« Là où elle pousse, plus rien ne marche. »",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Enchevêtrement de ronces noires avec gueule végétale au centre."
     },
     {
       "id": "MON_014",
@@ -143,7 +156,8 @@
       "capacite_speciale": null,
       "description": "Il digère lentement ce qui s'y prend.",
       "citation": "« Il digère lentement ce qui s'y prend. »",
-      "quantite": 2
+      "quantite": 2,
+      "proto_illu_desc": "Masse gélatineuse noire visqueuse, ossements à demi-digérés."
     },
     {
       "id": "MON_015",
@@ -153,7 +167,8 @@
       "capacite_speciale": "Quand ce monstre est éliminé, soignez le héros qui l'a tué de 1 <ico:degat>.",
       "description": "Il suit ta trace depuis le premier jour.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Créature reptilienne allongée rampant au sol, écailles sombres."
     },
     {
       "id": "MON_016",
@@ -163,7 +178,8 @@
       "capacite_speciale": "Quand ce monstre inflige des <ico:degat> à un héros, le colosse est soigné de 1 <ico:degat>.",
       "description": "Elle boit pour lui.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Sangsue géante noire à ventouses, bouche circulaire dentée."
     },
     {
       "id": "MON_017",
@@ -173,7 +189,8 @@
       "capacite_speciale": "Quand ce monstre est éliminé, tous les héros piochent 1 <ico:chasse>.",
       "description": "Sous la croûte, quelque chose qui vaut la peine d'être cassée.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Masse rocheuse fissurée, corruption pulsant comme du magma noir."
     },
     {
       "id": "MON_018",
@@ -183,7 +200,8 @@
       "capacite_speciale": "Quand ce monstre arrive en jeu, il se place en tête de file.",
       "description": "Il n'attend pas son tour.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Créature batracienne aux longues pattes arrière, prête à bondir."
     },
     {
       "id": "MON_019",
@@ -193,7 +211,8 @@
       "capacite_speciale": "Quand ce monstre doit attaquer, s'il n'est pas seul dans la file, il part en fond de file et le monstre suivant attaque à sa place.",
       "description": "Il recule pour mieux revenir.",
       "citation": "",
-      "quantite": 1
+      "quantite": 1,
+      "proto_illu_desc": "Créature serpentine recroquevillée, queue enroulée."
     }
   ]
 }
