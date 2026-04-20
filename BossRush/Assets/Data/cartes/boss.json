@@ -9,13 +9,13 @@
       "id": "BOSS_001",
       "nom": "Hobab",
       "difficulte": "facile",
-      "vie_multiplicateur": 5,
+      "vie_multiplicateur": 6,
       "stats": {
         "sequence": [
           "<ico:menace>"
         ],
         "passif": "Les <ico:degat> infligées par des Menaces ne peuvent pas être soignées.",
-        "actif": "Chaque héros ayant au moins 1 <ico:degat> défausse 1 carte de sa main."
+        "actif": "Chaque héros ayant au moins 1 <ico:degat> défausse 2 cartes de sa main."
       },
       "monstres_ids": [],
       "lore_md": "boss_hobab.md",
@@ -32,7 +32,7 @@
           "<ico:menace>"
         ],
         "passif": "Azhda est immunisé tant qu'il a autant ou plus de monstres que de héros vivants.",
-        "actif": "Le héros actif voit sa <ico:capacite> consommée."
+        "actif": "<ico:invocation> chez tous les héros ayant leur capacité consommée."
       },
       "monstres_ids": [],
       "lore_md": "boss_azhdaha.md",
@@ -83,8 +83,8 @@
           "<ico:menace>",
           "<ico:destin>"
         ],
-        "passif": "Quand Invunche inflige des blessures à un héros<ico:menace> via , ce héros consomme sa capacité.",
-        "actif": "Chaque héros pioche une carte destin."
+        "passif": "Lorsque un choix est demandé par <ico:menace> ou  <ico:destin>, les deux choix sont appliqués.",
+        "actif": "Chaque héros pioche une <ico:destin>. Elles sont lues à tour de role en partant du héros actif."
       },
       "monstres_ids": [],
       "lore_md": "boss_invunche.md",
@@ -102,7 +102,7 @@
           "<ico:menace>"
         ],
         "passif": "A la fin de son tour, si un héros a infligé des blessures à Akkoro, il se défausse d'une <ico:chasse>.",
-        "actif": "Le héros actif défausse 1 Objet posé devant lui."
+        "actif": "Le héros actif défausse 1 Objet posé. Si un objet a bien été défaussé, Soignez 2 <ico:degat> d'Akkoro."
       },
       "monstres_ids": [],
       "lore_md": "boss_akkorokamui.md",
@@ -156,7 +156,7 @@
           "<ico:invocation>"
         ],
         "passif": "Chaque fois qu'un héros élimine un monstre, il pioche <ico:chasse>.",
-        "actif": "<ico:attaque> de toutes les files."
+        "actif": "<ico:attaque> sur  la file courante."
       },
       "monstres_ids": [],
       "lore_md": "boss_grand_eland.md",

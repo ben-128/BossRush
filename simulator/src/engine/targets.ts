@@ -413,5 +413,10 @@ export function evalCondition(
     if (!h) return false;
     return compare(h.queue.length, cond.self_queue_size);
   }
+  if ('self_capacite_used' in cond) {
+    const h = state.heroes[sourceSeat];
+    if (!h) return false;
+    return h.capaciteUsed === true;
+  }
   return false;
 }

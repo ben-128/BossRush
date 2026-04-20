@@ -49,7 +49,7 @@
       "competences": [
         "distance"
       ],
-      "capacite_speciale": "Vous pouvez jouez autant de <ico:chasse> que vous le souhaitez ce tour ci.",
+      "capacite_speciale": "Jouez immédiatement 2 <ico:chasse>, puis piochez 2 <ico:chasse>.",
       "citation": "« On voit la première flèche. Jamais les suivantes. »",
       "proto_illu_desc": "Ourse brune anthropomorphe en attush aïnou vert forêt, glisse le long d'un tronc arc sur le dos."
     },
@@ -61,7 +61,7 @@
       "competences": [
         "diplomatie"
       ],
-      "capacite_speciale": "Chaque héros joue immédiatement 1 carte <ico:chasse> de sa main.",
+      "capacite_speciale": "En partant d'Aslan, chaque héros joue à tour de rôle 1 <ico:chasse>.",
       "citation": "« Cinq tribus parlent par sa bouche. »",
       "proto_illu_desc": "Tur du Caucase anthropomorphe en cherkeska circassienne, bras levé tenant un parchemin scellé."
     }

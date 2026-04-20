@@ -118,7 +118,7 @@
       "id": "EPR_014",
       "type": "assaut",
       "sous_type": "capacite_boss",
-      "nom": "Fureur ancestrale",
+      "nom": "Réveil du Colosse",
       "description": "<ico:capacite> ",
       "proto_illu_desc": "Colosse hurlant tête en arrière, sol tremblant."
     },
@@ -126,114 +126,121 @@
       "id": "EPR_015",
       "type": "assaut",
       "sous_type": "capacite_boss",
-      "nom": "Écho du titan",
+      "nom": "Réveil du Colosse",
       "description": "<ico:capacite> ",
       "proto_illu_desc": "Onde de choc sombre émanant du Colosse, héros repoussés."
     },
     {
       "id": "EPR_016",
-      "type": "assaut",
-      "nom": "Ouverture !",
-      "description": "Une faille dans la garde du boss !\n\n• Frapper fort (piocher 1 Destin)\n\nOU\n\n• Jouer prudent (piocher 1 <ico:chasse>)",
-      "proto_illu_desc": "Faille visible dans l'armure du Colosse, lumière rouge qui filtre."
+      "type": "evenement",
+      "nom": "Charge du Colosse",
+      "description": "Le Colosse fond droit sur les héros !\n\n• Le héros subit <ico:degat><ico:degat>\n\nOU\n\n• Chaque héros défausse 1 Action",
+      "proto_illu_desc": "Colosse chargeant tête baissée, poussière soulevée, héros dispersés.",
+      "degats": 2
     },
     {
       "id": "EPR_017",
       "type": "evenement",
-      "nom": "Terrain instable",
-      "description": "Le sol se fissure sous les coups !\n\n• Un allié défausse 1 Objet\n\nOU\n\n• <ico:attaque> sur votre file",
-      "proto_illu_desc": "Sol se fissurant, lézardes qui s'étendent."
+      "nom": "Éboulement",
+      "description": "Des pierres s'abattent sur une file !\n\n• Défausser 2 <ico:chasse> pour vous abriter\n\nOU\n\n• <ico:attaque> sur une file avec monstre (au choix)",
+      "proto_illu_desc": "Pluie de rochers sombres tombant sur une colonne de monstres."
     },
     {
       "id": "EPR_018",
       "type": "evenement",
       "nom": "Éclats tranchants",
-      "description": "Des débris fusent dans toutes les directions !\n\n• Foncer à travers (piocher 2 <ico:chasse>, mais subir <ico:degat>)\n\nOU\n\n• Se mettre à couvert (aucun effet)",
-      "proto_illu_desc": "Éclats de pierre et d'os fusant, héros se protégeant."
+      "description": "Des éclats fusent vers le héros !\n\n• Le héros subit <ico:degat>\n\nOU\n\n• Défausser 1 <ico:chasse> en bouclier",
+      "proto_illu_desc": "Éclats de pierre fusant, héros se couvrant d'une carte comme d'un bouclier.",
+      "degats": 1
     },
     {
       "id": "EPR_019",
       "type": "evenement",
       "nom": "Hurlement du Colosse",
-      "description": "Un cri glaçant fait vibrer les murs !\n\n• Un allié défausse 1 Objet\n\nOU\n\n• <ico:capacite> du Colosse",
-      "proto_illu_desc": "Colosse gueule ouverte hurlant, ondes sonores visibles."
+      "description": "Un cri glaçant brise la concentration !\n\n• Le héros consomme sa <ico:capacite>\n\nOU\n\n• <ico:capacite> du Colosse",
+      "proto_illu_desc": "Colosse hurlant, ondes sonores brisant un halo doré autour d'un héros."
     },
     {
       "id": "EPR_020",
       "type": "evenement",
-      "nom": "Œil du cyclone",
-      "description": "Un calme trompeur s'installe...\n\n• Souffler (régénérer sa <ico:capacite>, mais <ico:invocation> 1 monstre est invoqué dans votre file)\n\nOU\n\n• Rester concentré (piocher 1 Destin)",
-      "proto_illu_desc": "Calme trompeur au centre d'une tempête qui tourne."
+      "nom": "Éclosion",
+      "description": "Des œufs corrompus éclosent aux pieds du héros !\n\n• Le héros subit <ico:degat>\n\nOU\n\n• <ico:invocation> dans votre file",
+      "proto_illu_desc": "Grappe d'œufs noirs craquant, créature émergeant d'un côté, braises s'en échappant de l'autre.",
+      "degats": 1
     },
     {
       "id": "EPR_021",
       "type": "evenement",
-      "nom": "Garde brisée",
-      "description": "La défense du boss vacille un instant !\n\n• Attaque coordonnée (chaque héros pioche 1 Destin)\n\nOU\n\n• Frapper vite (piocher 2 <ico:chasse>)",
-      "proto_illu_desc": "Armure du Colosse qui se fissure, moment d'opportunité."
+      "nom": "Souffle vampirique",
+      "description": "Une aura sombre sape les héros ou régénère les corrompus !\n\n• Soignez toutes les <ico:degat> de tous les monstres\n\nOU\n\n• Chaque héros défausse 1 <ico:chasse>",
+      "proto_illu_desc": "Aura noire s'étirant entre le Colosse et les héros, monstres pulsant de rouge."
     },
     {
       "id": "EPR_022",
       "type": "evenement",
-      "nom": "Brume apaisante",
-      "description": "Une brume étrange enveloppe le champ de bataille.\n\n• S'y abandonner (soigner 1 <ico:degat>)\n\nOU\n\n• La traverser en courant (piocher 2 <ico:chasse>)",
-      "proto_illu_desc": "Brume douce enveloppant le champ de bataille."
+      "nom": "Nuée toxique",
+      "description": "Des vapeurs corrompues envahissent l'air !\n\n• Défausser 2 <ico:chasse> pour retenir son souffle\n\nOU\n\n• Le héros subit <ico:degat>",
+      "proto_illu_desc": "Vapeurs verdâtres rampantes, héros masquant son visage d'un bandana.",
+      "degats": 1
     },
     {
       "id": "EPR_023",
       "type": "evenement",
-      "nom": "Pacte funeste",
-      "description": "Une voix murmure une offre dangereuse...\n\n• Accepter (défausser 2 <ico:chasse> de sa main, piocher 2 Destins)\n\nOU\n\n• Refuser (aucun effet)",
-      "proto_illu_desc": "Voix désincarnée murmurant une offre dangereuse."
+      "nom": "Coup de queue",
+      "description": "Un revers de queue propulse le héros dans ses propres monstres !\n\n• Défausser 1 Action pour esquiver\n\nOU\n\n• <ico:attaque> sur votre file",
+      "proto_illu_desc": "Queue massive frappant le héros qui vole vers la file de monstres."
     },
     {
       "id": "EPR_024",
       "type": "evenement",
       "nom": "Débris volants",
-      "description": "Le combat fait voler des débris !\n\n• Se protéger (défausser 1 Objet)\n\nOU\n\n• <ico:attaque> sur toutes les files",
-      "proto_illu_desc": "Débris projetés dans les airs par le combat."
+      "description": "Le combat projette des débris partout !\n\n• Défausser 1 Objet en bouclier\n\nOU\n\n• <ico:attaque> sur toutes les files",
+      "proto_illu_desc": "Débris projetés, héros se couvrant d'un objet brisé devant lui."
     },
     {
       "id": "EPR_025",
       "type": "evenement",
-      "nom": "Onde arcanique",
-      "description": "Une vague d'énergie sauvage déferle !\n\n• Canaliser (défausser 1 Objet, soigner 1 <ico:degat>)\n\nOU\n\n• Résister (piocher 1 Destin)",
-      "proto_illu_desc": "Vague d'énergie arcanique déferlant, glyphes brillants."
+      "nom": "Ordre du Colosse",
+      "description": "Le Colosse ordonne à ses créatures : se rassembler, ou lui rendre leur force !\n\n• Tous les monstres des autres files rejoignent votre file\n\nOU\n\n• Le Colosse soigne 1 <ico:degat>",
+      "proto_illu_desc": "Colosse levant une main, monstres affluant vers un héros ou dissipant en brume noire aspirée."
     },
     {
       "id": "EPR_026",
       "type": "evenement",
-      "nom": "Renfort inattendu",
-      "description": "Un ennemi surgit !\n\n• Défausser 1 Action\n\nOU\n\n• <ico:invocation> dans votre file",
-      "proto_illu_desc": "Monstre surgissant par surprise d'une position inattendue."
+      "nom": "Marée corrompue",
+      "description": "Une marée noire monte : une créature en émerge, ou elle retourne au Colosse !\n\n• <ico:invocation> dans votre file\n\nOU\n\n• Le Colosse soigne 1 <ico:degat>",
+      "proto_illu_desc": "Marée d'ombre liquide montant, créature s'en extirpant d'un côté, flux reflux vers le Colosse de l'autre."
     },
     {
       "id": "EPR_027",
       "type": "evenement",
-      "nom": "Pilier qui s'effondre",
-      "description": "La structure menace de s'écrouler !\n\n• Un héros défausse 1 Objet pour le retenir (aucun effet)\n\nOU\n\n• Esquiver (le héros subit <ico:degat>)",
-      "proto_illu_desc": "Pilier gigantesque menaçant de s'écrouler."
+      "nom": "Effondrement",
+      "description": "Le décor s'effondre dans un nuage de poussière !\n\n• Défausser votre main et piocher autant de <ico:chasse>\n\nOU\n\n• Un allié subit <ico:degat>",
+      "proto_illu_desc": "Structure s'écroulant, cartes volant au vent d'un côté, allié couvert de gravats de l'autre.",
+      "degats": 1
     },
     {
       "id": "EPR_028",
       "type": "evenement",
-      "nom": "Relique instable",
-      "description": "Un artefact vibre d'énergie incontrôlable !\n\n• La contenir (le héros pioche 1 <ico:chasse>)\n\nOU\n\n• La briser (chaque héros pioche 1 <ico:chasse>, mais le héros actif subit <ico:degat>)",
-      "proto_illu_desc": "Artefact vibrant d'énergie incontrôlable, fissures lumineuses."
+      "nom": "Gouffre",
+      "description": "Un gouffre s'ouvre — s'accrocher, ou y tomber !\n\n• Défausser 1 <ico:chasse> pour s'accrocher à une prise\n\nOU\n\n• Le héros avec le plus de points de vie subit <ico:degat>",
+      "proto_illu_desc": "Crevasse béante, héros suspendu à une carte plantée dans la paroi.",
+      "degats": 1
     },
     {
       "id": "EPR_029",
       "type": "evenement",
       "nom": "Embuscade",
-      "description": "Le boss prépare un piège !\n\n• Esquiver (défausser 1 Action, aucun effet)\n\nOU\n\n• Subir le piège (le héros subit <ico:degat><ico:degat>)",
-      "proto_illu_desc": "Piège visible, monstre embusqué prêt à surgir."
+      "description": "Un piège tendu se referme sur le héros !\n\n• Défausser 1 Action pour esquiver\n\nOU\n\n• Le héros subit <ico:degat><ico:degat>",
+      "proto_illu_desc": "Piège de ronces noires se refermant, héros bondissant en arrière.",
+      "degats": 2
     },
     {
       "id": "EPR_030",
       "type": "evenement",
-      "nom": "Moment de vérité",
-      "description": "Dos au mur, tout se joue maintenant !\n\n• Tout donner (défausser sa main, soigner 2 <ico:degat>)\n\nOU\n\n• Tenir bon (piocher 1 <ico:chasse>)",
-      "proto_illu_desc": "Héros dos au mur, regard déterminé, moment dramatique."
+      "nom": "Regard du Colosse",
+      "description": "Le Colosse fixe une proie — il frappe une file, ou pille le mieux préparé !\n\n• <ico:attaque> sur une file avec monstre (au choix)\n\nOU\n\n• Le héros avec le plus de <ico:chasse> en main en défausse 2",
+      "proto_illu_desc": "Œil immense du Colosse fixant la scène, rayon de lumière rouge balayant les héros."
     }
   ]
 }

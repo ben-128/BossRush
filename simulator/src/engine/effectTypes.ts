@@ -75,6 +75,7 @@ export type Condition =
   | { hand_size: Comparator }
   | { self_queue_size: Comparator }
   | { no_ally_has_damage: true }
+  | { self_capacite_used: true }
   | { and: Condition[] }
   | { or: Condition[] }
   | { not: Condition };
@@ -376,11 +377,13 @@ export interface OpRedistributeWounds {
   op: 'redistributeWounds';
 }
 
-/** Discard one posed Objet on target (BOSS_005 actif). */
+/** Discard one posed Objet on target (BOSS_005 actif).
+ *  bossHealIfAny: si au moins un objet a été défaussé, soigne le boss (BOSS_006 actif). */
 export interface OpDiscardObject {
   op: 'discardObject';
   target: 'active_hero' | 'self';
   n: number;
+  bossHealIfAny?: number;
 }
 
 /** Force active hero to only be able to draw this turn (BOSS_007 actif). */
@@ -715,6 +718,7 @@ export interface CardEffectEntry {
     | 'boss_receives_max_1_damage_per_turn'
     | 'boss_before_heroes'
     | 'kaggen_elim_draws_chasse'
+    | 'apply_both_choices'
   >;
 }
 

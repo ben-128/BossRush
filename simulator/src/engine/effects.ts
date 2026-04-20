@@ -520,10 +520,15 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
     case 'discardObject': {
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
+      let discarded = 0;
       for (let i = 0; i < op.n && h.objects.length > 0; i++) {
         const obj = h.objects.shift()!;
         discardChasse(state, obj, ctx.sourceSeat);
         emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: obj.id, fromSeat: ctx.sourceSeat });
+        discarded++;
+      }
+      if (op.bossHealIfAny && discarded > 0) {
+        await runOps(state, ctx, [{ op: 'bossHeal', amount: op.bossHealIfAny }]);
       }
       return;
     }
@@ -1098,6 +1103,23 @@ async function applyChoiceOp(state: GameState, ctx: EffectContext, op: OpChoice)
     who === 'active'
       ? ctx.sourceSeat
       : (state.heroes.find((h) => !h.dead)?.seatIdx ?? ctx.sourceSeat);
+
+  // Invunche : si le boss a le hook 'apply_both_choices', les choix issus de
+  // menaces/destins voient leurs deux options appliquées séquentiellement.
+  const bossEntry = state.effects[state.boss.bossId];
+  const bothChoices = bossEntry?.passif_hooks?.includes('apply_both_choices');
+  if (bothChoices && (ctx.sourceKind === 'menace' || ctx.sourceKind === 'destin')) {
+    for (const opt of op.options) {
+      emit(state, {
+        kind: 'CHOICE_MADE',
+        sourceCardId: ctx.sourceCardId,
+        seat: decidingSeat,
+        label: opt.label,
+      });
+      await runOps(state, ctx, opt.ops);
+    }
+    return;
+  }
 
   // Ask policy first; fall back to RNG.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

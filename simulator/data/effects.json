@@ -454,18 +454,23 @@
     "DEN_020": { "effet": "Palabre : échanges libres entre héros + 1 invocation", "tag": "destin_amb", "ops": [{ "op": "openFreeExchange", "maxSwaps": 3 }, { "op": "summon", "target": "self", "n": 1 }] },
 
     "BOSS_001": {
-      "effet": "Hobab — actif : chaque héros blessé défausse 1",
+      "effet": "Hobab — actif : chaque héros blessé défausse 2",
       "actif_ops": [
         { "op": "forEach", "over": "each_hero", "do": [
           { "op": "require", "cond": { "self_damage": { "op": ">=", "value": 1 } } },
-          { "op": "discard", "target": "self", "n": 1 }
+          { "op": "discard", "target": "self", "n": 2 }
         ]}
       ],
       "passif_hooks": ["damage_unhealable_from_menace"]
     },
     "BOSS_002": {
-      "effet": "Azhda — actif : capacité du héros actif consommée ; passif : immune tant que monstres ≥ héros vivants",
-      "actif_ops": [{ "op": "markCapaciteUsed", "target": "active_hero" }],
+      "effet": "Azhda — actif : invocation chez chaque héros dont la capacité est consommée ; passif : immune tant que monstres ≥ héros vivants",
+      "actif_ops": [
+        { "op": "forEach", "over": "each_hero", "do": [
+          { "op": "require", "cond": { "self_capacite_used": true } },
+          { "op": "summon", "target": "self", "n": 1 }
+        ]}
+      ],
       "passif_hooks": ["azhda_immune_if_monsters_gte_heroes"]
     },
     "BOSS_003": {
@@ -479,13 +484,13 @@
       "passif_hooks": ["attack_order_all_queues"]
     },
     "BOSS_005": {
-      "effet": "Invunche — actif : chaque héros pioche 1 Destin ; passif : héros blessé perd sa capacité",
+      "effet": "Invunche — actif : chaque héros pioche 1 Destin (résolution en partant du héros actif) ; passif : les choix de menace/destin sont tous deux appliqués",
       "actif_ops": [{ "op": "drawDestin", "target": "each_hero" }],
-      "passif_hooks": ["invunche_damage_marks_capacite_used"]
+      "passif_hooks": ["apply_both_choices"]
     },
     "BOSS_006": {
-      "effet": "Akkoro — actif : héros actif défausse 1 Objet posé ; passif : en fin de tour, si Akkoro a été blessé → défausse 1 Chasse",
-      "actif_ops": [{ "op": "discardObject", "target": "active_hero", "n": 1 }],
+      "effet": "Akkoro — actif : héros actif défausse 1 Objet posé, si défaussé → soigne 2 ; passif : fin de tour, si Akkoro blessé → héros actif défausse 1 Chasse",
+      "actif_ops": [{ "op": "discardObject", "target": "active_hero", "n": 1, "bossHealIfAny": 2 }],
       "passif_hooks": ["akkoro_damage_discards_chasse"]
     },
     "BOSS_007": {
@@ -504,8 +509,8 @@
       "passif_hooks": ["gaww_reshuffle_heals_2"]
     },
     "BOSS_009": {
-      "effet": "Kaggen — actif : ordre d'attaque sur toutes les files ; passif : éliminer un monstre fait piocher 1 Chasse",
-      "actif_ops": [{ "op": "attackOrder", "target": "each_hero" }],
+      "effet": "Kaggen — actif : ordre d'attaque sur la file courante ; passif : éliminer un monstre fait piocher 1 Chasse",
+      "actif_ops": [{ "op": "attackOrder", "target": "self" }],
       "passif_hooks": ["kaggen_elim_draws_chasse"]
     },
     "BOSS_010": {

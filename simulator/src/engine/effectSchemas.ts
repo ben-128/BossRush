@@ -17,6 +17,7 @@ const BaseCondition = z.union([
   z.object({ hand_size: Comparator }),
   z.object({ self_queue_size: Comparator }),
   z.object({ no_ally_has_damage: z.literal(true) }),
+  z.object({ self_capacite_used: z.literal(true) }),
 ]);
 
 // Recursive for and/or/not — use z.lazy.
@@ -199,6 +200,7 @@ const OpDiscardObject = z.object({
   op: z.literal('discardObject'),
   target: z.enum(['active_hero', 'self']),
   n: z.number().int().positive(),
+  bossHealIfAny: z.number().int().positive().optional(),
 });
 const OpRestrictToDraw = z.object({
   op: z.literal('restrictToDraw'),
@@ -475,6 +477,7 @@ const PassifHook = z.enum([
   'boss_before_heroes',
   'attack_order_all_queues',
   'kaggen_elim_draws_chasse',
+  'apply_both_choices',
 ]);
 
 const ReactiveTriggerEnum = z.enum([

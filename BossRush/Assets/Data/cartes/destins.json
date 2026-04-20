@@ -167,7 +167,7 @@
       "id": "DEN_020",
       "type": "ambigu",
       "titre": "Palabre interrompue",
-      "effet": "Le héros peut échanger des cartes avec tous les autres héros. Puis piochez <ico:invocation>.",
+      "effet": "Un allié pioche 2 <ico:chasse>. Puis <ico:invocation> dans votre file.",
       "lore": "« Ils s'accordent. Une ombre grandit derrière eux. »",
       "proto_illu_desc": "Cercle de héros échangeant des cartes, ombre derrière eux."
     }
