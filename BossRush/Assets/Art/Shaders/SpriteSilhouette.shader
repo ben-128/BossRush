@@ -7,6 +7,10 @@ Shader "Custom/SpriteSilhouette"
         _AlphaCutoff ("Alpha Cutoff", Range(0, 1)) = 0.5
         _Expand ("Outline Expand (world units)", Float) = 0.02
         _Erode ("Erode (pixels)", Range(0, 5)) = 2
+        _FalloffTex ("Alpha Falloff Curve (1D)", 2D) = "white" {}
+        _FalloffStrength ("Falloff Strength", Range(0, 1)) = 0
+        _UVCenter ("UV Center (atlas)", Vector) = (0.5, 0.5, 0, 0)
+        _UVHalfExtent ("UV Half Extent (atlas)", Vector) = (0.5, 0.5, 0, 0)
     }
     SubShader
     {
@@ -50,6 +54,10 @@ Shader "Custom/SpriteSilhouette"
             float _AlphaCutoff;
             float _Expand;
             float _Erode;
+            sampler2D _FalloffTex;
+            float _FalloffStrength;
+            float4 _UVCenter;
+            float4 _UVHalfExtent;
 
             v2f vert(appdata v)
             {
@@ -69,8 +77,6 @@ Shader "Custom/SpriteSilhouette"
             {
                 float2 px = _MainTex_TexelSize.xy * _Erode;
 
-                // Érosion : le pixel n'est valide que si LUI ET tous ses
-                // voisins proches ont de l'alpha. Un pixel isolé est éliminé.
                 float minAlpha = tex2D(_MainTex, i.uv).a;
                 minAlpha = min(minAlpha, tex2D(_MainTex, i.uv + float2( 1,  0) * px).a);
                 minAlpha = min(minAlpha, tex2D(_MainTex, i.uv + float2(-1,  0) * px).a);
@@ -82,7 +88,20 @@ Shader "Custom/SpriteSilhouette"
                 minAlpha = min(minAlpha, tex2D(_MainTex, i.uv + float2(-1, -1) * px).a);
 
                 clip(minAlpha - _AlphaCutoff);
-                return _Color;
+
+                fixed4 col = _Color;
+
+                // Radial alpha falloff : centre UV du sprite → dist normalisée → curve
+                if (_FalloffStrength > 0.001)
+                {
+                    float2 extent = max(_UVHalfExtent.xy, 0.0001);
+                    float2 localUV = (i.uv - _UVCenter.xy) / extent;
+                    float dist = saturate(length(localUV));
+                    float falloff = tex2D(_FalloffTex, float2(dist, 0.5)).r;
+                    col.a *= lerp(1.0, falloff, _FalloffStrength);
+                }
+
+                return col;
             }
             ENDCG
         }

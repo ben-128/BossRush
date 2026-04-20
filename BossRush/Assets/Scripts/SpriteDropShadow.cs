@@ -23,8 +23,8 @@ public class SpriteDropShadow : MonoBehaviour
     [Tooltip("Décalage Y en world units (négatif = bas)")]
     public float offsetY = -0.015f;
 
-    [Tooltip("Échelle de l'ombre par rapport à l'icône (1.05 = légèrement plus grande)")]
-    [Range(1f, 2f)]
+    [Tooltip("Échelle de l'ombre par rapport à l'icône")]
+    [Range(0.5f, 5f)]
     public float shadowScale = 1.03f;
 
     [Tooltip("Sorting order offset (négatif = derrière le sprite parent)")]
@@ -36,14 +36,27 @@ public class SpriteDropShadow : MonoBehaviour
     [Tooltip("Log en console le centroïde calculé et si c'est un fallback bounds.")]
     public bool debugLog = false;
 
+    [Header("Alpha Falloff")]
+    [Tooltip("Active le dégradé d'alpha radial (centre = plein, bords = transparent).")]
+    public bool useAlphaFalloff = false;
+
+    [Tooltip("Curve contrôlant l'alpha en fonction de la distance normalisée depuis le centre du sprite (0 = centre, 1 = bord).")]
+    public AnimationCurve alphaFalloff = new AnimationCurve(
+        new Keyframe(0f, 1f, 0f, 0f),
+        new Keyframe(1f, 0f, -2f, 0f)
+    );
+
+    [Tooltip("Intensité du falloff (0 = désactivé, 1 = plein effet).")]
+    [Range(0f, 1f)]
+    public float alphaFalloffStrength = 1f;
+
     private SpriteRenderer sr;
     private GameObject shadowGO;
     private SpriteRenderer shadowSR;
     private Material shadowMat;
+    private Texture2D falloffTex;
 
-    // Cache centroïde par sprite (clé: instanceID) pour éviter de relire la texture chaque frame.
     private static readonly Dictionary<int, Vector2> centroidCache = new Dictionary<int, Vector2>();
-
     private static Shader silhouetteShader;
 
     private void OnEnable()
@@ -72,40 +85,32 @@ public class SpriteDropShadow : MonoBehaviour
     {
         if (sr == null || shadowSR == null) return;
 
-        // Sync sprite
         if (shadowSR.sprite != sr.sprite)
+        {
             shadowSR.sprite = sr.sprite;
+            UpdateFalloffMaterial();
+        }
 
         ApplyShadowTransform();
 
-        // Couleur via material (SpriteSilhouette : remplace tous les pixels par shadowColor)
         if (shadowMat != null)
+        {
             shadowMat.SetColor("_Color", shadowColor);
+            shadowMat.SetFloat("_FalloffStrength", useAlphaFalloff ? alphaFalloffStrength : 0f);
+        }
 
-        // Sorting
         shadowSR.sortingLayerID = sr.sortingLayerID;
         shadowSR.sortingOrder = sr.sortingOrder + sortingOrderOffset;
     }
 
-    /// <summary>
-    /// Positionne et scale l'ombre en compensant pour que shadowScale soit centré
-    /// sur le contenu visible du sprite (centroïde alpha), pas sur le pivot.
-    /// </summary>
     private void ApplyShadowTransform()
     {
         Vector2 center = GetVisualCenterLocal(sr.sprite);
-        // Quand on scale le child par s autour de son origine (= pivot du sprite),
-        // un point p passe de p à p*s. Pour que le point "visual center" reste fixe,
-        // on translate le child de center * (1 - s).
         Vector2 comp = center * (1f - shadowScale);
         shadowGO.transform.localPosition = new Vector3(offsetX + comp.x, offsetY + comp.y, 0.001f);
         shadowGO.transform.localScale = new Vector3(shadowScale, shadowScale, 1f);
     }
 
-    /// <summary>
-    /// Retourne le centre visuel du sprite en unités locales (relatif au pivot).
-    /// Utilise le centroïde alpha si la texture est lisible, sinon bounds.center.
-    /// </summary>
     private Vector2 GetVisualCenterLocal(Sprite sprite)
     {
         if (sprite == null) return Vector2.zero;
@@ -122,7 +127,6 @@ public class SpriteDropShadow : MonoBehaviour
                 if (debugLog) Debug.Log($"[SpriteDropShadow] {name}: alpha centroid OK pour '{sprite.name}' = {centroid} (tex {sprite.texture?.name}, readable={sprite.texture?.isReadable})", this);
                 return centroid;
             }
-            // Fallback bounds — NE PAS cacher pour pouvoir retenter quand la texture devient lisible.
             if (debugLog) Debug.LogWarning($"[SpriteDropShadow] {name}: fallback bounds pour '{sprite.name}' (tex {sprite.texture?.name}, readable={sprite.texture?.isReadable}) → l'ombre risque d'être décalée si le pivot n'est pas centré sur le contenu visible", this);
         }
         return sprite.bounds.center;
@@ -135,10 +139,6 @@ public class SpriteDropShadow : MonoBehaviour
         Rebuild();
     }
 
-    /// <summary>
-    /// Calcule le centroïde pondéré par l'alpha des pixels opaques du sprite,
-    /// en unités locales relatives au pivot.
-    /// </summary>
     private static bool TryComputeAlphaCentroid(Sprite sprite, out Vector2 localCenter)
     {
         localCenter = Vector2.zero;
@@ -146,7 +146,6 @@ public class SpriteDropShadow : MonoBehaviour
         if (tex == null) return false;
         if (!tex.isReadable) return false;
 
-        // GetPixels peut lever si la texture n'est pas en Read/Write.
         Color[] pixels;
         try
         {
@@ -158,10 +157,7 @@ public class SpriteDropShadow : MonoBehaviour
             if (w <= 0 || h <= 0) return false;
             pixels = tex.GetPixels(x, y, w, h);
 
-            double sumW = 0.0;
-            double sumX = 0.0;
-            double sumY = 0.0;
-            // Sous-échantillonnage pour éviter les surcoûts sur grosses textures.
+            double sumW = 0.0, sumX = 0.0, sumY = 0.0;
             int step = Mathf.Max(1, Mathf.Min(w, h) / 128);
             for (int j = 0; j < h; j += step)
             {
@@ -177,14 +173,9 @@ public class SpriteDropShadow : MonoBehaviour
             }
             if (sumW <= 0.0) return false;
 
-            // Centroïde en pixels locaux au textureRect.
             float cx = (float)(sumX / sumW);
             float cy = (float)(sumY / sumW);
-
-            // Pivot en pixels locaux au textureRect.
-            Vector2 pivotPx = sprite.pivot; // depuis bottom-left du rect
-
-            // Conversion en unités locales : (centroïde - pivot) / PPU
+            Vector2 pivotPx = sprite.pivot;
             float ppu = sprite.pixelsPerUnit;
             if (ppu <= 0f) ppu = 100f;
             localCenter = new Vector2((cx - pivotPx.x) / ppu, (cy - pivotPx.y) / ppu);
@@ -192,8 +183,60 @@ public class SpriteDropShadow : MonoBehaviour
         }
         catch (System.Exception)
         {
-            // Texture pas en Read/Write ou inaccessible, fallback.
             return false;
+        }
+    }
+
+    private void BakeFalloffTexture()
+    {
+        if (falloffTex != null)
+        {
+            if (Application.isPlaying) Destroy(falloffTex);
+            else DestroyImmediate(falloffTex);
+            falloffTex = null;
+        }
+
+        const int w = 128;
+        falloffTex = new Texture2D(w, 1, TextureFormat.R8, false);
+        falloffTex.hideFlags = HideFlags.DontSave;
+        falloffTex.wrapMode = TextureWrapMode.Clamp;
+        falloffTex.filterMode = FilterMode.Bilinear;
+
+        Color[] pixels = new Color[w];
+        for (int i = 0; i < w; i++)
+        {
+            float t = i / (float)(w - 1);
+            float v = Mathf.Clamp01(alphaFalloff != null ? alphaFalloff.Evaluate(t) : 1f);
+            pixels[i] = new Color(v, v, v, 1f);
+        }
+        falloffTex.SetPixels(pixels);
+        falloffTex.Apply();
+    }
+
+    private void UpdateFalloffMaterial()
+    {
+        if (shadowMat == null) return;
+
+        if (!useAlphaFalloff || falloffTex == null)
+        {
+            shadowMat.SetFloat("_FalloffStrength", 0f);
+            return;
+        }
+
+        shadowMat.SetTexture("_FalloffTex", falloffTex);
+        shadowMat.SetFloat("_FalloffStrength", alphaFalloffStrength);
+
+        Sprite sprite = sr != null ? sr.sprite : null;
+        if (sprite != null && sprite.texture != null)
+        {
+            Texture2D tex = sprite.texture;
+            Rect tr = sprite.textureRect;
+            float cx = (tr.x + tr.width  * 0.5f) / tex.width;
+            float cy = (tr.y + tr.height * 0.5f) / tex.height;
+            float hx = (tr.width  * 0.5f) / tex.width;
+            float hy = (tr.height * 0.5f) / tex.height;
+            shadowMat.SetVector("_UVCenter",     new Vector4(cx, cy, 0, 0));
+            shadowMat.SetVector("_UVHalfExtent", new Vector4(hx, hy, 0, 0));
         }
     }
 
@@ -203,7 +246,6 @@ public class SpriteDropShadow : MonoBehaviour
 
         DestroyShadow();
 
-        // Charger le shader SpriteSilhouette (cache statique).
         if (silhouetteShader == null)
             silhouetteShader = Shader.Find("Custom/SpriteSilhouette");
 
@@ -219,7 +261,6 @@ public class SpriteDropShadow : MonoBehaviour
         shadowSR.flipX = sr.flipX;
         shadowSR.flipY = sr.flipY;
 
-        // Material silhouette : remplace tous les pixels opaques par shadowColor.
         if (silhouetteShader != null)
         {
             shadowMat = new Material(silhouetteShader);
@@ -231,12 +272,15 @@ public class SpriteDropShadow : MonoBehaviour
             shadowSR.material = shadowMat;
         }
 
+        if (useAlphaFalloff)
+        {
+            BakeFalloffTexture();
+            UpdateFalloffMaterial();
+        }
+
         ApplyShadowTransform();
     }
 
-    /// <summary>
-    /// Force rebuild + update. Appeler avant Camera.Render() si besoin.
-    /// </summary>
     public void ForceUpdate()
     {
         if (sr == null) sr = GetComponent<SpriteRenderer>();
@@ -246,9 +290,6 @@ public class SpriteDropShadow : MonoBehaviour
             LateUpdate();
     }
 
-    /// <summary>
-    /// Invalide le cache de centroïdes. À appeler si une texture change en cours d'exécution.
-    /// </summary>
     public static void ClearCentroidCache()
     {
         centroidCache.Clear();
@@ -256,20 +297,22 @@ public class SpriteDropShadow : MonoBehaviour
 
     private void DestroyShadow()
     {
+        if (falloffTex != null)
+        {
+            if (Application.isPlaying) Destroy(falloffTex);
+            else DestroyImmediate(falloffTex);
+            falloffTex = null;
+        }
         if (shadowMat != null)
         {
-            if (Application.isPlaying)
-                Destroy(shadowMat);
-            else
-                DestroyImmediate(shadowMat);
+            if (Application.isPlaying) Destroy(shadowMat);
+            else DestroyImmediate(shadowMat);
             shadowMat = null;
         }
         if (shadowGO != null)
         {
-            if (Application.isPlaying)
-                Destroy(shadowGO);
-            else
-                DestroyImmediate(shadowGO);
+            if (Application.isPlaying) Destroy(shadowGO);
+            else DestroyImmediate(shadowGO);
             shadowGO = null;
             shadowSR = null;
         }
