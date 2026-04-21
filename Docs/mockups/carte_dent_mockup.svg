@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="825" height="1125" viewBox="0 0 825 1125" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <!-- Subtle paper/gouache texture for cream panel -->
+    <filter id="paperGrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/>
+      <feColorMatrix values="0 0 0 0 0.95  0 0 0 0 0.91  0 0 0 0 0.83  0 0 0 0.08 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+
+    <!-- Gouache paint texture for colored bands -->
+    <filter id="gouache" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="7"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+
+    <!-- Impasto illustration shading -->
+    <radialGradient id="caveLight" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#3a556b"/>
+      <stop offset="55%" stop-color="#1e2a38"/>
+      <stop offset="100%" stop-color="#0c1118"/>
+    </radialGradient>
+    <radialGradient id="mawRed" cx="50%" cy="55%" r="55%">
+      <stop offset="0%" stop-color="#3a0a0a"/>
+      <stop offset="70%" stop-color="#180303"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+    <linearGradient id="toothGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f2e5c2"/>
+      <stop offset="60%" stop-color="#d9c48f"/>
+      <stop offset="100%" stop-color="#8a6f3c"/>
+    </linearGradient>
+    <linearGradient id="titleBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a3a2c"/>
+      <stop offset="50%" stop-color="#3A2E22"/>
+      <stop offset="100%" stop-color="#2a2018"/>
+    </linearGradient>
+    <linearGradient id="statsBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2018"/>
+      <stop offset="100%" stop-color="#1a130d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ================= OUTER FRAME ================= -->
+  <rect x="0" y="0" width="825" height="1125" rx="24" ry="24" fill="#3A2E22"/>
+  <rect x="15" y="15" width="795" height="1095" rx="12" ry="12" fill="#F2E8D5"/>
+
+  <!-- ================= TITLE BANNER (y=15..115) ================= -->
+  <g>
+    <rect x="15" y="15" width="795" height="100" fill="url(#titleBand)"/>
+    <rect x="15" y="15" width="795" height="100" fill="#3A2E22" filter="url(#gouache)" opacity="0.6"/>
+    <!-- top/bottom ink lines -->
+    <rect x="15" y="15" width="795" height="2" fill="#1a130d" opacity="0.5"/>
+    <rect x="15" y="113" width="795" height="2" fill="#1a130d" opacity="0.5"/>
+
+    <!-- Monster type pip (left) -->
+    <g transform="translate(65,65)">
+      <circle r="30" fill="#F2E8D5" stroke="#D4B87A" stroke-width="2"/>
+      <text text-anchor="middle" y="10" font-size="34" font-weight="700" fill="#3A2E22">M</text>
+    </g>
+
+    <!-- Title -->
+    <text x="412" y="68" text-anchor="middle" font-size="46" font-weight="700"
+          fill="#F5ECD8" letter-spacing="2" style="text-shadow: 0 2px 0 #000">LA DENT</text>
+    <text x="412" y="68" text-anchor="middle" font-size="46" font-weight="700"
+          fill="#F5ECD8" letter-spacing="2"/>
+    <text x="412" y="98" text-anchor="middle" font-size="18" font-style="italic"
+          fill="#D4B87A" letter-spacing="4">— THE FANG —</text>
+
+    <!-- Cost/ID pip (right) -->
+    <g transform="translate(760,65)">
+      <circle r="30" fill="#F2E8D5" stroke="#D4B87A" stroke-width="2"/>
+      <text text-anchor="middle" y="4" font-size="12" fill="#3A2E22">MONSTRE</text>
+      <text text-anchor="middle" y="20" font-size="16" font-weight="700" fill="#3A2E22">05/15</text>
+    </g>
+  </g>
+
+  <!-- ================= ILLUSTRATION (y=115..615) ================= -->
+  <g>
+    <rect x="15" y="115" width="795" height="500" fill="url(#caveLight)"/>
+    <!-- cave stalactites silhouette top -->
+    <path d="M15,115 L15,170 L60,115 L90,190 L140,115 L200,150 L250,115 L310,200 L370,115 L430,180 L490,115 L550,175 L610,115 L680,195 L740,115 L810,160 L810,115 Z"
+          fill="#0c1118" opacity="0.8"/>
+    <!-- scattered bones on floor -->
+    <g stroke="#c9b98f" stroke-width="3" fill="#c9b98f" opacity="0.55">
+      <ellipse cx="120" cy="585" rx="28" ry="5"/>
+      <ellipse cx="155" cy="595" rx="14" ry="4"/>
+      <ellipse cx="680" cy="590" rx="32" ry="5"/>
+      <path d="M700,580 l25,-8 l4,6 l-25,8 z"/>
+      <circle cx="255" cy="600" r="7"/>
+    </g>
+    <!-- dripping saliva from above jaw -->
+    <g fill="#f0ecc0" opacity="0.75">
+      <ellipse cx="330" cy="360" rx="3" ry="14"/>
+      <ellipse cx="480" cy="375" rx="3" ry="18"/>
+      <ellipse cx="420" cy="380" rx="2" ry="10"/>
+    </g>
+
+    <!-- Body stub -->
+    <ellipse cx="412" cy="560" rx="150" ry="40" fill="#2a1d14"/>
+    <ellipse cx="340" cy="575" rx="25" ry="12" fill="#1a1008"/><!-- vestigial limb -->
+    <ellipse cx="490" cy="575" rx="25" ry="12" fill="#1a1008"/>
+
+    <!-- MASSIVE JAW creature -->
+    <!-- upper jaw -->
+    <path d="M180,300
+             Q260,220 412,210
+             Q564,220 644,300
+             Q600,360 560,370
+             Q480,380 412,378
+             Q344,380 264,370
+             Q224,360 180,300 Z"
+          fill="#3d2317" stroke="#1a0e08" stroke-width="3"/>
+    <!-- upper gums -->
+    <path d="M210,340 Q412,400 614,340 Q560,410 412,420 Q264,410 210,340 Z"
+          fill="url(#mawRed)"/>
+    <!-- maw interior -->
+    <ellipse cx="412" cy="470" rx="210" ry="90" fill="#0a0000"/>
+    <!-- lower gums -->
+    <path d="M210,540 Q412,470 614,540 Q560,500 412,492 Q264,500 210,540 Z"
+          fill="url(#mawRed)"/>
+    <!-- lower jaw -->
+    <path d="M190,550
+             Q260,620 412,635
+             Q564,620 634,550
+             Q590,600 540,615
+             Q480,625 412,625
+             Q344,625 284,615
+             Q234,600 190,550 Z"
+          fill="#3d2317" stroke="#1a0e08" stroke-width="3"/>
+
+    <!-- Upper fangs (curving down) -->
+    <g>
+      <path d="M250,360 Q245,440 275,470 Q285,440 278,360 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M310,390 Q305,460 330,485 Q340,460 335,390 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M370,408 Q368,480 385,500 Q395,480 390,408 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M430,408 Q432,480 445,500 Q455,480 455,408 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M490,390 Q492,460 505,485 Q515,460 510,390 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M550,360 Q555,440 575,470 Q585,440 580,360 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+    </g>
+    <!-- Lower fangs (curving up) -->
+    <g>
+      <path d="M250,540 Q245,470 275,445 Q285,470 278,540 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M320,520 Q315,455 340,435 Q350,455 345,520 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M385,510 Q385,445 405,430 Q413,445 410,510 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M440,510 Q440,445 460,430 Q468,445 465,510 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M505,520 Q505,455 530,435 Q540,455 535,520 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+      <path d="M555,540 Q555,470 580,445 Q595,470 585,540 Z" fill="url(#toothGrad)" stroke="#5c4422" stroke-width="1.5"/>
+    </g>
+    <!-- corruption tendrils on gums -->
+    <g stroke="#0a0a0a" stroke-width="2" fill="none" opacity="0.75">
+      <path d="M220,340 q15,-10 30,0 q15,10 30,0"/>
+      <path d="M540,340 q15,-10 30,0 q15,10 30,0"/>
+      <path d="M300,540 q20,10 40,0"/>
+      <path d="M470,540 q20,10 40,0"/>
+    </g>
+    <!-- impasto highlights -->
+    <g opacity="0.4" fill="#d9c48f">
+      <ellipse cx="255" cy="400" rx="6" ry="2"/>
+      <ellipse cx="570" cy="400" rx="6" ry="2"/>
+      <ellipse cx="412" cy="435" rx="10" ry="2"/>
+    </g>
+  </g>
+
+  <!-- ================= SEPARATOR BAR (y=615..655) ================= -->
+  <g>
+    <rect x="15" y="615" width="795" height="40" fill="#3A2E22"/>
+    <rect x="15" y="615" width="795" height="2" fill="#D4B87A"/>
+    <rect x="15" y="653" width="795" height="2" fill="#D4B87A"/>
+    <!-- central tribal diamond -->
+    <g transform="translate(412.5,635)" fill="#D4B87A">
+      <polygon points="0,-14 14,0 0,14 -14,0"/>
+      <polygon points="0,-8 8,0 0,8 -8,0" fill="#3A2E22"/>
+      <!-- radiating lines -->
+      <g stroke="#D4B87A" stroke-width="2">
+        <line x1="-40" y1="0" x2="-20" y2="0"/>
+        <line x1="20" y1="0" x2="40" y2="0"/>
+        <line x1="-30" y1="-8" x2="-20" y2="-4"/>
+        <line x1="-30" y1="8" x2="-20" y2="4"/>
+        <line x1="30" y1="-8" x2="20" y2="-4"/>
+        <line x1="30" y1="8" x2="20" y2="4"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= TEXT ZONE (y=655..1035) ================= -->
+  <g>
+    <rect x="15" y="655" width="795" height="380" fill="#F2E8D5"/>
+    <rect x="15" y="655" width="795" height="380" fill="#F2E8D5" filter="url(#paperGrain)" opacity="0.6"/>
+
+    <!-- Archetype tag -->
+    <g transform="translate(412.5,700)">
+      <rect x="-110" y="-22" width="220" height="32" rx="16" fill="#3A2E22"/>
+      <text text-anchor="middle" y="0" font-size="16" font-weight="700" fill="#D4B87A" letter-spacing="4">GLASS CANNON</text>
+    </g>
+
+    <!-- Flavor quote -->
+    <text x="412.5" y="755" text-anchor="middle" font-size="22" font-style="italic" fill="#5c4422">
+      « Il n'a gardé que sa morsure. »
+    </text>
+
+    <!-- Divider -->
+    <line x1="180" y1="785" x2="645" y2="785" stroke="#D4B87A" stroke-width="1.5"/>
+    <circle cx="412.5" cy="785" r="4" fill="#D4B87A"/>
+
+    <!-- Effect label -->
+    <text x="60" y="835" font-size="18" font-weight="700" fill="#3A2E22" letter-spacing="3">EFFET</text>
+    <line x1="60" y1="848" x2="170" y2="848" stroke="#3A2E22" stroke-width="2"/>
+
+    <!-- Rules text -->
+    <g font-size="22" fill="#2A1F14">
+      <text x="60" y="890">
+        <tspan font-weight="700">Morsure.</tspan> Lorsque La Dent frappe,
+      </text>
+      <text x="60" y="922">elle inflige <tspan font-weight="700" fill="#8B2020">2 dégâts</tspan> à sa cible et</text>
+      <text x="60" y="954">meurt à la fin du round.</text>
+
+      <text x="60" y="1000" font-style="italic" fill="#5c4422" font-size="18">
+        Une créature suicidaire : tout dans les crocs, rien derrière.
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= STATS BAR (y=1035..1115) ================= -->
+  <g>
+    <rect x="15" y="1035" width="795" height="80" fill="url(#statsBand)"/>
+    <rect x="15" y="1035" width="795" height="80" fill="#2a2018" filter="url(#gouache)" opacity="0.5"/>
+    <rect x="15" y="1035" width="795" height="2" fill="#D4B87A" opacity="0.7"/>
+
+    <!-- HP -->
+    <g transform="translate(170,1075)">
+      <circle r="34" fill="#F2E8D5" stroke="#D4B87A" stroke-width="3"/>
+      <path d="M0,-14 C-10,-22 -22,-14 -22,-4 C-22,8 0,20 0,20 C0,20 22,8 22,-4 C22,-14 10,-22 0,-14 Z"
+            fill="#8B2020" transform="scale(0.75)"/>
+      <text x="52" y="-2" font-size="14" font-weight="700" fill="#D4B87A" letter-spacing="2">PV</text>
+      <text x="52" y="22" font-size="34" font-weight="700" fill="#F5ECD8">1</text>
+    </g>
+
+    <!-- DMG -->
+    <g transform="translate(412.5,1075)">
+      <circle r="34" fill="#F2E8D5" stroke="#D4B87A" stroke-width="3"/>
+      <!-- sword/fang icon -->
+      <path d="M0,-18 L6,-6 L6,14 L-6,14 L-6,-6 Z" fill="#3A2E22"/>
+      <path d="M-10,14 L10,14 L10,18 L-10,18 Z" fill="#3A2E22"/>
+      <text x="52" y="-2" font-size="14" font-weight="700" fill="#D4B87A" letter-spacing="2">DGT</text>
+      <text x="52" y="22" font-size="34" font-weight="700" fill="#F5ECD8">2</text>
+    </g>
+
+    <!-- EFFECT -->
+    <g transform="translate(655,1075)">
+      <circle r="34" fill="#F2E8D5" stroke="#D4B87A" stroke-width="3"/>
+      <text text-anchor="middle" y="8" font-size="38" font-weight="700" fill="#8a6a2a">—</text>
+      <text x="52" y="-2" font-size="14" font-weight="700" fill="#D4B87A" letter-spacing="2">EFFET</text>
+      <text x="52" y="22" font-size="22" font-weight="700" fill="#F5ECD8">aucun</text>
+    </g>
+  </g>
+
+  <!-- Set / version marker bottom-right -->
+  <text x="795" y="1105" text-anchor="end" font-size="10" fill="#D4B87A" opacity="0.6" letter-spacing="2">RAID PARTY · M05 · v1</text>
+</svg>
