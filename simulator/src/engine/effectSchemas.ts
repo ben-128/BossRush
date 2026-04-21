@@ -315,6 +315,7 @@ const EffectOp: z.ZodType<unknown> = z.lazy(() =>
     OpMoveSelfMonsterToHead,
     OpPlayMoreActions,
     OpOpenFreeExchange,
+    OpEachHeroPlaysChasse,
     OpBossActif,
     OpAttackOrder,
     OpIgnorePrereqNext,
@@ -444,6 +445,9 @@ const OpPlayMoreActions = z.object({
 const OpOpenFreeExchange = z.object({
   op: z.literal('openFreeExchange'),
   maxSwaps: z.number().int().positive().optional(),
+});
+const OpEachHeroPlaysChasse = z.object({
+  op: z.literal('eachHeroPlaysChasse'),
 });
 
 const TriggerOps = z.object({

@@ -223,29 +223,16 @@ function shouldUseCapacite(state: GameState, h: HeroRuntime): boolean {
       // there are ≥ 2 playable cards in hand — the loop will drain them.
       return playableActions(state, h).length >= 2;
     }
-    case 'global_buff': {
-      // Aslan: free-exchange window for everyone (not just self ↔ ally).
-      // Count hero-pairs (i<j) where both sides hold a card whose prereq
-      // matches the other — i.e. a mutually-beneficial trade is possible.
-      // Fire if ≥ 2 such pairs exist; in a 2-hero game, ≥ 1 is enough.
+    case 'chain_plays': {
+      // Aslan : en partant de lui, chaque héros joue 1 Chasse. On déclenche
+      // dès que ≥ 2 héros vivants ont au moins 1 carte jouable (prereq
+      // satisfait), Aslan compris — sinon la capacité est gaspillée.
       const living = state.heroes.filter((hh) => !hh.dead);
       if (living.length < 2) return false;
-      const nomOf = (hh: HeroRuntime) => state.catalog.heroesById.get(hh.heroId)?.nom;
-      let pairs = 0;
-      for (let i = 0; i < living.length; i++) {
-        for (let j = i + 1; j < living.length; j++) {
-          const a = living[i]!;
-          const b = living[j]!;
-          const na = nomOf(a);
-          const nb = nomOf(b);
-          if (!na || !nb) continue;
-          const aForB = a.hand.some((c) => c.prerequis === nb);
-          const bForA = b.hand.some((c) => c.prerequis === na);
-          if (aForB && bForA) pairs++;
-        }
-      }
-      const threshold = living.length <= 2 ? 1 : 2;
-      return pairs >= threshold;
+      const playable = living.filter((hh) =>
+        hh.hand.some((c) => meetsPrerequisite(hh, c, state)),
+      );
+      return playable.length >= 2;
     }
     default:
       return false;

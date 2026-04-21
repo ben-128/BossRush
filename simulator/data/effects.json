@@ -359,9 +359,9 @@
       "ops": [{ "op": "playMoreActions", "n": 20, "restrictTo": "play_action_only" }]
     },
     "HERO_005": {
-      "effet": "Aslan — Échanges libres (stand-in simplifié)",
-      "tag": "global_buff",
-      "ops": [{ "op": "openFreeExchange", "maxSwaps": 4 }]
+      "effet": "Aslan — En partant d'Aslan, chaque héros joue 1 Chasse à tour de rôle",
+      "tag": "chain_plays",
+      "ops": [{ "op": "eachHeroPlaysChasse" }]
     },
 
     "EPR_016": {
@@ -433,23 +433,23 @@
     "DEN_002": { "effet": "Source cachée : heal 2", "tag": "destin_pos", "ops": [{ "op": "heal", "target": "self", "amount": 2 }] },
     "DEN_003": { "effet": "Songe ancestral : régénère capacité", "tag": "destin_pos", "ops": [{ "op": "regenCapacite", "target": "any_hero" }] },
     "DEN_004": { "effet": "Cache : pioche 2", "tag": "destin_pos", "ops": [{ "op": "draw", "target": "self", "n": 2 }] },
-    "DEN_005": { "effet": "Feu de conseil : choix entre chaque héros pioche 1 OU chaque héros heal 2", "tag": "destin_pos", "ops": [{ "op": "choice", "options": [
+    "DEN_005": { "effet": "Feu de conseil : choix entre chaque héros pioche 1 OU chaque héros heal 1", "tag": "destin_pos", "ops": [{ "op": "choice", "options": [
       { "label": "piocher", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }] },
-      { "label": "soigner", "ops": [{ "op": "heal", "target": "each_hero", "amount": 2 }] }
+      { "label": "soigner", "ops": [{ "op": "heal", "target": "each_hero", "amount": 1 }] }
     ]}] },
     "DEN_006": { "effet": "Relique : pioche 1, si c'est un Objet pioche 1 extra", "tag": "destin_pos", "ops": [{ "op": "drawWithObjetBonus", "target": "self" }] },
-    "DEN_007": { "effet": "Averse : each discard 1 random", "tag": "destin_neg", "ops": [{ "op": "forEach", "over": "each_hero", "do": [{ "op": "discard", "target": "self", "n": 1, "random": true }] }] },
+    "DEN_007": { "effet": "Averse : chaque héros défausse 1 chasse (au choix)", "tag": "destin_neg", "ops": [{ "op": "forEach", "over": "each_hero", "do": [{ "op": "discard", "target": "self", "n": 1 }] }] },
     "DEN_008": { "effet": "Outil brisé : défausse 1 Objet posé", "tag": "destin_neg", "ops": [{ "op": "discardObject", "target": "self", "n": 1 }] },
     "DEN_009": { "effet": "Angle mort : 1 dmg", "tag": "destin_neg", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }] },
     "DEN_010": { "effet": "Bruissement : 1 invocation", "tag": "destin_neg", "ops": [{ "op": "summon", "target": "self", "n": 1 }] },
     "DEN_011": { "effet": "Meute : 1 invocation self + suivant", "tag": "destin_neg", "ops": [{ "op": "summon", "target": "self", "n": 1 }, { "op": "summon", "target": "next_hero", "n": 1 }] },
     "DEN_012": { "effet": "Offrande : Boss soigné 2", "tag": "destin_neg", "ops": [{ "op": "bossHeal", "amount": 2 }] },
-    "DEN_013": { "effet": "Cicatrice : 1 dmg + pioche 1", "tag": "destin_amb", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }, { "op": "draw", "target": "self", "n": 1 }] },
+    "DEN_013": { "effet": "Cicatrice : 1 dmg + pioche 2", "tag": "destin_amb", "ops": [{ "op": "damage", "target": "active_hero", "amount": 1 }, { "op": "draw", "target": "self", "n": 2 }] },
     "DEN_014": { "effet": "Frappe audacieuse : boss 2 dmg + invocation", "tag": "destin_amb", "ops": [{ "op": "bossDamage", "amount": 2 }, { "op": "summon", "target": "self", "n": 1 }] },
     "DEN_015": { "effet": "Butin mal partagé : pioche 3 + autre héros 1 dmg", "tag": "destin_amb", "ops": [{ "op": "draw", "target": "self", "n": 3 }, { "op": "damage", "target": "any_hero_not_self", "amount": 1 }] },
     "DEN_016": { "effet": "Gué dangereux : each pioche 1 + self 1 dmg", "tag": "destin_amb", "ops": [{ "op": "draw", "target": "each_hero", "n": 1 }, { "op": "damage", "target": "active_hero", "amount": 1 }] },
     "DEN_017": { "effet": "Troc guérisseur : heal 2 + discard 1", "tag": "destin_amb", "ops": [{ "op": "heal", "target": "self", "amount": 2 }, { "op": "discard", "target": "self", "n": 1 }] },
-    "DEN_018": { "effet": "Eclaireur seul : défausse 2 Actions → pioche 2, sinon subit 1 dégât", "tag": "destin_amb", "ops": [{ "op": "scoutSolo" }] },
+    "DEN_018": { "effet": "Séparation : défausse 3 Chasse → pioche 3, sinon subit 1 dégât", "tag": "destin_amb", "ops": [{ "op": "scoutSolo" }] },
     "DEN_019": { "effet": "Rituel : régénère + invocation", "tag": "destin_amb", "ops": [{ "op": "regenCapacite", "target": "self" }, { "op": "summon", "target": "self", "n": 1 }] },
     "DEN_020": { "effet": "Palabre : échanges libres entre héros + 1 invocation", "tag": "destin_amb", "ops": [{ "op": "openFreeExchange", "maxSwaps": 3 }, { "op": "summon", "target": "self", "n": 1 }] },
 

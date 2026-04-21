@@ -142,6 +142,31 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       }
       return;
     }
+    case 'eachHeroPlaysChasse': {
+      // Aslan (HERO_005) : en partant du héros actif (Aslan), chaque héros
+      // vivant joue à tour de rôle 1 Chasse (Action ou pose d'Objet). Si le
+      // policy ne peut/veut pas jouer (pas de carte jouable, prereq non
+      // satisfait), ce héros passe son tour bonus.
+      const nP = state.nPlayers;
+      const startSeat = ctx.sourceSeat;
+      const originalActive = state.activeSeat;
+      for (let offset = 0; offset < nP; offset++) {
+        if (state.result !== 'running') break;
+        const seat = (startSeat + offset) % nP;
+        const h = state.heroes[seat];
+        if (!h || h.dead) continue;
+        const policy = state.policies[seat];
+        if (!policy) continue;
+        // Temporairement réassigner l'actif pour que la policy et les
+        // helpers de ciblage "self" pointent sur ce héros.
+        state.activeSeat = seat;
+        const action = await policy.pickAction(state);
+        if (action.kind !== 'play') continue;
+        await applyPlayerAction(state, action);
+      }
+      state.activeSeat = originalActive;
+      return;
+    }
     case 'openFreeExchange': {
       // Policy-driven free exchange window. Simple implementation: for up to
       // maxSwaps, let each living hero (other than active) offer one card;
@@ -940,21 +965,20 @@ async function runOne(state: GameState, ctx: EffectContext, op: EffectOp): Promi
       return;
     }
     case 'scoutSolo': {
+      // DEN_018 « Séparation » — défausse 3 Chasse (au choix) → pioche autant.
+      // Si le héros a moins de 3 cartes en main : il subit 1 dégât à la place.
       const h = state.heroes[ctx.sourceSeat];
       if (!h) return;
-      const actionIdx = h.hand
-        .map((c, i) => (c.categorie === 'action' ? i : -1))
-        .filter((i) => i !== -1);
-      if (actionIdx.length >= 2) {
-        // Discard 2 Actions then draw 2.
-        for (const i of actionIdx.slice(0, 2).sort((a, b) => b - a)) {
-          const [c] = h.hand.splice(i, 1);
-          if (c) {
-            discardChasse(state, c, ctx.sourceSeat);
-            emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: ctx.sourceSeat });
-          }
+      const needed = 3;
+      if (h.hand.length >= needed) {
+        // Discard 3 from hand (head first — policy-agnostic, same as other
+        // discards). Then draw 3.
+        for (let i = 0; i < needed && h.hand.length > 0; i++) {
+          const c = h.hand.shift()!;
+          discardChasse(state, c, ctx.sourceSeat);
+          emit(state, { kind: 'DISCARD_CARD', pile: 'chasse', card: c.id, fromSeat: ctx.sourceSeat });
         }
-        for (let k = 0; k < 2; k++) {
+        for (let k = 0; k < needed; k++) {
           const c = drawChasseFor(state, ctx.sourceSeat);
           if (!c) break;
           h.hand.push(c);

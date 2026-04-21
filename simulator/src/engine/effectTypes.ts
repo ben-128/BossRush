@@ -265,11 +265,17 @@ export interface OpPlayMoreActions {
   restrictTo?: 'play_action_only';
 }
 
-/** Open a free exchange window across all heroes (Aslan capacité). */
+/** Open a free exchange window across all heroes (DEN_020 Palabre). */
 export interface OpOpenFreeExchange {
   op: 'openFreeExchange';
   /** Max total swaps to perform (policy-driven). */
   maxSwaps?: number;
+}
+
+/** Aslan (HERO_005) : en partant du héros actif, chaque héros vivant joue
+ *  à tour de rôle 1 Chasse (s'il peut). Policy-driven via pickAction. */
+export interface OpEachHeroPlaysChasse {
+  op: 'eachHeroPlaysChasse';
 }
 
 /** Trigger the boss's actif (⚡ capacité) outside of its normal sequence slot. */
@@ -589,6 +595,7 @@ export type EffectOp =
   | OpMoveSelfMonsterToHead
   | OpPlayMoreActions
   | OpOpenFreeExchange
+  | OpEachHeroPlaysChasse
   | OpBossActif
   | OpAttackOrder
   | OpIgnorePrereqNext

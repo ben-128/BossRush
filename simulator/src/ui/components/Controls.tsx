@@ -11,16 +11,30 @@ export function Controls() {
   const setAnimSpeedMs = useStore((s) => s.setAnimSpeedMs);
   const manualMode = useStore((s) => s.manualMode);
   const setManualMode = useStore((s) => s.setManualMode);
+  const autoPlay = useStore((s) => s.autoPlay);
+  const setAutoPlay = useStore((s) => s.setAutoPlay);
   const ended = state.result !== 'running';
 
   return (
     <div className="flex flex-wrap gap-3 items-center border-t border-stone-700 pt-4 mt-auto">
       <button
         onClick={nextTurn}
-        disabled={ended}
+        disabled={ended || autoPlay}
         className="px-5 py-2.5 bg-gradient-to-b from-sky-600 to-sky-700 hover:from-sky-500 hover:to-sky-600 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed shadow-md transition-all font-medium"
       >
         Tour suivant →
+      </button>
+      <button
+        onClick={() => setAutoPlay(!autoPlay)}
+        disabled={ended || manualMode}
+        title={manualMode ? 'Indisponible en mode manuel' : autoPlay ? 'Arrêter l\'enchaînement' : 'Enchaîner les tours automatiquement'}
+        className={`px-5 py-2.5 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed shadow-md transition-all font-medium ${
+          autoPlay
+            ? 'bg-gradient-to-b from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600'
+            : 'bg-gradient-to-b from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600'
+        }`}
+      >
+        {autoPlay ? '⏸ Stop' : '▶ Lecture auto'}
       </button>
       <button
         onClick={runToEnd}

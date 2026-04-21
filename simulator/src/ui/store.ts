@@ -69,6 +69,9 @@ interface Store {
   /** Manual mode: human makes all decisions instead of the AI. */
   manualMode: boolean;
   setManualMode: (v: boolean) => void;
+  /** Auto-play: enchaîne les tours automatiquement avec une pause entre chaque. */
+  autoPlay: boolean;
+  setAutoPlay: (v: boolean) => void;
   /** Pending decision awaiting UI resolution (human mode). */
   pendingDecision: PendingDecision | null;
   setPendingDecision: (d: PendingDecision | null) => void;
@@ -139,8 +142,12 @@ export const useStore = create<Store>((set, get) => ({
     typeof localStorage !== 'undefined' && localStorage.getItem('manualMode') === '1' ? true : false,
   setManualMode: (v) => {
     if (typeof localStorage !== 'undefined') localStorage.setItem('manualMode', v ? '1' : '0');
-    set({ manualMode: v });
+    // Sortir du mode manuel n'a pas d'impact sur auto-play, mais l'entrer
+    // annule auto-play (qui requiert l'IA pour décider).
+    set({ manualMode: v, ...(v ? { autoPlay: false } : {}) });
   },
+  autoPlay: false,
+  setAutoPlay: (v) => set({ autoPlay: v }),
   pendingDecision: null,
   setPendingDecision: (d) => set({ pendingDecision: d }),
 
@@ -240,7 +247,7 @@ export const useStore = create<Store>((set, get) => ({
   },
 
   reset: () => {
-    set({ state: null, running: false, view: 'setup', visibleEventCount: 0 });
+    set({ state: null, running: false, view: 'setup', visibleEventCount: 0, autoPlay: false });
   },
 }));
 
