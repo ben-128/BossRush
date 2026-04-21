@@ -42,7 +42,7 @@
       "id": "DEN_005",
       "type": "positif",
       "titre": "Feu de conseil",
-      "effet": "Choix collectif : tous les héros piochent 1 <ico:chasse>, OU tous les héros retirent 2 <ico:degat>.",
+      "effet": "Tous les héros piochent 1 <ico:chasse>, OU tous les héros retirent 1 <ico:degat>.",
       "lore": "« Autour des braises, chacun propose. Le groupe tranche. »",
       "proto_illu_desc": "Feu de camp au crépuscule, héros en cercle en palabre."
     },
@@ -58,7 +58,7 @@
       "id": "DEN_007",
       "type": "negatif",
       "titre": "Averse de cendres",
-      "effet": "Chaque héros défausse 1 <ico:chasse> au hasard de sa main.",
+      "effet": "Chaque héros défausse 1 <ico:chasse> de sa main.",
       "lore": "« La cendre tombe du ciel. Les mains ne tiennent plus rien. »",
       "proto_illu_desc": "Pluie de cendres grises, héros grelottant, cartes qui échappent."
     },
@@ -75,7 +75,7 @@
       "type": "negatif",
       "titre": "Angle mort",
       "degats": 1,
-      "effet": "",
+      "effet": "Ce héros subit 1 <ico:degat>.",
       "lore": "« Une branche fouette. Des crocs surgissent de nulle part. »",
       "proto_illu_desc": "Crocs surgissant d'un fourré, branche qui fouette."
     },
@@ -108,18 +108,18 @@
       "type": "ambigu",
       "titre": "Cicatrice",
       "degats": 1,
-      "effet": "Le héros subit 1 <ico:degat> et pioche 1 <ico:chasse>.",
+      "effet": "Le héros subit 1 <ico:degat> et pioche 2 <ico:chasse>.",
       "lore": "« La douleur grave ce que la prudence oubliait. »",
       "proto_illu_desc": "Héros recevant une blessure marquante, cicatrice qui reste."
     },
     {
       "id": "DEN_014",
       "type": "ambigu",
-      "titre": "Frappe audacieuse",
+      "titre": "Brèche",
       "degats": 2,
-      "effet": "Le Colosse subit 2 <ico:degat> (placez cette carte sous le Colosse). Puis <ico:invocation> dans la file du héros.",
-      "lore": "« Il frappe avant de réfléchir. Son cri attire d'autres ombres. »",
-      "proto_illu_desc": "Héros frappe le Colosse, son cri attire d'autres monstres."
+      "effet": "Le Colosse subit 2 <ico:degat>. Puis <ico:invocation> dans la file du héros.",
+      "lore": "« Une fissure s'ouvre dans les défenses du Colosse. Quelque chose d'autre l'a senti. »",
+      "proto_illu_desc": "Fissure lumineuse dans l'armure du Colosse, ombre monstrueuse en arrière-plan."
     },
     {
       "id": "DEN_015",
@@ -150,9 +150,9 @@
     {
       "id": "DEN_018",
       "type": "ambigu",
-      "titre": "Éclaireur seul",
-      "effet": "Le héros défausse 2 <ico:chasse> de type Action pour piocher 2 <ico:chasse>. S'il n'a pas assez de cartes, il subit 1 <ico:degat>.",
-      "lore": "« Il part devant. Soit il rapporte, soit il ne revient pas. »",
+      "titre": "Séparation",
+      "effet": "Le héros défausse 3 <ico:chasse> et en pioche autant. S'il n'a pas assez de cartes, il subit 1 <ico:degat> à la place.",
+      "lore": "« Le groupe se divise sans le vouloir. Certains reviennent les mains pleines. D'autres pas. »",
       "proto_illu_desc": "Héros seul s'avance dans un brouillard dense, dos au groupe."
     },
     {
@@ -167,7 +167,7 @@
       "id": "DEN_020",
       "type": "ambigu",
       "titre": "Palabre interrompue",
-      "effet": "Un allié pioche 2 <ico:chasse>. Puis <ico:invocation> dans votre file.",
+      "effet": "Un héros allié au choix pioche 2 <ico:chasse>. Puis <ico:invocation> dans votre file.",
       "lore": "« Ils s'accordent. Une ombre grandit derrière eux. »",
       "proto_illu_desc": "Cercle de héros échangeant des cartes, ombre derrière eux."
     }
