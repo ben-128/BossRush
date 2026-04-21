@@ -50,7 +50,7 @@
       "id": "DEN_006",
       "type": "positif",
       "titre": "Relique affleurée",
-      "effet": "Le héros pioche 1 <ico:chasse>. Si c'est un Objet, il pioche 1 <ico:chasse> supplémentaire.",
+      "effet": "Le héros pioche 1 <ico:chasse>. Si c'est un <ico:objet>, il pioche 1 <ico:chasse> supplémentaire.",
       "lore": "« La pluie a creusé la terre. Ce qui dormait dessous attendait ce jour. »",
       "proto_illu_desc": "Objet tribal ancien affleurant de la terre mouillée."
     },
@@ -66,7 +66,7 @@
       "id": "DEN_008",
       "type": "negatif",
       "titre": "Outil brisé",
-      "effet": "Le héros défausse un de ses objets posés.",
+      "effet": "Le héros défausse un de ses <ico:objet> posés.",
       "lore": "« Trop serré, trop usé. Il cède sous la main. »",
       "proto_illu_desc": "Objet rituel cassé au sol, héros dépité."
     },

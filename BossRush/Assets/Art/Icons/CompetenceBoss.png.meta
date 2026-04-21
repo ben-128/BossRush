@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 035dda4784972a340b3a96d3fb12ec1e
+guid: b26a8a27dada7aa4f9e115d61c671530
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6605179963774313510
-    second: Heros_0
+      213: -3172554251620107524
+    second: CompetenceBoss_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Heros_0
+      name: CompetenceBoss_0
       rect:
         serializedVersion: 2
-        x: 112
-        y: 61
-        width: 399
-        height: 392
+        x: 91
+        y: 118
+        width: 846
+        height: 825
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: adb54b591dfa554a0800000000000000
-      internalID: -6605179963774313510
+      spriteID: cfa378197b2d8f3d0800000000000000
+      internalID: -3172554251620107524
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Heros_0: -6605179963774313510
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

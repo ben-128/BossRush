@@ -102,7 +102,7 @@
           "<ico:menace>"
         ],
         "passif": "A la fin de son tour, si un héros a infligé des blessures à Akkoro, il se défausse d'une <ico:chasse>.",
-        "actif": "Le héros actif défausse 1 Objet posé. Si un objet a bien été défaussé, Soignez 2 <ico:degat> d'Akkoro."
+        "actif": "Le héros actif défausse 1 <ico:objet> posé. Si un <ico:objet> a bien été défaussé, Soignez 2 <ico:degat> d'Akkoro."
       },
       "monstres_ids": [],
       "lore_md": "boss_akkorokamui.md",

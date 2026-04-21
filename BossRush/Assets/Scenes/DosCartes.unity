@@ -173,7 +173,7 @@ MonoBehaviour:
   - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
   - {fileID: 7758815720208094920, guid: e656d287c22a2cf4b8e465d158e18372, type: 3}
   - {fileID: 7758815720208094920, guid: e656d287c22a2cf4b8e465d158e18372, type: 3}
-  - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
+  - {fileID: 7758815720208094920, guid: e656d287c22a2cf4b8e465d158e18372, type: 3}
   - {fileID: -4063282911688051274, guid: 071ddbecafecc644e8f949e0ebcd8cfd, type: 3}
   heroPalette: {fileID: 11400000, guid: 50cd86edcde15e74798559bd275afe4a, type: 2}
   entries:
@@ -203,6 +203,20 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
     scale: 0.5
     variantsParCompetence: 1
+    useHeroIcon: 0
+    silhouetteFill: 0
+  - nom: Destin
+    sprite: {fileID: 5888003367461260326, guid: 6a4a05e12ea992a46967923a9c29f28e, type: 3}
+    offset: {x: 0, y: 0}
+    scale: 0.5
+    variantsParCompetence: 0
+    useHeroIcon: 0
+    silhouetteFill: 0
+  - nom: Colosse
+    sprite: {fileID: -880185066638594788, guid: 25ae59e3540209443b4eb4263bcc20e5, type: 3}
+    offset: {x: 0, y: 0}
+    scale: 0.5
+    variantsParCompetence: 0
     useHeroIcon: 0
     silhouetteFill: 0
 --- !u!1 &200001
@@ -369,8 +383,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 6b584df02bc20e344824f51d7d7892ec, type: 3}
-  m_Color: {r: 0.9169811, g: 0.7165396, b: 0.2404912, a: 1}
+  m_Sprite: {fileID: 5888003367461260326, guid: 6a4a05e12ea992a46967923a9c29f28e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -392,13 +406,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c469ecf3f73bdd47a7ce69112629090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowColor: {r: 0, g: 0, b: 0, a: 1}
+  shadowColor: {r: 1, g: 1, b: 1, a: 1}
   offsetX: 0
   offsetY: 0
-  shadowScale: 1.05
+  shadowScale: 1.2
+  dilatePixels: 0
   sortingOrderOffset: -1
   centerOnAlphaCentroid: 0
   debugLog: 0
+  useAlphaFalloff: 1
+  alphaFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: -0.5
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  alphaFalloffStrength: 1
 --- !u!1 &400001
 GameObject:
   m_ObjectHideFlags: 0

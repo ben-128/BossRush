@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 035dda4784972a340b3a96d3fb12ec1e
+guid: 6a4a05e12ea992a46967923a9c29f28e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6605179963774313510
-    second: Heros_0
+      213: 5888003367461260326
+    second: Destin_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Heros_0
+      name: Destin_0
       rect:
         serializedVersion: 2
-        x: 112
-        y: 61
-        width: 399
-        height: 392
+        x: 123
+        y: 143
+        width: 758
+        height: 754
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: adb54b591dfa554a0800000000000000
-      internalID: -6605179963774313510
+      spriteID: 62c05d1edd366b150800000000000000
+      internalID: 5888003367461260326
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Heros_0: -6605179963774313510
+      Destin_0: 5888003367461260326
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

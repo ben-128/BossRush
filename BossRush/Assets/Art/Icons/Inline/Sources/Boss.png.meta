@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 035dda4784972a340b3a96d3fb12ec1e
+guid: 25ae59e3540209443b4eb4263bcc20e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6605179963774313510
-    second: Heros_0
+      213: -880185066638594788
+    second: Colosse_0
+  - first:
+      213: 3854503271807400811
+    second: Colosse_1
+  - first:
+      213: 4008866937225974341
+    second: Colosse_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +30,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Heros_0
+      name: Colosse_0
       rect:
         serializedVersion: 2
-        x: 112
-        y: 61
-        width: 399
-        height: 392
+        x: 3
+        y: 8
+        width: 1019
+        height: 1011
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: adb54b591dfa554a0800000000000000
-      internalID: -6605179963774313510
+      spriteID: c1d27666854f8c3f0800000000000000
+      internalID: -880185066638594788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Colosse_1
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 699
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6b39adbd42fd7530800000000000000
+      internalID: 3854503271807400811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Colosse_2
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 635
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54299215d3b52a730800000000000000
+      internalID: 4008866937225974341
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Heros_0: -6605179963774313510
+      Colosse_0: -880185066638594788
+      Colosse_1: 3854503271807400811
+      Colosse_2: 4008866937225974341
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

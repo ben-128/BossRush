@@ -573,7 +573,7 @@
       "categorie": "action",
       "degats": 1,
       "prerequis": "Aslan",
-      "effet": "Un héros allié joue immédiatement 1 Objet de sa main.",
+      "effet": "Un héros allié joue immédiatement 1 <ico:objet> de sa main.",
       "quantite": 1,
       "proto_illu_desc": "Aslan kinjal dégainé, glyphes de pacte reliant les alliés."
     },
@@ -701,7 +701,7 @@
       "nom": "Traité de paix",
       "categorie": "objet",
       "prerequis": "Aslan",
-      "effet": "Réaction : quand une <ico:menace> est révélée\nannulez son effet. N'importe quel héros peut déclencher cet Objet.",
+      "effet": "Réaction : quand une <ico:menace> est révélée\nannulez son effet. N'importe quel héros peut déclencher cet <ico:objet>.",
       "quantite": 1,
       "proto_illu_desc": "Parchemin déployé, signatures en plusieurs langues."
     }

@@ -23,9 +23,13 @@ public class SpriteDropShadow : MonoBehaviour
     [Tooltip("Décalage Y en world units (négatif = bas)")]
     public float offsetY = -0.015f;
 
-    [Tooltip("Échelle de l'ombre par rapport à l'icône")]
+    [Tooltip("Échelle du mesh ombre par rapport à l'icône. Garde un petit headroom si dilatePixels > 0 (sinon la silhouette dilatée est clippée par le quad).")]
     [Range(0.5f, 5f)]
-    public float shadowScale = 1.03f;
+    public float shadowScale = 1.1f;
+
+    [Tooltip("Rayon de dilatation de la silhouette, en pixels (shader). Donne une épaisseur d'ombre UNIFORME indépendante de la forme du sprite. 0 = désactivé.")]
+    [Range(0f, 16f)]
+    public float dilatePixels = 3f;
 
     [Tooltip("Sorting order offset (négatif = derrière le sprite parent)")]
     public int sortingOrderOffset = -1;
@@ -57,6 +61,9 @@ public class SpriteDropShadow : MonoBehaviour
     private Texture2D falloffTex;
 
     private static readonly Dictionary<int, Vector2> centroidCache = new Dictionary<int, Vector2>();
+    // Cache des bounds alpha (uvCenter, uvHalfExtent) par sprite pour éviter les scans répétés.
+    private struct UVBounds { public Vector2 center; public Vector2 halfExtent; public bool valid; }
+    private static readonly Dictionary<int, UVBounds> contentBoundsCache = new Dictionary<int, UVBounds>();
     private static Shader silhouetteShader;
 
     private void OnEnable()
@@ -97,6 +104,10 @@ public class SpriteDropShadow : MonoBehaviour
         {
             shadowMat.SetColor("_Color", shadowColor);
             shadowMat.SetFloat("_FalloffStrength", useAlphaFalloff ? alphaFalloffStrength : 0f);
+            shadowMat.SetFloat("_DilatePixels", dilatePixels);
+            // _Expand (world units) pousse les vertex pour garantir le headroom du quad quand on dilate en pixels.
+            float ppu = sr.sprite != null ? sr.sprite.pixelsPerUnit : 100f;
+            shadowMat.SetFloat("_Expand", ppu > 0.001f ? dilatePixels / ppu : 0f);
         }
 
         shadowSR.sortingLayerID = sr.sortingLayerID;
@@ -187,6 +198,87 @@ public class SpriteDropShadow : MonoBehaviour
         }
     }
 
+    // Scanne l'alpha du sprite pour déterminer la bounding box du contenu visible
+    // (pixels avec alpha > seuil), puis calcule center + halfExtent en UV d'atlas.
+    // Évite que la radial falloff utilise le rect complet du PNG (qui inclut le padding transparent).
+    private static bool TryComputeContentUVBounds(Sprite sprite, out Vector2 uvCenter, out Vector2 uvHalfExtent)
+    {
+        uvCenter = Vector2.zero;
+        uvHalfExtent = Vector2.zero;
+        if (sprite == null) return false;
+
+        int key = sprite.GetInstanceID();
+        if (contentBoundsCache.TryGetValue(key, out var cached))
+        {
+            if (!cached.valid) return false;
+            uvCenter = cached.center;
+            uvHalfExtent = cached.halfExtent;
+            return true;
+        }
+
+        Texture2D tex = sprite.texture;
+        if (tex == null || !tex.isReadable)
+        {
+            contentBoundsCache[key] = new UVBounds { valid = false };
+            return false;
+        }
+
+        try
+        {
+            Rect tr = sprite.textureRect;
+            int x0 = Mathf.FloorToInt(tr.x);
+            int y0 = Mathf.FloorToInt(tr.y);
+            int w = Mathf.FloorToInt(tr.width);
+            int h = Mathf.FloorToInt(tr.height);
+            if (w <= 0 || h <= 0)
+            {
+                contentBoundsCache[key] = new UVBounds { valid = false };
+                return false;
+            }
+
+            Color[] pixels = tex.GetPixels(x0, y0, w, h);
+            int minX = w, maxX = -1, minY = h, maxY = -1;
+            const float alphaThreshold = 0.01f;
+            for (int j = 0; j < h; j++)
+            {
+                int row = j * w;
+                for (int i = 0; i < w; i++)
+                {
+                    if (pixels[row + i].a > alphaThreshold)
+                    {
+                        if (i < minX) minX = i;
+                        if (i > maxX) maxX = i;
+                        if (j < minY) minY = j;
+                        if (j > maxY) maxY = j;
+                    }
+                }
+            }
+
+            if (maxX < 0)
+            {
+                contentBoundsCache[key] = new UVBounds { valid = false };
+                return false;
+            }
+
+            float texW = tex.width;
+            float texH = tex.height;
+            float uMin = (tr.x + minX) / texW;
+            float uMax = (tr.x + maxX + 1) / texW;
+            float vMin = (tr.y + minY) / texH;
+            float vMax = (tr.y + maxY + 1) / texH;
+
+            uvCenter = new Vector2((uMin + uMax) * 0.5f, (vMin + vMax) * 0.5f);
+            uvHalfExtent = new Vector2((uMax - uMin) * 0.5f, (vMax - vMin) * 0.5f);
+            contentBoundsCache[key] = new UVBounds { center = uvCenter, halfExtent = uvHalfExtent, valid = true };
+            return true;
+        }
+        catch (System.Exception)
+        {
+            contentBoundsCache[key] = new UVBounds { valid = false };
+            return false;
+        }
+    }
+
     private void BakeFalloffTexture()
     {
         if (falloffTex != null)
@@ -229,14 +321,28 @@ public class SpriteDropShadow : MonoBehaviour
         Sprite sprite = sr != null ? sr.sprite : null;
         if (sprite != null && sprite.texture != null)
         {
-            Texture2D tex = sprite.texture;
-            Rect tr = sprite.textureRect;
-            float cx = (tr.x + tr.width  * 0.5f) / tex.width;
-            float cy = (tr.y + tr.height * 0.5f) / tex.height;
-            float hx = (tr.width  * 0.5f) / tex.width;
-            float hy = (tr.height * 0.5f) / tex.height;
-            shadowMat.SetVector("_UVCenter",     new Vector4(cx, cy, 0, 0));
-            shadowMat.SetVector("_UVHalfExtent", new Vector4(hx, hy, 0, 0));
+            Vector2 uvCenter, uvHalfExtent;
+            // Priorité : bounds du contenu alpha (ignore le padding transparent du PNG).
+            // Fallback : rect complet du sprite si la texture n'est pas readable.
+            if (!TryComputeContentUVBounds(sprite, out uvCenter, out uvHalfExtent))
+            {
+                Texture2D tex = sprite.texture;
+                Rect tr = sprite.textureRect;
+                uvCenter = new Vector2(
+                    (tr.x + tr.width  * 0.5f) / tex.width,
+                    (tr.y + tr.height * 0.5f) / tex.height);
+                uvHalfExtent = new Vector2(
+                    (tr.width  * 0.5f) / tex.width,
+                    (tr.height * 0.5f) / tex.height);
+                if (debugLog) Debug.LogWarning($"[SpriteDropShadow] {name}: fallback rect pour bounds de '{sprite.name}' (texture non readable) → falloff basée sur rect PNG complet, peut inclure le padding transparent.", this);
+            }
+            else if (debugLog)
+            {
+                Debug.Log($"[SpriteDropShadow] {name}: content bounds '{sprite.name}' center={uvCenter} halfExtent={uvHalfExtent}", this);
+            }
+
+            shadowMat.SetVector("_UVCenter",     new Vector4(uvCenter.x, uvCenter.y, 0, 0));
+            shadowMat.SetVector("_UVHalfExtent", new Vector4(uvHalfExtent.x, uvHalfExtent.y, 0, 0));
         }
     }
 
@@ -267,8 +373,9 @@ public class SpriteDropShadow : MonoBehaviour
             shadowMat.hideFlags = HideFlags.DontSave;
             shadowMat.SetColor("_Color", shadowColor);
             shadowMat.SetFloat("_AlphaCutoff", 0.01f);
-            shadowMat.SetFloat("_Expand", 0f);
-            shadowMat.SetFloat("_Erode", 0f);
+            shadowMat.SetFloat("_DilatePixels", dilatePixels);
+            float ppu = sr.sprite != null ? sr.sprite.pixelsPerUnit : 100f;
+            shadowMat.SetFloat("_Expand", ppu > 0.001f ? dilatePixels / ppu : 0f);
             shadowSR.material = shadowMat;
         }
 
@@ -293,6 +400,7 @@ public class SpriteDropShadow : MonoBehaviour
     public static void ClearCentroidCache()
     {
         centroidCache.Clear();
+        contentBoundsCache.Clear();
     }
 
     private void DestroyShadow()

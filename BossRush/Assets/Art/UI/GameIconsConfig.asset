@@ -30,7 +30,7 @@ MonoBehaviour:
     widthRatio: 1
   - tag: actif_boss
     label: Actif boss
-    sprite: {fileID: 21300000, guid: d56e599730892d84f983710c8ccac9e9, type: 3}
+    sprite: {fileID: -3172554251620107524, guid: b26a8a27dada7aa4f9e115d61c671530, type: 3}
     scale: 1.5
     widthRatio: 1
   - tag: degat
@@ -50,7 +50,7 @@ MonoBehaviour:
     widthRatio: 1
   - tag: destin
     label: Carte Destin
-    sprite: {fileID: 6703963501300539589, guid: 727e8f26dbc7fff448209a65bce61742, type: 3}
+    sprite: {fileID: 5888003367461260326, guid: b6fb9193e61f3034899392be4be188c1, type: 3}
     scale: 1.5
     widthRatio: 1
   - tag: chasse

@@ -54,6 +54,7 @@ public static class DefaultIconConfigCreator
         new Preset { tag = "action",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorNoir,  symbolColor = Color.white, scale = 0.6f },
         new Preset { tag = "destin",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorNoir,  symbolColor = Color.white, scale = 0.6f },
         new Preset { tag = "chasse",     mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorNoir,  symbolColor = Color.white, scale = 0.6f },
+        new Preset { tag = "objet",      mode = IconCompositionConfig.CompositeMode.Cutout,     frameColor = ColorNoir,  symbolColor = Color.white, scale = 0.6f },
 
         // Actions pures (SymbolOnly) — tous en noir sauf 2 exceptions
         new Preset { tag = "invocation", mode = IconCompositionConfig.CompositeMode.SymbolOnly, frameColor = Color.white, symbolColor = ColorNoir,   scale = 1f   },

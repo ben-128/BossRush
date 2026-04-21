@@ -194,7 +194,7 @@
       "id": "EPR_024",
       "type": "evenement",
       "nom": "Débris volants",
-      "description": "Le combat projette des débris partout !\n\n• Défausser 1 Objet en bouclier\n\nOU\n\n• <ico:attaque> sur toutes les files",
+      "description": "Le combat projette des débris partout !\n\n• Défausser 1 <ico:objet> en bouclier\n\nOU\n\n• <ico:attaque> sur toutes les files",
       "proto_illu_desc": "Débris projetés, héros se couvrant d'un objet brisé devant lui."
     },
     {

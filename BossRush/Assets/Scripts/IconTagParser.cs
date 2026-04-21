@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 ///
 /// Le TMP_SpriteAsset "GameIcons" doit contenir un sprite par tag :
 ///   menace, invocation, attaque, actif_boss, degat,
-///   action, capacite, destin, chasse, ord_monstre
+///   action, objet, capacite, destin, chasse, ord_monstre
 ///
 /// Assigner ce SpriteAsset dans TMP Settings → Default Sprite Asset,
 /// ou sur chaque TextMeshPro component → Extra Settings → Sprite Asset.

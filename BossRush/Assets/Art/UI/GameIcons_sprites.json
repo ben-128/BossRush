@@ -68,5 +68,12 @@
     "y": 128,
     "width": 128,
     "height": 128
+  },
+  {
+    "name": "objet",
+    "x": 0,
+    "y": 256,
+    "width": 128,
+    "height": 128
   }
 ]
