@@ -65,6 +65,11 @@ public class SpriteDropShadow : MonoBehaviour
     private struct UVBounds { public Vector2 center; public Vector2 halfExtent; public bool valid; }
     private static readonly Dictionary<int, UVBounds> contentBoundsCache = new Dictionary<int, UVBounds>();
     private static Shader silhouetteShader;
+    private static Shader defaultSpriteShader;
+
+    // Le custom shader (Custom/SpriteSilhouette) est nécessaire uniquement pour le falloff alpha
+    // ou pour la dilatation. Sinon on retombe sur le Sprites/Default standard, plus léger.
+    private bool NeedsCustomShader => useAlphaFalloff || dilatePixels > 0f;
 
     private void OnEnable()
     {
@@ -100,14 +105,32 @@ public class SpriteDropShadow : MonoBehaviour
 
         ApplyShadowTransform();
 
+        // Si le mode a changé (falloff/dilate activés ou désactivés), il faut recréer
+        // le material avec le bon shader — sinon on reste sur l'ancien.
+        bool usingCustom = shadowMat != null && shadowMat.shader == silhouetteShader;
+        if (usingCustom != NeedsCustomShader)
+        {
+            Rebuild();
+            return;
+        }
+
         if (shadowMat != null)
         {
             shadowMat.SetColor("_Color", shadowColor);
-            shadowMat.SetFloat("_FalloffStrength", useAlphaFalloff ? alphaFalloffStrength : 0f);
-            shadowMat.SetFloat("_DilatePixels", dilatePixels);
-            // _Expand (world units) pousse les vertex pour garantir le headroom du quad quand on dilate en pixels.
-            float ppu = sr.sprite != null ? sr.sprite.pixelsPerUnit : 100f;
-            shadowMat.SetFloat("_Expand", ppu > 0.001f ? dilatePixels / ppu : 0f);
+            if (NeedsCustomShader)
+            {
+                shadowMat.SetFloat("_FalloffStrength", useAlphaFalloff ? alphaFalloffStrength : 0f);
+                shadowMat.SetFloat("_DilatePixels", dilatePixels);
+                // _Expand (world units) pousse les vertex pour garantir le headroom du quad quand on dilate en pixels.
+                float ppu = sr.sprite != null ? sr.sprite.pixelsPerUnit : 100f;
+                shadowMat.SetFloat("_Expand", ppu > 0.001f ? dilatePixels / ppu : 0f);
+            }
+        }
+
+        // Mode simple (shader par défaut) : le SpriteRenderer.color gère la teinte.
+        if (!NeedsCustomShader)
+        {
+            shadowSR.color = shadowColor;
         }
 
         shadowSR.sortingLayerID = sr.sortingLayerID;
@@ -354,6 +377,8 @@ public class SpriteDropShadow : MonoBehaviour
 
         if (silhouetteShader == null)
             silhouetteShader = Shader.Find("Custom/SpriteSilhouette");
+        if (defaultSpriteShader == null)
+            defaultSpriteShader = Shader.Find("Sprites/Default");
 
         shadowGO = new GameObject("_DropShadow");
         shadowGO.hideFlags = HideFlags.DontSave;
@@ -367,7 +392,9 @@ public class SpriteDropShadow : MonoBehaviour
         shadowSR.flipX = sr.flipX;
         shadowSR.flipY = sr.flipY;
 
-        if (silhouetteShader != null)
+        // Custom shader seulement si on a besoin de falloff ou dilate.
+        // Sinon on utilise Sprites/Default + tint via SpriteRenderer.color (plus léger, comportement standard).
+        if (NeedsCustomShader && silhouetteShader != null)
         {
             shadowMat = new Material(silhouetteShader);
             shadowMat.hideFlags = HideFlags.DontSave;
@@ -377,12 +404,18 @@ public class SpriteDropShadow : MonoBehaviour
             float ppu = sr.sprite != null ? sr.sprite.pixelsPerUnit : 100f;
             shadowMat.SetFloat("_Expand", ppu > 0.001f ? dilatePixels / ppu : 0f);
             shadowSR.material = shadowMat;
-        }
 
-        if (useAlphaFalloff)
+            if (useAlphaFalloff)
+            {
+                BakeFalloffTexture();
+                UpdateFalloffMaterial();
+            }
+        }
+        else
         {
-            BakeFalloffTexture();
-            UpdateFalloffMaterial();
+            // Shader par défaut : tint via SpriteRenderer.color.
+            shadowSR.color = shadowColor;
+            shadowMat = null;
         }
 
         ApplyShadowTransform();

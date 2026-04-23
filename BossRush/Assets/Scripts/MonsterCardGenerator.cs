@@ -24,7 +24,7 @@ public class MonsterCardGenerator : CardGenerator
     {
         public string id;
         public string nom;
-        public int pv;
+        public int vie;
         public int degats;
         public string type_degats;
         public string capacite_speciale;
@@ -73,6 +73,8 @@ public class MonsterCardGenerator : CardGenerator
 
     [Header("Textes spécifiques monstre")]
     public TMPro.TextMeshPro pvText;
+    [Tooltip("TMP dédié à la capacité spéciale. Activé uniquement si le monstre a une capacité.")]
+    public TMPro.TextMeshPro capaciteText;
 
     [Header("Icônes de type de dégâts")]
     public TypeDegatsSprites typeDegatsSprites;
@@ -109,7 +111,7 @@ public class MonsterCardGenerator : CardGenerator
             {
                 id = json.id,
                 nom = json.nom,
-                pv = json.pv,
+                pv = json.vie,
                 degats = json.degats,
                 type_degats = json.type_degats,
                 capacite_speciale = json.capacite_speciale,
@@ -132,9 +134,31 @@ public class MonsterCardGenerator : CardGenerator
         var monster = allMonsters[index];
 
         bool hasCapacite = !string.IsNullOrEmpty(monster.capacite_speciale);
-        string texte = hasCapacite ? IconTagParser.Parse(monster.capacite_speciale) : $"<i>{monster.description}</i>";
 
-        SetBaseTexts(monster.nom, texte);
+        if (nomText != null) nomText.text = monster.nom;
+        ApplyTextStyle(nomText);
+
+        if (capaciteText != null)
+        {
+            capaciteText.gameObject.SetActive(hasCapacite);
+            if (hasCapacite)
+            {
+                EnsureSpriteAsset(capaciteText);
+                capaciteText.text = IconTagParser.Parse(monster.capacite_speciale);
+                ApplyTextStyle(capaciteText);
+            }
+        }
+        if (descriptionText != null)
+        {
+            descriptionText.gameObject.SetActive(!hasCapacite);
+            if (!hasCapacite)
+            {
+                EnsureSpriteAsset(descriptionText);
+                descriptionText.text = $"<i>{monster.description}</i>";
+                ApplyTextStyle(descriptionText);
+            }
+        }
+
         if (pvText != null) pvText.text = monster.pv.ToString();
         SetPortrait(monster.sprite, monster.offset, monster.scale);
         SetCitation(monster.citation);
