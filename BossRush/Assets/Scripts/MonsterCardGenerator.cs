@@ -149,19 +149,13 @@ public class MonsterCardGenerator : CardGenerator
             }
         }
         if (descriptionText != null)
-        {
-            descriptionText.gameObject.SetActive(!hasCapacite);
-            if (!hasCapacite)
-            {
-                EnsureSpriteAsset(descriptionText);
-                descriptionText.text = $"<i>{monster.description}</i>";
-                ApplyTextStyle(descriptionText);
-            }
-        }
+            descriptionText.gameObject.SetActive(false);
 
         if (pvText != null) pvText.text = monster.pv.ToString();
         SetPortrait(monster.sprite, monster.offset, monster.scale);
         SetCitation(monster.citation);
+        if (citationText != null)
+            citationText.gameObject.SetActive(!hasCapacite);
         SetProtoIlluDesc(monster.proto_illu_desc);
 
         // Icônes de dégâts
